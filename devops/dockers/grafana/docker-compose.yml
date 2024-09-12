@@ -1,0 +1,59 @@
+services:
+  grafana:
+    image: grafana/grafana-oss
+    environment:
+      SERVICE_FQDN_GRAFANA_3000: 'http://grafana-kscw008.coolify-testing-host.sslip.io/'
+      GF_SERVER_ROOT_URL: '${SERVICE_FQDN_GRAFANA}'
+      GF_SERVER_DOMAIN: '${SERVICE_FQDN_GRAFANA}'
+      GF_SECURITY_ADMIN_PASSWORD: '${SERVICE_PASSWORD_GRAFANA}'
+      COOLIFY_CONTAINER_NAME: grafana-kscw008
+    ports:
+      - '8001:3000'
+    volumes:
+      - 'kscw008_grafana-data:/var/lib/grafana'
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - '-f'
+        - 'http://127.0.0.1:3000/api/health'
+      interval: 5s
+      timeout: 20s
+      retries: 10
+    networks:
+      kscw008: null
+    labels:
+      - coolify.managed=true
+      - coolify.version=4.0.0-beta.319
+      - coolify.serviceId=23
+      - coolify.type=service
+      - coolify.name=grafana-kscw008
+      - coolify.pullRequestId=0
+      - coolify.service.subId=35
+      - coolify.service.subType=application
+      - traefik.enable=true
+      - traefik.http.middlewares.gzip.compress=true
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+      - traefik.http.routers.http-0-kscw008-grafana.entryPoints=http
+      - traefik.http.routers.http-0-kscw008-grafana.middlewares=gzip
+      - 'traefik.http.routers.http-0-kscw008-grafana.rule=Host(`grafana-kscw008.coolify-testing-host.sslip.io`) && PathPrefix(`/`)'
+      - traefik.http.routers.http-0-kscw008-grafana.service=http-0-kscw008-grafana
+      - traefik.http.services.http-0-kscw008-grafana.loadbalancer.server.port=3000
+      - 'caddy_0.encode=zstd gzip'
+      - 'caddy_0.handle_path.0_reverse_proxy={{upstreams 3000}}'
+      - 'caddy_0.handle_path=/*'
+      - caddy_0.header=-Server
+      - 'caddy_0.try_files={path} /index.html /index.php'
+      - 'caddy_0=http://grafana-kscw008.coolify-testing-host.sslip.io'
+      - caddy_ingress_network=kscw008
+    restart: unless-stopped
+    container_name: grafana-kscw008
+volumes:
+  kscw008_grafana-data:
+    name: kscw008_grafana-data
+networks:
+  kscw008:
+    name: kscw008
+    external: true
+configs: {  }
+secrets: {  }

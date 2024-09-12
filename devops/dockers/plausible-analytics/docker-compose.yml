@@ -1,0 +1,7 @@
+services:
+  plausible:
+    image: plausible/analytics
+    ports:
+      - '8002:8000'
+    volumes:
+      - .:/etc/plausible

@@ -1,0 +1,1 @@
+docker run -d --name babibear-ghost -e NODE_ENV=development -e url=http://localhost:3002 -p 3002:2368 ghost

@@ -1,0 +1,1 @@
+qrcode --width 1024 -d F6A4AF -o babibear-qrcode-F6A4AF.png \"https://www.facebook.com/babibear.EMOJI\"
