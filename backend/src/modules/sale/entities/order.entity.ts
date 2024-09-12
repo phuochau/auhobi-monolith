@@ -4,7 +4,6 @@ import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../constants';
 import { OrgBranch } from '../../organization/entities/org-branch.entity';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
-import { BranchSaleChannel } from './branch-sale-channel.entity';
 import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
 import { OrderProduct, OrderProductDTO } from './order-product.entity';
 import { Customer } from '../../crm/entities/customer.entity';
@@ -67,7 +66,6 @@ class BaseClass extends BaseEntity {
 @ObjectType()
 @FilterableRelation('branch', () => OrgBranch)
 @FilterableRelation('customer', () => Customer)
-@FilterableRelation('saleChannel', () => BranchSaleChannel)
 @Entity({ name: `${TABLE_PREFIX}_orders` })
 export class Order extends BaseClass {
   @FilterableField(() => ID)
@@ -76,9 +74,6 @@ export class Order extends BaseClass {
 
   @ManyToOne(() => OrgBranch, genXToOneOptions())
   branch: OrgBranch
-
-  @ManyToOne(() => BranchSaleChannel, genXToOneOptions())
-  saleChannel: BranchSaleChannel
 
   @ManyToOne(() => Customer, genXToOneOptions())
   customer: Customer
@@ -110,9 +105,6 @@ export class OrderDTO extends BaseClass {
 
     @FilterableField(() => ID)
     customer: Customer;
-
-    @FilterableField(() => ID)
-    saleChannel: BranchSaleChannel;
 
     @FilterableField(() => [OrderProductDTO], { nullable: true })
     products: OrderProduct[];

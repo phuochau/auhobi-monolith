@@ -1,15 +1,15 @@
 import { Resolver } from "@nestjs/graphql";
 import { CRUDResolver } from "@ptc-org/nestjs-query-graphql";
 import { InjectQueryService, QueryService } from "@ptc-org/nestjs-query-core";
-import { GraphQLGuard } from "../../core/auth/guards/graphql.guard";
-import { Order, OrderDTO } from "../entities/order.entity";
+import { Garage, GarageDTO } from "../entities/garage.entity";
+import { GraphQLGuard } from "src/modules/core/auth/guards/graphql.guard";
 
 const ResolveConfig = { guards: [GraphQLGuard] }
 
-@Resolver(() => Order)
-export class OrderResolver extends CRUDResolver(Order, {
-  CreateDTOClass: OrderDTO,
-  UpdateDTOClass: OrderDTO,
+@Resolver(() => Garage)
+export class GarageResolver extends CRUDResolver(Garage, {
+  CreateDTOClass: GarageDTO,
+  UpdateDTOClass: GarageDTO,
   read: ResolveConfig,
   create: ResolveConfig,
   update: ResolveConfig,
@@ -18,7 +18,7 @@ export class OrderResolver extends CRUDResolver(Order, {
   enableTotalCount: true
 }) {
   constructor(
-    @InjectQueryService(Order) override readonly service: QueryService<Order>
+    @InjectQueryService(Garage) override readonly service: QueryService<Garage>
   ) {
     super(service);
   }

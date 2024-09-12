@@ -1,0 +1,5 @@
+export enum GarageStatus {
+  ACTIVATED = 'ACTIVATED',
+  UNACTIVATED = 'UNACTIVATED',
+  BLOCKED = 'BLOCKED'
+}

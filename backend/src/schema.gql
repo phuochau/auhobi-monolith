@@ -3166,34 +3166,6 @@ type ProductCategoriesAggregateResponse {
   max: ProductCategoriesMaxAggregate
 }
 
-type BranchSaleChannel {
-  commission: Float
-  details: JSON
-  saleChannel: SaleChannel!
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  branch: OrgBranch!
-}
-
-enum SaleChannel {
-  BE_FOOD
-  GRAB_FOOD
-  SHOPEE_FOOD
-  FABI
-}
-
-type ProductPrice {
-  price: Float!
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  branchSaleChannel: BranchSaleChannel!
-  product: Product!
-}
-
 type CustomerAddress {
   full: String
   distanceKm: Float
@@ -3350,7 +3322,6 @@ type Order {
   deletedAt: DateTime
   branch: OrgBranch!
   customer: Customer!
-  saleChannel: BranchSaleChannel!
 }
 
 type OrderProduct {
@@ -3378,160 +3349,6 @@ type OrderProduct {
     """Specify to sort results."""
     sorting: [ProductOptionSort!]! = []
   ): OrderProductOptionsConnection!
-}
-
-type ProductPriceDeleteResponse {
-  price: Float
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type ProductPriceEdge {
-  """The node containing the ProductPrice"""
-  node: ProductPrice!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type ProductPriceConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [ProductPriceEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type ProductPriceAggregateGroupBy {
-  price: Float
-  id: ID
-  createdAt(by: GroupBy! = DAY): DateTime
-  updatedAt(by: GroupBy! = DAY): DateTime
-  deletedAt(by: GroupBy! = DAY): DateTime
-}
-
-type ProductPriceCountAggregate {
-  price: Int
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  deletedAt: Int
-}
-
-type ProductPriceSumAggregate {
-  price: Float
-}
-
-type ProductPriceAvgAggregate {
-  price: Float
-}
-
-type ProductPriceMinAggregate {
-  price: Float
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type ProductPriceMaxAggregate {
-  price: Float
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type ProductPriceAggregateResponse {
-  groupBy: ProductPriceAggregateGroupBy
-  count: ProductPriceCountAggregate
-  sum: ProductPriceSumAggregate
-  avg: ProductPriceAvgAggregate
-  min: ProductPriceMinAggregate
-  max: ProductPriceMaxAggregate
-}
-
-type BranchSaleChannelDeleteResponse {
-  commission: Float
-  details: JSON
-  saleChannel: SaleChannel
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type BranchSaleChannelEdge {
-  """The node containing the BranchSaleChannel"""
-  node: BranchSaleChannel!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type BranchSaleChannelConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [BranchSaleChannelEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type BranchSaleChannelAggregateGroupBy {
-  saleChannel: SaleChannel
-  id: ID
-  createdAt(by: GroupBy! = DAY): DateTime
-  updatedAt(by: GroupBy! = DAY): DateTime
-  deletedAt(by: GroupBy! = DAY): DateTime
-}
-
-type BranchSaleChannelCountAggregate {
-  saleChannel: Int
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  deletedAt: Int
-}
-
-type BranchSaleChannelSumAggregate {
-  saleChannel: Float
-}
-
-type BranchSaleChannelAvgAggregate {
-  saleChannel: Float
-}
-
-type BranchSaleChannelMinAggregate {
-  saleChannel: SaleChannel
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type BranchSaleChannelMaxAggregate {
-  saleChannel: SaleChannel
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type BranchSaleChannelAggregateResponse {
-  groupBy: BranchSaleChannelAggregateGroupBy
-  count: BranchSaleChannelCountAggregate
-  sum: BranchSaleChannelSumAggregate
-  avg: BranchSaleChannelAvgAggregate
-  min: BranchSaleChannelMinAggregate
-  max: BranchSaleChannelMaxAggregate
 }
 
 type OrderProductDeleteResponse {
@@ -3986,6 +3803,133 @@ type CustomerAddressesAggregateResponse {
   max: CustomerAddressesMaxAggregate
 }
 
+type Garage {
+  name: String!
+  description: String
+  address: String
+  lat: Float
+  lng: Float
+  logo: String
+  media: [String!]
+  status: GarageStatus
+  metadata: JSON
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime
+  deleted_at: DateTime
+  org: Org!
+}
+
+enum GarageStatus {
+  ACTIVATED
+  UNACTIVATED
+  BLOCKED
+}
+
+type GarageDeleteResponse {
+  name: String
+  description: String
+  address: String
+  lat: Float
+  lng: Float
+  logo: String
+  media: [String!]
+  status: GarageStatus
+  metadata: JSON
+  id: ID
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type GarageEdge {
+  """The node containing the Garage"""
+  node: Garage!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type GarageConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [GarageEdge!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type GarageAggregateGroupBy {
+  name: String
+  address: String
+  lat: Float
+  lng: Float
+  status: GarageStatus
+  id: ID
+  created_at(by: GroupBy! = DAY): DateTime
+  updated_at(by: GroupBy! = DAY): DateTime
+  deleted_at(by: GroupBy! = DAY): DateTime
+}
+
+type GarageCountAggregate {
+  name: Int
+  address: Int
+  lat: Int
+  lng: Int
+  status: Int
+  id: Int
+  created_at: Int
+  updated_at: Int
+  deleted_at: Int
+}
+
+type GarageSumAggregate {
+  lat: Float
+  lng: Float
+  id: Float
+}
+
+type GarageAvgAggregate {
+  lat: Float
+  lng: Float
+  id: Float
+}
+
+type GarageMinAggregate {
+  name: String
+  address: String
+  lat: Float
+  lng: Float
+  status: GarageStatus
+  id: ID
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type GarageMaxAggregate {
+  name: String
+  address: String
+  lat: Float
+  lng: Float
+  status: GarageStatus
+  id: ID
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type GarageAggregateResponse {
+  groupBy: GarageAggregateGroupBy
+  count: GarageCountAggregate
+  sum: GarageSumAggregate
+  avg: GarageAvgAggregate
+  min: GarageMinAggregate
+  max: GarageMaxAggregate
+}
+
 type Query {
   accountAggregate(
     """Filter to find records to aggregate on"""
@@ -4290,24 +4234,6 @@ type Query {
     """Specify to sort results."""
     sorting: [OrgSort!]! = []
   ): OrgConnection!
-  branchSaleChannelAggregate(
-    """Filter to find records to aggregate on"""
-    filter: BranchSaleChannelAggregateFilter
-  ): [BranchSaleChannelAggregateResponse!]!
-  branchSaleChannel(
-    """The id of the record to find."""
-    id: ID!
-  ): BranchSaleChannel!
-  branchSaleChannels(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: BranchSaleChannelFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [BranchSaleChannelSort!]! = []
-  ): BranchSaleChannelConnection!
   orderProductAggregate(
     """Filter to find records to aggregate on"""
     filter: OrderProductAggregateFilter
@@ -4344,24 +4270,24 @@ type Query {
     """Specify to sort results."""
     sorting: [OrderSort!]! = []
   ): OrderConnection!
-  productPriceAggregate(
+  garageAggregate(
     """Filter to find records to aggregate on"""
-    filter: ProductPriceAggregateFilter
-  ): [ProductPriceAggregateResponse!]!
-  productPrice(
+    filter: GarageAggregateFilter
+  ): [GarageAggregateResponse!]!
+  garage(
     """The id of the record to find."""
     id: ID!
-  ): ProductPrice!
-  productPrices(
+  ): Garage!
+  garages(
     """Limit or page results."""
     paging: CursorPaging! = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: ProductPriceFilter! = {}
+    filter: GarageFilter! = {}
 
     """Specify to sort results."""
-    sorting: [ProductPriceSort!]! = []
-  ): ProductPriceConnection!
+    sorting: [GarageSort!]! = []
+  ): GarageConnection!
 }
 
 input AccountAggregateFilter {
@@ -5444,83 +5370,6 @@ enum OrgSortFields {
   deletedAt
 }
 
-input BranchSaleChannelAggregateFilter {
-  and: [BranchSaleChannelAggregateFilter!]
-  or: [BranchSaleChannelAggregateFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  branch: BranchSaleChannelAggregateFilterOrgBranchAggregateFilter
-}
-
-input SaleChannelFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: SaleChannel
-  neq: SaleChannel
-  gt: SaleChannel
-  gte: SaleChannel
-  lt: SaleChannel
-  lte: SaleChannel
-  like: SaleChannel
-  notLike: SaleChannel
-  iLike: SaleChannel
-  notILike: SaleChannel
-  in: [SaleChannel!]
-  notIn: [SaleChannel!]
-}
-
-input BranchSaleChannelAggregateFilterOrgBranchAggregateFilter {
-  and: [BranchSaleChannelAggregateFilterOrgBranchAggregateFilter!]
-  or: [BranchSaleChannelAggregateFilterOrgBranchAggregateFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input BranchSaleChannelFilter {
-  and: [BranchSaleChannelFilter!]
-  or: [BranchSaleChannelFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  branch: BranchSaleChannelFilterOrgBranchFilter
-}
-
-input BranchSaleChannelFilterOrgBranchFilter {
-  and: [BranchSaleChannelFilterOrgBranchFilter!]
-  or: [BranchSaleChannelFilterOrgBranchFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input BranchSaleChannelSort {
-  field: BranchSaleChannelSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum BranchSaleChannelSortFields {
-  saleChannel
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
 input OrderProductAggregateFilter {
   and: [OrderProductAggregateFilter!]
   or: [OrderProductAggregateFilter!]
@@ -5663,19 +5512,8 @@ input OrderAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-  saleChannel: OrderAggregateFilterBranchSaleChannelAggregateFilter
   customer: OrderAggregateFilterCustomerAggregateFilter
   branch: OrderAggregateFilterOrgBranchAggregateFilter
-}
-
-input OrderAggregateFilterBranchSaleChannelAggregateFilter {
-  and: [OrderAggregateFilterBranchSaleChannelAggregateFilter!]
-  or: [OrderAggregateFilterBranchSaleChannelAggregateFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
 }
 
 input OrderAggregateFilterCustomerAggregateFilter {
@@ -5717,19 +5555,8 @@ input OrderFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-  saleChannel: OrderFilterBranchSaleChannelFilter
   customer: OrderFilterCustomerFilter
   branch: OrderFilterOrgBranchFilter
-}
-
-input OrderFilterBranchSaleChannelFilter {
-  and: [OrderFilterBranchSaleChannelFilter!]
-  or: [OrderFilterBranchSaleChannelFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
 }
 
 input OrderFilterCustomerFilter {
@@ -5777,24 +5604,43 @@ enum OrderSortFields {
   deletedAt
 }
 
-input ProductPriceAggregateFilter {
-  and: [ProductPriceAggregateFilter!]
-  or: [ProductPriceAggregateFilter!]
-  price: NumberFieldComparison
+input GarageAggregateFilter {
+  and: [GarageAggregateFilter!]
+  or: [GarageAggregateFilter!]
+  name: StringFieldComparison
+  address: StringFieldComparison
+  lat: NumberFieldComparison
+  lng: NumberFieldComparison
+  status: GarageStatusFilterComparison
   id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  product: ProductPriceAggregateFilterProductAggregateFilter
-  branchSaleChannel: ProductPriceAggregateFilterBranchSaleChannelAggregateFilter
+  created_at: DateFieldComparison
+  updated_at: DateFieldComparison
+  deleted_at: DateFieldComparison
+  org: GarageAggregateFilterOrgAggregateFilter
 }
 
-input ProductPriceAggregateFilterProductAggregateFilter {
-  and: [ProductPriceAggregateFilterProductAggregateFilter!]
-  or: [ProductPriceAggregateFilterProductAggregateFilter!]
-  sku: StringFieldComparison
+input GarageStatusFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: GarageStatus
+  neq: GarageStatus
+  gt: GarageStatus
+  gte: GarageStatus
+  lt: GarageStatus
+  lte: GarageStatus
+  like: GarageStatus
+  notLike: GarageStatus
+  iLike: GarageStatus
+  notILike: GarageStatus
+  in: [GarageStatus!]
+  notIn: [GarageStatus!]
+}
+
+input GarageAggregateFilterOrgAggregateFilter {
+  and: [GarageAggregateFilterOrgAggregateFilter!]
+  or: [GarageAggregateFilterOrgAggregateFilter!]
+  type: OrgTypeFilterComparison
   name: StringFieldComparison
-  price: NumberFieldComparison
   enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -5802,34 +5648,26 @@ input ProductPriceAggregateFilterProductAggregateFilter {
   deletedAt: DateFieldComparison
 }
 
-input ProductPriceAggregateFilterBranchSaleChannelAggregateFilter {
-  and: [ProductPriceAggregateFilterBranchSaleChannelAggregateFilter!]
-  or: [ProductPriceAggregateFilterBranchSaleChannelAggregateFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ProductPriceFilter {
-  and: [ProductPriceFilter!]
-  or: [ProductPriceFilter!]
-  price: NumberFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  product: ProductPriceFilterProductFilter
-  branchSaleChannel: ProductPriceFilterBranchSaleChannelFilter
-}
-
-input ProductPriceFilterProductFilter {
-  and: [ProductPriceFilterProductFilter!]
-  or: [ProductPriceFilterProductFilter!]
-  sku: StringFieldComparison
+input GarageFilter {
+  and: [GarageFilter!]
+  or: [GarageFilter!]
   name: StringFieldComparison
-  price: NumberFieldComparison
+  address: StringFieldComparison
+  lat: NumberFieldComparison
+  lng: NumberFieldComparison
+  status: GarageStatusFilterComparison
+  id: IDFilterComparison
+  created_at: DateFieldComparison
+  updated_at: DateFieldComparison
+  deleted_at: DateFieldComparison
+  org: GarageFilterOrgFilter
+}
+
+input GarageFilterOrgFilter {
+  and: [GarageFilterOrgFilter!]
+  or: [GarageFilterOrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
   enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -5837,28 +5675,22 @@ input ProductPriceFilterProductFilter {
   deletedAt: DateFieldComparison
 }
 
-input ProductPriceFilterBranchSaleChannelFilter {
-  and: [ProductPriceFilterBranchSaleChannelFilter!]
-  or: [ProductPriceFilterBranchSaleChannelFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ProductPriceSort {
-  field: ProductPriceSortFields!
+input GarageSort {
+  field: GarageSortFields!
   direction: SortDirection!
   nulls: SortNulls
 }
 
-enum ProductPriceSortFields {
-  price
+enum GarageSortFields {
+  name
+  address
+  lat
+  lng
+  status
   id
-  createdAt
-  updatedAt
-  deletedAt
+  created_at
+  updated_at
+  deleted_at
 }
 
 type Mutation {
@@ -5994,12 +5826,6 @@ type Mutation {
   updateManyOrgs(input: UpdateManyOrgsInput!): UpdateManyResponse!
   deleteOneOrg(input: DeleteOneOrgInput!): OrgDeleteResponse!
   deleteManyOrgs(input: DeleteManyOrgsInput!): DeleteManyResponse!
-  createOneBranchSaleChannel(input: CreateOneBranchSaleChannelInput!): BranchSaleChannel!
-  createManyBranchSaleChannels(input: CreateManyBranchSaleChannelsInput!): [BranchSaleChannel!]!
-  updateOneBranchSaleChannel(input: UpdateOneBranchSaleChannelInput!): BranchSaleChannel!
-  updateManyBranchSaleChannels(input: UpdateManyBranchSaleChannelsInput!): UpdateManyResponse!
-  deleteOneBranchSaleChannel(input: DeleteOneBranchSaleChannelInput!): BranchSaleChannelDeleteResponse!
-  deleteManyBranchSaleChannels(input: DeleteManyBranchSaleChannelsInput!): DeleteManyResponse!
   setProductOnOrderProduct(input: SetProductOnOrderProductInput!): OrderProduct!
   addOptionsToOrderProduct(input: AddOptionsToOrderProductInput!): OrderProduct!
   setOptionsOnOrderProduct(input: SetOptionsOnOrderProductInput!): OrderProduct!
@@ -6015,14 +5841,12 @@ type Mutation {
   updateManyOrders(input: UpdateManyOrdersInput!): UpdateManyResponse!
   deleteOneOrder(input: DeleteOneOrderInput!): OrderDeleteResponse!
   deleteManyOrders(input: DeleteManyOrdersInput!): DeleteManyResponse!
-  orderImportByFiles(input: OrderImportInput!): [Order!]!
-  createOneProductPrice(input: CreateOneProductPriceInput!): ProductPrice!
-  createManyProductPrices(input: CreateManyProductPricesInput!): [ProductPrice!]!
-  updateOneProductPrice(input: UpdateOneProductPriceInput!): ProductPrice!
-  updateManyProductPrices(input: UpdateManyProductPricesInput!): UpdateManyResponse!
-  deleteOneProductPrice(input: DeleteOneProductPriceInput!): ProductPriceDeleteResponse!
-  deleteManyProductPrices(input: DeleteManyProductPricesInput!): DeleteManyResponse!
-  productPriceImportByFile(input: ProductPriceImportInput!): [ProductPrice!]!
+  createOneGarage(input: CreateOneGarageInput!): Garage!
+  createManyGarages(input: CreateManyGaragesInput!): [Garage!]!
+  updateOneGarage(input: UpdateOneGarageInput!): Garage!
+  updateManyGarages(input: UpdateManyGaragesInput!): UpdateManyResponse!
+  deleteOneGarage(input: DeleteOneGarageInput!): GarageDeleteResponse!
+  deleteManyGarages(input: DeleteManyGaragesInput!): DeleteManyResponse!
 }
 
 input AuthLoginInput {
@@ -7393,69 +7217,6 @@ input OrgDeleteFilter {
   deletedAt: DateFieldComparison
 }
 
-input CreateOneBranchSaleChannelInput {
-  """The record to create"""
-  branchSaleChannel: BranchSaleChannelDTO!
-}
-
-input BranchSaleChannelDTO {
-  commission: Float
-  details: JSON
-  saleChannel: SaleChannel!
-  branch: ID!
-}
-
-input CreateManyBranchSaleChannelsInput {
-  """Array of records to create"""
-  branchSaleChannels: [BranchSaleChannelDTO!]!
-}
-
-input UpdateOneBranchSaleChannelInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: BranchSaleChannelDTO!
-}
-
-input UpdateManyBranchSaleChannelsInput {
-  """Filter used to find fields to update"""
-  filter: BranchSaleChannelUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: BranchSaleChannelDTO!
-}
-
-input BranchSaleChannelUpdateFilter {
-  and: [BranchSaleChannelUpdateFilter!]
-  or: [BranchSaleChannelUpdateFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneBranchSaleChannelInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyBranchSaleChannelsInput {
-  """Filter to find records to delete"""
-  filter: BranchSaleChannelDeleteFilter!
-}
-
-input BranchSaleChannelDeleteFilter {
-  and: [BranchSaleChannelDeleteFilter!]
-  or: [BranchSaleChannelDeleteFilter!]
-  saleChannel: SaleChannelFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
 input SetProductOnOrderProductInput {
   """The id of the record."""
   id: ID!
@@ -7572,7 +7333,6 @@ input OrderDTO {
   shippingAddressFull: String
   branch: ID!
   customer: ID!
-  saleChannel: ID!
   products: [OrderProductDTO!]
 }
 
@@ -7637,75 +7397,79 @@ input OrderDeleteFilter {
   deletedAt: DateFieldComparison
 }
 
-input OrderImportInput {
-  branchId: ID!
-  branchSaleChannelId: ID!
-  fileOrMediaIds: [ID!]!
-}
-
-input CreateOneProductPriceInput {
+input CreateOneGarageInput {
   """The record to create"""
-  productPrice: ProductPriceDTO!
+  garage: GarageDTO!
 }
 
-input ProductPriceDTO {
-  price: Float!
-  branchSaleChannel: ID!
-  product: ID!
+input GarageDTO {
+  name: String!
+  description: String
+  address: String
+  lat: Float
+  lng: Float
+  logo: String
+  media: [String!]
+  status: GarageStatus
+  metadata: JSON
+  org: ID
 }
 
-input CreateManyProductPricesInput {
+input CreateManyGaragesInput {
   """Array of records to create"""
-  productPrices: [ProductPriceDTO!]!
+  garages: [GarageDTO!]!
 }
 
-input UpdateOneProductPriceInput {
+input UpdateOneGarageInput {
   """The id of the record to update"""
   id: ID!
 
   """The update to apply."""
-  update: ProductPriceDTO!
+  update: GarageDTO!
 }
 
-input UpdateManyProductPricesInput {
+input UpdateManyGaragesInput {
   """Filter used to find fields to update"""
-  filter: ProductPriceUpdateFilter!
+  filter: GarageUpdateFilter!
 
   """The update to apply to all records found using the filter"""
-  update: ProductPriceDTO!
+  update: GarageDTO!
 }
 
-input ProductPriceUpdateFilter {
-  and: [ProductPriceUpdateFilter!]
-  or: [ProductPriceUpdateFilter!]
-  price: NumberFieldComparison
+input GarageUpdateFilter {
+  and: [GarageUpdateFilter!]
+  or: [GarageUpdateFilter!]
+  name: StringFieldComparison
+  address: StringFieldComparison
+  lat: NumberFieldComparison
+  lng: NumberFieldComparison
+  status: GarageStatusFilterComparison
   id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
+  created_at: DateFieldComparison
+  updated_at: DateFieldComparison
+  deleted_at: DateFieldComparison
 }
 
-input DeleteOneProductPriceInput {
+input DeleteOneGarageInput {
   """The id of the record to delete."""
   id: ID!
 }
 
-input DeleteManyProductPricesInput {
+input DeleteManyGaragesInput {
   """Filter to find records to delete"""
-  filter: ProductPriceDeleteFilter!
+  filter: GarageDeleteFilter!
 }
 
-input ProductPriceDeleteFilter {
-  and: [ProductPriceDeleteFilter!]
-  or: [ProductPriceDeleteFilter!]
-  price: NumberFieldComparison
+input GarageDeleteFilter {
+  and: [GarageDeleteFilter!]
+  or: [GarageDeleteFilter!]
+  name: StringFieldComparison
+  address: StringFieldComparison
+  lat: NumberFieldComparison
+  lng: NumberFieldComparison
+  status: GarageStatusFilterComparison
   id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ProductPriceImportInput {
-  branchId: ID!
-  fileId: ID!
+  created_at: DateFieldComparison
+  updated_at: DateFieldComparison
+  deleted_at: DateFieldComparison
 }
