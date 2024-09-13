@@ -7,7 +7,7 @@ export default function DashboardLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
-          name="/order-import"
+          name="/add-vehicle"
           options={{
             presentation: 'modal',
           }}

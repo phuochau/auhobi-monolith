@@ -10,10 +10,7 @@ import { useState } from "react"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useDispatch } from "react-redux"
-import { GraphQLAPI } from "@/graphql/api"
 import { Button } from "@/components/ui/button"
-import { MutationOrderImportByFilesArgs, Order } from "@/graphql/gql/generated-models"
-import { OrderImportByFilesMutation } from "@/graphql/gql/mutations/orderImportByFiles"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
  
 const formSchema = z.object({
@@ -43,21 +40,13 @@ const Orders = () => {
       setSubmitting(true)
       setResponse(undefined)
   
-      const res = await GraphQLAPI.guestQuery<Order, MutationOrderImportByFilesArgs>(OrderImportByFilesMutation, {
-        input: {
-          branchId: "",
-          branchSaleChannelId: values.saleChannel,
-          fileOrMediaIds: values.fileOrMediaIds
-        }
-      })
-  
-      setResponse(res)
-      if (!res.errors && res.data) {
-        // dispatch(login(res.data))
-        // router.replace('/dashboard')
-      } else {
-        setSubmitting(false)
-      }
+      // setResponse(res)
+      // if (!res.errors && res.data) {
+      //   // dispatch(login(res.data))
+      //   // router.replace('/dashboard')
+      // } else {
+      //   setSubmitting(false)
+      // }
     }
 
     return (
