@@ -50,12 +50,15 @@ export class VehicleModel extends BaseClass {
   parent: VehicleModel
 
   @ManyToMany(() => VehicleModelBody, (p) => p.model, genXToManyOptions())
+  @JoinTable()
   bodies: VehicleModelBody[]
 
   @ManyToMany(() => VehicleEngine, genXToManyOptions())
+  @JoinTable()
   engines: VehicleEngine[]
 
   @ManyToMany(() => VehicleTransmission, genXToManyOptions())
+  @JoinTable()
   transmissions: VehicleTransmission[]
 
   @FilterableField(() => Int, { nullable: true })

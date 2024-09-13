@@ -1,10 +1,12 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { UserStatus } from './enums/user-status.enum';
 import { Account } from 'src/modules/core/auth/entities/account.entity';
 import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
+import { UserVehicle } from './user-vehicle.entity';
+import { genXToManyOptions } from 'src/modules/core/database/helpers/genXToManyOptions';
 
 @ObjectType()
 @InputType()
@@ -36,6 +38,9 @@ export class User extends BaseClass {
 
   @ManyToOne(() => Account, genXToOneOptions())
   account?: Account;
+
+  @OneToMany(() => UserVehicle, (p) => p.owner, genXToManyOptions({ nullable: true }))
+  vehicles: UserVehicle[]
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })

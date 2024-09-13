@@ -57,7 +57,7 @@ export class UserVehicle extends BaseClass {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne(() => User, genXToOneOptions())
+  @ManyToOne(() => User)
   owner: User
 
   @ManyToOne(() => VehicleModel, genXToOneOptions())
