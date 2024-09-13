@@ -9,6 +9,7 @@ import { CrmModule } from './modules/crm/crm.module';
 import { GarageModule } from './modules/garage/garage.module';
 import { CommerceModule } from './modules/commerce/commerce.module';
 import { EndUserModule } from './modules/end-user/end-user.module';
+import { VehicleModule } from './modules/vehicle/vehicle.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { EndUserModule } from './modules/end-user/end-user.module';
     CommerceModule,
     GarageModule,
     EndUserModule,
+    VehicleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

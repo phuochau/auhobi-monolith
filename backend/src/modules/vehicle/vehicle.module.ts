@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { NestjsQueryGraphQLModule } from '@ptc-org/nestjs-query-graphql';
 import { NestjsQueryTypeOrmModule } from '@ptc-org/nestjs-query-typeorm';
 import { Entities, DTOs } from './entities';
-import { Resolvers } from './resolves';
+import { Resolvers } from './resolvers';
 
 @Module({
   imports: [
@@ -22,4 +22,4 @@ import { Resolvers } from './resolves';
   exports: [
   ]
 })
-export class EndUserModule {}
+export class VehicleModule {}

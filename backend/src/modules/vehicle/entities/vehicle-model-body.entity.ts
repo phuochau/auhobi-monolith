@@ -1,41 +1,39 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { TABLE_PREFIX } from '../../constants';
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
-import { UserStatus } from './enums/user-status.enum';
-import { Account } from 'src/modules/core/auth/entities/account.entity';
+import { VehicleModel } from './vehicle-model.entity';
+import { VehicleBody } from './vehicle-body.entity';
 import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @FilterableField()
-  @Column({ nullable: true })
-  phone_number: string;
+  @Field(() => ID)
+  @ManyToOne(() => VehicleModel)
+  @JoinColumn({ name: 'model_id' })
+  model: VehicleModel
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
-  avatar: string;
+  @Field(() => ID)
+  @ManyToOne(() => VehicleBody, genXToOneOptions())
+  @JoinColumn({ name: 'body_id' })
+  body: VehicleBody
 
-  @FilterableField(() => UserStatus)
-  @Column({ nullable: false, default: UserStatus.ACTIVATED })
-  status: UserStatus;
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  pic: string;
 }
-
 
 /**
  * Entity
  */
 @ObjectType()
-@FilterableRelation('account', () => Account)
-@Entity({ name: `${TABLE_PREFIX}_users` })
-export class User extends BaseClass {
+@FilterableRelation('body', () => VehicleBody)
+@Entity({ name: `${TABLE_PREFIX}_model_bodies` })
+export class VehicleModelBody extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
-  @ManyToOne(() => Account, genXToOneOptions())
-  account?: Account;
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -54,7 +52,5 @@ export class User extends BaseClass {
  * DTO
  */
 @InputType()
-export class UserDTO extends BaseClass {
-  @FilterableField(() => ID)
-  account: Account
+export class VehicleModelBodyDTO extends BaseClass {
 }
