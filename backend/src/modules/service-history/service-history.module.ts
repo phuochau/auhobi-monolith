@@ -22,4 +22,4 @@ import { Resolvers } from './resolvers';
   exports: [
   ]
 })
-export class VehicleHistoryModule {}
+export class ServiceHistoryModule {}

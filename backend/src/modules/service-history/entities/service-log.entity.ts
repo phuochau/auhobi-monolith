@@ -1,31 +1,40 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
-import { VehicleLog } from './vehicle-log.entity';
+import { TABLE_PREFIX } from '../constants';
+import { Garage } from '../../garage/entities/garage.entity';
 import { UserVehicle } from '../../end-user/entities/user-vehicle.entity';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
+import { ServiceLogType } from './enums/service-log-type.enum';
 
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @FilterableField()
-  @Column()
-  total: number;
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  description?: string;
 
-  @Field(() => [String], { nullable: true })
-  @Column("text", { array: true, default: [] })
-  media: string[];
+  @FilterableField({ nullable: true })
+  @Column({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
+  date: Date;
+
+  @Field({ nullable: true })
+  @Column({ type: 'decimal', nullable: true })
+  mileage?: number;
+
+  @FilterableField(() => ServiceLogType)
+  @Column()
+  type: ServiceLogType;
 }
 
 /**
  * Entity
  */
 @ObjectType()
+@FilterableRelation('garage', () => Garage, { nullable: true })
 @FilterableRelation('vehicle', () => UserVehicle)
-@FilterableRelation('log', () => VehicleLog)
-@Entity({ name: `${TABLE_PREFIX}_log_bills` })
-export class VehicleLogBill extends BaseClass {
+@Entity({ name: `${TABLE_PREFIX}_logs` })
+export class ServiceLog extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -33,8 +42,11 @@ export class VehicleLogBill extends BaseClass {
   @ManyToOne(() => UserVehicle, genXToOneOptions())
   vehicle: UserVehicle
 
-  @ManyToOne(() => VehicleLog, genXToOneOptions())
-  log: VehicleLog
+  @Column("text", { array: true, default: [] })
+  media: string[];
+
+  @ManyToOne(() => Garage, genXToOneOptions({ nullable: true }))
+  garage?: Garage;
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -53,10 +65,14 @@ export class VehicleLogBill extends BaseClass {
  * DTO
  */
 @InputType()
-export class VehicleLogBillDTO extends BaseClass {
+export class ServiceLogDTO extends BaseClass {
   @FilterableField(() => ID)
   vehicle: UserVehicle
 
-  @FilterableField(() => [ID])
-  log: VehicleLog
+  @FilterableField(() => ID, { nullable: true })
+  garage: Garage;
+
+  @Field(() => [ID], { nullable: true })
+  media: string[];
+
 }

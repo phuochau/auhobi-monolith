@@ -1,12 +1,12 @@
 import { View } from "react-native"
 import { Text } from '@/components/ui/text'
 
-const Orders = () => {
+const ServiceHistory = () => {
     return (
         <View>
-          <Text>Orders</Text>
+          <Text>Service History</Text>
         </View>
     )
 }
 
-export default Orders
+export default ServiceHistory

@@ -1,6 +1,6 @@
 import { registerEnumType } from "@nestjs/graphql";
 
-export enum UserVehicleLogType {
+export enum ServiceLogType {
   MAINTENANCE = 1,
   REPAIR = 2,
   DETAILING = 3,
@@ -11,6 +11,6 @@ export enum UserVehicleLogType {
   OTHER = 100
 }
 
-registerEnumType(UserVehicleLogType, { 
-  name: 'UserVehicleLogType'
+registerEnumType(ServiceLogType, { 
+  name: 'ServiceLogType'
 })

@@ -1,17 +1,17 @@
 import { Parent, ResolveField, Resolver } from "@nestjs/graphql";
 import { CRUDResolver } from "@ptc-org/nestjs-query-graphql";
 import { InjectQueryService, QueryService } from "@ptc-org/nestjs-query-core";
-import { VehicleLog, VehicleLogDTO } from "../entities/vehicle-log.entity";
+import { ServiceLog, ServiceLogDTO } from "../entities/service-log.entity";
 import _ from "lodash";
 import { GraphQLGuard } from "src/modules/core/auth/guards/graphql.guard";
-import { VehicleLogBill } from "../entities/vehicle-log-bill.entity";
+import { ServiceLogBill } from "../entities/service-log-bill.entity";
 
 const ResolveConfig = { guards: [GraphQLGuard] }
 
-@Resolver(() => VehicleLog)
-export class VehicleLogResolver extends CRUDResolver(VehicleLog, {
-  CreateDTOClass: VehicleLogDTO,
-  UpdateDTOClass: VehicleLogDTO,
+@Resolver(() => ServiceLog)
+export class ServiceLogResolver extends CRUDResolver(ServiceLog, {
+  CreateDTOClass: ServiceLogDTO,
+  UpdateDTOClass: ServiceLogDTO,
   read: ResolveConfig,
   create: ResolveConfig,
   update: ResolveConfig,
@@ -20,14 +20,14 @@ export class VehicleLogResolver extends CRUDResolver(VehicleLog, {
   enableTotalCount: true
 }) {
   constructor(
-    @InjectQueryService(VehicleLog) override readonly service: QueryService<VehicleLog>,
-    @InjectQueryService(VehicleLogBill) readonly billService: QueryService<VehicleLogBill>
+    @InjectQueryService(ServiceLog) override readonly service: QueryService<ServiceLog>,
+    @InjectQueryService(ServiceLogBill) readonly billService: QueryService<ServiceLogBill>
   ) {
     super(service);
   }
 
-  @ResolveField(() => VehicleLogBill, { nullable: true })
-  async bill(@Parent() log: VehicleLog) {
+  @ResolveField(() => ServiceLogBill, { nullable: true })
+  async bill(@Parent() log: ServiceLog) {
     const result = await this.billService.query({
       filter: {
         log: {

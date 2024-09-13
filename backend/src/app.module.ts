@@ -10,7 +10,7 @@ import { GarageModule } from './modules/garage/garage.module';
 import { CommerceModule } from './modules/commerce/commerce.module';
 import { EndUserModule } from './modules/end-user/end-user.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
-import { VehicleHistoryModule } from './modules/vehicle-history/vehicle-history.module';
+import { ServiceHistoryModule } from './modules/service-history/service-history.module';
 
 @Module({
   imports: [
@@ -23,7 +23,7 @@ import { VehicleHistoryModule } from './modules/vehicle-history/vehicle-history.
     GarageModule,
     EndUserModule,
     VehicleModule,
-    VehicleHistoryModule,
+    ServiceHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

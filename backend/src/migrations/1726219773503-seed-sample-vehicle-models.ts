@@ -6,7 +6,7 @@ import { VehicleModel } from "../modules/vehicle/entities/vehicle-model.entity";
 import { VehicleTransmission } from "../modules/vehicle/entities/vehicle-transmission.entity";
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class SeedSampleBmwModels1726214610583 implements MigrationInterface {
+export class SeedSampleVehicleModels1726219773503 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const bodyRepo = queryRunner.manager.getRepository<VehicleBody>(VehicleBody)
