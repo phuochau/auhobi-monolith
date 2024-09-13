@@ -4,7 +4,7 @@ import { ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../../constants';
 import { Account } from './account.entity';
 import { genXToOneOptions } from '../../database/helpers/genXToOneOptions';
-import { Encryption } from 'src/lib/encryption';
+import { Encryption } from '../../../../lib/encryption';
 
 @ObjectType()
 @InputType()
