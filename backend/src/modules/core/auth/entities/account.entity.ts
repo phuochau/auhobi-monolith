@@ -1,12 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Index, BaseEntity } from 'typeorm';
 import { FilterableField } from '@ptc-org/nestjs-query-graphql';
-import { ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../../constants';
 import { AccountRole } from './enums/account-role.enum';
-
-registerEnumType(AccountRole, {
-  name: 'AccountRole',
-});
 
 @ObjectType()
 @InputType()

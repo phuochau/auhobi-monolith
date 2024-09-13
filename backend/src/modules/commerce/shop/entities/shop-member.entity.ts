@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Column, BaseEntity } from 'typeorm';
-import { ObjectType, InputType, ID, registerEnumType } from '@nestjs/graphql';
+import { ObjectType, InputType, ID } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { Account } from '../../../core/auth/entities/account.entity';
@@ -7,20 +7,12 @@ import { genXToOneOptions } from '../../../core/database/helpers/genXToOneOption
 import { ShopMemberRole } from './enums/shop-member-role.enum';
 import { Shop } from './shop.entity';
 
-registerEnumType(ShopMemberRole, {
-  name: 'ShopMemberRole',
-})
-
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
   @FilterableField(() => ShopMemberRole)
   @Column('int', { default: ShopMemberRole.VIEWER })
   role: ShopMemberRole;
-  
-  @FilterableField({ nullable: true })
-  @Column({ default: true })
-  enabled: boolean;
 }
 
 /**

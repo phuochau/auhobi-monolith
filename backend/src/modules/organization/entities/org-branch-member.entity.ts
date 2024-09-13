@@ -1,15 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Column, BaseEntity } from 'typeorm';
 import { OrgBranch } from './org-branch.entity';
-import { ObjectType, InputType, ID, registerEnumType } from '@nestjs/graphql';
+import { ObjectType, InputType, ID } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../constants';
-import { FilterableField, FilterableRelation, QueryOptions } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { OrgBranchRole } from './enums/org-branch-role.enum';
 import { Account } from '../../core/auth/entities/account.entity';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
-
-registerEnumType(OrgBranchRole, {
-  name: 'OrgBranchRole',
-})
 
 @ObjectType()
 @InputType()

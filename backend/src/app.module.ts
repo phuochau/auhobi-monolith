@@ -8,6 +8,7 @@ import { OrganizationModule } from './modules/organization/organization.module';
 import { CrmModule } from './modules/crm/crm.module';
 import { GarageModule } from './modules/garage/garage.module';
 import { CommerceModule } from './modules/commerce/commerce.module';
+import { EndUserModule } from './modules/end-user/end-user.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CommerceModule } from './modules/commerce/commerce.module';
     CrmModule,
     CommerceModule,
     GarageModule,
+    EndUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -621,7 +621,7 @@ enum OrgBranchRole {
 type OrgBranch {
   name: String!
   details: JSON
-  enabled: Boolean
+  status: OrgBranchStatus!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -647,6 +647,12 @@ type OrgBranch {
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar JSON
+
+enum OrgBranchStatus {
+  ACTIVATED
+  UNACTIVATED
+  BLOCKED
+}
 
 input OrgBranchMemberAggregateFilter {
   and: [OrgBranchMemberAggregateFilter!]
@@ -725,7 +731,7 @@ input OrgBranchMemberAggregateFilterOrgBranchAggregateFilter {
   or: [OrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -764,6 +770,23 @@ input JSONFilterComparison {
   notILike: JSON
   in: [JSON!]
   notIn: [JSON!]
+}
+
+input OrgBranchStatusFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: OrgBranchStatus
+  neq: OrgBranchStatus
+  gt: OrgBranchStatus
+  gte: OrgBranchStatus
+  lt: OrgBranchStatus
+  lte: OrgBranchStatus
+  like: OrgBranchStatus
+  notLike: OrgBranchStatus
+  iLike: OrgBranchStatus
+  notILike: OrgBranchStatus
+  in: [OrgBranchStatus!]
+  notIn: [OrgBranchStatus!]
 }
 
 input OrgBranchMemberAggregateFilterAccountAggregateFilter {
@@ -823,7 +846,7 @@ input OrgBranchMemberFilterOrgBranchFilter {
   or: [OrgBranchMemberFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -873,7 +896,6 @@ enum SortNulls {
 
 type ShopMember {
   role: ShopMemberRole!
-  enabled: Boolean
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -919,7 +941,6 @@ input ShopMemberAggregateFilter {
   and: [ShopMemberAggregateFilter!]
   or: [ShopMemberAggregateFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -975,7 +996,6 @@ input ShopMemberFilter {
   and: [ShopMemberFilter!]
   or: [ShopMemberFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1018,7 +1038,6 @@ input ShopMemberSort {
 
 enum ShopMemberSortFields {
   role
-  enabled
   id
   createdAt
   updatedAt
@@ -1029,7 +1048,7 @@ type Org {
   type: OrgType!
   name: String!
   details: JSON
-  enabled: Boolean
+  status: OrgStatus!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1083,6 +1102,12 @@ enum OrgType {
   DEFAULT
 }
 
+enum OrgStatus {
+  ACTIVATED
+  UNACTIVATED
+  BLOCKED
+}
+
 input OrgMemberAggregateFilter {
   and: [OrgMemberAggregateFilter!]
   or: [OrgMemberAggregateFilter!]
@@ -1124,7 +1149,7 @@ input OrgMemberAggregateFilterOrgAggregateFilter {
   or: [OrgMemberAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1148,6 +1173,23 @@ input OrgTypeFilterComparison {
   notIn: [OrgType!]
 }
 
+input OrgStatusFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: OrgStatus
+  neq: OrgStatus
+  gt: OrgStatus
+  gte: OrgStatus
+  lt: OrgStatus
+  lte: OrgStatus
+  like: OrgStatus
+  notLike: OrgStatus
+  iLike: OrgStatus
+  notILike: OrgStatus
+  in: [OrgStatus!]
+  notIn: [OrgStatus!]
+}
+
 input OrgMemberAggregateFilterAccountAggregateFilter {
   and: [OrgMemberAggregateFilterAccountAggregateFilter!]
   or: [OrgMemberAggregateFilterAccountAggregateFilter!]
@@ -1167,7 +1209,7 @@ input OrgBranchAggregateFilter {
   or: [OrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1181,7 +1223,7 @@ input OrgBranchAggregateFilterOrgAggregateFilter {
   or: [OrgBranchAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1219,7 +1261,7 @@ input ShopAggregateFilterOrgBranchAggregateFilter {
   or: [ShopAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1231,7 +1273,7 @@ input ShopAggregateFilterOrgAggregateFilter {
   or: [ShopAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1242,7 +1284,6 @@ input ShopAggregateFilterShopMemberAggregateFilter {
   and: [ShopAggregateFilterShopMemberAggregateFilter!]
   or: [ShopAggregateFilterShopMemberAggregateFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1267,7 +1308,7 @@ input OrgMemberFilterOrgFilter {
   or: [OrgMemberFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1308,7 +1349,7 @@ input OrgBranchFilter {
   or: [OrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1322,7 +1363,7 @@ input OrgBranchFilterOrgFilter {
   or: [OrgBranchFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1349,7 +1390,7 @@ input OrgBranchSort {
 enum OrgBranchSortFields {
   name
   details
-  enabled
+  status
   id
   createdAt
   updatedAt
@@ -1376,7 +1417,7 @@ input ShopFilterOrgBranchFilter {
   or: [ShopFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1388,7 +1429,7 @@ input ShopFilterOrgFilter {
   or: [ShopFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1399,7 +1440,6 @@ input ShopFilterShopMemberFilter {
   and: [ShopFilterShopMemberFilter!]
   or: [ShopFilterShopMemberFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -1594,7 +1634,7 @@ type OrgBranchMemberAggregateResponse {
 type OrgBranchDeleteResponse {
   name: String
   details: JSON
-  enabled: Boolean
+  status: OrgBranchStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1623,7 +1663,7 @@ type OrgBranchConnection {
 type OrgBranchAggregateGroupBy {
   name: String
   details: JSON
-  enabled: Boolean
+  status: OrgBranchStatus
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
   updatedAt(by: GroupBy! = DAY): DateTime
@@ -1633,7 +1673,7 @@ type OrgBranchAggregateGroupBy {
 type OrgBranchCountAggregate {
   name: Int
   details: Int
-  enabled: Int
+  status: Int
   id: Int
   createdAt: Int
   updatedAt: Int
@@ -1643,6 +1683,7 @@ type OrgBranchCountAggregate {
 type OrgBranchMinAggregate {
   name: String
   details: JSON
+  status: OrgBranchStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1652,6 +1693,7 @@ type OrgBranchMinAggregate {
 type OrgBranchMaxAggregate {
   name: String
   details: JSON
+  status: OrgBranchStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1739,7 +1781,7 @@ type OrgDeleteResponse {
   type: OrgType
   name: String
   details: JSON
-  enabled: Boolean
+  status: OrgStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1768,7 +1810,7 @@ type OrgConnection {
 type OrgAggregateGroupBy {
   type: OrgType
   name: String
-  enabled: Boolean
+  status: OrgStatus
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
   updatedAt(by: GroupBy! = DAY): DateTime
@@ -1778,7 +1820,7 @@ type OrgAggregateGroupBy {
 type OrgCountAggregate {
   type: Int
   name: Int
-  enabled: Int
+  status: Int
   id: Int
   createdAt: Int
   updatedAt: Int
@@ -1796,6 +1838,7 @@ type OrgAvgAggregate {
 type OrgMinAggregate {
   type: OrgType
   name: String
+  status: OrgStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1805,6 +1848,7 @@ type OrgMinAggregate {
 type OrgMaxAggregate {
   type: OrgType
   name: String
+  status: OrgStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1901,7 +1945,7 @@ type OrgShopsAggregateResponse {
 type OrgBranchesAggregateGroupBy {
   name: String
   details: JSON
-  enabled: Boolean
+  status: OrgBranchStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1911,7 +1955,7 @@ type OrgBranchesAggregateGroupBy {
 type OrgBranchesCountAggregate {
   name: Int
   details: Int
-  enabled: Int
+  status: Int
   id: Int
   createdAt: Int
   updatedAt: Int
@@ -1921,6 +1965,7 @@ type OrgBranchesCountAggregate {
 type OrgBranchesMinAggregate {
   name: String
   details: JSON
+  status: OrgBranchStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -1930,6 +1975,7 @@ type OrgBranchesMinAggregate {
 type OrgBranchesMaxAggregate {
   name: String
   details: JSON
+  status: OrgBranchStatus
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -2520,7 +2566,7 @@ input ProductAggregateFilterOrgBranchAggregateFilter {
   or: [ProductAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -2594,7 +2640,7 @@ input ProductFilterOrgBranchFilter {
   or: [ProductFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -2862,7 +2908,7 @@ input ProductCategoryAggregateFilterOrgBranchAggregateFilter {
   or: [ProductCategoryAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -2938,7 +2984,7 @@ input ProductCategoryFilterOrgBranchFilter {
   or: [ProductCategoryFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -4273,7 +4319,6 @@ type ProductCategoriesAggregateResponse {
 
 type ShopMemberDeleteResponse {
   role: ShopMemberRole
-  enabled: Boolean
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -4301,7 +4346,6 @@ type ShopMemberConnection {
 
 type ShopMemberAggregateGroupBy {
   role: ShopMemberRole
-  enabled: Boolean
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
   updatedAt(by: GroupBy! = DAY): DateTime
@@ -4310,7 +4354,6 @@ type ShopMemberAggregateGroupBy {
 
 type ShopMemberCountAggregate {
   role: Int
-  enabled: Int
   id: Int
   createdAt: Int
   updatedAt: Int
@@ -4437,7 +4480,6 @@ type ShopMembersConnection {
 
 type ShopMembersAggregateGroupBy {
   role: ShopMemberRole
-  enabled: Boolean
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -4446,7 +4488,6 @@ type ShopMembersAggregateGroupBy {
 
 type ShopMembersCountAggregate {
   role: Int
-  enabled: Int
   id: Int
   createdAt: Int
   updatedAt: Int
@@ -5267,7 +5308,7 @@ input OrgAggregateFilter {
   or: [OrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5312,7 +5353,7 @@ input OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter {
   or: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5326,7 +5367,7 @@ input OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateF
   or: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5349,7 +5390,7 @@ input OrgAggregateFilterShopAggregateFilterOrgAggregateFilter {
   or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5391,7 +5432,7 @@ input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateF
   or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5413,7 +5454,6 @@ input OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter {
   and: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter!]
   or: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5453,7 +5493,7 @@ input OrgAggregateFilterOrgBranchAggregateFilter {
   or: [OrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5467,7 +5507,7 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter {
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5509,7 +5549,7 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggre
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5545,7 +5585,7 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOr
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5584,7 +5624,7 @@ input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter {
   or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5626,7 +5666,7 @@ input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggre
   or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5663,7 +5703,7 @@ input OrgFilter {
   or: [OrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5708,7 +5748,7 @@ input OrgFilterShopFilterOrgBranchFilter {
   or: [OrgFilterShopFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5722,7 +5762,7 @@ input OrgFilterShopFilterOrgBranchFilterOrgFilter {
   or: [OrgFilterShopFilterOrgBranchFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5745,7 +5785,7 @@ input OrgFilterShopFilterOrgFilter {
   or: [OrgFilterShopFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5787,7 +5827,7 @@ input OrgFilterShopFilterOrgFilterOrgBranchFilter {
   or: [OrgFilterShopFilterOrgFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5809,7 +5849,6 @@ input OrgFilterShopFilterShopMemberFilter {
   and: [OrgFilterShopFilterShopMemberFilter!]
   or: [OrgFilterShopFilterShopMemberFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5849,7 +5888,7 @@ input OrgFilterOrgBranchFilter {
   or: [OrgFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5863,7 +5902,7 @@ input OrgFilterOrgBranchFilterOrgFilter {
   or: [OrgFilterOrgBranchFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5905,7 +5944,7 @@ input OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter {
   or: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5941,7 +5980,7 @@ input OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter {
   or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5980,7 +6019,7 @@ input OrgFilterOrgMemberFilterOrgFilter {
   or: [OrgFilterOrgMemberFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6022,7 +6061,7 @@ input OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter {
   or: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6063,7 +6102,7 @@ input OrgSort {
 enum OrgSortFields {
   type
   name
-  enabled
+  status
   id
   createdAt
   updatedAt
@@ -6164,7 +6203,7 @@ input ProductTypeAggregateFilterOrgBranchAggregateFilter {
   or: [ProductTypeAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6202,7 +6241,7 @@ input ProductTypeFilterOrgBranchFilter {
   or: [ProductTypeFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6255,7 +6294,7 @@ input ProductUnitAggregateFilterOrgBranchAggregateFilter {
   or: [ProductUnitAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6293,7 +6332,7 @@ input ProductUnitFilterOrgBranchFilter {
   or: [ProductUnitFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6493,7 +6532,7 @@ input OrderAggregateFilterOrgBranchAggregateFilter {
   or: [OrderAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6536,7 +6575,7 @@ input OrderFilterOrgBranchFilter {
   or: [OrderFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6600,7 +6639,7 @@ input GarageAggregateFilterOrgBranchAggregateFilter {
   or: [GarageAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6612,7 +6651,7 @@ input GarageAggregateFilterOrgAggregateFilter {
   or: [GarageAggregateFilterOrgAggregateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6640,7 +6679,7 @@ input GarageFilterOrgBranchFilter {
   or: [GarageFilterOrgBranchFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -6652,7 +6691,7 @@ input GarageFilterOrgFilter {
   or: [GarageFilterOrgFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -7381,7 +7420,7 @@ input CreateOneOrgBranchInput {
 input OrgBranchDTO {
   name: String!
   details: JSON
-  enabled: Boolean
+  status: OrgBranchStatus!
   org: ID
   members: [OrgBranchMemberDTO!]
 }
@@ -7412,7 +7451,7 @@ input OrgBranchUpdateFilter {
   or: [OrgBranchUpdateFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -7434,7 +7473,7 @@ input OrgBranchDeleteFilter {
   or: [OrgBranchDeleteFilter!]
   name: StringFieldComparison
   details: JSONFilterComparison
-  enabled: BooleanFieldComparison
+  status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -7563,7 +7602,7 @@ input OrgDTO {
   type: OrgType!
   name: String!
   details: JSON
-  enabled: Boolean
+  status: OrgStatus!
   createdBy: ID
   members: [OrgMemberDTO!]
   branches: [OrgBranchDTO!]
@@ -7595,7 +7634,7 @@ input OrgUpdateFilter {
   or: [OrgUpdateFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -7617,7 +7656,7 @@ input OrgDeleteFilter {
   or: [OrgDeleteFilter!]
   type: OrgTypeFilterComparison
   name: StringFieldComparison
-  enabled: BooleanFieldComparison
+  status: OrgStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8445,7 +8484,6 @@ input ShopDTO {
 
 input ShopMemberDTO {
   role: ShopMemberRole!
-  enabled: Boolean
   account: ID!
   shop: ID
 }
@@ -8535,7 +8573,6 @@ input ShopMemberUpdateFilter {
   and: [ShopMemberUpdateFilter!]
   or: [ShopMemberUpdateFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8556,7 +8593,6 @@ input ShopMemberDeleteFilter {
   and: [ShopMemberDeleteFilter!]
   or: [ShopMemberDeleteFilter!]
   role: ShopMemberRoleFilterComparison
-  enabled: BooleanFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison

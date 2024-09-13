@@ -1,14 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Index, BaseEntity, OneToMany } from 'typeorm';
 import { FilterableField, FilterableOffsetConnection } from '@ptc-org/nestjs-query-graphql';
-import { ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../constants';
 import { CustomerGender } from './enums/customer-gender.enum';
 import { CustomerAddress, CustomerAddressDTO } from './customer-address.entity';
 import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
-
-registerEnumType(CustomerGender, {
-  name: 'CustomerGender',
-});
 
 @ObjectType()
 @InputType()

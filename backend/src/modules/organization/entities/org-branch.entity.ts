@@ -6,6 +6,7 @@ import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableOffsetConnection, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
+import { OrgBranchStatus } from './enums/org-branch-status.enum';
 
 @ObjectType()
 @InputType()
@@ -18,9 +19,9 @@ class BaseClass extends BaseEntity {
   @Column({ type: 'jsonb', nullable: true })
   details: string;
   
-  @FilterableField({ nullable: true })
-  @Column({ default: true })
-  enabled: boolean;
+  @FilterableField(() => OrgBranchStatus, { nullable: false })
+  @Column({ nullable: false, default: OrgBranchStatus.ACTIVATED })
+  status: OrgBranchStatus;
 }
 
 /**

@@ -1,11 +1,11 @@
 import { registerEnumType } from "@nestjs/graphql";
 
-export enum GarageStatus {
+export enum OrgBranchStatus {
   ACTIVATED = 'ACTIVATED',
   UNACTIVATED = 'UNACTIVATED',
   BLOCKED = 'BLOCKED'
 }
 
-registerEnumType(GarageStatus, { 
-  name: 'GarageStatus'
+registerEnumType(OrgBranchStatus, {
+  name: 'OrgBranchStatus',
 })

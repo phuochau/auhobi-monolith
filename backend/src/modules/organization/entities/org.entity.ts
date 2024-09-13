@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BaseEntity } from 'typeorm';
 import { OrgBranch, OrgBranchDTO } from './org-branch.entity';
 import { OrgMember, OrgMemberDTO } from './org-member.entity';
-import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../constants';
 import { BeforeCreateOne, CreateOneInputType, FilterableField, FilterableOffsetConnection, FilterableRelation, QueryOptions } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
@@ -12,10 +12,8 @@ import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 import { GqlContext } from '../../core/graphql/types/gql-context';
 import { OrgType } from './enums/org-type.enum';
 import { Shop } from 'src/modules/commerce/shop/entities/shop.entity';
+import { OrgStatus } from './enums/org-status.enum';
 
-registerEnumType(OrgType, {
-  name: 'OrgType',
-})
 
 @ObjectType()
 @InputType()
@@ -32,9 +30,9 @@ class BaseClass extends BaseEntity {
   @Column({ type: 'jsonb', nullable: true })
   details: string;
   
-  @FilterableField({ nullable: true })
-  @Column({ default: true })
-  enabled: boolean;
+  @FilterableField(() => OrgStatus, { nullable: false })
+  @Column({ nullable: false, default: OrgStatus.ACTIVATED })
+  status: OrgStatus;
 }
 
 /**
