@@ -4,6 +4,7 @@ export const OrgBranchesMaxAggregateFragment = gql`
     fragment OrgBranchesMaxAggregateFragment on OrgBranchesMaxAggregate {
     	name
     	details
+    	status
     	id
     	createdAt
     	updatedAt

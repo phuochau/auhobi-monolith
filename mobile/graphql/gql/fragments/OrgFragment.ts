@@ -5,7 +5,7 @@ export const OrgFragment = gql`
     	type
     	name
     	details
-    	enabled
+    	status
     	id
     	createdAt
     	updatedAt

@@ -4,7 +4,7 @@ export const OrgBranchesCountAggregateFragment = gql`
     fragment OrgBranchesCountAggregateFragment on OrgBranchesCountAggregate {
     	name
     	details
-    	enabled
+    	status
     	id
     	createdAt
     	updatedAt

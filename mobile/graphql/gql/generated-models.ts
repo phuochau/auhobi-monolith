@@ -682,6 +682,13 @@ export type AddAddressesToCustomerInput = {
   relationIds: Array<Scalars['ID']['input']>;
 };
 
+export type AddBodiesToVehicleModelInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
 export type AddBranchesToOrgInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
@@ -697,6 +704,13 @@ export type AddMembersToOrgBranchInput = {
 };
 
 export type AddMembersToOrgInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type AddMembersToShopInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
   /** The ids of the relations. */
@@ -746,6 +760,13 @@ export type AddProductsToProductTypeInput = {
 };
 
 export type AddProductsToProductUnitInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type AddShopsToOrgInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
   /** The ids of the relations. */
@@ -979,205 +1000,6 @@ export type BooleanFieldComparison = {
   isNot?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type BranchSaleChannel = {
-  __typename?: 'BranchSaleChannel';
-  branch: OrgBranch;
-  commission?: Maybe<Scalars['Float']['output']>;
-  createdAt: Scalars['DateTime']['output'];
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  details?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
-  saleChannel: SaleChannel;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type BranchSaleChannelAggregateFilter = {
-  and?: InputMaybe<Array<BranchSaleChannelAggregateFilter>>;
-  branch?: InputMaybe<BranchSaleChannelAggregateFilterOrgBranchAggregateFilter>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<BranchSaleChannelAggregateFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type BranchSaleChannelAggregateFilterOrgBranchAggregateFilter = {
-  and?: InputMaybe<Array<BranchSaleChannelAggregateFilterOrgBranchAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<BranchSaleChannelAggregateFilterOrgBranchAggregateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type BranchSaleChannelAggregateGroupBy = {
-  __typename?: 'BranchSaleChannelAggregateGroupBy';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  saleChannel?: Maybe<SaleChannel>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type BranchSaleChannelAggregateGroupByCreatedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type BranchSaleChannelAggregateGroupByDeletedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type BranchSaleChannelAggregateGroupByUpdatedAtArgs = {
-  by?: GroupBy;
-};
-
-export type BranchSaleChannelAggregateResponse = {
-  __typename?: 'BranchSaleChannelAggregateResponse';
-  avg?: Maybe<BranchSaleChannelAvgAggregate>;
-  count?: Maybe<BranchSaleChannelCountAggregate>;
-  groupBy?: Maybe<BranchSaleChannelAggregateGroupBy>;
-  max?: Maybe<BranchSaleChannelMaxAggregate>;
-  min?: Maybe<BranchSaleChannelMinAggregate>;
-  sum?: Maybe<BranchSaleChannelSumAggregate>;
-};
-
-export type BranchSaleChannelAvgAggregate = {
-  __typename?: 'BranchSaleChannelAvgAggregate';
-  saleChannel?: Maybe<Scalars['Float']['output']>;
-};
-
-export type BranchSaleChannelConnection = {
-  __typename?: 'BranchSaleChannelConnection';
-  /** Array of edges. */
-  edges: Array<BranchSaleChannelEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-  /** Fetch total count of records */
-  totalCount: Scalars['Int']['output'];
-};
-
-export type BranchSaleChannelCountAggregate = {
-  __typename?: 'BranchSaleChannelCountAggregate';
-  createdAt?: Maybe<Scalars['Int']['output']>;
-  deletedAt?: Maybe<Scalars['Int']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  saleChannel?: Maybe<Scalars['Int']['output']>;
-  updatedAt?: Maybe<Scalars['Int']['output']>;
-};
-
-export type BranchSaleChannelDto = {
-  branch: Scalars['ID']['input'];
-  commission?: InputMaybe<Scalars['Float']['input']>;
-  details?: InputMaybe<Scalars['JSON']['input']>;
-  saleChannel: SaleChannel;
-};
-
-export type BranchSaleChannelDeleteFilter = {
-  and?: InputMaybe<Array<BranchSaleChannelDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<BranchSaleChannelDeleteFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type BranchSaleChannelDeleteResponse = {
-  __typename?: 'BranchSaleChannelDeleteResponse';
-  commission?: Maybe<Scalars['Float']['output']>;
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  details?: Maybe<Scalars['JSON']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  saleChannel?: Maybe<SaleChannel>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type BranchSaleChannelEdge = {
-  __typename?: 'BranchSaleChannelEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the BranchSaleChannel */
-  node: BranchSaleChannel;
-};
-
-export type BranchSaleChannelFilter = {
-  and?: InputMaybe<Array<BranchSaleChannelFilter>>;
-  branch?: InputMaybe<BranchSaleChannelFilterOrgBranchFilter>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<BranchSaleChannelFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type BranchSaleChannelFilterOrgBranchFilter = {
-  and?: InputMaybe<Array<BranchSaleChannelFilterOrgBranchFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<BranchSaleChannelFilterOrgBranchFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type BranchSaleChannelMaxAggregate = {
-  __typename?: 'BranchSaleChannelMaxAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  saleChannel?: Maybe<SaleChannel>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type BranchSaleChannelMinAggregate = {
-  __typename?: 'BranchSaleChannelMinAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  saleChannel?: Maybe<SaleChannel>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type BranchSaleChannelSort = {
-  direction: SortDirection;
-  field: BranchSaleChannelSortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum BranchSaleChannelSortFields {
-  CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
-  Id = 'id',
-  SaleChannel = 'saleChannel',
-  UpdatedAt = 'updatedAt'
-}
-
-export type BranchSaleChannelSumAggregate = {
-  __typename?: 'BranchSaleChannelSumAggregate';
-  saleChannel?: Maybe<Scalars['Float']['output']>;
-};
-
-export type BranchSaleChannelUpdateFilter = {
-  and?: InputMaybe<Array<BranchSaleChannelUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<BranchSaleChannelUpdateFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
 export type CreateManyAccountPasswordResetsInput = {
   /** Array of records to create */
   accountPasswordResets: Array<AccountPasswordResetDto>;
@@ -1198,11 +1020,6 @@ export type CreateManyApiKeysInput = {
   apiKeys: Array<ApiKeyDto>;
 };
 
-export type CreateManyBranchSaleChannelsInput = {
-  /** Array of records to create */
-  branchSaleChannels: Array<BranchSaleChannelDto>;
-};
-
 export type CreateManyCustomersInput = {
   /** Array of records to create */
   customers: Array<CustomerDto>;
@@ -1211,6 +1028,11 @@ export type CreateManyCustomersInput = {
 export type CreateManyFilesInput = {
   /** Array of records to create */
   files: Array<FileDto>;
+};
+
+export type CreateManyGaragesInput = {
+  /** Array of records to create */
+  garages: Array<GarageDto>;
 };
 
 export type CreateManyMediaInput = {
@@ -1263,11 +1085,6 @@ export type CreateManyProductOptionsInput = {
   productOptions: Array<ProductOptionDto>;
 };
 
-export type CreateManyProductPricesInput = {
-  /** Array of records to create */
-  productPrices: Array<ProductPriceDto>;
-};
-
 export type CreateManyProductTypesInput = {
   /** Array of records to create */
   productTypes: Array<ProductTypeDto>;
@@ -1281,6 +1098,66 @@ export type CreateManyProductUnitsInput = {
 export type CreateManyProductsInput = {
   /** Array of records to create */
   products: Array<ProductDto>;
+};
+
+export type CreateManyShopMembersInput = {
+  /** Array of records to create */
+  shopMembers: Array<ShopMemberDto>;
+};
+
+export type CreateManyShopsInput = {
+  /** Array of records to create */
+  shops: Array<ShopDto>;
+};
+
+export type CreateManyUserVehiclesInput = {
+  /** Array of records to create */
+  userVehicles: Array<UserVehicleDto>;
+};
+
+export type CreateManyUsersInput = {
+  /** Array of records to create */
+  users: Array<UserDto>;
+};
+
+export type CreateManyVehicleBodiesInput = {
+  /** Array of records to create */
+  vehicleBodies: Array<VehicleBodyDto>;
+};
+
+export type CreateManyVehicleBrandsInput = {
+  /** Array of records to create */
+  vehicleBrands: Array<VehicleBrandDto>;
+};
+
+export type CreateManyVehicleEnginesInput = {
+  /** Array of records to create */
+  vehicleEngines: Array<VehicleEngineDto>;
+};
+
+export type CreateManyVehicleLogBillsInput = {
+  /** Array of records to create */
+  vehicleLogBills: Array<VehicleLogBillDto>;
+};
+
+export type CreateManyVehicleLogsInput = {
+  /** Array of records to create */
+  vehicleLogs: Array<VehicleLogDto>;
+};
+
+export type CreateManyVehicleModelBodiesInput = {
+  /** Array of records to create */
+  vehicleModelBodies: Array<VehicleModelBodyDto>;
+};
+
+export type CreateManyVehicleModelsInput = {
+  /** Array of records to create */
+  vehicleModels: Array<VehicleModelDto>;
+};
+
+export type CreateManyVehicleTransmissionsInput = {
+  /** Array of records to create */
+  vehicleTransmissions: Array<VehicleTransmissionDto>;
 };
 
 export type CreateOneAccountInput = {
@@ -1303,11 +1180,6 @@ export type CreateOneApiKeyInput = {
   apiKey: ApiKeyDto;
 };
 
-export type CreateOneBranchSaleChannelInput = {
-  /** The record to create */
-  branchSaleChannel: BranchSaleChannelDto;
-};
-
 export type CreateOneCustomerInput = {
   /** The record to create */
   customer: CustomerDto;
@@ -1316,6 +1188,11 @@ export type CreateOneCustomerInput = {
 export type CreateOneFileInput = {
   /** The record to create */
   file: FileDto;
+};
+
+export type CreateOneGarageInput = {
+  /** The record to create */
+  garage: GarageDto;
 };
 
 export type CreateOneMediaInput = {
@@ -1373,11 +1250,6 @@ export type CreateOneProductOptionInput = {
   productOption: ProductOptionDto;
 };
 
-export type CreateOneProductPriceInput = {
-  /** The record to create */
-  productPrice: ProductPriceDto;
-};
-
 export type CreateOneProductTypeInput = {
   /** The record to create */
   productType: ProductTypeDto;
@@ -1386,6 +1258,66 @@ export type CreateOneProductTypeInput = {
 export type CreateOneProductUnitInput = {
   /** The record to create */
   productUnit: ProductUnitDto;
+};
+
+export type CreateOneShopInput = {
+  /** The record to create */
+  shop: ShopDto;
+};
+
+export type CreateOneShopMemberInput = {
+  /** The record to create */
+  shopMember: ShopMemberDto;
+};
+
+export type CreateOneUserInput = {
+  /** The record to create */
+  user: UserDto;
+};
+
+export type CreateOneUserVehicleInput = {
+  /** The record to create */
+  userVehicle: UserVehicleDto;
+};
+
+export type CreateOneVehicleBodyInput = {
+  /** The record to create */
+  vehicleBody: VehicleBodyDto;
+};
+
+export type CreateOneVehicleBrandInput = {
+  /** The record to create */
+  vehicleBrand: VehicleBrandDto;
+};
+
+export type CreateOneVehicleEngineInput = {
+  /** The record to create */
+  vehicleEngine: VehicleEngineDto;
+};
+
+export type CreateOneVehicleLogBillInput = {
+  /** The record to create */
+  vehicleLogBill: VehicleLogBillDto;
+};
+
+export type CreateOneVehicleLogInput = {
+  /** The record to create */
+  vehicleLog: VehicleLogDto;
+};
+
+export type CreateOneVehicleModelBodyInput = {
+  /** The record to create */
+  vehicleModelBody: VehicleModelBodyDto;
+};
+
+export type CreateOneVehicleModelInput = {
+  /** The record to create */
+  vehicleModel: VehicleModelDto;
+};
+
+export type CreateOneVehicleTransmissionInput = {
+  /** The record to create */
+  vehicleTransmission: VehicleTransmissionDto;
 };
 
 export type CursorPaging = {
@@ -1900,11 +1832,6 @@ export type DeleteManyApiKeysInput = {
   filter: ApiKeyDeleteFilter;
 };
 
-export type DeleteManyBranchSaleChannelsInput = {
-  /** Filter to find records to delete */
-  filter: BranchSaleChannelDeleteFilter;
-};
-
 export type DeleteManyCustomersInput = {
   /** Filter to find records to delete */
   filter: CustomerDeleteFilter;
@@ -1913,6 +1840,11 @@ export type DeleteManyCustomersInput = {
 export type DeleteManyFilesInput = {
   /** Filter to find records to delete */
   filter: FileDeleteFilter;
+};
+
+export type DeleteManyGaragesInput = {
+  /** Filter to find records to delete */
+  filter: GarageDeleteFilter;
 };
 
 export type DeleteManyMediaInput = {
@@ -1965,11 +1897,6 @@ export type DeleteManyProductOptionsInput = {
   filter: ProductOptionDeleteFilter;
 };
 
-export type DeleteManyProductPricesInput = {
-  /** Filter to find records to delete */
-  filter: ProductPriceDeleteFilter;
-};
-
 export type DeleteManyProductTypesInput = {
   /** Filter to find records to delete */
   filter: ProductTypeDeleteFilter;
@@ -1989,6 +1916,66 @@ export type DeleteManyResponse = {
   __typename?: 'DeleteManyResponse';
   /** The number of records deleted. */
   deletedCount: Scalars['Int']['output'];
+};
+
+export type DeleteManyShopMembersInput = {
+  /** Filter to find records to delete */
+  filter: ShopMemberDeleteFilter;
+};
+
+export type DeleteManyShopsInput = {
+  /** Filter to find records to delete */
+  filter: ShopDeleteFilter;
+};
+
+export type DeleteManyUserVehiclesInput = {
+  /** Filter to find records to delete */
+  filter: UserVehicleDeleteFilter;
+};
+
+export type DeleteManyUsersInput = {
+  /** Filter to find records to delete */
+  filter: UserDeleteFilter;
+};
+
+export type DeleteManyVehicleBodiesInput = {
+  /** Filter to find records to delete */
+  filter: VehicleBodyDeleteFilter;
+};
+
+export type DeleteManyVehicleBrandsInput = {
+  /** Filter to find records to delete */
+  filter: VehicleBrandDeleteFilter;
+};
+
+export type DeleteManyVehicleEnginesInput = {
+  /** Filter to find records to delete */
+  filter: VehicleEngineDeleteFilter;
+};
+
+export type DeleteManyVehicleLogBillsInput = {
+  /** Filter to find records to delete */
+  filter: VehicleLogBillDeleteFilter;
+};
+
+export type DeleteManyVehicleLogsInput = {
+  /** Filter to find records to delete */
+  filter: VehicleLogDeleteFilter;
+};
+
+export type DeleteManyVehicleModelBodiesInput = {
+  /** Filter to find records to delete */
+  filter: VehicleModelBodyDeleteFilter;
+};
+
+export type DeleteManyVehicleModelsInput = {
+  /** Filter to find records to delete */
+  filter: VehicleModelDeleteFilter;
+};
+
+export type DeleteManyVehicleTransmissionsInput = {
+  /** Filter to find records to delete */
+  filter: VehicleTransmissionDeleteFilter;
 };
 
 export type DeleteOneAccountInput = {
@@ -2011,17 +1998,17 @@ export type DeleteOneApiKeyInput = {
   id: Scalars['ID']['input'];
 };
 
-export type DeleteOneBranchSaleChannelInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
 export type DeleteOneCustomerInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
 };
 
 export type DeleteOneFileInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneGarageInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
 };
@@ -2081,17 +2068,72 @@ export type DeleteOneProductOptionInput = {
   id: Scalars['ID']['input'];
 };
 
-export type DeleteOneProductPriceInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
 export type DeleteOneProductTypeInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
 };
 
 export type DeleteOneProductUnitInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneShopInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneShopMemberInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneUserInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneUserVehicleInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleBodyInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleBrandInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleEngineInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleLogBillInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleLogInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleModelBodyInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleModelInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneVehicleTransmissionInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
 };
@@ -2311,6 +2353,314 @@ export type FileUpdateFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type Garage = {
+  __typename?: 'Garage';
+  address?: Maybe<Scalars['String']['output']>;
+  branch: OrgBranch;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+  logo?: Maybe<Scalars['String']['output']>;
+  media?: Maybe<Array<Scalars['String']['output']>>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  org: Org;
+  status?: Maybe<GarageStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type GarageAggregateFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<GarageAggregateFilter>>;
+  branch?: InputMaybe<GarageAggregateFilterOrgBranchAggregateFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageAggregateFilter>>;
+  org?: InputMaybe<GarageAggregateFilterOrgAggregateFilter>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageAggregateFilterOrgAggregateFilter = {
+  and?: InputMaybe<Array<GarageAggregateFilterOrgAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageAggregateFilterOrgAggregateFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageAggregateFilterOrgBranchAggregateFilter = {
+  and?: InputMaybe<Array<GarageAggregateFilterOrgBranchAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageAggregateGroupBy = {
+  __typename?: 'GarageAggregateGroupBy';
+  address?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<GarageStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type GarageAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type GarageAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type GarageAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type GarageAggregateResponse = {
+  __typename?: 'GarageAggregateResponse';
+  avg?: Maybe<GarageAvgAggregate>;
+  count?: Maybe<GarageCountAggregate>;
+  groupBy?: Maybe<GarageAggregateGroupBy>;
+  max?: Maybe<GarageMaxAggregate>;
+  min?: Maybe<GarageMinAggregate>;
+  sum?: Maybe<GarageSumAggregate>;
+};
+
+export type GarageAvgAggregate = {
+  __typename?: 'GarageAvgAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+};
+
+export type GarageConnection = {
+  __typename?: 'GarageConnection';
+  /** Array of edges. */
+  edges: Array<GarageEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type GarageCountAggregate = {
+  __typename?: 'GarageCountAggregate';
+  address?: Maybe<Scalars['Int']['output']>;
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  lat?: Maybe<Scalars['Int']['output']>;
+  lng?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type GarageDto = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  branch?: InputMaybe<Scalars['ID']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  lat?: InputMaybe<Scalars['Float']['input']>;
+  lng?: InputMaybe<Scalars['Float']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
+  media?: InputMaybe<Array<Scalars['String']['input']>>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  org?: InputMaybe<Scalars['ID']['input']>;
+  status?: InputMaybe<GarageStatus>;
+};
+
+export type GarageDeleteFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<GarageDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageDeleteFilter>>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageDeleteResponse = {
+  __typename?: 'GarageDeleteResponse';
+  address?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+  logo?: Maybe<Scalars['String']['output']>;
+  media?: Maybe<Array<Scalars['String']['output']>>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<GarageStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type GarageEdge = {
+  __typename?: 'GarageEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Garage */
+  node: Garage;
+};
+
+export type GarageFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<GarageFilter>>;
+  branch?: InputMaybe<GarageFilterOrgBranchFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageFilter>>;
+  org?: InputMaybe<GarageFilterOrgFilter>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageFilterOrgBranchFilter = {
+  and?: InputMaybe<Array<GarageFilterOrgBranchFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageFilterOrgFilter = {
+  and?: InputMaybe<Array<GarageFilterOrgFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageFilterOrgFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type GarageMaxAggregate = {
+  __typename?: 'GarageMaxAggregate';
+  address?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<GarageStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type GarageMinAggregate = {
+  __typename?: 'GarageMinAggregate';
+  address?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<GarageStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type GarageSort = {
+  direction: SortDirection;
+  field: GarageSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum GarageSortFields {
+  Address = 'address',
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Lat = 'lat',
+  Lng = 'lng',
+  Name = 'name',
+  Status = 'status',
+  UpdatedAt = 'updatedAt'
+}
+
+export enum GarageStatus {
+  Activated = 'ACTIVATED',
+  Blocked = 'BLOCKED',
+  Unactivated = 'UNACTIVATED'
+}
+
+export type GarageStatusFilterComparison = {
+  eq?: InputMaybe<GarageStatus>;
+  gt?: InputMaybe<GarageStatus>;
+  gte?: InputMaybe<GarageStatus>;
+  iLike?: InputMaybe<GarageStatus>;
+  in?: InputMaybe<Array<GarageStatus>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<GarageStatus>;
+  lt?: InputMaybe<GarageStatus>;
+  lte?: InputMaybe<GarageStatus>;
+  neq?: InputMaybe<GarageStatus>;
+  notILike?: InputMaybe<GarageStatus>;
+  notIn?: InputMaybe<Array<GarageStatus>>;
+  notLike?: InputMaybe<GarageStatus>;
+};
+
+export type GarageSumAggregate = {
+  __typename?: 'GarageSumAggregate';
+  id?: Maybe<Scalars['Float']['output']>;
+  lat?: Maybe<Scalars['Float']['output']>;
+  lng?: Maybe<Scalars['Float']['output']>;
+};
+
+export type GarageUpdateFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<GarageUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<GarageUpdateFilter>>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 /** Group by */
 export enum GroupBy {
   Day = 'DAY',
@@ -2334,6 +2684,26 @@ export type IdFilterComparison = {
   notILike?: InputMaybe<Scalars['ID']['input']>;
   notIn?: InputMaybe<Array<Scalars['ID']['input']>>;
   notLike?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type IntFieldComparison = {
+  between?: InputMaybe<IntFieldComparisonBetween>;
+  eq?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
+  neq?: InputMaybe<Scalars['Int']['input']>;
+  notBetween?: InputMaybe<IntFieldComparisonBetween>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
+};
+
+export type IntFieldComparisonBetween = {
+  lower: Scalars['Int']['input'];
+  upper: Scalars['Int']['input'];
 };
 
 export type JsonFilterComparison = {
@@ -2578,9 +2948,11 @@ export type MediaUpdateFilter = {
 export type Mutation = {
   __typename?: 'Mutation';
   addAddressesToCustomer: Customer;
+  addBodiesToVehicleModel: VehicleModel;
   addBranchesToOrg: Org;
   addMembersToOrg: Org;
   addMembersToOrgBranch: OrgBranch;
+  addMembersToShop: Shop;
   addOptionGroupsToProduct: Product;
   addOptionsToOrderProduct: OrderProduct;
   addOptionsToProductOptionGroup: ProductOptionGroup;
@@ -2588,6 +2960,7 @@ export type Mutation = {
   addProductsToProductOptionGroup: ProductOptionGroup;
   addProductsToProductType: ProductType;
   addProductsToProductUnit: ProductUnit;
+  addShopsToOrg: Org;
   authConfirmPasswordReset: Scalars['Boolean']['output'];
   authLogin: LoginResult;
   authRefreshToken: LoginResult;
@@ -2600,9 +2973,9 @@ export type Mutation = {
   createManyAccountVerfications: Array<AccountVerfication>;
   createManyAccounts: Array<Account>;
   createManyApiKeys: Array<ApiKey>;
-  createManyBranchSaleChannels: Array<BranchSaleChannel>;
   createManyCustomers: Array<Customer>;
   createManyFiles: Array<File>;
+  createManyGarages: Array<Garage>;
   createManyMedia: Array<Media>;
   createManyOrderProducts: Array<OrderProduct>;
   createManyOrders: Array<Order>;
@@ -2613,17 +2986,28 @@ export type Mutation = {
   createManyProductCategories: Array<ProductCategory>;
   createManyProductOptionGroups: Array<ProductOptionGroup>;
   createManyProductOptions: Array<ProductOption>;
-  createManyProductPrices: Array<ProductPrice>;
   createManyProductTypes: Array<ProductType>;
   createManyProductUnits: Array<ProductUnit>;
   createManyProducts: Array<Product>;
+  createManyShopMembers: Array<ShopMember>;
+  createManyShops: Array<Shop>;
+  createManyUserVehicles: Array<UserVehicle>;
+  createManyUsers: Array<User>;
+  createManyVehicleBodies: Array<VehicleBody>;
+  createManyVehicleBrands: Array<VehicleBrand>;
+  createManyVehicleEngines: Array<VehicleEngine>;
+  createManyVehicleLogBills: Array<VehicleLogBill>;
+  createManyVehicleLogs: Array<VehicleLog>;
+  createManyVehicleModelBodies: Array<VehicleModelBody>;
+  createManyVehicleModels: Array<VehicleModel>;
+  createManyVehicleTransmissions: Array<VehicleTransmission>;
   createOneAccount: Account;
   createOneAccountPasswordReset: AccountPasswordReset;
   createOneAccountVerfication: AccountVerfication;
   createOneApiKey: ApiKey;
-  createOneBranchSaleChannel: BranchSaleChannel;
   createOneCustomer: Customer;
   createOneFile: File;
+  createOneGarage: Garage;
   createOneMedia: Media;
   createOneOrder: Order;
   createOneOrderProduct: OrderProduct;
@@ -2635,16 +3019,27 @@ export type Mutation = {
   createOneProductCategory: ProductCategory;
   createOneProductOption: ProductOption;
   createOneProductOptionGroup: ProductOptionGroup;
-  createOneProductPrice: ProductPrice;
   createOneProductType: ProductType;
   createOneProductUnit: ProductUnit;
+  createOneShop: Shop;
+  createOneShopMember: ShopMember;
+  createOneUser: User;
+  createOneUserVehicle: UserVehicle;
+  createOneVehicleBody: VehicleBody;
+  createOneVehicleBrand: VehicleBrand;
+  createOneVehicleEngine: VehicleEngine;
+  createOneVehicleLog: VehicleLog;
+  createOneVehicleLogBill: VehicleLogBill;
+  createOneVehicleModel: VehicleModel;
+  createOneVehicleModelBody: VehicleModelBody;
+  createOneVehicleTransmission: VehicleTransmission;
   deleteManyAccountPasswordResets: DeleteManyResponse;
   deleteManyAccountVerfications: DeleteManyResponse;
   deleteManyAccounts: DeleteManyResponse;
   deleteManyApiKeys: DeleteManyResponse;
-  deleteManyBranchSaleChannels: DeleteManyResponse;
   deleteManyCustomers: DeleteManyResponse;
   deleteManyFiles: DeleteManyResponse;
+  deleteManyGarages: DeleteManyResponse;
   deleteManyMedia: DeleteManyResponse;
   deleteManyOrderProducts: DeleteManyResponse;
   deleteManyOrders: DeleteManyResponse;
@@ -2655,17 +3050,28 @@ export type Mutation = {
   deleteManyProductCategories: DeleteManyResponse;
   deleteManyProductOptionGroups: DeleteManyResponse;
   deleteManyProductOptions: DeleteManyResponse;
-  deleteManyProductPrices: DeleteManyResponse;
   deleteManyProductTypes: DeleteManyResponse;
   deleteManyProductUnits: DeleteManyResponse;
   deleteManyProducts: DeleteManyResponse;
+  deleteManyShopMembers: DeleteManyResponse;
+  deleteManyShops: DeleteManyResponse;
+  deleteManyUserVehicles: DeleteManyResponse;
+  deleteManyUsers: DeleteManyResponse;
+  deleteManyVehicleBodies: DeleteManyResponse;
+  deleteManyVehicleBrands: DeleteManyResponse;
+  deleteManyVehicleEngines: DeleteManyResponse;
+  deleteManyVehicleLogBills: DeleteManyResponse;
+  deleteManyVehicleLogs: DeleteManyResponse;
+  deleteManyVehicleModelBodies: DeleteManyResponse;
+  deleteManyVehicleModels: DeleteManyResponse;
+  deleteManyVehicleTransmissions: DeleteManyResponse;
   deleteOneAccount: AccountDeleteResponse;
   deleteOneAccountPasswordReset: AccountPasswordResetDeleteResponse;
   deleteOneAccountVerfication: AccountVerficationDeleteResponse;
   deleteOneApiKey: ApiKeyDeleteResponse;
-  deleteOneBranchSaleChannel: BranchSaleChannelDeleteResponse;
   deleteOneCustomer: CustomerDeleteResponse;
   deleteOneFile: FileDeleteResponse;
+  deleteOneGarage: GarageDeleteResponse;
   deleteOneMedia: MediaDeleteResponse;
   deleteOneOrder: OrderDeleteResponse;
   deleteOneOrderProduct: OrderProductDeleteResponse;
@@ -2677,16 +3083,27 @@ export type Mutation = {
   deleteOneProductCategory: ProductCategoryDeleteResponse;
   deleteOneProductOption: ProductOptionDeleteResponse;
   deleteOneProductOptionGroup: ProductOptionGroupDeleteResponse;
-  deleteOneProductPrice: ProductPriceDeleteResponse;
   deleteOneProductType: ProductTypeDeleteResponse;
   deleteOneProductUnit: ProductUnitDeleteResponse;
-  orderImportByFiles: Array<Order>;
+  deleteOneShop: ShopDeleteResponse;
+  deleteOneShopMember: ShopMemberDeleteResponse;
+  deleteOneUser: UserDeleteResponse;
+  deleteOneUserVehicle: UserVehicleDeleteResponse;
+  deleteOneVehicleBody: VehicleBodyDeleteResponse;
+  deleteOneVehicleBrand: VehicleBrandDeleteResponse;
+  deleteOneVehicleEngine: VehicleEngineDeleteResponse;
+  deleteOneVehicleLog: VehicleLogDeleteResponse;
+  deleteOneVehicleLogBill: VehicleLogBillDeleteResponse;
+  deleteOneVehicleModel: VehicleModelDeleteResponse;
+  deleteOneVehicleModelBody: VehicleModelBodyDeleteResponse;
+  deleteOneVehicleTransmission: VehicleTransmissionDeleteResponse;
   productImportByFile: Array<Product>;
-  productPriceImportByFile: Array<ProductPrice>;
   setAddressesOnCustomer: Customer;
+  setBodiesOnVehicleModel: VehicleModel;
   setBranchesOnOrg: Org;
   setMembersOnOrg: Org;
   setMembersOnOrgBranch: OrgBranch;
+  setMembersOnShop: Shop;
   setOptionGroupsOnProduct: Product;
   setOptionsOnOrderProduct: OrderProduct;
   setOptionsOnProductOptionGroup: ProductOptionGroup;
@@ -2695,14 +3112,15 @@ export type Mutation = {
   setProductsOnProductOptionGroup: ProductOptionGroup;
   setProductsOnProductType: ProductType;
   setProductsOnProductUnit: ProductUnit;
+  setShopsOnOrg: Org;
   setUnitOnProduct: Product;
   updateManyAccountPasswordResets: UpdateManyResponse;
   updateManyAccountVerfications: UpdateManyResponse;
   updateManyAccounts: UpdateManyResponse;
   updateManyApiKeys: UpdateManyResponse;
-  updateManyBranchSaleChannels: UpdateManyResponse;
   updateManyCustomers: UpdateManyResponse;
   updateManyFiles: UpdateManyResponse;
+  updateManyGarages: UpdateManyResponse;
   updateManyMedia: UpdateManyResponse;
   updateManyOrderProducts: UpdateManyResponse;
   updateManyOrders: UpdateManyResponse;
@@ -2713,17 +3131,28 @@ export type Mutation = {
   updateManyProductCategories: UpdateManyResponse;
   updateManyProductOptionGroups: UpdateManyResponse;
   updateManyProductOptions: UpdateManyResponse;
-  updateManyProductPrices: UpdateManyResponse;
   updateManyProductTypes: UpdateManyResponse;
   updateManyProductUnits: UpdateManyResponse;
   updateManyProducts: UpdateManyResponse;
+  updateManyShopMembers: UpdateManyResponse;
+  updateManyShops: UpdateManyResponse;
+  updateManyUserVehicles: UpdateManyResponse;
+  updateManyUsers: UpdateManyResponse;
+  updateManyVehicleBodies: UpdateManyResponse;
+  updateManyVehicleBrands: UpdateManyResponse;
+  updateManyVehicleEngines: UpdateManyResponse;
+  updateManyVehicleLogBills: UpdateManyResponse;
+  updateManyVehicleLogs: UpdateManyResponse;
+  updateManyVehicleModelBodies: UpdateManyResponse;
+  updateManyVehicleModels: UpdateManyResponse;
+  updateManyVehicleTransmissions: UpdateManyResponse;
   updateOneAccount: Account;
   updateOneAccountPasswordReset: AccountPasswordReset;
   updateOneAccountVerfication: AccountVerfication;
   updateOneApiKey: ApiKey;
-  updateOneBranchSaleChannel: BranchSaleChannel;
   updateOneCustomer: Customer;
   updateOneFile: File;
+  updateOneGarage: Garage;
   updateOneMedia: Media;
   updateOneOrder: Order;
   updateOneOrderProduct: OrderProduct;
@@ -2735,14 +3164,30 @@ export type Mutation = {
   updateOneProductCategory: ProductCategory;
   updateOneProductOption: ProductOption;
   updateOneProductOptionGroup: ProductOptionGroup;
-  updateOneProductPrice: ProductPrice;
   updateOneProductType: ProductType;
   updateOneProductUnit: ProductUnit;
+  updateOneShop: Shop;
+  updateOneShopMember: ShopMember;
+  updateOneUser: User;
+  updateOneUserVehicle: UserVehicle;
+  updateOneVehicleBody: VehicleBody;
+  updateOneVehicleBrand: VehicleBrand;
+  updateOneVehicleEngine: VehicleEngine;
+  updateOneVehicleLog: VehicleLog;
+  updateOneVehicleLogBill: VehicleLogBill;
+  updateOneVehicleModel: VehicleModel;
+  updateOneVehicleModelBody: VehicleModelBody;
+  updateOneVehicleTransmission: VehicleTransmission;
 };
 
 
 export type MutationAddAddressesToCustomerArgs = {
   input: AddAddressesToCustomerInput;
+};
+
+
+export type MutationAddBodiesToVehicleModelArgs = {
+  input: AddBodiesToVehicleModelInput;
 };
 
 
@@ -2758,6 +3203,11 @@ export type MutationAddMembersToOrgArgs = {
 
 export type MutationAddMembersToOrgBranchArgs = {
   input: AddMembersToOrgBranchInput;
+};
+
+
+export type MutationAddMembersToShopArgs = {
+  input: AddMembersToShopInput;
 };
 
 
@@ -2793,6 +3243,11 @@ export type MutationAddProductsToProductTypeArgs = {
 
 export type MutationAddProductsToProductUnitArgs = {
   input: AddProductsToProductUnitInput;
+};
+
+
+export type MutationAddShopsToOrgArgs = {
+  input: AddShopsToOrgInput;
 };
 
 
@@ -2856,11 +3311,6 @@ export type MutationCreateManyApiKeysArgs = {
 };
 
 
-export type MutationCreateManyBranchSaleChannelsArgs = {
-  input: CreateManyBranchSaleChannelsInput;
-};
-
-
 export type MutationCreateManyCustomersArgs = {
   input: CreateManyCustomersInput;
 };
@@ -2868,6 +3318,11 @@ export type MutationCreateManyCustomersArgs = {
 
 export type MutationCreateManyFilesArgs = {
   input: CreateManyFilesInput;
+};
+
+
+export type MutationCreateManyGaragesArgs = {
+  input: CreateManyGaragesInput;
 };
 
 
@@ -2921,11 +3376,6 @@ export type MutationCreateManyProductOptionsArgs = {
 };
 
 
-export type MutationCreateManyProductPricesArgs = {
-  input: CreateManyProductPricesInput;
-};
-
-
 export type MutationCreateManyProductTypesArgs = {
   input: CreateManyProductTypesInput;
 };
@@ -2938,6 +3388,66 @@ export type MutationCreateManyProductUnitsArgs = {
 
 export type MutationCreateManyProductsArgs = {
   input: CreateManyProductsInput;
+};
+
+
+export type MutationCreateManyShopMembersArgs = {
+  input: CreateManyShopMembersInput;
+};
+
+
+export type MutationCreateManyShopsArgs = {
+  input: CreateManyShopsInput;
+};
+
+
+export type MutationCreateManyUserVehiclesArgs = {
+  input: CreateManyUserVehiclesInput;
+};
+
+
+export type MutationCreateManyUsersArgs = {
+  input: CreateManyUsersInput;
+};
+
+
+export type MutationCreateManyVehicleBodiesArgs = {
+  input: CreateManyVehicleBodiesInput;
+};
+
+
+export type MutationCreateManyVehicleBrandsArgs = {
+  input: CreateManyVehicleBrandsInput;
+};
+
+
+export type MutationCreateManyVehicleEnginesArgs = {
+  input: CreateManyVehicleEnginesInput;
+};
+
+
+export type MutationCreateManyVehicleLogBillsArgs = {
+  input: CreateManyVehicleLogBillsInput;
+};
+
+
+export type MutationCreateManyVehicleLogsArgs = {
+  input: CreateManyVehicleLogsInput;
+};
+
+
+export type MutationCreateManyVehicleModelBodiesArgs = {
+  input: CreateManyVehicleModelBodiesInput;
+};
+
+
+export type MutationCreateManyVehicleModelsArgs = {
+  input: CreateManyVehicleModelsInput;
+};
+
+
+export type MutationCreateManyVehicleTransmissionsArgs = {
+  input: CreateManyVehicleTransmissionsInput;
 };
 
 
@@ -2961,11 +3471,6 @@ export type MutationCreateOneApiKeyArgs = {
 };
 
 
-export type MutationCreateOneBranchSaleChannelArgs = {
-  input: CreateOneBranchSaleChannelInput;
-};
-
-
 export type MutationCreateOneCustomerArgs = {
   input: CreateOneCustomerInput;
 };
@@ -2973,6 +3478,11 @@ export type MutationCreateOneCustomerArgs = {
 
 export type MutationCreateOneFileArgs = {
   input: CreateOneFileInput;
+};
+
+
+export type MutationCreateOneGarageArgs = {
+  input: CreateOneGarageInput;
 };
 
 
@@ -3031,11 +3541,6 @@ export type MutationCreateOneProductOptionGroupArgs = {
 };
 
 
-export type MutationCreateOneProductPriceArgs = {
-  input: CreateOneProductPriceInput;
-};
-
-
 export type MutationCreateOneProductTypeArgs = {
   input: CreateOneProductTypeInput;
 };
@@ -3043,6 +3548,66 @@ export type MutationCreateOneProductTypeArgs = {
 
 export type MutationCreateOneProductUnitArgs = {
   input: CreateOneProductUnitInput;
+};
+
+
+export type MutationCreateOneShopArgs = {
+  input: CreateOneShopInput;
+};
+
+
+export type MutationCreateOneShopMemberArgs = {
+  input: CreateOneShopMemberInput;
+};
+
+
+export type MutationCreateOneUserArgs = {
+  input: CreateOneUserInput;
+};
+
+
+export type MutationCreateOneUserVehicleArgs = {
+  input: CreateOneUserVehicleInput;
+};
+
+
+export type MutationCreateOneVehicleBodyArgs = {
+  input: CreateOneVehicleBodyInput;
+};
+
+
+export type MutationCreateOneVehicleBrandArgs = {
+  input: CreateOneVehicleBrandInput;
+};
+
+
+export type MutationCreateOneVehicleEngineArgs = {
+  input: CreateOneVehicleEngineInput;
+};
+
+
+export type MutationCreateOneVehicleLogArgs = {
+  input: CreateOneVehicleLogInput;
+};
+
+
+export type MutationCreateOneVehicleLogBillArgs = {
+  input: CreateOneVehicleLogBillInput;
+};
+
+
+export type MutationCreateOneVehicleModelArgs = {
+  input: CreateOneVehicleModelInput;
+};
+
+
+export type MutationCreateOneVehicleModelBodyArgs = {
+  input: CreateOneVehicleModelBodyInput;
+};
+
+
+export type MutationCreateOneVehicleTransmissionArgs = {
+  input: CreateOneVehicleTransmissionInput;
 };
 
 
@@ -3066,11 +3631,6 @@ export type MutationDeleteManyApiKeysArgs = {
 };
 
 
-export type MutationDeleteManyBranchSaleChannelsArgs = {
-  input: DeleteManyBranchSaleChannelsInput;
-};
-
-
 export type MutationDeleteManyCustomersArgs = {
   input: DeleteManyCustomersInput;
 };
@@ -3078,6 +3638,11 @@ export type MutationDeleteManyCustomersArgs = {
 
 export type MutationDeleteManyFilesArgs = {
   input: DeleteManyFilesInput;
+};
+
+
+export type MutationDeleteManyGaragesArgs = {
+  input: DeleteManyGaragesInput;
 };
 
 
@@ -3131,11 +3696,6 @@ export type MutationDeleteManyProductOptionsArgs = {
 };
 
 
-export type MutationDeleteManyProductPricesArgs = {
-  input: DeleteManyProductPricesInput;
-};
-
-
 export type MutationDeleteManyProductTypesArgs = {
   input: DeleteManyProductTypesInput;
 };
@@ -3148,6 +3708,66 @@ export type MutationDeleteManyProductUnitsArgs = {
 
 export type MutationDeleteManyProductsArgs = {
   input: DeleteManyProductsInput;
+};
+
+
+export type MutationDeleteManyShopMembersArgs = {
+  input: DeleteManyShopMembersInput;
+};
+
+
+export type MutationDeleteManyShopsArgs = {
+  input: DeleteManyShopsInput;
+};
+
+
+export type MutationDeleteManyUserVehiclesArgs = {
+  input: DeleteManyUserVehiclesInput;
+};
+
+
+export type MutationDeleteManyUsersArgs = {
+  input: DeleteManyUsersInput;
+};
+
+
+export type MutationDeleteManyVehicleBodiesArgs = {
+  input: DeleteManyVehicleBodiesInput;
+};
+
+
+export type MutationDeleteManyVehicleBrandsArgs = {
+  input: DeleteManyVehicleBrandsInput;
+};
+
+
+export type MutationDeleteManyVehicleEnginesArgs = {
+  input: DeleteManyVehicleEnginesInput;
+};
+
+
+export type MutationDeleteManyVehicleLogBillsArgs = {
+  input: DeleteManyVehicleLogBillsInput;
+};
+
+
+export type MutationDeleteManyVehicleLogsArgs = {
+  input: DeleteManyVehicleLogsInput;
+};
+
+
+export type MutationDeleteManyVehicleModelBodiesArgs = {
+  input: DeleteManyVehicleModelBodiesInput;
+};
+
+
+export type MutationDeleteManyVehicleModelsArgs = {
+  input: DeleteManyVehicleModelsInput;
+};
+
+
+export type MutationDeleteManyVehicleTransmissionsArgs = {
+  input: DeleteManyVehicleTransmissionsInput;
 };
 
 
@@ -3171,11 +3791,6 @@ export type MutationDeleteOneApiKeyArgs = {
 };
 
 
-export type MutationDeleteOneBranchSaleChannelArgs = {
-  input: DeleteOneBranchSaleChannelInput;
-};
-
-
 export type MutationDeleteOneCustomerArgs = {
   input: DeleteOneCustomerInput;
 };
@@ -3183,6 +3798,11 @@ export type MutationDeleteOneCustomerArgs = {
 
 export type MutationDeleteOneFileArgs = {
   input: DeleteOneFileInput;
+};
+
+
+export type MutationDeleteOneGarageArgs = {
+  input: DeleteOneGarageInput;
 };
 
 
@@ -3241,11 +3861,6 @@ export type MutationDeleteOneProductOptionGroupArgs = {
 };
 
 
-export type MutationDeleteOneProductPriceArgs = {
-  input: DeleteOneProductPriceInput;
-};
-
-
 export type MutationDeleteOneProductTypeArgs = {
   input: DeleteOneProductTypeInput;
 };
@@ -3256,8 +3871,63 @@ export type MutationDeleteOneProductUnitArgs = {
 };
 
 
-export type MutationOrderImportByFilesArgs = {
-  input: OrderImportInput;
+export type MutationDeleteOneShopArgs = {
+  input: DeleteOneShopInput;
+};
+
+
+export type MutationDeleteOneShopMemberArgs = {
+  input: DeleteOneShopMemberInput;
+};
+
+
+export type MutationDeleteOneUserArgs = {
+  input: DeleteOneUserInput;
+};
+
+
+export type MutationDeleteOneUserVehicleArgs = {
+  input: DeleteOneUserVehicleInput;
+};
+
+
+export type MutationDeleteOneVehicleBodyArgs = {
+  input: DeleteOneVehicleBodyInput;
+};
+
+
+export type MutationDeleteOneVehicleBrandArgs = {
+  input: DeleteOneVehicleBrandInput;
+};
+
+
+export type MutationDeleteOneVehicleEngineArgs = {
+  input: DeleteOneVehicleEngineInput;
+};
+
+
+export type MutationDeleteOneVehicleLogArgs = {
+  input: DeleteOneVehicleLogInput;
+};
+
+
+export type MutationDeleteOneVehicleLogBillArgs = {
+  input: DeleteOneVehicleLogBillInput;
+};
+
+
+export type MutationDeleteOneVehicleModelArgs = {
+  input: DeleteOneVehicleModelInput;
+};
+
+
+export type MutationDeleteOneVehicleModelBodyArgs = {
+  input: DeleteOneVehicleModelBodyInput;
+};
+
+
+export type MutationDeleteOneVehicleTransmissionArgs = {
+  input: DeleteOneVehicleTransmissionInput;
 };
 
 
@@ -3266,13 +3936,13 @@ export type MutationProductImportByFileArgs = {
 };
 
 
-export type MutationProductPriceImportByFileArgs = {
-  input: ProductPriceImportInput;
+export type MutationSetAddressesOnCustomerArgs = {
+  input: SetAddressesOnCustomerInput;
 };
 
 
-export type MutationSetAddressesOnCustomerArgs = {
-  input: SetAddressesOnCustomerInput;
+export type MutationSetBodiesOnVehicleModelArgs = {
+  input: SetBodiesOnVehicleModelInput;
 };
 
 
@@ -3288,6 +3958,11 @@ export type MutationSetMembersOnOrgArgs = {
 
 export type MutationSetMembersOnOrgBranchArgs = {
   input: SetMembersOnOrgBranchInput;
+};
+
+
+export type MutationSetMembersOnShopArgs = {
+  input: SetMembersOnShopInput;
 };
 
 
@@ -3331,6 +4006,11 @@ export type MutationSetProductsOnProductUnitArgs = {
 };
 
 
+export type MutationSetShopsOnOrgArgs = {
+  input: SetShopsOnOrgInput;
+};
+
+
 export type MutationSetUnitOnProductArgs = {
   input: SetUnitOnProductInput;
 };
@@ -3356,11 +4036,6 @@ export type MutationUpdateManyApiKeysArgs = {
 };
 
 
-export type MutationUpdateManyBranchSaleChannelsArgs = {
-  input: UpdateManyBranchSaleChannelsInput;
-};
-
-
 export type MutationUpdateManyCustomersArgs = {
   input: UpdateManyCustomersInput;
 };
@@ -3368,6 +4043,11 @@ export type MutationUpdateManyCustomersArgs = {
 
 export type MutationUpdateManyFilesArgs = {
   input: UpdateManyFilesInput;
+};
+
+
+export type MutationUpdateManyGaragesArgs = {
+  input: UpdateManyGaragesInput;
 };
 
 
@@ -3421,11 +4101,6 @@ export type MutationUpdateManyProductOptionsArgs = {
 };
 
 
-export type MutationUpdateManyProductPricesArgs = {
-  input: UpdateManyProductPricesInput;
-};
-
-
 export type MutationUpdateManyProductTypesArgs = {
   input: UpdateManyProductTypesInput;
 };
@@ -3438,6 +4113,66 @@ export type MutationUpdateManyProductUnitsArgs = {
 
 export type MutationUpdateManyProductsArgs = {
   input: UpdateManyProductsInput;
+};
+
+
+export type MutationUpdateManyShopMembersArgs = {
+  input: UpdateManyShopMembersInput;
+};
+
+
+export type MutationUpdateManyShopsArgs = {
+  input: UpdateManyShopsInput;
+};
+
+
+export type MutationUpdateManyUserVehiclesArgs = {
+  input: UpdateManyUserVehiclesInput;
+};
+
+
+export type MutationUpdateManyUsersArgs = {
+  input: UpdateManyUsersInput;
+};
+
+
+export type MutationUpdateManyVehicleBodiesArgs = {
+  input: UpdateManyVehicleBodiesInput;
+};
+
+
+export type MutationUpdateManyVehicleBrandsArgs = {
+  input: UpdateManyVehicleBrandsInput;
+};
+
+
+export type MutationUpdateManyVehicleEnginesArgs = {
+  input: UpdateManyVehicleEnginesInput;
+};
+
+
+export type MutationUpdateManyVehicleLogBillsArgs = {
+  input: UpdateManyVehicleLogBillsInput;
+};
+
+
+export type MutationUpdateManyVehicleLogsArgs = {
+  input: UpdateManyVehicleLogsInput;
+};
+
+
+export type MutationUpdateManyVehicleModelBodiesArgs = {
+  input: UpdateManyVehicleModelBodiesInput;
+};
+
+
+export type MutationUpdateManyVehicleModelsArgs = {
+  input: UpdateManyVehicleModelsInput;
+};
+
+
+export type MutationUpdateManyVehicleTransmissionsArgs = {
+  input: UpdateManyVehicleTransmissionsInput;
 };
 
 
@@ -3461,11 +4196,6 @@ export type MutationUpdateOneApiKeyArgs = {
 };
 
 
-export type MutationUpdateOneBranchSaleChannelArgs = {
-  input: UpdateOneBranchSaleChannelInput;
-};
-
-
 export type MutationUpdateOneCustomerArgs = {
   input: UpdateOneCustomerInput;
 };
@@ -3473,6 +4203,11 @@ export type MutationUpdateOneCustomerArgs = {
 
 export type MutationUpdateOneFileArgs = {
   input: UpdateOneFileInput;
+};
+
+
+export type MutationUpdateOneGarageArgs = {
+  input: UpdateOneGarageInput;
 };
 
 
@@ -3531,11 +4266,6 @@ export type MutationUpdateOneProductOptionGroupArgs = {
 };
 
 
-export type MutationUpdateOneProductPriceArgs = {
-  input: UpdateOneProductPriceInput;
-};
-
-
 export type MutationUpdateOneProductTypeArgs = {
   input: UpdateOneProductTypeInput;
 };
@@ -3543,6 +4273,66 @@ export type MutationUpdateOneProductTypeArgs = {
 
 export type MutationUpdateOneProductUnitArgs = {
   input: UpdateOneProductUnitInput;
+};
+
+
+export type MutationUpdateOneShopArgs = {
+  input: UpdateOneShopInput;
+};
+
+
+export type MutationUpdateOneShopMemberArgs = {
+  input: UpdateOneShopMemberInput;
+};
+
+
+export type MutationUpdateOneUserArgs = {
+  input: UpdateOneUserInput;
+};
+
+
+export type MutationUpdateOneUserVehicleArgs = {
+  input: UpdateOneUserVehicleInput;
+};
+
+
+export type MutationUpdateOneVehicleBodyArgs = {
+  input: UpdateOneVehicleBodyInput;
+};
+
+
+export type MutationUpdateOneVehicleBrandArgs = {
+  input: UpdateOneVehicleBrandInput;
+};
+
+
+export type MutationUpdateOneVehicleEngineArgs = {
+  input: UpdateOneVehicleEngineInput;
+};
+
+
+export type MutationUpdateOneVehicleLogArgs = {
+  input: UpdateOneVehicleLogInput;
+};
+
+
+export type MutationUpdateOneVehicleLogBillArgs = {
+  input: UpdateOneVehicleLogBillInput;
+};
+
+
+export type MutationUpdateOneVehicleModelArgs = {
+  input: UpdateOneVehicleModelInput;
+};
+
+
+export type MutationUpdateOneVehicleModelBodyArgs = {
+  input: UpdateOneVehicleModelBodyInput;
+};
+
+
+export type MutationUpdateOneVehicleTransmissionArgs = {
+  input: UpdateOneVehicleTransmissionInput;
 };
 
 export type NumberFieldComparison = {
@@ -3594,7 +4384,6 @@ export type Order = {
   netPrice: Scalars['Float']['output'];
   note?: Maybe<Scalars['String']['output']>;
   refId?: Maybe<Scalars['String']['output']>;
-  saleChannel: BranchSaleChannel;
   shippingAddressCity?: Maybe<Scalars['String']['output']>;
   shippingAddressDistanceKm?: Maybe<Scalars['Float']['output']>;
   shippingAddressDistrict?: Maybe<Scalars['String']['output']>;
@@ -3617,17 +4406,6 @@ export type OrderAggregateFilter = {
   netPrice?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<OrderAggregateFilter>>;
   refId?: InputMaybe<StringFieldComparison>;
-  saleChannel?: InputMaybe<OrderAggregateFilterBranchSaleChannelAggregateFilter>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type OrderAggregateFilterBranchSaleChannelAggregateFilter = {
-  and?: InputMaybe<Array<OrderAggregateFilterBranchSaleChannelAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<OrderAggregateFilterBranchSaleChannelAggregateFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -3650,10 +4428,10 @@ export type OrderAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrderAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -3740,7 +4518,6 @@ export type OrderDto = {
   note?: InputMaybe<Scalars['String']['input']>;
   products?: InputMaybe<Array<OrderProductDto>>;
   refId?: InputMaybe<Scalars['String']['input']>;
-  saleChannel: Scalars['ID']['input'];
   shippingAddressCity?: InputMaybe<Scalars['String']['input']>;
   shippingAddressDistanceKm?: InputMaybe<Scalars['Float']['input']>;
   shippingAddressDistrict?: InputMaybe<Scalars['String']['input']>;
@@ -3805,17 +4582,6 @@ export type OrderFilter = {
   netPrice?: InputMaybe<NumberFieldComparison>;
   or?: InputMaybe<Array<OrderFilter>>;
   refId?: InputMaybe<StringFieldComparison>;
-  saleChannel?: InputMaybe<OrderFilterBranchSaleChannelFilter>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type OrderFilterBranchSaleChannelFilter = {
-  and?: InputMaybe<Array<OrderFilterBranchSaleChannelFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<OrderFilterBranchSaleChannelFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -3838,17 +4604,11 @@ export type OrderFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrderFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type OrderImportInput = {
-  branchId: Scalars['ID']['input'];
-  branchSaleChannelId: Scalars['ID']['input'];
-  fileOrMediaIds: Array<Scalars['ID']['input']>;
 };
 
 export type OrderMaxAggregate = {
@@ -4316,11 +5076,13 @@ export type Org = {
   createdBy: Account;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   details?: Maybe<Scalars['JSON']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   members?: Maybe<OrgMembersConnection>;
   membersAggregate: Array<OrgMembersAggregateResponse>;
   name: Scalars['String']['output'];
+  shops?: Maybe<OrgShopsConnection>;
+  shopsAggregate: Array<OrgShopsAggregateResponse>;
+  status: OrgStatus;
   type: OrgType;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -4349,17 +5111,30 @@ export type OrgMembersAggregateArgs = {
   filter?: InputMaybe<OrgMemberAggregateFilter>;
 };
 
+
+export type OrgShopsArgs = {
+  filter?: ShopFilter;
+  paging?: OffsetPaging;
+  sorting?: Array<ShopSort>;
+};
+
+
+export type OrgShopsAggregateArgs = {
+  filter?: InputMaybe<ShopAggregateFilter>;
+};
+
 export type OrgAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilter>>;
   branches?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   createdBy?: InputMaybe<OrgAggregateFilterAccountAggregateFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgAggregateFilterOrgMemberAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilter>>;
+  shops?: InputMaybe<OrgAggregateFilterShopAggregateFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4383,12 +5158,12 @@ export type OrgAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilter>>;
   org?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4398,11 +5173,12 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   createdBy?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>>;
+  shops?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4426,10 +5202,10 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranc
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4441,6 +5217,18 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMembe
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter>>;
   role?: InputMaybe<OrgRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4476,10 +5264,10 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFi
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4516,11 +5304,12 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   createdBy?: InputMaybe<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter>>;
+  shops?: InputMaybe<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4544,10 +5333,10 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranc
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4562,13 +5351,180 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMembe
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilter>>;
+  branch?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilter>>;
+  org?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgAggregateFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilter>>;
+  branches?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  createdBy?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilter>>;
+  shops?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter>>;
+  role?: InputMaybe<OrgRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter>>;
+  org?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter>>;
+  role?: InputMaybe<OrgBranchRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter = {
+  account?: InputMaybe<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>;
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  shop?: InputMaybe<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter = {
+  and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 export type OrgAggregateGroupBy = {
   __typename?: 'OrgAggregateGroupBy';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgStatus>;
   type?: Maybe<OrgType>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -4608,12 +5564,12 @@ export type OrgBranch = {
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   details?: Maybe<Scalars['JSON']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   members: OrgBranchMembersConnection;
   membersAggregate: Array<OrgBranchMembersAggregateResponse>;
   name: Scalars['String']['output'];
   org: Org;
+  status: OrgBranchStatus;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -4634,12 +5590,12 @@ export type OrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgBranchAggregateFilterOrgBranchMemberAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchAggregateFilter>>;
   org?: InputMaybe<OrgBranchAggregateFilterOrgAggregateFilter>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4647,10 +5603,10 @@ export type OrgBranchAggregateFilterOrgAggregateFilter = {
   and?: InputMaybe<Array<OrgBranchAggregateFilterOrgAggregateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchAggregateFilterOrgAggregateFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4671,9 +5627,9 @@ export type OrgBranchAggregateGroupBy = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   details?: Maybe<Scalars['JSON']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -4715,18 +5671,18 @@ export type OrgBranchCountAggregate = {
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   details?: Maybe<Scalars['Int']['output']>;
-  enabled?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
 export type OrgBranchDto = {
   details?: InputMaybe<Scalars['JSON']['input']>;
-  enabled?: InputMaybe<Scalars['Boolean']['input']>;
   members?: InputMaybe<Array<OrgBranchMemberDto>>;
   name: Scalars['String']['input'];
   org?: InputMaybe<Scalars['ID']['input']>;
+  status: OrgBranchStatus;
 };
 
 export type OrgBranchDeleteFilter = {
@@ -4734,10 +5690,10 @@ export type OrgBranchDeleteFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchDeleteFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4746,9 +5702,9 @@ export type OrgBranchDeleteResponse = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   details?: Maybe<Scalars['JSON']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -4765,12 +5721,12 @@ export type OrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgBranchFilterOrgBranchMemberFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchFilter>>;
   org?: InputMaybe<OrgBranchFilterOrgFilter>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4789,10 +5745,10 @@ export type OrgBranchFilterOrgFilter = {
   and?: InputMaybe<Array<OrgBranchFilterOrgFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchFilterOrgFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4804,6 +5760,7 @@ export type OrgBranchMaxAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -4851,10 +5808,10 @@ export type OrgBranchMemberAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -4986,10 +5943,10 @@ export type OrgBranchMemberFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5117,6 +6074,7 @@ export type OrgBranchMinAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -5154,21 +6112,44 @@ export enum OrgBranchSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Details = 'details',
-  Enabled = 'enabled',
   Id = 'id',
   Name = 'name',
+  Status = 'status',
   UpdatedAt = 'updatedAt'
 }
+
+export enum OrgBranchStatus {
+  Activated = 'ACTIVATED',
+  Blocked = 'BLOCKED',
+  Unactivated = 'UNACTIVATED'
+}
+
+export type OrgBranchStatusFilterComparison = {
+  eq?: InputMaybe<OrgBranchStatus>;
+  gt?: InputMaybe<OrgBranchStatus>;
+  gte?: InputMaybe<OrgBranchStatus>;
+  iLike?: InputMaybe<OrgBranchStatus>;
+  in?: InputMaybe<Array<OrgBranchStatus>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<OrgBranchStatus>;
+  lt?: InputMaybe<OrgBranchStatus>;
+  lte?: InputMaybe<OrgBranchStatus>;
+  neq?: InputMaybe<OrgBranchStatus>;
+  notILike?: InputMaybe<OrgBranchStatus>;
+  notIn?: InputMaybe<Array<OrgBranchStatus>>;
+  notLike?: InputMaybe<OrgBranchStatus>;
+};
 
 export type OrgBranchUpdateFilter = {
   and?: InputMaybe<Array<OrgBranchUpdateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchUpdateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5177,9 +6158,9 @@ export type OrgBranchesAggregateGroupBy = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   details?: Maybe<Scalars['JSON']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -5206,9 +6187,9 @@ export type OrgBranchesCountAggregate = {
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   details?: Maybe<Scalars['Int']['output']>;
-  enabled?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -5219,6 +6200,7 @@ export type OrgBranchesMaxAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -5229,6 +6211,7 @@ export type OrgBranchesMinAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -5246,9 +6229,9 @@ export type OrgCountAggregate = {
   __typename?: 'OrgCountAggregate';
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
-  enabled?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
   type?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
@@ -5257,9 +6240,9 @@ export type OrgDto = {
   branches?: InputMaybe<Array<OrgBranchDto>>;
   createdBy?: InputMaybe<Scalars['ID']['input']>;
   details?: InputMaybe<Scalars['JSON']['input']>;
-  enabled?: InputMaybe<Scalars['Boolean']['input']>;
   members?: InputMaybe<Array<OrgMemberDto>>;
   name: Scalars['String']['input'];
+  status: OrgStatus;
   type: OrgType;
 };
 
@@ -5267,10 +6250,10 @@ export type OrgDeleteFilter = {
   and?: InputMaybe<Array<OrgDeleteFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgDeleteFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5280,9 +6263,9 @@ export type OrgDeleteResponse = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   details?: Maybe<Scalars['JSON']['output']>;
-  enabled?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgStatus>;
   type?: Maybe<OrgType>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5301,11 +6284,12 @@ export type OrgFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   createdBy?: InputMaybe<OrgFilterAccountFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgFilterOrgMemberFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilter>>;
+  shops?: InputMaybe<OrgFilterShopFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5329,12 +6313,12 @@ export type OrgFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgFilterOrgBranchFilterOrgBranchMemberFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilter>>;
   org?: InputMaybe<OrgFilterOrgBranchFilterOrgFilter>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5370,10 +6354,10 @@ export type OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5383,11 +6367,12 @@ export type OrgFilterOrgBranchFilterOrgFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   createdBy?: InputMaybe<OrgFilterOrgBranchFilterOrgFilterAccountFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilter>>;
+  shops?: InputMaybe<OrgFilterOrgBranchFilterOrgFilterShopFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5411,10 +6396,10 @@ export type OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5426,6 +6411,18 @@ export type OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter = {
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter>>;
   role?: InputMaybe<OrgRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterOrgBranchFilterOrgFilterShopFilter = {
+  and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterShopFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterShopFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5462,11 +6459,12 @@ export type OrgFilterOrgMemberFilterOrgFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   createdBy?: InputMaybe<OrgFilterOrgMemberFilterOrgFilterAccountFilter>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   members?: InputMaybe<OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilter>>;
+  shops?: InputMaybe<OrgFilterOrgMemberFilterOrgFilterShopFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5490,10 +6488,10 @@ export type OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -5508,12 +6506,180 @@ export type OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type OrgFilterOrgMemberFilterOrgFilterShopFilter = {
+  and?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterShopFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterShopFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilter>>;
+  branch?: InputMaybe<OrgFilterShopFilterOrgBranchFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<OrgFilterShopFilterShopMemberFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilter>>;
+  org?: InputMaybe<OrgFilterShopFilterOrgFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgBranchFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilter>>;
+  org?: InputMaybe<OrgFilterShopFilterOrgBranchFilterOrgFilter>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter>>;
+  role?: InputMaybe<OrgBranchRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgBranchFilterOrgFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilterOrgFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilterOrgFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgFilter>>;
+  branches?: InputMaybe<OrgFilterShopFilterOrgFilterOrgBranchFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  createdBy?: InputMaybe<OrgFilterShopFilterOrgFilterAccountFilter>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<OrgFilterShopFilterOrgFilterOrgMemberFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgFilter>>;
+  shops?: InputMaybe<OrgFilterShopFilterOrgFilterShopFilter>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgFilterAccountFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgFilterOrgBranchFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterOrgBranchFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgFilterOrgMemberFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterOrgMemberFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterOrgMemberFilter>>;
+  role?: InputMaybe<OrgRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterOrgFilterShopFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterShopFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterShopFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterShopMemberFilter = {
+  account?: InputMaybe<OrgFilterShopFilterShopMemberFilterAccountFilter>;
+  and?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  shop?: InputMaybe<OrgFilterShopFilterShopMemberFilterShopFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterShopMemberFilterAccountFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type OrgFilterShopFilterShopMemberFilterShopFilter = {
+  and?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterShopFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterShopFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 export type OrgMaxAggregate = {
   __typename?: 'OrgMaxAggregate';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgStatus>;
   type?: Maybe<OrgType>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5561,10 +6727,10 @@ export type OrgMemberAggregateFilterOrgAggregateFilter = {
   and?: InputMaybe<Array<OrgMemberAggregateFilterOrgAggregateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgMemberAggregateFilterOrgAggregateFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5696,10 +6862,10 @@ export type OrgMemberFilterOrgFilter = {
   and?: InputMaybe<Array<OrgMemberFilterOrgFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgMemberFilterOrgFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5827,6 +6993,7 @@ export type OrgMinAggregate = {
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<OrgStatus>;
   type?: Maybe<OrgType>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5854,6 +7021,66 @@ export type OrgRoleFilterComparison = {
   notLike?: InputMaybe<OrgRole>;
 };
 
+export type OrgShopsAggregateGroupBy = {
+  __typename?: 'OrgShopsAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type OrgShopsAggregateResponse = {
+  __typename?: 'OrgShopsAggregateResponse';
+  count?: Maybe<OrgShopsCountAggregate>;
+  groupBy?: Maybe<OrgShopsAggregateGroupBy>;
+  max?: Maybe<OrgShopsMaxAggregate>;
+  min?: Maybe<OrgShopsMinAggregate>;
+};
+
+export type OrgShopsConnection = {
+  __typename?: 'OrgShopsConnection';
+  /** Array of nodes. */
+  nodes: Array<Shop>;
+  /** Paging information */
+  pageInfo: OffsetPageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type OrgShopsCountAggregate = {
+  __typename?: 'OrgShopsCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  details?: Maybe<Scalars['Int']['output']>;
+  enabled?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type OrgShopsMaxAggregate = {
+  __typename?: 'OrgShopsMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type OrgShopsMinAggregate = {
+  __typename?: 'OrgShopsMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
 export type OrgSort = {
   direction: SortDirection;
   field: OrgSortFields;
@@ -5863,12 +7090,35 @@ export type OrgSort = {
 export enum OrgSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
-  Enabled = 'enabled',
   Id = 'id',
   Name = 'name',
+  Status = 'status',
   Type = 'type',
   UpdatedAt = 'updatedAt'
 }
+
+export enum OrgStatus {
+  Activated = 'ACTIVATED',
+  Blocked = 'BLOCKED',
+  Unactivated = 'UNACTIVATED'
+}
+
+export type OrgStatusFilterComparison = {
+  eq?: InputMaybe<OrgStatus>;
+  gt?: InputMaybe<OrgStatus>;
+  gte?: InputMaybe<OrgStatus>;
+  iLike?: InputMaybe<OrgStatus>;
+  in?: InputMaybe<Array<OrgStatus>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<OrgStatus>;
+  lt?: InputMaybe<OrgStatus>;
+  lte?: InputMaybe<OrgStatus>;
+  neq?: InputMaybe<OrgStatus>;
+  notILike?: InputMaybe<OrgStatus>;
+  notIn?: InputMaybe<Array<OrgStatus>>;
+  notLike?: InputMaybe<OrgStatus>;
+};
 
 export type OrgSumAggregate = {
   __typename?: 'OrgSumAggregate';
@@ -5876,7 +7126,7 @@ export type OrgSumAggregate = {
 };
 
 export enum OrgType {
-  Fnb = 'FNB'
+  Default = 'DEFAULT'
 }
 
 export type OrgTypeFilterComparison = {
@@ -5900,10 +7150,10 @@ export type OrgUpdateFilter = {
   and?: InputMaybe<Array<OrgUpdateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgUpdateFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
   type?: InputMaybe<OrgTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5988,10 +7238,10 @@ export type ProductAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -6182,10 +7432,10 @@ export type ProductCategoryAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductCategoryAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -6309,10 +7559,10 @@ export type ProductCategoryFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductCategoryFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -6544,10 +7794,10 @@ export type ProductFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -7294,230 +8544,6 @@ export type ProductOptionUpdateFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type ProductPrice = {
-  __typename?: 'ProductPrice';
-  branchSaleChannel: BranchSaleChannel;
-  createdAt: Scalars['DateTime']['output'];
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id: Scalars['ID']['output'];
-  price: Scalars['Float']['output'];
-  product: Product;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type ProductPriceAggregateFilter = {
-  and?: InputMaybe<Array<ProductPriceAggregateFilter>>;
-  branchSaleChannel?: InputMaybe<ProductPriceAggregateFilterBranchSaleChannelAggregateFilter>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<ProductPriceAggregateFilter>>;
-  price?: InputMaybe<NumberFieldComparison>;
-  product?: InputMaybe<ProductPriceAggregateFilterProductAggregateFilter>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceAggregateFilterBranchSaleChannelAggregateFilter = {
-  and?: InputMaybe<Array<ProductPriceAggregateFilterBranchSaleChannelAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<ProductPriceAggregateFilterBranchSaleChannelAggregateFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceAggregateFilterProductAggregateFilter = {
-  and?: InputMaybe<Array<ProductPriceAggregateFilterProductAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<ProductPriceAggregateFilterProductAggregateFilter>>;
-  price?: InputMaybe<NumberFieldComparison>;
-  sku?: InputMaybe<StringFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceAggregateGroupBy = {
-  __typename?: 'ProductPriceAggregateGroupBy';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  price?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type ProductPriceAggregateGroupByCreatedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type ProductPriceAggregateGroupByDeletedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type ProductPriceAggregateGroupByUpdatedAtArgs = {
-  by?: GroupBy;
-};
-
-export type ProductPriceAggregateResponse = {
-  __typename?: 'ProductPriceAggregateResponse';
-  avg?: Maybe<ProductPriceAvgAggregate>;
-  count?: Maybe<ProductPriceCountAggregate>;
-  groupBy?: Maybe<ProductPriceAggregateGroupBy>;
-  max?: Maybe<ProductPriceMaxAggregate>;
-  min?: Maybe<ProductPriceMinAggregate>;
-  sum?: Maybe<ProductPriceSumAggregate>;
-};
-
-export type ProductPriceAvgAggregate = {
-  __typename?: 'ProductPriceAvgAggregate';
-  price?: Maybe<Scalars['Float']['output']>;
-};
-
-export type ProductPriceConnection = {
-  __typename?: 'ProductPriceConnection';
-  /** Array of edges. */
-  edges: Array<ProductPriceEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-  /** Fetch total count of records */
-  totalCount: Scalars['Int']['output'];
-};
-
-export type ProductPriceCountAggregate = {
-  __typename?: 'ProductPriceCountAggregate';
-  createdAt?: Maybe<Scalars['Int']['output']>;
-  deletedAt?: Maybe<Scalars['Int']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  price?: Maybe<Scalars['Int']['output']>;
-  updatedAt?: Maybe<Scalars['Int']['output']>;
-};
-
-export type ProductPriceDto = {
-  branchSaleChannel: Scalars['ID']['input'];
-  price: Scalars['Float']['input'];
-  product: Scalars['ID']['input'];
-};
-
-export type ProductPriceDeleteFilter = {
-  and?: InputMaybe<Array<ProductPriceDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<ProductPriceDeleteFilter>>;
-  price?: InputMaybe<NumberFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceDeleteResponse = {
-  __typename?: 'ProductPriceDeleteResponse';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  price?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type ProductPriceEdge = {
-  __typename?: 'ProductPriceEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the ProductPrice */
-  node: ProductPrice;
-};
-
-export type ProductPriceFilter = {
-  and?: InputMaybe<Array<ProductPriceFilter>>;
-  branchSaleChannel?: InputMaybe<ProductPriceFilterBranchSaleChannelFilter>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<ProductPriceFilter>>;
-  price?: InputMaybe<NumberFieldComparison>;
-  product?: InputMaybe<ProductPriceFilterProductFilter>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceFilterBranchSaleChannelFilter = {
-  and?: InputMaybe<Array<ProductPriceFilterBranchSaleChannelFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<ProductPriceFilterBranchSaleChannelFilter>>;
-  saleChannel?: InputMaybe<SaleChannelFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceFilterProductFilter = {
-  and?: InputMaybe<Array<ProductPriceFilterProductFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<ProductPriceFilterProductFilter>>;
-  price?: InputMaybe<NumberFieldComparison>;
-  sku?: InputMaybe<StringFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type ProductPriceImportInput = {
-  branchId: Scalars['ID']['input'];
-  fileId: Scalars['ID']['input'];
-};
-
-export type ProductPriceMaxAggregate = {
-  __typename?: 'ProductPriceMaxAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  price?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type ProductPriceMinAggregate = {
-  __typename?: 'ProductPriceMinAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  price?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type ProductPriceSort = {
-  direction: SortDirection;
-  field: ProductPriceSortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum ProductPriceSortFields {
-  CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
-  Id = 'id',
-  Price = 'price',
-  UpdatedAt = 'updatedAt'
-}
-
-export type ProductPriceSumAggregate = {
-  __typename?: 'ProductPriceSumAggregate';
-  price?: Maybe<Scalars['Float']['output']>;
-};
-
-export type ProductPriceUpdateFilter = {
-  and?: InputMaybe<Array<ProductPriceUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<ProductPriceUpdateFilter>>;
-  price?: InputMaybe<NumberFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
 export type ProductSort = {
   direction: SortDirection;
   field: ProductSortFields;
@@ -7583,10 +8609,10 @@ export type ProductTypeAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductTypeAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -7710,10 +8736,10 @@ export type ProductTypeFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductTypeFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -7895,10 +8921,10 @@ export type ProductUnitAggregateFilterOrgBranchAggregateFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductUnitAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -8022,10 +9048,10 @@ export type ProductUnitFilterOrgBranchFilter = {
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   details?: InputMaybe<JsonFilterComparison>;
-  enabled?: InputMaybe<BooleanFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductUnitFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -8191,15 +9217,15 @@ export type Query = {
   apiKey: ApiKey;
   apiKeyAggregate: Array<ApiKeyAggregateResponse>;
   apiKeys: ApiKeyConnection;
-  branchSaleChannel: BranchSaleChannel;
-  branchSaleChannelAggregate: Array<BranchSaleChannelAggregateResponse>;
-  branchSaleChannels: BranchSaleChannelConnection;
   customer: Customer;
   customerAggregate: Array<CustomerAggregateResponse>;
   customers: CustomerConnection;
   file: File;
   fileAggregate: Array<FileAggregateResponse>;
   files: FileConnection;
+  garage: Garage;
+  garageAggregate: Array<GarageAggregateResponse>;
+  garages: GarageConnection;
   me: Account;
   media: MediaConnection;
   mediaAggregate: Array<MediaAggregateResponse>;
@@ -8232,9 +9258,6 @@ export type Query = {
   productOptionGroupAggregate: Array<ProductOptionGroupAggregateResponse>;
   productOptionGroups: ProductOptionGroupConnection;
   productOptions: ProductOptionConnection;
-  productPrice: ProductPrice;
-  productPriceAggregate: Array<ProductPriceAggregateResponse>;
-  productPrices: ProductPriceConnection;
   productType: ProductType;
   productTypeAggregate: Array<ProductTypeAggregateResponse>;
   productTypes: ProductTypeConnection;
@@ -8242,6 +9265,36 @@ export type Query = {
   productUnitAggregate: Array<ProductUnitAggregateResponse>;
   productUnits: ProductUnitConnection;
   products: ProductConnection;
+  shop: Shop;
+  shopAggregate: Array<ShopAggregateResponse>;
+  shopMember: ShopMember;
+  shopMemberAggregate: Array<ShopMemberAggregateResponse>;
+  shopMembers: ShopMemberConnection;
+  shops: ShopConnection;
+  user: User;
+  userAggregate: Array<UserAggregateResponse>;
+  userVehicle: UserVehicle;
+  userVehicleAggregate: Array<UserVehicleAggregateResponse>;
+  userVehicles: UserVehicleConnection;
+  users: UserConnection;
+  vehicleBodies: VehicleBodyConnection;
+  vehicleBody: VehicleBody;
+  vehicleBrand: VehicleBrand;
+  vehicleBrands: VehicleBrandConnection;
+  vehicleEngine: VehicleEngine;
+  vehicleEngines: VehicleEngineConnection;
+  vehicleLog: VehicleLog;
+  vehicleLogAggregate: Array<VehicleLogAggregateResponse>;
+  vehicleLogBill: VehicleLogBill;
+  vehicleLogBillAggregate: Array<VehicleLogBillAggregateResponse>;
+  vehicleLogBills: VehicleLogBillConnection;
+  vehicleLogs: VehicleLogConnection;
+  vehicleModel: VehicleModel;
+  vehicleModelBodies: VehicleModelBodyConnection;
+  vehicleModelBody: VehicleModelBody;
+  vehicleModels: VehicleModelConnection;
+  vehicleTransmission: VehicleTransmission;
+  vehicleTransmissions: VehicleTransmissionConnection;
 };
 
 
@@ -8313,23 +9366,6 @@ export type QueryApiKeysArgs = {
 };
 
 
-export type QueryBranchSaleChannelArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryBranchSaleChannelAggregateArgs = {
-  filter?: InputMaybe<BranchSaleChannelAggregateFilter>;
-};
-
-
-export type QueryBranchSaleChannelsArgs = {
-  filter?: BranchSaleChannelFilter;
-  paging?: CursorPaging;
-  sorting?: Array<BranchSaleChannelSort>;
-};
-
-
 export type QueryCustomerArgs = {
   id: Scalars['ID']['input'];
 };
@@ -8361,6 +9397,23 @@ export type QueryFilesArgs = {
   filter?: FileFilter;
   paging?: CursorPaging;
   sorting?: Array<FileSort>;
+};
+
+
+export type QueryGarageArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryGarageAggregateArgs = {
+  filter?: InputMaybe<GarageAggregateFilter>;
+};
+
+
+export type QueryGaragesArgs = {
+  filter?: GarageFilter;
+  paging?: CursorPaging;
+  sorting?: Array<GarageSort>;
 };
 
 
@@ -8539,23 +9592,6 @@ export type QueryProductOptionsArgs = {
 };
 
 
-export type QueryProductPriceArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryProductPriceAggregateArgs = {
-  filter?: InputMaybe<ProductPriceAggregateFilter>;
-};
-
-
-export type QueryProductPricesArgs = {
-  filter?: ProductPriceFilter;
-  paging?: CursorPaging;
-  sorting?: Array<ProductPriceSort>;
-};
-
-
 export type QueryProductTypeArgs = {
   id: Scalars['ID']['input'];
 };
@@ -8596,31 +9632,188 @@ export type QueryProductsArgs = {
   sorting?: Array<ProductSort>;
 };
 
-export enum SaleChannel {
-  BeFood = 'BE_FOOD',
-  Fabi = 'FABI',
-  GrabFood = 'GRAB_FOOD',
-  ShopeeFood = 'SHOPEE_FOOD'
-}
 
-export type SaleChannelFilterComparison = {
-  eq?: InputMaybe<SaleChannel>;
-  gt?: InputMaybe<SaleChannel>;
-  gte?: InputMaybe<SaleChannel>;
-  iLike?: InputMaybe<SaleChannel>;
-  in?: InputMaybe<Array<SaleChannel>>;
-  is?: InputMaybe<Scalars['Boolean']['input']>;
-  isNot?: InputMaybe<Scalars['Boolean']['input']>;
-  like?: InputMaybe<SaleChannel>;
-  lt?: InputMaybe<SaleChannel>;
-  lte?: InputMaybe<SaleChannel>;
-  neq?: InputMaybe<SaleChannel>;
-  notILike?: InputMaybe<SaleChannel>;
-  notIn?: InputMaybe<Array<SaleChannel>>;
-  notLike?: InputMaybe<SaleChannel>;
+export type QueryShopArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryShopAggregateArgs = {
+  filter?: InputMaybe<ShopAggregateFilter>;
+};
+
+
+export type QueryShopMemberArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryShopMemberAggregateArgs = {
+  filter?: InputMaybe<ShopMemberAggregateFilter>;
+};
+
+
+export type QueryShopMembersArgs = {
+  filter?: ShopMemberFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ShopMemberSort>;
+};
+
+
+export type QueryShopsArgs = {
+  filter?: ShopFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ShopSort>;
+};
+
+
+export type QueryUserArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryUserAggregateArgs = {
+  filter?: InputMaybe<UserAggregateFilter>;
+};
+
+
+export type QueryUserVehicleArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryUserVehicleAggregateArgs = {
+  filter?: InputMaybe<UserVehicleAggregateFilter>;
+};
+
+
+export type QueryUserVehiclesArgs = {
+  filter?: UserVehicleFilter;
+  paging?: CursorPaging;
+  sorting?: Array<UserVehicleSort>;
+};
+
+
+export type QueryUsersArgs = {
+  filter?: UserFilter;
+  paging?: CursorPaging;
+  sorting?: Array<UserSort>;
+};
+
+
+export type QueryVehicleBodiesArgs = {
+  filter?: VehicleBodyFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleBodySort>;
+};
+
+
+export type QueryVehicleBodyArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleBrandArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleBrandsArgs = {
+  filter?: VehicleBrandFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleBrandSort>;
+};
+
+
+export type QueryVehicleEngineArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleEnginesArgs = {
+  filter?: VehicleEngineFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleEngineSort>;
+};
+
+
+export type QueryVehicleLogArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleLogAggregateArgs = {
+  filter?: InputMaybe<VehicleLogAggregateFilter>;
+};
+
+
+export type QueryVehicleLogBillArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleLogBillAggregateArgs = {
+  filter?: InputMaybe<VehicleLogBillAggregateFilter>;
+};
+
+
+export type QueryVehicleLogBillsArgs = {
+  filter?: VehicleLogBillFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleLogBillSort>;
+};
+
+
+export type QueryVehicleLogsArgs = {
+  filter?: VehicleLogFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleLogSort>;
+};
+
+
+export type QueryVehicleModelArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleModelBodiesArgs = {
+  filter?: VehicleModelBodyFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleModelBodySort>;
+};
+
+
+export type QueryVehicleModelBodyArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleModelsArgs = {
+  filter?: VehicleModelFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleModelSort>;
+};
+
+
+export type QueryVehicleTransmissionArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleTransmissionsArgs = {
+  filter?: VehicleTransmissionFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleTransmissionSort>;
 };
 
 export type SetAddressesOnCustomerInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type SetBodiesOnVehicleModelInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
   /** The ids of the relations. */
@@ -8642,6 +9835,13 @@ export type SetMembersOnOrgBranchInput = {
 };
 
 export type SetMembersOnOrgInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type SetMembersOnShopInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
   /** The ids of the relations. */
@@ -8704,11 +9904,601 @@ export type SetProductsOnProductUnitInput = {
   relationIds: Array<Scalars['ID']['input']>;
 };
 
+export type SetShopsOnOrgInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
 export type SetUnitOnProductInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
   /** The id of relation. */
   relationId: Scalars['ID']['input'];
+};
+
+export type Shop = {
+  __typename?: 'Shop';
+  branch: OrgBranch;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  id: Scalars['ID']['output'];
+  members: ShopMembersConnection;
+  membersAggregate: Array<ShopMembersAggregateResponse>;
+  name: Scalars['String']['output'];
+  org: Org;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ShopMembersArgs = {
+  filter?: ShopMemberFilter;
+  paging?: OffsetPaging;
+  sorting?: Array<ShopMemberSort>;
+};
+
+
+export type ShopMembersAggregateArgs = {
+  filter?: InputMaybe<ShopMemberAggregateFilter>;
+};
+
+export type ShopAggregateFilter = {
+  and?: InputMaybe<Array<ShopAggregateFilter>>;
+  branch?: InputMaybe<ShopAggregateFilterOrgBranchAggregateFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<ShopAggregateFilterShopMemberAggregateFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopAggregateFilter>>;
+  org?: InputMaybe<ShopAggregateFilterOrgAggregateFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopAggregateFilterOrgAggregateFilter = {
+  and?: InputMaybe<Array<ShopAggregateFilterOrgAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopAggregateFilterOrgAggregateFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopAggregateFilterOrgBranchAggregateFilter = {
+  and?: InputMaybe<Array<ShopAggregateFilterOrgBranchAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopAggregateFilterOrgBranchAggregateFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopAggregateFilterShopMemberAggregateFilter = {
+  and?: InputMaybe<Array<ShopAggregateFilterShopMemberAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ShopAggregateFilterShopMemberAggregateFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopAggregateGroupBy = {
+  __typename?: 'ShopAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ShopAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ShopAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ShopAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type ShopAggregateResponse = {
+  __typename?: 'ShopAggregateResponse';
+  count?: Maybe<ShopCountAggregate>;
+  groupBy?: Maybe<ShopAggregateGroupBy>;
+  max?: Maybe<ShopMaxAggregate>;
+  min?: Maybe<ShopMinAggregate>;
+};
+
+export type ShopConnection = {
+  __typename?: 'ShopConnection';
+  /** Array of edges. */
+  edges: Array<ShopEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ShopCountAggregate = {
+  __typename?: 'ShopCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  details?: Maybe<Scalars['Int']['output']>;
+  enabled?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ShopDto = {
+  branch?: InputMaybe<Scalars['ID']['input']>;
+  details?: InputMaybe<Scalars['JSON']['input']>;
+  enabled?: InputMaybe<Scalars['Boolean']['input']>;
+  members?: InputMaybe<Array<ShopMemberDto>>;
+  name: Scalars['String']['input'];
+  org?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type ShopDeleteFilter = {
+  and?: InputMaybe<Array<ShopDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopDeleteResponse = {
+  __typename?: 'ShopDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  enabled?: Maybe<Scalars['Boolean']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopEdge = {
+  __typename?: 'ShopEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the Shop */
+  node: Shop;
+};
+
+export type ShopFilter = {
+  and?: InputMaybe<Array<ShopFilter>>;
+  branch?: InputMaybe<ShopFilterOrgBranchFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  members?: InputMaybe<ShopFilterShopMemberFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopFilter>>;
+  org?: InputMaybe<ShopFilterOrgFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopFilterOrgBranchFilter = {
+  and?: InputMaybe<Array<ShopFilterOrgBranchFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopFilterOrgBranchFilter>>;
+  status?: InputMaybe<OrgBranchStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopFilterOrgFilter = {
+  and?: InputMaybe<Array<ShopFilterOrgFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopFilterOrgFilter>>;
+  status?: InputMaybe<OrgStatusFilterComparison>;
+  type?: InputMaybe<OrgTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopFilterShopMemberFilter = {
+  and?: InputMaybe<Array<ShopFilterShopMemberFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ShopFilterShopMemberFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMaxAggregate = {
+  __typename?: 'ShopMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMember = {
+  __typename?: 'ShopMember';
+  account: Account;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  role: ShopMemberRole;
+  shop: Shop;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMemberAggregateFilter = {
+  account?: InputMaybe<ShopMemberAggregateFilterAccountAggregateFilter>;
+  and?: InputMaybe<Array<ShopMemberAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ShopMemberAggregateFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  shop?: InputMaybe<ShopMemberAggregateFilterShopAggregateFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberAggregateFilterAccountAggregateFilter = {
+  and?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberAggregateFilterShopAggregateFilter = {
+  and?: InputMaybe<Array<ShopMemberAggregateFilterShopAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopMemberAggregateFilterShopAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberAggregateGroupBy = {
+  __typename?: 'ShopMemberAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ShopMemberAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ShopMemberAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ShopMemberAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type ShopMemberAggregateResponse = {
+  __typename?: 'ShopMemberAggregateResponse';
+  avg?: Maybe<ShopMemberAvgAggregate>;
+  count?: Maybe<ShopMemberCountAggregate>;
+  groupBy?: Maybe<ShopMemberAggregateGroupBy>;
+  max?: Maybe<ShopMemberMaxAggregate>;
+  min?: Maybe<ShopMemberMinAggregate>;
+  sum?: Maybe<ShopMemberSumAggregate>;
+};
+
+export type ShopMemberAvgAggregate = {
+  __typename?: 'ShopMemberAvgAggregate';
+  role?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ShopMemberConnection = {
+  __typename?: 'ShopMemberConnection';
+  /** Array of edges. */
+  edges: Array<ShopMemberEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ShopMemberCountAggregate = {
+  __typename?: 'ShopMemberCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  role?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ShopMemberDto = {
+  account: Scalars['ID']['input'];
+  role: ShopMemberRole;
+  shop?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type ShopMemberDeleteFilter = {
+  and?: InputMaybe<Array<ShopMemberDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ShopMemberDeleteFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberDeleteResponse = {
+  __typename?: 'ShopMemberDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMemberEdge = {
+  __typename?: 'ShopMemberEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the ShopMember */
+  node: ShopMember;
+};
+
+export type ShopMemberFilter = {
+  account?: InputMaybe<ShopMemberFilterAccountFilter>;
+  and?: InputMaybe<Array<ShopMemberFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ShopMemberFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  shop?: InputMaybe<ShopMemberFilterShopFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberFilterAccountFilter = {
+  and?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberFilterShopFilter = {
+  and?: InputMaybe<Array<ShopMemberFilterShopFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopMemberFilterShopFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMemberMaxAggregate = {
+  __typename?: 'ShopMemberMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMemberMinAggregate = {
+  __typename?: 'ShopMemberMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export enum ShopMemberRole {
+  Editor = 'EDITOR',
+  Manager = 'MANAGER',
+  Owner = 'OWNER',
+  Viewer = 'VIEWER'
+}
+
+export type ShopMemberRoleFilterComparison = {
+  eq?: InputMaybe<ShopMemberRole>;
+  gt?: InputMaybe<ShopMemberRole>;
+  gte?: InputMaybe<ShopMemberRole>;
+  iLike?: InputMaybe<ShopMemberRole>;
+  in?: InputMaybe<Array<ShopMemberRole>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<ShopMemberRole>;
+  lt?: InputMaybe<ShopMemberRole>;
+  lte?: InputMaybe<ShopMemberRole>;
+  neq?: InputMaybe<ShopMemberRole>;
+  notILike?: InputMaybe<ShopMemberRole>;
+  notIn?: InputMaybe<Array<ShopMemberRole>>;
+  notLike?: InputMaybe<ShopMemberRole>;
+};
+
+export type ShopMemberSort = {
+  direction: SortDirection;
+  field: ShopMemberSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ShopMemberSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Role = 'role',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ShopMemberSumAggregate = {
+  __typename?: 'ShopMemberSumAggregate';
+  role?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ShopMemberUpdateFilter = {
+  and?: InputMaybe<Array<ShopMemberUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ShopMemberUpdateFilter>>;
+  role?: InputMaybe<ShopMemberRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ShopMembersAggregateGroupBy = {
+  __typename?: 'ShopMembersAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMembersAggregateResponse = {
+  __typename?: 'ShopMembersAggregateResponse';
+  avg?: Maybe<ShopMembersAvgAggregate>;
+  count?: Maybe<ShopMembersCountAggregate>;
+  groupBy?: Maybe<ShopMembersAggregateGroupBy>;
+  max?: Maybe<ShopMembersMaxAggregate>;
+  min?: Maybe<ShopMembersMinAggregate>;
+  sum?: Maybe<ShopMembersSumAggregate>;
+};
+
+export type ShopMembersAvgAggregate = {
+  __typename?: 'ShopMembersAvgAggregate';
+  role?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ShopMembersConnection = {
+  __typename?: 'ShopMembersConnection';
+  /** Array of nodes. */
+  nodes: Array<ShopMember>;
+  /** Paging information */
+  pageInfo: OffsetPageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ShopMembersCountAggregate = {
+  __typename?: 'ShopMembersCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  role?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ShopMembersMaxAggregate = {
+  __typename?: 'ShopMembersMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMembersMinAggregate = {
+  __typename?: 'ShopMembersMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  role?: Maybe<ShopMemberRole>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopMembersSumAggregate = {
+  __typename?: 'ShopMembersSumAggregate';
+  role?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ShopMinAggregate = {
+  __typename?: 'ShopMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  details?: Maybe<Scalars['JSON']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ShopSort = {
+  direction: SortDirection;
+  field: ShopSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ShopSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Details = 'details',
+  Enabled = 'enabled',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ShopUpdateFilter = {
+  and?: InputMaybe<Array<ShopUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  details?: InputMaybe<JsonFilterComparison>;
+  enabled?: InputMaybe<BooleanFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ShopUpdateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 /** Sort Directions */
@@ -8768,13 +10558,6 @@ export type UpdateManyApiKeysInput = {
   update: ApiKeyDto;
 };
 
-export type UpdateManyBranchSaleChannelsInput = {
-  /** Filter used to find fields to update */
-  filter: BranchSaleChannelUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: BranchSaleChannelDto;
-};
-
 export type UpdateManyCustomersInput = {
   /** Filter used to find fields to update */
   filter: CustomerUpdateFilter;
@@ -8787,6 +10570,13 @@ export type UpdateManyFilesInput = {
   filter: FileUpdateFilter;
   /** The update to apply to all records found using the filter */
   update: FileDto;
+};
+
+export type UpdateManyGaragesInput = {
+  /** Filter used to find fields to update */
+  filter: GarageUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: GarageDto;
 };
 
 export type UpdateManyMediaInput = {
@@ -8859,13 +10649,6 @@ export type UpdateManyProductOptionsInput = {
   update: ProductOptionDto;
 };
 
-export type UpdateManyProductPricesInput = {
-  /** Filter used to find fields to update */
-  filter: ProductPriceUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: ProductPriceDto;
-};
-
 export type UpdateManyProductTypesInput = {
   /** Filter used to find fields to update */
   filter: ProductTypeUpdateFilter;
@@ -8891,6 +10674,90 @@ export type UpdateManyResponse = {
   __typename?: 'UpdateManyResponse';
   /** The number of records updated. */
   updatedCount: Scalars['Int']['output'];
+};
+
+export type UpdateManyShopMembersInput = {
+  /** Filter used to find fields to update */
+  filter: ShopMemberUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: ShopMemberDto;
+};
+
+export type UpdateManyShopsInput = {
+  /** Filter used to find fields to update */
+  filter: ShopUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: ShopDto;
+};
+
+export type UpdateManyUserVehiclesInput = {
+  /** Filter used to find fields to update */
+  filter: UserVehicleUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: UserVehicleDto;
+};
+
+export type UpdateManyUsersInput = {
+  /** Filter used to find fields to update */
+  filter: UserUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: UserDto;
+};
+
+export type UpdateManyVehicleBodiesInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleBodyUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleBodyDto;
+};
+
+export type UpdateManyVehicleBrandsInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleBrandUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleBrandDto;
+};
+
+export type UpdateManyVehicleEnginesInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleEngineUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleEngineDto;
+};
+
+export type UpdateManyVehicleLogBillsInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleLogBillUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleLogBillDto;
+};
+
+export type UpdateManyVehicleLogsInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleLogUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleLogDto;
+};
+
+export type UpdateManyVehicleModelBodiesInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleModelBodyUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleModelBodyDto;
+};
+
+export type UpdateManyVehicleModelsInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleModelUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleModelDto;
+};
+
+export type UpdateManyVehicleTransmissionsInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleTransmissionUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleTransmissionDto;
 };
 
 export type UpdateOneAccountInput = {
@@ -8921,13 +10788,6 @@ export type UpdateOneApiKeyInput = {
   update: ApiKeyDto;
 };
 
-export type UpdateOneBranchSaleChannelInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: BranchSaleChannelDto;
-};
-
 export type UpdateOneCustomerInput = {
   /** The id of the record to update */
   id: Scalars['ID']['input'];
@@ -8940,6 +10800,13 @@ export type UpdateOneFileInput = {
   id: Scalars['ID']['input'];
   /** The update to apply. */
   update: FileDto;
+};
+
+export type UpdateOneGarageInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: GarageDto;
 };
 
 export type UpdateOneMediaInput = {
@@ -9019,13 +10886,6 @@ export type UpdateOneProductOptionInput = {
   update: ProductOptionDto;
 };
 
-export type UpdateOneProductPriceInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: ProductPriceDto;
-};
-
 export type UpdateOneProductTypeInput = {
   /** The id of the record to update */
   id: Scalars['ID']['input'];
@@ -9038,6 +10898,1785 @@ export type UpdateOneProductUnitInput = {
   id: Scalars['ID']['input'];
   /** The update to apply. */
   update: ProductUnitDto;
+};
+
+export type UpdateOneShopInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: ShopDto;
+};
+
+export type UpdateOneShopMemberInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: ShopMemberDto;
+};
+
+export type UpdateOneUserInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: UserDto;
+};
+
+export type UpdateOneUserVehicleInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: UserVehicleDto;
+};
+
+export type UpdateOneVehicleBodyInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleBodyDto;
+};
+
+export type UpdateOneVehicleBrandInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleBrandDto;
+};
+
+export type UpdateOneVehicleEngineInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleEngineDto;
+};
+
+export type UpdateOneVehicleLogBillInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleLogBillDto;
+};
+
+export type UpdateOneVehicleLogInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleLogDto;
+};
+
+export type UpdateOneVehicleModelBodyInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleModelBodyDto;
+};
+
+export type UpdateOneVehicleModelInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleModelDto;
+};
+
+export type UpdateOneVehicleTransmissionInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleTransmissionDto;
+};
+
+export type User = {
+  __typename?: 'User';
+  account: Account;
+  avatar?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  phone_number: Scalars['String']['output'];
+  status: UserStatus;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserAggregateFilter = {
+  account?: InputMaybe<UserAggregateFilterAccountAggregateFilter>;
+  and?: InputMaybe<Array<UserAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
+  status?: InputMaybe<UserStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserAggregateFilterAccountAggregateFilter = {
+  and?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserAggregateGroupBy = {
+  __typename?: 'UserAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type UserAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type UserAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type UserAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type UserAggregateResponse = {
+  __typename?: 'UserAggregateResponse';
+  count?: Maybe<UserCountAggregate>;
+  groupBy?: Maybe<UserAggregateGroupBy>;
+  max?: Maybe<UserMaxAggregate>;
+  min?: Maybe<UserMinAggregate>;
+};
+
+export type UserConnection = {
+  __typename?: 'UserConnection';
+  /** Array of edges. */
+  edges: Array<UserEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type UserCountAggregate = {
+  __typename?: 'UserCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  phone_number?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type UserDto = {
+  account: Scalars['ID']['input'];
+  avatar?: InputMaybe<Scalars['String']['input']>;
+  phone_number: Scalars['String']['input'];
+  status: UserStatus;
+};
+
+export type UserDeleteFilter = {
+  and?: InputMaybe<Array<UserDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserDeleteFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
+  status?: InputMaybe<UserStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserDeleteResponse = {
+  __typename?: 'UserDeleteResponse';
+  avatar?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserEdge = {
+  __typename?: 'UserEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the User */
+  node: User;
+};
+
+export type UserFilter = {
+  account?: InputMaybe<UserFilterAccountFilter>;
+  and?: InputMaybe<Array<UserFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
+  status?: InputMaybe<UserStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserFilterAccountFilter = {
+  and?: InputMaybe<Array<UserFilterAccountFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  email?: InputMaybe<StringFieldComparison>;
+  emailVerified?: InputMaybe<BooleanFieldComparison>;
+  firstName?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lastName?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserFilterAccountFilter>>;
+  role?: InputMaybe<AccountRoleFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserMaxAggregate = {
+  __typename?: 'UserMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserMinAggregate = {
+  __typename?: 'UserMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserSort = {
+  direction: SortDirection;
+  field: UserSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum UserSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  PhoneNumber = 'phone_number',
+  Status = 'status',
+  UpdatedAt = 'updatedAt'
+}
+
+export enum UserStatus {
+  Activated = 'ACTIVATED',
+  Blocked = 'BLOCKED',
+  Unactivated = 'UNACTIVATED'
+}
+
+export type UserStatusFilterComparison = {
+  eq?: InputMaybe<UserStatus>;
+  gt?: InputMaybe<UserStatus>;
+  gte?: InputMaybe<UserStatus>;
+  iLike?: InputMaybe<UserStatus>;
+  in?: InputMaybe<Array<UserStatus>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<UserStatus>;
+  lt?: InputMaybe<UserStatus>;
+  lte?: InputMaybe<UserStatus>;
+  neq?: InputMaybe<UserStatus>;
+  notILike?: InputMaybe<UserStatus>;
+  notIn?: InputMaybe<Array<UserStatus>>;
+  notLike?: InputMaybe<UserStatus>;
+};
+
+export type UserUpdateFilter = {
+  and?: InputMaybe<Array<UserUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserUpdateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
+  status?: InputMaybe<UserStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export enum UserVechileStatus {
+  Activated = 'ACTIVATED',
+  Blocked = 'BLOCKED',
+  Unactivated = 'UNACTIVATED'
+}
+
+export type UserVechileStatusFilterComparison = {
+  eq?: InputMaybe<UserVechileStatus>;
+  gt?: InputMaybe<UserVechileStatus>;
+  gte?: InputMaybe<UserVechileStatus>;
+  iLike?: InputMaybe<UserVechileStatus>;
+  in?: InputMaybe<Array<UserVechileStatus>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<UserVechileStatus>;
+  lt?: InputMaybe<UserVechileStatus>;
+  lte?: InputMaybe<UserVechileStatus>;
+  neq?: InputMaybe<UserVechileStatus>;
+  notILike?: InputMaybe<UserVechileStatus>;
+  notIn?: InputMaybe<Array<UserVechileStatus>>;
+  notLike?: InputMaybe<UserVechileStatus>;
+};
+
+export type UserVehicle = {
+  __typename?: 'UserVehicle';
+  body: VehicleModelBody;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  engine: VehicleEngine;
+  id: Scalars['ID']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  model: VehicleModel;
+  name?: Maybe<Scalars['String']['output']>;
+  owner: User;
+  pic?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserVechileStatus>;
+  transmission: VehicleTransmission;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserVehicleAggregateFilter = {
+  and?: InputMaybe<Array<UserVehicleAggregateFilter>>;
+  body?: InputMaybe<UserVehicleAggregateFilterVehicleModelBodyAggregateFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  engine?: InputMaybe<UserVehicleAggregateFilterVehicleEngineAggregateFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  model?: InputMaybe<UserVehicleAggregateFilterVehicleModelAggregateFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleAggregateFilter>>;
+  owner?: InputMaybe<UserVehicleAggregateFilterUserAggregateFilter>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  transmission?: InputMaybe<UserVehicleAggregateFilterVehicleTransmissionAggregateFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleAggregateFilterUserAggregateFilter = {
+  and?: InputMaybe<Array<UserVehicleAggregateFilterUserAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserVehicleAggregateFilterUserAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
+  status?: InputMaybe<UserStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleAggregateFilterVehicleEngineAggregateFilter = {
+  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleEngineAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleEngineAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleAggregateFilterVehicleModelAggregateFilter = {
+  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelAggregateFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleAggregateFilterVehicleModelBodyAggregateFilter = {
+  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelBodyAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelBodyAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleAggregateFilterVehicleTransmissionAggregateFilter = {
+  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleTransmissionAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleTransmissionAggregateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleAggregateGroupBy = {
+  __typename?: 'UserVehicleAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserVechileStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type UserVehicleAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type UserVehicleAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type UserVehicleAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type UserVehicleAggregateResponse = {
+  __typename?: 'UserVehicleAggregateResponse';
+  count?: Maybe<UserVehicleCountAggregate>;
+  groupBy?: Maybe<UserVehicleAggregateGroupBy>;
+  max?: Maybe<UserVehicleMaxAggregate>;
+  min?: Maybe<UserVehicleMinAggregate>;
+};
+
+export type UserVehicleConnection = {
+  __typename?: 'UserVehicleConnection';
+  /** Array of edges. */
+  edges: Array<UserVehicleEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type UserVehicleCountAggregate = {
+  __typename?: 'UserVehicleCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type UserVehicleDto = {
+  body: Scalars['ID']['input'];
+  engine: Scalars['ID']['input'];
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  model: Scalars['ID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  owner?: InputMaybe<Scalars['ID']['input']>;
+  pic?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<UserVechileStatus>;
+  transmission: Scalars['ID']['input'];
+};
+
+export type UserVehicleDeleteFilter = {
+  and?: InputMaybe<Array<UserVehicleDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleDeleteFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleDeleteResponse = {
+  __typename?: 'UserVehicleDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  pic?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserVechileStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserVehicleEdge = {
+  __typename?: 'UserVehicleEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the UserVehicle */
+  node: UserVehicle;
+};
+
+export type UserVehicleFilter = {
+  and?: InputMaybe<Array<UserVehicleFilter>>;
+  body?: InputMaybe<UserVehicleFilterVehicleModelBodyFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  engine?: InputMaybe<UserVehicleFilterVehicleEngineFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  model?: InputMaybe<UserVehicleFilterVehicleModelFilter>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleFilter>>;
+  owner?: InputMaybe<UserVehicleFilterUserFilter>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  transmission?: InputMaybe<UserVehicleFilterVehicleTransmissionFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleFilterUserFilter = {
+  and?: InputMaybe<Array<UserVehicleFilterUserFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserVehicleFilterUserFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
+  status?: InputMaybe<UserStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleFilterVehicleEngineFilter = {
+  and?: InputMaybe<Array<UserVehicleFilterVehicleEngineFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleFilterVehicleEngineFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleFilterVehicleModelBodyFilter = {
+  and?: InputMaybe<Array<UserVehicleFilterVehicleModelBodyFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<UserVehicleFilterVehicleModelBodyFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleFilterVehicleModelFilter = {
+  and?: InputMaybe<Array<UserVehicleFilterVehicleModelFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleFilterVehicleModelFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type UserVehicleFilterVehicleTransmissionFilter = {
+  and?: InputMaybe<Array<UserVehicleFilterVehicleTransmissionFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleFilterVehicleTransmissionFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export enum UserVehicleLogType {
+  Detailing = 'DETAILING',
+  Maintenance = 'MAINTENANCE',
+  Other = 'OTHER',
+  Paperwork = 'PAPERWORK',
+  Repair = 'REPAIR',
+  Retrofit = 'RETROFIT',
+  Software = 'SOFTWARE',
+  Tuning = 'TUNING'
+}
+
+export type UserVehicleLogTypeFilterComparison = {
+  eq?: InputMaybe<UserVehicleLogType>;
+  gt?: InputMaybe<UserVehicleLogType>;
+  gte?: InputMaybe<UserVehicleLogType>;
+  iLike?: InputMaybe<UserVehicleLogType>;
+  in?: InputMaybe<Array<UserVehicleLogType>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<UserVehicleLogType>;
+  lt?: InputMaybe<UserVehicleLogType>;
+  lte?: InputMaybe<UserVehicleLogType>;
+  neq?: InputMaybe<UserVehicleLogType>;
+  notILike?: InputMaybe<UserVehicleLogType>;
+  notIn?: InputMaybe<Array<UserVehicleLogType>>;
+  notLike?: InputMaybe<UserVehicleLogType>;
+};
+
+export type UserVehicleMaxAggregate = {
+  __typename?: 'UserVehicleMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserVechileStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserVehicleMinAggregate = {
+  __typename?: 'UserVehicleMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<UserVechileStatus>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type UserVehicleSort = {
+  direction: SortDirection;
+  field: UserVehicleSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum UserVehicleSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Name = 'name',
+  Status = 'status',
+  UpdatedAt = 'updatedAt'
+}
+
+export type UserVehicleUpdateFilter = {
+  and?: InputMaybe<Array<UserVehicleUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<UserVehicleUpdateFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBody = {
+  __typename?: 'VehicleBody';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleBodyConnection = {
+  __typename?: 'VehicleBodyConnection';
+  /** Array of edges. */
+  edges: Array<VehicleBodyEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleBodyDto = {
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type VehicleBodyDeleteFilter = {
+  and?: InputMaybe<Array<VehicleBodyDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBodyDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBodyDeleteResponse = {
+  __typename?: 'VehicleBodyDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleBodyEdge = {
+  __typename?: 'VehicleBodyEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleBody */
+  node: VehicleBody;
+};
+
+export type VehicleBodyFilter = {
+  and?: InputMaybe<Array<VehicleBodyFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBodyFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBodySort = {
+  direction: SortDirection;
+  field: VehicleBodySortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleBodySortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleBodyUpdateFilter = {
+  and?: InputMaybe<Array<VehicleBodyUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBodyUpdateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBrand = {
+  __typename?: 'VehicleBrand';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  endYear?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  logo?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  startYear?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleBrandConnection = {
+  __typename?: 'VehicleBrandConnection';
+  /** Array of edges. */
+  edges: Array<VehicleBrandEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleBrandDto = {
+  endYear?: InputMaybe<Scalars['Int']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  startYear?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type VehicleBrandDeleteFilter = {
+  and?: InputMaybe<Array<VehicleBrandDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBrandDeleteFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBrandDeleteResponse = {
+  __typename?: 'VehicleBrandDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  endYear?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  logo?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  startYear?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleBrandEdge = {
+  __typename?: 'VehicleBrandEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleBrand */
+  node: VehicleBrand;
+};
+
+export type VehicleBrandFilter = {
+  and?: InputMaybe<Array<VehicleBrandFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBrandFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBrandSort = {
+  direction: SortDirection;
+  field: VehicleBrandSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleBrandSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  EndYear = 'endYear',
+  Id = 'id',
+  Name = 'name',
+  StartYear = 'startYear',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleBrandUpdateFilter = {
+  and?: InputMaybe<Array<VehicleBrandUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBrandUpdateFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleEngine = {
+  __typename?: 'VehicleEngine';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleEngineConnection = {
+  __typename?: 'VehicleEngineConnection';
+  /** Array of edges. */
+  edges: Array<VehicleEngineEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleEngineDto = {
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type VehicleEngineDeleteFilter = {
+  and?: InputMaybe<Array<VehicleEngineDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleEngineDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleEngineDeleteResponse = {
+  __typename?: 'VehicleEngineDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleEngineEdge = {
+  __typename?: 'VehicleEngineEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleEngine */
+  node: VehicleEngine;
+};
+
+export type VehicleEngineFilter = {
+  and?: InputMaybe<Array<VehicleEngineFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleEngineFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleEngineSort = {
+  direction: SortDirection;
+  field: VehicleEngineSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleEngineSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleEngineUpdateFilter = {
+  and?: InputMaybe<Array<VehicleEngineUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleEngineUpdateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLog = {
+  __typename?: 'VehicleLog';
+  bill?: Maybe<VehicleLogBill>;
+  createdAt: Scalars['DateTime']['output'];
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  garage?: Maybe<Garage>;
+  id: Scalars['ID']['output'];
+  mileage?: Maybe<Scalars['Float']['output']>;
+  type: UserVehicleLogType;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  vehicle: UserVehicle;
+};
+
+export type VehicleLogAggregateFilter = {
+  and?: InputMaybe<Array<VehicleLogAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  garage?: InputMaybe<VehicleLogAggregateFilterGarageAggregateFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogAggregateFilter>>;
+  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<VehicleLogAggregateFilterUserVehicleAggregateFilter>;
+};
+
+export type VehicleLogAggregateFilterGarageAggregateFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<VehicleLogAggregateFilterGarageAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleLogAggregateFilterGarageAggregateFilter>>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogAggregateFilterUserVehicleAggregateFilter = {
+  and?: InputMaybe<Array<VehicleLogAggregateFilterUserVehicleAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleLogAggregateFilterUserVehicleAggregateFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogAggregateGroupBy = {
+  __typename?: 'VehicleLogAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  type?: Maybe<UserVehicleLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type VehicleLogAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type VehicleLogAggregateGroupByDateArgs = {
+  by?: GroupBy;
+};
+
+
+export type VehicleLogAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type VehicleLogAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type VehicleLogAggregateResponse = {
+  __typename?: 'VehicleLogAggregateResponse';
+  avg?: Maybe<VehicleLogAvgAggregate>;
+  count?: Maybe<VehicleLogCountAggregate>;
+  groupBy?: Maybe<VehicleLogAggregateGroupBy>;
+  max?: Maybe<VehicleLogMaxAggregate>;
+  min?: Maybe<VehicleLogMinAggregate>;
+  sum?: Maybe<VehicleLogSumAggregate>;
+};
+
+export type VehicleLogAvgAggregate = {
+  __typename?: 'VehicleLogAvgAggregate';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+export type VehicleLogBill = {
+  __typename?: 'VehicleLogBill';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  log: VehicleLog;
+  media?: Maybe<Array<Scalars['String']['output']>>;
+  total: Scalars['Float']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  vehicle: UserVehicle;
+};
+
+export type VehicleLogBillAggregateFilter = {
+  and?: InputMaybe<Array<VehicleLogBillAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  log?: InputMaybe<VehicleLogBillAggregateFilterVehicleLogAggregateFilter>;
+  or?: InputMaybe<Array<VehicleLogBillAggregateFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<VehicleLogBillAggregateFilterUserVehicleAggregateFilter>;
+};
+
+export type VehicleLogBillAggregateFilterUserVehicleAggregateFilter = {
+  and?: InputMaybe<Array<VehicleLogBillAggregateFilterUserVehicleAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleLogBillAggregateFilterUserVehicleAggregateFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogBillAggregateFilterVehicleLogAggregateFilter = {
+  and?: InputMaybe<Array<VehicleLogBillAggregateFilterVehicleLogAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogBillAggregateFilterVehicleLogAggregateFilter>>;
+  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogBillAggregateGroupBy = {
+  __typename?: 'VehicleLogBillAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type VehicleLogBillAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type VehicleLogBillAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type VehicleLogBillAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type VehicleLogBillAggregateResponse = {
+  __typename?: 'VehicleLogBillAggregateResponse';
+  avg?: Maybe<VehicleLogBillAvgAggregate>;
+  count?: Maybe<VehicleLogBillCountAggregate>;
+  groupBy?: Maybe<VehicleLogBillAggregateGroupBy>;
+  max?: Maybe<VehicleLogBillMaxAggregate>;
+  min?: Maybe<VehicleLogBillMinAggregate>;
+  sum?: Maybe<VehicleLogBillSumAggregate>;
+};
+
+export type VehicleLogBillAvgAggregate = {
+  __typename?: 'VehicleLogBillAvgAggregate';
+  total?: Maybe<Scalars['Float']['output']>;
+};
+
+export type VehicleLogBillConnection = {
+  __typename?: 'VehicleLogBillConnection';
+  /** Array of edges. */
+  edges: Array<VehicleLogBillEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type VehicleLogBillCountAggregate = {
+  __typename?: 'VehicleLogBillCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type VehicleLogBillDto = {
+  log: Array<Scalars['ID']['input']>;
+  media?: InputMaybe<Array<Scalars['String']['input']>>;
+  total: Scalars['Float']['input'];
+  vehicle: Scalars['ID']['input'];
+};
+
+export type VehicleLogBillDeleteFilter = {
+  and?: InputMaybe<Array<VehicleLogBillDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogBillDeleteFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogBillDeleteResponse = {
+  __typename?: 'VehicleLogBillDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  media?: Maybe<Array<Scalars['String']['output']>>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleLogBillEdge = {
+  __typename?: 'VehicleLogBillEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleLogBill */
+  node: VehicleLogBill;
+};
+
+export type VehicleLogBillFilter = {
+  and?: InputMaybe<Array<VehicleLogBillFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  log?: InputMaybe<VehicleLogBillFilterVehicleLogFilter>;
+  or?: InputMaybe<Array<VehicleLogBillFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<VehicleLogBillFilterUserVehicleFilter>;
+};
+
+export type VehicleLogBillFilterUserVehicleFilter = {
+  and?: InputMaybe<Array<VehicleLogBillFilterUserVehicleFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleLogBillFilterUserVehicleFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogBillFilterVehicleLogFilter = {
+  and?: InputMaybe<Array<VehicleLogBillFilterVehicleLogFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogBillFilterVehicleLogFilter>>;
+  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogBillMaxAggregate = {
+  __typename?: 'VehicleLogBillMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleLogBillMinAggregate = {
+  __typename?: 'VehicleLogBillMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleLogBillSort = {
+  direction: SortDirection;
+  field: VehicleLogBillSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleLogBillSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Total = 'total',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleLogBillSumAggregate = {
+  __typename?: 'VehicleLogBillSumAggregate';
+  total?: Maybe<Scalars['Float']['output']>;
+};
+
+export type VehicleLogBillUpdateFilter = {
+  and?: InputMaybe<Array<VehicleLogBillUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogBillUpdateFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogConnection = {
+  __typename?: 'VehicleLogConnection';
+  /** Array of edges. */
+  edges: Array<VehicleLogEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type VehicleLogCountAggregate = {
+  __typename?: 'VehicleLogCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  date?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  description?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type VehicleLogDto = {
+  date?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  garage?: InputMaybe<Scalars['ID']['input']>;
+  media?: InputMaybe<Array<Scalars['ID']['input']>>;
+  mileage?: InputMaybe<Scalars['Float']['input']>;
+  type: UserVehicleLogType;
+  vehicle: Scalars['ID']['input'];
+};
+
+export type VehicleLogDeleteFilter = {
+  and?: InputMaybe<Array<VehicleLogDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogDeleteFilter>>;
+  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogDeleteResponse = {
+  __typename?: 'VehicleLogDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  mileage?: Maybe<Scalars['Float']['output']>;
+  type?: Maybe<UserVehicleLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleLogEdge = {
+  __typename?: 'VehicleLogEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleLog */
+  node: VehicleLog;
+};
+
+export type VehicleLogFilter = {
+  and?: InputMaybe<Array<VehicleLogFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  garage?: InputMaybe<VehicleLogFilterGarageFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogFilter>>;
+  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<VehicleLogFilterUserVehicleFilter>;
+};
+
+export type VehicleLogFilterGarageFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<VehicleLogFilterGarageFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleLogFilterGarageFilter>>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogFilterUserVehicleFilter = {
+  and?: InputMaybe<Array<VehicleLogFilterUserVehicleFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleLogFilterUserVehicleFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleLogMaxAggregate = {
+  __typename?: 'VehicleLogMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  type?: Maybe<UserVehicleLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleLogMinAggregate = {
+  __typename?: 'VehicleLogMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  type?: Maybe<UserVehicleLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleLogSort = {
+  direction: SortDirection;
+  field: VehicleLogSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleLogSortFields {
+  CreatedAt = 'createdAt',
+  Date = 'date',
+  DeletedAt = 'deletedAt',
+  Description = 'description',
+  Id = 'id',
+  Type = 'type',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleLogSumAggregate = {
+  __typename?: 'VehicleLogSumAggregate';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+export type VehicleLogUpdateFilter = {
+  and?: InputMaybe<Array<VehicleLogUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleLogUpdateFilter>>;
+  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModel = {
+  __typename?: 'VehicleModel';
+  bodies: Array<VehicleModelBody>;
+  brand?: Maybe<VehicleBrand>;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  endYear?: Maybe<Scalars['Int']['output']>;
+  engines: Array<VehicleEngine>;
+  id: Scalars['ID']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  parent?: Maybe<VehicleModel>;
+  startYear: Scalars['Int']['output'];
+  transmissions: Array<VehicleTransmission>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type VehicleModelBodiesArgs = {
+  filter?: VehicleModelBodyFilter;
+  sorting?: Array<VehicleModelBodySort>;
+};
+
+
+export type VehicleModelEnginesArgs = {
+  filter?: VehicleEngineFilter;
+  sorting?: Array<VehicleEngineSort>;
+};
+
+
+export type VehicleModelTransmissionsArgs = {
+  filter?: VehicleTransmissionFilter;
+  sorting?: Array<VehicleTransmissionSort>;
+};
+
+export type VehicleModelBody = {
+  __typename?: 'VehicleModelBody';
+  body: VehicleBody;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  model: VehicleModel;
+  picture?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleModelBodyConnection = {
+  __typename?: 'VehicleModelBodyConnection';
+  /** Array of edges. */
+  edges: Array<VehicleModelBodyEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleModelBodyDto = {
+  body: VehicleBodyDto;
+  model: VehicleModelDto;
+  picture?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type VehicleModelBodyDeleteFilter = {
+  and?: InputMaybe<Array<VehicleModelBodyDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleModelBodyDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelBodyDeleteResponse = {
+  __typename?: 'VehicleModelBodyDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  picture?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleModelBodyEdge = {
+  __typename?: 'VehicleModelBodyEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleModelBody */
+  node: VehicleModelBody;
+};
+
+export type VehicleModelBodyFilter = {
+  and?: InputMaybe<Array<VehicleModelBodyFilter>>;
+  body?: InputMaybe<VehicleModelBodyFilterVehicleBodyFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  model?: InputMaybe<VehicleModelBodyFilterVehicleModelFilter>;
+  or?: InputMaybe<Array<VehicleModelBodyFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelBodyFilterVehicleBodyFilter = {
+  and?: InputMaybe<Array<VehicleModelBodyFilterVehicleBodyFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelBodyFilterVehicleBodyFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelBodyFilterVehicleModelFilter = {
+  and?: InputMaybe<Array<VehicleModelBodyFilterVehicleModelFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelBodyFilterVehicleModelFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelBodySort = {
+  direction: SortDirection;
+  field: VehicleModelBodySortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleModelBodySortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleModelBodyUpdateFilter = {
+  and?: InputMaybe<Array<VehicleModelBodyUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleModelBodyUpdateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelConnection = {
+  __typename?: 'VehicleModelConnection';
+  /** Array of edges. */
+  edges: Array<VehicleModelEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleModelDto = {
+  bodies: Array<VehicleModelBodyDto>;
+  brand: Scalars['ID']['input'];
+  engines: Array<Scalars['ID']['input']>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  parent: Scalars['ID']['input'];
+  startYear: Scalars['Int']['input'];
+  transmissions: Array<Scalars['ID']['input']>;
+};
+
+export type VehicleModelDeleteFilter = {
+  and?: InputMaybe<Array<VehicleModelDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelDeleteFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelDeleteResponse = {
+  __typename?: 'VehicleModelDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  endYear?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  startYear?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleModelEdge = {
+  __typename?: 'VehicleModelEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleModel */
+  node: VehicleModel;
+};
+
+export type VehicleModelFilter = {
+  and?: InputMaybe<Array<VehicleModelFilter>>;
+  bodies?: InputMaybe<VehicleModelFilterVehicleModelBodyFilter>;
+  brand?: InputMaybe<VehicleModelFilterVehicleBrandFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  engines?: InputMaybe<VehicleModelFilterVehicleEngineFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilter>>;
+  parent?: InputMaybe<VehicleModelFilterVehicleModelFilter>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  transmissions?: InputMaybe<VehicleModelFilterVehicleTransmissionFilter>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleBrandFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleBrandFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleBrandFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleEngineFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleEngineFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleEngineFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleModelBodyFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleModelBodyFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleModelBodyFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleModelFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleModelFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleModelFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleTransmissionFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleTransmissionFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleTransmissionFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelSort = {
+  direction: SortDirection;
+  field: VehicleModelSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleModelSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  EndYear = 'endYear',
+  Id = 'id',
+  Name = 'name',
+  StartYear = 'startYear',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleModelUpdateFilter = {
+  and?: InputMaybe<Array<VehicleModelUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  endYear?: InputMaybe<IntFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelUpdateFilter>>;
+  startYear?: InputMaybe<IntFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleTransmission = {
+  __typename?: 'VehicleTransmission';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleTransmissionConnection = {
+  __typename?: 'VehicleTransmissionConnection';
+  /** Array of edges. */
+  edges: Array<VehicleTransmissionEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleTransmissionDto = {
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type VehicleTransmissionDeleteFilter = {
+  and?: InputMaybe<Array<VehicleTransmissionDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleTransmissionDeleteFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleTransmissionDeleteResponse = {
+  __typename?: 'VehicleTransmissionDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleTransmissionEdge = {
+  __typename?: 'VehicleTransmissionEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleTransmission */
+  node: VehicleTransmission;
+};
+
+export type VehicleTransmissionFilter = {
+  and?: InputMaybe<Array<VehicleTransmissionFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleTransmissionFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleTransmissionSort = {
+  direction: SortDirection;
+  field: VehicleTransmissionSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleTransmissionSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleTransmissionUpdateFilter = {
+  and?: InputMaybe<Array<VehicleTransmissionUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleTransmissionUpdateFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -9169,9 +12808,11 @@ export type ResolversTypes = ResolversObject<{
   AccountVerficationSortFields: AccountVerficationSortFields;
   AccountVerficationUpdateFilter: AccountVerficationUpdateFilter;
   AddAddressesToCustomerInput: AddAddressesToCustomerInput;
+  AddBodiesToVehicleModelInput: AddBodiesToVehicleModelInput;
   AddBranchesToOrgInput: AddBranchesToOrgInput;
   AddMembersToOrgBranchInput: AddMembersToOrgBranchInput;
   AddMembersToOrgInput: AddMembersToOrgInput;
+  AddMembersToShopInput: AddMembersToShopInput;
   AddOptionGroupsToProductInput: AddOptionGroupsToProductInput;
   AddOptionsToOrderProductInput: AddOptionsToOrderProductInput;
   AddOptionsToProductOptionGroupInput: AddOptionsToProductOptionGroupInput;
@@ -9179,6 +12820,7 @@ export type ResolversTypes = ResolversObject<{
   AddProductsToProductOptionGroupInput: AddProductsToProductOptionGroupInput;
   AddProductsToProductTypeInput: AddProductsToProductTypeInput;
   AddProductsToProductUnitInput: AddProductsToProductUnitInput;
+  AddShopsToOrgInput: AddShopsToOrgInput;
   ApiKey: ResolverTypeWrapper<ApiKey>;
   ApiKeyAggregateFilter: ApiKeyAggregateFilter;
   ApiKeyAggregateGroupBy: ResolverTypeWrapper<ApiKeyAggregateGroupBy>;
@@ -9205,34 +12847,14 @@ export type ResolversTypes = ResolversObject<{
   AuthVerifyAccountInput: AuthVerifyAccountInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   BooleanFieldComparison: BooleanFieldComparison;
-  BranchSaleChannel: ResolverTypeWrapper<BranchSaleChannel>;
-  BranchSaleChannelAggregateFilter: BranchSaleChannelAggregateFilter;
-  BranchSaleChannelAggregateFilterOrgBranchAggregateFilter: BranchSaleChannelAggregateFilterOrgBranchAggregateFilter;
-  BranchSaleChannelAggregateGroupBy: ResolverTypeWrapper<BranchSaleChannelAggregateGroupBy>;
-  BranchSaleChannelAggregateResponse: ResolverTypeWrapper<BranchSaleChannelAggregateResponse>;
-  BranchSaleChannelAvgAggregate: ResolverTypeWrapper<BranchSaleChannelAvgAggregate>;
-  BranchSaleChannelConnection: ResolverTypeWrapper<BranchSaleChannelConnection>;
-  BranchSaleChannelCountAggregate: ResolverTypeWrapper<BranchSaleChannelCountAggregate>;
-  BranchSaleChannelDTO: BranchSaleChannelDto;
-  BranchSaleChannelDeleteFilter: BranchSaleChannelDeleteFilter;
-  BranchSaleChannelDeleteResponse: ResolverTypeWrapper<BranchSaleChannelDeleteResponse>;
-  BranchSaleChannelEdge: ResolverTypeWrapper<BranchSaleChannelEdge>;
-  BranchSaleChannelFilter: BranchSaleChannelFilter;
-  BranchSaleChannelFilterOrgBranchFilter: BranchSaleChannelFilterOrgBranchFilter;
-  BranchSaleChannelMaxAggregate: ResolverTypeWrapper<BranchSaleChannelMaxAggregate>;
-  BranchSaleChannelMinAggregate: ResolverTypeWrapper<BranchSaleChannelMinAggregate>;
-  BranchSaleChannelSort: BranchSaleChannelSort;
-  BranchSaleChannelSortFields: BranchSaleChannelSortFields;
-  BranchSaleChannelSumAggregate: ResolverTypeWrapper<BranchSaleChannelSumAggregate>;
-  BranchSaleChannelUpdateFilter: BranchSaleChannelUpdateFilter;
   ConnectionCursor: ResolverTypeWrapper<Scalars['ConnectionCursor']['output']>;
   CreateManyAccountPasswordResetsInput: CreateManyAccountPasswordResetsInput;
   CreateManyAccountVerficationsInput: CreateManyAccountVerficationsInput;
   CreateManyAccountsInput: CreateManyAccountsInput;
   CreateManyApiKeysInput: CreateManyApiKeysInput;
-  CreateManyBranchSaleChannelsInput: CreateManyBranchSaleChannelsInput;
   CreateManyCustomersInput: CreateManyCustomersInput;
   CreateManyFilesInput: CreateManyFilesInput;
+  CreateManyGaragesInput: CreateManyGaragesInput;
   CreateManyMediaInput: CreateManyMediaInput;
   CreateManyOrderProductsInput: CreateManyOrderProductsInput;
   CreateManyOrdersInput: CreateManyOrdersInput;
@@ -9243,17 +12865,28 @@ export type ResolversTypes = ResolversObject<{
   CreateManyProductCategoriesInput: CreateManyProductCategoriesInput;
   CreateManyProductOptionGroupsInput: CreateManyProductOptionGroupsInput;
   CreateManyProductOptionsInput: CreateManyProductOptionsInput;
-  CreateManyProductPricesInput: CreateManyProductPricesInput;
   CreateManyProductTypesInput: CreateManyProductTypesInput;
   CreateManyProductUnitsInput: CreateManyProductUnitsInput;
   CreateManyProductsInput: CreateManyProductsInput;
+  CreateManyShopMembersInput: CreateManyShopMembersInput;
+  CreateManyShopsInput: CreateManyShopsInput;
+  CreateManyUserVehiclesInput: CreateManyUserVehiclesInput;
+  CreateManyUsersInput: CreateManyUsersInput;
+  CreateManyVehicleBodiesInput: CreateManyVehicleBodiesInput;
+  CreateManyVehicleBrandsInput: CreateManyVehicleBrandsInput;
+  CreateManyVehicleEnginesInput: CreateManyVehicleEnginesInput;
+  CreateManyVehicleLogBillsInput: CreateManyVehicleLogBillsInput;
+  CreateManyVehicleLogsInput: CreateManyVehicleLogsInput;
+  CreateManyVehicleModelBodiesInput: CreateManyVehicleModelBodiesInput;
+  CreateManyVehicleModelsInput: CreateManyVehicleModelsInput;
+  CreateManyVehicleTransmissionsInput: CreateManyVehicleTransmissionsInput;
   CreateOneAccountInput: CreateOneAccountInput;
   CreateOneAccountPasswordResetInput: CreateOneAccountPasswordResetInput;
   CreateOneAccountVerficationInput: CreateOneAccountVerficationInput;
   CreateOneApiKeyInput: CreateOneApiKeyInput;
-  CreateOneBranchSaleChannelInput: CreateOneBranchSaleChannelInput;
   CreateOneCustomerInput: CreateOneCustomerInput;
   CreateOneFileInput: CreateOneFileInput;
+  CreateOneGarageInput: CreateOneGarageInput;
   CreateOneMediaInput: CreateOneMediaInput;
   CreateOneOrderInput: CreateOneOrderInput;
   CreateOneOrderProductInput: CreateOneOrderProductInput;
@@ -9265,9 +12898,20 @@ export type ResolversTypes = ResolversObject<{
   CreateOneProductInput: CreateOneProductInput;
   CreateOneProductOptionGroupInput: CreateOneProductOptionGroupInput;
   CreateOneProductOptionInput: CreateOneProductOptionInput;
-  CreateOneProductPriceInput: CreateOneProductPriceInput;
   CreateOneProductTypeInput: CreateOneProductTypeInput;
   CreateOneProductUnitInput: CreateOneProductUnitInput;
+  CreateOneShopInput: CreateOneShopInput;
+  CreateOneShopMemberInput: CreateOneShopMemberInput;
+  CreateOneUserInput: CreateOneUserInput;
+  CreateOneUserVehicleInput: CreateOneUserVehicleInput;
+  CreateOneVehicleBodyInput: CreateOneVehicleBodyInput;
+  CreateOneVehicleBrandInput: CreateOneVehicleBrandInput;
+  CreateOneVehicleEngineInput: CreateOneVehicleEngineInput;
+  CreateOneVehicleLogBillInput: CreateOneVehicleLogBillInput;
+  CreateOneVehicleLogInput: CreateOneVehicleLogInput;
+  CreateOneVehicleModelBodyInput: CreateOneVehicleModelBodyInput;
+  CreateOneVehicleModelInput: CreateOneVehicleModelInput;
+  CreateOneVehicleTransmissionInput: CreateOneVehicleTransmissionInput;
   CursorPaging: CursorPaging;
   Customer: ResolverTypeWrapper<Customer>;
   CustomerAddress: ResolverTypeWrapper<CustomerAddress>;
@@ -9314,9 +12958,9 @@ export type ResolversTypes = ResolversObject<{
   DeleteManyAccountVerficationsInput: DeleteManyAccountVerficationsInput;
   DeleteManyAccountsInput: DeleteManyAccountsInput;
   DeleteManyApiKeysInput: DeleteManyApiKeysInput;
-  DeleteManyBranchSaleChannelsInput: DeleteManyBranchSaleChannelsInput;
   DeleteManyCustomersInput: DeleteManyCustomersInput;
   DeleteManyFilesInput: DeleteManyFilesInput;
+  DeleteManyGaragesInput: DeleteManyGaragesInput;
   DeleteManyMediaInput: DeleteManyMediaInput;
   DeleteManyOrderProductsInput: DeleteManyOrderProductsInput;
   DeleteManyOrdersInput: DeleteManyOrdersInput;
@@ -9327,18 +12971,29 @@ export type ResolversTypes = ResolversObject<{
   DeleteManyProductCategoriesInput: DeleteManyProductCategoriesInput;
   DeleteManyProductOptionGroupsInput: DeleteManyProductOptionGroupsInput;
   DeleteManyProductOptionsInput: DeleteManyProductOptionsInput;
-  DeleteManyProductPricesInput: DeleteManyProductPricesInput;
   DeleteManyProductTypesInput: DeleteManyProductTypesInput;
   DeleteManyProductUnitsInput: DeleteManyProductUnitsInput;
   DeleteManyProductsInput: DeleteManyProductsInput;
   DeleteManyResponse: ResolverTypeWrapper<DeleteManyResponse>;
+  DeleteManyShopMembersInput: DeleteManyShopMembersInput;
+  DeleteManyShopsInput: DeleteManyShopsInput;
+  DeleteManyUserVehiclesInput: DeleteManyUserVehiclesInput;
+  DeleteManyUsersInput: DeleteManyUsersInput;
+  DeleteManyVehicleBodiesInput: DeleteManyVehicleBodiesInput;
+  DeleteManyVehicleBrandsInput: DeleteManyVehicleBrandsInput;
+  DeleteManyVehicleEnginesInput: DeleteManyVehicleEnginesInput;
+  DeleteManyVehicleLogBillsInput: DeleteManyVehicleLogBillsInput;
+  DeleteManyVehicleLogsInput: DeleteManyVehicleLogsInput;
+  DeleteManyVehicleModelBodiesInput: DeleteManyVehicleModelBodiesInput;
+  DeleteManyVehicleModelsInput: DeleteManyVehicleModelsInput;
+  DeleteManyVehicleTransmissionsInput: DeleteManyVehicleTransmissionsInput;
   DeleteOneAccountInput: DeleteOneAccountInput;
   DeleteOneAccountPasswordResetInput: DeleteOneAccountPasswordResetInput;
   DeleteOneAccountVerficationInput: DeleteOneAccountVerficationInput;
   DeleteOneApiKeyInput: DeleteOneApiKeyInput;
-  DeleteOneBranchSaleChannelInput: DeleteOneBranchSaleChannelInput;
   DeleteOneCustomerInput: DeleteOneCustomerInput;
   DeleteOneFileInput: DeleteOneFileInput;
+  DeleteOneGarageInput: DeleteOneGarageInput;
   DeleteOneMediaInput: DeleteOneMediaInput;
   DeleteOneOrderInput: DeleteOneOrderInput;
   DeleteOneOrderProductInput: DeleteOneOrderProductInput;
@@ -9350,9 +13005,20 @@ export type ResolversTypes = ResolversObject<{
   DeleteOneProductInput: DeleteOneProductInput;
   DeleteOneProductOptionGroupInput: DeleteOneProductOptionGroupInput;
   DeleteOneProductOptionInput: DeleteOneProductOptionInput;
-  DeleteOneProductPriceInput: DeleteOneProductPriceInput;
   DeleteOneProductTypeInput: DeleteOneProductTypeInput;
   DeleteOneProductUnitInput: DeleteOneProductUnitInput;
+  DeleteOneShopInput: DeleteOneShopInput;
+  DeleteOneShopMemberInput: DeleteOneShopMemberInput;
+  DeleteOneUserInput: DeleteOneUserInput;
+  DeleteOneUserVehicleInput: DeleteOneUserVehicleInput;
+  DeleteOneVehicleBodyInput: DeleteOneVehicleBodyInput;
+  DeleteOneVehicleBrandInput: DeleteOneVehicleBrandInput;
+  DeleteOneVehicleEngineInput: DeleteOneVehicleEngineInput;
+  DeleteOneVehicleLogBillInput: DeleteOneVehicleLogBillInput;
+  DeleteOneVehicleLogInput: DeleteOneVehicleLogInput;
+  DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
+  DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
+  DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
   File: ResolverTypeWrapper<File>;
   FileAggregateFilter: FileAggregateFilter;
   FileAggregateFilterAccountAggregateFilter: FileAggregateFilterAccountAggregateFilter;
@@ -9372,10 +13038,36 @@ export type ResolversTypes = ResolversObject<{
   FileSortFields: FileSortFields;
   FileUpdateFilter: FileUpdateFilter;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+  Garage: ResolverTypeWrapper<Garage>;
+  GarageAggregateFilter: GarageAggregateFilter;
+  GarageAggregateFilterOrgAggregateFilter: GarageAggregateFilterOrgAggregateFilter;
+  GarageAggregateFilterOrgBranchAggregateFilter: GarageAggregateFilterOrgBranchAggregateFilter;
+  GarageAggregateGroupBy: ResolverTypeWrapper<GarageAggregateGroupBy>;
+  GarageAggregateResponse: ResolverTypeWrapper<GarageAggregateResponse>;
+  GarageAvgAggregate: ResolverTypeWrapper<GarageAvgAggregate>;
+  GarageConnection: ResolverTypeWrapper<GarageConnection>;
+  GarageCountAggregate: ResolverTypeWrapper<GarageCountAggregate>;
+  GarageDTO: GarageDto;
+  GarageDeleteFilter: GarageDeleteFilter;
+  GarageDeleteResponse: ResolverTypeWrapper<GarageDeleteResponse>;
+  GarageEdge: ResolverTypeWrapper<GarageEdge>;
+  GarageFilter: GarageFilter;
+  GarageFilterOrgBranchFilter: GarageFilterOrgBranchFilter;
+  GarageFilterOrgFilter: GarageFilterOrgFilter;
+  GarageMaxAggregate: ResolverTypeWrapper<GarageMaxAggregate>;
+  GarageMinAggregate: ResolverTypeWrapper<GarageMinAggregate>;
+  GarageSort: GarageSort;
+  GarageSortFields: GarageSortFields;
+  GarageStatus: GarageStatus;
+  GarageStatusFilterComparison: GarageStatusFilterComparison;
+  GarageSumAggregate: ResolverTypeWrapper<GarageSumAggregate>;
+  GarageUpdateFilter: GarageUpdateFilter;
   GroupBy: GroupBy;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   IDFilterComparison: IdFilterComparison;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  IntFieldComparison: IntFieldComparison;
+  IntFieldComparisonBetween: IntFieldComparisonBetween;
   JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
   JSONFilterComparison: JsonFilterComparison;
   LoginResult: ResolverTypeWrapper<LoginResult>;
@@ -9404,7 +13096,6 @@ export type ResolversTypes = ResolversObject<{
   OffsetPaging: OffsetPaging;
   Order: ResolverTypeWrapper<Order>;
   OrderAggregateFilter: OrderAggregateFilter;
-  OrderAggregateFilterBranchSaleChannelAggregateFilter: OrderAggregateFilterBranchSaleChannelAggregateFilter;
   OrderAggregateFilterCustomerAggregateFilter: OrderAggregateFilterCustomerAggregateFilter;
   OrderAggregateFilterOrgBranchAggregateFilter: OrderAggregateFilterOrgBranchAggregateFilter;
   OrderAggregateGroupBy: ResolverTypeWrapper<OrderAggregateGroupBy>;
@@ -9417,10 +13108,8 @@ export type ResolversTypes = ResolversObject<{
   OrderDeleteResponse: ResolverTypeWrapper<OrderDeleteResponse>;
   OrderEdge: ResolverTypeWrapper<OrderEdge>;
   OrderFilter: OrderFilter;
-  OrderFilterBranchSaleChannelFilter: OrderFilterBranchSaleChannelFilter;
   OrderFilterCustomerFilter: OrderFilterCustomerFilter;
   OrderFilterOrgBranchFilter: OrderFilterOrgBranchFilter;
-  OrderImportInput: OrderImportInput;
   OrderMaxAggregate: ResolverTypeWrapper<OrderMaxAggregate>;
   OrderMinAggregate: ResolverTypeWrapper<OrderMinAggregate>;
   OrderProduct: ResolverTypeWrapper<OrderProduct>;
@@ -9467,6 +13156,7 @@ export type ResolversTypes = ResolversObject<{
   OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter;
+  OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter;
@@ -9476,6 +13166,19 @@ export type ResolversTypes = ResolversObject<{
   OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter;
   OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter;
   OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter;
+  OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter;
+  OrgAggregateFilterShopAggregateFilter: OrgAggregateFilterShopAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter;
   OrgAggregateGroupBy: ResolverTypeWrapper<OrgAggregateGroupBy>;
   OrgAggregateResponse: ResolverTypeWrapper<OrgAggregateResponse>;
   OrgAvgAggregate: ResolverTypeWrapper<OrgAvgAggregate>;
@@ -9530,6 +13233,8 @@ export type ResolversTypes = ResolversObject<{
   OrgBranchRoleFilterComparison: OrgBranchRoleFilterComparison;
   OrgBranchSort: OrgBranchSort;
   OrgBranchSortFields: OrgBranchSortFields;
+  OrgBranchStatus: OrgBranchStatus;
+  OrgBranchStatusFilterComparison: OrgBranchStatusFilterComparison;
   OrgBranchUpdateFilter: OrgBranchUpdateFilter;
   OrgBranchesAggregateGroupBy: ResolverTypeWrapper<OrgBranchesAggregateGroupBy>;
   OrgBranchesAggregateResponse: ResolverTypeWrapper<OrgBranchesAggregateResponse>;
@@ -9553,12 +13258,26 @@ export type ResolversTypes = ResolversObject<{
   OrgFilterOrgBranchFilterOrgFilterAccountFilter: OrgFilterOrgBranchFilterOrgFilterAccountFilter;
   OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter: OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter;
   OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter: OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter;
+  OrgFilterOrgBranchFilterOrgFilterShopFilter: OrgFilterOrgBranchFilterOrgFilterShopFilter;
   OrgFilterOrgMemberFilter: OrgFilterOrgMemberFilter;
   OrgFilterOrgMemberFilterAccountFilter: OrgFilterOrgMemberFilterAccountFilter;
   OrgFilterOrgMemberFilterOrgFilter: OrgFilterOrgMemberFilterOrgFilter;
   OrgFilterOrgMemberFilterOrgFilterAccountFilter: OrgFilterOrgMemberFilterOrgFilterAccountFilter;
   OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter: OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter;
   OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter: OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter;
+  OrgFilterOrgMemberFilterOrgFilterShopFilter: OrgFilterOrgMemberFilterOrgFilterShopFilter;
+  OrgFilterShopFilter: OrgFilterShopFilter;
+  OrgFilterShopFilterOrgBranchFilter: OrgFilterShopFilterOrgBranchFilter;
+  OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter: OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter;
+  OrgFilterShopFilterOrgBranchFilterOrgFilter: OrgFilterShopFilterOrgBranchFilterOrgFilter;
+  OrgFilterShopFilterOrgFilter: OrgFilterShopFilterOrgFilter;
+  OrgFilterShopFilterOrgFilterAccountFilter: OrgFilterShopFilterOrgFilterAccountFilter;
+  OrgFilterShopFilterOrgFilterOrgBranchFilter: OrgFilterShopFilterOrgFilterOrgBranchFilter;
+  OrgFilterShopFilterOrgFilterOrgMemberFilter: OrgFilterShopFilterOrgFilterOrgMemberFilter;
+  OrgFilterShopFilterOrgFilterShopFilter: OrgFilterShopFilterOrgFilterShopFilter;
+  OrgFilterShopFilterShopMemberFilter: OrgFilterShopFilterShopMemberFilter;
+  OrgFilterShopFilterShopMemberFilterAccountFilter: OrgFilterShopFilterShopMemberFilterAccountFilter;
+  OrgFilterShopFilterShopMemberFilterShopFilter: OrgFilterShopFilterShopMemberFilterShopFilter;
   OrgMaxAggregate: ResolverTypeWrapper<OrgMaxAggregate>;
   OrgMember: ResolverTypeWrapper<OrgMember>;
   OrgMemberAggregateFilter: OrgMemberAggregateFilter;
@@ -9593,8 +13312,16 @@ export type ResolversTypes = ResolversObject<{
   OrgMinAggregate: ResolverTypeWrapper<OrgMinAggregate>;
   OrgRole: OrgRole;
   OrgRoleFilterComparison: OrgRoleFilterComparison;
+  OrgShopsAggregateGroupBy: ResolverTypeWrapper<OrgShopsAggregateGroupBy>;
+  OrgShopsAggregateResponse: ResolverTypeWrapper<OrgShopsAggregateResponse>;
+  OrgShopsConnection: ResolverTypeWrapper<OrgShopsConnection>;
+  OrgShopsCountAggregate: ResolverTypeWrapper<OrgShopsCountAggregate>;
+  OrgShopsMaxAggregate: ResolverTypeWrapper<OrgShopsMaxAggregate>;
+  OrgShopsMinAggregate: ResolverTypeWrapper<OrgShopsMinAggregate>;
   OrgSort: OrgSort;
   OrgSortFields: OrgSortFields;
+  OrgStatus: OrgStatus;
+  OrgStatusFilterComparison: OrgStatusFilterComparison;
   OrgSumAggregate: ResolverTypeWrapper<OrgSumAggregate>;
   OrgType: OrgType;
   OrgTypeFilterComparison: OrgTypeFilterComparison;
@@ -9721,29 +13448,6 @@ export type ResolversTypes = ResolversObject<{
   ProductOptionSortFields: ProductOptionSortFields;
   ProductOptionSumAggregate: ResolverTypeWrapper<ProductOptionSumAggregate>;
   ProductOptionUpdateFilter: ProductOptionUpdateFilter;
-  ProductPrice: ResolverTypeWrapper<ProductPrice>;
-  ProductPriceAggregateFilter: ProductPriceAggregateFilter;
-  ProductPriceAggregateFilterBranchSaleChannelAggregateFilter: ProductPriceAggregateFilterBranchSaleChannelAggregateFilter;
-  ProductPriceAggregateFilterProductAggregateFilter: ProductPriceAggregateFilterProductAggregateFilter;
-  ProductPriceAggregateGroupBy: ResolverTypeWrapper<ProductPriceAggregateGroupBy>;
-  ProductPriceAggregateResponse: ResolverTypeWrapper<ProductPriceAggregateResponse>;
-  ProductPriceAvgAggregate: ResolverTypeWrapper<ProductPriceAvgAggregate>;
-  ProductPriceConnection: ResolverTypeWrapper<ProductPriceConnection>;
-  ProductPriceCountAggregate: ResolverTypeWrapper<ProductPriceCountAggregate>;
-  ProductPriceDTO: ProductPriceDto;
-  ProductPriceDeleteFilter: ProductPriceDeleteFilter;
-  ProductPriceDeleteResponse: ResolverTypeWrapper<ProductPriceDeleteResponse>;
-  ProductPriceEdge: ResolverTypeWrapper<ProductPriceEdge>;
-  ProductPriceFilter: ProductPriceFilter;
-  ProductPriceFilterBranchSaleChannelFilter: ProductPriceFilterBranchSaleChannelFilter;
-  ProductPriceFilterProductFilter: ProductPriceFilterProductFilter;
-  ProductPriceImportInput: ProductPriceImportInput;
-  ProductPriceMaxAggregate: ResolverTypeWrapper<ProductPriceMaxAggregate>;
-  ProductPriceMinAggregate: ResolverTypeWrapper<ProductPriceMinAggregate>;
-  ProductPriceSort: ProductPriceSort;
-  ProductPriceSortFields: ProductPriceSortFields;
-  ProductPriceSumAggregate: ResolverTypeWrapper<ProductPriceSumAggregate>;
-  ProductPriceUpdateFilter: ProductPriceUpdateFilter;
   ProductSort: ProductSort;
   ProductSortFields: ProductSortFields;
   ProductSumAggregate: ResolverTypeWrapper<ProductSumAggregate>;
@@ -9805,12 +13509,12 @@ export type ResolversTypes = ResolversObject<{
   ProductUnitUpdateFilter: ProductUnitUpdateFilter;
   ProductUpdateFilter: ProductUpdateFilter;
   Query: ResolverTypeWrapper<{}>;
-  SaleChannel: SaleChannel;
-  SaleChannelFilterComparison: SaleChannelFilterComparison;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
+  SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
   SetMembersOnOrgBranchInput: SetMembersOnOrgBranchInput;
   SetMembersOnOrgInput: SetMembersOnOrgInput;
+  SetMembersOnShopInput: SetMembersOnShopInput;
   SetOptionGroupsOnProductInput: SetOptionGroupsOnProductInput;
   SetOptionsOnOrderProductInput: SetOptionsOnOrderProductInput;
   SetOptionsOnProductOptionGroupInput: SetOptionsOnProductOptionGroupInput;
@@ -9819,7 +13523,62 @@ export type ResolversTypes = ResolversObject<{
   SetProductsOnProductOptionGroupInput: SetProductsOnProductOptionGroupInput;
   SetProductsOnProductTypeInput: SetProductsOnProductTypeInput;
   SetProductsOnProductUnitInput: SetProductsOnProductUnitInput;
+  SetShopsOnOrgInput: SetShopsOnOrgInput;
   SetUnitOnProductInput: SetUnitOnProductInput;
+  Shop: ResolverTypeWrapper<Shop>;
+  ShopAggregateFilter: ShopAggregateFilter;
+  ShopAggregateFilterOrgAggregateFilter: ShopAggregateFilterOrgAggregateFilter;
+  ShopAggregateFilterOrgBranchAggregateFilter: ShopAggregateFilterOrgBranchAggregateFilter;
+  ShopAggregateFilterShopMemberAggregateFilter: ShopAggregateFilterShopMemberAggregateFilter;
+  ShopAggregateGroupBy: ResolverTypeWrapper<ShopAggregateGroupBy>;
+  ShopAggregateResponse: ResolverTypeWrapper<ShopAggregateResponse>;
+  ShopConnection: ResolverTypeWrapper<ShopConnection>;
+  ShopCountAggregate: ResolverTypeWrapper<ShopCountAggregate>;
+  ShopDTO: ShopDto;
+  ShopDeleteFilter: ShopDeleteFilter;
+  ShopDeleteResponse: ResolverTypeWrapper<ShopDeleteResponse>;
+  ShopEdge: ResolverTypeWrapper<ShopEdge>;
+  ShopFilter: ShopFilter;
+  ShopFilterOrgBranchFilter: ShopFilterOrgBranchFilter;
+  ShopFilterOrgFilter: ShopFilterOrgFilter;
+  ShopFilterShopMemberFilter: ShopFilterShopMemberFilter;
+  ShopMaxAggregate: ResolverTypeWrapper<ShopMaxAggregate>;
+  ShopMember: ResolverTypeWrapper<ShopMember>;
+  ShopMemberAggregateFilter: ShopMemberAggregateFilter;
+  ShopMemberAggregateFilterAccountAggregateFilter: ShopMemberAggregateFilterAccountAggregateFilter;
+  ShopMemberAggregateFilterShopAggregateFilter: ShopMemberAggregateFilterShopAggregateFilter;
+  ShopMemberAggregateGroupBy: ResolverTypeWrapper<ShopMemberAggregateGroupBy>;
+  ShopMemberAggregateResponse: ResolverTypeWrapper<ShopMemberAggregateResponse>;
+  ShopMemberAvgAggregate: ResolverTypeWrapper<ShopMemberAvgAggregate>;
+  ShopMemberConnection: ResolverTypeWrapper<ShopMemberConnection>;
+  ShopMemberCountAggregate: ResolverTypeWrapper<ShopMemberCountAggregate>;
+  ShopMemberDTO: ShopMemberDto;
+  ShopMemberDeleteFilter: ShopMemberDeleteFilter;
+  ShopMemberDeleteResponse: ResolverTypeWrapper<ShopMemberDeleteResponse>;
+  ShopMemberEdge: ResolverTypeWrapper<ShopMemberEdge>;
+  ShopMemberFilter: ShopMemberFilter;
+  ShopMemberFilterAccountFilter: ShopMemberFilterAccountFilter;
+  ShopMemberFilterShopFilter: ShopMemberFilterShopFilter;
+  ShopMemberMaxAggregate: ResolverTypeWrapper<ShopMemberMaxAggregate>;
+  ShopMemberMinAggregate: ResolverTypeWrapper<ShopMemberMinAggregate>;
+  ShopMemberRole: ShopMemberRole;
+  ShopMemberRoleFilterComparison: ShopMemberRoleFilterComparison;
+  ShopMemberSort: ShopMemberSort;
+  ShopMemberSortFields: ShopMemberSortFields;
+  ShopMemberSumAggregate: ResolverTypeWrapper<ShopMemberSumAggregate>;
+  ShopMemberUpdateFilter: ShopMemberUpdateFilter;
+  ShopMembersAggregateGroupBy: ResolverTypeWrapper<ShopMembersAggregateGroupBy>;
+  ShopMembersAggregateResponse: ResolverTypeWrapper<ShopMembersAggregateResponse>;
+  ShopMembersAvgAggregate: ResolverTypeWrapper<ShopMembersAvgAggregate>;
+  ShopMembersConnection: ResolverTypeWrapper<ShopMembersConnection>;
+  ShopMembersCountAggregate: ResolverTypeWrapper<ShopMembersCountAggregate>;
+  ShopMembersMaxAggregate: ResolverTypeWrapper<ShopMembersMaxAggregate>;
+  ShopMembersMinAggregate: ResolverTypeWrapper<ShopMembersMinAggregate>;
+  ShopMembersSumAggregate: ResolverTypeWrapper<ShopMembersSumAggregate>;
+  ShopMinAggregate: ResolverTypeWrapper<ShopMinAggregate>;
+  ShopSort: ShopSort;
+  ShopSortFields: ShopSortFields;
+  ShopUpdateFilter: ShopUpdateFilter;
   SortDirection: SortDirection;
   SortNulls: SortNulls;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
@@ -9828,9 +13587,9 @@ export type ResolversTypes = ResolversObject<{
   UpdateManyAccountVerficationsInput: UpdateManyAccountVerficationsInput;
   UpdateManyAccountsInput: UpdateManyAccountsInput;
   UpdateManyApiKeysInput: UpdateManyApiKeysInput;
-  UpdateManyBranchSaleChannelsInput: UpdateManyBranchSaleChannelsInput;
   UpdateManyCustomersInput: UpdateManyCustomersInput;
   UpdateManyFilesInput: UpdateManyFilesInput;
+  UpdateManyGaragesInput: UpdateManyGaragesInput;
   UpdateManyMediaInput: UpdateManyMediaInput;
   UpdateManyOrderProductsInput: UpdateManyOrderProductsInput;
   UpdateManyOrdersInput: UpdateManyOrdersInput;
@@ -9841,18 +13600,29 @@ export type ResolversTypes = ResolversObject<{
   UpdateManyProductCategoriesInput: UpdateManyProductCategoriesInput;
   UpdateManyProductOptionGroupsInput: UpdateManyProductOptionGroupsInput;
   UpdateManyProductOptionsInput: UpdateManyProductOptionsInput;
-  UpdateManyProductPricesInput: UpdateManyProductPricesInput;
   UpdateManyProductTypesInput: UpdateManyProductTypesInput;
   UpdateManyProductUnitsInput: UpdateManyProductUnitsInput;
   UpdateManyProductsInput: UpdateManyProductsInput;
   UpdateManyResponse: ResolverTypeWrapper<UpdateManyResponse>;
+  UpdateManyShopMembersInput: UpdateManyShopMembersInput;
+  UpdateManyShopsInput: UpdateManyShopsInput;
+  UpdateManyUserVehiclesInput: UpdateManyUserVehiclesInput;
+  UpdateManyUsersInput: UpdateManyUsersInput;
+  UpdateManyVehicleBodiesInput: UpdateManyVehicleBodiesInput;
+  UpdateManyVehicleBrandsInput: UpdateManyVehicleBrandsInput;
+  UpdateManyVehicleEnginesInput: UpdateManyVehicleEnginesInput;
+  UpdateManyVehicleLogBillsInput: UpdateManyVehicleLogBillsInput;
+  UpdateManyVehicleLogsInput: UpdateManyVehicleLogsInput;
+  UpdateManyVehicleModelBodiesInput: UpdateManyVehicleModelBodiesInput;
+  UpdateManyVehicleModelsInput: UpdateManyVehicleModelsInput;
+  UpdateManyVehicleTransmissionsInput: UpdateManyVehicleTransmissionsInput;
   UpdateOneAccountInput: UpdateOneAccountInput;
   UpdateOneAccountPasswordResetInput: UpdateOneAccountPasswordResetInput;
   UpdateOneAccountVerficationInput: UpdateOneAccountVerficationInput;
   UpdateOneApiKeyInput: UpdateOneApiKeyInput;
-  UpdateOneBranchSaleChannelInput: UpdateOneBranchSaleChannelInput;
   UpdateOneCustomerInput: UpdateOneCustomerInput;
   UpdateOneFileInput: UpdateOneFileInput;
+  UpdateOneGarageInput: UpdateOneGarageInput;
   UpdateOneMediaInput: UpdateOneMediaInput;
   UpdateOneOrderInput: UpdateOneOrderInput;
   UpdateOneOrderProductInput: UpdateOneOrderProductInput;
@@ -9864,9 +13634,181 @@ export type ResolversTypes = ResolversObject<{
   UpdateOneProductInput: UpdateOneProductInput;
   UpdateOneProductOptionGroupInput: UpdateOneProductOptionGroupInput;
   UpdateOneProductOptionInput: UpdateOneProductOptionInput;
-  UpdateOneProductPriceInput: UpdateOneProductPriceInput;
   UpdateOneProductTypeInput: UpdateOneProductTypeInput;
   UpdateOneProductUnitInput: UpdateOneProductUnitInput;
+  UpdateOneShopInput: UpdateOneShopInput;
+  UpdateOneShopMemberInput: UpdateOneShopMemberInput;
+  UpdateOneUserInput: UpdateOneUserInput;
+  UpdateOneUserVehicleInput: UpdateOneUserVehicleInput;
+  UpdateOneVehicleBodyInput: UpdateOneVehicleBodyInput;
+  UpdateOneVehicleBrandInput: UpdateOneVehicleBrandInput;
+  UpdateOneVehicleEngineInput: UpdateOneVehicleEngineInput;
+  UpdateOneVehicleLogBillInput: UpdateOneVehicleLogBillInput;
+  UpdateOneVehicleLogInput: UpdateOneVehicleLogInput;
+  UpdateOneVehicleModelBodyInput: UpdateOneVehicleModelBodyInput;
+  UpdateOneVehicleModelInput: UpdateOneVehicleModelInput;
+  UpdateOneVehicleTransmissionInput: UpdateOneVehicleTransmissionInput;
+  User: ResolverTypeWrapper<User>;
+  UserAggregateFilter: UserAggregateFilter;
+  UserAggregateFilterAccountAggregateFilter: UserAggregateFilterAccountAggregateFilter;
+  UserAggregateGroupBy: ResolverTypeWrapper<UserAggregateGroupBy>;
+  UserAggregateResponse: ResolverTypeWrapper<UserAggregateResponse>;
+  UserConnection: ResolverTypeWrapper<UserConnection>;
+  UserCountAggregate: ResolverTypeWrapper<UserCountAggregate>;
+  UserDTO: UserDto;
+  UserDeleteFilter: UserDeleteFilter;
+  UserDeleteResponse: ResolverTypeWrapper<UserDeleteResponse>;
+  UserEdge: ResolverTypeWrapper<UserEdge>;
+  UserFilter: UserFilter;
+  UserFilterAccountFilter: UserFilterAccountFilter;
+  UserMaxAggregate: ResolverTypeWrapper<UserMaxAggregate>;
+  UserMinAggregate: ResolverTypeWrapper<UserMinAggregate>;
+  UserSort: UserSort;
+  UserSortFields: UserSortFields;
+  UserStatus: UserStatus;
+  UserStatusFilterComparison: UserStatusFilterComparison;
+  UserUpdateFilter: UserUpdateFilter;
+  UserVechileStatus: UserVechileStatus;
+  UserVechileStatusFilterComparison: UserVechileStatusFilterComparison;
+  UserVehicle: ResolverTypeWrapper<UserVehicle>;
+  UserVehicleAggregateFilter: UserVehicleAggregateFilter;
+  UserVehicleAggregateFilterUserAggregateFilter: UserVehicleAggregateFilterUserAggregateFilter;
+  UserVehicleAggregateFilterVehicleEngineAggregateFilter: UserVehicleAggregateFilterVehicleEngineAggregateFilter;
+  UserVehicleAggregateFilterVehicleModelAggregateFilter: UserVehicleAggregateFilterVehicleModelAggregateFilter;
+  UserVehicleAggregateFilterVehicleModelBodyAggregateFilter: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter;
+  UserVehicleAggregateFilterVehicleTransmissionAggregateFilter: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter;
+  UserVehicleAggregateGroupBy: ResolverTypeWrapper<UserVehicleAggregateGroupBy>;
+  UserVehicleAggregateResponse: ResolverTypeWrapper<UserVehicleAggregateResponse>;
+  UserVehicleConnection: ResolverTypeWrapper<UserVehicleConnection>;
+  UserVehicleCountAggregate: ResolverTypeWrapper<UserVehicleCountAggregate>;
+  UserVehicleDTO: UserVehicleDto;
+  UserVehicleDeleteFilter: UserVehicleDeleteFilter;
+  UserVehicleDeleteResponse: ResolverTypeWrapper<UserVehicleDeleteResponse>;
+  UserVehicleEdge: ResolverTypeWrapper<UserVehicleEdge>;
+  UserVehicleFilter: UserVehicleFilter;
+  UserVehicleFilterUserFilter: UserVehicleFilterUserFilter;
+  UserVehicleFilterVehicleEngineFilter: UserVehicleFilterVehicleEngineFilter;
+  UserVehicleFilterVehicleModelBodyFilter: UserVehicleFilterVehicleModelBodyFilter;
+  UserVehicleFilterVehicleModelFilter: UserVehicleFilterVehicleModelFilter;
+  UserVehicleFilterVehicleTransmissionFilter: UserVehicleFilterVehicleTransmissionFilter;
+  UserVehicleLogType: UserVehicleLogType;
+  UserVehicleLogTypeFilterComparison: UserVehicleLogTypeFilterComparison;
+  UserVehicleMaxAggregate: ResolverTypeWrapper<UserVehicleMaxAggregate>;
+  UserVehicleMinAggregate: ResolverTypeWrapper<UserVehicleMinAggregate>;
+  UserVehicleSort: UserVehicleSort;
+  UserVehicleSortFields: UserVehicleSortFields;
+  UserVehicleUpdateFilter: UserVehicleUpdateFilter;
+  VehicleBody: ResolverTypeWrapper<VehicleBody>;
+  VehicleBodyConnection: ResolverTypeWrapper<VehicleBodyConnection>;
+  VehicleBodyDTO: VehicleBodyDto;
+  VehicleBodyDeleteFilter: VehicleBodyDeleteFilter;
+  VehicleBodyDeleteResponse: ResolverTypeWrapper<VehicleBodyDeleteResponse>;
+  VehicleBodyEdge: ResolverTypeWrapper<VehicleBodyEdge>;
+  VehicleBodyFilter: VehicleBodyFilter;
+  VehicleBodySort: VehicleBodySort;
+  VehicleBodySortFields: VehicleBodySortFields;
+  VehicleBodyUpdateFilter: VehicleBodyUpdateFilter;
+  VehicleBrand: ResolverTypeWrapper<VehicleBrand>;
+  VehicleBrandConnection: ResolverTypeWrapper<VehicleBrandConnection>;
+  VehicleBrandDTO: VehicleBrandDto;
+  VehicleBrandDeleteFilter: VehicleBrandDeleteFilter;
+  VehicleBrandDeleteResponse: ResolverTypeWrapper<VehicleBrandDeleteResponse>;
+  VehicleBrandEdge: ResolverTypeWrapper<VehicleBrandEdge>;
+  VehicleBrandFilter: VehicleBrandFilter;
+  VehicleBrandSort: VehicleBrandSort;
+  VehicleBrandSortFields: VehicleBrandSortFields;
+  VehicleBrandUpdateFilter: VehicleBrandUpdateFilter;
+  VehicleEngine: ResolverTypeWrapper<VehicleEngine>;
+  VehicleEngineConnection: ResolverTypeWrapper<VehicleEngineConnection>;
+  VehicleEngineDTO: VehicleEngineDto;
+  VehicleEngineDeleteFilter: VehicleEngineDeleteFilter;
+  VehicleEngineDeleteResponse: ResolverTypeWrapper<VehicleEngineDeleteResponse>;
+  VehicleEngineEdge: ResolverTypeWrapper<VehicleEngineEdge>;
+  VehicleEngineFilter: VehicleEngineFilter;
+  VehicleEngineSort: VehicleEngineSort;
+  VehicleEngineSortFields: VehicleEngineSortFields;
+  VehicleEngineUpdateFilter: VehicleEngineUpdateFilter;
+  VehicleLog: ResolverTypeWrapper<VehicleLog>;
+  VehicleLogAggregateFilter: VehicleLogAggregateFilter;
+  VehicleLogAggregateFilterGarageAggregateFilter: VehicleLogAggregateFilterGarageAggregateFilter;
+  VehicleLogAggregateFilterUserVehicleAggregateFilter: VehicleLogAggregateFilterUserVehicleAggregateFilter;
+  VehicleLogAggregateGroupBy: ResolverTypeWrapper<VehicleLogAggregateGroupBy>;
+  VehicleLogAggregateResponse: ResolverTypeWrapper<VehicleLogAggregateResponse>;
+  VehicleLogAvgAggregate: ResolverTypeWrapper<VehicleLogAvgAggregate>;
+  VehicleLogBill: ResolverTypeWrapper<VehicleLogBill>;
+  VehicleLogBillAggregateFilter: VehicleLogBillAggregateFilter;
+  VehicleLogBillAggregateFilterUserVehicleAggregateFilter: VehicleLogBillAggregateFilterUserVehicleAggregateFilter;
+  VehicleLogBillAggregateFilterVehicleLogAggregateFilter: VehicleLogBillAggregateFilterVehicleLogAggregateFilter;
+  VehicleLogBillAggregateGroupBy: ResolverTypeWrapper<VehicleLogBillAggregateGroupBy>;
+  VehicleLogBillAggregateResponse: ResolverTypeWrapper<VehicleLogBillAggregateResponse>;
+  VehicleLogBillAvgAggregate: ResolverTypeWrapper<VehicleLogBillAvgAggregate>;
+  VehicleLogBillConnection: ResolverTypeWrapper<VehicleLogBillConnection>;
+  VehicleLogBillCountAggregate: ResolverTypeWrapper<VehicleLogBillCountAggregate>;
+  VehicleLogBillDTO: VehicleLogBillDto;
+  VehicleLogBillDeleteFilter: VehicleLogBillDeleteFilter;
+  VehicleLogBillDeleteResponse: ResolverTypeWrapper<VehicleLogBillDeleteResponse>;
+  VehicleLogBillEdge: ResolverTypeWrapper<VehicleLogBillEdge>;
+  VehicleLogBillFilter: VehicleLogBillFilter;
+  VehicleLogBillFilterUserVehicleFilter: VehicleLogBillFilterUserVehicleFilter;
+  VehicleLogBillFilterVehicleLogFilter: VehicleLogBillFilterVehicleLogFilter;
+  VehicleLogBillMaxAggregate: ResolverTypeWrapper<VehicleLogBillMaxAggregate>;
+  VehicleLogBillMinAggregate: ResolverTypeWrapper<VehicleLogBillMinAggregate>;
+  VehicleLogBillSort: VehicleLogBillSort;
+  VehicleLogBillSortFields: VehicleLogBillSortFields;
+  VehicleLogBillSumAggregate: ResolverTypeWrapper<VehicleLogBillSumAggregate>;
+  VehicleLogBillUpdateFilter: VehicleLogBillUpdateFilter;
+  VehicleLogConnection: ResolverTypeWrapper<VehicleLogConnection>;
+  VehicleLogCountAggregate: ResolverTypeWrapper<VehicleLogCountAggregate>;
+  VehicleLogDTO: VehicleLogDto;
+  VehicleLogDeleteFilter: VehicleLogDeleteFilter;
+  VehicleLogDeleteResponse: ResolverTypeWrapper<VehicleLogDeleteResponse>;
+  VehicleLogEdge: ResolverTypeWrapper<VehicleLogEdge>;
+  VehicleLogFilter: VehicleLogFilter;
+  VehicleLogFilterGarageFilter: VehicleLogFilterGarageFilter;
+  VehicleLogFilterUserVehicleFilter: VehicleLogFilterUserVehicleFilter;
+  VehicleLogMaxAggregate: ResolverTypeWrapper<VehicleLogMaxAggregate>;
+  VehicleLogMinAggregate: ResolverTypeWrapper<VehicleLogMinAggregate>;
+  VehicleLogSort: VehicleLogSort;
+  VehicleLogSortFields: VehicleLogSortFields;
+  VehicleLogSumAggregate: ResolverTypeWrapper<VehicleLogSumAggregate>;
+  VehicleLogUpdateFilter: VehicleLogUpdateFilter;
+  VehicleModel: ResolverTypeWrapper<VehicleModel>;
+  VehicleModelBody: ResolverTypeWrapper<VehicleModelBody>;
+  VehicleModelBodyConnection: ResolverTypeWrapper<VehicleModelBodyConnection>;
+  VehicleModelBodyDTO: VehicleModelBodyDto;
+  VehicleModelBodyDeleteFilter: VehicleModelBodyDeleteFilter;
+  VehicleModelBodyDeleteResponse: ResolverTypeWrapper<VehicleModelBodyDeleteResponse>;
+  VehicleModelBodyEdge: ResolverTypeWrapper<VehicleModelBodyEdge>;
+  VehicleModelBodyFilter: VehicleModelBodyFilter;
+  VehicleModelBodyFilterVehicleBodyFilter: VehicleModelBodyFilterVehicleBodyFilter;
+  VehicleModelBodyFilterVehicleModelFilter: VehicleModelBodyFilterVehicleModelFilter;
+  VehicleModelBodySort: VehicleModelBodySort;
+  VehicleModelBodySortFields: VehicleModelBodySortFields;
+  VehicleModelBodyUpdateFilter: VehicleModelBodyUpdateFilter;
+  VehicleModelConnection: ResolverTypeWrapper<VehicleModelConnection>;
+  VehicleModelDTO: VehicleModelDto;
+  VehicleModelDeleteFilter: VehicleModelDeleteFilter;
+  VehicleModelDeleteResponse: ResolverTypeWrapper<VehicleModelDeleteResponse>;
+  VehicleModelEdge: ResolverTypeWrapper<VehicleModelEdge>;
+  VehicleModelFilter: VehicleModelFilter;
+  VehicleModelFilterVehicleBrandFilter: VehicleModelFilterVehicleBrandFilter;
+  VehicleModelFilterVehicleEngineFilter: VehicleModelFilterVehicleEngineFilter;
+  VehicleModelFilterVehicleModelBodyFilter: VehicleModelFilterVehicleModelBodyFilter;
+  VehicleModelFilterVehicleModelFilter: VehicleModelFilterVehicleModelFilter;
+  VehicleModelFilterVehicleTransmissionFilter: VehicleModelFilterVehicleTransmissionFilter;
+  VehicleModelSort: VehicleModelSort;
+  VehicleModelSortFields: VehicleModelSortFields;
+  VehicleModelUpdateFilter: VehicleModelUpdateFilter;
+  VehicleTransmission: ResolverTypeWrapper<VehicleTransmission>;
+  VehicleTransmissionConnection: ResolverTypeWrapper<VehicleTransmissionConnection>;
+  VehicleTransmissionDTO: VehicleTransmissionDto;
+  VehicleTransmissionDeleteFilter: VehicleTransmissionDeleteFilter;
+  VehicleTransmissionDeleteResponse: ResolverTypeWrapper<VehicleTransmissionDeleteResponse>;
+  VehicleTransmissionEdge: ResolverTypeWrapper<VehicleTransmissionEdge>;
+  VehicleTransmissionFilter: VehicleTransmissionFilter;
+  VehicleTransmissionSort: VehicleTransmissionSort;
+  VehicleTransmissionSortFields: VehicleTransmissionSortFields;
+  VehicleTransmissionUpdateFilter: VehicleTransmissionUpdateFilter;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -9924,9 +13866,11 @@ export type ResolversParentTypes = ResolversObject<{
   AccountVerficationSort: AccountVerficationSort;
   AccountVerficationUpdateFilter: AccountVerficationUpdateFilter;
   AddAddressesToCustomerInput: AddAddressesToCustomerInput;
+  AddBodiesToVehicleModelInput: AddBodiesToVehicleModelInput;
   AddBranchesToOrgInput: AddBranchesToOrgInput;
   AddMembersToOrgBranchInput: AddMembersToOrgBranchInput;
   AddMembersToOrgInput: AddMembersToOrgInput;
+  AddMembersToShopInput: AddMembersToShopInput;
   AddOptionGroupsToProductInput: AddOptionGroupsToProductInput;
   AddOptionsToOrderProductInput: AddOptionsToOrderProductInput;
   AddOptionsToProductOptionGroupInput: AddOptionsToProductOptionGroupInput;
@@ -9934,6 +13878,7 @@ export type ResolversParentTypes = ResolversObject<{
   AddProductsToProductOptionGroupInput: AddProductsToProductOptionGroupInput;
   AddProductsToProductTypeInput: AddProductsToProductTypeInput;
   AddProductsToProductUnitInput: AddProductsToProductUnitInput;
+  AddShopsToOrgInput: AddShopsToOrgInput;
   ApiKey: ApiKey;
   ApiKeyAggregateFilter: ApiKeyAggregateFilter;
   ApiKeyAggregateGroupBy: ApiKeyAggregateGroupBy;
@@ -9959,33 +13904,14 @@ export type ResolversParentTypes = ResolversObject<{
   AuthVerifyAccountInput: AuthVerifyAccountInput;
   Boolean: Scalars['Boolean']['output'];
   BooleanFieldComparison: BooleanFieldComparison;
-  BranchSaleChannel: BranchSaleChannel;
-  BranchSaleChannelAggregateFilter: BranchSaleChannelAggregateFilter;
-  BranchSaleChannelAggregateFilterOrgBranchAggregateFilter: BranchSaleChannelAggregateFilterOrgBranchAggregateFilter;
-  BranchSaleChannelAggregateGroupBy: BranchSaleChannelAggregateGroupBy;
-  BranchSaleChannelAggregateResponse: BranchSaleChannelAggregateResponse;
-  BranchSaleChannelAvgAggregate: BranchSaleChannelAvgAggregate;
-  BranchSaleChannelConnection: BranchSaleChannelConnection;
-  BranchSaleChannelCountAggregate: BranchSaleChannelCountAggregate;
-  BranchSaleChannelDTO: BranchSaleChannelDto;
-  BranchSaleChannelDeleteFilter: BranchSaleChannelDeleteFilter;
-  BranchSaleChannelDeleteResponse: BranchSaleChannelDeleteResponse;
-  BranchSaleChannelEdge: BranchSaleChannelEdge;
-  BranchSaleChannelFilter: BranchSaleChannelFilter;
-  BranchSaleChannelFilterOrgBranchFilter: BranchSaleChannelFilterOrgBranchFilter;
-  BranchSaleChannelMaxAggregate: BranchSaleChannelMaxAggregate;
-  BranchSaleChannelMinAggregate: BranchSaleChannelMinAggregate;
-  BranchSaleChannelSort: BranchSaleChannelSort;
-  BranchSaleChannelSumAggregate: BranchSaleChannelSumAggregate;
-  BranchSaleChannelUpdateFilter: BranchSaleChannelUpdateFilter;
   ConnectionCursor: Scalars['ConnectionCursor']['output'];
   CreateManyAccountPasswordResetsInput: CreateManyAccountPasswordResetsInput;
   CreateManyAccountVerficationsInput: CreateManyAccountVerficationsInput;
   CreateManyAccountsInput: CreateManyAccountsInput;
   CreateManyApiKeysInput: CreateManyApiKeysInput;
-  CreateManyBranchSaleChannelsInput: CreateManyBranchSaleChannelsInput;
   CreateManyCustomersInput: CreateManyCustomersInput;
   CreateManyFilesInput: CreateManyFilesInput;
+  CreateManyGaragesInput: CreateManyGaragesInput;
   CreateManyMediaInput: CreateManyMediaInput;
   CreateManyOrderProductsInput: CreateManyOrderProductsInput;
   CreateManyOrdersInput: CreateManyOrdersInput;
@@ -9996,17 +13922,28 @@ export type ResolversParentTypes = ResolversObject<{
   CreateManyProductCategoriesInput: CreateManyProductCategoriesInput;
   CreateManyProductOptionGroupsInput: CreateManyProductOptionGroupsInput;
   CreateManyProductOptionsInput: CreateManyProductOptionsInput;
-  CreateManyProductPricesInput: CreateManyProductPricesInput;
   CreateManyProductTypesInput: CreateManyProductTypesInput;
   CreateManyProductUnitsInput: CreateManyProductUnitsInput;
   CreateManyProductsInput: CreateManyProductsInput;
+  CreateManyShopMembersInput: CreateManyShopMembersInput;
+  CreateManyShopsInput: CreateManyShopsInput;
+  CreateManyUserVehiclesInput: CreateManyUserVehiclesInput;
+  CreateManyUsersInput: CreateManyUsersInput;
+  CreateManyVehicleBodiesInput: CreateManyVehicleBodiesInput;
+  CreateManyVehicleBrandsInput: CreateManyVehicleBrandsInput;
+  CreateManyVehicleEnginesInput: CreateManyVehicleEnginesInput;
+  CreateManyVehicleLogBillsInput: CreateManyVehicleLogBillsInput;
+  CreateManyVehicleLogsInput: CreateManyVehicleLogsInput;
+  CreateManyVehicleModelBodiesInput: CreateManyVehicleModelBodiesInput;
+  CreateManyVehicleModelsInput: CreateManyVehicleModelsInput;
+  CreateManyVehicleTransmissionsInput: CreateManyVehicleTransmissionsInput;
   CreateOneAccountInput: CreateOneAccountInput;
   CreateOneAccountPasswordResetInput: CreateOneAccountPasswordResetInput;
   CreateOneAccountVerficationInput: CreateOneAccountVerficationInput;
   CreateOneApiKeyInput: CreateOneApiKeyInput;
-  CreateOneBranchSaleChannelInput: CreateOneBranchSaleChannelInput;
   CreateOneCustomerInput: CreateOneCustomerInput;
   CreateOneFileInput: CreateOneFileInput;
+  CreateOneGarageInput: CreateOneGarageInput;
   CreateOneMediaInput: CreateOneMediaInput;
   CreateOneOrderInput: CreateOneOrderInput;
   CreateOneOrderProductInput: CreateOneOrderProductInput;
@@ -10018,9 +13955,20 @@ export type ResolversParentTypes = ResolversObject<{
   CreateOneProductInput: CreateOneProductInput;
   CreateOneProductOptionGroupInput: CreateOneProductOptionGroupInput;
   CreateOneProductOptionInput: CreateOneProductOptionInput;
-  CreateOneProductPriceInput: CreateOneProductPriceInput;
   CreateOneProductTypeInput: CreateOneProductTypeInput;
   CreateOneProductUnitInput: CreateOneProductUnitInput;
+  CreateOneShopInput: CreateOneShopInput;
+  CreateOneShopMemberInput: CreateOneShopMemberInput;
+  CreateOneUserInput: CreateOneUserInput;
+  CreateOneUserVehicleInput: CreateOneUserVehicleInput;
+  CreateOneVehicleBodyInput: CreateOneVehicleBodyInput;
+  CreateOneVehicleBrandInput: CreateOneVehicleBrandInput;
+  CreateOneVehicleEngineInput: CreateOneVehicleEngineInput;
+  CreateOneVehicleLogBillInput: CreateOneVehicleLogBillInput;
+  CreateOneVehicleLogInput: CreateOneVehicleLogInput;
+  CreateOneVehicleModelBodyInput: CreateOneVehicleModelBodyInput;
+  CreateOneVehicleModelInput: CreateOneVehicleModelInput;
+  CreateOneVehicleTransmissionInput: CreateOneVehicleTransmissionInput;
   CursorPaging: CursorPaging;
   Customer: Customer;
   CustomerAddress: CustomerAddress;
@@ -10064,9 +14012,9 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteManyAccountVerficationsInput: DeleteManyAccountVerficationsInput;
   DeleteManyAccountsInput: DeleteManyAccountsInput;
   DeleteManyApiKeysInput: DeleteManyApiKeysInput;
-  DeleteManyBranchSaleChannelsInput: DeleteManyBranchSaleChannelsInput;
   DeleteManyCustomersInput: DeleteManyCustomersInput;
   DeleteManyFilesInput: DeleteManyFilesInput;
+  DeleteManyGaragesInput: DeleteManyGaragesInput;
   DeleteManyMediaInput: DeleteManyMediaInput;
   DeleteManyOrderProductsInput: DeleteManyOrderProductsInput;
   DeleteManyOrdersInput: DeleteManyOrdersInput;
@@ -10077,18 +14025,29 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteManyProductCategoriesInput: DeleteManyProductCategoriesInput;
   DeleteManyProductOptionGroupsInput: DeleteManyProductOptionGroupsInput;
   DeleteManyProductOptionsInput: DeleteManyProductOptionsInput;
-  DeleteManyProductPricesInput: DeleteManyProductPricesInput;
   DeleteManyProductTypesInput: DeleteManyProductTypesInput;
   DeleteManyProductUnitsInput: DeleteManyProductUnitsInput;
   DeleteManyProductsInput: DeleteManyProductsInput;
   DeleteManyResponse: DeleteManyResponse;
+  DeleteManyShopMembersInput: DeleteManyShopMembersInput;
+  DeleteManyShopsInput: DeleteManyShopsInput;
+  DeleteManyUserVehiclesInput: DeleteManyUserVehiclesInput;
+  DeleteManyUsersInput: DeleteManyUsersInput;
+  DeleteManyVehicleBodiesInput: DeleteManyVehicleBodiesInput;
+  DeleteManyVehicleBrandsInput: DeleteManyVehicleBrandsInput;
+  DeleteManyVehicleEnginesInput: DeleteManyVehicleEnginesInput;
+  DeleteManyVehicleLogBillsInput: DeleteManyVehicleLogBillsInput;
+  DeleteManyVehicleLogsInput: DeleteManyVehicleLogsInput;
+  DeleteManyVehicleModelBodiesInput: DeleteManyVehicleModelBodiesInput;
+  DeleteManyVehicleModelsInput: DeleteManyVehicleModelsInput;
+  DeleteManyVehicleTransmissionsInput: DeleteManyVehicleTransmissionsInput;
   DeleteOneAccountInput: DeleteOneAccountInput;
   DeleteOneAccountPasswordResetInput: DeleteOneAccountPasswordResetInput;
   DeleteOneAccountVerficationInput: DeleteOneAccountVerficationInput;
   DeleteOneApiKeyInput: DeleteOneApiKeyInput;
-  DeleteOneBranchSaleChannelInput: DeleteOneBranchSaleChannelInput;
   DeleteOneCustomerInput: DeleteOneCustomerInput;
   DeleteOneFileInput: DeleteOneFileInput;
+  DeleteOneGarageInput: DeleteOneGarageInput;
   DeleteOneMediaInput: DeleteOneMediaInput;
   DeleteOneOrderInput: DeleteOneOrderInput;
   DeleteOneOrderProductInput: DeleteOneOrderProductInput;
@@ -10100,9 +14059,20 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteOneProductInput: DeleteOneProductInput;
   DeleteOneProductOptionGroupInput: DeleteOneProductOptionGroupInput;
   DeleteOneProductOptionInput: DeleteOneProductOptionInput;
-  DeleteOneProductPriceInput: DeleteOneProductPriceInput;
   DeleteOneProductTypeInput: DeleteOneProductTypeInput;
   DeleteOneProductUnitInput: DeleteOneProductUnitInput;
+  DeleteOneShopInput: DeleteOneShopInput;
+  DeleteOneShopMemberInput: DeleteOneShopMemberInput;
+  DeleteOneUserInput: DeleteOneUserInput;
+  DeleteOneUserVehicleInput: DeleteOneUserVehicleInput;
+  DeleteOneVehicleBodyInput: DeleteOneVehicleBodyInput;
+  DeleteOneVehicleBrandInput: DeleteOneVehicleBrandInput;
+  DeleteOneVehicleEngineInput: DeleteOneVehicleEngineInput;
+  DeleteOneVehicleLogBillInput: DeleteOneVehicleLogBillInput;
+  DeleteOneVehicleLogInput: DeleteOneVehicleLogInput;
+  DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
+  DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
+  DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
   File: File;
   FileAggregateFilter: FileAggregateFilter;
   FileAggregateFilterAccountAggregateFilter: FileAggregateFilterAccountAggregateFilter;
@@ -10121,9 +14091,33 @@ export type ResolversParentTypes = ResolversObject<{
   FileSort: FileSort;
   FileUpdateFilter: FileUpdateFilter;
   Float: Scalars['Float']['output'];
+  Garage: Garage;
+  GarageAggregateFilter: GarageAggregateFilter;
+  GarageAggregateFilterOrgAggregateFilter: GarageAggregateFilterOrgAggregateFilter;
+  GarageAggregateFilterOrgBranchAggregateFilter: GarageAggregateFilterOrgBranchAggregateFilter;
+  GarageAggregateGroupBy: GarageAggregateGroupBy;
+  GarageAggregateResponse: GarageAggregateResponse;
+  GarageAvgAggregate: GarageAvgAggregate;
+  GarageConnection: GarageConnection;
+  GarageCountAggregate: GarageCountAggregate;
+  GarageDTO: GarageDto;
+  GarageDeleteFilter: GarageDeleteFilter;
+  GarageDeleteResponse: GarageDeleteResponse;
+  GarageEdge: GarageEdge;
+  GarageFilter: GarageFilter;
+  GarageFilterOrgBranchFilter: GarageFilterOrgBranchFilter;
+  GarageFilterOrgFilter: GarageFilterOrgFilter;
+  GarageMaxAggregate: GarageMaxAggregate;
+  GarageMinAggregate: GarageMinAggregate;
+  GarageSort: GarageSort;
+  GarageStatusFilterComparison: GarageStatusFilterComparison;
+  GarageSumAggregate: GarageSumAggregate;
+  GarageUpdateFilter: GarageUpdateFilter;
   ID: Scalars['ID']['output'];
   IDFilterComparison: IdFilterComparison;
   Int: Scalars['Int']['output'];
+  IntFieldComparison: IntFieldComparison;
+  IntFieldComparisonBetween: IntFieldComparisonBetween;
   JSON: Scalars['JSON']['output'];
   JSONFilterComparison: JsonFilterComparison;
   LoginResult: LoginResult;
@@ -10151,7 +14145,6 @@ export type ResolversParentTypes = ResolversObject<{
   OffsetPaging: OffsetPaging;
   Order: Order;
   OrderAggregateFilter: OrderAggregateFilter;
-  OrderAggregateFilterBranchSaleChannelAggregateFilter: OrderAggregateFilterBranchSaleChannelAggregateFilter;
   OrderAggregateFilterCustomerAggregateFilter: OrderAggregateFilterCustomerAggregateFilter;
   OrderAggregateFilterOrgBranchAggregateFilter: OrderAggregateFilterOrgBranchAggregateFilter;
   OrderAggregateGroupBy: OrderAggregateGroupBy;
@@ -10164,10 +14157,8 @@ export type ResolversParentTypes = ResolversObject<{
   OrderDeleteResponse: OrderDeleteResponse;
   OrderEdge: OrderEdge;
   OrderFilter: OrderFilter;
-  OrderFilterBranchSaleChannelFilter: OrderFilterBranchSaleChannelFilter;
   OrderFilterCustomerFilter: OrderFilterCustomerFilter;
   OrderFilterOrgBranchFilter: OrderFilterOrgBranchFilter;
-  OrderImportInput: OrderImportInput;
   OrderMaxAggregate: OrderMaxAggregate;
   OrderMinAggregate: OrderMinAggregate;
   OrderProduct: OrderProduct;
@@ -10212,6 +14203,7 @@ export type ResolversParentTypes = ResolversObject<{
   OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter;
+  OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter;
   OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter;
@@ -10221,6 +14213,19 @@ export type ResolversParentTypes = ResolversObject<{
   OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter;
   OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter;
   OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter;
+  OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter;
+  OrgAggregateFilterShopAggregateFilter: OrgAggregateFilterShopAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter;
+  OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter;
   OrgAggregateGroupBy: OrgAggregateGroupBy;
   OrgAggregateResponse: OrgAggregateResponse;
   OrgAvgAggregate: OrgAvgAggregate;
@@ -10272,6 +14277,7 @@ export type ResolversParentTypes = ResolversObject<{
   OrgBranchMinAggregate: OrgBranchMinAggregate;
   OrgBranchRoleFilterComparison: OrgBranchRoleFilterComparison;
   OrgBranchSort: OrgBranchSort;
+  OrgBranchStatusFilterComparison: OrgBranchStatusFilterComparison;
   OrgBranchUpdateFilter: OrgBranchUpdateFilter;
   OrgBranchesAggregateGroupBy: OrgBranchesAggregateGroupBy;
   OrgBranchesAggregateResponse: OrgBranchesAggregateResponse;
@@ -10295,12 +14301,26 @@ export type ResolversParentTypes = ResolversObject<{
   OrgFilterOrgBranchFilterOrgFilterAccountFilter: OrgFilterOrgBranchFilterOrgFilterAccountFilter;
   OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter: OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter;
   OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter: OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter;
+  OrgFilterOrgBranchFilterOrgFilterShopFilter: OrgFilterOrgBranchFilterOrgFilterShopFilter;
   OrgFilterOrgMemberFilter: OrgFilterOrgMemberFilter;
   OrgFilterOrgMemberFilterAccountFilter: OrgFilterOrgMemberFilterAccountFilter;
   OrgFilterOrgMemberFilterOrgFilter: OrgFilterOrgMemberFilterOrgFilter;
   OrgFilterOrgMemberFilterOrgFilterAccountFilter: OrgFilterOrgMemberFilterOrgFilterAccountFilter;
   OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter: OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter;
   OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter: OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter;
+  OrgFilterOrgMemberFilterOrgFilterShopFilter: OrgFilterOrgMemberFilterOrgFilterShopFilter;
+  OrgFilterShopFilter: OrgFilterShopFilter;
+  OrgFilterShopFilterOrgBranchFilter: OrgFilterShopFilterOrgBranchFilter;
+  OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter: OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter;
+  OrgFilterShopFilterOrgBranchFilterOrgFilter: OrgFilterShopFilterOrgBranchFilterOrgFilter;
+  OrgFilterShopFilterOrgFilter: OrgFilterShopFilterOrgFilter;
+  OrgFilterShopFilterOrgFilterAccountFilter: OrgFilterShopFilterOrgFilterAccountFilter;
+  OrgFilterShopFilterOrgFilterOrgBranchFilter: OrgFilterShopFilterOrgFilterOrgBranchFilter;
+  OrgFilterShopFilterOrgFilterOrgMemberFilter: OrgFilterShopFilterOrgFilterOrgMemberFilter;
+  OrgFilterShopFilterOrgFilterShopFilter: OrgFilterShopFilterOrgFilterShopFilter;
+  OrgFilterShopFilterShopMemberFilter: OrgFilterShopFilterShopMemberFilter;
+  OrgFilterShopFilterShopMemberFilterAccountFilter: OrgFilterShopFilterShopMemberFilterAccountFilter;
+  OrgFilterShopFilterShopMemberFilterShopFilter: OrgFilterShopFilterShopMemberFilterShopFilter;
   OrgMaxAggregate: OrgMaxAggregate;
   OrgMember: OrgMember;
   OrgMemberAggregateFilter: OrgMemberAggregateFilter;
@@ -10333,7 +14353,14 @@ export type ResolversParentTypes = ResolversObject<{
   OrgMembersSumAggregate: OrgMembersSumAggregate;
   OrgMinAggregate: OrgMinAggregate;
   OrgRoleFilterComparison: OrgRoleFilterComparison;
+  OrgShopsAggregateGroupBy: OrgShopsAggregateGroupBy;
+  OrgShopsAggregateResponse: OrgShopsAggregateResponse;
+  OrgShopsConnection: OrgShopsConnection;
+  OrgShopsCountAggregate: OrgShopsCountAggregate;
+  OrgShopsMaxAggregate: OrgShopsMaxAggregate;
+  OrgShopsMinAggregate: OrgShopsMinAggregate;
   OrgSort: OrgSort;
+  OrgStatusFilterComparison: OrgStatusFilterComparison;
   OrgSumAggregate: OrgSumAggregate;
   OrgTypeFilterComparison: OrgTypeFilterComparison;
   OrgUpdateFilter: OrgUpdateFilter;
@@ -10456,28 +14483,6 @@ export type ResolversParentTypes = ResolversObject<{
   ProductOptionSort: ProductOptionSort;
   ProductOptionSumAggregate: ProductOptionSumAggregate;
   ProductOptionUpdateFilter: ProductOptionUpdateFilter;
-  ProductPrice: ProductPrice;
-  ProductPriceAggregateFilter: ProductPriceAggregateFilter;
-  ProductPriceAggregateFilterBranchSaleChannelAggregateFilter: ProductPriceAggregateFilterBranchSaleChannelAggregateFilter;
-  ProductPriceAggregateFilterProductAggregateFilter: ProductPriceAggregateFilterProductAggregateFilter;
-  ProductPriceAggregateGroupBy: ProductPriceAggregateGroupBy;
-  ProductPriceAggregateResponse: ProductPriceAggregateResponse;
-  ProductPriceAvgAggregate: ProductPriceAvgAggregate;
-  ProductPriceConnection: ProductPriceConnection;
-  ProductPriceCountAggregate: ProductPriceCountAggregate;
-  ProductPriceDTO: ProductPriceDto;
-  ProductPriceDeleteFilter: ProductPriceDeleteFilter;
-  ProductPriceDeleteResponse: ProductPriceDeleteResponse;
-  ProductPriceEdge: ProductPriceEdge;
-  ProductPriceFilter: ProductPriceFilter;
-  ProductPriceFilterBranchSaleChannelFilter: ProductPriceFilterBranchSaleChannelFilter;
-  ProductPriceFilterProductFilter: ProductPriceFilterProductFilter;
-  ProductPriceImportInput: ProductPriceImportInput;
-  ProductPriceMaxAggregate: ProductPriceMaxAggregate;
-  ProductPriceMinAggregate: ProductPriceMinAggregate;
-  ProductPriceSort: ProductPriceSort;
-  ProductPriceSumAggregate: ProductPriceSumAggregate;
-  ProductPriceUpdateFilter: ProductPriceUpdateFilter;
   ProductSort: ProductSort;
   ProductSumAggregate: ProductSumAggregate;
   ProductType: ProductType;
@@ -10536,11 +14541,12 @@ export type ResolversParentTypes = ResolversObject<{
   ProductUnitUpdateFilter: ProductUnitUpdateFilter;
   ProductUpdateFilter: ProductUpdateFilter;
   Query: {};
-  SaleChannelFilterComparison: SaleChannelFilterComparison;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
+  SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
   SetMembersOnOrgBranchInput: SetMembersOnOrgBranchInput;
   SetMembersOnOrgInput: SetMembersOnOrgInput;
+  SetMembersOnShopInput: SetMembersOnShopInput;
   SetOptionGroupsOnProductInput: SetOptionGroupsOnProductInput;
   SetOptionsOnOrderProductInput: SetOptionsOnOrderProductInput;
   SetOptionsOnProductOptionGroupInput: SetOptionsOnProductOptionGroupInput;
@@ -10549,16 +14555,68 @@ export type ResolversParentTypes = ResolversObject<{
   SetProductsOnProductOptionGroupInput: SetProductsOnProductOptionGroupInput;
   SetProductsOnProductTypeInput: SetProductsOnProductTypeInput;
   SetProductsOnProductUnitInput: SetProductsOnProductUnitInput;
+  SetShopsOnOrgInput: SetShopsOnOrgInput;
   SetUnitOnProductInput: SetUnitOnProductInput;
+  Shop: Shop;
+  ShopAggregateFilter: ShopAggregateFilter;
+  ShopAggregateFilterOrgAggregateFilter: ShopAggregateFilterOrgAggregateFilter;
+  ShopAggregateFilterOrgBranchAggregateFilter: ShopAggregateFilterOrgBranchAggregateFilter;
+  ShopAggregateFilterShopMemberAggregateFilter: ShopAggregateFilterShopMemberAggregateFilter;
+  ShopAggregateGroupBy: ShopAggregateGroupBy;
+  ShopAggregateResponse: ShopAggregateResponse;
+  ShopConnection: ShopConnection;
+  ShopCountAggregate: ShopCountAggregate;
+  ShopDTO: ShopDto;
+  ShopDeleteFilter: ShopDeleteFilter;
+  ShopDeleteResponse: ShopDeleteResponse;
+  ShopEdge: ShopEdge;
+  ShopFilter: ShopFilter;
+  ShopFilterOrgBranchFilter: ShopFilterOrgBranchFilter;
+  ShopFilterOrgFilter: ShopFilterOrgFilter;
+  ShopFilterShopMemberFilter: ShopFilterShopMemberFilter;
+  ShopMaxAggregate: ShopMaxAggregate;
+  ShopMember: ShopMember;
+  ShopMemberAggregateFilter: ShopMemberAggregateFilter;
+  ShopMemberAggregateFilterAccountAggregateFilter: ShopMemberAggregateFilterAccountAggregateFilter;
+  ShopMemberAggregateFilterShopAggregateFilter: ShopMemberAggregateFilterShopAggregateFilter;
+  ShopMemberAggregateGroupBy: ShopMemberAggregateGroupBy;
+  ShopMemberAggregateResponse: ShopMemberAggregateResponse;
+  ShopMemberAvgAggregate: ShopMemberAvgAggregate;
+  ShopMemberConnection: ShopMemberConnection;
+  ShopMemberCountAggregate: ShopMemberCountAggregate;
+  ShopMemberDTO: ShopMemberDto;
+  ShopMemberDeleteFilter: ShopMemberDeleteFilter;
+  ShopMemberDeleteResponse: ShopMemberDeleteResponse;
+  ShopMemberEdge: ShopMemberEdge;
+  ShopMemberFilter: ShopMemberFilter;
+  ShopMemberFilterAccountFilter: ShopMemberFilterAccountFilter;
+  ShopMemberFilterShopFilter: ShopMemberFilterShopFilter;
+  ShopMemberMaxAggregate: ShopMemberMaxAggregate;
+  ShopMemberMinAggregate: ShopMemberMinAggregate;
+  ShopMemberRoleFilterComparison: ShopMemberRoleFilterComparison;
+  ShopMemberSort: ShopMemberSort;
+  ShopMemberSumAggregate: ShopMemberSumAggregate;
+  ShopMemberUpdateFilter: ShopMemberUpdateFilter;
+  ShopMembersAggregateGroupBy: ShopMembersAggregateGroupBy;
+  ShopMembersAggregateResponse: ShopMembersAggregateResponse;
+  ShopMembersAvgAggregate: ShopMembersAvgAggregate;
+  ShopMembersConnection: ShopMembersConnection;
+  ShopMembersCountAggregate: ShopMembersCountAggregate;
+  ShopMembersMaxAggregate: ShopMembersMaxAggregate;
+  ShopMembersMinAggregate: ShopMembersMinAggregate;
+  ShopMembersSumAggregate: ShopMembersSumAggregate;
+  ShopMinAggregate: ShopMinAggregate;
+  ShopSort: ShopSort;
+  ShopUpdateFilter: ShopUpdateFilter;
   String: Scalars['String']['output'];
   StringFieldComparison: StringFieldComparison;
   UpdateManyAccountPasswordResetsInput: UpdateManyAccountPasswordResetsInput;
   UpdateManyAccountVerficationsInput: UpdateManyAccountVerficationsInput;
   UpdateManyAccountsInput: UpdateManyAccountsInput;
   UpdateManyApiKeysInput: UpdateManyApiKeysInput;
-  UpdateManyBranchSaleChannelsInput: UpdateManyBranchSaleChannelsInput;
   UpdateManyCustomersInput: UpdateManyCustomersInput;
   UpdateManyFilesInput: UpdateManyFilesInput;
+  UpdateManyGaragesInput: UpdateManyGaragesInput;
   UpdateManyMediaInput: UpdateManyMediaInput;
   UpdateManyOrderProductsInput: UpdateManyOrderProductsInput;
   UpdateManyOrdersInput: UpdateManyOrdersInput;
@@ -10569,18 +14627,29 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateManyProductCategoriesInput: UpdateManyProductCategoriesInput;
   UpdateManyProductOptionGroupsInput: UpdateManyProductOptionGroupsInput;
   UpdateManyProductOptionsInput: UpdateManyProductOptionsInput;
-  UpdateManyProductPricesInput: UpdateManyProductPricesInput;
   UpdateManyProductTypesInput: UpdateManyProductTypesInput;
   UpdateManyProductUnitsInput: UpdateManyProductUnitsInput;
   UpdateManyProductsInput: UpdateManyProductsInput;
   UpdateManyResponse: UpdateManyResponse;
+  UpdateManyShopMembersInput: UpdateManyShopMembersInput;
+  UpdateManyShopsInput: UpdateManyShopsInput;
+  UpdateManyUserVehiclesInput: UpdateManyUserVehiclesInput;
+  UpdateManyUsersInput: UpdateManyUsersInput;
+  UpdateManyVehicleBodiesInput: UpdateManyVehicleBodiesInput;
+  UpdateManyVehicleBrandsInput: UpdateManyVehicleBrandsInput;
+  UpdateManyVehicleEnginesInput: UpdateManyVehicleEnginesInput;
+  UpdateManyVehicleLogBillsInput: UpdateManyVehicleLogBillsInput;
+  UpdateManyVehicleLogsInput: UpdateManyVehicleLogsInput;
+  UpdateManyVehicleModelBodiesInput: UpdateManyVehicleModelBodiesInput;
+  UpdateManyVehicleModelsInput: UpdateManyVehicleModelsInput;
+  UpdateManyVehicleTransmissionsInput: UpdateManyVehicleTransmissionsInput;
   UpdateOneAccountInput: UpdateOneAccountInput;
   UpdateOneAccountPasswordResetInput: UpdateOneAccountPasswordResetInput;
   UpdateOneAccountVerficationInput: UpdateOneAccountVerficationInput;
   UpdateOneApiKeyInput: UpdateOneApiKeyInput;
-  UpdateOneBranchSaleChannelInput: UpdateOneBranchSaleChannelInput;
   UpdateOneCustomerInput: UpdateOneCustomerInput;
   UpdateOneFileInput: UpdateOneFileInput;
+  UpdateOneGarageInput: UpdateOneGarageInput;
   UpdateOneMediaInput: UpdateOneMediaInput;
   UpdateOneOrderInput: UpdateOneOrderInput;
   UpdateOneOrderProductInput: UpdateOneOrderProductInput;
@@ -10592,9 +14661,168 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateOneProductInput: UpdateOneProductInput;
   UpdateOneProductOptionGroupInput: UpdateOneProductOptionGroupInput;
   UpdateOneProductOptionInput: UpdateOneProductOptionInput;
-  UpdateOneProductPriceInput: UpdateOneProductPriceInput;
   UpdateOneProductTypeInput: UpdateOneProductTypeInput;
   UpdateOneProductUnitInput: UpdateOneProductUnitInput;
+  UpdateOneShopInput: UpdateOneShopInput;
+  UpdateOneShopMemberInput: UpdateOneShopMemberInput;
+  UpdateOneUserInput: UpdateOneUserInput;
+  UpdateOneUserVehicleInput: UpdateOneUserVehicleInput;
+  UpdateOneVehicleBodyInput: UpdateOneVehicleBodyInput;
+  UpdateOneVehicleBrandInput: UpdateOneVehicleBrandInput;
+  UpdateOneVehicleEngineInput: UpdateOneVehicleEngineInput;
+  UpdateOneVehicleLogBillInput: UpdateOneVehicleLogBillInput;
+  UpdateOneVehicleLogInput: UpdateOneVehicleLogInput;
+  UpdateOneVehicleModelBodyInput: UpdateOneVehicleModelBodyInput;
+  UpdateOneVehicleModelInput: UpdateOneVehicleModelInput;
+  UpdateOneVehicleTransmissionInput: UpdateOneVehicleTransmissionInput;
+  User: User;
+  UserAggregateFilter: UserAggregateFilter;
+  UserAggregateFilterAccountAggregateFilter: UserAggregateFilterAccountAggregateFilter;
+  UserAggregateGroupBy: UserAggregateGroupBy;
+  UserAggregateResponse: UserAggregateResponse;
+  UserConnection: UserConnection;
+  UserCountAggregate: UserCountAggregate;
+  UserDTO: UserDto;
+  UserDeleteFilter: UserDeleteFilter;
+  UserDeleteResponse: UserDeleteResponse;
+  UserEdge: UserEdge;
+  UserFilter: UserFilter;
+  UserFilterAccountFilter: UserFilterAccountFilter;
+  UserMaxAggregate: UserMaxAggregate;
+  UserMinAggregate: UserMinAggregate;
+  UserSort: UserSort;
+  UserStatusFilterComparison: UserStatusFilterComparison;
+  UserUpdateFilter: UserUpdateFilter;
+  UserVechileStatusFilterComparison: UserVechileStatusFilterComparison;
+  UserVehicle: UserVehicle;
+  UserVehicleAggregateFilter: UserVehicleAggregateFilter;
+  UserVehicleAggregateFilterUserAggregateFilter: UserVehicleAggregateFilterUserAggregateFilter;
+  UserVehicleAggregateFilterVehicleEngineAggregateFilter: UserVehicleAggregateFilterVehicleEngineAggregateFilter;
+  UserVehicleAggregateFilterVehicleModelAggregateFilter: UserVehicleAggregateFilterVehicleModelAggregateFilter;
+  UserVehicleAggregateFilterVehicleModelBodyAggregateFilter: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter;
+  UserVehicleAggregateFilterVehicleTransmissionAggregateFilter: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter;
+  UserVehicleAggregateGroupBy: UserVehicleAggregateGroupBy;
+  UserVehicleAggregateResponse: UserVehicleAggregateResponse;
+  UserVehicleConnection: UserVehicleConnection;
+  UserVehicleCountAggregate: UserVehicleCountAggregate;
+  UserVehicleDTO: UserVehicleDto;
+  UserVehicleDeleteFilter: UserVehicleDeleteFilter;
+  UserVehicleDeleteResponse: UserVehicleDeleteResponse;
+  UserVehicleEdge: UserVehicleEdge;
+  UserVehicleFilter: UserVehicleFilter;
+  UserVehicleFilterUserFilter: UserVehicleFilterUserFilter;
+  UserVehicleFilterVehicleEngineFilter: UserVehicleFilterVehicleEngineFilter;
+  UserVehicleFilterVehicleModelBodyFilter: UserVehicleFilterVehicleModelBodyFilter;
+  UserVehicleFilterVehicleModelFilter: UserVehicleFilterVehicleModelFilter;
+  UserVehicleFilterVehicleTransmissionFilter: UserVehicleFilterVehicleTransmissionFilter;
+  UserVehicleLogTypeFilterComparison: UserVehicleLogTypeFilterComparison;
+  UserVehicleMaxAggregate: UserVehicleMaxAggregate;
+  UserVehicleMinAggregate: UserVehicleMinAggregate;
+  UserVehicleSort: UserVehicleSort;
+  UserVehicleUpdateFilter: UserVehicleUpdateFilter;
+  VehicleBody: VehicleBody;
+  VehicleBodyConnection: VehicleBodyConnection;
+  VehicleBodyDTO: VehicleBodyDto;
+  VehicleBodyDeleteFilter: VehicleBodyDeleteFilter;
+  VehicleBodyDeleteResponse: VehicleBodyDeleteResponse;
+  VehicleBodyEdge: VehicleBodyEdge;
+  VehicleBodyFilter: VehicleBodyFilter;
+  VehicleBodySort: VehicleBodySort;
+  VehicleBodyUpdateFilter: VehicleBodyUpdateFilter;
+  VehicleBrand: VehicleBrand;
+  VehicleBrandConnection: VehicleBrandConnection;
+  VehicleBrandDTO: VehicleBrandDto;
+  VehicleBrandDeleteFilter: VehicleBrandDeleteFilter;
+  VehicleBrandDeleteResponse: VehicleBrandDeleteResponse;
+  VehicleBrandEdge: VehicleBrandEdge;
+  VehicleBrandFilter: VehicleBrandFilter;
+  VehicleBrandSort: VehicleBrandSort;
+  VehicleBrandUpdateFilter: VehicleBrandUpdateFilter;
+  VehicleEngine: VehicleEngine;
+  VehicleEngineConnection: VehicleEngineConnection;
+  VehicleEngineDTO: VehicleEngineDto;
+  VehicleEngineDeleteFilter: VehicleEngineDeleteFilter;
+  VehicleEngineDeleteResponse: VehicleEngineDeleteResponse;
+  VehicleEngineEdge: VehicleEngineEdge;
+  VehicleEngineFilter: VehicleEngineFilter;
+  VehicleEngineSort: VehicleEngineSort;
+  VehicleEngineUpdateFilter: VehicleEngineUpdateFilter;
+  VehicleLog: VehicleLog;
+  VehicleLogAggregateFilter: VehicleLogAggregateFilter;
+  VehicleLogAggregateFilterGarageAggregateFilter: VehicleLogAggregateFilterGarageAggregateFilter;
+  VehicleLogAggregateFilterUserVehicleAggregateFilter: VehicleLogAggregateFilterUserVehicleAggregateFilter;
+  VehicleLogAggregateGroupBy: VehicleLogAggregateGroupBy;
+  VehicleLogAggregateResponse: VehicleLogAggregateResponse;
+  VehicleLogAvgAggregate: VehicleLogAvgAggregate;
+  VehicleLogBill: VehicleLogBill;
+  VehicleLogBillAggregateFilter: VehicleLogBillAggregateFilter;
+  VehicleLogBillAggregateFilterUserVehicleAggregateFilter: VehicleLogBillAggregateFilterUserVehicleAggregateFilter;
+  VehicleLogBillAggregateFilterVehicleLogAggregateFilter: VehicleLogBillAggregateFilterVehicleLogAggregateFilter;
+  VehicleLogBillAggregateGroupBy: VehicleLogBillAggregateGroupBy;
+  VehicleLogBillAggregateResponse: VehicleLogBillAggregateResponse;
+  VehicleLogBillAvgAggregate: VehicleLogBillAvgAggregate;
+  VehicleLogBillConnection: VehicleLogBillConnection;
+  VehicleLogBillCountAggregate: VehicleLogBillCountAggregate;
+  VehicleLogBillDTO: VehicleLogBillDto;
+  VehicleLogBillDeleteFilter: VehicleLogBillDeleteFilter;
+  VehicleLogBillDeleteResponse: VehicleLogBillDeleteResponse;
+  VehicleLogBillEdge: VehicleLogBillEdge;
+  VehicleLogBillFilter: VehicleLogBillFilter;
+  VehicleLogBillFilterUserVehicleFilter: VehicleLogBillFilterUserVehicleFilter;
+  VehicleLogBillFilterVehicleLogFilter: VehicleLogBillFilterVehicleLogFilter;
+  VehicleLogBillMaxAggregate: VehicleLogBillMaxAggregate;
+  VehicleLogBillMinAggregate: VehicleLogBillMinAggregate;
+  VehicleLogBillSort: VehicleLogBillSort;
+  VehicleLogBillSumAggregate: VehicleLogBillSumAggregate;
+  VehicleLogBillUpdateFilter: VehicleLogBillUpdateFilter;
+  VehicleLogConnection: VehicleLogConnection;
+  VehicleLogCountAggregate: VehicleLogCountAggregate;
+  VehicleLogDTO: VehicleLogDto;
+  VehicleLogDeleteFilter: VehicleLogDeleteFilter;
+  VehicleLogDeleteResponse: VehicleLogDeleteResponse;
+  VehicleLogEdge: VehicleLogEdge;
+  VehicleLogFilter: VehicleLogFilter;
+  VehicleLogFilterGarageFilter: VehicleLogFilterGarageFilter;
+  VehicleLogFilterUserVehicleFilter: VehicleLogFilterUserVehicleFilter;
+  VehicleLogMaxAggregate: VehicleLogMaxAggregate;
+  VehicleLogMinAggregate: VehicleLogMinAggregate;
+  VehicleLogSort: VehicleLogSort;
+  VehicleLogSumAggregate: VehicleLogSumAggregate;
+  VehicleLogUpdateFilter: VehicleLogUpdateFilter;
+  VehicleModel: VehicleModel;
+  VehicleModelBody: VehicleModelBody;
+  VehicleModelBodyConnection: VehicleModelBodyConnection;
+  VehicleModelBodyDTO: VehicleModelBodyDto;
+  VehicleModelBodyDeleteFilter: VehicleModelBodyDeleteFilter;
+  VehicleModelBodyDeleteResponse: VehicleModelBodyDeleteResponse;
+  VehicleModelBodyEdge: VehicleModelBodyEdge;
+  VehicleModelBodyFilter: VehicleModelBodyFilter;
+  VehicleModelBodyFilterVehicleBodyFilter: VehicleModelBodyFilterVehicleBodyFilter;
+  VehicleModelBodyFilterVehicleModelFilter: VehicleModelBodyFilterVehicleModelFilter;
+  VehicleModelBodySort: VehicleModelBodySort;
+  VehicleModelBodyUpdateFilter: VehicleModelBodyUpdateFilter;
+  VehicleModelConnection: VehicleModelConnection;
+  VehicleModelDTO: VehicleModelDto;
+  VehicleModelDeleteFilter: VehicleModelDeleteFilter;
+  VehicleModelDeleteResponse: VehicleModelDeleteResponse;
+  VehicleModelEdge: VehicleModelEdge;
+  VehicleModelFilter: VehicleModelFilter;
+  VehicleModelFilterVehicleBrandFilter: VehicleModelFilterVehicleBrandFilter;
+  VehicleModelFilterVehicleEngineFilter: VehicleModelFilterVehicleEngineFilter;
+  VehicleModelFilterVehicleModelBodyFilter: VehicleModelFilterVehicleModelBodyFilter;
+  VehicleModelFilterVehicleModelFilter: VehicleModelFilterVehicleModelFilter;
+  VehicleModelFilterVehicleTransmissionFilter: VehicleModelFilterVehicleTransmissionFilter;
+  VehicleModelSort: VehicleModelSort;
+  VehicleModelUpdateFilter: VehicleModelUpdateFilter;
+  VehicleTransmission: VehicleTransmission;
+  VehicleTransmissionConnection: VehicleTransmissionConnection;
+  VehicleTransmissionDTO: VehicleTransmissionDto;
+  VehicleTransmissionDeleteFilter: VehicleTransmissionDeleteFilter;
+  VehicleTransmissionDeleteResponse: VehicleTransmissionDeleteResponse;
+  VehicleTransmissionEdge: VehicleTransmissionEdge;
+  VehicleTransmissionFilter: VehicleTransmissionFilter;
+  VehicleTransmissionSort: VehicleTransmissionSort;
+  VehicleTransmissionUpdateFilter: VehicleTransmissionUpdateFilter;
 }>;
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = ResolversObject<{
@@ -10967,98 +15195,6 @@ export type ApiKeyMinAggregateResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type BranchSaleChannelResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannel'] = ResolversParentTypes['BranchSaleChannel']> = ResolversObject<{
-  branch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType>;
-  commission?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  saleChannel?: Resolver<ResolversTypes['SaleChannel'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelAggregateGroupBy'] = ResolversParentTypes['BranchSaleChannelAggregateGroupBy']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<BranchSaleChannelAggregateGroupByCreatedAtArgs, 'by'>>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<BranchSaleChannelAggregateGroupByDeletedAtArgs, 'by'>>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  saleChannel?: Resolver<Maybe<ResolversTypes['SaleChannel']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<BranchSaleChannelAggregateGroupByUpdatedAtArgs, 'by'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelAggregateResponse'] = ResolversParentTypes['BranchSaleChannelAggregateResponse']> = ResolversObject<{
-  avg?: Resolver<Maybe<ResolversTypes['BranchSaleChannelAvgAggregate']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['BranchSaleChannelCountAggregate']>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['BranchSaleChannelAggregateGroupBy']>, ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['BranchSaleChannelMaxAggregate']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['BranchSaleChannelMinAggregate']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['BranchSaleChannelSumAggregate']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelAvgAggregate'] = ResolversParentTypes['BranchSaleChannelAvgAggregate']> = ResolversObject<{
-  saleChannel?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelConnection'] = ResolversParentTypes['BranchSaleChannelConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['BranchSaleChannelEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelCountAggregate'] = ResolversParentTypes['BranchSaleChannelCountAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  saleChannel?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelDeleteResponse'] = ResolversParentTypes['BranchSaleChannelDeleteResponse']> = ResolversObject<{
-  commission?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  saleChannel?: Resolver<Maybe<ResolversTypes['SaleChannel']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelEdge'] = ResolversParentTypes['BranchSaleChannelEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['BranchSaleChannel'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelMaxAggregate'] = ResolversParentTypes['BranchSaleChannelMaxAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  saleChannel?: Resolver<Maybe<ResolversTypes['SaleChannel']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelMinAggregate'] = ResolversParentTypes['BranchSaleChannelMinAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  saleChannel?: Resolver<Maybe<ResolversTypes['SaleChannel']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type BranchSaleChannelSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['BranchSaleChannelSumAggregate'] = ResolversParentTypes['BranchSaleChannelSumAggregate']> = ResolversObject<{
-  saleChannel?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export interface ConnectionCursorScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['ConnectionCursor'], any> {
   name: 'ConnectionCursor';
 }
@@ -11369,6 +15505,131 @@ export type FileMinAggregateResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type GarageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Garage'] = ResolversParentTypes['Garage']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  branch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  org?: Resolver<ResolversTypes['Org'], ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageAggregateGroupBy'] = ResolversParentTypes['GarageAggregateGroupBy']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<GarageAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<GarageAggregateGroupByDeletedAtArgs, 'by'>>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<GarageAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageAggregateResponse'] = ResolversParentTypes['GarageAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['GarageAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['GarageCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['GarageAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['GarageMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['GarageMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['GarageSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageAvgAggregate'] = ResolversParentTypes['GarageAvgAggregate']> = ResolversObject<{
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageConnection'] = ResolversParentTypes['GarageConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['GarageEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageCountAggregate'] = ResolversParentTypes['GarageCountAggregate']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageDeleteResponse'] = ResolversParentTypes['GarageDeleteResponse']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageEdge'] = ResolversParentTypes['GarageEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['Garage'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageMaxAggregate'] = ResolversParentTypes['GarageMaxAggregate']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageMinAggregate'] = ResolversParentTypes['GarageMinAggregate']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type GarageSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageSumAggregate'] = ResolversParentTypes['GarageSumAggregate']> = ResolversObject<{
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JSON'], any> {
   name: 'JSON';
 }
@@ -11474,9 +15735,11 @@ export type MediaMinAggregateResolvers<ContextType = any, ParentType extends Res
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   addAddressesToCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationAddAddressesToCustomerArgs, 'input'>>;
+  addBodiesToVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationAddBodiesToVehicleModelArgs, 'input'>>;
   addBranchesToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddBranchesToOrgArgs, 'input'>>;
   addMembersToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddMembersToOrgArgs, 'input'>>;
   addMembersToOrgBranch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType, RequireFields<MutationAddMembersToOrgBranchArgs, 'input'>>;
+  addMembersToShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationAddMembersToShopArgs, 'input'>>;
   addOptionGroupsToProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationAddOptionGroupsToProductArgs, 'input'>>;
   addOptionsToOrderProduct?: Resolver<ResolversTypes['OrderProduct'], ParentType, ContextType, RequireFields<MutationAddOptionsToOrderProductArgs, 'input'>>;
   addOptionsToProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationAddOptionsToProductOptionGroupArgs, 'input'>>;
@@ -11484,6 +15747,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   addProductsToProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationAddProductsToProductOptionGroupArgs, 'input'>>;
   addProductsToProductType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<MutationAddProductsToProductTypeArgs, 'input'>>;
   addProductsToProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationAddProductsToProductUnitArgs, 'input'>>;
+  addShopsToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddShopsToOrgArgs, 'input'>>;
   authConfirmPasswordReset?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthConfirmPasswordResetArgs, 'input'>>;
   authLogin?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthLoginArgs, 'input'>>;
   authRefreshToken?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthRefreshTokenArgs, 'input'>>;
@@ -11496,9 +15760,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createManyAccountVerfications?: Resolver<Array<ResolversTypes['AccountVerfication']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountVerficationsArgs, 'input'>>;
   createManyAccounts?: Resolver<Array<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountsArgs, 'input'>>;
   createManyApiKeys?: Resolver<Array<ResolversTypes['ApiKey']>, ParentType, ContextType, RequireFields<MutationCreateManyApiKeysArgs, 'input'>>;
-  createManyBranchSaleChannels?: Resolver<Array<ResolversTypes['BranchSaleChannel']>, ParentType, ContextType, RequireFields<MutationCreateManyBranchSaleChannelsArgs, 'input'>>;
   createManyCustomers?: Resolver<Array<ResolversTypes['Customer']>, ParentType, ContextType, RequireFields<MutationCreateManyCustomersArgs, 'input'>>;
   createManyFiles?: Resolver<Array<ResolversTypes['File']>, ParentType, ContextType, RequireFields<MutationCreateManyFilesArgs, 'input'>>;
+  createManyGarages?: Resolver<Array<ResolversTypes['Garage']>, ParentType, ContextType, RequireFields<MutationCreateManyGaragesArgs, 'input'>>;
   createManyMedia?: Resolver<Array<ResolversTypes['Media']>, ParentType, ContextType, RequireFields<MutationCreateManyMediaArgs, 'input'>>;
   createManyOrderProducts?: Resolver<Array<ResolversTypes['OrderProduct']>, ParentType, ContextType, RequireFields<MutationCreateManyOrderProductsArgs, 'input'>>;
   createManyOrders?: Resolver<Array<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationCreateManyOrdersArgs, 'input'>>;
@@ -11509,17 +15773,28 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createManyProductCategories?: Resolver<Array<ResolversTypes['ProductCategory']>, ParentType, ContextType, RequireFields<MutationCreateManyProductCategoriesArgs, 'input'>>;
   createManyProductOptionGroups?: Resolver<Array<ResolversTypes['ProductOptionGroup']>, ParentType, ContextType, RequireFields<MutationCreateManyProductOptionGroupsArgs, 'input'>>;
   createManyProductOptions?: Resolver<Array<ResolversTypes['ProductOption']>, ParentType, ContextType, RequireFields<MutationCreateManyProductOptionsArgs, 'input'>>;
-  createManyProductPrices?: Resolver<Array<ResolversTypes['ProductPrice']>, ParentType, ContextType, RequireFields<MutationCreateManyProductPricesArgs, 'input'>>;
   createManyProductTypes?: Resolver<Array<ResolversTypes['ProductType']>, ParentType, ContextType, RequireFields<MutationCreateManyProductTypesArgs, 'input'>>;
   createManyProductUnits?: Resolver<Array<ResolversTypes['ProductUnit']>, ParentType, ContextType, RequireFields<MutationCreateManyProductUnitsArgs, 'input'>>;
   createManyProducts?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationCreateManyProductsArgs, 'input'>>;
+  createManyShopMembers?: Resolver<Array<ResolversTypes['ShopMember']>, ParentType, ContextType, RequireFields<MutationCreateManyShopMembersArgs, 'input'>>;
+  createManyShops?: Resolver<Array<ResolversTypes['Shop']>, ParentType, ContextType, RequireFields<MutationCreateManyShopsArgs, 'input'>>;
+  createManyUserVehicles?: Resolver<Array<ResolversTypes['UserVehicle']>, ParentType, ContextType, RequireFields<MutationCreateManyUserVehiclesArgs, 'input'>>;
+  createManyUsers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateManyUsersArgs, 'input'>>;
+  createManyVehicleBodies?: Resolver<Array<ResolversTypes['VehicleBody']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBodiesArgs, 'input'>>;
+  createManyVehicleBrands?: Resolver<Array<ResolversTypes['VehicleBrand']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBrandsArgs, 'input'>>;
+  createManyVehicleEngines?: Resolver<Array<ResolversTypes['VehicleEngine']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleEnginesArgs, 'input'>>;
+  createManyVehicleLogBills?: Resolver<Array<ResolversTypes['VehicleLogBill']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleLogBillsArgs, 'input'>>;
+  createManyVehicleLogs?: Resolver<Array<ResolversTypes['VehicleLog']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleLogsArgs, 'input'>>;
+  createManyVehicleModelBodies?: Resolver<Array<ResolversTypes['VehicleModelBody']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleModelBodiesArgs, 'input'>>;
+  createManyVehicleModels?: Resolver<Array<ResolversTypes['VehicleModel']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleModelsArgs, 'input'>>;
+  createManyVehicleTransmissions?: Resolver<Array<ResolversTypes['VehicleTransmission']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleTransmissionsArgs, 'input'>>;
   createOneAccount?: Resolver<ResolversTypes['Account'], ParentType, ContextType, RequireFields<MutationCreateOneAccountArgs, 'input'>>;
   createOneAccountPasswordReset?: Resolver<ResolversTypes['AccountPasswordReset'], ParentType, ContextType, RequireFields<MutationCreateOneAccountPasswordResetArgs, 'input'>>;
   createOneAccountVerfication?: Resolver<ResolversTypes['AccountVerfication'], ParentType, ContextType, RequireFields<MutationCreateOneAccountVerficationArgs, 'input'>>;
   createOneApiKey?: Resolver<ResolversTypes['ApiKey'], ParentType, ContextType, RequireFields<MutationCreateOneApiKeyArgs, 'input'>>;
-  createOneBranchSaleChannel?: Resolver<ResolversTypes['BranchSaleChannel'], ParentType, ContextType, RequireFields<MutationCreateOneBranchSaleChannelArgs, 'input'>>;
   createOneCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationCreateOneCustomerArgs, 'input'>>;
   createOneFile?: Resolver<ResolversTypes['File'], ParentType, ContextType, RequireFields<MutationCreateOneFileArgs, 'input'>>;
+  createOneGarage?: Resolver<ResolversTypes['Garage'], ParentType, ContextType, RequireFields<MutationCreateOneGarageArgs, 'input'>>;
   createOneMedia?: Resolver<ResolversTypes['Media'], ParentType, ContextType, RequireFields<MutationCreateOneMediaArgs, 'input'>>;
   createOneOrder?: Resolver<ResolversTypes['Order'], ParentType, ContextType, RequireFields<MutationCreateOneOrderArgs, 'input'>>;
   createOneOrderProduct?: Resolver<ResolversTypes['OrderProduct'], ParentType, ContextType, RequireFields<MutationCreateOneOrderProductArgs, 'input'>>;
@@ -11531,16 +15806,27 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createOneProductCategory?: Resolver<ResolversTypes['ProductCategory'], ParentType, ContextType, RequireFields<MutationCreateOneProductCategoryArgs, 'input'>>;
   createOneProductOption?: Resolver<ResolversTypes['ProductOption'], ParentType, ContextType, RequireFields<MutationCreateOneProductOptionArgs, 'input'>>;
   createOneProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationCreateOneProductOptionGroupArgs, 'input'>>;
-  createOneProductPrice?: Resolver<ResolversTypes['ProductPrice'], ParentType, ContextType, RequireFields<MutationCreateOneProductPriceArgs, 'input'>>;
   createOneProductType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<MutationCreateOneProductTypeArgs, 'input'>>;
   createOneProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationCreateOneProductUnitArgs, 'input'>>;
+  createOneShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationCreateOneShopArgs, 'input'>>;
+  createOneShopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<MutationCreateOneShopMemberArgs, 'input'>>;
+  createOneUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateOneUserArgs, 'input'>>;
+  createOneUserVehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType, RequireFields<MutationCreateOneUserVehicleArgs, 'input'>>;
+  createOneVehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBodyArgs, 'input'>>;
+  createOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBrandArgs, 'input'>>;
+  createOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleEngineArgs, 'input'>>;
+  createOneVehicleLog?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleLogArgs, 'input'>>;
+  createOneVehicleLogBill?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleLogBillArgs, 'input'>>;
+  createOneVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleModelArgs, 'input'>>;
+  createOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleModelBodyArgs, 'input'>>;
+  createOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleTransmissionArgs, 'input'>>;
   deleteManyAccountPasswordResets?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyAccountPasswordResetsArgs, 'input'>>;
   deleteManyAccountVerfications?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyAccountVerficationsArgs, 'input'>>;
   deleteManyAccounts?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyAccountsArgs, 'input'>>;
   deleteManyApiKeys?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyApiKeysArgs, 'input'>>;
-  deleteManyBranchSaleChannels?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyBranchSaleChannelsArgs, 'input'>>;
   deleteManyCustomers?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyCustomersArgs, 'input'>>;
   deleteManyFiles?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyFilesArgs, 'input'>>;
+  deleteManyGarages?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyGaragesArgs, 'input'>>;
   deleteManyMedia?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyMediaArgs, 'input'>>;
   deleteManyOrderProducts?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyOrderProductsArgs, 'input'>>;
   deleteManyOrders?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyOrdersArgs, 'input'>>;
@@ -11551,17 +15837,28 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyProductCategories?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductCategoriesArgs, 'input'>>;
   deleteManyProductOptionGroups?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductOptionGroupsArgs, 'input'>>;
   deleteManyProductOptions?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductOptionsArgs, 'input'>>;
-  deleteManyProductPrices?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductPricesArgs, 'input'>>;
   deleteManyProductTypes?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductTypesArgs, 'input'>>;
   deleteManyProductUnits?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductUnitsArgs, 'input'>>;
   deleteManyProducts?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductsArgs, 'input'>>;
+  deleteManyShopMembers?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyShopMembersArgs, 'input'>>;
+  deleteManyShops?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyShopsArgs, 'input'>>;
+  deleteManyUserVehicles?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyUserVehiclesArgs, 'input'>>;
+  deleteManyUsers?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyUsersArgs, 'input'>>;
+  deleteManyVehicleBodies?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBodiesArgs, 'input'>>;
+  deleteManyVehicleBrands?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBrandsArgs, 'input'>>;
+  deleteManyVehicleEngines?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleEnginesArgs, 'input'>>;
+  deleteManyVehicleLogBills?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleLogBillsArgs, 'input'>>;
+  deleteManyVehicleLogs?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleLogsArgs, 'input'>>;
+  deleteManyVehicleModelBodies?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleModelBodiesArgs, 'input'>>;
+  deleteManyVehicleModels?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleModelsArgs, 'input'>>;
+  deleteManyVehicleTransmissions?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleTransmissionsArgs, 'input'>>;
   deleteOneAccount?: Resolver<ResolversTypes['AccountDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneAccountArgs, 'input'>>;
   deleteOneAccountPasswordReset?: Resolver<ResolversTypes['AccountPasswordResetDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneAccountPasswordResetArgs, 'input'>>;
   deleteOneAccountVerfication?: Resolver<ResolversTypes['AccountVerficationDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneAccountVerficationArgs, 'input'>>;
   deleteOneApiKey?: Resolver<ResolversTypes['ApiKeyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneApiKeyArgs, 'input'>>;
-  deleteOneBranchSaleChannel?: Resolver<ResolversTypes['BranchSaleChannelDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneBranchSaleChannelArgs, 'input'>>;
   deleteOneCustomer?: Resolver<ResolversTypes['CustomerDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneCustomerArgs, 'input'>>;
   deleteOneFile?: Resolver<ResolversTypes['FileDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneFileArgs, 'input'>>;
+  deleteOneGarage?: Resolver<ResolversTypes['GarageDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneGarageArgs, 'input'>>;
   deleteOneMedia?: Resolver<ResolversTypes['MediaDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneMediaArgs, 'input'>>;
   deleteOneOrder?: Resolver<ResolversTypes['OrderDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneOrderArgs, 'input'>>;
   deleteOneOrderProduct?: Resolver<ResolversTypes['OrderProductDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneOrderProductArgs, 'input'>>;
@@ -11573,16 +15870,27 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteOneProductCategory?: Resolver<ResolversTypes['ProductCategoryDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductCategoryArgs, 'input'>>;
   deleteOneProductOption?: Resolver<ResolversTypes['ProductOptionDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductOptionArgs, 'input'>>;
   deleteOneProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroupDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductOptionGroupArgs, 'input'>>;
-  deleteOneProductPrice?: Resolver<ResolversTypes['ProductPriceDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductPriceArgs, 'input'>>;
   deleteOneProductType?: Resolver<ResolversTypes['ProductTypeDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductTypeArgs, 'input'>>;
   deleteOneProductUnit?: Resolver<ResolversTypes['ProductUnitDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductUnitArgs, 'input'>>;
-  orderImportByFiles?: Resolver<Array<ResolversTypes['Order']>, ParentType, ContextType, RequireFields<MutationOrderImportByFilesArgs, 'input'>>;
+  deleteOneShop?: Resolver<ResolversTypes['ShopDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneShopArgs, 'input'>>;
+  deleteOneShopMember?: Resolver<ResolversTypes['ShopMemberDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneShopMemberArgs, 'input'>>;
+  deleteOneUser?: Resolver<ResolversTypes['UserDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneUserArgs, 'input'>>;
+  deleteOneUserVehicle?: Resolver<ResolversTypes['UserVehicleDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneUserVehicleArgs, 'input'>>;
+  deleteOneVehicleBody?: Resolver<ResolversTypes['VehicleBodyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBodyArgs, 'input'>>;
+  deleteOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrandDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBrandArgs, 'input'>>;
+  deleteOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngineDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleEngineArgs, 'input'>>;
+  deleteOneVehicleLog?: Resolver<ResolversTypes['VehicleLogDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleLogArgs, 'input'>>;
+  deleteOneVehicleLogBill?: Resolver<ResolversTypes['VehicleLogBillDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleLogBillArgs, 'input'>>;
+  deleteOneVehicleModel?: Resolver<ResolversTypes['VehicleModelDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleModelArgs, 'input'>>;
+  deleteOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBodyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleModelBodyArgs, 'input'>>;
+  deleteOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmissionDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleTransmissionArgs, 'input'>>;
   productImportByFile?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationProductImportByFileArgs, 'input'>>;
-  productPriceImportByFile?: Resolver<Array<ResolversTypes['ProductPrice']>, ParentType, ContextType, RequireFields<MutationProductPriceImportByFileArgs, 'input'>>;
   setAddressesOnCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationSetAddressesOnCustomerArgs, 'input'>>;
+  setBodiesOnVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationSetBodiesOnVehicleModelArgs, 'input'>>;
   setBranchesOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetBranchesOnOrgArgs, 'input'>>;
   setMembersOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetMembersOnOrgArgs, 'input'>>;
   setMembersOnOrgBranch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType, RequireFields<MutationSetMembersOnOrgBranchArgs, 'input'>>;
+  setMembersOnShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationSetMembersOnShopArgs, 'input'>>;
   setOptionGroupsOnProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationSetOptionGroupsOnProductArgs, 'input'>>;
   setOptionsOnOrderProduct?: Resolver<ResolversTypes['OrderProduct'], ParentType, ContextType, RequireFields<MutationSetOptionsOnOrderProductArgs, 'input'>>;
   setOptionsOnProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationSetOptionsOnProductOptionGroupArgs, 'input'>>;
@@ -11591,14 +15899,15 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   setProductsOnProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationSetProductsOnProductOptionGroupArgs, 'input'>>;
   setProductsOnProductType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<MutationSetProductsOnProductTypeArgs, 'input'>>;
   setProductsOnProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationSetProductsOnProductUnitArgs, 'input'>>;
+  setShopsOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetShopsOnOrgArgs, 'input'>>;
   setUnitOnProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationSetUnitOnProductArgs, 'input'>>;
   updateManyAccountPasswordResets?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyAccountPasswordResetsArgs, 'input'>>;
   updateManyAccountVerfications?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyAccountVerficationsArgs, 'input'>>;
   updateManyAccounts?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyAccountsArgs, 'input'>>;
   updateManyApiKeys?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyApiKeysArgs, 'input'>>;
-  updateManyBranchSaleChannels?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyBranchSaleChannelsArgs, 'input'>>;
   updateManyCustomers?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyCustomersArgs, 'input'>>;
   updateManyFiles?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyFilesArgs, 'input'>>;
+  updateManyGarages?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyGaragesArgs, 'input'>>;
   updateManyMedia?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyMediaArgs, 'input'>>;
   updateManyOrderProducts?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyOrderProductsArgs, 'input'>>;
   updateManyOrders?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyOrdersArgs, 'input'>>;
@@ -11609,17 +15918,28 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyProductCategories?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductCategoriesArgs, 'input'>>;
   updateManyProductOptionGroups?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductOptionGroupsArgs, 'input'>>;
   updateManyProductOptions?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductOptionsArgs, 'input'>>;
-  updateManyProductPrices?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductPricesArgs, 'input'>>;
   updateManyProductTypes?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductTypesArgs, 'input'>>;
   updateManyProductUnits?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductUnitsArgs, 'input'>>;
   updateManyProducts?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductsArgs, 'input'>>;
+  updateManyShopMembers?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyShopMembersArgs, 'input'>>;
+  updateManyShops?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyShopsArgs, 'input'>>;
+  updateManyUserVehicles?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyUserVehiclesArgs, 'input'>>;
+  updateManyUsers?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyUsersArgs, 'input'>>;
+  updateManyVehicleBodies?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBodiesArgs, 'input'>>;
+  updateManyVehicleBrands?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBrandsArgs, 'input'>>;
+  updateManyVehicleEngines?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleEnginesArgs, 'input'>>;
+  updateManyVehicleLogBills?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleLogBillsArgs, 'input'>>;
+  updateManyVehicleLogs?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleLogsArgs, 'input'>>;
+  updateManyVehicleModelBodies?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleModelBodiesArgs, 'input'>>;
+  updateManyVehicleModels?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleModelsArgs, 'input'>>;
+  updateManyVehicleTransmissions?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleTransmissionsArgs, 'input'>>;
   updateOneAccount?: Resolver<ResolversTypes['Account'], ParentType, ContextType, RequireFields<MutationUpdateOneAccountArgs, 'input'>>;
   updateOneAccountPasswordReset?: Resolver<ResolversTypes['AccountPasswordReset'], ParentType, ContextType, RequireFields<MutationUpdateOneAccountPasswordResetArgs, 'input'>>;
   updateOneAccountVerfication?: Resolver<ResolversTypes['AccountVerfication'], ParentType, ContextType, RequireFields<MutationUpdateOneAccountVerficationArgs, 'input'>>;
   updateOneApiKey?: Resolver<ResolversTypes['ApiKey'], ParentType, ContextType, RequireFields<MutationUpdateOneApiKeyArgs, 'input'>>;
-  updateOneBranchSaleChannel?: Resolver<ResolversTypes['BranchSaleChannel'], ParentType, ContextType, RequireFields<MutationUpdateOneBranchSaleChannelArgs, 'input'>>;
   updateOneCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationUpdateOneCustomerArgs, 'input'>>;
   updateOneFile?: Resolver<ResolversTypes['File'], ParentType, ContextType, RequireFields<MutationUpdateOneFileArgs, 'input'>>;
+  updateOneGarage?: Resolver<ResolversTypes['Garage'], ParentType, ContextType, RequireFields<MutationUpdateOneGarageArgs, 'input'>>;
   updateOneMedia?: Resolver<ResolversTypes['Media'], ParentType, ContextType, RequireFields<MutationUpdateOneMediaArgs, 'input'>>;
   updateOneOrder?: Resolver<ResolversTypes['Order'], ParentType, ContextType, RequireFields<MutationUpdateOneOrderArgs, 'input'>>;
   updateOneOrderProduct?: Resolver<ResolversTypes['OrderProduct'], ParentType, ContextType, RequireFields<MutationUpdateOneOrderProductArgs, 'input'>>;
@@ -11631,9 +15951,20 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateOneProductCategory?: Resolver<ResolversTypes['ProductCategory'], ParentType, ContextType, RequireFields<MutationUpdateOneProductCategoryArgs, 'input'>>;
   updateOneProductOption?: Resolver<ResolversTypes['ProductOption'], ParentType, ContextType, RequireFields<MutationUpdateOneProductOptionArgs, 'input'>>;
   updateOneProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationUpdateOneProductOptionGroupArgs, 'input'>>;
-  updateOneProductPrice?: Resolver<ResolversTypes['ProductPrice'], ParentType, ContextType, RequireFields<MutationUpdateOneProductPriceArgs, 'input'>>;
   updateOneProductType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<MutationUpdateOneProductTypeArgs, 'input'>>;
   updateOneProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationUpdateOneProductUnitArgs, 'input'>>;
+  updateOneShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationUpdateOneShopArgs, 'input'>>;
+  updateOneShopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<MutationUpdateOneShopMemberArgs, 'input'>>;
+  updateOneUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateOneUserArgs, 'input'>>;
+  updateOneUserVehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType, RequireFields<MutationUpdateOneUserVehicleArgs, 'input'>>;
+  updateOneVehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBodyArgs, 'input'>>;
+  updateOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBrandArgs, 'input'>>;
+  updateOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleEngineArgs, 'input'>>;
+  updateOneVehicleLog?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleLogArgs, 'input'>>;
+  updateOneVehicleLogBill?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleLogBillArgs, 'input'>>;
+  updateOneVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleModelArgs, 'input'>>;
+  updateOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleModelBodyArgs, 'input'>>;
+  updateOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleTransmissionArgs, 'input'>>;
 }>;
 
 export type OffsetPageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['OffsetPageInfo'] = ResolversParentTypes['OffsetPageInfo']> = ResolversObject<{
@@ -11655,7 +15986,6 @@ export type OrderResolvers<ContextType = any, ParentType extends ResolversParent
   netPrice?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  saleChannel?: Resolver<ResolversTypes['BranchSaleChannel'], ParentType, ContextType>;
   shippingAddressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   shippingAddressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -11975,11 +16305,13 @@ export type OrgResolvers<ContextType = any, ParentType extends ResolversParentTy
   createdBy?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   members?: Resolver<Maybe<ResolversTypes['OrgMembersConnection']>, ParentType, ContextType, RequireFields<OrgMembersArgs, 'filter' | 'paging' | 'sorting'>>;
   membersAggregate?: Resolver<Array<ResolversTypes['OrgMembersAggregateResponse']>, ParentType, ContextType, Partial<OrgMembersAggregateArgs>>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  shops?: Resolver<Maybe<ResolversTypes['OrgShopsConnection']>, ParentType, ContextType, RequireFields<OrgShopsArgs, 'filter' | 'paging' | 'sorting'>>;
+  shopsAggregate?: Resolver<Array<ResolversTypes['OrgShopsAggregateResponse']>, ParentType, ContextType, Partial<OrgShopsAggregateArgs>>;
+  status?: Resolver<ResolversTypes['OrgStatus'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['OrgType'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -11988,9 +16320,9 @@ export type OrgResolvers<ContextType = any, ParentType extends ResolversParentTy
 export type OrgAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgAggregateGroupBy'] = ResolversParentTypes['OrgAggregateGroupBy']> = ResolversObject<{
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgAggregateGroupByDeletedAtArgs, 'by'>>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgStatus']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['OrgType']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgAggregateGroupByUpdatedAtArgs, 'by'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -12015,12 +16347,12 @@ export type OrgBranchResolvers<ContextType = any, ParentType extends ResolversPa
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   members?: Resolver<ResolversTypes['OrgBranchMembersConnection'], ParentType, ContextType, RequireFields<OrgBranchMembersArgs, 'filter' | 'paging' | 'sorting'>>;
   membersAggregate?: Resolver<Array<ResolversTypes['OrgBranchMembersAggregateResponse']>, ParentType, ContextType, Partial<OrgBranchMembersAggregateArgs>>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   org?: Resolver<ResolversTypes['Org'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['OrgBranchStatus'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12029,9 +16361,9 @@ export type OrgBranchAggregateGroupByResolvers<ContextType = any, ParentType ext
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgBranchAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgBranchAggregateGroupByDeletedAtArgs, 'by'>>;
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgBranchAggregateGroupByUpdatedAtArgs, 'by'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12055,9 +16387,9 @@ export type OrgBranchCountAggregateResolvers<ContextType = any, ParentType exten
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12066,9 +16398,9 @@ export type OrgBranchDeleteResponseResolvers<ContextType = any, ParentType exten
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12085,6 +16417,7 @@ export type OrgBranchMaxAggregateResolvers<ContextType = any, ParentType extends
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12253,6 +16586,7 @@ export type OrgBranchMinAggregateResolvers<ContextType = any, ParentType extends
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12261,9 +16595,9 @@ export type OrgBranchesAggregateGroupByResolvers<ContextType = any, ParentType e
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12287,9 +16621,9 @@ export type OrgBranchesCountAggregateResolvers<ContextType = any, ParentType ext
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12300,6 +16634,7 @@ export type OrgBranchesMaxAggregateResolvers<ContextType = any, ParentType exten
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12310,6 +16645,7 @@ export type OrgBranchesMinAggregateResolvers<ContextType = any, ParentType exten
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -12324,9 +16660,9 @@ export type OrgConnectionResolvers<ContextType = any, ParentType extends Resolve
 export type OrgCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgCountAggregate'] = ResolversParentTypes['OrgCountAggregate']> = ResolversObject<{
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -12336,9 +16672,9 @@ export type OrgDeleteResponseResolvers<ContextType = any, ParentType extends Res
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgStatus']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['OrgType']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -12355,6 +16691,7 @@ export type OrgMaxAggregateResolvers<ContextType = any, ParentType extends Resol
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgStatus']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['OrgType']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -12523,7 +16860,65 @@ export type OrgMinAggregateResolvers<ContextType = any, ParentType extends Resol
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['OrgStatus']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['OrgType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OrgShopsAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgShopsAggregateGroupBy'] = ResolversParentTypes['OrgShopsAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OrgShopsAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgShopsAggregateResponse'] = ResolversParentTypes['OrgShopsAggregateResponse']> = ResolversObject<{
+  count?: Resolver<Maybe<ResolversTypes['OrgShopsCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['OrgShopsAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['OrgShopsMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['OrgShopsMinAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OrgShopsConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgShopsConnection'] = ResolversParentTypes['OrgShopsConnection']> = ResolversObject<{
+  nodes?: Resolver<Array<ResolversTypes['Shop']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['OffsetPageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OrgShopsCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgShopsCountAggregate'] = ResolversParentTypes['OrgShopsCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  enabled?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OrgShopsMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgShopsMaxAggregate'] = ResolversParentTypes['OrgShopsMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type OrgShopsMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrgShopsMinAggregate'] = ResolversParentTypes['OrgShopsMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -13246,95 +17641,6 @@ export type ProductOptionSumAggregateResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ProductPriceResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPrice'] = ResolversParentTypes['ProductPrice']> = ResolversObject<{
-  branchSaleChannel?: Resolver<ResolversTypes['BranchSaleChannel'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  product?: Resolver<ResolversTypes['Product'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceAggregateGroupBy'] = ResolversParentTypes['ProductPriceAggregateGroupBy']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ProductPriceAggregateGroupByCreatedAtArgs, 'by'>>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ProductPriceAggregateGroupByDeletedAtArgs, 'by'>>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ProductPriceAggregateGroupByUpdatedAtArgs, 'by'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceAggregateResponse'] = ResolversParentTypes['ProductPriceAggregateResponse']> = ResolversObject<{
-  avg?: Resolver<Maybe<ResolversTypes['ProductPriceAvgAggregate']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['ProductPriceCountAggregate']>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['ProductPriceAggregateGroupBy']>, ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['ProductPriceMaxAggregate']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['ProductPriceMinAggregate']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['ProductPriceSumAggregate']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceAvgAggregate'] = ResolversParentTypes['ProductPriceAvgAggregate']> = ResolversObject<{
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceConnection'] = ResolversParentTypes['ProductPriceConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['ProductPriceEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceCountAggregate'] = ResolversParentTypes['ProductPriceCountAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceDeleteResponse'] = ResolversParentTypes['ProductPriceDeleteResponse']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceEdge'] = ResolversParentTypes['ProductPriceEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['ProductPrice'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceMaxAggregate'] = ResolversParentTypes['ProductPriceMaxAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceMinAggregate'] = ResolversParentTypes['ProductPriceMinAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type ProductPriceSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductPriceSumAggregate'] = ResolversParentTypes['ProductPriceSumAggregate']> = ResolversObject<{
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type ProductSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductSumAggregate'] = ResolversParentTypes['ProductSumAggregate']> = ResolversObject<{
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -13667,15 +17973,15 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   apiKey?: Resolver<ResolversTypes['ApiKey'], ParentType, ContextType, RequireFields<QueryApiKeyArgs, 'id'>>;
   apiKeyAggregate?: Resolver<Array<ResolversTypes['ApiKeyAggregateResponse']>, ParentType, ContextType, Partial<QueryApiKeyAggregateArgs>>;
   apiKeys?: Resolver<ResolversTypes['ApiKeyConnection'], ParentType, ContextType, RequireFields<QueryApiKeysArgs, 'filter' | 'paging' | 'sorting'>>;
-  branchSaleChannel?: Resolver<ResolversTypes['BranchSaleChannel'], ParentType, ContextType, RequireFields<QueryBranchSaleChannelArgs, 'id'>>;
-  branchSaleChannelAggregate?: Resolver<Array<ResolversTypes['BranchSaleChannelAggregateResponse']>, ParentType, ContextType, Partial<QueryBranchSaleChannelAggregateArgs>>;
-  branchSaleChannels?: Resolver<ResolversTypes['BranchSaleChannelConnection'], ParentType, ContextType, RequireFields<QueryBranchSaleChannelsArgs, 'filter' | 'paging' | 'sorting'>>;
   customer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<QueryCustomerArgs, 'id'>>;
   customerAggregate?: Resolver<Array<ResolversTypes['CustomerAggregateResponse']>, ParentType, ContextType, Partial<QueryCustomerAggregateArgs>>;
   customers?: Resolver<ResolversTypes['CustomerConnection'], ParentType, ContextType, RequireFields<QueryCustomersArgs, 'filter' | 'paging' | 'sorting'>>;
   file?: Resolver<ResolversTypes['File'], ParentType, ContextType, RequireFields<QueryFileArgs, 'id'>>;
   fileAggregate?: Resolver<Array<ResolversTypes['FileAggregateResponse']>, ParentType, ContextType, Partial<QueryFileAggregateArgs>>;
   files?: Resolver<ResolversTypes['FileConnection'], ParentType, ContextType, RequireFields<QueryFilesArgs, 'filter' | 'paging' | 'sorting'>>;
+  garage?: Resolver<ResolversTypes['Garage'], ParentType, ContextType, RequireFields<QueryGarageArgs, 'id'>>;
+  garageAggregate?: Resolver<Array<ResolversTypes['GarageAggregateResponse']>, ParentType, ContextType, Partial<QueryGarageAggregateArgs>>;
+  garages?: Resolver<ResolversTypes['GarageConnection'], ParentType, ContextType, RequireFields<QueryGaragesArgs, 'filter' | 'paging' | 'sorting'>>;
   me?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
   media?: Resolver<ResolversTypes['MediaConnection'], ParentType, ContextType, RequireFields<QueryMediaArgs, 'filter' | 'paging' | 'sorting'>>;
   mediaAggregate?: Resolver<Array<ResolversTypes['MediaAggregateResponse']>, ParentType, ContextType, Partial<QueryMediaAggregateArgs>>;
@@ -13708,9 +18014,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   productOptionGroupAggregate?: Resolver<Array<ResolversTypes['ProductOptionGroupAggregateResponse']>, ParentType, ContextType, Partial<QueryProductOptionGroupAggregateArgs>>;
   productOptionGroups?: Resolver<ResolversTypes['ProductOptionGroupConnection'], ParentType, ContextType, RequireFields<QueryProductOptionGroupsArgs, 'filter' | 'paging' | 'sorting'>>;
   productOptions?: Resolver<ResolversTypes['ProductOptionConnection'], ParentType, ContextType, RequireFields<QueryProductOptionsArgs, 'filter' | 'paging' | 'sorting'>>;
-  productPrice?: Resolver<ResolversTypes['ProductPrice'], ParentType, ContextType, RequireFields<QueryProductPriceArgs, 'id'>>;
-  productPriceAggregate?: Resolver<Array<ResolversTypes['ProductPriceAggregateResponse']>, ParentType, ContextType, Partial<QueryProductPriceAggregateArgs>>;
-  productPrices?: Resolver<ResolversTypes['ProductPriceConnection'], ParentType, ContextType, RequireFields<QueryProductPricesArgs, 'filter' | 'paging' | 'sorting'>>;
   productType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<QueryProductTypeArgs, 'id'>>;
   productTypeAggregate?: Resolver<Array<ResolversTypes['ProductTypeAggregateResponse']>, ParentType, ContextType, Partial<QueryProductTypeAggregateArgs>>;
   productTypes?: Resolver<ResolversTypes['ProductTypeConnection'], ParentType, ContextType, RequireFields<QueryProductTypesArgs, 'filter' | 'paging' | 'sorting'>>;
@@ -13718,10 +18021,857 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   productUnitAggregate?: Resolver<Array<ResolversTypes['ProductUnitAggregateResponse']>, ParentType, ContextType, Partial<QueryProductUnitAggregateArgs>>;
   productUnits?: Resolver<ResolversTypes['ProductUnitConnection'], ParentType, ContextType, RequireFields<QueryProductUnitsArgs, 'filter' | 'paging' | 'sorting'>>;
   products?: Resolver<ResolversTypes['ProductConnection'], ParentType, ContextType, RequireFields<QueryProductsArgs, 'filter' | 'paging' | 'sorting'>>;
+  shop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<QueryShopArgs, 'id'>>;
+  shopAggregate?: Resolver<Array<ResolversTypes['ShopAggregateResponse']>, ParentType, ContextType, Partial<QueryShopAggregateArgs>>;
+  shopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<QueryShopMemberArgs, 'id'>>;
+  shopMemberAggregate?: Resolver<Array<ResolversTypes['ShopMemberAggregateResponse']>, ParentType, ContextType, Partial<QueryShopMemberAggregateArgs>>;
+  shopMembers?: Resolver<ResolversTypes['ShopMemberConnection'], ParentType, ContextType, RequireFields<QueryShopMembersArgs, 'filter' | 'paging' | 'sorting'>>;
+  shops?: Resolver<ResolversTypes['ShopConnection'], ParentType, ContextType, RequireFields<QueryShopsArgs, 'filter' | 'paging' | 'sorting'>>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+  userAggregate?: Resolver<Array<ResolversTypes['UserAggregateResponse']>, ParentType, ContextType, Partial<QueryUserAggregateArgs>>;
+  userVehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType, RequireFields<QueryUserVehicleArgs, 'id'>>;
+  userVehicleAggregate?: Resolver<Array<ResolversTypes['UserVehicleAggregateResponse']>, ParentType, ContextType, Partial<QueryUserVehicleAggregateArgs>>;
+  userVehicles?: Resolver<ResolversTypes['UserVehicleConnection'], ParentType, ContextType, RequireFields<QueryUserVehiclesArgs, 'filter' | 'paging' | 'sorting'>>;
+  users?: Resolver<ResolversTypes['UserConnection'], ParentType, ContextType, RequireFields<QueryUsersArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleBodies?: Resolver<ResolversTypes['VehicleBodyConnection'], ParentType, ContextType, RequireFields<QueryVehicleBodiesArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<QueryVehicleBodyArgs, 'id'>>;
+  vehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<QueryVehicleBrandArgs, 'id'>>;
+  vehicleBrands?: Resolver<ResolversTypes['VehicleBrandConnection'], ParentType, ContextType, RequireFields<QueryVehicleBrandsArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<QueryVehicleEngineArgs, 'id'>>;
+  vehicleEngines?: Resolver<ResolversTypes['VehicleEngineConnection'], ParentType, ContextType, RequireFields<QueryVehicleEnginesArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleLog?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType, RequireFields<QueryVehicleLogArgs, 'id'>>;
+  vehicleLogAggregate?: Resolver<Array<ResolversTypes['VehicleLogAggregateResponse']>, ParentType, ContextType, Partial<QueryVehicleLogAggregateArgs>>;
+  vehicleLogBill?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType, RequireFields<QueryVehicleLogBillArgs, 'id'>>;
+  vehicleLogBillAggregate?: Resolver<Array<ResolversTypes['VehicleLogBillAggregateResponse']>, ParentType, ContextType, Partial<QueryVehicleLogBillAggregateArgs>>;
+  vehicleLogBills?: Resolver<ResolversTypes['VehicleLogBillConnection'], ParentType, ContextType, RequireFields<QueryVehicleLogBillsArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleLogs?: Resolver<ResolversTypes['VehicleLogConnection'], ParentType, ContextType, RequireFields<QueryVehicleLogsArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<QueryVehicleModelArgs, 'id'>>;
+  vehicleModelBodies?: Resolver<ResolversTypes['VehicleModelBodyConnection'], ParentType, ContextType, RequireFields<QueryVehicleModelBodiesArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<QueryVehicleModelBodyArgs, 'id'>>;
+  vehicleModels?: Resolver<ResolversTypes['VehicleModelConnection'], ParentType, ContextType, RequireFields<QueryVehicleModelsArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<QueryVehicleTransmissionArgs, 'id'>>;
+  vehicleTransmissions?: Resolver<ResolversTypes['VehicleTransmissionConnection'], ParentType, ContextType, RequireFields<QueryVehicleTransmissionsArgs, 'filter' | 'paging' | 'sorting'>>;
+}>;
+
+export type ShopResolvers<ContextType = any, ParentType extends ResolversParentTypes['Shop'] = ResolversParentTypes['Shop']> = ResolversObject<{
+  branch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  members?: Resolver<ResolversTypes['ShopMembersConnection'], ParentType, ContextType, RequireFields<ShopMembersArgs, 'filter' | 'paging' | 'sorting'>>;
+  membersAggregate?: Resolver<Array<ResolversTypes['ShopMembersAggregateResponse']>, ParentType, ContextType, Partial<ShopMembersAggregateArgs>>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  org?: Resolver<ResolversTypes['Org'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopAggregateGroupBy'] = ResolversParentTypes['ShopAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ShopAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ShopAggregateGroupByDeletedAtArgs, 'by'>>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ShopAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopAggregateResponse'] = ResolversParentTypes['ShopAggregateResponse']> = ResolversObject<{
+  count?: Resolver<Maybe<ResolversTypes['ShopCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['ShopAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['ShopMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['ShopMinAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopConnection'] = ResolversParentTypes['ShopConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['ShopEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopCountAggregate'] = ResolversParentTypes['ShopCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  enabled?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopDeleteResponse'] = ResolversParentTypes['ShopDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  enabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopEdge'] = ResolversParentTypes['ShopEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['Shop'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMaxAggregate'] = ResolversParentTypes['ShopMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMember'] = ResolversParentTypes['ShopMember']> = ResolversObject<{
+  account?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  role?: Resolver<ResolversTypes['ShopMemberRole'], ParentType, ContextType>;
+  shop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberAggregateGroupBy'] = ResolversParentTypes['ShopMemberAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ShopMemberAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ShopMemberAggregateGroupByDeletedAtArgs, 'by'>>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ShopMemberAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberAggregateResponse'] = ResolversParentTypes['ShopMemberAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['ShopMemberAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['ShopMemberCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['ShopMemberAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['ShopMemberMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['ShopMemberMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['ShopMemberSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberAvgAggregate'] = ResolversParentTypes['ShopMemberAvgAggregate']> = ResolversObject<{
+  role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberConnection'] = ResolversParentTypes['ShopMemberConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['ShopMemberEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberCountAggregate'] = ResolversParentTypes['ShopMemberCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberDeleteResponse'] = ResolversParentTypes['ShopMemberDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberEdge'] = ResolversParentTypes['ShopMemberEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberMaxAggregate'] = ResolversParentTypes['ShopMemberMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberMinAggregate'] = ResolversParentTypes['ShopMemberMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMemberSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMemberSumAggregate'] = ResolversParentTypes['ShopMemberSumAggregate']> = ResolversObject<{
+  role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersAggregateGroupBy'] = ResolversParentTypes['ShopMembersAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersAggregateResponse'] = ResolversParentTypes['ShopMembersAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['ShopMembersAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['ShopMembersCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['ShopMembersAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['ShopMembersMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['ShopMembersMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['ShopMembersSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersAvgAggregate'] = ResolversParentTypes['ShopMembersAvgAggregate']> = ResolversObject<{
+  role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersConnection'] = ResolversParentTypes['ShopMembersConnection']> = ResolversObject<{
+  nodes?: Resolver<Array<ResolversTypes['ShopMember']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['OffsetPageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersCountAggregate'] = ResolversParentTypes['ShopMembersCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersMaxAggregate'] = ResolversParentTypes['ShopMembersMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersMinAggregate'] = ResolversParentTypes['ShopMembersMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  role?: Resolver<Maybe<ResolversTypes['ShopMemberRole']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMembersSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMembersSumAggregate'] = ResolversParentTypes['ShopMembersSumAggregate']> = ResolversObject<{
+  role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ShopMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ShopMinAggregate'] = ResolversParentTypes['ShopMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type UpdateManyResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpdateManyResponse'] = ResolversParentTypes['UpdateManyResponse']> = ResolversObject<{
   updatedCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  account?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
+  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  phone_number?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['UserStatus'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserAggregateGroupBy'] = ResolversParentTypes['UserAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserAggregateGroupByDeletedAtArgs, 'by'>>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserAggregateResponse'] = ResolversParentTypes['UserAggregateResponse']> = ResolversObject<{
+  count?: Resolver<Maybe<ResolversTypes['UserCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['UserAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['UserMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['UserMinAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserConnection'] = ResolversParentTypes['UserConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['UserEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserCountAggregate'] = ResolversParentTypes['UserCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserDeleteResponse'] = ResolversParentTypes['UserDeleteResponse']> = ResolversObject<{
+  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserEdge'] = ResolversParentTypes['UserEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserMaxAggregate'] = ResolversParentTypes['UserMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserMinAggregate'] = ResolversParentTypes['UserMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicle'] = ResolversParentTypes['UserVehicle']> = ResolversObject<{
+  body?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  engine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  model?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  owner?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  pic?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserVechileStatus']>, ParentType, ContextType>;
+  transmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleAggregateGroupBy'] = ResolversParentTypes['UserVehicleAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserVehicleAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserVehicleAggregateGroupByDeletedAtArgs, 'by'>>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserVechileStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserVehicleAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleAggregateResponse'] = ResolversParentTypes['UserVehicleAggregateResponse']> = ResolversObject<{
+  count?: Resolver<Maybe<ResolversTypes['UserVehicleCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['UserVehicleAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['UserVehicleMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['UserVehicleMinAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleConnection'] = ResolversParentTypes['UserVehicleConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['UserVehicleEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleCountAggregate'] = ResolversParentTypes['UserVehicleCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleDeleteResponse'] = ResolversParentTypes['UserVehicleDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  pic?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserVechileStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleEdge'] = ResolversParentTypes['UserVehicleEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleMaxAggregate'] = ResolversParentTypes['UserVehicleMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserVechileStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserVehicleMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicleMinAggregate'] = ResolversParentTypes['UserVehicleMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['UserVechileStatus']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBodyResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBody'] = ResolversParentTypes['VehicleBody']> = ResolversObject<{
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBodyConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBodyConnection'] = ResolversParentTypes['VehicleBodyConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleBodyEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBodyDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBodyDeleteResponse'] = ResolversParentTypes['VehicleBodyDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBodyEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBodyEdge'] = ResolversParentTypes['VehicleBodyEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBrandResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBrand'] = ResolversParentTypes['VehicleBrand']> = ResolversObject<{
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBrandConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBrandConnection'] = ResolversParentTypes['VehicleBrandConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleBrandEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBrandDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBrandDeleteResponse'] = ResolversParentTypes['VehicleBrandDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBrandEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBrandEdge'] = ResolversParentTypes['VehicleBrandEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleEngineResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngine'] = ResolversParentTypes['VehicleEngine']> = ResolversObject<{
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleEngineConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngineConnection'] = ResolversParentTypes['VehicleEngineConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleEngineEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleEngineDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngineDeleteResponse'] = ResolversParentTypes['VehicleEngineDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleEngineEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngineEdge'] = ResolversParentTypes['VehicleEngineEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLog'] = ResolversParentTypes['VehicleLog']> = ResolversObject<{
+  bill?: Resolver<Maybe<ResolversTypes['VehicleLogBill']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  garage?: Resolver<Maybe<ResolversTypes['Garage']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['UserVehicleLogType'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  vehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogAggregateGroupBy'] = ResolversParentTypes['VehicleLogAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByCreatedAtArgs, 'by'>>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByDateArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByDeletedAtArgs, 'by'>>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogAggregateResponse'] = ResolversParentTypes['VehicleLogAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['VehicleLogAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['VehicleLogCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['VehicleLogAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['VehicleLogMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['VehicleLogMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['VehicleLogSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogAvgAggregate'] = ResolversParentTypes['VehicleLogAvgAggregate']> = ResolversObject<{
+  type?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBill'] = ResolversParentTypes['VehicleLogBill']> = ResolversObject<{
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  log?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  total?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  vehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillAggregateGroupBy'] = ResolversParentTypes['VehicleLogBillAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogBillAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogBillAggregateGroupByDeletedAtArgs, 'by'>>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogBillAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillAggregateResponse'] = ResolversParentTypes['VehicleLogBillAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['VehicleLogBillAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['VehicleLogBillCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['VehicleLogBillAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['VehicleLogBillMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['VehicleLogBillMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['VehicleLogBillSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillAvgAggregate'] = ResolversParentTypes['VehicleLogBillAvgAggregate']> = ResolversObject<{
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillConnection'] = ResolversParentTypes['VehicleLogBillConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleLogBillEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillCountAggregate'] = ResolversParentTypes['VehicleLogBillCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillDeleteResponse'] = ResolversParentTypes['VehicleLogBillDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillEdge'] = ResolversParentTypes['VehicleLogBillEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillMaxAggregate'] = ResolversParentTypes['VehicleLogBillMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillMinAggregate'] = ResolversParentTypes['VehicleLogBillMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogBillSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillSumAggregate'] = ResolversParentTypes['VehicleLogBillSumAggregate']> = ResolversObject<{
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogConnection'] = ResolversParentTypes['VehicleLogConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleLogEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogCountAggregate'] = ResolversParentTypes['VehicleLogCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogDeleteResponse'] = ResolversParentTypes['VehicleLogDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogEdge'] = ResolversParentTypes['VehicleLogEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogMaxAggregate'] = ResolversParentTypes['VehicleLogMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogMinAggregate'] = ResolversParentTypes['VehicleLogMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleLogSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogSumAggregate'] = ResolversParentTypes['VehicleLogSumAggregate']> = ResolversObject<{
+  type?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModel'] = ResolversParentTypes['VehicleModel']> = ResolversObject<{
+  bodies?: Resolver<Array<ResolversTypes['VehicleModelBody']>, ParentType, ContextType, RequireFields<VehicleModelBodiesArgs, 'filter' | 'sorting'>>;
+  brand?: Resolver<Maybe<ResolversTypes['VehicleBrand']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  engines?: Resolver<Array<ResolversTypes['VehicleEngine']>, ParentType, ContextType, RequireFields<VehicleModelEnginesArgs, 'filter' | 'sorting'>>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  parent?: Resolver<Maybe<ResolversTypes['VehicleModel']>, ParentType, ContextType>;
+  startYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  transmissions?: Resolver<Array<ResolversTypes['VehicleTransmission']>, ParentType, ContextType, RequireFields<VehicleModelTransmissionsArgs, 'filter' | 'sorting'>>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelBodyResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBody'] = ResolversParentTypes['VehicleModelBody']> = ResolversObject<{
+  body?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  model?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType>;
+  picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelBodyConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBodyConnection'] = ResolversParentTypes['VehicleModelBodyConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleModelBodyEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelBodyDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBodyDeleteResponse'] = ResolversParentTypes['VehicleModelBodyDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelBodyEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBodyEdge'] = ResolversParentTypes['VehicleModelBodyEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelConnection'] = ResolversParentTypes['VehicleModelConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleModelEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelDeleteResponse'] = ResolversParentTypes['VehicleModelDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleModelEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelEdge'] = ResolversParentTypes['VehicleModelEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleTransmissionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmission'] = ResolversParentTypes['VehicleTransmission']> = ResolversObject<{
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleTransmissionConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmissionConnection'] = ResolversParentTypes['VehicleTransmissionConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleTransmissionEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleTransmissionDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmissionDeleteResponse'] = ResolversParentTypes['VehicleTransmissionDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleTransmissionEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmissionEdge'] = ResolversParentTypes['VehicleTransmissionEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -13764,17 +18914,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   ApiKeyEdge?: ApiKeyEdgeResolvers<ContextType>;
   ApiKeyMaxAggregate?: ApiKeyMaxAggregateResolvers<ContextType>;
   ApiKeyMinAggregate?: ApiKeyMinAggregateResolvers<ContextType>;
-  BranchSaleChannel?: BranchSaleChannelResolvers<ContextType>;
-  BranchSaleChannelAggregateGroupBy?: BranchSaleChannelAggregateGroupByResolvers<ContextType>;
-  BranchSaleChannelAggregateResponse?: BranchSaleChannelAggregateResponseResolvers<ContextType>;
-  BranchSaleChannelAvgAggregate?: BranchSaleChannelAvgAggregateResolvers<ContextType>;
-  BranchSaleChannelConnection?: BranchSaleChannelConnectionResolvers<ContextType>;
-  BranchSaleChannelCountAggregate?: BranchSaleChannelCountAggregateResolvers<ContextType>;
-  BranchSaleChannelDeleteResponse?: BranchSaleChannelDeleteResponseResolvers<ContextType>;
-  BranchSaleChannelEdge?: BranchSaleChannelEdgeResolvers<ContextType>;
-  BranchSaleChannelMaxAggregate?: BranchSaleChannelMaxAggregateResolvers<ContextType>;
-  BranchSaleChannelMinAggregate?: BranchSaleChannelMinAggregateResolvers<ContextType>;
-  BranchSaleChannelSumAggregate?: BranchSaleChannelSumAggregateResolvers<ContextType>;
   ConnectionCursor?: GraphQLScalarType;
   Customer?: CustomerResolvers<ContextType>;
   CustomerAddress?: CustomerAddressResolvers<ContextType>;
@@ -13807,6 +18946,17 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   FileEdge?: FileEdgeResolvers<ContextType>;
   FileMaxAggregate?: FileMaxAggregateResolvers<ContextType>;
   FileMinAggregate?: FileMinAggregateResolvers<ContextType>;
+  Garage?: GarageResolvers<ContextType>;
+  GarageAggregateGroupBy?: GarageAggregateGroupByResolvers<ContextType>;
+  GarageAggregateResponse?: GarageAggregateResponseResolvers<ContextType>;
+  GarageAvgAggregate?: GarageAvgAggregateResolvers<ContextType>;
+  GarageConnection?: GarageConnectionResolvers<ContextType>;
+  GarageCountAggregate?: GarageCountAggregateResolvers<ContextType>;
+  GarageDeleteResponse?: GarageDeleteResponseResolvers<ContextType>;
+  GarageEdge?: GarageEdgeResolvers<ContextType>;
+  GarageMaxAggregate?: GarageMaxAggregateResolvers<ContextType>;
+  GarageMinAggregate?: GarageMinAggregateResolvers<ContextType>;
+  GarageSumAggregate?: GarageSumAggregateResolvers<ContextType>;
   JSON?: GraphQLScalarType;
   LoginResult?: LoginResultResolvers<ContextType>;
   Media?: MediaResolvers<ContextType>;
@@ -13913,6 +19063,12 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   OrgMembersMinAggregate?: OrgMembersMinAggregateResolvers<ContextType>;
   OrgMembersSumAggregate?: OrgMembersSumAggregateResolvers<ContextType>;
   OrgMinAggregate?: OrgMinAggregateResolvers<ContextType>;
+  OrgShopsAggregateGroupBy?: OrgShopsAggregateGroupByResolvers<ContextType>;
+  OrgShopsAggregateResponse?: OrgShopsAggregateResponseResolvers<ContextType>;
+  OrgShopsConnection?: OrgShopsConnectionResolvers<ContextType>;
+  OrgShopsCountAggregate?: OrgShopsCountAggregateResolvers<ContextType>;
+  OrgShopsMaxAggregate?: OrgShopsMaxAggregateResolvers<ContextType>;
+  OrgShopsMinAggregate?: OrgShopsMinAggregateResolvers<ContextType>;
   OrgSumAggregate?: OrgSumAggregateResolvers<ContextType>;
   PageInfo?: PageInfoResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
@@ -13990,17 +19146,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   ProductOptionMaxAggregate?: ProductOptionMaxAggregateResolvers<ContextType>;
   ProductOptionMinAggregate?: ProductOptionMinAggregateResolvers<ContextType>;
   ProductOptionSumAggregate?: ProductOptionSumAggregateResolvers<ContextType>;
-  ProductPrice?: ProductPriceResolvers<ContextType>;
-  ProductPriceAggregateGroupBy?: ProductPriceAggregateGroupByResolvers<ContextType>;
-  ProductPriceAggregateResponse?: ProductPriceAggregateResponseResolvers<ContextType>;
-  ProductPriceAvgAggregate?: ProductPriceAvgAggregateResolvers<ContextType>;
-  ProductPriceConnection?: ProductPriceConnectionResolvers<ContextType>;
-  ProductPriceCountAggregate?: ProductPriceCountAggregateResolvers<ContextType>;
-  ProductPriceDeleteResponse?: ProductPriceDeleteResponseResolvers<ContextType>;
-  ProductPriceEdge?: ProductPriceEdgeResolvers<ContextType>;
-  ProductPriceMaxAggregate?: ProductPriceMaxAggregateResolvers<ContextType>;
-  ProductPriceMinAggregate?: ProductPriceMinAggregateResolvers<ContextType>;
-  ProductPriceSumAggregate?: ProductPriceSumAggregateResolvers<ContextType>;
   ProductSumAggregate?: ProductSumAggregateResolvers<ContextType>;
   ProductType?: ProductTypeResolvers<ContextType>;
   ProductTypeAggregateGroupBy?: ProductTypeAggregateGroupByResolvers<ContextType>;
@@ -14037,6 +19182,98 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   ProductUnitProductsMinAggregate?: ProductUnitProductsMinAggregateResolvers<ContextType>;
   ProductUnitProductsSumAggregate?: ProductUnitProductsSumAggregateResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Shop?: ShopResolvers<ContextType>;
+  ShopAggregateGroupBy?: ShopAggregateGroupByResolvers<ContextType>;
+  ShopAggregateResponse?: ShopAggregateResponseResolvers<ContextType>;
+  ShopConnection?: ShopConnectionResolvers<ContextType>;
+  ShopCountAggregate?: ShopCountAggregateResolvers<ContextType>;
+  ShopDeleteResponse?: ShopDeleteResponseResolvers<ContextType>;
+  ShopEdge?: ShopEdgeResolvers<ContextType>;
+  ShopMaxAggregate?: ShopMaxAggregateResolvers<ContextType>;
+  ShopMember?: ShopMemberResolvers<ContextType>;
+  ShopMemberAggregateGroupBy?: ShopMemberAggregateGroupByResolvers<ContextType>;
+  ShopMemberAggregateResponse?: ShopMemberAggregateResponseResolvers<ContextType>;
+  ShopMemberAvgAggregate?: ShopMemberAvgAggregateResolvers<ContextType>;
+  ShopMemberConnection?: ShopMemberConnectionResolvers<ContextType>;
+  ShopMemberCountAggregate?: ShopMemberCountAggregateResolvers<ContextType>;
+  ShopMemberDeleteResponse?: ShopMemberDeleteResponseResolvers<ContextType>;
+  ShopMemberEdge?: ShopMemberEdgeResolvers<ContextType>;
+  ShopMemberMaxAggregate?: ShopMemberMaxAggregateResolvers<ContextType>;
+  ShopMemberMinAggregate?: ShopMemberMinAggregateResolvers<ContextType>;
+  ShopMemberSumAggregate?: ShopMemberSumAggregateResolvers<ContextType>;
+  ShopMembersAggregateGroupBy?: ShopMembersAggregateGroupByResolvers<ContextType>;
+  ShopMembersAggregateResponse?: ShopMembersAggregateResponseResolvers<ContextType>;
+  ShopMembersAvgAggregate?: ShopMembersAvgAggregateResolvers<ContextType>;
+  ShopMembersConnection?: ShopMembersConnectionResolvers<ContextType>;
+  ShopMembersCountAggregate?: ShopMembersCountAggregateResolvers<ContextType>;
+  ShopMembersMaxAggregate?: ShopMembersMaxAggregateResolvers<ContextType>;
+  ShopMembersMinAggregate?: ShopMembersMinAggregateResolvers<ContextType>;
+  ShopMembersSumAggregate?: ShopMembersSumAggregateResolvers<ContextType>;
+  ShopMinAggregate?: ShopMinAggregateResolvers<ContextType>;
   UpdateManyResponse?: UpdateManyResponseResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
+  UserAggregateGroupBy?: UserAggregateGroupByResolvers<ContextType>;
+  UserAggregateResponse?: UserAggregateResponseResolvers<ContextType>;
+  UserConnection?: UserConnectionResolvers<ContextType>;
+  UserCountAggregate?: UserCountAggregateResolvers<ContextType>;
+  UserDeleteResponse?: UserDeleteResponseResolvers<ContextType>;
+  UserEdge?: UserEdgeResolvers<ContextType>;
+  UserMaxAggregate?: UserMaxAggregateResolvers<ContextType>;
+  UserMinAggregate?: UserMinAggregateResolvers<ContextType>;
+  UserVehicle?: UserVehicleResolvers<ContextType>;
+  UserVehicleAggregateGroupBy?: UserVehicleAggregateGroupByResolvers<ContextType>;
+  UserVehicleAggregateResponse?: UserVehicleAggregateResponseResolvers<ContextType>;
+  UserVehicleConnection?: UserVehicleConnectionResolvers<ContextType>;
+  UserVehicleCountAggregate?: UserVehicleCountAggregateResolvers<ContextType>;
+  UserVehicleDeleteResponse?: UserVehicleDeleteResponseResolvers<ContextType>;
+  UserVehicleEdge?: UserVehicleEdgeResolvers<ContextType>;
+  UserVehicleMaxAggregate?: UserVehicleMaxAggregateResolvers<ContextType>;
+  UserVehicleMinAggregate?: UserVehicleMinAggregateResolvers<ContextType>;
+  VehicleBody?: VehicleBodyResolvers<ContextType>;
+  VehicleBodyConnection?: VehicleBodyConnectionResolvers<ContextType>;
+  VehicleBodyDeleteResponse?: VehicleBodyDeleteResponseResolvers<ContextType>;
+  VehicleBodyEdge?: VehicleBodyEdgeResolvers<ContextType>;
+  VehicleBrand?: VehicleBrandResolvers<ContextType>;
+  VehicleBrandConnection?: VehicleBrandConnectionResolvers<ContextType>;
+  VehicleBrandDeleteResponse?: VehicleBrandDeleteResponseResolvers<ContextType>;
+  VehicleBrandEdge?: VehicleBrandEdgeResolvers<ContextType>;
+  VehicleEngine?: VehicleEngineResolvers<ContextType>;
+  VehicleEngineConnection?: VehicleEngineConnectionResolvers<ContextType>;
+  VehicleEngineDeleteResponse?: VehicleEngineDeleteResponseResolvers<ContextType>;
+  VehicleEngineEdge?: VehicleEngineEdgeResolvers<ContextType>;
+  VehicleLog?: VehicleLogResolvers<ContextType>;
+  VehicleLogAggregateGroupBy?: VehicleLogAggregateGroupByResolvers<ContextType>;
+  VehicleLogAggregateResponse?: VehicleLogAggregateResponseResolvers<ContextType>;
+  VehicleLogAvgAggregate?: VehicleLogAvgAggregateResolvers<ContextType>;
+  VehicleLogBill?: VehicleLogBillResolvers<ContextType>;
+  VehicleLogBillAggregateGroupBy?: VehicleLogBillAggregateGroupByResolvers<ContextType>;
+  VehicleLogBillAggregateResponse?: VehicleLogBillAggregateResponseResolvers<ContextType>;
+  VehicleLogBillAvgAggregate?: VehicleLogBillAvgAggregateResolvers<ContextType>;
+  VehicleLogBillConnection?: VehicleLogBillConnectionResolvers<ContextType>;
+  VehicleLogBillCountAggregate?: VehicleLogBillCountAggregateResolvers<ContextType>;
+  VehicleLogBillDeleteResponse?: VehicleLogBillDeleteResponseResolvers<ContextType>;
+  VehicleLogBillEdge?: VehicleLogBillEdgeResolvers<ContextType>;
+  VehicleLogBillMaxAggregate?: VehicleLogBillMaxAggregateResolvers<ContextType>;
+  VehicleLogBillMinAggregate?: VehicleLogBillMinAggregateResolvers<ContextType>;
+  VehicleLogBillSumAggregate?: VehicleLogBillSumAggregateResolvers<ContextType>;
+  VehicleLogConnection?: VehicleLogConnectionResolvers<ContextType>;
+  VehicleLogCountAggregate?: VehicleLogCountAggregateResolvers<ContextType>;
+  VehicleLogDeleteResponse?: VehicleLogDeleteResponseResolvers<ContextType>;
+  VehicleLogEdge?: VehicleLogEdgeResolvers<ContextType>;
+  VehicleLogMaxAggregate?: VehicleLogMaxAggregateResolvers<ContextType>;
+  VehicleLogMinAggregate?: VehicleLogMinAggregateResolvers<ContextType>;
+  VehicleLogSumAggregate?: VehicleLogSumAggregateResolvers<ContextType>;
+  VehicleModel?: VehicleModelResolvers<ContextType>;
+  VehicleModelBody?: VehicleModelBodyResolvers<ContextType>;
+  VehicleModelBodyConnection?: VehicleModelBodyConnectionResolvers<ContextType>;
+  VehicleModelBodyDeleteResponse?: VehicleModelBodyDeleteResponseResolvers<ContextType>;
+  VehicleModelBodyEdge?: VehicleModelBodyEdgeResolvers<ContextType>;
+  VehicleModelConnection?: VehicleModelConnectionResolvers<ContextType>;
+  VehicleModelDeleteResponse?: VehicleModelDeleteResponseResolvers<ContextType>;
+  VehicleModelEdge?: VehicleModelEdgeResolvers<ContextType>;
+  VehicleTransmission?: VehicleTransmissionResolvers<ContextType>;
+  VehicleTransmissionConnection?: VehicleTransmissionConnectionResolvers<ContextType>;
+  VehicleTransmissionDeleteResponse?: VehicleTransmissionDeleteResponseResolvers<ContextType>;
+  VehicleTransmissionEdge?: VehicleTransmissionEdgeResolvers<ContextType>;
 }>;
 
