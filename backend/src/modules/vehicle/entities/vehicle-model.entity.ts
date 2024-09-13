@@ -3,7 +3,7 @@ import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinCol
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation, FilterableUnPagedRelation, IDField } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
-import { VehicleModelBody } from './vehicle-model-body.entity';
+import { VehicleModelBody, VehicleModelBodyDTO } from './vehicle-model-body.entity';
 import { VehicleEngine } from './vehicle-engine.entity';
 import { VehicleTransmission } from './vehicle-transmission.entity';
 import { VehicleBrand } from './vehicle-brand.entity';
@@ -21,25 +21,6 @@ class BaseClass extends BaseEntity {
   @Column({ type: 'int' })
   startYear: number
 
-  @FilterableField(() => Int, { nullable: true })
-  @Column({ type: 'int', nullable: true })
-  endYear: number
-
-  @Field(() => [ID], { nullable: true })
-  @ManyToMany(() => VehicleModelBody, (p) => p.model, genXToManyOptions())
-  @JoinTable()
-  bodies: VehicleModelBody[]
-
-  @Field(() => [ID], { nullable: true })
-  @ManyToMany(() => VehicleEngine, genXToManyOptions())
-  @JoinTable()
-  engines: VehicleEngine[]
-
-  @Field(() => [ID], { nullable: true })
-  @ManyToMany(() => VehicleTransmission, genXToManyOptions())
-  @JoinTable()
-  transmissions: VehicleTransmission[]
-
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
   metadata: any
@@ -50,7 +31,7 @@ class BaseClass extends BaseEntity {
  */
 @ObjectType()
 @FilterableRelation('parent', () => VehicleModel, { nullable: true })
-@FilterableUnPagedRelation('bodies', () => VehicleModelBody)
+@FilterableUnPagedRelation('bodies', () => VehicleModelBody, { update: { enabled: true } })
 @FilterableRelation('brand', () => VehicleBrand, { nullable: true })
 @FilterableUnPagedRelation('engines', () => VehicleEngine)
 @FilterableUnPagedRelation('transmissions', () => VehicleTransmission)
@@ -67,6 +48,19 @@ export class VehicleModel extends BaseClass {
   @ManyToOne(() => VehicleModel, genXToOneOptions({ nullable: true }))
   @JoinColumn({ name: 'parent_id' })
   parent: VehicleModel
+
+  @ManyToMany(() => VehicleModelBody, (p) => p.model, genXToManyOptions())
+  bodies: VehicleModelBody[]
+
+  @ManyToMany(() => VehicleEngine, genXToManyOptions())
+  engines: VehicleEngine[]
+
+  @ManyToMany(() => VehicleTransmission, genXToManyOptions())
+  transmissions: VehicleTransmission[]
+
+  @FilterableField(() => Int, { nullable: true })
+  @Column({ type: 'int', nullable: true })
+  endYear: number
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -91,4 +85,13 @@ export class VehicleModelDTO extends BaseClass {
 
   @FilterableField(() => ID)
   parent: VehicleModel
+
+  @FilterableField(() => [VehicleModelBodyDTO])
+  bodies: VehicleModelBody[]
+
+  @FilterableField(() => [ID])
+  engines: VehicleEngine[]
+
+  @FilterableField(() => [ID])
+  transmissions: VehicleTransmission[]
 }

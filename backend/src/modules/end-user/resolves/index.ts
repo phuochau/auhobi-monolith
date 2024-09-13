@@ -1,5 +1,7 @@
+import { UserVehicleResolver } from "./user-vehicle.resolver";
 import { UserResolver } from "./user.resolver";
 
 export const Resolvers = [
-    UserResolver
+    UserVehicleResolver,
+    UserResolver,
 ]

@@ -10,6 +10,7 @@ import { GarageModule } from './modules/garage/garage.module';
 import { CommerceModule } from './modules/commerce/commerce.module';
 import { EndUserModule } from './modules/end-user/end-user.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
+import { VehicleHistoryModule } from './modules/vehicle-history/vehicle-history.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
     GarageModule,
     EndUserModule,
     VehicleModule,
+    VehicleHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

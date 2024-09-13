@@ -1,9 +1,12 @@
+import { UserVehicle, UserVehicleDTO } from "./user-vehicle.entity"
 import { User, UserDTO } from "./user.entity"
 
 export const Entities = [
-    User
+    UserVehicle,
+    User,
 ]
 
 export const DTOs = [
-    UserDTO
+    UserVehicleDTO,
+    UserDTO,
 ]

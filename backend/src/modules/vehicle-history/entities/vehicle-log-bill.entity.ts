@@ -2,35 +2,39 @@ import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
-import { VehicleModel, VehicleModelDTO } from './vehicle-model.entity';
-import { VehicleBody, VehicleBodyDTO } from './vehicle-body.entity';
+import { VehicleLog } from './vehicle-log.entity';
+import { UserVehicle } from 'src/modules/end-user/entities/user-vehicle.entity';
 import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @Field({ nullable: true })
-  @Column({ nullable: true })
-  pic: string;
+  @FilterableField()
+  @Column()
+  total: number;
+
+  @Field(() => [String], { nullable: true })
+  @Column("text", { array: true, default: [] })
+  media: string[];
 }
 
 /**
  * Entity
  */
 @ObjectType()
-@FilterableRelation('body', () => VehicleBody)
-@FilterableRelation('model', () => VehicleModel)
-@Entity({ name: `${TABLE_PREFIX}_model_bodies` })
-export class VehicleModelBody extends BaseClass {
+@FilterableRelation('vehicle', () => UserVehicle)
+@FilterableRelation('log', () => VehicleLog)
+@Entity({ name: `${TABLE_PREFIX}_log_bills` })
+export class VehicleLogBill extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne(() => VehicleModel)
-  model: VehicleModel
+  @ManyToOne(() => UserVehicle, genXToOneOptions())
+  vehicle: UserVehicle
 
-  @ManyToOne(() => VehicleBody, genXToOneOptions())
-  body: VehicleBody
+  @ManyToOne(() => VehicleLog, genXToOneOptions())
+  log: VehicleLog
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -49,10 +53,10 @@ export class VehicleModelBody extends BaseClass {
  * DTO
  */
 @InputType()
-export class VehicleModelBodyDTO extends BaseClass {
-  @FilterableField(() => VehicleModelDTO)
-  model: VehicleModel
+export class VehicleLogBillDTO extends BaseClass {
+  @FilterableField(() => ID)
+  vehicle: UserVehicle
 
-  @FilterableField(() => VehicleBodyDTO)
-  body: VehicleBody
+  @FilterableField(() => [ID])
+  log: VehicleLog
 }
