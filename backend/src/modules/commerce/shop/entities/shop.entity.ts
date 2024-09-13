@@ -4,10 +4,10 @@ import { TABLE_PREFIX } from '../../constants';
 import { FilterableField, FilterableOffsetConnection, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { genXToManyOptions } from '../../../core/database/helpers/genXToManyOptions';
-import { Org } from 'src/modules/organization/entities/org.entity';
+import { Org } from '../../../organization/entities/org.entity';
 import { ShopMember, ShopMemberDTO } from './shop-member.entity';
-import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
-import { OrgBranch } from 'src/modules/organization/entities/org-branch.entity';
+import { genXToOneOptions } from '../../../core/database/helpers/genXToOneOptions';
+import { OrgBranch } from '../../../organization/entities/org-branch.entity';
 
 @ObjectType()
 @InputType()

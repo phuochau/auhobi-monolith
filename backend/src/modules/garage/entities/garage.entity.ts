@@ -7,9 +7,9 @@ import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { GarageStatus } from './enums/garage-status.enum';
-import { Org } from 'src/modules/organization/entities/org.entity';
-import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
-import { OrgBranch } from 'src/modules/organization/entities/org-branch.entity';
+import { Org } from '../../organization/entities/org.entity';
+import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
+import { OrgBranch } from '../../organization/entities/org-branch.entity';
 
 @ObjectType()
 @InputType()

@@ -3,8 +3,8 @@ import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToO
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { VehicleLog } from './vehicle-log.entity';
-import { UserVehicle } from 'src/modules/end-user/entities/user-vehicle.entity';
-import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
+import { UserVehicle } from '../../end-user/entities/user-vehicle.entity';
+import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()

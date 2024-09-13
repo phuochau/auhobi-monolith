@@ -4,7 +4,7 @@ import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { VehicleModel, VehicleModelDTO } from './vehicle-model.entity';
 import { VehicleBody, VehicleBodyDTO } from './vehicle-body.entity';
-import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
+import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()

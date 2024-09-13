@@ -11,7 +11,7 @@ import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 import { GqlContext } from '../../core/graphql/types/gql-context';
 import { OrgType } from './enums/org-type.enum';
-import { Shop } from 'src/modules/commerce/shop/entities/shop.entity';
+import { Shop } from '../../commerce/shop/entities/shop.entity';
 import { OrgStatus } from './enums/org-status.enum';
 
 

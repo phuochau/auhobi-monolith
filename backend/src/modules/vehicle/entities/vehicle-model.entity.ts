@@ -7,8 +7,8 @@ import { VehicleModelBody, VehicleModelBodyDTO } from './vehicle-model-body.enti
 import { VehicleEngine } from './vehicle-engine.entity';
 import { VehicleTransmission } from './vehicle-transmission.entity';
 import { VehicleBrand } from './vehicle-brand.entity';
-import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
-import { genXToManyOptions } from 'src/modules/core/database/helpers/genXToManyOptions';
+import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
+import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
 
 @ObjectType()
 @InputType()

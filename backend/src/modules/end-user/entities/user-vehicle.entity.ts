@@ -11,8 +11,8 @@ import { VehicleEngine } from '../../../modules/vehicle/entities/vehicle-engine.
 import { VehicleTransmission } from '../../../modules/vehicle/entities/vehicle-transmission.entity';
 import { UserVechileStatus } from './enums/user-vehicle-status.enum';
 import { User } from './user.entity';
-import { GqlContext } from 'src/modules/core/graphql/types/gql-context';
-import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
+import { GqlContext } from '../../core/graphql/types/gql-context';
+import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()
