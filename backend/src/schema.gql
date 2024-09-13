@@ -2380,9 +2380,9 @@ type Garage {
   status: GarageStatus
   metadata: JSON
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   org: Org!
   branch: OrgBranch!
 }
@@ -2404,9 +2404,9 @@ type GarageDeleteResponse {
   status: GarageStatus
   metadata: JSON
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type GarageEdge {
@@ -2435,9 +2435,9 @@ type GarageAggregateGroupBy {
   lng: Float
   status: GarageStatus
   id: ID
-  created_at(by: GroupBy! = DAY): DateTime
-  updated_at(by: GroupBy! = DAY): DateTime
-  deleted_at(by: GroupBy! = DAY): DateTime
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
 }
 
 type GarageCountAggregate {
@@ -2447,9 +2447,9 @@ type GarageCountAggregate {
   lng: Int
   status: Int
   id: Int
-  created_at: Int
-  updated_at: Int
-  deleted_at: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
 }
 
 type GarageSumAggregate {
@@ -2471,9 +2471,9 @@ type GarageMinAggregate {
   lng: Float
   status: GarageStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type GarageMaxAggregate {
@@ -2483,9 +2483,9 @@ type GarageMaxAggregate {
   lng: Float
   status: GarageStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type GarageAggregateResponse {
@@ -4531,17 +4531,17 @@ type VehicleBody {
   name: String!
   metadata: JSON
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleModelBody {
-  pic: String
+  picture: String
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   body: VehicleBody!
   model: VehicleModel!
 }
@@ -4550,18 +4550,18 @@ type VehicleEngine {
   name: String!
   metadata: JSON
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleTransmission {
   name: String!
   metadata: JSON
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleBrand {
@@ -4571,9 +4571,9 @@ type VehicleBrand {
   logo: String
   metadata: JSON
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleModel {
@@ -4582,9 +4582,9 @@ type VehicleModel {
   metadata: JSON
   id: ID!
   endYear: Int
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   parent: VehicleModel
   brand: VehicleBrand
   bodies(
@@ -4614,9 +4614,9 @@ input VehicleModelBodyFilter {
   and: [VehicleModelBodyFilter!]
   or: [VehicleModelBodyFilter!]
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   model: VehicleModelBodyFilterVehicleModelFilter
   body: VehicleModelBodyFilterVehicleBodyFilter
 }
@@ -4628,9 +4628,9 @@ input VehicleModelBodyFilterVehicleModelFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input IntFieldComparison {
@@ -4658,9 +4658,9 @@ input VehicleModelBodyFilterVehicleBodyFilter {
   or: [VehicleModelBodyFilterVehicleBodyFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleModelBodySort {
@@ -4671,9 +4671,9 @@ input VehicleModelBodySort {
 
 enum VehicleModelBodySortFields {
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleEngineFilter {
@@ -4681,9 +4681,9 @@ input VehicleEngineFilter {
   or: [VehicleEngineFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleEngineSort {
@@ -4695,9 +4695,9 @@ input VehicleEngineSort {
 enum VehicleEngineSortFields {
   name
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleTransmissionFilter {
@@ -4705,9 +4705,9 @@ input VehicleTransmissionFilter {
   or: [VehicleTransmissionFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleTransmissionSort {
@@ -4719,9 +4719,9 @@ input VehicleTransmissionSort {
 enum VehicleTransmissionSortFields {
   name
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 type User {
@@ -4729,9 +4729,9 @@ type User {
   avatar: String
   status: UserStatus!
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   account: Account!
 }
 
@@ -4747,9 +4747,9 @@ type UserVehicle {
   status: UserVechileStatus
   metadata: JSON
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   owner: User!
   model: VehicleModel!
   body: VehicleModelBody!
@@ -4769,9 +4769,9 @@ type UserVehicleDeleteResponse {
   status: UserVechileStatus
   metadata: JSON
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type UserVehicleEdge {
@@ -4797,36 +4797,36 @@ type UserVehicleAggregateGroupBy {
   name: String
   status: UserVechileStatus
   id: ID
-  created_at(by: GroupBy! = DAY): DateTime
-  updated_at(by: GroupBy! = DAY): DateTime
-  deleted_at(by: GroupBy! = DAY): DateTime
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
 }
 
 type UserVehicleCountAggregate {
   name: Int
   status: Int
   id: Int
-  created_at: Int
-  updated_at: Int
-  deleted_at: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
 }
 
 type UserVehicleMinAggregate {
   name: String
   status: UserVechileStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type UserVehicleMaxAggregate {
   name: String
   status: UserVechileStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type UserVehicleAggregateResponse {
@@ -4841,9 +4841,9 @@ type UserDeleteResponse {
   avatar: String
   status: UserStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type UserEdge {
@@ -4869,36 +4869,36 @@ type UserAggregateGroupBy {
   phone_number: String
   status: UserStatus
   id: ID
-  created_at(by: GroupBy! = DAY): DateTime
-  updated_at(by: GroupBy! = DAY): DateTime
-  deleted_at(by: GroupBy! = DAY): DateTime
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
 }
 
 type UserCountAggregate {
   phone_number: Int
   status: Int
   id: Int
-  created_at: Int
-  updated_at: Int
-  deleted_at: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
 }
 
 type UserMinAggregate {
   phone_number: String
   status: UserStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type UserMaxAggregate {
   phone_number: String
   status: UserStatus
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type UserAggregateResponse {
@@ -4912,9 +4912,9 @@ type VehicleBodyDeleteResponse {
   name: String
   metadata: JSON
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleBodyEdge {
@@ -4940,9 +4940,9 @@ type VehicleBrandDeleteResponse {
   logo: String
   metadata: JSON
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleBrandEdge {
@@ -4965,9 +4965,9 @@ type VehicleEngineDeleteResponse {
   name: String
   metadata: JSON
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleEngineEdge {
@@ -4987,11 +4987,11 @@ type VehicleEngineConnection {
 }
 
 type VehicleModelBodyDeleteResponse {
-  pic: String
+  picture: String
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleModelBodyEdge {
@@ -5016,9 +5016,9 @@ type VehicleModelDeleteResponse {
   metadata: JSON
   id: ID
   endYear: Int
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleModelEdge {
@@ -5041,9 +5041,9 @@ type VehicleTransmissionDeleteResponse {
   name: String
   metadata: JSON
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleTransmissionEdge {
@@ -5068,9 +5068,9 @@ type VehicleLog {
   mileage: Float
   type: UserVehicleLogType!
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   garage: Garage
   vehicle: UserVehicle!
   bill: VehicleLogBill
@@ -5091,9 +5091,9 @@ type VehicleLogBill {
   total: Float!
   media: [String!]
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
   vehicle: UserVehicle!
   log: VehicleLog!
 }
@@ -5102,9 +5102,9 @@ type VehicleLogBillDeleteResponse {
   total: Float
   media: [String!]
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleLogBillEdge {
@@ -5129,17 +5129,17 @@ type VehicleLogBillConnection {
 type VehicleLogBillAggregateGroupBy {
   total: Float
   id: ID
-  created_at(by: GroupBy! = DAY): DateTime
-  updated_at(by: GroupBy! = DAY): DateTime
-  deleted_at(by: GroupBy! = DAY): DateTime
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
 }
 
 type VehicleLogBillCountAggregate {
   total: Int
   id: Int
-  created_at: Int
-  updated_at: Int
-  deleted_at: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
 }
 
 type VehicleLogBillSumAggregate {
@@ -5153,17 +5153,17 @@ type VehicleLogBillAvgAggregate {
 type VehicleLogBillMinAggregate {
   total: Float
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleLogBillMaxAggregate {
   total: Float
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleLogBillAggregateResponse {
@@ -5181,9 +5181,9 @@ type VehicleLogDeleteResponse {
   mileage: Float
   type: UserVehicleLogType
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleLogEdge {
@@ -5210,9 +5210,9 @@ type VehicleLogAggregateGroupBy {
   date(by: GroupBy! = DAY): DateTime
   type: UserVehicleLogType
   id: ID
-  created_at(by: GroupBy! = DAY): DateTime
-  updated_at(by: GroupBy! = DAY): DateTime
-  deleted_at(by: GroupBy! = DAY): DateTime
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
 }
 
 type VehicleLogCountAggregate {
@@ -5220,9 +5220,9 @@ type VehicleLogCountAggregate {
   date: Int
   type: Int
   id: Int
-  created_at: Int
-  updated_at: Int
-  deleted_at: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
 }
 
 type VehicleLogSumAggregate {
@@ -5238,9 +5238,9 @@ type VehicleLogMinAggregate {
   date: DateTime
   type: UserVehicleLogType
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleLogMaxAggregate {
@@ -5248,9 +5248,9 @@ type VehicleLogMaxAggregate {
   date: DateTime
   type: UserVehicleLogType
   id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 type VehicleLogAggregateResponse {
@@ -7501,9 +7501,9 @@ input GarageAggregateFilter {
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   branch: GarageAggregateFilterOrgBranchAggregateFilter
   org: GarageAggregateFilterOrgAggregateFilter
 }
@@ -7558,9 +7558,9 @@ input GarageFilter {
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   branch: GarageFilterOrgBranchFilter
   org: GarageFilterOrgFilter
 }
@@ -7602,9 +7602,9 @@ enum GarageSortFields {
   lng
   status
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input UserVehicleAggregateFilter {
@@ -7613,9 +7613,9 @@ input UserVehicleAggregateFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   transmission: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter
   engine: UserVehicleAggregateFilterVehicleEngineAggregateFilter
   body: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter
@@ -7645,9 +7645,9 @@ input UserVehicleAggregateFilterVehicleTransmissionAggregateFilter {
   or: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleAggregateFilterVehicleEngineAggregateFilter {
@@ -7655,18 +7655,18 @@ input UserVehicleAggregateFilterVehicleEngineAggregateFilter {
   or: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleAggregateFilterVehicleModelBodyAggregateFilter {
   and: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
   or: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleAggregateFilterVehicleModelAggregateFilter {
@@ -7676,9 +7676,9 @@ input UserVehicleAggregateFilterVehicleModelAggregateFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleAggregateFilterUserAggregateFilter {
@@ -7687,9 +7687,9 @@ input UserVehicleAggregateFilterUserAggregateFilter {
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserStatusFilterComparison {
@@ -7715,9 +7715,9 @@ input UserVehicleFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   transmission: UserVehicleFilterVehicleTransmissionFilter
   engine: UserVehicleFilterVehicleEngineFilter
   body: UserVehicleFilterVehicleModelBodyFilter
@@ -7730,9 +7730,9 @@ input UserVehicleFilterVehicleTransmissionFilter {
   or: [UserVehicleFilterVehicleTransmissionFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleFilterVehicleEngineFilter {
@@ -7740,18 +7740,18 @@ input UserVehicleFilterVehicleEngineFilter {
   or: [UserVehicleFilterVehicleEngineFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleFilterVehicleModelBodyFilter {
   and: [UserVehicleFilterVehicleModelBodyFilter!]
   or: [UserVehicleFilterVehicleModelBodyFilter!]
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleFilterVehicleModelFilter {
@@ -7761,9 +7761,9 @@ input UserVehicleFilterVehicleModelFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleFilterUserFilter {
@@ -7772,9 +7772,9 @@ input UserVehicleFilterUserFilter {
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleSort {
@@ -7787,9 +7787,9 @@ enum UserVehicleSortFields {
   name
   status
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input UserAggregateFilter {
@@ -7798,9 +7798,9 @@ input UserAggregateFilter {
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   account: UserAggregateFilterAccountAggregateFilter
 }
 
@@ -7824,9 +7824,9 @@ input UserFilter {
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   account: UserFilterAccountFilter
 }
 
@@ -7854,9 +7854,9 @@ enum UserSortFields {
   phone_number
   status
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleBodyFilter {
@@ -7864,9 +7864,9 @@ input VehicleBodyFilter {
   or: [VehicleBodyFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleBodySort {
@@ -7878,9 +7878,9 @@ input VehicleBodySort {
 enum VehicleBodySortFields {
   name
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleBrandFilter {
@@ -7890,9 +7890,9 @@ input VehicleBrandFilter {
   startYear: IntFieldComparison
   endYear: IntFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleBrandSort {
@@ -7906,9 +7906,9 @@ enum VehicleBrandSortFields {
   startYear
   endYear
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleModelFilter {
@@ -7918,9 +7918,9 @@ input VehicleModelFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   brand: VehicleModelFilterVehicleBrandFilter
   parent: VehicleModelFilterVehicleModelFilter
   transmissions: VehicleModelFilterVehicleTransmissionFilter
@@ -7935,9 +7935,9 @@ input VehicleModelFilterVehicleBrandFilter {
   startYear: IntFieldComparison
   endYear: IntFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleModelFilterVehicleModelFilter {
@@ -7947,9 +7947,9 @@ input VehicleModelFilterVehicleModelFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleModelFilterVehicleTransmissionFilter {
@@ -7957,9 +7957,9 @@ input VehicleModelFilterVehicleTransmissionFilter {
   or: [VehicleModelFilterVehicleTransmissionFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleModelFilterVehicleEngineFilter {
@@ -7967,18 +7967,18 @@ input VehicleModelFilterVehicleEngineFilter {
   or: [VehicleModelFilterVehicleEngineFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleModelFilterVehicleModelBodyFilter {
   and: [VehicleModelFilterVehicleModelBodyFilter!]
   or: [VehicleModelFilterVehicleModelBodyFilter!]
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleModelSort {
@@ -7992,9 +7992,9 @@ enum VehicleModelSortFields {
   startYear
   id
   endYear
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleLogBillAggregateFilter {
@@ -8002,9 +8002,9 @@ input VehicleLogBillAggregateFilter {
   or: [VehicleLogBillAggregateFilter!]
   total: NumberFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   log: VehicleLogBillAggregateFilterVehicleLogAggregateFilter
   vehicle: VehicleLogBillAggregateFilterUserVehicleAggregateFilter
 }
@@ -8016,9 +8016,9 @@ input VehicleLogBillAggregateFilterVehicleLogAggregateFilter {
   date: DateFieldComparison
   type: UserVehicleLogTypeFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input UserVehicleLogTypeFilterComparison {
@@ -8044,9 +8044,9 @@ input VehicleLogBillAggregateFilterUserVehicleAggregateFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogBillFilter {
@@ -8054,9 +8054,9 @@ input VehicleLogBillFilter {
   or: [VehicleLogBillFilter!]
   total: NumberFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   log: VehicleLogBillFilterVehicleLogFilter
   vehicle: VehicleLogBillFilterUserVehicleFilter
 }
@@ -8068,9 +8068,9 @@ input VehicleLogBillFilterVehicleLogFilter {
   date: DateFieldComparison
   type: UserVehicleLogTypeFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogBillFilterUserVehicleFilter {
@@ -8079,9 +8079,9 @@ input VehicleLogBillFilterUserVehicleFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogBillSort {
@@ -8093,9 +8093,9 @@ input VehicleLogBillSort {
 enum VehicleLogBillSortFields {
   total
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 input VehicleLogAggregateFilter {
@@ -8105,9 +8105,9 @@ input VehicleLogAggregateFilter {
   date: DateFieldComparison
   type: UserVehicleLogTypeFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   vehicle: VehicleLogAggregateFilterUserVehicleAggregateFilter
   garage: VehicleLogAggregateFilterGarageAggregateFilter
 }
@@ -8118,9 +8118,9 @@ input VehicleLogAggregateFilterUserVehicleAggregateFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogAggregateFilterGarageAggregateFilter {
@@ -8132,9 +8132,9 @@ input VehicleLogAggregateFilterGarageAggregateFilter {
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogFilter {
@@ -8144,9 +8144,9 @@ input VehicleLogFilter {
   date: DateFieldComparison
   type: UserVehicleLogTypeFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
   vehicle: VehicleLogFilterUserVehicleFilter
   garage: VehicleLogFilterGarageFilter
 }
@@ -8157,9 +8157,9 @@ input VehicleLogFilterUserVehicleFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogFilterGarageFilter {
@@ -8171,9 +8171,9 @@ input VehicleLogFilterGarageFilter {
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input VehicleLogSort {
@@ -8187,9 +8187,9 @@ enum VehicleLogSortFields {
   date
   type
   id
-  created_at
-  updated_at
-  deleted_at
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 type Mutation {
@@ -10186,9 +10186,9 @@ input GarageUpdateFilter {
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneGarageInput {
@@ -10210,9 +10210,9 @@ input GarageDeleteFilter {
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneUserVehicleInput {
@@ -10259,9 +10259,9 @@ input UserVehicleUpdateFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneUserVehicleInput {
@@ -10280,9 +10280,9 @@ input UserVehicleDeleteFilter {
   name: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneUserInput {
@@ -10324,9 +10324,9 @@ input UserUpdateFilter {
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneUserInput {
@@ -10345,9 +10345,9 @@ input UserDeleteFilter {
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleBodyInput {
@@ -10386,9 +10386,9 @@ input VehicleBodyUpdateFilter {
   or: [VehicleBodyUpdateFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleBodyInput {
@@ -10406,9 +10406,9 @@ input VehicleBodyDeleteFilter {
   or: [VehicleBodyDeleteFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleBrandInput {
@@ -10452,9 +10452,9 @@ input VehicleBrandUpdateFilter {
   startYear: IntFieldComparison
   endYear: IntFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleBrandInput {
@@ -10474,9 +10474,9 @@ input VehicleBrandDeleteFilter {
   startYear: IntFieldComparison
   endYear: IntFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleEngineInput {
@@ -10515,9 +10515,9 @@ input VehicleEngineUpdateFilter {
   or: [VehicleEngineUpdateFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleEngineInput {
@@ -10535,9 +10535,9 @@ input VehicleEngineDeleteFilter {
   or: [VehicleEngineDeleteFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleModelBodyInput {
@@ -10546,7 +10546,7 @@ input CreateOneVehicleModelBodyInput {
 }
 
 input VehicleModelBodyDTO {
-  pic: String
+  picture: String
   model: VehicleModelDTO!
   body: VehicleBodyDTO!
 }
@@ -10587,9 +10587,9 @@ input VehicleModelBodyUpdateFilter {
   and: [VehicleModelBodyUpdateFilter!]
   or: [VehicleModelBodyUpdateFilter!]
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleModelBodyInput {
@@ -10606,9 +10606,9 @@ input VehicleModelBodyDeleteFilter {
   and: [VehicleModelBodyDeleteFilter!]
   or: [VehicleModelBodyDeleteFilter!]
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input AddBodiesToVehicleModelInput {
@@ -10660,9 +10660,9 @@ input VehicleModelUpdateFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleModelInput {
@@ -10682,9 +10682,9 @@ input VehicleModelDeleteFilter {
   startYear: IntFieldComparison
   id: IDFilterComparison
   endYear: IntFieldComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleTransmissionInput {
@@ -10723,9 +10723,9 @@ input VehicleTransmissionUpdateFilter {
   or: [VehicleTransmissionUpdateFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleTransmissionInput {
@@ -10743,9 +10743,9 @@ input VehicleTransmissionDeleteFilter {
   or: [VehicleTransmissionDeleteFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleLogBillInput {
@@ -10786,9 +10786,9 @@ input VehicleLogBillUpdateFilter {
   or: [VehicleLogBillUpdateFilter!]
   total: NumberFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleLogBillInput {
@@ -10806,9 +10806,9 @@ input VehicleLogBillDeleteFilter {
   or: [VehicleLogBillDeleteFilter!]
   total: NumberFieldComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CreateOneVehicleLogInput {
@@ -10854,9 +10854,9 @@ input VehicleLogUpdateFilter {
   date: DateFieldComparison
   type: UserVehicleLogTypeFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input DeleteOneVehicleLogInput {
@@ -10876,7 +10876,7 @@ input VehicleLogDeleteFilter {
   date: DateFieldComparison
   type: UserVehicleLogTypeFilterComparison
   id: IDFilterComparison
-  created_at: DateFieldComparison
-  updated_at: DateFieldComparison
-  deleted_at: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }

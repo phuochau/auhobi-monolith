@@ -50,15 +50,15 @@ export class VehicleLog extends BaseClass {
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
-  created_at?: Date;
+  createdAt?: Date;
 
   @FilterableField({ nullable: true })
   @UpdateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
-  updated_at?: Date;
+  updatedAt?: Date;
 
   @FilterableField({ nullable: true })
   @DeleteDateColumn({ type: "timestamptz", onUpdate: "CURRENT_TIMESTAMP(6)" })
-  deleted_at?: Date;
+  deletedAt?: Date;
 }
 
 /**
