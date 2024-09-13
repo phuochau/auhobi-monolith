@@ -11,6 +11,7 @@ import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 import { GqlContext } from '../../core/graphql/types/gql-context';
 import { OrgType } from './enums/org-type.enum';
+import { Shop } from 'src/modules/commerce/shop/entities/shop.entity';
 
 registerEnumType(OrgType, {
   name: 'OrgType',
@@ -20,7 +21,7 @@ registerEnumType(OrgType, {
 @InputType()
 class BaseClass extends BaseEntity {
   @FilterableField(() => OrgType)
-  @Column('int', { default: OrgType.FNB })
+  @Column('int', { default: OrgType.DEFAULT })
   type: OrgType;
 
   @FilterableField()
@@ -43,6 +44,7 @@ class BaseClass extends BaseEntity {
 @FilterableRelation('createdBy', () => Account)
 @FilterableOffsetConnection('members', () => OrgMember, { nullable: true, update: { enabled: true } })
 @FilterableOffsetConnection('branches', () => OrgBranch, { nullable: true, update: { enabled: true } })
+@FilterableOffsetConnection('shops', () => Shop, { nullable: true, update: { enabled: true } })
 @QueryOptions({ filterDepth: 3 })
 @Entity({ name: `${TABLE_PREFIX}_orgs` })
 export class Org extends BaseClass {
@@ -58,6 +60,9 @@ export class Org extends BaseClass {
 
   @OneToMany(() => OrgBranch, team => team.org, genXToManyOptions({ nullable: true }))
   branches: OrgBranch[];
+
+  @OneToMany(() => Shop, shop => shop.org, genXToManyOptions({ nullable: true }))
+  shops: Shop[];
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })

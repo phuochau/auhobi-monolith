@@ -871,6 +871,160 @@ enum SortNulls {
   NULLS_LAST
 }
 
+type ShopMember {
+  role: ShopMemberRole!
+  enabled: Boolean
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  account: Account!
+  shop: Shop!
+}
+
+enum ShopMemberRole {
+  VIEWER
+  EDITOR
+  MANAGER
+  OWNER
+}
+
+type Shop {
+  name: String!
+  details: JSON
+  enabled: Boolean
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  membersAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ShopMemberAggregateFilter
+  ): [ShopMembersAggregateResponse!]!
+  org: Org!
+  branch: OrgBranch!
+  members(
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: ShopMemberFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ShopMemberSort!]! = []
+  ): ShopMembersConnection!
+}
+
+input ShopMemberAggregateFilter {
+  and: [ShopMemberAggregateFilter!]
+  or: [ShopMemberAggregateFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  shop: ShopMemberAggregateFilterShopAggregateFilter
+  account: ShopMemberAggregateFilterAccountAggregateFilter
+}
+
+input ShopMemberRoleFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ShopMemberRole
+  neq: ShopMemberRole
+  gt: ShopMemberRole
+  gte: ShopMemberRole
+  lt: ShopMemberRole
+  lte: ShopMemberRole
+  like: ShopMemberRole
+  notLike: ShopMemberRole
+  iLike: ShopMemberRole
+  notILike: ShopMemberRole
+  in: [ShopMemberRole!]
+  notIn: [ShopMemberRole!]
+}
+
+input ShopMemberAggregateFilterShopAggregateFilter {
+  and: [ShopMemberAggregateFilterShopAggregateFilter!]
+  or: [ShopMemberAggregateFilterShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopMemberAggregateFilterAccountAggregateFilter {
+  and: [ShopMemberAggregateFilterAccountAggregateFilter!]
+  or: [ShopMemberAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopMemberFilter {
+  and: [ShopMemberFilter!]
+  or: [ShopMemberFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  shop: ShopMemberFilterShopFilter
+  account: ShopMemberFilterAccountFilter
+}
+
+input ShopMemberFilterShopFilter {
+  and: [ShopMemberFilterShopFilter!]
+  or: [ShopMemberFilterShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopMemberFilterAccountFilter {
+  and: [ShopMemberFilterAccountFilter!]
+  or: [ShopMemberFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopMemberSort {
+  field: ShopMemberSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum ShopMemberSortFields {
+  role
+  enabled
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
 type Org {
   type: OrgType!
   name: String!
@@ -888,6 +1042,10 @@ type Org {
     """Filter to find records to aggregate on"""
     filter: OrgBranchAggregateFilter
   ): [OrgBranchesAggregateResponse!]!
+  shopsAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ShopAggregateFilter
+  ): [OrgShopsAggregateResponse!]!
   createdBy: Account!
   members(
     """Limit or page results."""
@@ -909,10 +1067,20 @@ type Org {
     """Specify to sort results."""
     sorting: [OrgBranchSort!]! = []
   ): OrgBranchesConnection
+  shops(
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: ShopFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ShopSort!]! = []
+  ): OrgShopsConnection
 }
 
 enum OrgType {
-  FNB
+  DEFAULT
 }
 
 input OrgMemberAggregateFilter {
@@ -1031,6 +1199,56 @@ input OrgBranchAggregateFilterOrgBranchMemberAggregateFilter {
   deletedAt: DateFieldComparison
 }
 
+input ShopAggregateFilter {
+  and: [ShopAggregateFilter!]
+  or: [ShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  branch: ShopAggregateFilterOrgBranchAggregateFilter
+  org: ShopAggregateFilterOrgAggregateFilter
+  members: ShopAggregateFilterShopMemberAggregateFilter
+}
+
+input ShopAggregateFilterOrgBranchAggregateFilter {
+  and: [ShopAggregateFilterOrgBranchAggregateFilter!]
+  or: [ShopAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopAggregateFilterOrgAggregateFilter {
+  and: [ShopAggregateFilterOrgAggregateFilter!]
+  or: [ShopAggregateFilterOrgAggregateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopAggregateFilterShopMemberAggregateFilter {
+  and: [ShopAggregateFilterShopMemberAggregateFilter!]
+  or: [ShopAggregateFilterShopMemberAggregateFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
 input OrgMemberFilter {
   and: [OrgMemberFilter!]
   or: [OrgMemberFilter!]
@@ -1129,6 +1347,72 @@ input OrgBranchSort {
 }
 
 enum OrgBranchSortFields {
+  name
+  details
+  enabled
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+input ShopFilter {
+  and: [ShopFilter!]
+  or: [ShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  branch: ShopFilterOrgBranchFilter
+  org: ShopFilterOrgFilter
+  members: ShopFilterShopMemberFilter
+}
+
+input ShopFilterOrgBranchFilter {
+  and: [ShopFilterOrgBranchFilter!]
+  or: [ShopFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopFilterOrgFilter {
+  and: [ShopFilterOrgFilter!]
+  or: [ShopFilterOrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopFilterShopMemberFilter {
+  and: [ShopFilterShopMemberFilter!]
+  or: [ShopFilterShopMemberFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ShopSort {
+  field: ShopSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum ShopSortFields {
   name
   details
   enabled
@@ -1536,6 +1820,17 @@ type OrgAggregateResponse {
   max: OrgMaxAggregate
 }
 
+type OrgShopsConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [Shop!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
 type OrgBranchesConnection {
   """Paging information"""
   pageInfo: OffsetPageInfo!
@@ -1556,6 +1851,51 @@ type OrgMembersConnection {
 
   """Fetch total count of records"""
   totalCount: Int!
+}
+
+type OrgShopsAggregateGroupBy {
+  name: String
+  details: JSON
+  enabled: Boolean
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrgShopsCountAggregate {
+  name: Int
+  details: Int
+  enabled: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type OrgShopsMinAggregate {
+  name: String
+  details: JSON
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrgShopsMaxAggregate {
+  name: String
+  details: JSON
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrgShopsAggregateResponse {
+  groupBy: OrgShopsAggregateGroupBy
+  count: OrgShopsCountAggregate
+  min: OrgShopsMinAggregate
+  max: OrgShopsMaxAggregate
 }
 
 type OrgBranchesAggregateGroupBy {
@@ -1654,6 +1994,463 @@ type OrgMembersAggregateResponse {
   max: OrgMembersMaxAggregate
 }
 
+type Customer {
+  phone: String!
+  email: String
+  firstName: String
+  lastName: String
+  gender: CustomerGender!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  addressesAggregate(
+    """Filter to find records to aggregate on"""
+    filter: CustomerAddressAggregateFilter
+  ): [CustomerAddressesAggregateResponse!]!
+  addresses(
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: CustomerAddressFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CustomerAddressSort!]! = []
+  ): CustomerAddressesConnection
+}
+
+enum CustomerGender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+input CustomerAddressAggregateFilter {
+  and: [CustomerAddressAggregateFilter!]
+  or: [CustomerAddressAggregateFilter!]
+  full: StringFieldComparison
+  distanceKm: NumberFieldComparison
+  city: StringFieldComparison
+  district: StringFieldComparison
+  ward: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  customer: CustomerAddressAggregateFilterCustomerAggregateFilter
+}
+
+input NumberFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Float
+  neq: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  in: [Float!]
+  notIn: [Float!]
+  between: NumberFieldComparisonBetween
+  notBetween: NumberFieldComparisonBetween
+}
+
+input NumberFieldComparisonBetween {
+  lower: Float!
+  upper: Float!
+}
+
+input CustomerAddressAggregateFilterCustomerAggregateFilter {
+  and: [CustomerAddressAggregateFilterCustomerAggregateFilter!]
+  or: [CustomerAddressAggregateFilterCustomerAggregateFilter!]
+  phone: StringFieldComparison
+  email: StringFieldComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  gender: CustomerGenderFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input CustomerGenderFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: CustomerGender
+  neq: CustomerGender
+  gt: CustomerGender
+  gte: CustomerGender
+  lt: CustomerGender
+  lte: CustomerGender
+  like: CustomerGender
+  notLike: CustomerGender
+  iLike: CustomerGender
+  notILike: CustomerGender
+  in: [CustomerGender!]
+  notIn: [CustomerGender!]
+}
+
+input CustomerAddressFilter {
+  and: [CustomerAddressFilter!]
+  or: [CustomerAddressFilter!]
+  full: StringFieldComparison
+  distanceKm: NumberFieldComparison
+  city: StringFieldComparison
+  district: StringFieldComparison
+  ward: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  customer: CustomerAddressFilterCustomerFilter
+}
+
+input CustomerAddressFilterCustomerFilter {
+  and: [CustomerAddressFilterCustomerFilter!]
+  or: [CustomerAddressFilterCustomerFilter!]
+  phone: StringFieldComparison
+  email: StringFieldComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  gender: CustomerGenderFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input CustomerAddressSort {
+  field: CustomerAddressSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum CustomerAddressSortFields {
+  full
+  distanceKm
+  city
+  district
+  ward
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+type CustomerAddress {
+  full: String
+  distanceKm: Float
+  city: String
+  district: String
+  ward: String
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerDeleteResponse {
+  phone: String
+  email: String
+  firstName: String
+  lastName: String
+  gender: CustomerGender
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerEdge {
+  """The node containing the Customer"""
+  node: Customer!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type CustomerConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [CustomerEdge!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type CustomerAggregateGroupBy {
+  phone: String
+  email: String
+  firstName: String
+  lastName: String
+  gender: CustomerGender
+  id: ID
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
+}
+
+type CustomerCountAggregate {
+  phone: Int
+  email: Int
+  firstName: Int
+  lastName: Int
+  gender: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type CustomerSumAggregate {
+  gender: Float
+}
+
+type CustomerAvgAggregate {
+  gender: Float
+}
+
+type CustomerMinAggregate {
+  phone: String
+  email: String
+  firstName: String
+  lastName: String
+  gender: CustomerGender
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerMaxAggregate {
+  phone: String
+  email: String
+  firstName: String
+  lastName: String
+  gender: CustomerGender
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerAggregateResponse {
+  groupBy: CustomerAggregateGroupBy
+  count: CustomerCountAggregate
+  sum: CustomerSumAggregate
+  avg: CustomerAvgAggregate
+  min: CustomerMinAggregate
+  max: CustomerMaxAggregate
+}
+
+type CustomerAddressesConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [CustomerAddress!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type CustomerAddressesAggregateGroupBy {
+  full: String
+  distanceKm: Float
+  city: String
+  district: String
+  ward: String
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerAddressesCountAggregate {
+  full: Int
+  distanceKm: Int
+  city: Int
+  district: Int
+  ward: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type CustomerAddressesSumAggregate {
+  distanceKm: Float
+}
+
+type CustomerAddressesAvgAggregate {
+  distanceKm: Float
+}
+
+type CustomerAddressesMinAggregate {
+  full: String
+  distanceKm: Float
+  city: String
+  district: String
+  ward: String
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerAddressesMaxAggregate {
+  full: String
+  distanceKm: Float
+  city: String
+  district: String
+  ward: String
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type CustomerAddressesAggregateResponse {
+  groupBy: CustomerAddressesAggregateGroupBy
+  count: CustomerAddressesCountAggregate
+  sum: CustomerAddressesSumAggregate
+  avg: CustomerAddressesAvgAggregate
+  min: CustomerAddressesMinAggregate
+  max: CustomerAddressesMaxAggregate
+}
+
+type Garage {
+  name: String!
+  description: String
+  address: String
+  lat: Float
+  lng: Float
+  logo: String
+  media: [String!]
+  status: GarageStatus
+  metadata: JSON
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime
+  deleted_at: DateTime
+  org: Org!
+  branch: OrgBranch!
+}
+
+enum GarageStatus {
+  ACTIVATED
+  UNACTIVATED
+  BLOCKED
+}
+
+type GarageDeleteResponse {
+  name: String
+  description: String
+  address: String
+  lat: Float
+  lng: Float
+  logo: String
+  media: [String!]
+  status: GarageStatus
+  metadata: JSON
+  id: ID
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type GarageEdge {
+  """The node containing the Garage"""
+  node: Garage!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type GarageConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [GarageEdge!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type GarageAggregateGroupBy {
+  name: String
+  address: String
+  lat: Float
+  lng: Float
+  status: GarageStatus
+  id: ID
+  created_at(by: GroupBy! = DAY): DateTime
+  updated_at(by: GroupBy! = DAY): DateTime
+  deleted_at(by: GroupBy! = DAY): DateTime
+}
+
+type GarageCountAggregate {
+  name: Int
+  address: Int
+  lat: Int
+  lng: Int
+  status: Int
+  id: Int
+  created_at: Int
+  updated_at: Int
+  deleted_at: Int
+}
+
+type GarageSumAggregate {
+  lat: Float
+  lng: Float
+  id: Float
+}
+
+type GarageAvgAggregate {
+  lat: Float
+  lng: Float
+  id: Float
+}
+
+type GarageMinAggregate {
+  name: String
+  address: String
+  lat: Float
+  lng: Float
+  status: GarageStatus
+  id: ID
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type GarageMaxAggregate {
+  name: String
+  address: String
+  lat: Float
+  lng: Float
+  status: GarageStatus
+  id: ID
+  created_at: DateTime
+  updated_at: DateTime
+  deleted_at: DateTime
+}
+
+type GarageAggregateResponse {
+  groupBy: GarageAggregateGroupBy
+  count: GarageCountAggregate
+  sum: GarageSumAggregate
+  avg: GarageAvgAggregate
+  min: GarageMinAggregate
+  max: GarageMaxAggregate
+}
+
 type ProductType {
   sku: String
   name: String!
@@ -1694,26 +2491,6 @@ input ProductAggregateFilter {
   branch: ProductAggregateFilterOrgBranchAggregateFilter
   optionGroups: ProductAggregateFilterProductOptionGroupAggregateFilter
   categories: ProductAggregateFilterProductCategoryAggregateFilter
-}
-
-input NumberFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: Float
-  neq: Float
-  gt: Float
-  gte: Float
-  lt: Float
-  lte: Float
-  in: [Float!]
-  notIn: [Float!]
-  between: NumberFieldComparisonBetween
-  notBetween: NumberFieldComparisonBetween
-}
-
-input NumberFieldComparisonBetween {
-  lower: Float!
-  upper: Float!
 }
 
 input ProductAggregateFilterProductUnitAggregateFilter {
@@ -1861,6 +2638,30 @@ enum ProductSortFields {
   createdAt
   updatedAt
   deletedAt
+}
+
+type ProductCategory {
+  sku: String
+  name: String!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  productsAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ProductAggregateFilter
+  ): [ProductCategoryProductsAggregateResponse!]!
+  branch: OrgBranch!
+  products(
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: ProductFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ProductSort!]! = []
+  ): ProductCategoryProductsConnection
 }
 
 type ProductUnit {
@@ -2225,28 +3026,332 @@ enum ProductOptionGroupSortFields {
   deletedAt
 }
 
-type ProductCategory {
-  sku: String
-  name: String!
+type Order {
+  refId: String
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float!
+  note: String
+  shippingAddressDistanceKm: Float
+  shippingAddressDistrict: String
+  shippingAddressCity: String
+  shippingAddressWard: String
+  shippingAddressFull: String
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
-  productsAggregate(
-    """Filter to find records to aggregate on"""
-    filter: ProductAggregateFilter
-  ): [ProductCategoryProductsAggregateResponse!]!
   branch: OrgBranch!
-  products(
+  customer: Customer!
+}
+
+type OrderProduct {
+  quantity: Float!
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  optionsAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ProductOptionAggregateFilter
+  ): [OrderProductOptionsAggregateResponse!]!
+  product: Product!
+  order: Order!
+  options(
     """Limit or page results."""
     paging: OffsetPaging! = {limit: 10}
 
     """Specify to filter the records returned."""
-    filter: ProductFilter! = {}
+    filter: ProductOptionFilter! = {}
 
     """Specify to sort results."""
-    sorting: [ProductSort!]! = []
-  ): ProductCategoryProductsConnection
+    sorting: [ProductOptionSort!]! = []
+  ): OrderProductOptionsConnection!
+}
+
+type OrderProductDeleteResponse {
+  quantity: Float
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderProductEdge {
+  """The node containing the OrderProduct"""
+  node: OrderProduct!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type OrderProductConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [OrderProductEdge!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type OrderProductAggregateGroupBy {
+  quantity: Float
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
+}
+
+type OrderProductCountAggregate {
+  quantity: Int
+  grossPrice: Int
+  discountPrice: Int
+  netPrice: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type OrderProductSumAggregate {
+  quantity: Float
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float
+}
+
+type OrderProductAvgAggregate {
+  quantity: Float
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float
+}
+
+type OrderProductMinAggregate {
+  quantity: Float
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderProductMaxAggregate {
+  quantity: Float
+  grossPrice: Float
+  discountPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderProductAggregateResponse {
+  groupBy: OrderProductAggregateGroupBy
+  count: OrderProductCountAggregate
+  sum: OrderProductSumAggregate
+  avg: OrderProductAvgAggregate
+  min: OrderProductMinAggregate
+  max: OrderProductMaxAggregate
+}
+
+type OrderProductOptionsConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [ProductOption!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type OrderProductOptionsAggregateGroupBy {
+  sku: String
+  name: String
+  diffPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderProductOptionsCountAggregate {
+  sku: Int
+  name: Int
+  diffPrice: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type OrderProductOptionsSumAggregate {
+  diffPrice: Float
+}
+
+type OrderProductOptionsAvgAggregate {
+  diffPrice: Float
+}
+
+type OrderProductOptionsMinAggregate {
+  sku: String
+  name: String
+  diffPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderProductOptionsMaxAggregate {
+  sku: String
+  name: String
+  diffPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderProductOptionsAggregateResponse {
+  groupBy: OrderProductOptionsAggregateGroupBy
+  count: OrderProductOptionsCountAggregate
+  sum: OrderProductOptionsSumAggregate
+  avg: OrderProductOptionsAvgAggregate
+  min: OrderProductOptionsMinAggregate
+  max: OrderProductOptionsMaxAggregate
+}
+
+type OrderDeleteResponse {
+  refId: String
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float
+  note: String
+  shippingAddressDistanceKm: Float
+  shippingAddressDistrict: String
+  shippingAddressCity: String
+  shippingAddressWard: String
+  shippingAddressFull: String
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderEdge {
+  """The node containing the Order"""
+  node: Order!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type OrderConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [OrderEdge!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type OrderAggregateGroupBy {
+  refId: String
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
+}
+
+type OrderCountAggregate {
+  refId: Int
+  grossPrice: Int
+  discountPrice: Int
+  commissionPercent: Int
+  commissionPrice: Int
+  netPrice: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type OrderSumAggregate {
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float
+}
+
+type OrderAvgAggregate {
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float
+}
+
+type OrderMinAggregate {
+  refId: String
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderMaxAggregate {
+  refId: String
+  grossPrice: Float
+  discountPrice: Float
+  commissionPercent: Float
+  commissionPrice: Float
+  netPrice: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type OrderAggregateResponse {
+  groupBy: OrderAggregateGroupBy
+  count: OrderCountAggregate
+  sum: OrderSumAggregate
+  avg: OrderAvgAggregate
+  min: OrderMinAggregate
+  max: OrderMaxAggregate
 }
 
 type ProductCategoryDeleteResponse {
@@ -3166,768 +4271,219 @@ type ProductCategoriesAggregateResponse {
   max: ProductCategoriesMaxAggregate
 }
 
-type CustomerAddress {
-  full: String
-  distanceKm: Float
-  city: String
-  district: String
-  ward: String
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type Customer {
-  phone: String!
-  email: String
-  firstName: String
-  lastName: String
-  gender: CustomerGender!
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  addressesAggregate(
-    """Filter to find records to aggregate on"""
-    filter: CustomerAddressAggregateFilter
-  ): [CustomerAddressesAggregateResponse!]!
-  addresses(
-    """Limit or page results."""
-    paging: OffsetPaging! = {limit: 10}
-
-    """Specify to filter the records returned."""
-    filter: CustomerAddressFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [CustomerAddressSort!]! = []
-  ): CustomerAddressesConnection
-}
-
-enum CustomerGender {
-  MALE
-  FEMALE
-  UNKNOWN
-}
-
-input CustomerAddressAggregateFilter {
-  and: [CustomerAddressAggregateFilter!]
-  or: [CustomerAddressAggregateFilter!]
-  full: StringFieldComparison
-  distanceKm: NumberFieldComparison
-  city: StringFieldComparison
-  district: StringFieldComparison
-  ward: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  customer: CustomerAddressAggregateFilterCustomerAggregateFilter
-}
-
-input CustomerAddressAggregateFilterCustomerAggregateFilter {
-  and: [CustomerAddressAggregateFilterCustomerAggregateFilter!]
-  or: [CustomerAddressAggregateFilterCustomerAggregateFilter!]
-  phone: StringFieldComparison
-  email: StringFieldComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  gender: CustomerGenderFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CustomerGenderFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: CustomerGender
-  neq: CustomerGender
-  gt: CustomerGender
-  gte: CustomerGender
-  lt: CustomerGender
-  lte: CustomerGender
-  like: CustomerGender
-  notLike: CustomerGender
-  iLike: CustomerGender
-  notILike: CustomerGender
-  in: [CustomerGender!]
-  notIn: [CustomerGender!]
-}
-
-input CustomerAddressFilter {
-  and: [CustomerAddressFilter!]
-  or: [CustomerAddressFilter!]
-  full: StringFieldComparison
-  distanceKm: NumberFieldComparison
-  city: StringFieldComparison
-  district: StringFieldComparison
-  ward: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  customer: CustomerAddressFilterCustomerFilter
-}
-
-input CustomerAddressFilterCustomerFilter {
-  and: [CustomerAddressFilterCustomerFilter!]
-  or: [CustomerAddressFilterCustomerFilter!]
-  phone: StringFieldComparison
-  email: StringFieldComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  gender: CustomerGenderFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CustomerAddressSort {
-  field: CustomerAddressSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum CustomerAddressSortFields {
-  full
-  distanceKm
-  city
-  district
-  ward
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-type Order {
-  refId: String
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float!
-  note: String
-  shippingAddressDistanceKm: Float
-  shippingAddressDistrict: String
-  shippingAddressCity: String
-  shippingAddressWard: String
-  shippingAddressFull: String
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  branch: OrgBranch!
-  customer: Customer!
-}
-
-type OrderProduct {
-  quantity: Float!
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float!
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  optionsAggregate(
-    """Filter to find records to aggregate on"""
-    filter: ProductOptionAggregateFilter
-  ): [OrderProductOptionsAggregateResponse!]!
-  product: Product!
-  order: Order!
-  options(
-    """Limit or page results."""
-    paging: OffsetPaging! = {limit: 10}
-
-    """Specify to filter the records returned."""
-    filter: ProductOptionFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [ProductOptionSort!]! = []
-  ): OrderProductOptionsConnection!
-}
-
-type OrderProductDeleteResponse {
-  quantity: Float
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float
+type ShopMemberDeleteResponse {
+  role: ShopMemberRole
+  enabled: Boolean
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
 }
 
-type OrderProductEdge {
-  """The node containing the OrderProduct"""
-  node: OrderProduct!
+type ShopMemberEdge {
+  """The node containing the ShopMember"""
+  node: ShopMember!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type OrderProductConnection {
+type ShopMemberConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [OrderProductEdge!]!
+  edges: [ShopMemberEdge!]!
 
   """Fetch total count of records"""
   totalCount: Int!
 }
 
-type OrderProductAggregateGroupBy {
-  quantity: Float
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float
+type ShopMemberAggregateGroupBy {
+  role: ShopMemberRole
+  enabled: Boolean
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
   updatedAt(by: GroupBy! = DAY): DateTime
   deletedAt(by: GroupBy! = DAY): DateTime
 }
 
-type OrderProductCountAggregate {
-  quantity: Int
-  grossPrice: Int
-  discountPrice: Int
-  netPrice: Int
+type ShopMemberCountAggregate {
+  role: Int
+  enabled: Int
   id: Int
   createdAt: Int
   updatedAt: Int
   deletedAt: Int
 }
 
-type OrderProductSumAggregate {
-  quantity: Float
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float
+type ShopMemberSumAggregate {
+  role: Float
 }
 
-type OrderProductAvgAggregate {
-  quantity: Float
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float
+type ShopMemberAvgAggregate {
+  role: Float
 }
 
-type OrderProductMinAggregate {
-  quantity: Float
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float
+type ShopMemberMinAggregate {
+  role: ShopMemberRole
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
 }
 
-type OrderProductMaxAggregate {
-  quantity: Float
-  grossPrice: Float
-  discountPrice: Float
-  netPrice: Float
+type ShopMemberMaxAggregate {
+  role: ShopMemberRole
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
 }
 
-type OrderProductAggregateResponse {
-  groupBy: OrderProductAggregateGroupBy
-  count: OrderProductCountAggregate
-  sum: OrderProductSumAggregate
-  avg: OrderProductAvgAggregate
-  min: OrderProductMinAggregate
-  max: OrderProductMaxAggregate
+type ShopMemberAggregateResponse {
+  groupBy: ShopMemberAggregateGroupBy
+  count: ShopMemberCountAggregate
+  sum: ShopMemberSumAggregate
+  avg: ShopMemberAvgAggregate
+  min: ShopMemberMinAggregate
+  max: ShopMemberMaxAggregate
 }
 
-type OrderProductOptionsConnection {
+type ShopDeleteResponse {
+  name: String
+  details: JSON
+  enabled: Boolean
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type ShopEdge {
+  """The node containing the Shop"""
+  node: Shop!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type ShopConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [ShopEdge!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type ShopAggregateGroupBy {
+  name: String
+  details: JSON
+  enabled: Boolean
+  id: ID
+  createdAt(by: GroupBy! = DAY): DateTime
+  updatedAt(by: GroupBy! = DAY): DateTime
+  deletedAt(by: GroupBy! = DAY): DateTime
+}
+
+type ShopCountAggregate {
+  name: Int
+  details: Int
+  enabled: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type ShopMinAggregate {
+  name: String
+  details: JSON
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type ShopMaxAggregate {
+  name: String
+  details: JSON
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type ShopAggregateResponse {
+  groupBy: ShopAggregateGroupBy
+  count: ShopCountAggregate
+  min: ShopMinAggregate
+  max: ShopMaxAggregate
+}
+
+type ShopMembersConnection {
   """Paging information"""
   pageInfo: OffsetPageInfo!
 
   """Array of nodes."""
-  nodes: [ProductOption!]!
+  nodes: [ShopMember!]!
 
   """Fetch total count of records"""
   totalCount: Int!
 }
 
-type OrderProductOptionsAggregateGroupBy {
-  sku: String
-  name: String
-  diffPrice: Float
+type ShopMembersAggregateGroupBy {
+  role: ShopMemberRole
+  enabled: Boolean
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
 }
 
-type OrderProductOptionsCountAggregate {
-  sku: Int
-  name: Int
-  diffPrice: Int
+type ShopMembersCountAggregate {
+  role: Int
+  enabled: Int
   id: Int
   createdAt: Int
   updatedAt: Int
   deletedAt: Int
 }
 
-type OrderProductOptionsSumAggregate {
-  diffPrice: Float
+type ShopMembersSumAggregate {
+  role: Float
 }
 
-type OrderProductOptionsAvgAggregate {
-  diffPrice: Float
+type ShopMembersAvgAggregate {
+  role: Float
 }
 
-type OrderProductOptionsMinAggregate {
-  sku: String
-  name: String
-  diffPrice: Float
+type ShopMembersMinAggregate {
+  role: ShopMemberRole
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
 }
 
-type OrderProductOptionsMaxAggregate {
-  sku: String
-  name: String
-  diffPrice: Float
+type ShopMembersMaxAggregate {
+  role: ShopMemberRole
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
 }
 
-type OrderProductOptionsAggregateResponse {
-  groupBy: OrderProductOptionsAggregateGroupBy
-  count: OrderProductOptionsCountAggregate
-  sum: OrderProductOptionsSumAggregate
-  avg: OrderProductOptionsAvgAggregate
-  min: OrderProductOptionsMinAggregate
-  max: OrderProductOptionsMaxAggregate
-}
-
-type OrderDeleteResponse {
-  refId: String
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float
-  note: String
-  shippingAddressDistanceKm: Float
-  shippingAddressDistrict: String
-  shippingAddressCity: String
-  shippingAddressWard: String
-  shippingAddressFull: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type OrderEdge {
-  """The node containing the Order"""
-  node: Order!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type OrderConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [OrderEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type OrderAggregateGroupBy {
-  refId: String
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float
-  id: ID
-  createdAt(by: GroupBy! = DAY): DateTime
-  updatedAt(by: GroupBy! = DAY): DateTime
-  deletedAt(by: GroupBy! = DAY): DateTime
-}
-
-type OrderCountAggregate {
-  refId: Int
-  grossPrice: Int
-  discountPrice: Int
-  commissionPercent: Int
-  commissionPrice: Int
-  netPrice: Int
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  deletedAt: Int
-}
-
-type OrderSumAggregate {
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float
-}
-
-type OrderAvgAggregate {
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float
-}
-
-type OrderMinAggregate {
-  refId: String
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type OrderMaxAggregate {
-  refId: String
-  grossPrice: Float
-  discountPrice: Float
-  commissionPercent: Float
-  commissionPrice: Float
-  netPrice: Float
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type OrderAggregateResponse {
-  groupBy: OrderAggregateGroupBy
-  count: OrderCountAggregate
-  sum: OrderSumAggregate
-  avg: OrderAvgAggregate
-  min: OrderMinAggregate
-  max: OrderMaxAggregate
-}
-
-type CustomerDeleteResponse {
-  phone: String
-  email: String
-  firstName: String
-  lastName: String
-  gender: CustomerGender
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type CustomerEdge {
-  """The node containing the Customer"""
-  node: Customer!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type CustomerConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [CustomerEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type CustomerAggregateGroupBy {
-  phone: String
-  email: String
-  firstName: String
-  lastName: String
-  gender: CustomerGender
-  id: ID
-  createdAt(by: GroupBy! = DAY): DateTime
-  updatedAt(by: GroupBy! = DAY): DateTime
-  deletedAt(by: GroupBy! = DAY): DateTime
-}
-
-type CustomerCountAggregate {
-  phone: Int
-  email: Int
-  firstName: Int
-  lastName: Int
-  gender: Int
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  deletedAt: Int
-}
-
-type CustomerSumAggregate {
-  gender: Float
-}
-
-type CustomerAvgAggregate {
-  gender: Float
-}
-
-type CustomerMinAggregate {
-  phone: String
-  email: String
-  firstName: String
-  lastName: String
-  gender: CustomerGender
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type CustomerMaxAggregate {
-  phone: String
-  email: String
-  firstName: String
-  lastName: String
-  gender: CustomerGender
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type CustomerAggregateResponse {
-  groupBy: CustomerAggregateGroupBy
-  count: CustomerCountAggregate
-  sum: CustomerSumAggregate
-  avg: CustomerAvgAggregate
-  min: CustomerMinAggregate
-  max: CustomerMaxAggregate
-}
-
-type CustomerAddressesConnection {
-  """Paging information"""
-  pageInfo: OffsetPageInfo!
-
-  """Array of nodes."""
-  nodes: [CustomerAddress!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type CustomerAddressesAggregateGroupBy {
-  full: String
-  distanceKm: Float
-  city: String
-  district: String
-  ward: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type CustomerAddressesCountAggregate {
-  full: Int
-  distanceKm: Int
-  city: Int
-  district: Int
-  ward: Int
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  deletedAt: Int
-}
-
-type CustomerAddressesSumAggregate {
-  distanceKm: Float
-}
-
-type CustomerAddressesAvgAggregate {
-  distanceKm: Float
-}
-
-type CustomerAddressesMinAggregate {
-  full: String
-  distanceKm: Float
-  city: String
-  district: String
-  ward: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type CustomerAddressesMaxAggregate {
-  full: String
-  distanceKm: Float
-  city: String
-  district: String
-  ward: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type CustomerAddressesAggregateResponse {
-  groupBy: CustomerAddressesAggregateGroupBy
-  count: CustomerAddressesCountAggregate
-  sum: CustomerAddressesSumAggregate
-  avg: CustomerAddressesAvgAggregate
-  min: CustomerAddressesMinAggregate
-  max: CustomerAddressesMaxAggregate
-}
-
-type Garage {
-  name: String!
-  description: String
-  address: String
-  lat: Float
-  lng: Float
-  logo: String
-  media: [String!]
-  status: GarageStatus
-  metadata: JSON
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime
-  deleted_at: DateTime
-  org: Org!
-}
-
-enum GarageStatus {
-  ACTIVATED
-  UNACTIVATED
-  BLOCKED
-}
-
-type GarageDeleteResponse {
-  name: String
-  description: String
-  address: String
-  lat: Float
-  lng: Float
-  logo: String
-  media: [String!]
-  status: GarageStatus
-  metadata: JSON
-  id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
-}
-
-type GarageEdge {
-  """The node containing the Garage"""
-  node: Garage!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type GarageConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [GarageEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type GarageAggregateGroupBy {
-  name: String
-  address: String
-  lat: Float
-  lng: Float
-  status: GarageStatus
-  id: ID
-  created_at(by: GroupBy! = DAY): DateTime
-  updated_at(by: GroupBy! = DAY): DateTime
-  deleted_at(by: GroupBy! = DAY): DateTime
-}
-
-type GarageCountAggregate {
-  name: Int
-  address: Int
-  lat: Int
-  lng: Int
-  status: Int
-  id: Int
-  created_at: Int
-  updated_at: Int
-  deleted_at: Int
-}
-
-type GarageSumAggregate {
-  lat: Float
-  lng: Float
-  id: Float
-}
-
-type GarageAvgAggregate {
-  lat: Float
-  lng: Float
-  id: Float
-}
-
-type GarageMinAggregate {
-  name: String
-  address: String
-  lat: Float
-  lng: Float
-  status: GarageStatus
-  id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
-}
-
-type GarageMaxAggregate {
-  name: String
-  address: String
-  lat: Float
-  lng: Float
-  status: GarageStatus
-  id: ID
-  created_at: DateTime
-  updated_at: DateTime
-  deleted_at: DateTime
-}
-
-type GarageAggregateResponse {
-  groupBy: GarageAggregateGroupBy
-  count: GarageCountAggregate
-  sum: GarageSumAggregate
-  avg: GarageAvgAggregate
-  min: GarageMinAggregate
-  max: GarageMaxAggregate
+type ShopMembersAggregateResponse {
+  groupBy: ShopMembersAggregateGroupBy
+  count: ShopMembersCountAggregate
+  sum: ShopMembersSumAggregate
+  avg: ShopMembersAvgAggregate
+  min: ShopMembersMinAggregate
+  max: ShopMembersMaxAggregate
 }
 
 type Query {
@@ -4036,6 +4592,78 @@ type Query {
     """Specify to sort results."""
     sorting: [ApiKeySort!]! = []
   ): ApiKeyConnection!
+  orgBranchMemberAggregate(
+    """Filter to find records to aggregate on"""
+    filter: OrgBranchMemberAggregateFilter
+  ): [OrgBranchMemberAggregateResponse!]!
+  orgBranchMember(
+    """The id of the record to find."""
+    id: ID!
+  ): OrgBranchMember!
+  orgBranchMembers(
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: OrgBranchMemberFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [OrgBranchMemberSort!]! = []
+  ): OrgBranchMemberConnection!
+  orgBranchAggregate(
+    """Filter to find records to aggregate on"""
+    filter: OrgBranchAggregateFilter
+  ): [OrgBranchAggregateResponse!]!
+  orgBranch(
+    """The id of the record to find."""
+    id: ID!
+  ): OrgBranch!
+  orgBranches(
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: OrgBranchFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [OrgBranchSort!]! = []
+  ): OrgBranchConnection!
+  orgMemberAggregate(
+    """Filter to find records to aggregate on"""
+    filter: OrgMemberAggregateFilter
+  ): [OrgMemberAggregateResponse!]!
+  orgMember(
+    """The id of the record to find."""
+    id: ID!
+  ): OrgMember!
+  orgMembers(
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: OrgMemberFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [OrgMemberSort!]! = []
+  ): OrgMemberConnection!
+  orgAggregate(
+    """Filter to find records to aggregate on"""
+    filter: OrgAggregateFilter
+  ): [OrgAggregateResponse!]!
+  org(
+    """The id of the record to find."""
+    id: ID!
+  ): Org!
+  orgs(
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: OrgFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [OrgSort!]! = []
+  ): OrgConnection!
   customerAggregate(
     """Filter to find records to aggregate on"""
     filter: CustomerAggregateFilter
@@ -4162,78 +4790,6 @@ type Query {
     """Specify to sort results."""
     sorting: [ProductSort!]! = []
   ): ProductConnection!
-  orgBranchMemberAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrgBranchMemberAggregateFilter
-  ): [OrgBranchMemberAggregateResponse!]!
-  orgBranchMember(
-    """The id of the record to find."""
-    id: ID!
-  ): OrgBranchMember!
-  orgBranchMembers(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrgBranchMemberFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [OrgBranchMemberSort!]! = []
-  ): OrgBranchMemberConnection!
-  orgBranchAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrgBranchAggregateFilter
-  ): [OrgBranchAggregateResponse!]!
-  orgBranch(
-    """The id of the record to find."""
-    id: ID!
-  ): OrgBranch!
-  orgBranches(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrgBranchFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [OrgBranchSort!]! = []
-  ): OrgBranchConnection!
-  orgMemberAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrgMemberAggregateFilter
-  ): [OrgMemberAggregateResponse!]!
-  orgMember(
-    """The id of the record to find."""
-    id: ID!
-  ): OrgMember!
-  orgMembers(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrgMemberFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [OrgMemberSort!]! = []
-  ): OrgMemberConnection!
-  orgAggregate(
-    """Filter to find records to aggregate on"""
-    filter: OrgAggregateFilter
-  ): [OrgAggregateResponse!]!
-  org(
-    """The id of the record to find."""
-    id: ID!
-  ): Org!
-  orgs(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: OrgFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [OrgSort!]! = []
-  ): OrgConnection!
   orderProductAggregate(
     """Filter to find records to aggregate on"""
     filter: OrderProductAggregateFilter
@@ -4270,6 +4826,42 @@ type Query {
     """Specify to sort results."""
     sorting: [OrderSort!]! = []
   ): OrderConnection!
+  shopAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ShopAggregateFilter
+  ): [ShopAggregateResponse!]!
+  shop(
+    """The id of the record to find."""
+    id: ID!
+  ): Shop!
+  shops(
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: ShopFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ShopSort!]! = []
+  ): ShopConnection!
+  shopMemberAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ShopMemberAggregateFilter
+  ): [ShopMemberAggregateResponse!]!
+  shopMember(
+    """The id of the record to find."""
+    id: ID!
+  ): ShopMember!
+  shopMembers(
+    """Limit or page results."""
+    paging: CursorPaging! = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: ShopMemberFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ShopMemberSort!]! = []
+  ): ShopMemberConnection!
   garageAggregate(
     """Filter to find records to aggregate on"""
     filter: GarageAggregateFilter
@@ -4670,6 +5262,814 @@ enum ApiKeySortFields {
   deletedAt
 }
 
+input OrgAggregateFilter {
+  and: [OrgAggregateFilter!]
+  or: [OrgAggregateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgAggregateFilterAccountAggregateFilter
+  shops: OrgAggregateFilterShopAggregateFilter
+  branches: OrgAggregateFilterOrgBranchAggregateFilter
+  members: OrgAggregateFilterOrgMemberAggregateFilter
+}
+
+input OrgAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  branch: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter
+  org: OrgAggregateFilterShopAggregateFilterOrgAggregateFilter
+  members: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  org: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter
+  members: OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter!]
+  role: OrgBranchRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter
+  shops: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter
+  branches: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter
+  members: OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  shop: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter
+  account: OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter
+}
+
+input OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  org: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter
+  members: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter
+  shops: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter
+  branches: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter
+  members: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter!]
+  role: OrgBranchRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  branch: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter
+  account: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  org: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter
+  account: OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter
+  shops: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter
+  branches: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter
+  members: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterShopAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilter {
+  and: [OrgFilter!]
+  or: [OrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgFilterAccountFilter
+  shops: OrgFilterShopFilter
+  branches: OrgFilterOrgBranchFilter
+  members: OrgFilterOrgMemberFilter
+}
+
+input OrgFilterAccountFilter {
+  and: [OrgFilterAccountFilter!]
+  or: [OrgFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilter {
+  and: [OrgFilterShopFilter!]
+  or: [OrgFilterShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  branch: OrgFilterShopFilterOrgBranchFilter
+  org: OrgFilterShopFilterOrgFilter
+  members: OrgFilterShopFilterShopMemberFilter
+}
+
+input OrgFilterShopFilterOrgBranchFilter {
+  and: [OrgFilterShopFilterOrgBranchFilter!]
+  or: [OrgFilterShopFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  org: OrgFilterShopFilterOrgBranchFilterOrgFilter
+  members: OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter
+}
+
+input OrgFilterShopFilterOrgBranchFilterOrgFilter {
+  and: [OrgFilterShopFilterOrgBranchFilterOrgFilter!]
+  or: [OrgFilterShopFilterOrgBranchFilterOrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter {
+  and: [OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter!]
+  or: [OrgFilterShopFilterOrgBranchFilterOrgBranchMemberFilter!]
+  role: OrgBranchRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterOrgFilter {
+  and: [OrgFilterShopFilterOrgFilter!]
+  or: [OrgFilterShopFilterOrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgFilterShopFilterOrgFilterAccountFilter
+  shops: OrgFilterShopFilterOrgFilterShopFilter
+  branches: OrgFilterShopFilterOrgFilterOrgBranchFilter
+  members: OrgFilterShopFilterOrgFilterOrgMemberFilter
+}
+
+input OrgFilterShopFilterOrgFilterAccountFilter {
+  and: [OrgFilterShopFilterOrgFilterAccountFilter!]
+  or: [OrgFilterShopFilterOrgFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterOrgFilterShopFilter {
+  and: [OrgFilterShopFilterOrgFilterShopFilter!]
+  or: [OrgFilterShopFilterOrgFilterShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterOrgFilterOrgBranchFilter {
+  and: [OrgFilterShopFilterOrgFilterOrgBranchFilter!]
+  or: [OrgFilterShopFilterOrgFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterOrgFilterOrgMemberFilter {
+  and: [OrgFilterShopFilterOrgFilterOrgMemberFilter!]
+  or: [OrgFilterShopFilterOrgFilterOrgMemberFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterShopMemberFilter {
+  and: [OrgFilterShopFilterShopMemberFilter!]
+  or: [OrgFilterShopFilterShopMemberFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  shop: OrgFilterShopFilterShopMemberFilterShopFilter
+  account: OrgFilterShopFilterShopMemberFilterAccountFilter
+}
+
+input OrgFilterShopFilterShopMemberFilterShopFilter {
+  and: [OrgFilterShopFilterShopMemberFilterShopFilter!]
+  or: [OrgFilterShopFilterShopMemberFilterShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterShopFilterShopMemberFilterAccountFilter {
+  and: [OrgFilterShopFilterShopMemberFilterAccountFilter!]
+  or: [OrgFilterShopFilterShopMemberFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgBranchFilter {
+  and: [OrgFilterOrgBranchFilter!]
+  or: [OrgFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  org: OrgFilterOrgBranchFilterOrgFilter
+  members: OrgFilterOrgBranchFilterOrgBranchMemberFilter
+}
+
+input OrgFilterOrgBranchFilterOrgFilter {
+  and: [OrgFilterOrgBranchFilterOrgFilter!]
+  or: [OrgFilterOrgBranchFilterOrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgFilterOrgBranchFilterOrgFilterAccountFilter
+  shops: OrgFilterOrgBranchFilterOrgFilterShopFilter
+  branches: OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter
+  members: OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter
+}
+
+input OrgFilterOrgBranchFilterOrgFilterAccountFilter {
+  and: [OrgFilterOrgBranchFilterOrgFilterAccountFilter!]
+  or: [OrgFilterOrgBranchFilterOrgFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgBranchFilterOrgFilterShopFilter {
+  and: [OrgFilterOrgBranchFilterOrgFilterShopFilter!]
+  or: [OrgFilterOrgBranchFilterOrgFilterShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter {
+  and: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
+  or: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter {
+  and: [OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter!]
+  or: [OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgBranchFilterOrgBranchMemberFilter {
+  and: [OrgFilterOrgBranchFilterOrgBranchMemberFilter!]
+  or: [OrgFilterOrgBranchFilterOrgBranchMemberFilter!]
+  role: OrgBranchRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  branch: OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter
+  account: OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter
+}
+
+input OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter {
+  and: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
+  or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter {
+  and: [OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter!]
+  or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgMemberFilter {
+  and: [OrgFilterOrgMemberFilter!]
+  or: [OrgFilterOrgMemberFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  org: OrgFilterOrgMemberFilterOrgFilter
+  account: OrgFilterOrgMemberFilterAccountFilter
+}
+
+input OrgFilterOrgMemberFilterOrgFilter {
+  and: [OrgFilterOrgMemberFilterOrgFilter!]
+  or: [OrgFilterOrgMemberFilterOrgFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  createdBy: OrgFilterOrgMemberFilterOrgFilterAccountFilter
+  shops: OrgFilterOrgMemberFilterOrgFilterShopFilter
+  branches: OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter
+  members: OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter
+}
+
+input OrgFilterOrgMemberFilterOrgFilterAccountFilter {
+  and: [OrgFilterOrgMemberFilterOrgFilterAccountFilter!]
+  or: [OrgFilterOrgMemberFilterOrgFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgMemberFilterOrgFilterShopFilter {
+  and: [OrgFilterOrgMemberFilterOrgFilterShopFilter!]
+  or: [OrgFilterOrgMemberFilterOrgFilterShopFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter {
+  and: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
+  or: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter {
+  and: [OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter!]
+  or: [OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterOrgMemberFilterAccountFilter {
+  and: [OrgFilterOrgMemberFilterAccountFilter!]
+  or: [OrgFilterOrgMemberFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgSort {
+  field: OrgSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum OrgSortFields {
+  type
+  name
+  enabled
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
 input CustomerAggregateFilter {
   and: [CustomerAggregateFilter!]
   or: [CustomerAggregateFilter!]
@@ -4928,448 +6328,6 @@ enum ProductUnitSortFields {
   deletedAt
 }
 
-input OrgAggregateFilter {
-  and: [OrgAggregateFilter!]
-  or: [OrgAggregateFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: OrgAggregateFilterAccountAggregateFilter
-  branches: OrgAggregateFilterOrgBranchAggregateFilter
-  members: OrgAggregateFilterOrgMemberAggregateFilter
-}
-
-input OrgAggregateFilterAccountAggregateFilter {
-  and: [OrgAggregateFilterAccountAggregateFilter!]
-  or: [OrgAggregateFilterAccountAggregateFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  org: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter
-  members: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter
-  branches: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter
-  members: OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilter!]
-  role: OrgBranchRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  branch: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter
-  account: OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter {
-  and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter!]
-  or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgMemberAggregateFilter {
-  and: [OrgAggregateFilterOrgMemberAggregateFilter!]
-  or: [OrgAggregateFilterOrgMemberAggregateFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  org: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter
-  account: OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter
-}
-
-input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter {
-  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter!]
-  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter
-  branches: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter
-  members: OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter
-}
-
-input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter {
-  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter {
-  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
-  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter {
-  and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
-  or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggregateFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter {
-  and: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter!]
-  or: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilter {
-  and: [OrgFilter!]
-  or: [OrgFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: OrgFilterAccountFilter
-  branches: OrgFilterOrgBranchFilter
-  members: OrgFilterOrgMemberFilter
-}
-
-input OrgFilterAccountFilter {
-  and: [OrgFilterAccountFilter!]
-  or: [OrgFilterAccountFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgBranchFilter {
-  and: [OrgFilterOrgBranchFilter!]
-  or: [OrgFilterOrgBranchFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  org: OrgFilterOrgBranchFilterOrgFilter
-  members: OrgFilterOrgBranchFilterOrgBranchMemberFilter
-}
-
-input OrgFilterOrgBranchFilterOrgFilter {
-  and: [OrgFilterOrgBranchFilterOrgFilter!]
-  or: [OrgFilterOrgBranchFilterOrgFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: OrgFilterOrgBranchFilterOrgFilterAccountFilter
-  branches: OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter
-  members: OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter
-}
-
-input OrgFilterOrgBranchFilterOrgFilterAccountFilter {
-  and: [OrgFilterOrgBranchFilterOrgFilterAccountFilter!]
-  or: [OrgFilterOrgBranchFilterOrgFilterAccountFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter {
-  and: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
-  or: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter {
-  and: [OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter!]
-  or: [OrgFilterOrgBranchFilterOrgFilterOrgMemberFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgBranchFilterOrgBranchMemberFilter {
-  and: [OrgFilterOrgBranchFilterOrgBranchMemberFilter!]
-  or: [OrgFilterOrgBranchFilterOrgBranchMemberFilter!]
-  role: OrgBranchRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  branch: OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter
-  account: OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter
-}
-
-input OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter {
-  and: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
-  or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter {
-  and: [OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter!]
-  or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgMemberFilter {
-  and: [OrgFilterOrgMemberFilter!]
-  or: [OrgFilterOrgMemberFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  org: OrgFilterOrgMemberFilterOrgFilter
-  account: OrgFilterOrgMemberFilterAccountFilter
-}
-
-input OrgFilterOrgMemberFilterOrgFilter {
-  and: [OrgFilterOrgMemberFilterOrgFilter!]
-  or: [OrgFilterOrgMemberFilterOrgFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: OrgFilterOrgMemberFilterOrgFilterAccountFilter
-  branches: OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter
-  members: OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter
-}
-
-input OrgFilterOrgMemberFilterOrgFilterAccountFilter {
-  and: [OrgFilterOrgMemberFilterOrgFilterAccountFilter!]
-  or: [OrgFilterOrgMemberFilterOrgFilterAccountFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter {
-  and: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
-  or: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter {
-  and: [OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter!]
-  or: [OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgFilterOrgMemberFilterAccountFilter {
-  and: [OrgFilterOrgMemberFilterAccountFilter!]
-  or: [OrgFilterOrgMemberFilterAccountFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input OrgSort {
-  field: OrgSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum OrgSortFields {
-  type
-  name
-  enabled
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
 input OrderProductAggregateFilter {
   and: [OrderProductAggregateFilter!]
   or: [OrderProductAggregateFilter!]
@@ -5616,6 +6574,7 @@ input GarageAggregateFilter {
   created_at: DateFieldComparison
   updated_at: DateFieldComparison
   deleted_at: DateFieldComparison
+  branch: GarageAggregateFilterOrgBranchAggregateFilter
   org: GarageAggregateFilterOrgAggregateFilter
 }
 
@@ -5634,6 +6593,18 @@ input GarageStatusFilterComparison {
   notILike: GarageStatus
   in: [GarageStatus!]
   notIn: [GarageStatus!]
+}
+
+input GarageAggregateFilterOrgBranchAggregateFilter {
+  and: [GarageAggregateFilterOrgBranchAggregateFilter!]
+  or: [GarageAggregateFilterOrgBranchAggregateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input GarageAggregateFilterOrgAggregateFilter {
@@ -5660,7 +6631,20 @@ input GarageFilter {
   created_at: DateFieldComparison
   updated_at: DateFieldComparison
   deleted_at: DateFieldComparison
+  branch: GarageFilterOrgBranchFilter
   org: GarageFilterOrgFilter
+}
+
+input GarageFilterOrgBranchFilter {
+  and: [GarageFilterOrgBranchFilter!]
+  or: [GarageFilterOrgBranchFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input GarageFilterOrgFilter {
@@ -5738,6 +6722,38 @@ type Mutation {
   updateManyApiKeys(input: UpdateManyApiKeysInput!): UpdateManyResponse!
   deleteOneApiKey(input: DeleteOneApiKeyInput!): ApiKeyDeleteResponse!
   deleteManyApiKeys(input: DeleteManyApiKeysInput!): DeleteManyResponse!
+  createOneOrgBranchMember(input: CreateOneOrgBranchMemberInput!): OrgBranchMember!
+  createManyOrgBranchMembers(input: CreateManyOrgBranchMembersInput!): [OrgBranchMember!]!
+  updateOneOrgBranchMember(input: UpdateOneOrgBranchMemberInput!): OrgBranchMember!
+  updateManyOrgBranchMembers(input: UpdateManyOrgBranchMembersInput!): UpdateManyResponse!
+  deleteOneOrgBranchMember(input: DeleteOneOrgBranchMemberInput!): OrgBranchMemberDeleteResponse!
+  deleteManyOrgBranchMembers(input: DeleteManyOrgBranchMembersInput!): DeleteManyResponse!
+  addMembersToOrgBranch(input: AddMembersToOrgBranchInput!): OrgBranch!
+  setMembersOnOrgBranch(input: SetMembersOnOrgBranchInput!): OrgBranch!
+  createOneOrgBranch(input: CreateOneOrgBranchInput!): OrgBranch!
+  createManyOrgBranches(input: CreateManyOrgBranchesInput!): [OrgBranch!]!
+  updateOneOrgBranch(input: UpdateOneOrgBranchInput!): OrgBranch!
+  updateManyOrgBranches(input: UpdateManyOrgBranchesInput!): UpdateManyResponse!
+  deleteOneOrgBranch(input: DeleteOneOrgBranchInput!): OrgBranchDeleteResponse!
+  deleteManyOrgBranches(input: DeleteManyOrgBranchesInput!): DeleteManyResponse!
+  createOneOrgMember(input: CreateOneOrgMemberInput!): OrgMember!
+  createManyOrgMembers(input: CreateManyOrgMembersInput!): [OrgMember!]!
+  updateOneOrgMember(input: UpdateOneOrgMemberInput!): OrgMember!
+  updateManyOrgMembers(input: UpdateManyOrgMembersInput!): UpdateManyResponse!
+  deleteOneOrgMember(input: DeleteOneOrgMemberInput!): OrgMemberDeleteResponse!
+  deleteManyOrgMembers(input: DeleteManyOrgMembersInput!): DeleteManyResponse!
+  addMembersToOrg(input: AddMembersToOrgInput!): Org!
+  setMembersOnOrg(input: SetMembersOnOrgInput!): Org!
+  addBranchesToOrg(input: AddBranchesToOrgInput!): Org!
+  setBranchesOnOrg(input: SetBranchesOnOrgInput!): Org!
+  addShopsToOrg(input: AddShopsToOrgInput!): Org!
+  setShopsOnOrg(input: SetShopsOnOrgInput!): Org!
+  createOneOrg(input: CreateOneOrgInput!): Org!
+  createManyOrgs(input: CreateManyOrgsInput!): [Org!]!
+  updateOneOrg(input: UpdateOneOrgInput!): Org!
+  updateManyOrgs(input: UpdateManyOrgsInput!): UpdateManyResponse!
+  deleteOneOrg(input: DeleteOneOrgInput!): OrgDeleteResponse!
+  deleteManyOrgs(input: DeleteManyOrgsInput!): DeleteManyResponse!
   addAddressesToCustomer(input: AddAddressesToCustomerInput!): Customer!
   setAddressesOnCustomer(input: SetAddressesOnCustomerInput!): Customer!
   createOneCustomer(input: CreateOneCustomerInput!): Customer!
@@ -5796,36 +6812,6 @@ type Mutation {
   deleteOneProduct(input: DeleteOneProductInput!): ProductDeleteResponse!
   deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
   productImportByFile(input: ProductImportInput!): [Product!]!
-  createOneOrgBranchMember(input: CreateOneOrgBranchMemberInput!): OrgBranchMember!
-  createManyOrgBranchMembers(input: CreateManyOrgBranchMembersInput!): [OrgBranchMember!]!
-  updateOneOrgBranchMember(input: UpdateOneOrgBranchMemberInput!): OrgBranchMember!
-  updateManyOrgBranchMembers(input: UpdateManyOrgBranchMembersInput!): UpdateManyResponse!
-  deleteOneOrgBranchMember(input: DeleteOneOrgBranchMemberInput!): OrgBranchMemberDeleteResponse!
-  deleteManyOrgBranchMembers(input: DeleteManyOrgBranchMembersInput!): DeleteManyResponse!
-  addMembersToOrgBranch(input: AddMembersToOrgBranchInput!): OrgBranch!
-  setMembersOnOrgBranch(input: SetMembersOnOrgBranchInput!): OrgBranch!
-  createOneOrgBranch(input: CreateOneOrgBranchInput!): OrgBranch!
-  createManyOrgBranches(input: CreateManyOrgBranchesInput!): [OrgBranch!]!
-  updateOneOrgBranch(input: UpdateOneOrgBranchInput!): OrgBranch!
-  updateManyOrgBranches(input: UpdateManyOrgBranchesInput!): UpdateManyResponse!
-  deleteOneOrgBranch(input: DeleteOneOrgBranchInput!): OrgBranchDeleteResponse!
-  deleteManyOrgBranches(input: DeleteManyOrgBranchesInput!): DeleteManyResponse!
-  createOneOrgMember(input: CreateOneOrgMemberInput!): OrgMember!
-  createManyOrgMembers(input: CreateManyOrgMembersInput!): [OrgMember!]!
-  updateOneOrgMember(input: UpdateOneOrgMemberInput!): OrgMember!
-  updateManyOrgMembers(input: UpdateManyOrgMembersInput!): UpdateManyResponse!
-  deleteOneOrgMember(input: DeleteOneOrgMemberInput!): OrgMemberDeleteResponse!
-  deleteManyOrgMembers(input: DeleteManyOrgMembersInput!): DeleteManyResponse!
-  addMembersToOrg(input: AddMembersToOrgInput!): Org!
-  setMembersOnOrg(input: SetMembersOnOrgInput!): Org!
-  addBranchesToOrg(input: AddBranchesToOrgInput!): Org!
-  setBranchesOnOrg(input: SetBranchesOnOrgInput!): Org!
-  createOneOrg(input: CreateOneOrgInput!): Org!
-  createManyOrgs(input: CreateManyOrgsInput!): [Org!]!
-  updateOneOrg(input: UpdateOneOrgInput!): Org!
-  updateManyOrgs(input: UpdateManyOrgsInput!): UpdateManyResponse!
-  deleteOneOrg(input: DeleteOneOrgInput!): OrgDeleteResponse!
-  deleteManyOrgs(input: DeleteManyOrgsInput!): DeleteManyResponse!
   setProductOnOrderProduct(input: SetProductOnOrderProductInput!): OrderProduct!
   addOptionsToOrderProduct(input: AddOptionsToOrderProductInput!): OrderProduct!
   setOptionsOnOrderProduct(input: SetOptionsOnOrderProductInput!): OrderProduct!
@@ -5841,6 +6827,20 @@ type Mutation {
   updateManyOrders(input: UpdateManyOrdersInput!): UpdateManyResponse!
   deleteOneOrder(input: DeleteOneOrderInput!): OrderDeleteResponse!
   deleteManyOrders(input: DeleteManyOrdersInput!): DeleteManyResponse!
+  addMembersToShop(input: AddMembersToShopInput!): Shop!
+  setMembersOnShop(input: SetMembersOnShopInput!): Shop!
+  createOneShop(input: CreateOneShopInput!): Shop!
+  createManyShops(input: CreateManyShopsInput!): [Shop!]!
+  updateOneShop(input: UpdateOneShopInput!): Shop!
+  updateManyShops(input: UpdateManyShopsInput!): UpdateManyResponse!
+  deleteOneShop(input: DeleteOneShopInput!): ShopDeleteResponse!
+  deleteManyShops(input: DeleteManyShopsInput!): DeleteManyResponse!
+  createOneShopMember(input: CreateOneShopMemberInput!): ShopMember!
+  createManyShopMembers(input: CreateManyShopMembersInput!): [ShopMember!]!
+  updateOneShopMember(input: UpdateOneShopMemberInput!): ShopMember!
+  updateManyShopMembers(input: UpdateManyShopMembersInput!): UpdateManyResponse!
+  deleteOneShopMember(input: DeleteOneShopMemberInput!): ShopMemberDeleteResponse!
+  deleteManyShopMembers(input: DeleteManyShopMembersInput!): DeleteManyResponse!
   createOneGarage(input: CreateOneGarageInput!): Garage!
   createManyGarages(input: CreateManyGaragesInput!): [Garage!]!
   updateOneGarage(input: UpdateOneGarageInput!): Garage!
@@ -6287,6 +7287,338 @@ input ApiKeyDeleteFilter {
   id: IDFilterComparison
   expired: BooleanFieldComparison
   expiredAt: DateFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input CreateOneOrgBranchMemberInput {
+  """The record to create"""
+  orgBranchMember: OrgBranchMemberDTO!
+}
+
+input OrgBranchMemberDTO {
+  role: OrgBranchRole!
+  enabled: Boolean
+  account: ID!
+  branch: ID
+}
+
+input CreateManyOrgBranchMembersInput {
+  """Array of records to create"""
+  orgBranchMembers: [OrgBranchMemberDTO!]!
+}
+
+input UpdateOneOrgBranchMemberInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: OrgBranchMemberDTO!
+}
+
+input UpdateManyOrgBranchMembersInput {
+  """Filter used to find fields to update"""
+  filter: OrgBranchMemberUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: OrgBranchMemberDTO!
+}
+
+input OrgBranchMemberUpdateFilter {
+  and: [OrgBranchMemberUpdateFilter!]
+  or: [OrgBranchMemberUpdateFilter!]
+  role: OrgBranchRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneOrgBranchMemberInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyOrgBranchMembersInput {
+  """Filter to find records to delete"""
+  filter: OrgBranchMemberDeleteFilter!
+}
+
+input OrgBranchMemberDeleteFilter {
+  and: [OrgBranchMemberDeleteFilter!]
+  or: [OrgBranchMemberDeleteFilter!]
+  role: OrgBranchRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AddMembersToOrgBranchInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetMembersOnOrgBranchInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOneOrgBranchInput {
+  """The record to create"""
+  orgBranch: OrgBranchDTO!
+}
+
+input OrgBranchDTO {
+  name: String!
+  details: JSON
+  enabled: Boolean
+  org: ID
+  members: [OrgBranchMemberDTO!]
+}
+
+input CreateManyOrgBranchesInput {
+  """Array of records to create"""
+  orgBranches: [OrgBranchDTO!]!
+}
+
+input UpdateOneOrgBranchInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: OrgBranchDTO!
+}
+
+input UpdateManyOrgBranchesInput {
+  """Filter used to find fields to update"""
+  filter: OrgBranchUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: OrgBranchDTO!
+}
+
+input OrgBranchUpdateFilter {
+  and: [OrgBranchUpdateFilter!]
+  or: [OrgBranchUpdateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneOrgBranchInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyOrgBranchesInput {
+  """Filter to find records to delete"""
+  filter: OrgBranchDeleteFilter!
+}
+
+input OrgBranchDeleteFilter {
+  and: [OrgBranchDeleteFilter!]
+  or: [OrgBranchDeleteFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input CreateOneOrgMemberInput {
+  """The record to create"""
+  orgMember: OrgMemberDTO!
+}
+
+input OrgMemberDTO {
+  role: OrgRole!
+  enabled: Boolean
+  account: ID!
+  org: ID
+}
+
+input CreateManyOrgMembersInput {
+  """Array of records to create"""
+  orgMembers: [OrgMemberDTO!]!
+}
+
+input UpdateOneOrgMemberInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: OrgMemberDTO!
+}
+
+input UpdateManyOrgMembersInput {
+  """Filter used to find fields to update"""
+  filter: OrgMemberUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: OrgMemberDTO!
+}
+
+input OrgMemberUpdateFilter {
+  and: [OrgMemberUpdateFilter!]
+  or: [OrgMemberUpdateFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneOrgMemberInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyOrgMembersInput {
+  """Filter to find records to delete"""
+  filter: OrgMemberDeleteFilter!
+}
+
+input OrgMemberDeleteFilter {
+  and: [OrgMemberDeleteFilter!]
+  or: [OrgMemberDeleteFilter!]
+  role: OrgRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AddMembersToOrgInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetMembersOnOrgInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input AddBranchesToOrgInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetBranchesOnOrgInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input AddShopsToOrgInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetShopsOnOrgInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOneOrgInput {
+  """The record to create"""
+  org: OrgDTO!
+}
+
+input OrgDTO {
+  type: OrgType!
+  name: String!
+  details: JSON
+  enabled: Boolean
+  createdBy: ID
+  members: [OrgMemberDTO!]
+  branches: [OrgBranchDTO!]
+}
+
+input CreateManyOrgsInput {
+  """Array of records to create"""
+  orgs: [OrgDTO!]!
+}
+
+input UpdateOneOrgInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: OrgDTO!
+}
+
+input UpdateManyOrgsInput {
+  """Filter used to find fields to update"""
+  filter: OrgUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: OrgDTO!
+}
+
+input OrgUpdateFilter {
+  and: [OrgUpdateFilter!]
+  or: [OrgUpdateFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneOrgInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyOrgsInput {
+  """Filter to find records to delete"""
+  filter: OrgDeleteFilter!
+}
+
+input OrgDeleteFilter {
+  and: [OrgDeleteFilter!]
+  or: [OrgDeleteFilter!]
+  type: OrgTypeFilterComparison
+  name: StringFieldComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6901,322 +8233,6 @@ input ProductImportInput {
   fileId: ID!
 }
 
-input CreateOneOrgBranchMemberInput {
-  """The record to create"""
-  orgBranchMember: OrgBranchMemberDTO!
-}
-
-input OrgBranchMemberDTO {
-  role: OrgBranchRole!
-  enabled: Boolean
-  account: ID!
-  branch: ID
-}
-
-input CreateManyOrgBranchMembersInput {
-  """Array of records to create"""
-  orgBranchMembers: [OrgBranchMemberDTO!]!
-}
-
-input UpdateOneOrgBranchMemberInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: OrgBranchMemberDTO!
-}
-
-input UpdateManyOrgBranchMembersInput {
-  """Filter used to find fields to update"""
-  filter: OrgBranchMemberUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: OrgBranchMemberDTO!
-}
-
-input OrgBranchMemberUpdateFilter {
-  and: [OrgBranchMemberUpdateFilter!]
-  or: [OrgBranchMemberUpdateFilter!]
-  role: OrgBranchRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneOrgBranchMemberInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyOrgBranchMembersInput {
-  """Filter to find records to delete"""
-  filter: OrgBranchMemberDeleteFilter!
-}
-
-input OrgBranchMemberDeleteFilter {
-  and: [OrgBranchMemberDeleteFilter!]
-  or: [OrgBranchMemberDeleteFilter!]
-  role: OrgBranchRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AddMembersToOrgBranchInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetMembersOnOrgBranchInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input CreateOneOrgBranchInput {
-  """The record to create"""
-  orgBranch: OrgBranchDTO!
-}
-
-input OrgBranchDTO {
-  name: String!
-  details: JSON
-  enabled: Boolean
-  org: ID
-  members: [OrgBranchMemberDTO!]
-}
-
-input CreateManyOrgBranchesInput {
-  """Array of records to create"""
-  orgBranches: [OrgBranchDTO!]!
-}
-
-input UpdateOneOrgBranchInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: OrgBranchDTO!
-}
-
-input UpdateManyOrgBranchesInput {
-  """Filter used to find fields to update"""
-  filter: OrgBranchUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: OrgBranchDTO!
-}
-
-input OrgBranchUpdateFilter {
-  and: [OrgBranchUpdateFilter!]
-  or: [OrgBranchUpdateFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneOrgBranchInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyOrgBranchesInput {
-  """Filter to find records to delete"""
-  filter: OrgBranchDeleteFilter!
-}
-
-input OrgBranchDeleteFilter {
-  and: [OrgBranchDeleteFilter!]
-  or: [OrgBranchDeleteFilter!]
-  name: StringFieldComparison
-  details: JSONFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CreateOneOrgMemberInput {
-  """The record to create"""
-  orgMember: OrgMemberDTO!
-}
-
-input OrgMemberDTO {
-  role: OrgRole!
-  enabled: Boolean
-  account: ID!
-  org: ID
-}
-
-input CreateManyOrgMembersInput {
-  """Array of records to create"""
-  orgMembers: [OrgMemberDTO!]!
-}
-
-input UpdateOneOrgMemberInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: OrgMemberDTO!
-}
-
-input UpdateManyOrgMembersInput {
-  """Filter used to find fields to update"""
-  filter: OrgMemberUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: OrgMemberDTO!
-}
-
-input OrgMemberUpdateFilter {
-  and: [OrgMemberUpdateFilter!]
-  or: [OrgMemberUpdateFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneOrgMemberInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyOrgMembersInput {
-  """Filter to find records to delete"""
-  filter: OrgMemberDeleteFilter!
-}
-
-input OrgMemberDeleteFilter {
-  and: [OrgMemberDeleteFilter!]
-  or: [OrgMemberDeleteFilter!]
-  role: OrgRoleFilterComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AddMembersToOrgInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetMembersOnOrgInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input AddBranchesToOrgInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetBranchesOnOrgInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input CreateOneOrgInput {
-  """The record to create"""
-  org: OrgDTO!
-}
-
-input OrgDTO {
-  type: OrgType!
-  name: String!
-  details: JSON
-  enabled: Boolean
-  createdBy: ID
-  members: [OrgMemberDTO!]
-  branches: [OrgBranchDTO!]
-}
-
-input CreateManyOrgsInput {
-  """Array of records to create"""
-  orgs: [OrgDTO!]!
-}
-
-input UpdateOneOrgInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: OrgDTO!
-}
-
-input UpdateManyOrgsInput {
-  """Filter used to find fields to update"""
-  filter: OrgUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: OrgDTO!
-}
-
-input OrgUpdateFilter {
-  and: [OrgUpdateFilter!]
-  or: [OrgUpdateFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneOrgInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyOrgsInput {
-  """Filter to find records to delete"""
-  filter: OrgDeleteFilter!
-}
-
-input OrgDeleteFilter {
-  and: [OrgDeleteFilter!]
-  or: [OrgDeleteFilter!]
-  type: OrgTypeFilterComparison
-  name: StringFieldComparison
-  enabled: BooleanFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
 input SetProductOnOrderProductInput {
   """The id of the record."""
   id: ID!
@@ -7397,6 +8413,156 @@ input OrderDeleteFilter {
   deletedAt: DateFieldComparison
 }
 
+input AddMembersToShopInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetMembersOnShopInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOneShopInput {
+  """The record to create"""
+  shop: ShopDTO!
+}
+
+input ShopDTO {
+  name: String!
+  details: JSON
+  enabled: Boolean
+  org: ID
+  branch: ID
+  members: [ShopMemberDTO!]
+}
+
+input ShopMemberDTO {
+  role: ShopMemberRole!
+  enabled: Boolean
+  account: ID!
+  shop: ID
+}
+
+input CreateManyShopsInput {
+  """Array of records to create"""
+  shops: [ShopDTO!]!
+}
+
+input UpdateOneShopInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: ShopDTO!
+}
+
+input UpdateManyShopsInput {
+  """Filter used to find fields to update"""
+  filter: ShopUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: ShopDTO!
+}
+
+input ShopUpdateFilter {
+  and: [ShopUpdateFilter!]
+  or: [ShopUpdateFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneShopInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyShopsInput {
+  """Filter to find records to delete"""
+  filter: ShopDeleteFilter!
+}
+
+input ShopDeleteFilter {
+  and: [ShopDeleteFilter!]
+  or: [ShopDeleteFilter!]
+  name: StringFieldComparison
+  details: JSONFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input CreateOneShopMemberInput {
+  """The record to create"""
+  shopMember: ShopMemberDTO!
+}
+
+input CreateManyShopMembersInput {
+  """Array of records to create"""
+  shopMembers: [ShopMemberDTO!]!
+}
+
+input UpdateOneShopMemberInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: ShopMemberDTO!
+}
+
+input UpdateManyShopMembersInput {
+  """Filter used to find fields to update"""
+  filter: ShopMemberUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: ShopMemberDTO!
+}
+
+input ShopMemberUpdateFilter {
+  and: [ShopMemberUpdateFilter!]
+  or: [ShopMemberUpdateFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneShopMemberInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyShopMembersInput {
+  """Filter to find records to delete"""
+  filter: ShopMemberDeleteFilter!
+}
+
+input ShopMemberDeleteFilter {
+  and: [ShopMemberDeleteFilter!]
+  or: [ShopMemberDeleteFilter!]
+  role: ShopMemberRoleFilterComparison
+  enabled: BooleanFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
 input CreateOneGarageInput {
   """The record to create"""
   garage: GarageDTO!
@@ -7413,6 +8579,7 @@ input GarageDTO {
   status: GarageStatus
   metadata: JSON
   org: ID
+  branch: ID
 }
 
 input CreateManyGaragesInput {

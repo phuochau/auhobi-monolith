@@ -1,11 +1,15 @@
+/**
+ * The virtual garage, it can be managed by an organization branch or not
+ */
 import { Field, ID, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { GarageStatus } from './enums/garage-status.enum';
 import { Org } from 'src/modules/organization/entities/org.entity';
 import { genXToOneOptions } from 'src/modules/core/database/helpers/genXToOneOptions';
+import { OrgBranch } from 'src/modules/organization/entities/org-branch.entity';
 
 registerEnumType(GarageStatus, { 
   name: 'GarageStatus'
@@ -56,6 +60,7 @@ class BaseClass extends BaseEntity {
  */
 @ObjectType()
 @FilterableRelation('org', () => Org)
+@FilterableRelation('branch', () => OrgBranch)
 @Entity({ name: `${TABLE_PREFIX}_garages` })
 export class Garage extends BaseClass {
   @FilterableField(() => ID)
@@ -63,7 +68,10 @@ export class Garage extends BaseClass {
   id: number;
 
   @ManyToOne(() => Org, genXToOneOptions({ nullable: true }))
-  org: Org;
+  org?: Org;
+
+  @ManyToOne(() => Org, genXToOneOptions({ nullable: true }))
+  branch?: OrgBranch;
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -85,4 +93,7 @@ export class Garage extends BaseClass {
 export class GarageDTO extends BaseClass {
   @FilterableField(() => ID, { nullable: true })
   org: Org
+  
+  @FilterableField(() => ID, { nullable: true })
+  branch: OrgBranch
 }

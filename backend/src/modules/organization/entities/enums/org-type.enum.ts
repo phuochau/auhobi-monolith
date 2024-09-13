@@ -1,3 +1,3 @@
 export enum OrgType {
-    FNB = 1
-  }
+  DEFAULT = 1
+}

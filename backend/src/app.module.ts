@@ -5,21 +5,19 @@ import { CoreModule } from './modules/core/core.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { ApplicationModule } from './modules/application/application.module';
 import { OrganizationModule } from './modules/organization/organization.module';
-import { InventoryModule } from './modules/inventory/inventory.module';
-import { SaleModule } from './modules/sale/sale.module';
 import { CrmModule } from './modules/crm/crm.module';
 import { GarageModule } from './modules/garage/garage.module';
+import { CommerceModule } from './modules/commerce/commerce.module';
 
 @Module({
   imports: [
     AdminModule,
     CoreModule,
     ApplicationModule,
-    CrmModule,
-    InventoryModule,
     OrganizationModule,
-    SaleModule,
-    GarageModule
+    CrmModule,
+    CommerceModule,
+    GarageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
