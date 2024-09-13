@@ -244,6 +244,7 @@ type MediaAggregateResponse {
 
 type AccountPasswordReset {
   token: String!
+  code: String!
   id: ID!
   used: Boolean!
   expiredAt: DateTime!
@@ -255,6 +256,7 @@ type AccountPasswordReset {
 
 type AccountVerfication {
   token: String!
+  code: String!
   id: ID!
   used: Boolean!
   expiredAt: DateTime!
@@ -366,6 +368,7 @@ type AccountAggregateResponse {
 
 type AccountVerficationDeleteResponse {
   token: String
+  code: String
   id: ID
   used: Boolean
   expiredAt: DateTime
@@ -395,6 +398,7 @@ type AccountVerficationConnection {
 
 type AccountVerficationAggregateGroupBy {
   token: String
+  code: String
   id: ID
   used: Boolean
   expiredAt(by: GroupBy! = DAY): DateTime
@@ -405,6 +409,7 @@ type AccountVerficationAggregateGroupBy {
 
 type AccountVerficationCountAggregate {
   token: Int
+  code: Int
   id: Int
   used: Int
   expiredAt: Int
@@ -415,6 +420,7 @@ type AccountVerficationCountAggregate {
 
 type AccountVerficationMinAggregate {
   token: String
+  code: String
   id: ID
   expiredAt: DateTime
   createdAt: DateTime
@@ -424,6 +430,7 @@ type AccountVerficationMinAggregate {
 
 type AccountVerficationMaxAggregate {
   token: String
+  code: String
   id: ID
   expiredAt: DateTime
   createdAt: DateTime
@@ -440,6 +447,7 @@ type AccountVerficationAggregateResponse {
 
 type AccountPasswordResetDeleteResponse {
   token: String
+  code: String
   id: ID
   used: Boolean
   expiredAt: DateTime
@@ -469,6 +477,7 @@ type AccountPasswordResetConnection {
 
 type AccountPasswordResetAggregateGroupBy {
   token: String
+  code: String
   id: ID
   used: Boolean
   expiredAt(by: GroupBy! = DAY): DateTime
@@ -479,6 +488,7 @@ type AccountPasswordResetAggregateGroupBy {
 
 type AccountPasswordResetCountAggregate {
   token: Int
+  code: Int
   id: Int
   used: Int
   expiredAt: Int
@@ -489,6 +499,7 @@ type AccountPasswordResetCountAggregate {
 
 type AccountPasswordResetMinAggregate {
   token: String
+  code: String
   id: ID
   expiredAt: DateTime
   createdAt: DateTime
@@ -498,6 +509,7 @@ type AccountPasswordResetMinAggregate {
 
 type AccountPasswordResetMaxAggregate {
   token: String
+  code: String
   id: ID
   expiredAt: DateTime
   createdAt: DateTime
@@ -5878,6 +5890,7 @@ input AccountVerficationAggregateFilter {
   and: [AccountVerficationAggregateFilter!]
   or: [AccountVerficationAggregateFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -5905,6 +5918,7 @@ input AccountVerficationFilter {
   and: [AccountVerficationFilter!]
   or: [AccountVerficationFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -5936,6 +5950,7 @@ input AccountVerficationSort {
 
 enum AccountVerficationSortFields {
   token
+  code
   id
   used
   expiredAt
@@ -5948,6 +5963,7 @@ input AccountPasswordResetAggregateFilter {
   and: [AccountPasswordResetAggregateFilter!]
   or: [AccountPasswordResetAggregateFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -5975,6 +5991,7 @@ input AccountPasswordResetFilter {
   and: [AccountPasswordResetFilter!]
   or: [AccountPasswordResetFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -6006,6 +6023,7 @@ input AccountPasswordResetSort {
 
 enum AccountPasswordResetSortFields {
   token
+  code
   id
   used
   expiredAt
@@ -8199,8 +8217,10 @@ type Mutation {
   authResendVerification(input: AuthResendVerificationInput!): Boolean!
   authResendVerificationWithEmail(input: AuthResendVerificationWithEmailInput!): Boolean!
   authVerify(input: AuthVerifyAccountInput!): Boolean!
+  authVerifyByCode(input: AuthVerifyAccountByCodeInput!): Boolean!
   authRequestPasswordReset(input: AuthRequestPasswordResetInput!): Boolean!
   authConfirmPasswordReset(input: AuthConfirmPasswordResetInput!): Boolean!
+  authConfirmPasswordResetByCode(input: AuthConfirmPasswordResetByCodeInput!): Boolean!
   createOneAccount(input: CreateOneAccountInput!): Account!
   createManyAccounts(input: CreateManyAccountsInput!): [Account!]!
   updateOneAccount(input: UpdateOneAccountInput!): Account!
@@ -8441,6 +8461,7 @@ input AuthRegisterInput {
   password: String!
   firstName: String!
   lastName: String
+  useCode: Boolean! = false
 }
 
 input AuthResendVerificationInput {
@@ -8449,18 +8470,31 @@ input AuthResendVerificationInput {
 
 input AuthResendVerificationWithEmailInput {
   email: String!
+  useCode: Boolean! = false
 }
 
 input AuthVerifyAccountInput {
   token: String!
 }
 
+input AuthVerifyAccountByCodeInput {
+  email: String!
+  code: String!
+}
+
 input AuthRequestPasswordResetInput {
   email: String!
+  useCode: Boolean! = false
 }
 
 input AuthConfirmPasswordResetInput {
   token: String!
+  password: String!
+}
+
+input AuthConfirmPasswordResetByCodeInput {
+  email: String!
+  code: String!
   password: String!
 }
 
@@ -8542,6 +8576,7 @@ input CreateOneAccountVerficationInput {
 
 input AccountVerficationDTO {
   token: String!
+  code: String!
   account: ID!
 }
 
@@ -8570,6 +8605,7 @@ input AccountVerficationUpdateFilter {
   and: [AccountVerficationUpdateFilter!]
   or: [AccountVerficationUpdateFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -8592,6 +8628,7 @@ input AccountVerficationDeleteFilter {
   and: [AccountVerficationDeleteFilter!]
   or: [AccountVerficationDeleteFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -8607,6 +8644,7 @@ input CreateOneAccountPasswordResetInput {
 
 input AccountPasswordResetDTO {
   token: String!
+  code: String!
   account: ID!
 }
 
@@ -8635,6 +8673,7 @@ input AccountPasswordResetUpdateFilter {
   and: [AccountPasswordResetUpdateFilter!]
   or: [AccountPasswordResetUpdateFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison
@@ -8657,6 +8696,7 @@ input AccountPasswordResetDeleteFilter {
   and: [AccountPasswordResetDeleteFilter!]
   or: [AccountPasswordResetDeleteFilter!]
   token: StringFieldComparison
+  code: StringFieldComparison
   id: IDFilterComparison
   used: BooleanFieldComparison
   expiredAt: DateFieldComparison

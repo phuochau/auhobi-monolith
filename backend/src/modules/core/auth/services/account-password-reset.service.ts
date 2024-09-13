@@ -29,7 +29,7 @@ export class AccountPasswordResetService {
     return this.repo.save(verification)
   }
 
-  async getToken(token: string): Promise<AccountPasswordReset | undefined> {
+  async findByToken(token: string): Promise<AccountPasswordReset | undefined> {
     return this.repo.findOne({
       where: {
         token,
@@ -39,7 +39,20 @@ export class AccountPasswordResetService {
     })
   }
 
-  async getActiveToken(token: string): Promise<AccountPasswordReset | undefined> {
+  async findByCode(email: string, code: string): Promise<AccountPasswordReset | undefined> {
+    return this.repo.findOne({
+      where: {
+        code,
+        used: false,
+        account: {
+          email
+        },
+      },
+      relations: ['account']
+    })
+  }
+
+  async findActiveByToken(token: string): Promise<AccountPasswordReset | undefined> {
     return this.repo.findOne({
       where: {
         token,
@@ -50,7 +63,7 @@ export class AccountPasswordResetService {
     })
   }
 
-  async markTokenAsUsed(verification: AccountPasswordReset): Promise<AccountPasswordReset> {
+  async markAsUsed(verification: AccountPasswordReset): Promise<AccountPasswordReset> {
     verification.used = true
     return this.repo.save(verification)
   }
@@ -66,6 +79,21 @@ export class AccountPasswordResetService {
       template: 'request-password-reset',
       context: {
         link
+      }
+    })
+    return true
+  }
+
+  async sendPasswordResetEmailByCode(request: AccountPasswordReset): Promise<boolean> {
+    const text = await this.emailService.renderContent(PlatformConfig.auth.requestPasswordReset.email.textByCode,  { code: request.code })
+
+    await this.emailService.send({
+      to: request.account.email,
+      subject: PlatformConfig.auth.requestPasswordReset.email.subject,
+      text,
+      template: 'request-password-reset-by-code',
+      context: {
+        code: request.code
       }
     })
     return true

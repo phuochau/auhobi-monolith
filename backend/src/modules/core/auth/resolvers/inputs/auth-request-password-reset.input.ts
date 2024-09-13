@@ -4,4 +4,7 @@ import { Field, InputType } from "@nestjs/graphql";
 export class AuthRequestPasswordResetInput {
     @Field()
     email: string
+
+    @Field({ defaultValue: false })
+    useCode: boolean;
 }

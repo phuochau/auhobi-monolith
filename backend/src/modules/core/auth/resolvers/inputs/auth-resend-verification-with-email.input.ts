@@ -4,4 +4,7 @@ import { Field, InputType } from "@nestjs/graphql";
 export class AuthResendVerificationWithEmailInput {
     @Field()
     email: string
+
+    @Field({ defaultValue: false })
+    useCode: boolean;
 }

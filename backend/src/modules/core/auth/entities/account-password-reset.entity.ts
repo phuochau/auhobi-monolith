@@ -1,17 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, BaseEntity } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, BaseEntity, BeforeInsert } from 'typeorm';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../../constants';
 import { Account } from './account.entity';
 import { genXToOneOptions } from '../../database/helpers/genXToOneOptions';
+import { Encryption } from 'src/lib/encryption';
 
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-
     @FilterableField()
     @Column()
     token: string;
+
+    @FilterableField()
+    @Column()
+    code: string;
 }
 
 /**
@@ -21,6 +25,11 @@ class BaseClass extends BaseEntity {
 @FilterableRelation('account', () => Account)
 @Entity({ name: `${TABLE_PREFIX}_account_password_resets` })
 export class AccountPasswordReset extends BaseClass {
+  @BeforeInsert()
+  updateCode() {
+    this.code = Encryption.genDigits(6)
+  }
+  
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;

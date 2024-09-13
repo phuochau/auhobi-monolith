@@ -29,7 +29,7 @@ export class AccountVerificationService {
     return this.repo.save(verification)
   }
 
-  async getToken(token: string): Promise<AccountVerfication | undefined> {
+  async findByToken(token: string): Promise<AccountVerfication | undefined> {
     return this.repo.findOne({
       where: {
         token,
@@ -39,7 +39,20 @@ export class AccountVerificationService {
     })
   }
 
-  async getExpiredToken(token: string): Promise<AccountVerfication | undefined> {
+  async findByCode(email: string, code: string): Promise<AccountVerfication | undefined> {
+    return this.repo.findOne({
+      where: {
+        code,
+        used: false,
+        account: {
+          email
+        },
+      },
+      relations: ['account']
+    })
+  }
+
+  async findExpiredByToken(token: string): Promise<AccountVerfication | undefined> {
     return this.repo.findOne({
       where: {
         token,
@@ -50,7 +63,7 @@ export class AccountVerificationService {
     })
   }
 
-  async getActiveToken(token: string): Promise<AccountVerfication | undefined> {
+  async findActiveByToken(token: string): Promise<AccountVerfication | undefined> {
     return this.repo.findOne({
       where: {
         token,
@@ -61,7 +74,7 @@ export class AccountVerificationService {
     })
   }
 
-  async markTokenAsUsed(verification: AccountVerfication): Promise<AccountVerfication> {
+  async markAsUsed(verification: AccountVerfication): Promise<AccountVerfication> {
     verification.used = true
     return this.repo.save(verification)
   }
@@ -77,6 +90,21 @@ export class AccountVerificationService {
       template: 'email-verification',
       context: {
         link
+      }
+    })
+    return true
+  }
+
+  async sendRequestEmailByCode(verification: AccountVerfication): Promise<boolean> {
+    const text = await this.emailService.renderContent(PlatformConfig.auth.verification.email.textByCode,  { code: verification.code })
+
+    await this.emailService.send({
+      to: verification.account.email,
+      subject: PlatformConfig.auth.verification.email.subject,
+      text,
+      template: 'email-verification-by-code',
+      context: {
+        code: verification.code
       }
     })
     return true

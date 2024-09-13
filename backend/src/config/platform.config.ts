@@ -20,7 +20,8 @@ export const PlatformConfig = {
         email: {
             link: `${frontEndUrl}/verification?token=<%= token %>`,
             subject: 'Verify your account',
-            text: 'Click on this link <%= link %> to verify your account.'
+            text: 'Click on this link <%= link %> to verify your account.',
+            textByCode: 'Enter this code: <%= code %> to verify your account.'
         }
     },
     confirmation: {
@@ -34,7 +35,8 @@ export const PlatformConfig = {
         email: {
             link: `${frontEndUrl}/reset-password/confirm?token=<%= token %>`,
             subject: 'You just requested to reset your password',
-            text: 'Click on this link <%= link %> to enter new password.'
+            text: 'Click on this link <%= link %> to enter new password.',
+            textByCode: 'Enter this code: <%= code %> to enter new password.'
         }
     },
     passwordResetConfirmation: {

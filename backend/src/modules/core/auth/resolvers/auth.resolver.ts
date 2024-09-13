@@ -9,6 +9,8 @@ import { AuthResendVerificationWithEmailInput } from "./inputs/auth-resend-verif
 import { AuthVerifyAccountInput } from "./inputs/auth-verify-account";
 import { AuthRequestPasswordResetInput } from "./inputs/auth-request-password-reset.input";
 import { AuthConfirmPasswordResetInput } from "./inputs/auth-confirm-password-reset.input";
+import { AuthVerifyAccountByCodeInput } from "./inputs/auth-verify-account-by-code.input";
+import { AuthConfirmPasswordResetByCodeInput } from "./inputs/auth-confirm-password-reset-by-code.input";
 
 @Resolver()
 export class AuthResolver {
@@ -42,7 +44,7 @@ export class AuthResolver {
   authRegister(
     @Args({ name: 'input', type: () => AuthRegisterInput }) input: AuthRegisterInput,
   ) {
-    return this.authService.register(input.email, input.password, input.firstName, input.lastName)
+    return this.authService.register(input.email, input.password, input.firstName, input.lastName, input.useCode)
   }
 
   @Mutation(() => Boolean)
@@ -56,7 +58,7 @@ export class AuthResolver {
   authResendVerificationWithEmail(
     @Args({ name: 'input', type: () => AuthResendVerificationWithEmailInput }) input: AuthResendVerificationWithEmailInput,
   ) {
-    return this.authService.resendVerificationWithEmail(input.email)
+    return this.authService.resendVerificationWithEmail(input.email, input.useCode)
   }
 
   @Mutation(() => Boolean)
@@ -64,6 +66,13 @@ export class AuthResolver {
     @Args({ name: 'input', type: () => AuthVerifyAccountInput }) input: AuthVerifyAccountInput,
   ) {
     return this.authService.verifyAccount(input.token)
+  }
+
+  @Mutation(() => Boolean)
+  authVerifyByCode(
+    @Args({ name: 'input', type: () => AuthVerifyAccountByCodeInput }) input: AuthVerifyAccountByCodeInput,
+  ) {
+    return this.authService.verifyAccountByCode(input.email, input.code)
   }
 
   /**
@@ -74,7 +83,7 @@ export class AuthResolver {
   authRequestPasswordReset(
     @Args({ name: 'input', type: () => AuthRequestPasswordResetInput }) input: AuthRequestPasswordResetInput,
   ) {
-    return this.authService.requestPasswordReset(input.email)
+    return this.authService.requestPasswordReset(input.email, input.useCode)
   }
 
   @Mutation(() => Boolean)
@@ -82,5 +91,12 @@ export class AuthResolver {
     @Args({ name: 'input', type: () => AuthConfirmPasswordResetInput }) input: AuthConfirmPasswordResetInput
   ) {
     return this.authService.confirmPasswordReset(input.token, input.password)
+  }
+
+  @Mutation(() => Boolean)
+  authConfirmPasswordResetByCode(
+    @Args({ name: 'input', type: () => AuthConfirmPasswordResetByCodeInput }) input: AuthConfirmPasswordResetByCodeInput
+  ) {
+    return this.authService.confirmPasswordResetByCode(input.email, input.code, input.password)
   }
 }

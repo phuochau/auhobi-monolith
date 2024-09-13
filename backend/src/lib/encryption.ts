@@ -13,4 +13,8 @@ export namespace Encryption {
   export const genToken = (length = 32) => {
     return faker.string.alphanumeric({ length })
   }
+
+  export const genDigits = (length = 6) => {
+    return faker.string.numeric({ length })
+  }
 }

@@ -115,7 +115,7 @@ export class AuthService {
    * Register Flow
    */
 
-  async register(email: string, pass: string, firstName: string, lastName: string): Promise<boolean> {
+  async register(email: string, pass: string, firstName: string, lastName: string, useCode: boolean): Promise<boolean> {
     let acc = await this.accountService.findAccountByEmail(email)
     if (acc) {
       if (!acc.emailVerified) {
@@ -126,12 +126,16 @@ export class AuthService {
 
     acc = await this.accountService.createOneAccount(email, pass, firstName, lastName)
     const verification = await this.accountVerificationService.createOne(acc)
-    this.accountVerificationService.sendRequestEmail(verification)
+    if (useCode) {
+      this.accountVerificationService.sendRequestEmailByCode(verification)
+    } else {
+      this.accountVerificationService.sendRequestEmail(verification)
+    }
     return true
   }
 
   async verifyAccount(token: string): Promise<boolean> {
-    const request = await this.accountVerificationService.getToken(token)
+    const request = await this.accountVerificationService.findByToken(token)
     if (!request) {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
     }
@@ -146,14 +150,36 @@ export class AuthService {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
 
-    await this.accountVerificationService.markTokenAsUsed(request)
+    await this.accountVerificationService.markAsUsed(request)
+    await this.accountService.activeAccount(acc)
+    this.accountVerificationService.sendConfirmationEmail(request)
+    return true
+  }
+
+  async verifyAccountByCode(email: string, code: string): Promise<boolean> {
+    const acc = await this.accountService.findUnactiveAccount(email)
+    if (!acc) {
+      throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
+    }
+
+    const request = await this.accountVerificationService.findByCode(email, code)
+    if (!request) {
+      throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
+    }
+
+    const expiredAt = dayjs(request.expiredAt)
+    if (dayjs().isAfter(expiredAt)) {
+      throw new NotFoundException(ErrorCodes.AUTH_REQUEST_EXPIRED)
+    }
+
+    await this.accountVerificationService.markAsUsed(request)
     await this.accountService.activeAccount(acc)
     this.accountVerificationService.sendConfirmationEmail(request)
     return true
   }
 
   async resendVerification(token: string): Promise<boolean> {
-    const request = await this.accountVerificationService.getExpiredToken(token)
+    const request = await this.accountVerificationService.findExpiredByToken(token)
     if (!request) {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
     }
@@ -167,13 +193,18 @@ export class AuthService {
     return true
   }
 
-  async resendVerificationWithEmail(email: string): Promise<boolean> {
+  async resendVerificationWithEmail(email: string, useCode: boolean): Promise<boolean> {
     const acc = await this.accountService.findUnactiveAccount(email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
     const verification = await this.accountVerificationService.createOne(acc)
-    this.accountVerificationService.sendRequestEmail(verification)
+
+    if (useCode) {
+      this.accountVerificationService.sendRequestEmailByCode(verification)
+    } else {
+      this.accountVerificationService.sendRequestEmail(verification)
+    }
     return true
   }
 
@@ -181,19 +212,23 @@ export class AuthService {
    * Forgot password flow
    */
 
-  async requestPasswordReset(email: string): Promise<boolean> {
+  async requestPasswordReset(email: string, useCode: boolean): Promise<boolean> {
     let acc = await this.accountService.findActiveAccount(email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
 
     const request = await this.accountPasswordResetService.createOne(acc)
-    await this.accountPasswordResetService.sendPasswordResetEmail(request)
+    if (useCode) {
+      this.accountPasswordResetService.sendPasswordResetEmailByCode(request)
+    } else {
+      this.accountPasswordResetService.sendPasswordResetEmail(request)
+    }
     return true
   }
 
   async confirmPasswordReset(token: string, password: string): Promise<boolean> {
-    const request = await this.accountPasswordResetService.getToken(token)
+    const request = await this.accountPasswordResetService.findByToken(token)
     if (!request) {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
     }
@@ -209,8 +244,30 @@ export class AuthService {
     }
 
     await this.accountService.updatePassword(acc, password)
-    await this.accountPasswordResetService.markTokenAsUsed(request)
-    await this.accountPasswordResetService.sendConfirmationEmail(request)
+    await this.accountPasswordResetService.markAsUsed(request)
+    this.accountPasswordResetService.sendConfirmationEmail(request)
+    return true
+  }
+
+  async confirmPasswordResetByCode(email: string, code: string, password: string): Promise<boolean> {
+    const acc = await this.accountService.findActiveAccount(email)
+    if (!acc) {
+      throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
+    }
+
+    const request = await this.accountPasswordResetService.findByCode(email, code)
+    if (!request) {
+      throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
+    }
+
+    const expiredAt = dayjs(request.expiredAt)
+    if (dayjs().isAfter(expiredAt)) {
+      throw new NotFoundException(ErrorCodes.AUTH_REQUEST_EXPIRED)
+    }
+
+    await this.accountService.updatePassword(acc, password)
+    await this.accountPasswordResetService.markAsUsed(request)
+    this.accountPasswordResetService.sendConfirmationEmail(request)
     return true
   }
 
