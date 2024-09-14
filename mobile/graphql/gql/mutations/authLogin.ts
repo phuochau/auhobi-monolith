@@ -13,6 +13,22 @@ export const AuthLoginMutation = gql`
     			createdAt
     			updatedAt
     			deletedAt
+				user {
+					phone_number
+					avatar
+					status
+					id
+					vehicles {
+						nodes {
+							name
+							customModel
+							picture
+							status
+							metadata
+							id
+						}
+					}
+				}
     		}
     		accessToken
     		refreshToken

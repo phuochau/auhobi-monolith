@@ -1,7 +1,7 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
-import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, FilterableOffsetConnection, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { UserStatus } from './enums/user-status.enum';
 import { Account } from '../../core/auth/entities/account.entity';
 import { UserVehicle } from './user-vehicle.entity';
@@ -10,7 +10,7 @@ import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @FilterableField()
+  @FilterableField({ nullable: true })
   @Column({ nullable: true })
   phone_number: string;
 
@@ -29,6 +29,7 @@ class BaseClass extends BaseEntity {
  */
 @ObjectType()
 @FilterableRelation('account', () => Account)
+@FilterableOffsetConnection('vehicles', () => UserVehicle, { nullable: true, update: { enabled: true } })
 @Entity({ name: `${TABLE_PREFIX}_users` })
 export class User extends BaseClass {
   @FilterableField(() => ID)

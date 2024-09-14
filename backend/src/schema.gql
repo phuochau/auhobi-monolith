@@ -299,20 +299,230 @@ enum UserVechileStatus {
 }
 
 type User {
-  phone_number: String!
+  phone_number: String
   avatar: String
   status: UserStatus!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
+  vehiclesAggregate(
+    """Filter to find records to aggregate on"""
+    filter: UserVehicleAggregateFilter
+  ): [UserVehiclesAggregateResponse!]!
   account: Account!
+  vehicles(
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: UserVehicleFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [UserVehicleSort!]! = []
+  ): UserVehiclesConnection
 }
 
 enum UserStatus {
   ACTIVATED
   UNACTIVATED
   BLOCKED
+}
+
+input UserVehicleAggregateFilter {
+  and: [UserVehicleAggregateFilter!]
+  or: [UserVehicleAggregateFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  transmission: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter
+  engine: UserVehicleAggregateFilterVehicleEngineAggregateFilter
+  body: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter
+  model: UserVehicleAggregateFilterVehicleModelAggregateFilter
+  owner: UserVehicleAggregateFilterUserAggregateFilter
+}
+
+input UserVechileStatusFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: UserVechileStatus
+  neq: UserVechileStatus
+  gt: UserVechileStatus
+  gte: UserVechileStatus
+  lt: UserVechileStatus
+  lte: UserVechileStatus
+  like: UserVechileStatus
+  notLike: UserVechileStatus
+  iLike: UserVechileStatus
+  notILike: UserVechileStatus
+  in: [UserVechileStatus!]
+  notIn: [UserVechileStatus!]
+}
+
+input UserVehicleAggregateFilterVehicleTransmissionAggregateFilter {
+  and: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
+  or: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleAggregateFilterVehicleEngineAggregateFilter {
+  and: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
+  or: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleAggregateFilterVehicleModelBodyAggregateFilter {
+  and: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
+  or: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleAggregateFilterVehicleModelAggregateFilter {
+  and: [UserVehicleAggregateFilterVehicleModelAggregateFilter!]
+  or: [UserVehicleAggregateFilterVehicleModelAggregateFilter!]
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  id: IDFilterComparison
+  endYear: IntFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleAggregateFilterUserAggregateFilter {
+  and: [UserVehicleAggregateFilterUserAggregateFilter!]
+  or: [UserVehicleAggregateFilterUserAggregateFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserStatusFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: UserStatus
+  neq: UserStatus
+  gt: UserStatus
+  gte: UserStatus
+  lt: UserStatus
+  lte: UserStatus
+  like: UserStatus
+  notLike: UserStatus
+  iLike: UserStatus
+  notILike: UserStatus
+  in: [UserStatus!]
+  notIn: [UserStatus!]
+}
+
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
+
+  """Offset to start returning records from"""
+  offset: Int
+}
+
+input UserVehicleFilter {
+  and: [UserVehicleFilter!]
+  or: [UserVehicleFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  transmission: UserVehicleFilterVehicleTransmissionFilter
+  engine: UserVehicleFilterVehicleEngineFilter
+  body: UserVehicleFilterVehicleModelBodyFilter
+  model: UserVehicleFilterVehicleModelFilter
+  owner: UserVehicleFilterUserFilter
+}
+
+input UserVehicleFilterVehicleTransmissionFilter {
+  and: [UserVehicleFilterVehicleTransmissionFilter!]
+  or: [UserVehicleFilterVehicleTransmissionFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleFilterVehicleEngineFilter {
+  and: [UserVehicleFilterVehicleEngineFilter!]
+  or: [UserVehicleFilterVehicleEngineFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleFilterVehicleModelBodyFilter {
+  and: [UserVehicleFilterVehicleModelBodyFilter!]
+  or: [UserVehicleFilterVehicleModelBodyFilter!]
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleFilterVehicleModelFilter {
+  and: [UserVehicleFilterVehicleModelFilter!]
+  or: [UserVehicleFilterVehicleModelFilter!]
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  id: IDFilterComparison
+  endYear: IntFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleFilterUserFilter {
+  and: [UserVehicleFilterUserFilter!]
+  or: [UserVehicleFilterUserFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserVehicleSort {
+  field: UserVehicleSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum UserVehicleSortFields {
+  name
+  customModel
+  status
+  id
+  createdAt
+  updatedAt
+  deletedAt
 }
 
 type Account {
@@ -1080,14 +1290,6 @@ input AccountRoleFilterComparison {
   notILike: AccountRole
   in: [AccountRole!]
   notIn: [AccountRole!]
-}
-
-input OffsetPaging {
-  """Limit the number of records returned"""
-  limit: Int
-
-  """Offset to start returning records from"""
-  offset: Int
 }
 
 input OrgBranchMemberFilter {
@@ -4927,6 +5129,64 @@ type UserAggregateResponse {
   max: UserMaxAggregate
 }
 
+type UserVehiclesConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [UserVehicle!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type UserVehiclesAggregateGroupBy {
+  name: String
+  customModel: String
+  status: UserVechileStatus
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type UserVehiclesCountAggregate {
+  name: Int
+  customModel: Int
+  status: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type UserVehiclesMinAggregate {
+  name: String
+  customModel: String
+  status: UserVechileStatus
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type UserVehiclesMaxAggregate {
+  name: String
+  customModel: String
+  status: UserVechileStatus
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type UserVehiclesAggregateResponse {
+  groupBy: UserVehiclesAggregateGroupBy
+  count: UserVehiclesCountAggregate
+  min: UserVehiclesMinAggregate
+  max: UserVehiclesMaxAggregate
+}
+
 type VehicleBodyDeleteResponse {
   name: String
   metadata: JSON
@@ -5857,23 +6117,103 @@ input AccountAggregateFilterUserAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+  account: AccountAggregateFilterUserAggregateFilterAccountAggregateFilter
+  vehicles: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter
 }
 
-input UserStatusFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: UserStatus
-  neq: UserStatus
-  gt: UserStatus
-  gte: UserStatus
-  lt: UserStatus
-  lte: UserStatus
-  like: UserStatus
-  notLike: UserStatus
-  iLike: UserStatus
-  notILike: UserStatus
-  in: [UserStatus!]
-  notIn: [UserStatus!]
+input AccountAggregateFilterUserAggregateFilterAccountAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  user: AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter
+}
+
+input AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  transmission: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter
+  engine: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter
+  body: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter
+  model: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter
+  owner: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter
+}
+
+input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter!]
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  id: IDFilterComparison
+  endYear: IntFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input CursorPaging {
@@ -5908,6 +6248,103 @@ input AccountFilter {
 input AccountFilterUserFilter {
   and: [AccountFilterUserFilter!]
   or: [AccountFilterUserFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  account: AccountFilterUserFilterAccountFilter
+  vehicles: AccountFilterUserFilterUserVehicleFilter
+}
+
+input AccountFilterUserFilterAccountFilter {
+  and: [AccountFilterUserFilterAccountFilter!]
+  or: [AccountFilterUserFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  user: AccountFilterUserFilterAccountFilterUserFilter
+}
+
+input AccountFilterUserFilterAccountFilterUserFilter {
+  and: [AccountFilterUserFilterAccountFilterUserFilter!]
+  or: [AccountFilterUserFilterAccountFilterUserFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountFilterUserFilterUserVehicleFilter {
+  and: [AccountFilterUserFilterUserVehicleFilter!]
+  or: [AccountFilterUserFilterUserVehicleFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  transmission: AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter
+  engine: AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter
+  body: AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter
+  model: AccountFilterUserFilterUserVehicleFilterVehicleModelFilter
+  owner: AccountFilterUserFilterUserVehicleFilterUserFilter
+}
+
+input AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter {
+  and: [AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter!]
+  or: [AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter {
+  and: [AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter!]
+  or: [AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter {
+  and: [AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter!]
+  or: [AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter!]
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountFilterUserFilterUserVehicleFilterVehicleModelFilter {
+  and: [AccountFilterUserFilterUserVehicleFilterVehicleModelFilter!]
+  or: [AccountFilterUserFilterUserVehicleFilterVehicleModelFilter!]
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  id: IDFilterComparison
+  endYear: IntFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input AccountFilterUserFilterUserVehicleFilterUserFilter {
+  and: [AccountFilterUserFilterUserVehicleFilterUserFilter!]
+  or: [AccountFilterUserFilterUserVehicleFilterUserFilter!]
   phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
@@ -6301,6 +6738,7 @@ input OrgAggregateFilterAccountAggregateFilterUserAggregateFilter {
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
   account: OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter
+  vehicles: OrgAggregateFilterAccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter
 }
 
 input OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter {
@@ -6312,6 +6750,18 @@ input OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregat
   lastName: StringFieldComparison
   id: IDFilterComparison
   emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgAggregateFilterAccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter {
+  and: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter!]
+  or: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6735,6 +7185,7 @@ input OrgFilterAccountFilterUserFilter {
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
   account: OrgFilterAccountFilterUserFilterAccountFilter
+  vehicles: OrgFilterAccountFilterUserFilterUserVehicleFilter
 }
 
 input OrgFilterAccountFilterUserFilterAccountFilter {
@@ -6746,6 +7197,18 @@ input OrgFilterAccountFilterUserFilterAccountFilter {
   lastName: StringFieldComparison
   id: IDFilterComparison
   emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input OrgFilterAccountFilterUserFilterUserVehicleFilter {
+  and: [OrgFilterAccountFilterUserFilterUserVehicleFilter!]
+  or: [OrgFilterAccountFilterUserFilterUserVehicleFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7751,177 +8214,6 @@ enum GarageSortFields {
   deletedAt
 }
 
-input UserVehicleAggregateFilter {
-  and: [UserVehicleAggregateFilter!]
-  or: [UserVehicleAggregateFilter!]
-  name: StringFieldComparison
-  customModel: StringFieldComparison
-  status: UserVechileStatusFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  transmission: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter
-  engine: UserVehicleAggregateFilterVehicleEngineAggregateFilter
-  body: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter
-  model: UserVehicleAggregateFilterVehicleModelAggregateFilter
-  owner: UserVehicleAggregateFilterUserAggregateFilter
-}
-
-input UserVechileStatusFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: UserVechileStatus
-  neq: UserVechileStatus
-  gt: UserVechileStatus
-  gte: UserVechileStatus
-  lt: UserVechileStatus
-  lte: UserVechileStatus
-  like: UserVechileStatus
-  notLike: UserVechileStatus
-  iLike: UserVechileStatus
-  notILike: UserVechileStatus
-  in: [UserVechileStatus!]
-  notIn: [UserVechileStatus!]
-}
-
-input UserVehicleAggregateFilterVehicleTransmissionAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleAggregateFilterVehicleEngineAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleAggregateFilterVehicleModelBodyAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleAggregateFilterVehicleModelAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleModelAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleModelAggregateFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleAggregateFilterUserAggregateFilter {
-  and: [UserVehicleAggregateFilterUserAggregateFilter!]
-  or: [UserVehicleAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
-  status: UserStatusFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilter {
-  and: [UserVehicleFilter!]
-  or: [UserVehicleFilter!]
-  name: StringFieldComparison
-  customModel: StringFieldComparison
-  status: UserVechileStatusFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  transmission: UserVehicleFilterVehicleTransmissionFilter
-  engine: UserVehicleFilterVehicleEngineFilter
-  body: UserVehicleFilterVehicleModelBodyFilter
-  model: UserVehicleFilterVehicleModelFilter
-  owner: UserVehicleFilterUserFilter
-}
-
-input UserVehicleFilterVehicleTransmissionFilter {
-  and: [UserVehicleFilterVehicleTransmissionFilter!]
-  or: [UserVehicleFilterVehicleTransmissionFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilterVehicleEngineFilter {
-  and: [UserVehicleFilterVehicleEngineFilter!]
-  or: [UserVehicleFilterVehicleEngineFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilterVehicleModelBodyFilter {
-  and: [UserVehicleFilterVehicleModelBodyFilter!]
-  or: [UserVehicleFilterVehicleModelBodyFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilterVehicleModelFilter {
-  and: [UserVehicleFilterVehicleModelFilter!]
-  or: [UserVehicleFilterVehicleModelFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilterUserFilter {
-  and: [UserVehicleFilterUserFilter!]
-  or: [UserVehicleFilterUserFilter!]
-  phone_number: StringFieldComparison
-  status: UserStatusFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleSort {
-  field: UserVehicleSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum UserVehicleSortFields {
-  name
-  customModel
-  status
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
 input UserAggregateFilter {
   and: [UserAggregateFilter!]
   or: [UserAggregateFilter!]
@@ -7932,6 +8224,7 @@ input UserAggregateFilter {
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
   account: UserAggregateFilterAccountAggregateFilter
+  vehicles: UserAggregateFilterUserVehicleAggregateFilter
 }
 
 input UserAggregateFilterAccountAggregateFilter {
@@ -7948,6 +8241,18 @@ input UserAggregateFilterAccountAggregateFilter {
   deletedAt: DateFieldComparison
 }
 
+input UserAggregateFilterUserVehicleAggregateFilter {
+  and: [UserAggregateFilterUserVehicleAggregateFilter!]
+  or: [UserAggregateFilterUserVehicleAggregateFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
 input UserFilter {
   and: [UserFilter!]
   or: [UserFilter!]
@@ -7958,6 +8263,7 @@ input UserFilter {
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
   account: UserFilterAccountFilter
+  vehicles: UserFilterUserVehicleFilter
 }
 
 input UserFilterAccountFilter {
@@ -7969,6 +8275,18 @@ input UserFilterAccountFilter {
   lastName: StringFieldComparison
   id: IDFilterComparison
   emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserFilterUserVehicleFilter {
+  and: [UserFilterUserVehicleFilter!]
+  or: [UserFilterUserVehicleFilter!]
+  name: StringFieldComparison
+  customModel: StringFieldComparison
+  status: UserVechileStatusFilterComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -8505,6 +8823,8 @@ type Mutation {
   updateManyUserVehicles(input: UpdateManyUserVehiclesInput!): UpdateManyResponse!
   deleteOneUserVehicle(input: DeleteOneUserVehicleInput!): UserVehicleDeleteResponse!
   deleteManyUserVehicles(input: DeleteManyUserVehiclesInput!): DeleteManyResponse!
+  addVehiclesToUser(input: AddVehiclesToUserInput!): User!
+  setVehiclesOnUser(input: SetVehiclesOnUserInput!): User!
   createOneUser(input: CreateOneUserInput!): User!
   createManyUsers(input: CreateManyUsersInput!): [User!]!
   updateOneUser(input: UpdateOneUserInput!): User!
@@ -8639,7 +8959,7 @@ input AccountDTO {
 }
 
 input UserDTO {
-  phone_number: String!
+  phone_number: String
   avatar: String
   status: UserStatus!
   account: ID!
@@ -10461,6 +10781,22 @@ input UserVehicleDeleteFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+}
+
+input AddVehiclesToUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetVehiclesOnUserInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
 }
 
 input CreateOneUserInput {
