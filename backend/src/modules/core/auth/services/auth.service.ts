@@ -69,7 +69,7 @@ export class AuthService {
     return refreshToken
   }
 
-  async login(email: string, pass: string): Promise<LoginResult> {
+  async login(email: string, pass: string, useCode: boolean): Promise<LoginResult> {
     const acc = await this.accountService.findAccountByEmail(email);
 
     if (!acc) {
@@ -77,6 +77,7 @@ export class AuthService {
     }
     
     if (!acc.emailVerified) {
+      await this.createVerificationCode(acc, useCode)
       throw new NotAcceptableException(ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION)
     }
 

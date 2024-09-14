@@ -15,6 +15,8 @@ import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { loginAsync } from "@/store/auth/actions/login-async.action"
+import { GraphQLAPI } from "@/graphql/api"
+import { ErrorCodes } from "@/graphql/error-codes"
  
 const formSchema = z.object({
   email: z
@@ -53,14 +55,19 @@ const LoginScreen = () => {
       setSubmitting(true)
       setResponse(undefined)
   
-      const { payload } = await dispatch(loginAsync(values))
+      const { payload } = await dispatch(loginAsync({ ...values, useCode: true }))
   
       const response = payload as GraphQLResponse<LoginResult>
       setResponse(response)
       if (!response.errors && response.data) {
         router.replace('/dashboard')
       } else {
-        setSubmitting(false)
+        const errorCode = GraphQLAPI.getErrorString(response)
+        if (errorCode === ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION) {
+          router.replace({ pathname: '/auth/verification', params: { email: values.email, resent: 'true' }})
+        } else {
+          setSubmitting(false)
+        }
       }
     }
     

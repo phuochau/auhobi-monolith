@@ -7,4 +7,7 @@ export class AuthLoginInput {
 
     @Field()
     password: string;
+
+    @Field({ nullable: true, defaultValue: false })
+    useCode: boolean;
 }

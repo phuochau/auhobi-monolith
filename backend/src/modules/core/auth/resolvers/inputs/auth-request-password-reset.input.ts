@@ -5,6 +5,6 @@ export class AuthRequestPasswordResetInput {
     @Field()
     email: string
 
-    @Field({ defaultValue: false })
+    @Field({ nullable: true, defaultValue: false })
     useCode: boolean;
 }

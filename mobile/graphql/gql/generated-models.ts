@@ -995,6 +995,7 @@ export type AuthConfirmPasswordResetInput = {
 export type AuthLoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
+  useCode?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type AuthRefreshTokenInput = {
@@ -1007,12 +1008,12 @@ export type AuthRegisterInput = {
   firstName?: InputMaybe<Scalars['String']['input']>;
   lastName?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
-  useCode?: Scalars['Boolean']['input'];
+  useCode?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type AuthRequestPasswordResetInput = {
   email: Scalars['String']['input'];
-  useCode?: Scalars['Boolean']['input'];
+  useCode?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type AuthResendVerificationInput = {

@@ -8449,6 +8449,7 @@ type Mutation {
 input AuthLoginInput {
   email: String!
   password: String!
+  useCode: Boolean = false
 }
 
 input AuthRefreshTokenInput {
@@ -8461,7 +8462,7 @@ input AuthRegisterInput {
   password: String!
   firstName: String
   lastName: String
-  useCode: Boolean! = false
+  useCode: Boolean = false
 }
 
 input AuthResendVerificationInput {
@@ -8484,7 +8485,7 @@ input AuthVerifyAccountByCodeInput {
 
 input AuthRequestPasswordResetInput {
   email: String!
-  useCode: Boolean! = false
+  useCode: Boolean = false
 }
 
 input AuthConfirmPasswordResetInput {
