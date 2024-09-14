@@ -1,10 +1,9 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { BeforeCreateOne, BeforeFindOne, BeforeQueryMany, CreateOneInputType, FilterableField, FilterableRelation, FindOneArgsType } from '@ptc-org/nestjs-query-graphql';
+import { BeforeCreateOne, CreateOneInputType, FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { TABLE_PREFIX } from '../constants';
 import { VehicleModel } from '../../vehicle/entities/vehicle-model.entity';
-import { Query } from '@ptc-org/nestjs-query-core';
 import _ from 'lodash';
 import { VehicleModelBody } from '../../../modules/vehicle/entities/vehicle-model-body.entity';
 import { VehicleEngine } from '../../../modules/vehicle/entities/vehicle-engine.entity';
@@ -21,9 +20,13 @@ class BaseClass extends BaseEntity {
   @Column({ nullable: true })
   name: string;
 
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  customModel?: string;
+
   @Field({ nullable: true })
   @Column({ nullable: true })
-  pic: string;
+  picture: string;
 
   @FilterableField(() => UserVechileStatus, { nullable: true })
   @Column({  nullable: false, default: UserVechileStatus.ACTIVATED })
@@ -43,15 +46,7 @@ class BaseClass extends BaseEntity {
 @FilterableRelation('body', () => VehicleModelBody)
 @FilterableRelation('engine', () => VehicleEngine)
 @FilterableRelation('transmission', () => VehicleTransmission)
-@Entity({ name: `${TABLE_PREFIX}_vehicles` })
-@BeforeFindOne((input: FindOneArgsType, context: GqlContext) => {
-  input.id = context.req.user?.id
-  return input;
-})
-@BeforeQueryMany((input: Query<UserVehicleDTO>, context: GqlContext) => {
-  input.filter.owner = { id: { eq: context.req.user?.id } }
-  return input;
-})
+@Entity({ name: `${TABLE_PREFIX}_user_vehicles` })
 export class UserVehicle extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
@@ -60,17 +55,17 @@ export class UserVehicle extends BaseClass {
   @ManyToOne(() => User)
   owner: User
 
-  @ManyToOne(() => VehicleModel, genXToOneOptions())
-  model: VehicleModel;
+  @ManyToOne(() => VehicleModel, genXToOneOptions({ nullable: true }))
+  model?: VehicleModel;
 
-  @ManyToOne(() => VehicleModelBody, genXToOneOptions())
-  body: VehicleModelBody;
+  @ManyToOne(() => VehicleModelBody, genXToOneOptions({ nullable: true }))
+  body?: VehicleModelBody;
 
-  @ManyToOne(() => VehicleEngine, genXToOneOptions())
-  engine: VehicleEngine;
+  @ManyToOne(() => VehicleEngine, genXToOneOptions({ nullable: true }))
+  engine?: VehicleEngine;
 
-  @ManyToOne(() => VehicleTransmission, genXToOneOptions())
-  transmission: VehicleTransmission;
+  @ManyToOne(() => VehicleTransmission, genXToOneOptions({ nullable: true }))
+  transmission?: VehicleTransmission;
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -90,22 +85,22 @@ export class UserVehicle extends BaseClass {
  */
 @InputType()
 @BeforeCreateOne((input: CreateOneInputType<UserVehicleDTO>, context: GqlContext) => {
-  // TODO: find user and async input.input.owner = context.req.user
+  input.input.owner = context.req.user?.user
   return input;
 })
 export class UserVehicleDTO extends BaseClass {
   @FilterableField(() => ID, { nullable: true })
   owner: User;
 
-  @FilterableField(() => ID)
+  @FilterableField(() => ID, { nullable: true })
   model: VehicleModel;
 
-  @FilterableField(() => ID)
+  @FilterableField(() => ID, { nullable: true })
   body: VehicleModelBody;
 
-  @FilterableField(() => ID)
+  @FilterableField(() => ID, { nullable: true })
   engine: VehicleEngine;
 
-  @FilterableField(() => ID)
+  @FilterableField(() => ID, { nullable: true })
   transmission: VehicleTransmission;
 }

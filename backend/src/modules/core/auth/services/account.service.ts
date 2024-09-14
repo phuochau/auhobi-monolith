@@ -25,15 +25,25 @@ export class AccountService {
     return this.repo.findOneBy({ id: accId, emailVerified: true })
   }
 
+  async findActiveAccountUserById(accId: string): Promise<Account | undefined> {
+    return this.repo.findOne({ 
+      where: {
+        id: accId,
+        emailVerified: true
+      },
+      relations: ['user']
+    })
+  }
+
   async findAccountByEmail(email: string): Promise<Account | undefined> {
     return this.repo.findOneBy({ email })
   }
 
-  async findActiveAccount(email: string): Promise<Account | undefined> {
+  async findActiveAccountByEmail(email: string): Promise<Account | undefined> {
     return this.repo.findOneBy({ email, emailVerified: true })
   }
 
-  async findUnactiveAccount(email: string): Promise<Account | undefined> {
+  async findUnactiveAccountByEmail(email: string): Promise<Account | undefined> {
     return this.repo.findOneBy({ email, emailVerified: false })
   }
 

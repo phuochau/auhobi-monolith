@@ -1,10 +1,10 @@
 import { PassportStrategy } from '@nestjs/passport'
 import * as PassportCustom from 'passport-custom';
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { Account } from '../entities/account.entity';
 import { AuthService } from '../services/auth.service';
 import { ErrorCodes } from '../../../../config/error-codes';
 import { AccountService } from '../services/account.service';
+import { Account } from '../entities/account.entity';
 
 const CustomStrategy = PassportCustom.Strategy;
 
@@ -19,7 +19,7 @@ export class TokenVerifyStrategy extends PassportStrategy(CustomStrategy) {
       try {
         const token = req.headers.authorization.replace('Bearer ', '')
         let account = await this.authService.verifyAccessToken(token)
-        account = await this.accountService.findActiveAccountById(account.id) 
+        account = await this.accountService.findActiveAccountUserById(account.id)
 
         if (!account) {
           throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)

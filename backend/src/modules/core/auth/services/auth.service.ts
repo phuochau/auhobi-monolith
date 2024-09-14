@@ -152,7 +152,7 @@ export class AuthService {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_EXPIRED)
     }
     
-    const acc = await this.accountService.findUnactiveAccount(request.account.email)
+    const acc = await this.accountService.findUnactiveAccountByEmail(request.account.email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
@@ -164,7 +164,7 @@ export class AuthService {
   }
 
   async verifyAccountByCode(email: string, code: string): Promise<boolean> {
-    const acc = await this.accountService.findUnactiveAccount(email)
+    const acc = await this.accountService.findUnactiveAccountByEmail(email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
@@ -191,7 +191,7 @@ export class AuthService {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
     }
 
-    const acc = await this.accountService.findUnactiveAccount(request.account.email)
+    const acc = await this.accountService.findUnactiveAccountByEmail(request.account.email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
@@ -201,7 +201,7 @@ export class AuthService {
   }
 
   async resendVerificationWithEmail(email: string, useCode: boolean): Promise<boolean> {
-    const acc = await this.accountService.findUnactiveAccount(email)
+    const acc = await this.accountService.findUnactiveAccountByEmail(email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
@@ -220,7 +220,7 @@ export class AuthService {
    */
 
   async requestPasswordReset(email: string, useCode: boolean): Promise<boolean> {
-    let acc = await this.accountService.findActiveAccount(email)
+    let acc = await this.accountService.findActiveAccountByEmail(email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
@@ -245,7 +245,7 @@ export class AuthService {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_EXPIRED)
     }
 
-    const acc = await this.accountService.findActiveAccount(request.account.email)
+    const acc = await this.accountService.findActiveAccountByEmail(request.account.email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
     }
@@ -257,7 +257,7 @@ export class AuthService {
   }
 
   async confirmPasswordResetByCode(email: string, code: string, password: string): Promise<boolean> {
-    const acc = await this.accountService.findActiveAccount(email)
+    const acc = await this.accountService.findActiveAccountByEmail(email)
     if (!acc) {
       throw new NotFoundException(ErrorCodes.AUTH_REQUEST_NOT_FOUND)
     }

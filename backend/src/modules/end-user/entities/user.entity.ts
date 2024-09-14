@@ -4,7 +4,6 @@ import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { UserStatus } from './enums/user-status.enum';
 import { Account } from '../../core/auth/entities/account.entity';
-import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 import { UserVehicle } from './user-vehicle.entity';
 import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
 
@@ -36,8 +35,8 @@ export class User extends BaseClass {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne(() => Account, genXToOneOptions())
-  account?: Account;
+  @ManyToOne(() => Account)
+  account: Account;
 
   @OneToMany(() => UserVehicle, (p) => p.owner, genXToManyOptions({ nullable: true }))
   vehicles: UserVehicle[]
