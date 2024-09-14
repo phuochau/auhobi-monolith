@@ -8459,7 +8459,7 @@ input AuthRefreshTokenInput {
 input AuthRegisterInput {
   email: String!
   password: String!
-  firstName: String!
+  firstName: String
   lastName: String
   useCode: Boolean! = false
 }

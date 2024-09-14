@@ -12,9 +12,9 @@ import { useState } from "react"
 import { LoginResult } from "@/graphql/gql/generated-models"
 import { GraphQLError } from "@/components/graphql-error"
 import { FormMessage } from "@/components/ui/form"
-import { loginAsync } from "@/store/auth/auth.actions"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
+import { loginAsync } from "@/store/auth/actions/login-async.action"
  
 const formSchema = z.object({
   email: z
@@ -53,14 +53,15 @@ const LoginScreen = () => {
       setSubmitting(true)
       setResponse(undefined)
   
-      const res = await dispatch(loginAsync(values))
+      const { payload } = await dispatch(loginAsync(values))
   
-      // setResponse(res)
-      // if (!res.errors && res.data) {
-      //   router.replace('/dashboard')
-      // } else {
-      //   setSubmitting(false)
-      // }
+      const response = payload as GraphQLResponse<LoginResult>
+      setResponse(response)
+      if (!response.errors && response.data) {
+        router.replace('/dashboard')
+      } else {
+        setSubmitting(false)
+      }
     }
     
     return (
@@ -108,7 +109,7 @@ const LoginScreen = () => {
 
           <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
             <Text className="text-sm">Don't have an account? </Text>
-            <Link href={{ pathname: '/auth/register' }} className="underline">
+            <Link href={'/auth/register'} className="underline">
               <Text className="font-semibold text-sm">Register</Text>
             </Link>
           </View>

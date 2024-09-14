@@ -12,9 +12,9 @@
     "codegen": "yarn gql-models-codegen && yarn gql-fragments-gen",
     "gql-models-codegen": "graphql-codegen --config ./gql-schema-codegen.ts",
     "gql-fragments-gen": "node ../devops/scripts/gql-generator/gen-fragments.js  --schema-path=../backend/src/schema.gql --out-dir=./graphql/gql/fragments --depth=3",
-    "gql-query-gen": "node ../devops/scripts/gql-generator/gen-operation.js --schema-path=../backend/src/schema.gql --depth=3 --type=query --out-dir=./graphql/gql/queries",
-    "gql-mutation-gen": "node ../devops/scripts/gql-generator/gen-operation.js --schema-path=../backend/src/schema.gql --depth=3 --type=mutation --out-dir=./graphql/gql/mutations",
-    "gql-subscription-gen": "node ../devops/scripts/gql-generator/gen-operation.js --schema-path=../backend/src/schema.gql --depth=3 --type=subscription --out-dir=./graphql/gql/subscriptions"
+    "gql-query-gen": "node ../devops/scripts/gql-generator/gen-operation.js --schema-path=../backend/src/schema.gql --depth=1 --type=query --out-dir=./graphql/gql/queries",
+    "gql-mutation-gen": "node ../devops/scripts/gql-generator/gen-operation.js --schema-path=../backend/src/schema.gql --depth=1 --type=mutation --out-dir=./graphql/gql/mutations",
+    "gql-subscription-gen": "node ../devops/scripts/gql-generator/gen-operation.js --schema-path=../backend/src/schema.gql --depth=1 --type=subscription --out-dir=./graphql/gql/subscriptions"
   },
   "jest": {
     "preset": "jest-expo"

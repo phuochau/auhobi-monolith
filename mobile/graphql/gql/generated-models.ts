@@ -198,6 +198,7 @@ export type AccountMinAggregate = {
 export type AccountPasswordReset = {
   __typename?: 'AccountPasswordReset';
   account: Account;
+  code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt: Scalars['DateTime']['output'];
@@ -210,6 +211,7 @@ export type AccountPasswordReset = {
 export type AccountPasswordResetAggregateFilter = {
   account?: InputMaybe<AccountPasswordResetAggregateFilterAccountAggregateFilter>;
   and?: InputMaybe<Array<AccountPasswordResetAggregateFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -236,6 +238,7 @@ export type AccountPasswordResetAggregateFilterAccountAggregateFilter = {
 
 export type AccountPasswordResetAggregateGroupBy = {
   __typename?: 'AccountPasswordResetAggregateGroupBy';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -285,6 +288,7 @@ export type AccountPasswordResetConnection = {
 
 export type AccountPasswordResetCountAggregate = {
   __typename?: 'AccountPasswordResetCountAggregate';
+  code?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   expiredAt?: Maybe<Scalars['Int']['output']>;
@@ -296,11 +300,13 @@ export type AccountPasswordResetCountAggregate = {
 
 export type AccountPasswordResetDto = {
   account: Scalars['ID']['input'];
+  code: Scalars['String']['input'];
   token: Scalars['String']['input'];
 };
 
 export type AccountPasswordResetDeleteFilter = {
   and?: InputMaybe<Array<AccountPasswordResetDeleteFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -313,6 +319,7 @@ export type AccountPasswordResetDeleteFilter = {
 
 export type AccountPasswordResetDeleteResponse = {
   __typename?: 'AccountPasswordResetDeleteResponse';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -333,6 +340,7 @@ export type AccountPasswordResetEdge = {
 export type AccountPasswordResetFilter = {
   account?: InputMaybe<AccountPasswordResetFilterAccountFilter>;
   and?: InputMaybe<Array<AccountPasswordResetFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -359,6 +367,7 @@ export type AccountPasswordResetFilterAccountFilter = {
 
 export type AccountPasswordResetMaxAggregate = {
   __typename?: 'AccountPasswordResetMaxAggregate';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -369,6 +378,7 @@ export type AccountPasswordResetMaxAggregate = {
 
 export type AccountPasswordResetMinAggregate = {
   __typename?: 'AccountPasswordResetMinAggregate';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -384,6 +394,7 @@ export type AccountPasswordResetSort = {
 };
 
 export enum AccountPasswordResetSortFields {
+  Code = 'code',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   ExpiredAt = 'expiredAt',
@@ -395,6 +406,7 @@ export enum AccountPasswordResetSortFields {
 
 export type AccountPasswordResetUpdateFilter = {
   and?: InputMaybe<Array<AccountPasswordResetUpdateFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -468,6 +480,7 @@ export type AccountUpdateFilter = {
 export type AccountVerfication = {
   __typename?: 'AccountVerfication';
   account: Account;
+  code: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt: Scalars['DateTime']['output'];
@@ -480,6 +493,7 @@ export type AccountVerfication = {
 export type AccountVerficationAggregateFilter = {
   account?: InputMaybe<AccountVerficationAggregateFilterAccountAggregateFilter>;
   and?: InputMaybe<Array<AccountVerficationAggregateFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -506,6 +520,7 @@ export type AccountVerficationAggregateFilterAccountAggregateFilter = {
 
 export type AccountVerficationAggregateGroupBy = {
   __typename?: 'AccountVerficationAggregateGroupBy';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -555,6 +570,7 @@ export type AccountVerficationConnection = {
 
 export type AccountVerficationCountAggregate = {
   __typename?: 'AccountVerficationCountAggregate';
+  code?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   expiredAt?: Maybe<Scalars['Int']['output']>;
@@ -566,11 +582,13 @@ export type AccountVerficationCountAggregate = {
 
 export type AccountVerficationDto = {
   account: Scalars['ID']['input'];
+  code: Scalars['String']['input'];
   token: Scalars['String']['input'];
 };
 
 export type AccountVerficationDeleteFilter = {
   and?: InputMaybe<Array<AccountVerficationDeleteFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -583,6 +601,7 @@ export type AccountVerficationDeleteFilter = {
 
 export type AccountVerficationDeleteResponse = {
   __typename?: 'AccountVerficationDeleteResponse';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -603,6 +622,7 @@ export type AccountVerficationEdge = {
 export type AccountVerficationFilter = {
   account?: InputMaybe<AccountVerficationFilterAccountFilter>;
   and?: InputMaybe<Array<AccountVerficationFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -629,6 +649,7 @@ export type AccountVerficationFilterAccountFilter = {
 
 export type AccountVerficationMaxAggregate = {
   __typename?: 'AccountVerficationMaxAggregate';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -639,6 +660,7 @@ export type AccountVerficationMaxAggregate = {
 
 export type AccountVerficationMinAggregate = {
   __typename?: 'AccountVerficationMinAggregate';
+  code?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   expiredAt?: Maybe<Scalars['DateTime']['output']>;
@@ -654,6 +676,7 @@ export type AccountVerficationSort = {
 };
 
 export enum AccountVerficationSortFields {
+  Code = 'code',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   ExpiredAt = 'expiredAt',
@@ -665,6 +688,7 @@ export enum AccountVerficationSortFields {
 
 export type AccountVerficationUpdateFilter = {
   and?: InputMaybe<Array<AccountVerficationUpdateFilter>>;
+  code?: InputMaybe<StringFieldComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   expiredAt?: InputMaybe<DateFieldComparison>;
@@ -957,6 +981,12 @@ export type ApiKeyUpdateFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
+export type AuthConfirmPasswordResetByCodeInput = {
+  code: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
 export type AuthConfirmPasswordResetInput = {
   password: Scalars['String']['input'];
   token: Scalars['String']['input'];
@@ -974,13 +1004,15 @@ export type AuthRefreshTokenInput = {
 
 export type AuthRegisterInput = {
   email: Scalars['String']['input'];
-  firstName: Scalars['String']['input'];
+  firstName?: InputMaybe<Scalars['String']['input']>;
   lastName?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
+  useCode?: Scalars['Boolean']['input'];
 };
 
 export type AuthRequestPasswordResetInput = {
   email: Scalars['String']['input'];
+  useCode?: Scalars['Boolean']['input'];
 };
 
 export type AuthResendVerificationInput = {
@@ -988,6 +1020,12 @@ export type AuthResendVerificationInput = {
 };
 
 export type AuthResendVerificationWithEmailInput = {
+  email: Scalars['String']['input'];
+  useCode?: Scalars['Boolean']['input'];
+};
+
+export type AuthVerifyAccountByCodeInput = {
+  code: Scalars['String']['input'];
   email: Scalars['String']['input'];
 };
 
@@ -1100,6 +1138,16 @@ export type CreateManyProductsInput = {
   products: Array<ProductDto>;
 };
 
+export type CreateManyServiceLogBillsInput = {
+  /** Array of records to create */
+  serviceLogBills: Array<ServiceLogBillDto>;
+};
+
+export type CreateManyServiceLogsInput = {
+  /** Array of records to create */
+  serviceLogs: Array<ServiceLogDto>;
+};
+
 export type CreateManyShopMembersInput = {
   /** Array of records to create */
   shopMembers: Array<ShopMemberDto>;
@@ -1133,16 +1181,6 @@ export type CreateManyVehicleBrandsInput = {
 export type CreateManyVehicleEnginesInput = {
   /** Array of records to create */
   vehicleEngines: Array<VehicleEngineDto>;
-};
-
-export type CreateManyVehicleLogBillsInput = {
-  /** Array of records to create */
-  vehicleLogBills: Array<VehicleLogBillDto>;
-};
-
-export type CreateManyVehicleLogsInput = {
-  /** Array of records to create */
-  vehicleLogs: Array<VehicleLogDto>;
 };
 
 export type CreateManyVehicleModelBodiesInput = {
@@ -1260,6 +1298,16 @@ export type CreateOneProductUnitInput = {
   productUnit: ProductUnitDto;
 };
 
+export type CreateOneServiceLogBillInput = {
+  /** The record to create */
+  serviceLogBill: ServiceLogBillDto;
+};
+
+export type CreateOneServiceLogInput = {
+  /** The record to create */
+  serviceLog: ServiceLogDto;
+};
+
 export type CreateOneShopInput = {
   /** The record to create */
   shop: ShopDto;
@@ -1293,16 +1341,6 @@ export type CreateOneVehicleBrandInput = {
 export type CreateOneVehicleEngineInput = {
   /** The record to create */
   vehicleEngine: VehicleEngineDto;
-};
-
-export type CreateOneVehicleLogBillInput = {
-  /** The record to create */
-  vehicleLogBill: VehicleLogBillDto;
-};
-
-export type CreateOneVehicleLogInput = {
-  /** The record to create */
-  vehicleLog: VehicleLogDto;
 };
 
 export type CreateOneVehicleModelBodyInput = {
@@ -1918,6 +1956,16 @@ export type DeleteManyResponse = {
   deletedCount: Scalars['Int']['output'];
 };
 
+export type DeleteManyServiceLogBillsInput = {
+  /** Filter to find records to delete */
+  filter: ServiceLogBillDeleteFilter;
+};
+
+export type DeleteManyServiceLogsInput = {
+  /** Filter to find records to delete */
+  filter: ServiceLogDeleteFilter;
+};
+
 export type DeleteManyShopMembersInput = {
   /** Filter to find records to delete */
   filter: ShopMemberDeleteFilter;
@@ -1951,16 +1999,6 @@ export type DeleteManyVehicleBrandsInput = {
 export type DeleteManyVehicleEnginesInput = {
   /** Filter to find records to delete */
   filter: VehicleEngineDeleteFilter;
-};
-
-export type DeleteManyVehicleLogBillsInput = {
-  /** Filter to find records to delete */
-  filter: VehicleLogBillDeleteFilter;
-};
-
-export type DeleteManyVehicleLogsInput = {
-  /** Filter to find records to delete */
-  filter: VehicleLogDeleteFilter;
 };
 
 export type DeleteManyVehicleModelBodiesInput = {
@@ -2078,6 +2116,16 @@ export type DeleteOneProductUnitInput = {
   id: Scalars['ID']['input'];
 };
 
+export type DeleteOneServiceLogBillInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
+export type DeleteOneServiceLogInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
 export type DeleteOneShopInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
@@ -2109,16 +2157,6 @@ export type DeleteOneVehicleBrandInput = {
 };
 
 export type DeleteOneVehicleEngineInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
-export type DeleteOneVehicleLogBillInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
-export type DeleteOneVehicleLogInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
 };
@@ -2962,6 +3000,7 @@ export type Mutation = {
   addProductsToProductUnit: ProductUnit;
   addShopsToOrg: Org;
   authConfirmPasswordReset: Scalars['Boolean']['output'];
+  authConfirmPasswordResetByCode: Scalars['Boolean']['output'];
   authLogin: LoginResult;
   authRefreshToken: LoginResult;
   authRegister: Scalars['Boolean']['output'];
@@ -2969,6 +3008,7 @@ export type Mutation = {
   authResendVerification: Scalars['Boolean']['output'];
   authResendVerificationWithEmail: Scalars['Boolean']['output'];
   authVerify: Scalars['Boolean']['output'];
+  authVerifyByCode: Scalars['Boolean']['output'];
   createManyAccountPasswordResets: Array<AccountPasswordReset>;
   createManyAccountVerfications: Array<AccountVerfication>;
   createManyAccounts: Array<Account>;
@@ -2989,6 +3029,8 @@ export type Mutation = {
   createManyProductTypes: Array<ProductType>;
   createManyProductUnits: Array<ProductUnit>;
   createManyProducts: Array<Product>;
+  createManyServiceLogBills: Array<ServiceLogBill>;
+  createManyServiceLogs: Array<ServiceLog>;
   createManyShopMembers: Array<ShopMember>;
   createManyShops: Array<Shop>;
   createManyUserVehicles: Array<UserVehicle>;
@@ -2996,8 +3038,6 @@ export type Mutation = {
   createManyVehicleBodies: Array<VehicleBody>;
   createManyVehicleBrands: Array<VehicleBrand>;
   createManyVehicleEngines: Array<VehicleEngine>;
-  createManyVehicleLogBills: Array<VehicleLogBill>;
-  createManyVehicleLogs: Array<VehicleLog>;
   createManyVehicleModelBodies: Array<VehicleModelBody>;
   createManyVehicleModels: Array<VehicleModel>;
   createManyVehicleTransmissions: Array<VehicleTransmission>;
@@ -3021,6 +3061,8 @@ export type Mutation = {
   createOneProductOptionGroup: ProductOptionGroup;
   createOneProductType: ProductType;
   createOneProductUnit: ProductUnit;
+  createOneServiceLog: ServiceLog;
+  createOneServiceLogBill: ServiceLogBill;
   createOneShop: Shop;
   createOneShopMember: ShopMember;
   createOneUser: User;
@@ -3028,8 +3070,6 @@ export type Mutation = {
   createOneVehicleBody: VehicleBody;
   createOneVehicleBrand: VehicleBrand;
   createOneVehicleEngine: VehicleEngine;
-  createOneVehicleLog: VehicleLog;
-  createOneVehicleLogBill: VehicleLogBill;
   createOneVehicleModel: VehicleModel;
   createOneVehicleModelBody: VehicleModelBody;
   createOneVehicleTransmission: VehicleTransmission;
@@ -3053,6 +3093,8 @@ export type Mutation = {
   deleteManyProductTypes: DeleteManyResponse;
   deleteManyProductUnits: DeleteManyResponse;
   deleteManyProducts: DeleteManyResponse;
+  deleteManyServiceLogBills: DeleteManyResponse;
+  deleteManyServiceLogs: DeleteManyResponse;
   deleteManyShopMembers: DeleteManyResponse;
   deleteManyShops: DeleteManyResponse;
   deleteManyUserVehicles: DeleteManyResponse;
@@ -3060,8 +3102,6 @@ export type Mutation = {
   deleteManyVehicleBodies: DeleteManyResponse;
   deleteManyVehicleBrands: DeleteManyResponse;
   deleteManyVehicleEngines: DeleteManyResponse;
-  deleteManyVehicleLogBills: DeleteManyResponse;
-  deleteManyVehicleLogs: DeleteManyResponse;
   deleteManyVehicleModelBodies: DeleteManyResponse;
   deleteManyVehicleModels: DeleteManyResponse;
   deleteManyVehicleTransmissions: DeleteManyResponse;
@@ -3085,6 +3125,8 @@ export type Mutation = {
   deleteOneProductOptionGroup: ProductOptionGroupDeleteResponse;
   deleteOneProductType: ProductTypeDeleteResponse;
   deleteOneProductUnit: ProductUnitDeleteResponse;
+  deleteOneServiceLog: ServiceLogDeleteResponse;
+  deleteOneServiceLogBill: ServiceLogBillDeleteResponse;
   deleteOneShop: ShopDeleteResponse;
   deleteOneShopMember: ShopMemberDeleteResponse;
   deleteOneUser: UserDeleteResponse;
@@ -3092,8 +3134,6 @@ export type Mutation = {
   deleteOneVehicleBody: VehicleBodyDeleteResponse;
   deleteOneVehicleBrand: VehicleBrandDeleteResponse;
   deleteOneVehicleEngine: VehicleEngineDeleteResponse;
-  deleteOneVehicleLog: VehicleLogDeleteResponse;
-  deleteOneVehicleLogBill: VehicleLogBillDeleteResponse;
   deleteOneVehicleModel: VehicleModelDeleteResponse;
   deleteOneVehicleModelBody: VehicleModelBodyDeleteResponse;
   deleteOneVehicleTransmission: VehicleTransmissionDeleteResponse;
@@ -3134,6 +3174,8 @@ export type Mutation = {
   updateManyProductTypes: UpdateManyResponse;
   updateManyProductUnits: UpdateManyResponse;
   updateManyProducts: UpdateManyResponse;
+  updateManyServiceLogBills: UpdateManyResponse;
+  updateManyServiceLogs: UpdateManyResponse;
   updateManyShopMembers: UpdateManyResponse;
   updateManyShops: UpdateManyResponse;
   updateManyUserVehicles: UpdateManyResponse;
@@ -3141,8 +3183,6 @@ export type Mutation = {
   updateManyVehicleBodies: UpdateManyResponse;
   updateManyVehicleBrands: UpdateManyResponse;
   updateManyVehicleEngines: UpdateManyResponse;
-  updateManyVehicleLogBills: UpdateManyResponse;
-  updateManyVehicleLogs: UpdateManyResponse;
   updateManyVehicleModelBodies: UpdateManyResponse;
   updateManyVehicleModels: UpdateManyResponse;
   updateManyVehicleTransmissions: UpdateManyResponse;
@@ -3166,6 +3206,8 @@ export type Mutation = {
   updateOneProductOptionGroup: ProductOptionGroup;
   updateOneProductType: ProductType;
   updateOneProductUnit: ProductUnit;
+  updateOneServiceLog: ServiceLog;
+  updateOneServiceLogBill: ServiceLogBill;
   updateOneShop: Shop;
   updateOneShopMember: ShopMember;
   updateOneUser: User;
@@ -3173,8 +3215,6 @@ export type Mutation = {
   updateOneVehicleBody: VehicleBody;
   updateOneVehicleBrand: VehicleBrand;
   updateOneVehicleEngine: VehicleEngine;
-  updateOneVehicleLog: VehicleLog;
-  updateOneVehicleLogBill: VehicleLogBill;
   updateOneVehicleModel: VehicleModel;
   updateOneVehicleModelBody: VehicleModelBody;
   updateOneVehicleTransmission: VehicleTransmission;
@@ -3256,6 +3296,11 @@ export type MutationAuthConfirmPasswordResetArgs = {
 };
 
 
+export type MutationAuthConfirmPasswordResetByCodeArgs = {
+  input: AuthConfirmPasswordResetByCodeInput;
+};
+
+
 export type MutationAuthLoginArgs = {
   input: AuthLoginInput;
 };
@@ -3288,6 +3333,11 @@ export type MutationAuthResendVerificationWithEmailArgs = {
 
 export type MutationAuthVerifyArgs = {
   input: AuthVerifyAccountInput;
+};
+
+
+export type MutationAuthVerifyByCodeArgs = {
+  input: AuthVerifyAccountByCodeInput;
 };
 
 
@@ -3391,6 +3441,16 @@ export type MutationCreateManyProductsArgs = {
 };
 
 
+export type MutationCreateManyServiceLogBillsArgs = {
+  input: CreateManyServiceLogBillsInput;
+};
+
+
+export type MutationCreateManyServiceLogsArgs = {
+  input: CreateManyServiceLogsInput;
+};
+
+
 export type MutationCreateManyShopMembersArgs = {
   input: CreateManyShopMembersInput;
 };
@@ -3423,16 +3483,6 @@ export type MutationCreateManyVehicleBrandsArgs = {
 
 export type MutationCreateManyVehicleEnginesArgs = {
   input: CreateManyVehicleEnginesInput;
-};
-
-
-export type MutationCreateManyVehicleLogBillsArgs = {
-  input: CreateManyVehicleLogBillsInput;
-};
-
-
-export type MutationCreateManyVehicleLogsArgs = {
-  input: CreateManyVehicleLogsInput;
 };
 
 
@@ -3551,6 +3601,16 @@ export type MutationCreateOneProductUnitArgs = {
 };
 
 
+export type MutationCreateOneServiceLogArgs = {
+  input: CreateOneServiceLogInput;
+};
+
+
+export type MutationCreateOneServiceLogBillArgs = {
+  input: CreateOneServiceLogBillInput;
+};
+
+
 export type MutationCreateOneShopArgs = {
   input: CreateOneShopInput;
 };
@@ -3583,16 +3643,6 @@ export type MutationCreateOneVehicleBrandArgs = {
 
 export type MutationCreateOneVehicleEngineArgs = {
   input: CreateOneVehicleEngineInput;
-};
-
-
-export type MutationCreateOneVehicleLogArgs = {
-  input: CreateOneVehicleLogInput;
-};
-
-
-export type MutationCreateOneVehicleLogBillArgs = {
-  input: CreateOneVehicleLogBillInput;
 };
 
 
@@ -3711,6 +3761,16 @@ export type MutationDeleteManyProductsArgs = {
 };
 
 
+export type MutationDeleteManyServiceLogBillsArgs = {
+  input: DeleteManyServiceLogBillsInput;
+};
+
+
+export type MutationDeleteManyServiceLogsArgs = {
+  input: DeleteManyServiceLogsInput;
+};
+
+
 export type MutationDeleteManyShopMembersArgs = {
   input: DeleteManyShopMembersInput;
 };
@@ -3743,16 +3803,6 @@ export type MutationDeleteManyVehicleBrandsArgs = {
 
 export type MutationDeleteManyVehicleEnginesArgs = {
   input: DeleteManyVehicleEnginesInput;
-};
-
-
-export type MutationDeleteManyVehicleLogBillsArgs = {
-  input: DeleteManyVehicleLogBillsInput;
-};
-
-
-export type MutationDeleteManyVehicleLogsArgs = {
-  input: DeleteManyVehicleLogsInput;
 };
 
 
@@ -3871,6 +3921,16 @@ export type MutationDeleteOneProductUnitArgs = {
 };
 
 
+export type MutationDeleteOneServiceLogArgs = {
+  input: DeleteOneServiceLogInput;
+};
+
+
+export type MutationDeleteOneServiceLogBillArgs = {
+  input: DeleteOneServiceLogBillInput;
+};
+
+
 export type MutationDeleteOneShopArgs = {
   input: DeleteOneShopInput;
 };
@@ -3903,16 +3963,6 @@ export type MutationDeleteOneVehicleBrandArgs = {
 
 export type MutationDeleteOneVehicleEngineArgs = {
   input: DeleteOneVehicleEngineInput;
-};
-
-
-export type MutationDeleteOneVehicleLogArgs = {
-  input: DeleteOneVehicleLogInput;
-};
-
-
-export type MutationDeleteOneVehicleLogBillArgs = {
-  input: DeleteOneVehicleLogBillInput;
 };
 
 
@@ -4116,6 +4166,16 @@ export type MutationUpdateManyProductsArgs = {
 };
 
 
+export type MutationUpdateManyServiceLogBillsArgs = {
+  input: UpdateManyServiceLogBillsInput;
+};
+
+
+export type MutationUpdateManyServiceLogsArgs = {
+  input: UpdateManyServiceLogsInput;
+};
+
+
 export type MutationUpdateManyShopMembersArgs = {
   input: UpdateManyShopMembersInput;
 };
@@ -4148,16 +4208,6 @@ export type MutationUpdateManyVehicleBrandsArgs = {
 
 export type MutationUpdateManyVehicleEnginesArgs = {
   input: UpdateManyVehicleEnginesInput;
-};
-
-
-export type MutationUpdateManyVehicleLogBillsArgs = {
-  input: UpdateManyVehicleLogBillsInput;
-};
-
-
-export type MutationUpdateManyVehicleLogsArgs = {
-  input: UpdateManyVehicleLogsInput;
 };
 
 
@@ -4276,6 +4326,16 @@ export type MutationUpdateOneProductUnitArgs = {
 };
 
 
+export type MutationUpdateOneServiceLogArgs = {
+  input: UpdateOneServiceLogInput;
+};
+
+
+export type MutationUpdateOneServiceLogBillArgs = {
+  input: UpdateOneServiceLogBillInput;
+};
+
+
 export type MutationUpdateOneShopArgs = {
   input: UpdateOneShopInput;
 };
@@ -4308,16 +4368,6 @@ export type MutationUpdateOneVehicleBrandArgs = {
 
 export type MutationUpdateOneVehicleEngineArgs = {
   input: UpdateOneVehicleEngineInput;
-};
-
-
-export type MutationUpdateOneVehicleLogArgs = {
-  input: UpdateOneVehicleLogInput;
-};
-
-
-export type MutationUpdateOneVehicleLogBillArgs = {
-  input: UpdateOneVehicleLogBillInput;
 };
 
 
@@ -9265,6 +9315,12 @@ export type Query = {
   productUnitAggregate: Array<ProductUnitAggregateResponse>;
   productUnits: ProductUnitConnection;
   products: ProductConnection;
+  serviceLog: ServiceLog;
+  serviceLogAggregate: Array<ServiceLogAggregateResponse>;
+  serviceLogBill: ServiceLogBill;
+  serviceLogBillAggregate: Array<ServiceLogBillAggregateResponse>;
+  serviceLogBills: ServiceLogBillConnection;
+  serviceLogs: ServiceLogConnection;
   shop: Shop;
   shopAggregate: Array<ShopAggregateResponse>;
   shopMember: ShopMember;
@@ -9283,12 +9339,6 @@ export type Query = {
   vehicleBrands: VehicleBrandConnection;
   vehicleEngine: VehicleEngine;
   vehicleEngines: VehicleEngineConnection;
-  vehicleLog: VehicleLog;
-  vehicleLogAggregate: Array<VehicleLogAggregateResponse>;
-  vehicleLogBill: VehicleLogBill;
-  vehicleLogBillAggregate: Array<VehicleLogBillAggregateResponse>;
-  vehicleLogBills: VehicleLogBillConnection;
-  vehicleLogs: VehicleLogConnection;
   vehicleModel: VehicleModel;
   vehicleModelBodies: VehicleModelBodyConnection;
   vehicleModelBody: VehicleModelBody;
@@ -9633,6 +9683,40 @@ export type QueryProductsArgs = {
 };
 
 
+export type QueryServiceLogArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryServiceLogAggregateArgs = {
+  filter?: InputMaybe<ServiceLogAggregateFilter>;
+};
+
+
+export type QueryServiceLogBillArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryServiceLogBillAggregateArgs = {
+  filter?: InputMaybe<ServiceLogBillAggregateFilter>;
+};
+
+
+export type QueryServiceLogBillsArgs = {
+  filter?: ServiceLogBillFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ServiceLogBillSort>;
+};
+
+
+export type QueryServiceLogsArgs = {
+  filter?: ServiceLogFilter;
+  paging?: CursorPaging;
+  sorting?: Array<ServiceLogSort>;
+};
+
+
 export type QueryShopArgs = {
   id: Scalars['ID']['input'];
 };
@@ -9737,40 +9821,6 @@ export type QueryVehicleEnginesArgs = {
 };
 
 
-export type QueryVehicleLogArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryVehicleLogAggregateArgs = {
-  filter?: InputMaybe<VehicleLogAggregateFilter>;
-};
-
-
-export type QueryVehicleLogBillArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryVehicleLogBillAggregateArgs = {
-  filter?: InputMaybe<VehicleLogBillAggregateFilter>;
-};
-
-
-export type QueryVehicleLogBillsArgs = {
-  filter?: VehicleLogBillFilter;
-  paging?: CursorPaging;
-  sorting?: Array<VehicleLogBillSort>;
-};
-
-
-export type QueryVehicleLogsArgs = {
-  filter?: VehicleLogFilter;
-  paging?: CursorPaging;
-  sorting?: Array<VehicleLogSort>;
-};
-
-
 export type QueryVehicleModelArgs = {
   id: Scalars['ID']['input'];
 };
@@ -9804,6 +9854,513 @@ export type QueryVehicleTransmissionsArgs = {
   filter?: VehicleTransmissionFilter;
   paging?: CursorPaging;
   sorting?: Array<VehicleTransmissionSort>;
+};
+
+export type ServiceLog = {
+  __typename?: 'ServiceLog';
+  bill?: Maybe<ServiceLogBill>;
+  createdAt: Scalars['DateTime']['output'];
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  garage?: Maybe<Garage>;
+  id: Scalars['ID']['output'];
+  mileage?: Maybe<Scalars['Float']['output']>;
+  type: ServiceLogType;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  vehicle: UserVehicle;
+};
+
+export type ServiceLogAggregateFilter = {
+  and?: InputMaybe<Array<ServiceLogAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  garage?: InputMaybe<ServiceLogAggregateFilterGarageAggregateFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogAggregateFilter>>;
+  type?: InputMaybe<ServiceLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<ServiceLogAggregateFilterUserVehicleAggregateFilter>;
+};
+
+export type ServiceLogAggregateFilterGarageAggregateFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<ServiceLogAggregateFilterGarageAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ServiceLogAggregateFilterGarageAggregateFilter>>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogAggregateFilterUserVehicleAggregateFilter = {
+  and?: InputMaybe<Array<ServiceLogAggregateFilterUserVehicleAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ServiceLogAggregateFilterUserVehicleAggregateFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogAggregateGroupBy = {
+  __typename?: 'ServiceLogAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  type?: Maybe<ServiceLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ServiceLogAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ServiceLogAggregateGroupByDateArgs = {
+  by?: GroupBy;
+};
+
+
+export type ServiceLogAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ServiceLogAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type ServiceLogAggregateResponse = {
+  __typename?: 'ServiceLogAggregateResponse';
+  avg?: Maybe<ServiceLogAvgAggregate>;
+  count?: Maybe<ServiceLogCountAggregate>;
+  groupBy?: Maybe<ServiceLogAggregateGroupBy>;
+  max?: Maybe<ServiceLogMaxAggregate>;
+  min?: Maybe<ServiceLogMinAggregate>;
+  sum?: Maybe<ServiceLogSumAggregate>;
+};
+
+export type ServiceLogAvgAggregate = {
+  __typename?: 'ServiceLogAvgAggregate';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ServiceLogBill = {
+  __typename?: 'ServiceLogBill';
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  log: ServiceLog;
+  media?: Maybe<Array<Scalars['String']['output']>>;
+  total: Scalars['Float']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  vehicle: UserVehicle;
+};
+
+export type ServiceLogBillAggregateFilter = {
+  and?: InputMaybe<Array<ServiceLogBillAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  log?: InputMaybe<ServiceLogBillAggregateFilterServiceLogAggregateFilter>;
+  or?: InputMaybe<Array<ServiceLogBillAggregateFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<ServiceLogBillAggregateFilterUserVehicleAggregateFilter>;
+};
+
+export type ServiceLogBillAggregateFilterServiceLogAggregateFilter = {
+  and?: InputMaybe<Array<ServiceLogBillAggregateFilterServiceLogAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogBillAggregateFilterServiceLogAggregateFilter>>;
+  type?: InputMaybe<ServiceLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogBillAggregateFilterUserVehicleAggregateFilter = {
+  and?: InputMaybe<Array<ServiceLogBillAggregateFilterUserVehicleAggregateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ServiceLogBillAggregateFilterUserVehicleAggregateFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogBillAggregateGroupBy = {
+  __typename?: 'ServiceLogBillAggregateGroupBy';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type ServiceLogBillAggregateGroupByCreatedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ServiceLogBillAggregateGroupByDeletedAtArgs = {
+  by?: GroupBy;
+};
+
+
+export type ServiceLogBillAggregateGroupByUpdatedAtArgs = {
+  by?: GroupBy;
+};
+
+export type ServiceLogBillAggregateResponse = {
+  __typename?: 'ServiceLogBillAggregateResponse';
+  avg?: Maybe<ServiceLogBillAvgAggregate>;
+  count?: Maybe<ServiceLogBillCountAggregate>;
+  groupBy?: Maybe<ServiceLogBillAggregateGroupBy>;
+  max?: Maybe<ServiceLogBillMaxAggregate>;
+  min?: Maybe<ServiceLogBillMinAggregate>;
+  sum?: Maybe<ServiceLogBillSumAggregate>;
+};
+
+export type ServiceLogBillAvgAggregate = {
+  __typename?: 'ServiceLogBillAvgAggregate';
+  total?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ServiceLogBillConnection = {
+  __typename?: 'ServiceLogBillConnection';
+  /** Array of edges. */
+  edges: Array<ServiceLogBillEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ServiceLogBillCountAggregate = {
+  __typename?: 'ServiceLogBillCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ServiceLogBillDto = {
+  log: Array<Scalars['ID']['input']>;
+  media?: InputMaybe<Array<Scalars['String']['input']>>;
+  total: Scalars['Float']['input'];
+  vehicle: Scalars['ID']['input'];
+};
+
+export type ServiceLogBillDeleteFilter = {
+  and?: InputMaybe<Array<ServiceLogBillDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogBillDeleteFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogBillDeleteResponse = {
+  __typename?: 'ServiceLogBillDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  media?: Maybe<Array<Scalars['String']['output']>>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ServiceLogBillEdge = {
+  __typename?: 'ServiceLogBillEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the ServiceLogBill */
+  node: ServiceLogBill;
+};
+
+export type ServiceLogBillFilter = {
+  and?: InputMaybe<Array<ServiceLogBillFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  log?: InputMaybe<ServiceLogBillFilterServiceLogFilter>;
+  or?: InputMaybe<Array<ServiceLogBillFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<ServiceLogBillFilterUserVehicleFilter>;
+};
+
+export type ServiceLogBillFilterServiceLogFilter = {
+  and?: InputMaybe<Array<ServiceLogBillFilterServiceLogFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogBillFilterServiceLogFilter>>;
+  type?: InputMaybe<ServiceLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogBillFilterUserVehicleFilter = {
+  and?: InputMaybe<Array<ServiceLogBillFilterUserVehicleFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ServiceLogBillFilterUserVehicleFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogBillMaxAggregate = {
+  __typename?: 'ServiceLogBillMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ServiceLogBillMinAggregate = {
+  __typename?: 'ServiceLogBillMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ServiceLogBillSort = {
+  direction: SortDirection;
+  field: ServiceLogBillSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ServiceLogBillSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Total = 'total',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ServiceLogBillSumAggregate = {
+  __typename?: 'ServiceLogBillSumAggregate';
+  total?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ServiceLogBillUpdateFilter = {
+  and?: InputMaybe<Array<ServiceLogBillUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogBillUpdateFilter>>;
+  total?: InputMaybe<NumberFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogConnection = {
+  __typename?: 'ServiceLogConnection';
+  /** Array of edges. */
+  edges: Array<ServiceLogEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+  /** Fetch total count of records */
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ServiceLogCountAggregate = {
+  __typename?: 'ServiceLogCountAggregate';
+  createdAt?: Maybe<Scalars['Int']['output']>;
+  date?: Maybe<Scalars['Int']['output']>;
+  deletedAt?: Maybe<Scalars['Int']['output']>;
+  description?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['Int']['output']>;
+};
+
+export type ServiceLogDto = {
+  date?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  garage?: InputMaybe<Scalars['ID']['input']>;
+  media?: InputMaybe<Array<Scalars['ID']['input']>>;
+  mileage?: InputMaybe<Scalars['Float']['input']>;
+  type: ServiceLogType;
+  vehicle: Scalars['ID']['input'];
+};
+
+export type ServiceLogDeleteFilter = {
+  and?: InputMaybe<Array<ServiceLogDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogDeleteFilter>>;
+  type?: InputMaybe<ServiceLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogDeleteResponse = {
+  __typename?: 'ServiceLogDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  mileage?: Maybe<Scalars['Float']['output']>;
+  type?: Maybe<ServiceLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ServiceLogEdge = {
+  __typename?: 'ServiceLogEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the ServiceLog */
+  node: ServiceLog;
+};
+
+export type ServiceLogFilter = {
+  and?: InputMaybe<Array<ServiceLogFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  garage?: InputMaybe<ServiceLogFilterGarageFilter>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogFilter>>;
+  type?: InputMaybe<ServiceLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+  vehicle?: InputMaybe<ServiceLogFilterUserVehicleFilter>;
+};
+
+export type ServiceLogFilterGarageFilter = {
+  address?: InputMaybe<StringFieldComparison>;
+  and?: InputMaybe<Array<ServiceLogFilterGarageFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  lat?: InputMaybe<NumberFieldComparison>;
+  lng?: InputMaybe<NumberFieldComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ServiceLogFilterGarageFilter>>;
+  status?: InputMaybe<GarageStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogFilterUserVehicleFilter = {
+  and?: InputMaybe<Array<ServiceLogFilterUserVehicleFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<ServiceLogFilterUserVehicleFilter>>;
+  status?: InputMaybe<UserVechileStatusFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type ServiceLogMaxAggregate = {
+  __typename?: 'ServiceLogMaxAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  type?: Maybe<ServiceLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ServiceLogMinAggregate = {
+  __typename?: 'ServiceLogMinAggregate';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  date?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  type?: Maybe<ServiceLogType>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type ServiceLogSort = {
+  direction: SortDirection;
+  field: ServiceLogSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum ServiceLogSortFields {
+  CreatedAt = 'createdAt',
+  Date = 'date',
+  DeletedAt = 'deletedAt',
+  Description = 'description',
+  Id = 'id',
+  Type = 'type',
+  UpdatedAt = 'updatedAt'
+}
+
+export type ServiceLogSumAggregate = {
+  __typename?: 'ServiceLogSumAggregate';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+export enum ServiceLogType {
+  Detailing = 'DETAILING',
+  Maintenance = 'MAINTENANCE',
+  Other = 'OTHER',
+  Paperwork = 'PAPERWORK',
+  Repair = 'REPAIR',
+  Retrofit = 'RETROFIT',
+  Software = 'SOFTWARE',
+  Tuning = 'TUNING'
+}
+
+export type ServiceLogTypeFilterComparison = {
+  eq?: InputMaybe<ServiceLogType>;
+  gt?: InputMaybe<ServiceLogType>;
+  gte?: InputMaybe<ServiceLogType>;
+  iLike?: InputMaybe<ServiceLogType>;
+  in?: InputMaybe<Array<ServiceLogType>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<ServiceLogType>;
+  lt?: InputMaybe<ServiceLogType>;
+  lte?: InputMaybe<ServiceLogType>;
+  neq?: InputMaybe<ServiceLogType>;
+  notILike?: InputMaybe<ServiceLogType>;
+  notIn?: InputMaybe<Array<ServiceLogType>>;
+  notLike?: InputMaybe<ServiceLogType>;
+};
+
+export type ServiceLogUpdateFilter = {
+  and?: InputMaybe<Array<ServiceLogUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  date?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  description?: InputMaybe<StringFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  or?: InputMaybe<Array<ServiceLogUpdateFilter>>;
+  type?: InputMaybe<ServiceLogTypeFilterComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type SetAddressesOnCustomerInput = {
@@ -10676,6 +11233,20 @@ export type UpdateManyResponse = {
   updatedCount: Scalars['Int']['output'];
 };
 
+export type UpdateManyServiceLogBillsInput = {
+  /** Filter used to find fields to update */
+  filter: ServiceLogBillUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: ServiceLogBillDto;
+};
+
+export type UpdateManyServiceLogsInput = {
+  /** Filter used to find fields to update */
+  filter: ServiceLogUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: ServiceLogDto;
+};
+
 export type UpdateManyShopMembersInput = {
   /** Filter used to find fields to update */
   filter: ShopMemberUpdateFilter;
@@ -10723,20 +11294,6 @@ export type UpdateManyVehicleEnginesInput = {
   filter: VehicleEngineUpdateFilter;
   /** The update to apply to all records found using the filter */
   update: VehicleEngineDto;
-};
-
-export type UpdateManyVehicleLogBillsInput = {
-  /** Filter used to find fields to update */
-  filter: VehicleLogBillUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: VehicleLogBillDto;
-};
-
-export type UpdateManyVehicleLogsInput = {
-  /** Filter used to find fields to update */
-  filter: VehicleLogUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: VehicleLogDto;
 };
 
 export type UpdateManyVehicleModelBodiesInput = {
@@ -10900,6 +11457,20 @@ export type UpdateOneProductUnitInput = {
   update: ProductUnitDto;
 };
 
+export type UpdateOneServiceLogBillInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: ServiceLogBillDto;
+};
+
+export type UpdateOneServiceLogInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: ServiceLogDto;
+};
+
 export type UpdateOneShopInput = {
   /** The id of the record to update */
   id: Scalars['ID']['input'];
@@ -10947,20 +11518,6 @@ export type UpdateOneVehicleEngineInput = {
   id: Scalars['ID']['input'];
   /** The update to apply. */
   update: VehicleEngineDto;
-};
-
-export type UpdateOneVehicleLogBillInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: VehicleLogBillDto;
-};
-
-export type UpdateOneVehicleLogInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: VehicleLogDto;
 };
 
 export type UpdateOneVehicleModelBodyInput = {
@@ -11479,34 +12036,6 @@ export type UserVehicleFilterVehicleTransmissionFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export enum UserVehicleLogType {
-  Detailing = 'DETAILING',
-  Maintenance = 'MAINTENANCE',
-  Other = 'OTHER',
-  Paperwork = 'PAPERWORK',
-  Repair = 'REPAIR',
-  Retrofit = 'RETROFIT',
-  Software = 'SOFTWARE',
-  Tuning = 'TUNING'
-}
-
-export type UserVehicleLogTypeFilterComparison = {
-  eq?: InputMaybe<UserVehicleLogType>;
-  gt?: InputMaybe<UserVehicleLogType>;
-  gte?: InputMaybe<UserVehicleLogType>;
-  iLike?: InputMaybe<UserVehicleLogType>;
-  in?: InputMaybe<Array<UserVehicleLogType>>;
-  is?: InputMaybe<Scalars['Boolean']['input']>;
-  isNot?: InputMaybe<Scalars['Boolean']['input']>;
-  like?: InputMaybe<UserVehicleLogType>;
-  lt?: InputMaybe<UserVehicleLogType>;
-  lte?: InputMaybe<UserVehicleLogType>;
-  neq?: InputMaybe<UserVehicleLogType>;
-  notILike?: InputMaybe<UserVehicleLogType>;
-  notIn?: InputMaybe<Array<UserVehicleLogType>>;
-  notLike?: InputMaybe<UserVehicleLogType>;
-};
-
 export type UserVehicleMaxAggregate = {
   __typename?: 'UserVehicleMaxAggregate';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -11822,485 +12351,6 @@ export type VehicleEngineUpdateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleEngineUpdateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLog = {
-  __typename?: 'VehicleLog';
-  bill?: Maybe<VehicleLogBill>;
-  createdAt: Scalars['DateTime']['output'];
-  date?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  garage?: Maybe<Garage>;
-  id: Scalars['ID']['output'];
-  mileage?: Maybe<Scalars['Float']['output']>;
-  type: UserVehicleLogType;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  vehicle: UserVehicle;
-};
-
-export type VehicleLogAggregateFilter = {
-  and?: InputMaybe<Array<VehicleLogAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  date?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  description?: InputMaybe<StringFieldComparison>;
-  garage?: InputMaybe<VehicleLogAggregateFilterGarageAggregateFilter>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogAggregateFilter>>;
-  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-  vehicle?: InputMaybe<VehicleLogAggregateFilterUserVehicleAggregateFilter>;
-};
-
-export type VehicleLogAggregateFilterGarageAggregateFilter = {
-  address?: InputMaybe<StringFieldComparison>;
-  and?: InputMaybe<Array<VehicleLogAggregateFilterGarageAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  lat?: InputMaybe<NumberFieldComparison>;
-  lng?: InputMaybe<NumberFieldComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleLogAggregateFilterGarageAggregateFilter>>;
-  status?: InputMaybe<GarageStatusFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogAggregateFilterUserVehicleAggregateFilter = {
-  and?: InputMaybe<Array<VehicleLogAggregateFilterUserVehicleAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleLogAggregateFilterUserVehicleAggregateFilter>>;
-  status?: InputMaybe<UserVechileStatusFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogAggregateGroupBy = {
-  __typename?: 'VehicleLogAggregateGroupBy';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  date?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  type?: Maybe<UserVehicleLogType>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type VehicleLogAggregateGroupByCreatedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type VehicleLogAggregateGroupByDateArgs = {
-  by?: GroupBy;
-};
-
-
-export type VehicleLogAggregateGroupByDeletedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type VehicleLogAggregateGroupByUpdatedAtArgs = {
-  by?: GroupBy;
-};
-
-export type VehicleLogAggregateResponse = {
-  __typename?: 'VehicleLogAggregateResponse';
-  avg?: Maybe<VehicleLogAvgAggregate>;
-  count?: Maybe<VehicleLogCountAggregate>;
-  groupBy?: Maybe<VehicleLogAggregateGroupBy>;
-  max?: Maybe<VehicleLogMaxAggregate>;
-  min?: Maybe<VehicleLogMinAggregate>;
-  sum?: Maybe<VehicleLogSumAggregate>;
-};
-
-export type VehicleLogAvgAggregate = {
-  __typename?: 'VehicleLogAvgAggregate';
-  type?: Maybe<Scalars['Float']['output']>;
-};
-
-export type VehicleLogBill = {
-  __typename?: 'VehicleLogBill';
-  createdAt: Scalars['DateTime']['output'];
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id: Scalars['ID']['output'];
-  log: VehicleLog;
-  media?: Maybe<Array<Scalars['String']['output']>>;
-  total: Scalars['Float']['output'];
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  vehicle: UserVehicle;
-};
-
-export type VehicleLogBillAggregateFilter = {
-  and?: InputMaybe<Array<VehicleLogBillAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  log?: InputMaybe<VehicleLogBillAggregateFilterVehicleLogAggregateFilter>;
-  or?: InputMaybe<Array<VehicleLogBillAggregateFilter>>;
-  total?: InputMaybe<NumberFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-  vehicle?: InputMaybe<VehicleLogBillAggregateFilterUserVehicleAggregateFilter>;
-};
-
-export type VehicleLogBillAggregateFilterUserVehicleAggregateFilter = {
-  and?: InputMaybe<Array<VehicleLogBillAggregateFilterUserVehicleAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleLogBillAggregateFilterUserVehicleAggregateFilter>>;
-  status?: InputMaybe<UserVechileStatusFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogBillAggregateFilterVehicleLogAggregateFilter = {
-  and?: InputMaybe<Array<VehicleLogBillAggregateFilterVehicleLogAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  date?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  description?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogBillAggregateFilterVehicleLogAggregateFilter>>;
-  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogBillAggregateGroupBy = {
-  __typename?: 'VehicleLogBillAggregateGroupBy';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  total?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type VehicleLogBillAggregateGroupByCreatedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type VehicleLogBillAggregateGroupByDeletedAtArgs = {
-  by?: GroupBy;
-};
-
-
-export type VehicleLogBillAggregateGroupByUpdatedAtArgs = {
-  by?: GroupBy;
-};
-
-export type VehicleLogBillAggregateResponse = {
-  __typename?: 'VehicleLogBillAggregateResponse';
-  avg?: Maybe<VehicleLogBillAvgAggregate>;
-  count?: Maybe<VehicleLogBillCountAggregate>;
-  groupBy?: Maybe<VehicleLogBillAggregateGroupBy>;
-  max?: Maybe<VehicleLogBillMaxAggregate>;
-  min?: Maybe<VehicleLogBillMinAggregate>;
-  sum?: Maybe<VehicleLogBillSumAggregate>;
-};
-
-export type VehicleLogBillAvgAggregate = {
-  __typename?: 'VehicleLogBillAvgAggregate';
-  total?: Maybe<Scalars['Float']['output']>;
-};
-
-export type VehicleLogBillConnection = {
-  __typename?: 'VehicleLogBillConnection';
-  /** Array of edges. */
-  edges: Array<VehicleLogBillEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-  /** Fetch total count of records */
-  totalCount: Scalars['Int']['output'];
-};
-
-export type VehicleLogBillCountAggregate = {
-  __typename?: 'VehicleLogBillCountAggregate';
-  createdAt?: Maybe<Scalars['Int']['output']>;
-  deletedAt?: Maybe<Scalars['Int']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  total?: Maybe<Scalars['Int']['output']>;
-  updatedAt?: Maybe<Scalars['Int']['output']>;
-};
-
-export type VehicleLogBillDto = {
-  log: Array<Scalars['ID']['input']>;
-  media?: InputMaybe<Array<Scalars['String']['input']>>;
-  total: Scalars['Float']['input'];
-  vehicle: Scalars['ID']['input'];
-};
-
-export type VehicleLogBillDeleteFilter = {
-  and?: InputMaybe<Array<VehicleLogBillDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogBillDeleteFilter>>;
-  total?: InputMaybe<NumberFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogBillDeleteResponse = {
-  __typename?: 'VehicleLogBillDeleteResponse';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  media?: Maybe<Array<Scalars['String']['output']>>;
-  total?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleLogBillEdge = {
-  __typename?: 'VehicleLogBillEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the VehicleLogBill */
-  node: VehicleLogBill;
-};
-
-export type VehicleLogBillFilter = {
-  and?: InputMaybe<Array<VehicleLogBillFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  log?: InputMaybe<VehicleLogBillFilterVehicleLogFilter>;
-  or?: InputMaybe<Array<VehicleLogBillFilter>>;
-  total?: InputMaybe<NumberFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-  vehicle?: InputMaybe<VehicleLogBillFilterUserVehicleFilter>;
-};
-
-export type VehicleLogBillFilterUserVehicleFilter = {
-  and?: InputMaybe<Array<VehicleLogBillFilterUserVehicleFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleLogBillFilterUserVehicleFilter>>;
-  status?: InputMaybe<UserVechileStatusFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogBillFilterVehicleLogFilter = {
-  and?: InputMaybe<Array<VehicleLogBillFilterVehicleLogFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  date?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  description?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogBillFilterVehicleLogFilter>>;
-  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogBillMaxAggregate = {
-  __typename?: 'VehicleLogBillMaxAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  total?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleLogBillMinAggregate = {
-  __typename?: 'VehicleLogBillMinAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  total?: Maybe<Scalars['Float']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleLogBillSort = {
-  direction: SortDirection;
-  field: VehicleLogBillSortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum VehicleLogBillSortFields {
-  CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
-  Id = 'id',
-  Total = 'total',
-  UpdatedAt = 'updatedAt'
-}
-
-export type VehicleLogBillSumAggregate = {
-  __typename?: 'VehicleLogBillSumAggregate';
-  total?: Maybe<Scalars['Float']['output']>;
-};
-
-export type VehicleLogBillUpdateFilter = {
-  and?: InputMaybe<Array<VehicleLogBillUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogBillUpdateFilter>>;
-  total?: InputMaybe<NumberFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogConnection = {
-  __typename?: 'VehicleLogConnection';
-  /** Array of edges. */
-  edges: Array<VehicleLogEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-  /** Fetch total count of records */
-  totalCount: Scalars['Int']['output'];
-};
-
-export type VehicleLogCountAggregate = {
-  __typename?: 'VehicleLogCountAggregate';
-  createdAt?: Maybe<Scalars['Int']['output']>;
-  date?: Maybe<Scalars['Int']['output']>;
-  deletedAt?: Maybe<Scalars['Int']['output']>;
-  description?: Maybe<Scalars['Int']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  type?: Maybe<Scalars['Int']['output']>;
-  updatedAt?: Maybe<Scalars['Int']['output']>;
-};
-
-export type VehicleLogDto = {
-  date?: InputMaybe<Scalars['DateTime']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  garage?: InputMaybe<Scalars['ID']['input']>;
-  media?: InputMaybe<Array<Scalars['ID']['input']>>;
-  mileage?: InputMaybe<Scalars['Float']['input']>;
-  type: UserVehicleLogType;
-  vehicle: Scalars['ID']['input'];
-};
-
-export type VehicleLogDeleteFilter = {
-  and?: InputMaybe<Array<VehicleLogDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  date?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  description?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogDeleteFilter>>;
-  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogDeleteResponse = {
-  __typename?: 'VehicleLogDeleteResponse';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  date?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  mileage?: Maybe<Scalars['Float']['output']>;
-  type?: Maybe<UserVehicleLogType>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleLogEdge = {
-  __typename?: 'VehicleLogEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the VehicleLog */
-  node: VehicleLog;
-};
-
-export type VehicleLogFilter = {
-  and?: InputMaybe<Array<VehicleLogFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  date?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  description?: InputMaybe<StringFieldComparison>;
-  garage?: InputMaybe<VehicleLogFilterGarageFilter>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogFilter>>;
-  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-  vehicle?: InputMaybe<VehicleLogFilterUserVehicleFilter>;
-};
-
-export type VehicleLogFilterGarageFilter = {
-  address?: InputMaybe<StringFieldComparison>;
-  and?: InputMaybe<Array<VehicleLogFilterGarageFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  lat?: InputMaybe<NumberFieldComparison>;
-  lng?: InputMaybe<NumberFieldComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleLogFilterGarageFilter>>;
-  status?: InputMaybe<GarageStatusFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogFilterUserVehicleFilter = {
-  and?: InputMaybe<Array<VehicleLogFilterUserVehicleFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleLogFilterUserVehicleFilter>>;
-  status?: InputMaybe<UserVechileStatusFilterComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleLogMaxAggregate = {
-  __typename?: 'VehicleLogMaxAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  date?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  type?: Maybe<UserVehicleLogType>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleLogMinAggregate = {
-  __typename?: 'VehicleLogMinAggregate';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  date?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  type?: Maybe<UserVehicleLogType>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleLogSort = {
-  direction: SortDirection;
-  field: VehicleLogSortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum VehicleLogSortFields {
-  CreatedAt = 'createdAt',
-  Date = 'date',
-  DeletedAt = 'deletedAt',
-  Description = 'description',
-  Id = 'id',
-  Type = 'type',
-  UpdatedAt = 'updatedAt'
-}
-
-export type VehicleLogSumAggregate = {
-  __typename?: 'VehicleLogSumAggregate';
-  type?: Maybe<Scalars['Float']['output']>;
-};
-
-export type VehicleLogUpdateFilter = {
-  and?: InputMaybe<Array<VehicleLogUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  date?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  description?: InputMaybe<StringFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleLogUpdateFilter>>;
-  type?: InputMaybe<UserVehicleLogTypeFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12837,6 +12887,7 @@ export type ResolversTypes = ResolversObject<{
   ApiKeySort: ApiKeySort;
   ApiKeySortFields: ApiKeySortFields;
   ApiKeyUpdateFilter: ApiKeyUpdateFilter;
+  AuthConfirmPasswordResetByCodeInput: AuthConfirmPasswordResetByCodeInput;
   AuthConfirmPasswordResetInput: AuthConfirmPasswordResetInput;
   AuthLoginInput: AuthLoginInput;
   AuthRefreshTokenInput: AuthRefreshTokenInput;
@@ -12844,6 +12895,7 @@ export type ResolversTypes = ResolversObject<{
   AuthRequestPasswordResetInput: AuthRequestPasswordResetInput;
   AuthResendVerificationInput: AuthResendVerificationInput;
   AuthResendVerificationWithEmailInput: AuthResendVerificationWithEmailInput;
+  AuthVerifyAccountByCodeInput: AuthVerifyAccountByCodeInput;
   AuthVerifyAccountInput: AuthVerifyAccountInput;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   BooleanFieldComparison: BooleanFieldComparison;
@@ -12868,6 +12920,8 @@ export type ResolversTypes = ResolversObject<{
   CreateManyProductTypesInput: CreateManyProductTypesInput;
   CreateManyProductUnitsInput: CreateManyProductUnitsInput;
   CreateManyProductsInput: CreateManyProductsInput;
+  CreateManyServiceLogBillsInput: CreateManyServiceLogBillsInput;
+  CreateManyServiceLogsInput: CreateManyServiceLogsInput;
   CreateManyShopMembersInput: CreateManyShopMembersInput;
   CreateManyShopsInput: CreateManyShopsInput;
   CreateManyUserVehiclesInput: CreateManyUserVehiclesInput;
@@ -12875,8 +12929,6 @@ export type ResolversTypes = ResolversObject<{
   CreateManyVehicleBodiesInput: CreateManyVehicleBodiesInput;
   CreateManyVehicleBrandsInput: CreateManyVehicleBrandsInput;
   CreateManyVehicleEnginesInput: CreateManyVehicleEnginesInput;
-  CreateManyVehicleLogBillsInput: CreateManyVehicleLogBillsInput;
-  CreateManyVehicleLogsInput: CreateManyVehicleLogsInput;
   CreateManyVehicleModelBodiesInput: CreateManyVehicleModelBodiesInput;
   CreateManyVehicleModelsInput: CreateManyVehicleModelsInput;
   CreateManyVehicleTransmissionsInput: CreateManyVehicleTransmissionsInput;
@@ -12900,6 +12952,8 @@ export type ResolversTypes = ResolversObject<{
   CreateOneProductOptionInput: CreateOneProductOptionInput;
   CreateOneProductTypeInput: CreateOneProductTypeInput;
   CreateOneProductUnitInput: CreateOneProductUnitInput;
+  CreateOneServiceLogBillInput: CreateOneServiceLogBillInput;
+  CreateOneServiceLogInput: CreateOneServiceLogInput;
   CreateOneShopInput: CreateOneShopInput;
   CreateOneShopMemberInput: CreateOneShopMemberInput;
   CreateOneUserInput: CreateOneUserInput;
@@ -12907,8 +12961,6 @@ export type ResolversTypes = ResolversObject<{
   CreateOneVehicleBodyInput: CreateOneVehicleBodyInput;
   CreateOneVehicleBrandInput: CreateOneVehicleBrandInput;
   CreateOneVehicleEngineInput: CreateOneVehicleEngineInput;
-  CreateOneVehicleLogBillInput: CreateOneVehicleLogBillInput;
-  CreateOneVehicleLogInput: CreateOneVehicleLogInput;
   CreateOneVehicleModelBodyInput: CreateOneVehicleModelBodyInput;
   CreateOneVehicleModelInput: CreateOneVehicleModelInput;
   CreateOneVehicleTransmissionInput: CreateOneVehicleTransmissionInput;
@@ -12975,6 +13027,8 @@ export type ResolversTypes = ResolversObject<{
   DeleteManyProductUnitsInput: DeleteManyProductUnitsInput;
   DeleteManyProductsInput: DeleteManyProductsInput;
   DeleteManyResponse: ResolverTypeWrapper<DeleteManyResponse>;
+  DeleteManyServiceLogBillsInput: DeleteManyServiceLogBillsInput;
+  DeleteManyServiceLogsInput: DeleteManyServiceLogsInput;
   DeleteManyShopMembersInput: DeleteManyShopMembersInput;
   DeleteManyShopsInput: DeleteManyShopsInput;
   DeleteManyUserVehiclesInput: DeleteManyUserVehiclesInput;
@@ -12982,8 +13036,6 @@ export type ResolversTypes = ResolversObject<{
   DeleteManyVehicleBodiesInput: DeleteManyVehicleBodiesInput;
   DeleteManyVehicleBrandsInput: DeleteManyVehicleBrandsInput;
   DeleteManyVehicleEnginesInput: DeleteManyVehicleEnginesInput;
-  DeleteManyVehicleLogBillsInput: DeleteManyVehicleLogBillsInput;
-  DeleteManyVehicleLogsInput: DeleteManyVehicleLogsInput;
   DeleteManyVehicleModelBodiesInput: DeleteManyVehicleModelBodiesInput;
   DeleteManyVehicleModelsInput: DeleteManyVehicleModelsInput;
   DeleteManyVehicleTransmissionsInput: DeleteManyVehicleTransmissionsInput;
@@ -13007,6 +13059,8 @@ export type ResolversTypes = ResolversObject<{
   DeleteOneProductOptionInput: DeleteOneProductOptionInput;
   DeleteOneProductTypeInput: DeleteOneProductTypeInput;
   DeleteOneProductUnitInput: DeleteOneProductUnitInput;
+  DeleteOneServiceLogBillInput: DeleteOneServiceLogBillInput;
+  DeleteOneServiceLogInput: DeleteOneServiceLogInput;
   DeleteOneShopInput: DeleteOneShopInput;
   DeleteOneShopMemberInput: DeleteOneShopMemberInput;
   DeleteOneUserInput: DeleteOneUserInput;
@@ -13014,8 +13068,6 @@ export type ResolversTypes = ResolversObject<{
   DeleteOneVehicleBodyInput: DeleteOneVehicleBodyInput;
   DeleteOneVehicleBrandInput: DeleteOneVehicleBrandInput;
   DeleteOneVehicleEngineInput: DeleteOneVehicleEngineInput;
-  DeleteOneVehicleLogBillInput: DeleteOneVehicleLogBillInput;
-  DeleteOneVehicleLogInput: DeleteOneVehicleLogInput;
   DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
   DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
   DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
@@ -13509,6 +13561,52 @@ export type ResolversTypes = ResolversObject<{
   ProductUnitUpdateFilter: ProductUnitUpdateFilter;
   ProductUpdateFilter: ProductUpdateFilter;
   Query: ResolverTypeWrapper<{}>;
+  ServiceLog: ResolverTypeWrapper<ServiceLog>;
+  ServiceLogAggregateFilter: ServiceLogAggregateFilter;
+  ServiceLogAggregateFilterGarageAggregateFilter: ServiceLogAggregateFilterGarageAggregateFilter;
+  ServiceLogAggregateFilterUserVehicleAggregateFilter: ServiceLogAggregateFilterUserVehicleAggregateFilter;
+  ServiceLogAggregateGroupBy: ResolverTypeWrapper<ServiceLogAggregateGroupBy>;
+  ServiceLogAggregateResponse: ResolverTypeWrapper<ServiceLogAggregateResponse>;
+  ServiceLogAvgAggregate: ResolverTypeWrapper<ServiceLogAvgAggregate>;
+  ServiceLogBill: ResolverTypeWrapper<ServiceLogBill>;
+  ServiceLogBillAggregateFilter: ServiceLogBillAggregateFilter;
+  ServiceLogBillAggregateFilterServiceLogAggregateFilter: ServiceLogBillAggregateFilterServiceLogAggregateFilter;
+  ServiceLogBillAggregateFilterUserVehicleAggregateFilter: ServiceLogBillAggregateFilterUserVehicleAggregateFilter;
+  ServiceLogBillAggregateGroupBy: ResolverTypeWrapper<ServiceLogBillAggregateGroupBy>;
+  ServiceLogBillAggregateResponse: ResolverTypeWrapper<ServiceLogBillAggregateResponse>;
+  ServiceLogBillAvgAggregate: ResolverTypeWrapper<ServiceLogBillAvgAggregate>;
+  ServiceLogBillConnection: ResolverTypeWrapper<ServiceLogBillConnection>;
+  ServiceLogBillCountAggregate: ResolverTypeWrapper<ServiceLogBillCountAggregate>;
+  ServiceLogBillDTO: ServiceLogBillDto;
+  ServiceLogBillDeleteFilter: ServiceLogBillDeleteFilter;
+  ServiceLogBillDeleteResponse: ResolverTypeWrapper<ServiceLogBillDeleteResponse>;
+  ServiceLogBillEdge: ResolverTypeWrapper<ServiceLogBillEdge>;
+  ServiceLogBillFilter: ServiceLogBillFilter;
+  ServiceLogBillFilterServiceLogFilter: ServiceLogBillFilterServiceLogFilter;
+  ServiceLogBillFilterUserVehicleFilter: ServiceLogBillFilterUserVehicleFilter;
+  ServiceLogBillMaxAggregate: ResolverTypeWrapper<ServiceLogBillMaxAggregate>;
+  ServiceLogBillMinAggregate: ResolverTypeWrapper<ServiceLogBillMinAggregate>;
+  ServiceLogBillSort: ServiceLogBillSort;
+  ServiceLogBillSortFields: ServiceLogBillSortFields;
+  ServiceLogBillSumAggregate: ResolverTypeWrapper<ServiceLogBillSumAggregate>;
+  ServiceLogBillUpdateFilter: ServiceLogBillUpdateFilter;
+  ServiceLogConnection: ResolverTypeWrapper<ServiceLogConnection>;
+  ServiceLogCountAggregate: ResolverTypeWrapper<ServiceLogCountAggregate>;
+  ServiceLogDTO: ServiceLogDto;
+  ServiceLogDeleteFilter: ServiceLogDeleteFilter;
+  ServiceLogDeleteResponse: ResolverTypeWrapper<ServiceLogDeleteResponse>;
+  ServiceLogEdge: ResolverTypeWrapper<ServiceLogEdge>;
+  ServiceLogFilter: ServiceLogFilter;
+  ServiceLogFilterGarageFilter: ServiceLogFilterGarageFilter;
+  ServiceLogFilterUserVehicleFilter: ServiceLogFilterUserVehicleFilter;
+  ServiceLogMaxAggregate: ResolverTypeWrapper<ServiceLogMaxAggregate>;
+  ServiceLogMinAggregate: ResolverTypeWrapper<ServiceLogMinAggregate>;
+  ServiceLogSort: ServiceLogSort;
+  ServiceLogSortFields: ServiceLogSortFields;
+  ServiceLogSumAggregate: ResolverTypeWrapper<ServiceLogSumAggregate>;
+  ServiceLogType: ServiceLogType;
+  ServiceLogTypeFilterComparison: ServiceLogTypeFilterComparison;
+  ServiceLogUpdateFilter: ServiceLogUpdateFilter;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
   SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
@@ -13604,6 +13702,8 @@ export type ResolversTypes = ResolversObject<{
   UpdateManyProductUnitsInput: UpdateManyProductUnitsInput;
   UpdateManyProductsInput: UpdateManyProductsInput;
   UpdateManyResponse: ResolverTypeWrapper<UpdateManyResponse>;
+  UpdateManyServiceLogBillsInput: UpdateManyServiceLogBillsInput;
+  UpdateManyServiceLogsInput: UpdateManyServiceLogsInput;
   UpdateManyShopMembersInput: UpdateManyShopMembersInput;
   UpdateManyShopsInput: UpdateManyShopsInput;
   UpdateManyUserVehiclesInput: UpdateManyUserVehiclesInput;
@@ -13611,8 +13711,6 @@ export type ResolversTypes = ResolversObject<{
   UpdateManyVehicleBodiesInput: UpdateManyVehicleBodiesInput;
   UpdateManyVehicleBrandsInput: UpdateManyVehicleBrandsInput;
   UpdateManyVehicleEnginesInput: UpdateManyVehicleEnginesInput;
-  UpdateManyVehicleLogBillsInput: UpdateManyVehicleLogBillsInput;
-  UpdateManyVehicleLogsInput: UpdateManyVehicleLogsInput;
   UpdateManyVehicleModelBodiesInput: UpdateManyVehicleModelBodiesInput;
   UpdateManyVehicleModelsInput: UpdateManyVehicleModelsInput;
   UpdateManyVehicleTransmissionsInput: UpdateManyVehicleTransmissionsInput;
@@ -13636,6 +13734,8 @@ export type ResolversTypes = ResolversObject<{
   UpdateOneProductOptionInput: UpdateOneProductOptionInput;
   UpdateOneProductTypeInput: UpdateOneProductTypeInput;
   UpdateOneProductUnitInput: UpdateOneProductUnitInput;
+  UpdateOneServiceLogBillInput: UpdateOneServiceLogBillInput;
+  UpdateOneServiceLogInput: UpdateOneServiceLogInput;
   UpdateOneShopInput: UpdateOneShopInput;
   UpdateOneShopMemberInput: UpdateOneShopMemberInput;
   UpdateOneUserInput: UpdateOneUserInput;
@@ -13643,8 +13743,6 @@ export type ResolversTypes = ResolversObject<{
   UpdateOneVehicleBodyInput: UpdateOneVehicleBodyInput;
   UpdateOneVehicleBrandInput: UpdateOneVehicleBrandInput;
   UpdateOneVehicleEngineInput: UpdateOneVehicleEngineInput;
-  UpdateOneVehicleLogBillInput: UpdateOneVehicleLogBillInput;
-  UpdateOneVehicleLogInput: UpdateOneVehicleLogInput;
   UpdateOneVehicleModelBodyInput: UpdateOneVehicleModelBodyInput;
   UpdateOneVehicleModelInput: UpdateOneVehicleModelInput;
   UpdateOneVehicleTransmissionInput: UpdateOneVehicleTransmissionInput;
@@ -13691,8 +13789,6 @@ export type ResolversTypes = ResolversObject<{
   UserVehicleFilterVehicleModelBodyFilter: UserVehicleFilterVehicleModelBodyFilter;
   UserVehicleFilterVehicleModelFilter: UserVehicleFilterVehicleModelFilter;
   UserVehicleFilterVehicleTransmissionFilter: UserVehicleFilterVehicleTransmissionFilter;
-  UserVehicleLogType: UserVehicleLogType;
-  UserVehicleLogTypeFilterComparison: UserVehicleLogTypeFilterComparison;
   UserVehicleMaxAggregate: ResolverTypeWrapper<UserVehicleMaxAggregate>;
   UserVehicleMinAggregate: ResolverTypeWrapper<UserVehicleMinAggregate>;
   UserVehicleSort: UserVehicleSort;
@@ -13728,50 +13824,6 @@ export type ResolversTypes = ResolversObject<{
   VehicleEngineSort: VehicleEngineSort;
   VehicleEngineSortFields: VehicleEngineSortFields;
   VehicleEngineUpdateFilter: VehicleEngineUpdateFilter;
-  VehicleLog: ResolverTypeWrapper<VehicleLog>;
-  VehicleLogAggregateFilter: VehicleLogAggregateFilter;
-  VehicleLogAggregateFilterGarageAggregateFilter: VehicleLogAggregateFilterGarageAggregateFilter;
-  VehicleLogAggregateFilterUserVehicleAggregateFilter: VehicleLogAggregateFilterUserVehicleAggregateFilter;
-  VehicleLogAggregateGroupBy: ResolverTypeWrapper<VehicleLogAggregateGroupBy>;
-  VehicleLogAggregateResponse: ResolverTypeWrapper<VehicleLogAggregateResponse>;
-  VehicleLogAvgAggregate: ResolverTypeWrapper<VehicleLogAvgAggregate>;
-  VehicleLogBill: ResolverTypeWrapper<VehicleLogBill>;
-  VehicleLogBillAggregateFilter: VehicleLogBillAggregateFilter;
-  VehicleLogBillAggregateFilterUserVehicleAggregateFilter: VehicleLogBillAggregateFilterUserVehicleAggregateFilter;
-  VehicleLogBillAggregateFilterVehicleLogAggregateFilter: VehicleLogBillAggregateFilterVehicleLogAggregateFilter;
-  VehicleLogBillAggregateGroupBy: ResolverTypeWrapper<VehicleLogBillAggregateGroupBy>;
-  VehicleLogBillAggregateResponse: ResolverTypeWrapper<VehicleLogBillAggregateResponse>;
-  VehicleLogBillAvgAggregate: ResolverTypeWrapper<VehicleLogBillAvgAggregate>;
-  VehicleLogBillConnection: ResolverTypeWrapper<VehicleLogBillConnection>;
-  VehicleLogBillCountAggregate: ResolverTypeWrapper<VehicleLogBillCountAggregate>;
-  VehicleLogBillDTO: VehicleLogBillDto;
-  VehicleLogBillDeleteFilter: VehicleLogBillDeleteFilter;
-  VehicleLogBillDeleteResponse: ResolverTypeWrapper<VehicleLogBillDeleteResponse>;
-  VehicleLogBillEdge: ResolverTypeWrapper<VehicleLogBillEdge>;
-  VehicleLogBillFilter: VehicleLogBillFilter;
-  VehicleLogBillFilterUserVehicleFilter: VehicleLogBillFilterUserVehicleFilter;
-  VehicleLogBillFilterVehicleLogFilter: VehicleLogBillFilterVehicleLogFilter;
-  VehicleLogBillMaxAggregate: ResolverTypeWrapper<VehicleLogBillMaxAggregate>;
-  VehicleLogBillMinAggregate: ResolverTypeWrapper<VehicleLogBillMinAggregate>;
-  VehicleLogBillSort: VehicleLogBillSort;
-  VehicleLogBillSortFields: VehicleLogBillSortFields;
-  VehicleLogBillSumAggregate: ResolverTypeWrapper<VehicleLogBillSumAggregate>;
-  VehicleLogBillUpdateFilter: VehicleLogBillUpdateFilter;
-  VehicleLogConnection: ResolverTypeWrapper<VehicleLogConnection>;
-  VehicleLogCountAggregate: ResolverTypeWrapper<VehicleLogCountAggregate>;
-  VehicleLogDTO: VehicleLogDto;
-  VehicleLogDeleteFilter: VehicleLogDeleteFilter;
-  VehicleLogDeleteResponse: ResolverTypeWrapper<VehicleLogDeleteResponse>;
-  VehicleLogEdge: ResolverTypeWrapper<VehicleLogEdge>;
-  VehicleLogFilter: VehicleLogFilter;
-  VehicleLogFilterGarageFilter: VehicleLogFilterGarageFilter;
-  VehicleLogFilterUserVehicleFilter: VehicleLogFilterUserVehicleFilter;
-  VehicleLogMaxAggregate: ResolverTypeWrapper<VehicleLogMaxAggregate>;
-  VehicleLogMinAggregate: ResolverTypeWrapper<VehicleLogMinAggregate>;
-  VehicleLogSort: VehicleLogSort;
-  VehicleLogSortFields: VehicleLogSortFields;
-  VehicleLogSumAggregate: ResolverTypeWrapper<VehicleLogSumAggregate>;
-  VehicleLogUpdateFilter: VehicleLogUpdateFilter;
   VehicleModel: ResolverTypeWrapper<VehicleModel>;
   VehicleModelBody: ResolverTypeWrapper<VehicleModelBody>;
   VehicleModelBodyConnection: ResolverTypeWrapper<VehicleModelBodyConnection>;
@@ -13894,6 +13946,7 @@ export type ResolversParentTypes = ResolversObject<{
   ApiKeyMinAggregate: ApiKeyMinAggregate;
   ApiKeySort: ApiKeySort;
   ApiKeyUpdateFilter: ApiKeyUpdateFilter;
+  AuthConfirmPasswordResetByCodeInput: AuthConfirmPasswordResetByCodeInput;
   AuthConfirmPasswordResetInput: AuthConfirmPasswordResetInput;
   AuthLoginInput: AuthLoginInput;
   AuthRefreshTokenInput: AuthRefreshTokenInput;
@@ -13901,6 +13954,7 @@ export type ResolversParentTypes = ResolversObject<{
   AuthRequestPasswordResetInput: AuthRequestPasswordResetInput;
   AuthResendVerificationInput: AuthResendVerificationInput;
   AuthResendVerificationWithEmailInput: AuthResendVerificationWithEmailInput;
+  AuthVerifyAccountByCodeInput: AuthVerifyAccountByCodeInput;
   AuthVerifyAccountInput: AuthVerifyAccountInput;
   Boolean: Scalars['Boolean']['output'];
   BooleanFieldComparison: BooleanFieldComparison;
@@ -13925,6 +13979,8 @@ export type ResolversParentTypes = ResolversObject<{
   CreateManyProductTypesInput: CreateManyProductTypesInput;
   CreateManyProductUnitsInput: CreateManyProductUnitsInput;
   CreateManyProductsInput: CreateManyProductsInput;
+  CreateManyServiceLogBillsInput: CreateManyServiceLogBillsInput;
+  CreateManyServiceLogsInput: CreateManyServiceLogsInput;
   CreateManyShopMembersInput: CreateManyShopMembersInput;
   CreateManyShopsInput: CreateManyShopsInput;
   CreateManyUserVehiclesInput: CreateManyUserVehiclesInput;
@@ -13932,8 +13988,6 @@ export type ResolversParentTypes = ResolversObject<{
   CreateManyVehicleBodiesInput: CreateManyVehicleBodiesInput;
   CreateManyVehicleBrandsInput: CreateManyVehicleBrandsInput;
   CreateManyVehicleEnginesInput: CreateManyVehicleEnginesInput;
-  CreateManyVehicleLogBillsInput: CreateManyVehicleLogBillsInput;
-  CreateManyVehicleLogsInput: CreateManyVehicleLogsInput;
   CreateManyVehicleModelBodiesInput: CreateManyVehicleModelBodiesInput;
   CreateManyVehicleModelsInput: CreateManyVehicleModelsInput;
   CreateManyVehicleTransmissionsInput: CreateManyVehicleTransmissionsInput;
@@ -13957,6 +14011,8 @@ export type ResolversParentTypes = ResolversObject<{
   CreateOneProductOptionInput: CreateOneProductOptionInput;
   CreateOneProductTypeInput: CreateOneProductTypeInput;
   CreateOneProductUnitInput: CreateOneProductUnitInput;
+  CreateOneServiceLogBillInput: CreateOneServiceLogBillInput;
+  CreateOneServiceLogInput: CreateOneServiceLogInput;
   CreateOneShopInput: CreateOneShopInput;
   CreateOneShopMemberInput: CreateOneShopMemberInput;
   CreateOneUserInput: CreateOneUserInput;
@@ -13964,8 +14020,6 @@ export type ResolversParentTypes = ResolversObject<{
   CreateOneVehicleBodyInput: CreateOneVehicleBodyInput;
   CreateOneVehicleBrandInput: CreateOneVehicleBrandInput;
   CreateOneVehicleEngineInput: CreateOneVehicleEngineInput;
-  CreateOneVehicleLogBillInput: CreateOneVehicleLogBillInput;
-  CreateOneVehicleLogInput: CreateOneVehicleLogInput;
   CreateOneVehicleModelBodyInput: CreateOneVehicleModelBodyInput;
   CreateOneVehicleModelInput: CreateOneVehicleModelInput;
   CreateOneVehicleTransmissionInput: CreateOneVehicleTransmissionInput;
@@ -14029,6 +14083,8 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteManyProductUnitsInput: DeleteManyProductUnitsInput;
   DeleteManyProductsInput: DeleteManyProductsInput;
   DeleteManyResponse: DeleteManyResponse;
+  DeleteManyServiceLogBillsInput: DeleteManyServiceLogBillsInput;
+  DeleteManyServiceLogsInput: DeleteManyServiceLogsInput;
   DeleteManyShopMembersInput: DeleteManyShopMembersInput;
   DeleteManyShopsInput: DeleteManyShopsInput;
   DeleteManyUserVehiclesInput: DeleteManyUserVehiclesInput;
@@ -14036,8 +14092,6 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteManyVehicleBodiesInput: DeleteManyVehicleBodiesInput;
   DeleteManyVehicleBrandsInput: DeleteManyVehicleBrandsInput;
   DeleteManyVehicleEnginesInput: DeleteManyVehicleEnginesInput;
-  DeleteManyVehicleLogBillsInput: DeleteManyVehicleLogBillsInput;
-  DeleteManyVehicleLogsInput: DeleteManyVehicleLogsInput;
   DeleteManyVehicleModelBodiesInput: DeleteManyVehicleModelBodiesInput;
   DeleteManyVehicleModelsInput: DeleteManyVehicleModelsInput;
   DeleteManyVehicleTransmissionsInput: DeleteManyVehicleTransmissionsInput;
@@ -14061,6 +14115,8 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteOneProductOptionInput: DeleteOneProductOptionInput;
   DeleteOneProductTypeInput: DeleteOneProductTypeInput;
   DeleteOneProductUnitInput: DeleteOneProductUnitInput;
+  DeleteOneServiceLogBillInput: DeleteOneServiceLogBillInput;
+  DeleteOneServiceLogInput: DeleteOneServiceLogInput;
   DeleteOneShopInput: DeleteOneShopInput;
   DeleteOneShopMemberInput: DeleteOneShopMemberInput;
   DeleteOneUserInput: DeleteOneUserInput;
@@ -14068,8 +14124,6 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteOneVehicleBodyInput: DeleteOneVehicleBodyInput;
   DeleteOneVehicleBrandInput: DeleteOneVehicleBrandInput;
   DeleteOneVehicleEngineInput: DeleteOneVehicleEngineInput;
-  DeleteOneVehicleLogBillInput: DeleteOneVehicleLogBillInput;
-  DeleteOneVehicleLogInput: DeleteOneVehicleLogInput;
   DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
   DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
   DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
@@ -14541,6 +14595,49 @@ export type ResolversParentTypes = ResolversObject<{
   ProductUnitUpdateFilter: ProductUnitUpdateFilter;
   ProductUpdateFilter: ProductUpdateFilter;
   Query: {};
+  ServiceLog: ServiceLog;
+  ServiceLogAggregateFilter: ServiceLogAggregateFilter;
+  ServiceLogAggregateFilterGarageAggregateFilter: ServiceLogAggregateFilterGarageAggregateFilter;
+  ServiceLogAggregateFilterUserVehicleAggregateFilter: ServiceLogAggregateFilterUserVehicleAggregateFilter;
+  ServiceLogAggregateGroupBy: ServiceLogAggregateGroupBy;
+  ServiceLogAggregateResponse: ServiceLogAggregateResponse;
+  ServiceLogAvgAggregate: ServiceLogAvgAggregate;
+  ServiceLogBill: ServiceLogBill;
+  ServiceLogBillAggregateFilter: ServiceLogBillAggregateFilter;
+  ServiceLogBillAggregateFilterServiceLogAggregateFilter: ServiceLogBillAggregateFilterServiceLogAggregateFilter;
+  ServiceLogBillAggregateFilterUserVehicleAggregateFilter: ServiceLogBillAggregateFilterUserVehicleAggregateFilter;
+  ServiceLogBillAggregateGroupBy: ServiceLogBillAggregateGroupBy;
+  ServiceLogBillAggregateResponse: ServiceLogBillAggregateResponse;
+  ServiceLogBillAvgAggregate: ServiceLogBillAvgAggregate;
+  ServiceLogBillConnection: ServiceLogBillConnection;
+  ServiceLogBillCountAggregate: ServiceLogBillCountAggregate;
+  ServiceLogBillDTO: ServiceLogBillDto;
+  ServiceLogBillDeleteFilter: ServiceLogBillDeleteFilter;
+  ServiceLogBillDeleteResponse: ServiceLogBillDeleteResponse;
+  ServiceLogBillEdge: ServiceLogBillEdge;
+  ServiceLogBillFilter: ServiceLogBillFilter;
+  ServiceLogBillFilterServiceLogFilter: ServiceLogBillFilterServiceLogFilter;
+  ServiceLogBillFilterUserVehicleFilter: ServiceLogBillFilterUserVehicleFilter;
+  ServiceLogBillMaxAggregate: ServiceLogBillMaxAggregate;
+  ServiceLogBillMinAggregate: ServiceLogBillMinAggregate;
+  ServiceLogBillSort: ServiceLogBillSort;
+  ServiceLogBillSumAggregate: ServiceLogBillSumAggregate;
+  ServiceLogBillUpdateFilter: ServiceLogBillUpdateFilter;
+  ServiceLogConnection: ServiceLogConnection;
+  ServiceLogCountAggregate: ServiceLogCountAggregate;
+  ServiceLogDTO: ServiceLogDto;
+  ServiceLogDeleteFilter: ServiceLogDeleteFilter;
+  ServiceLogDeleteResponse: ServiceLogDeleteResponse;
+  ServiceLogEdge: ServiceLogEdge;
+  ServiceLogFilter: ServiceLogFilter;
+  ServiceLogFilterGarageFilter: ServiceLogFilterGarageFilter;
+  ServiceLogFilterUserVehicleFilter: ServiceLogFilterUserVehicleFilter;
+  ServiceLogMaxAggregate: ServiceLogMaxAggregate;
+  ServiceLogMinAggregate: ServiceLogMinAggregate;
+  ServiceLogSort: ServiceLogSort;
+  ServiceLogSumAggregate: ServiceLogSumAggregate;
+  ServiceLogTypeFilterComparison: ServiceLogTypeFilterComparison;
+  ServiceLogUpdateFilter: ServiceLogUpdateFilter;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
   SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
@@ -14631,6 +14728,8 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateManyProductUnitsInput: UpdateManyProductUnitsInput;
   UpdateManyProductsInput: UpdateManyProductsInput;
   UpdateManyResponse: UpdateManyResponse;
+  UpdateManyServiceLogBillsInput: UpdateManyServiceLogBillsInput;
+  UpdateManyServiceLogsInput: UpdateManyServiceLogsInput;
   UpdateManyShopMembersInput: UpdateManyShopMembersInput;
   UpdateManyShopsInput: UpdateManyShopsInput;
   UpdateManyUserVehiclesInput: UpdateManyUserVehiclesInput;
@@ -14638,8 +14737,6 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateManyVehicleBodiesInput: UpdateManyVehicleBodiesInput;
   UpdateManyVehicleBrandsInput: UpdateManyVehicleBrandsInput;
   UpdateManyVehicleEnginesInput: UpdateManyVehicleEnginesInput;
-  UpdateManyVehicleLogBillsInput: UpdateManyVehicleLogBillsInput;
-  UpdateManyVehicleLogsInput: UpdateManyVehicleLogsInput;
   UpdateManyVehicleModelBodiesInput: UpdateManyVehicleModelBodiesInput;
   UpdateManyVehicleModelsInput: UpdateManyVehicleModelsInput;
   UpdateManyVehicleTransmissionsInput: UpdateManyVehicleTransmissionsInput;
@@ -14663,6 +14760,8 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateOneProductOptionInput: UpdateOneProductOptionInput;
   UpdateOneProductTypeInput: UpdateOneProductTypeInput;
   UpdateOneProductUnitInput: UpdateOneProductUnitInput;
+  UpdateOneServiceLogBillInput: UpdateOneServiceLogBillInput;
+  UpdateOneServiceLogInput: UpdateOneServiceLogInput;
   UpdateOneShopInput: UpdateOneShopInput;
   UpdateOneShopMemberInput: UpdateOneShopMemberInput;
   UpdateOneUserInput: UpdateOneUserInput;
@@ -14670,8 +14769,6 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateOneVehicleBodyInput: UpdateOneVehicleBodyInput;
   UpdateOneVehicleBrandInput: UpdateOneVehicleBrandInput;
   UpdateOneVehicleEngineInput: UpdateOneVehicleEngineInput;
-  UpdateOneVehicleLogBillInput: UpdateOneVehicleLogBillInput;
-  UpdateOneVehicleLogInput: UpdateOneVehicleLogInput;
   UpdateOneVehicleModelBodyInput: UpdateOneVehicleModelBodyInput;
   UpdateOneVehicleModelInput: UpdateOneVehicleModelInput;
   UpdateOneVehicleTransmissionInput: UpdateOneVehicleTransmissionInput;
@@ -14715,7 +14812,6 @@ export type ResolversParentTypes = ResolversObject<{
   UserVehicleFilterVehicleModelBodyFilter: UserVehicleFilterVehicleModelBodyFilter;
   UserVehicleFilterVehicleModelFilter: UserVehicleFilterVehicleModelFilter;
   UserVehicleFilterVehicleTransmissionFilter: UserVehicleFilterVehicleTransmissionFilter;
-  UserVehicleLogTypeFilterComparison: UserVehicleLogTypeFilterComparison;
   UserVehicleMaxAggregate: UserVehicleMaxAggregate;
   UserVehicleMinAggregate: UserVehicleMinAggregate;
   UserVehicleSort: UserVehicleSort;
@@ -14747,48 +14843,6 @@ export type ResolversParentTypes = ResolversObject<{
   VehicleEngineFilter: VehicleEngineFilter;
   VehicleEngineSort: VehicleEngineSort;
   VehicleEngineUpdateFilter: VehicleEngineUpdateFilter;
-  VehicleLog: VehicleLog;
-  VehicleLogAggregateFilter: VehicleLogAggregateFilter;
-  VehicleLogAggregateFilterGarageAggregateFilter: VehicleLogAggregateFilterGarageAggregateFilter;
-  VehicleLogAggregateFilterUserVehicleAggregateFilter: VehicleLogAggregateFilterUserVehicleAggregateFilter;
-  VehicleLogAggregateGroupBy: VehicleLogAggregateGroupBy;
-  VehicleLogAggregateResponse: VehicleLogAggregateResponse;
-  VehicleLogAvgAggregate: VehicleLogAvgAggregate;
-  VehicleLogBill: VehicleLogBill;
-  VehicleLogBillAggregateFilter: VehicleLogBillAggregateFilter;
-  VehicleLogBillAggregateFilterUserVehicleAggregateFilter: VehicleLogBillAggregateFilterUserVehicleAggregateFilter;
-  VehicleLogBillAggregateFilterVehicleLogAggregateFilter: VehicleLogBillAggregateFilterVehicleLogAggregateFilter;
-  VehicleLogBillAggregateGroupBy: VehicleLogBillAggregateGroupBy;
-  VehicleLogBillAggregateResponse: VehicleLogBillAggregateResponse;
-  VehicleLogBillAvgAggregate: VehicleLogBillAvgAggregate;
-  VehicleLogBillConnection: VehicleLogBillConnection;
-  VehicleLogBillCountAggregate: VehicleLogBillCountAggregate;
-  VehicleLogBillDTO: VehicleLogBillDto;
-  VehicleLogBillDeleteFilter: VehicleLogBillDeleteFilter;
-  VehicleLogBillDeleteResponse: VehicleLogBillDeleteResponse;
-  VehicleLogBillEdge: VehicleLogBillEdge;
-  VehicleLogBillFilter: VehicleLogBillFilter;
-  VehicleLogBillFilterUserVehicleFilter: VehicleLogBillFilterUserVehicleFilter;
-  VehicleLogBillFilterVehicleLogFilter: VehicleLogBillFilterVehicleLogFilter;
-  VehicleLogBillMaxAggregate: VehicleLogBillMaxAggregate;
-  VehicleLogBillMinAggregate: VehicleLogBillMinAggregate;
-  VehicleLogBillSort: VehicleLogBillSort;
-  VehicleLogBillSumAggregate: VehicleLogBillSumAggregate;
-  VehicleLogBillUpdateFilter: VehicleLogBillUpdateFilter;
-  VehicleLogConnection: VehicleLogConnection;
-  VehicleLogCountAggregate: VehicleLogCountAggregate;
-  VehicleLogDTO: VehicleLogDto;
-  VehicleLogDeleteFilter: VehicleLogDeleteFilter;
-  VehicleLogDeleteResponse: VehicleLogDeleteResponse;
-  VehicleLogEdge: VehicleLogEdge;
-  VehicleLogFilter: VehicleLogFilter;
-  VehicleLogFilterGarageFilter: VehicleLogFilterGarageFilter;
-  VehicleLogFilterUserVehicleFilter: VehicleLogFilterUserVehicleFilter;
-  VehicleLogMaxAggregate: VehicleLogMaxAggregate;
-  VehicleLogMinAggregate: VehicleLogMinAggregate;
-  VehicleLogSort: VehicleLogSort;
-  VehicleLogSumAggregate: VehicleLogSumAggregate;
-  VehicleLogUpdateFilter: VehicleLogUpdateFilter;
   VehicleModel: VehicleModel;
   VehicleModelBody: VehicleModelBody;
   VehicleModelBodyConnection: VehicleModelBodyConnection;
@@ -14931,6 +14985,7 @@ export type AccountMinAggregateResolvers<ContextType = any, ParentType extends R
 
 export type AccountPasswordResetResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountPasswordReset'] = ResolversParentTypes['AccountPasswordReset']> = ResolversObject<{
   account?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
+  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
@@ -14942,6 +14997,7 @@ export type AccountPasswordResetResolvers<ContextType = any, ParentType extends 
 }>;
 
 export type AccountPasswordResetAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountPasswordResetAggregateGroupBy'] = ResolversParentTypes['AccountPasswordResetAggregateGroupBy']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountPasswordResetAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountPasswordResetAggregateGroupByDeletedAtArgs, 'by'>>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountPasswordResetAggregateGroupByExpiredAtArgs, 'by'>>;
@@ -14968,6 +15024,7 @@ export type AccountPasswordResetConnectionResolvers<ContextType = any, ParentTyp
 }>;
 
 export type AccountPasswordResetCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountPasswordResetCountAggregate'] = ResolversParentTypes['AccountPasswordResetCountAggregate']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -14979,6 +15036,7 @@ export type AccountPasswordResetCountAggregateResolvers<ContextType = any, Paren
 }>;
 
 export type AccountPasswordResetDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountPasswordResetDeleteResponse'] = ResolversParentTypes['AccountPasswordResetDeleteResponse']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -14996,6 +15054,7 @@ export type AccountPasswordResetEdgeResolvers<ContextType = any, ParentType exte
 }>;
 
 export type AccountPasswordResetMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountPasswordResetMaxAggregate'] = ResolversParentTypes['AccountPasswordResetMaxAggregate']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -15006,6 +15065,7 @@ export type AccountPasswordResetMaxAggregateResolvers<ContextType = any, ParentT
 }>;
 
 export type AccountPasswordResetMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountPasswordResetMinAggregate'] = ResolversParentTypes['AccountPasswordResetMinAggregate']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -15022,6 +15082,7 @@ export type AccountSumAggregateResolvers<ContextType = any, ParentType extends R
 
 export type AccountVerficationResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountVerfication'] = ResolversParentTypes['AccountVerfication']> = ResolversObject<{
   account?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
+  code?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
@@ -15033,6 +15094,7 @@ export type AccountVerficationResolvers<ContextType = any, ParentType extends Re
 }>;
 
 export type AccountVerficationAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountVerficationAggregateGroupBy'] = ResolversParentTypes['AccountVerficationAggregateGroupBy']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountVerficationAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountVerficationAggregateGroupByDeletedAtArgs, 'by'>>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountVerficationAggregateGroupByExpiredAtArgs, 'by'>>;
@@ -15059,6 +15121,7 @@ export type AccountVerficationConnectionResolvers<ContextType = any, ParentType 
 }>;
 
 export type AccountVerficationCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountVerficationCountAggregate'] = ResolversParentTypes['AccountVerficationCountAggregate']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -15070,6 +15133,7 @@ export type AccountVerficationCountAggregateResolvers<ContextType = any, ParentT
 }>;
 
 export type AccountVerficationDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountVerficationDeleteResponse'] = ResolversParentTypes['AccountVerficationDeleteResponse']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -15087,6 +15151,7 @@ export type AccountVerficationEdgeResolvers<ContextType = any, ParentType extend
 }>;
 
 export type AccountVerficationMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountVerficationMaxAggregate'] = ResolversParentTypes['AccountVerficationMaxAggregate']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -15097,6 +15162,7 @@ export type AccountVerficationMaxAggregateResolvers<ContextType = any, ParentTyp
 }>;
 
 export type AccountVerficationMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountVerficationMinAggregate'] = ResolversParentTypes['AccountVerficationMinAggregate']> = ResolversObject<{
+  code?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   expiredAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -15749,6 +15815,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   addProductsToProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationAddProductsToProductUnitArgs, 'input'>>;
   addShopsToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddShopsToOrgArgs, 'input'>>;
   authConfirmPasswordReset?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthConfirmPasswordResetArgs, 'input'>>;
+  authConfirmPasswordResetByCode?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthConfirmPasswordResetByCodeArgs, 'input'>>;
   authLogin?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthLoginArgs, 'input'>>;
   authRefreshToken?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthRefreshTokenArgs, 'input'>>;
   authRegister?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthRegisterArgs, 'input'>>;
@@ -15756,6 +15823,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   authResendVerification?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthResendVerificationArgs, 'input'>>;
   authResendVerificationWithEmail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthResendVerificationWithEmailArgs, 'input'>>;
   authVerify?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthVerifyArgs, 'input'>>;
+  authVerifyByCode?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthVerifyByCodeArgs, 'input'>>;
   createManyAccountPasswordResets?: Resolver<Array<ResolversTypes['AccountPasswordReset']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountPasswordResetsArgs, 'input'>>;
   createManyAccountVerfications?: Resolver<Array<ResolversTypes['AccountVerfication']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountVerficationsArgs, 'input'>>;
   createManyAccounts?: Resolver<Array<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountsArgs, 'input'>>;
@@ -15776,6 +15844,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createManyProductTypes?: Resolver<Array<ResolversTypes['ProductType']>, ParentType, ContextType, RequireFields<MutationCreateManyProductTypesArgs, 'input'>>;
   createManyProductUnits?: Resolver<Array<ResolversTypes['ProductUnit']>, ParentType, ContextType, RequireFields<MutationCreateManyProductUnitsArgs, 'input'>>;
   createManyProducts?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationCreateManyProductsArgs, 'input'>>;
+  createManyServiceLogBills?: Resolver<Array<ResolversTypes['ServiceLogBill']>, ParentType, ContextType, RequireFields<MutationCreateManyServiceLogBillsArgs, 'input'>>;
+  createManyServiceLogs?: Resolver<Array<ResolversTypes['ServiceLog']>, ParentType, ContextType, RequireFields<MutationCreateManyServiceLogsArgs, 'input'>>;
   createManyShopMembers?: Resolver<Array<ResolversTypes['ShopMember']>, ParentType, ContextType, RequireFields<MutationCreateManyShopMembersArgs, 'input'>>;
   createManyShops?: Resolver<Array<ResolversTypes['Shop']>, ParentType, ContextType, RequireFields<MutationCreateManyShopsArgs, 'input'>>;
   createManyUserVehicles?: Resolver<Array<ResolversTypes['UserVehicle']>, ParentType, ContextType, RequireFields<MutationCreateManyUserVehiclesArgs, 'input'>>;
@@ -15783,8 +15853,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createManyVehicleBodies?: Resolver<Array<ResolversTypes['VehicleBody']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBodiesArgs, 'input'>>;
   createManyVehicleBrands?: Resolver<Array<ResolversTypes['VehicleBrand']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBrandsArgs, 'input'>>;
   createManyVehicleEngines?: Resolver<Array<ResolversTypes['VehicleEngine']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleEnginesArgs, 'input'>>;
-  createManyVehicleLogBills?: Resolver<Array<ResolversTypes['VehicleLogBill']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleLogBillsArgs, 'input'>>;
-  createManyVehicleLogs?: Resolver<Array<ResolversTypes['VehicleLog']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleLogsArgs, 'input'>>;
   createManyVehicleModelBodies?: Resolver<Array<ResolversTypes['VehicleModelBody']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleModelBodiesArgs, 'input'>>;
   createManyVehicleModels?: Resolver<Array<ResolversTypes['VehicleModel']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleModelsArgs, 'input'>>;
   createManyVehicleTransmissions?: Resolver<Array<ResolversTypes['VehicleTransmission']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleTransmissionsArgs, 'input'>>;
@@ -15808,6 +15876,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createOneProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationCreateOneProductOptionGroupArgs, 'input'>>;
   createOneProductType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<MutationCreateOneProductTypeArgs, 'input'>>;
   createOneProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationCreateOneProductUnitArgs, 'input'>>;
+  createOneServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationCreateOneServiceLogArgs, 'input'>>;
+  createOneServiceLogBill?: Resolver<ResolversTypes['ServiceLogBill'], ParentType, ContextType, RequireFields<MutationCreateOneServiceLogBillArgs, 'input'>>;
   createOneShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationCreateOneShopArgs, 'input'>>;
   createOneShopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<MutationCreateOneShopMemberArgs, 'input'>>;
   createOneUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateOneUserArgs, 'input'>>;
@@ -15815,8 +15885,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createOneVehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBodyArgs, 'input'>>;
   createOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBrandArgs, 'input'>>;
   createOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleEngineArgs, 'input'>>;
-  createOneVehicleLog?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleLogArgs, 'input'>>;
-  createOneVehicleLogBill?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleLogBillArgs, 'input'>>;
   createOneVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleModelArgs, 'input'>>;
   createOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleModelBodyArgs, 'input'>>;
   createOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleTransmissionArgs, 'input'>>;
@@ -15840,6 +15908,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyProductTypes?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductTypesArgs, 'input'>>;
   deleteManyProductUnits?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductUnitsArgs, 'input'>>;
   deleteManyProducts?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyProductsArgs, 'input'>>;
+  deleteManyServiceLogBills?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyServiceLogBillsArgs, 'input'>>;
+  deleteManyServiceLogs?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyServiceLogsArgs, 'input'>>;
   deleteManyShopMembers?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyShopMembersArgs, 'input'>>;
   deleteManyShops?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyShopsArgs, 'input'>>;
   deleteManyUserVehicles?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyUserVehiclesArgs, 'input'>>;
@@ -15847,8 +15917,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyVehicleBodies?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBodiesArgs, 'input'>>;
   deleteManyVehicleBrands?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBrandsArgs, 'input'>>;
   deleteManyVehicleEngines?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleEnginesArgs, 'input'>>;
-  deleteManyVehicleLogBills?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleLogBillsArgs, 'input'>>;
-  deleteManyVehicleLogs?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleLogsArgs, 'input'>>;
   deleteManyVehicleModelBodies?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleModelBodiesArgs, 'input'>>;
   deleteManyVehicleModels?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleModelsArgs, 'input'>>;
   deleteManyVehicleTransmissions?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleTransmissionsArgs, 'input'>>;
@@ -15872,6 +15940,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteOneProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroupDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductOptionGroupArgs, 'input'>>;
   deleteOneProductType?: Resolver<ResolversTypes['ProductTypeDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductTypeArgs, 'input'>>;
   deleteOneProductUnit?: Resolver<ResolversTypes['ProductUnitDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneProductUnitArgs, 'input'>>;
+  deleteOneServiceLog?: Resolver<ResolversTypes['ServiceLogDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneServiceLogArgs, 'input'>>;
+  deleteOneServiceLogBill?: Resolver<ResolversTypes['ServiceLogBillDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneServiceLogBillArgs, 'input'>>;
   deleteOneShop?: Resolver<ResolversTypes['ShopDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneShopArgs, 'input'>>;
   deleteOneShopMember?: Resolver<ResolversTypes['ShopMemberDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneShopMemberArgs, 'input'>>;
   deleteOneUser?: Resolver<ResolversTypes['UserDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneUserArgs, 'input'>>;
@@ -15879,8 +15949,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteOneVehicleBody?: Resolver<ResolversTypes['VehicleBodyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBodyArgs, 'input'>>;
   deleteOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrandDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBrandArgs, 'input'>>;
   deleteOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngineDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleEngineArgs, 'input'>>;
-  deleteOneVehicleLog?: Resolver<ResolversTypes['VehicleLogDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleLogArgs, 'input'>>;
-  deleteOneVehicleLogBill?: Resolver<ResolversTypes['VehicleLogBillDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleLogBillArgs, 'input'>>;
   deleteOneVehicleModel?: Resolver<ResolversTypes['VehicleModelDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleModelArgs, 'input'>>;
   deleteOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBodyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleModelBodyArgs, 'input'>>;
   deleteOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmissionDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleTransmissionArgs, 'input'>>;
@@ -15921,6 +15989,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyProductTypes?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductTypesArgs, 'input'>>;
   updateManyProductUnits?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductUnitsArgs, 'input'>>;
   updateManyProducts?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyProductsArgs, 'input'>>;
+  updateManyServiceLogBills?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyServiceLogBillsArgs, 'input'>>;
+  updateManyServiceLogs?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyServiceLogsArgs, 'input'>>;
   updateManyShopMembers?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyShopMembersArgs, 'input'>>;
   updateManyShops?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyShopsArgs, 'input'>>;
   updateManyUserVehicles?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyUserVehiclesArgs, 'input'>>;
@@ -15928,8 +15998,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyVehicleBodies?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBodiesArgs, 'input'>>;
   updateManyVehicleBrands?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBrandsArgs, 'input'>>;
   updateManyVehicleEngines?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleEnginesArgs, 'input'>>;
-  updateManyVehicleLogBills?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleLogBillsArgs, 'input'>>;
-  updateManyVehicleLogs?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleLogsArgs, 'input'>>;
   updateManyVehicleModelBodies?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleModelBodiesArgs, 'input'>>;
   updateManyVehicleModels?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleModelsArgs, 'input'>>;
   updateManyVehicleTransmissions?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleTransmissionsArgs, 'input'>>;
@@ -15953,6 +16021,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateOneProductOptionGroup?: Resolver<ResolversTypes['ProductOptionGroup'], ParentType, ContextType, RequireFields<MutationUpdateOneProductOptionGroupArgs, 'input'>>;
   updateOneProductType?: Resolver<ResolversTypes['ProductType'], ParentType, ContextType, RequireFields<MutationUpdateOneProductTypeArgs, 'input'>>;
   updateOneProductUnit?: Resolver<ResolversTypes['ProductUnit'], ParentType, ContextType, RequireFields<MutationUpdateOneProductUnitArgs, 'input'>>;
+  updateOneServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationUpdateOneServiceLogArgs, 'input'>>;
+  updateOneServiceLogBill?: Resolver<ResolversTypes['ServiceLogBill'], ParentType, ContextType, RequireFields<MutationUpdateOneServiceLogBillArgs, 'input'>>;
   updateOneShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationUpdateOneShopArgs, 'input'>>;
   updateOneShopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<MutationUpdateOneShopMemberArgs, 'input'>>;
   updateOneUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateOneUserArgs, 'input'>>;
@@ -15960,8 +16030,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateOneVehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBodyArgs, 'input'>>;
   updateOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBrandArgs, 'input'>>;
   updateOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleEngineArgs, 'input'>>;
-  updateOneVehicleLog?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleLogArgs, 'input'>>;
-  updateOneVehicleLogBill?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleLogBillArgs, 'input'>>;
   updateOneVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleModelArgs, 'input'>>;
   updateOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleModelBodyArgs, 'input'>>;
   updateOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleTransmissionArgs, 'input'>>;
@@ -18021,6 +18089,12 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   productUnitAggregate?: Resolver<Array<ResolversTypes['ProductUnitAggregateResponse']>, ParentType, ContextType, Partial<QueryProductUnitAggregateArgs>>;
   productUnits?: Resolver<ResolversTypes['ProductUnitConnection'], ParentType, ContextType, RequireFields<QueryProductUnitsArgs, 'filter' | 'paging' | 'sorting'>>;
   products?: Resolver<ResolversTypes['ProductConnection'], ParentType, ContextType, RequireFields<QueryProductsArgs, 'filter' | 'paging' | 'sorting'>>;
+  serviceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<QueryServiceLogArgs, 'id'>>;
+  serviceLogAggregate?: Resolver<Array<ResolversTypes['ServiceLogAggregateResponse']>, ParentType, ContextType, Partial<QueryServiceLogAggregateArgs>>;
+  serviceLogBill?: Resolver<ResolversTypes['ServiceLogBill'], ParentType, ContextType, RequireFields<QueryServiceLogBillArgs, 'id'>>;
+  serviceLogBillAggregate?: Resolver<Array<ResolversTypes['ServiceLogBillAggregateResponse']>, ParentType, ContextType, Partial<QueryServiceLogBillAggregateArgs>>;
+  serviceLogBills?: Resolver<ResolversTypes['ServiceLogBillConnection'], ParentType, ContextType, RequireFields<QueryServiceLogBillsArgs, 'filter' | 'paging' | 'sorting'>>;
+  serviceLogs?: Resolver<ResolversTypes['ServiceLogConnection'], ParentType, ContextType, RequireFields<QueryServiceLogsArgs, 'filter' | 'paging' | 'sorting'>>;
   shop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<QueryShopArgs, 'id'>>;
   shopAggregate?: Resolver<Array<ResolversTypes['ShopAggregateResponse']>, ParentType, ContextType, Partial<QueryShopAggregateArgs>>;
   shopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<QueryShopMemberArgs, 'id'>>;
@@ -18039,18 +18113,207 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   vehicleBrands?: Resolver<ResolversTypes['VehicleBrandConnection'], ParentType, ContextType, RequireFields<QueryVehicleBrandsArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<QueryVehicleEngineArgs, 'id'>>;
   vehicleEngines?: Resolver<ResolversTypes['VehicleEngineConnection'], ParentType, ContextType, RequireFields<QueryVehicleEnginesArgs, 'filter' | 'paging' | 'sorting'>>;
-  vehicleLog?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType, RequireFields<QueryVehicleLogArgs, 'id'>>;
-  vehicleLogAggregate?: Resolver<Array<ResolversTypes['VehicleLogAggregateResponse']>, ParentType, ContextType, Partial<QueryVehicleLogAggregateArgs>>;
-  vehicleLogBill?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType, RequireFields<QueryVehicleLogBillArgs, 'id'>>;
-  vehicleLogBillAggregate?: Resolver<Array<ResolversTypes['VehicleLogBillAggregateResponse']>, ParentType, ContextType, Partial<QueryVehicleLogBillAggregateArgs>>;
-  vehicleLogBills?: Resolver<ResolversTypes['VehicleLogBillConnection'], ParentType, ContextType, RequireFields<QueryVehicleLogBillsArgs, 'filter' | 'paging' | 'sorting'>>;
-  vehicleLogs?: Resolver<ResolversTypes['VehicleLogConnection'], ParentType, ContextType, RequireFields<QueryVehicleLogsArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<QueryVehicleModelArgs, 'id'>>;
   vehicleModelBodies?: Resolver<ResolversTypes['VehicleModelBodyConnection'], ParentType, ContextType, RequireFields<QueryVehicleModelBodiesArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<QueryVehicleModelBodyArgs, 'id'>>;
   vehicleModels?: Resolver<ResolversTypes['VehicleModelConnection'], ParentType, ContextType, RequireFields<QueryVehicleModelsArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<QueryVehicleTransmissionArgs, 'id'>>;
   vehicleTransmissions?: Resolver<ResolversTypes['VehicleTransmissionConnection'], ParentType, ContextType, RequireFields<QueryVehicleTransmissionsArgs, 'filter' | 'paging' | 'sorting'>>;
+}>;
+
+export type ServiceLogResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLog'] = ResolversParentTypes['ServiceLog']> = ResolversObject<{
+  bill?: Resolver<Maybe<ResolversTypes['ServiceLogBill']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  garage?: Resolver<Maybe<ResolversTypes['Garage']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['ServiceLogType'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  vehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogAggregateGroupBy'] = ResolversParentTypes['ServiceLogAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogAggregateGroupByCreatedAtArgs, 'by'>>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogAggregateGroupByDateArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogAggregateGroupByDeletedAtArgs, 'by'>>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['ServiceLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogAggregateResponse'] = ResolversParentTypes['ServiceLogAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['ServiceLogAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['ServiceLogCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['ServiceLogAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['ServiceLogMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['ServiceLogMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['ServiceLogSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogAvgAggregate'] = ResolversParentTypes['ServiceLogAvgAggregate']> = ResolversObject<{
+  type?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBill'] = ResolversParentTypes['ServiceLogBill']> = ResolversObject<{
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  log?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  total?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  vehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillAggregateGroupBy'] = ResolversParentTypes['ServiceLogBillAggregateGroupBy']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogBillAggregateGroupByCreatedAtArgs, 'by'>>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogBillAggregateGroupByDeletedAtArgs, 'by'>>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<ServiceLogBillAggregateGroupByUpdatedAtArgs, 'by'>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillAggregateResponse'] = ResolversParentTypes['ServiceLogBillAggregateResponse']> = ResolversObject<{
+  avg?: Resolver<Maybe<ResolversTypes['ServiceLogBillAvgAggregate']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['ServiceLogBillCountAggregate']>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['ServiceLogBillAggregateGroupBy']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['ServiceLogBillMaxAggregate']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['ServiceLogBillMinAggregate']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['ServiceLogBillSumAggregate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillAvgAggregate'] = ResolversParentTypes['ServiceLogBillAvgAggregate']> = ResolversObject<{
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillConnection'] = ResolversParentTypes['ServiceLogBillConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['ServiceLogBillEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillCountAggregate'] = ResolversParentTypes['ServiceLogBillCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillDeleteResponse'] = ResolversParentTypes['ServiceLogBillDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillEdge'] = ResolversParentTypes['ServiceLogBillEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['ServiceLogBill'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillMaxAggregate'] = ResolversParentTypes['ServiceLogBillMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillMinAggregate'] = ResolversParentTypes['ServiceLogBillMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogBillSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogBillSumAggregate'] = ResolversParentTypes['ServiceLogBillSumAggregate']> = ResolversObject<{
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogConnection'] = ResolversParentTypes['ServiceLogConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['ServiceLogEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogCountAggregate'] = ResolversParentTypes['ServiceLogCountAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogDeleteResponse'] = ResolversParentTypes['ServiceLogDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['ServiceLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogEdge'] = ResolversParentTypes['ServiceLogEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogMaxAggregate'] = ResolversParentTypes['ServiceLogMaxAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['ServiceLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogMinAggregate'] = ResolversParentTypes['ServiceLogMinAggregate']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['ServiceLogType']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ServiceLogSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogSumAggregate'] = ResolversParentTypes['ServiceLogSumAggregate']> = ResolversObject<{
+  type?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ShopResolvers<ContextType = any, ParentType extends ResolversParentTypes['Shop'] = ResolversParentTypes['Shop']> = ResolversObject<{
@@ -18575,201 +18838,6 @@ export type VehicleEngineEdgeResolvers<ContextType = any, ParentType extends Res
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type VehicleLogResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLog'] = ResolversParentTypes['VehicleLog']> = ResolversObject<{
-  bill?: Resolver<Maybe<ResolversTypes['VehicleLogBill']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  garage?: Resolver<Maybe<ResolversTypes['Garage']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['UserVehicleLogType'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  vehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogAggregateGroupBy'] = ResolversParentTypes['VehicleLogAggregateGroupBy']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByCreatedAtArgs, 'by'>>;
-  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByDateArgs, 'by'>>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByDeletedAtArgs, 'by'>>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogAggregateGroupByUpdatedAtArgs, 'by'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogAggregateResponse'] = ResolversParentTypes['VehicleLogAggregateResponse']> = ResolversObject<{
-  avg?: Resolver<Maybe<ResolversTypes['VehicleLogAvgAggregate']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['VehicleLogCountAggregate']>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['VehicleLogAggregateGroupBy']>, ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['VehicleLogMaxAggregate']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['VehicleLogMinAggregate']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['VehicleLogSumAggregate']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogAvgAggregate'] = ResolversParentTypes['VehicleLogAvgAggregate']> = ResolversObject<{
-  type?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBill'] = ResolversParentTypes['VehicleLogBill']> = ResolversObject<{
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  log?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType>;
-  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  total?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  vehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillAggregateGroupBy'] = ResolversParentTypes['VehicleLogBillAggregateGroupBy']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogBillAggregateGroupByCreatedAtArgs, 'by'>>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogBillAggregateGroupByDeletedAtArgs, 'by'>>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<VehicleLogBillAggregateGroupByUpdatedAtArgs, 'by'>>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillAggregateResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillAggregateResponse'] = ResolversParentTypes['VehicleLogBillAggregateResponse']> = ResolversObject<{
-  avg?: Resolver<Maybe<ResolversTypes['VehicleLogBillAvgAggregate']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['VehicleLogBillCountAggregate']>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['VehicleLogBillAggregateGroupBy']>, ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['VehicleLogBillMaxAggregate']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['VehicleLogBillMinAggregate']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['VehicleLogBillSumAggregate']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillAvgAggregate'] = ResolversParentTypes['VehicleLogBillAvgAggregate']> = ResolversObject<{
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillConnection'] = ResolversParentTypes['VehicleLogBillConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['VehicleLogBillEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillCountAggregate'] = ResolversParentTypes['VehicleLogBillCountAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  total?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillDeleteResponse'] = ResolversParentTypes['VehicleLogBillDeleteResponse']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillEdge'] = ResolversParentTypes['VehicleLogBillEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['VehicleLogBill'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillMaxAggregate'] = ResolversParentTypes['VehicleLogBillMaxAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillMinAggregate'] = ResolversParentTypes['VehicleLogBillMinAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogBillSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogBillSumAggregate'] = ResolversParentTypes['VehicleLogBillSumAggregate']> = ResolversObject<{
-  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogConnection'] = ResolversParentTypes['VehicleLogConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['VehicleLogEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  totalCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogCountAggregate'] = ResolversParentTypes['VehicleLogCountAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogDeleteResponse'] = ResolversParentTypes['VehicleLogDeleteResponse']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogEdge'] = ResolversParentTypes['VehicleLogEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['VehicleLog'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogMaxAggregate'] = ResolversParentTypes['VehicleLogMaxAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogMinAggregate'] = ResolversParentTypes['VehicleLogMinAggregate']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['UserVehicleLogType']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleLogSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleLogSumAggregate'] = ResolversParentTypes['VehicleLogSumAggregate']> = ResolversObject<{
-  type?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type VehicleModelResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModel'] = ResolversParentTypes['VehicleModel']> = ResolversObject<{
   bodies?: Resolver<Array<ResolversTypes['VehicleModelBody']>, ParentType, ContextType, RequireFields<VehicleModelBodiesArgs, 'filter' | 'sorting'>>;
   brand?: Resolver<Maybe<ResolversTypes['VehicleBrand']>, ParentType, ContextType>;
@@ -19182,6 +19250,28 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   ProductUnitProductsMinAggregate?: ProductUnitProductsMinAggregateResolvers<ContextType>;
   ProductUnitProductsSumAggregate?: ProductUnitProductsSumAggregateResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  ServiceLog?: ServiceLogResolvers<ContextType>;
+  ServiceLogAggregateGroupBy?: ServiceLogAggregateGroupByResolvers<ContextType>;
+  ServiceLogAggregateResponse?: ServiceLogAggregateResponseResolvers<ContextType>;
+  ServiceLogAvgAggregate?: ServiceLogAvgAggregateResolvers<ContextType>;
+  ServiceLogBill?: ServiceLogBillResolvers<ContextType>;
+  ServiceLogBillAggregateGroupBy?: ServiceLogBillAggregateGroupByResolvers<ContextType>;
+  ServiceLogBillAggregateResponse?: ServiceLogBillAggregateResponseResolvers<ContextType>;
+  ServiceLogBillAvgAggregate?: ServiceLogBillAvgAggregateResolvers<ContextType>;
+  ServiceLogBillConnection?: ServiceLogBillConnectionResolvers<ContextType>;
+  ServiceLogBillCountAggregate?: ServiceLogBillCountAggregateResolvers<ContextType>;
+  ServiceLogBillDeleteResponse?: ServiceLogBillDeleteResponseResolvers<ContextType>;
+  ServiceLogBillEdge?: ServiceLogBillEdgeResolvers<ContextType>;
+  ServiceLogBillMaxAggregate?: ServiceLogBillMaxAggregateResolvers<ContextType>;
+  ServiceLogBillMinAggregate?: ServiceLogBillMinAggregateResolvers<ContextType>;
+  ServiceLogBillSumAggregate?: ServiceLogBillSumAggregateResolvers<ContextType>;
+  ServiceLogConnection?: ServiceLogConnectionResolvers<ContextType>;
+  ServiceLogCountAggregate?: ServiceLogCountAggregateResolvers<ContextType>;
+  ServiceLogDeleteResponse?: ServiceLogDeleteResponseResolvers<ContextType>;
+  ServiceLogEdge?: ServiceLogEdgeResolvers<ContextType>;
+  ServiceLogMaxAggregate?: ServiceLogMaxAggregateResolvers<ContextType>;
+  ServiceLogMinAggregate?: ServiceLogMinAggregateResolvers<ContextType>;
+  ServiceLogSumAggregate?: ServiceLogSumAggregateResolvers<ContextType>;
   Shop?: ShopResolvers<ContextType>;
   ShopAggregateGroupBy?: ShopAggregateGroupByResolvers<ContextType>;
   ShopAggregateResponse?: ShopAggregateResponseResolvers<ContextType>;
@@ -19241,28 +19331,6 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   VehicleEngineConnection?: VehicleEngineConnectionResolvers<ContextType>;
   VehicleEngineDeleteResponse?: VehicleEngineDeleteResponseResolvers<ContextType>;
   VehicleEngineEdge?: VehicleEngineEdgeResolvers<ContextType>;
-  VehicleLog?: VehicleLogResolvers<ContextType>;
-  VehicleLogAggregateGroupBy?: VehicleLogAggregateGroupByResolvers<ContextType>;
-  VehicleLogAggregateResponse?: VehicleLogAggregateResponseResolvers<ContextType>;
-  VehicleLogAvgAggregate?: VehicleLogAvgAggregateResolvers<ContextType>;
-  VehicleLogBill?: VehicleLogBillResolvers<ContextType>;
-  VehicleLogBillAggregateGroupBy?: VehicleLogBillAggregateGroupByResolvers<ContextType>;
-  VehicleLogBillAggregateResponse?: VehicleLogBillAggregateResponseResolvers<ContextType>;
-  VehicleLogBillAvgAggregate?: VehicleLogBillAvgAggregateResolvers<ContextType>;
-  VehicleLogBillConnection?: VehicleLogBillConnectionResolvers<ContextType>;
-  VehicleLogBillCountAggregate?: VehicleLogBillCountAggregateResolvers<ContextType>;
-  VehicleLogBillDeleteResponse?: VehicleLogBillDeleteResponseResolvers<ContextType>;
-  VehicleLogBillEdge?: VehicleLogBillEdgeResolvers<ContextType>;
-  VehicleLogBillMaxAggregate?: VehicleLogBillMaxAggregateResolvers<ContextType>;
-  VehicleLogBillMinAggregate?: VehicleLogBillMinAggregateResolvers<ContextType>;
-  VehicleLogBillSumAggregate?: VehicleLogBillSumAggregateResolvers<ContextType>;
-  VehicleLogConnection?: VehicleLogConnectionResolvers<ContextType>;
-  VehicleLogCountAggregate?: VehicleLogCountAggregateResolvers<ContextType>;
-  VehicleLogDeleteResponse?: VehicleLogDeleteResponseResolvers<ContextType>;
-  VehicleLogEdge?: VehicleLogEdgeResolvers<ContextType>;
-  VehicleLogMaxAggregate?: VehicleLogMaxAggregateResolvers<ContextType>;
-  VehicleLogMinAggregate?: VehicleLogMinAggregateResolvers<ContextType>;
-  VehicleLogSumAggregate?: VehicleLogSumAggregateResolvers<ContextType>;
   VehicleModel?: VehicleModelResolvers<ContextType>;
   VehicleModelBody?: VehicleModelBodyResolvers<ContextType>;
   VehicleModelBodyConnection?: VehicleModelBodyConnectionResolvers<ContextType>;

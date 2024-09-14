@@ -8,7 +8,7 @@ export class AuthRegisterInput {
     @Field()
     password: string;
 
-    @Field()
+    @Field({ nullable: true })
     firstName: string;
 
     @Field({ nullable: true })
