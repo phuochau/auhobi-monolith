@@ -93,6 +93,15 @@ export const DigitInput = (props: DigitInputProps) => {
                                 maxLength={1}
                                 onBlur={onBlur}
                                 value={value}
+                                onKeyPress={({ nativeEvent }) => {
+                                  if (nativeEvent.key === 'Backspace') {
+                                    if (!value?.length) {
+                                        if (index > 0) {
+                                            inputRefs[index - 1].current.focus()
+                                        }
+                                    }
+                                  }
+                                }}
                                 onChangeText={(text) => {
                                     onChange(text)
                                     if (text.length) {
