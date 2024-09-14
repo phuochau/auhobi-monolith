@@ -16,10 +16,10 @@ const defaultValues = ['', '', '', '', '', '']
 const VerificationScreen = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
-    const params = useLocalSearchParams<{ email: string }>();
+    const params = useLocalSearchParams<{ email: string, resent?: string }>();
     const [submitting, setSubmitting] = useState(false)
     const [resending, setResending] = useState(false)
-    const [resent, setResent] = useState(false)
+    const [resent, setResent] = useState(params.resent ? Boolean(params.resent) : false )
     const [code, setCode] = useState(defaultValues)
     const [response, setResponse] = useState<GraphQLResponse<Boolean>>()
     

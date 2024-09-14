@@ -115,22 +115,28 @@ export class AuthService {
    * Register Flow
    */
 
-  async register(email: string, pass: string, firstName: string, lastName: string, useCode: boolean): Promise<boolean> {
-    let acc = await this.accountService.findAccountByEmail(email)
-    if (acc) {
-      if (!acc.emailVerified) {
-        throw new NotAcceptableException(ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION)
-      }
-      throw new ConflictException(ErrorCodes.AUTH_ACCOUNT_EXISTS)
-    }
-
-    acc = await this.accountService.createOneAccount(email, pass, firstName, lastName)
+  async createVerificationCode(acc: Account, useCode: boolean) {
     const verification = await this.accountVerificationService.createOne(acc)
     if (useCode) {
       this.accountVerificationService.sendRequestEmailByCode(verification)
     } else {
       this.accountVerificationService.sendRequestEmail(verification)
     }
+  }
+
+  async register(email: string, pass: string, firstName: string, lastName: string, useCode: boolean): Promise<boolean> {
+    let acc = await this.accountService.findAccountByEmail(email)
+    if (acc) {
+      if (!acc.emailVerified) {
+        // Resend email automatically
+        await this.createVerificationCode(acc, useCode)
+        throw new NotAcceptableException(ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION)
+      }
+      throw new ConflictException(ErrorCodes.AUTH_ACCOUNT_EXISTS)
+    }
+
+    acc = await this.accountService.createOneAccount(email, pass, firstName, lastName)
+    await this.createVerificationCode(acc, useCode)
     return true
   }
 

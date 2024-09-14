@@ -14,6 +14,8 @@ import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { registerAsync } from "@/store/auth/actions/register-async.action"
+import { GraphQLAPI } from "@/graphql/api"
+import { ErrorCodes } from "@/graphql/error-codes"
  
 const formSchema = z.object({
   email: z
@@ -74,7 +76,12 @@ const RegisterScreen = () => {
       if (!response.errors && response.data) {
         router.replace({ pathname: '/auth/verification', params: { email: values.email }})
       } else {
-        setSubmitting(false)
+        const errorCode = GraphQLAPI.getErrorString(response)
+        if (errorCode === ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION) {
+          router.replace({ pathname: '/auth/verification', params: { email: values.email, resent: 'true' }})
+        } else {
+          setSubmitting(false)
+        }
       }
     }
     
