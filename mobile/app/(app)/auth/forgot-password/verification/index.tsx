@@ -84,7 +84,7 @@ const ForgotVerificationScreen = () => {
         <CardHeader>
           <CardTitle className="text-2xl">Verify Request</CardTitle>
           <CardDescription>
-            Please check your email inbox and enter the digits to confirm your request
+            Please check your email inbox to get verification code. Enter the verification code and new passwords to update your password
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
