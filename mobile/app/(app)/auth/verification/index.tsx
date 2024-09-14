@@ -1,26 +1,73 @@
 import { View } from "react-native"
 import { Text } from '@/components/ui/text'
-import { Link, useRouter } from "expo-router"
+import { Link, useLocalSearchParams, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
-import { useForm, Controller } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { passwordValidation } from "@/lib/validations"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { GraphQLError } from "@/components/graphql-error"
-import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { registerAsync } from "@/store/auth/actions/register-async.action"
+import { DigitInput } from "@/components/digit-input"
+import { verifyAccountAsync } from "@/store/auth/actions/verify-account-async.action"
+import { resendVerificationWithEmailAsync } from "@/store/auth/actions/resend-verification-with-email-async.action"
+
+const defaultValues = ['', '', '', '', '', '']
 
 const VerificationScreen = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
+    const params = useLocalSearchParams<{ email: string }>();
     const [submitting, setSubmitting] = useState(false)
+    const [resending, setResending] = useState(false)
+    const [resent, setResent] = useState(false)
+    const [code, setCode] = useState(defaultValues)
     const [response, setResponse] = useState<GraphQLResponse<Boolean>>()
     
+    async function onVerifyAccount() {
+      setSubmitting(true)
+      setResponse(undefined)
+      setResent(false)
+  
+      const { payload } = await dispatch(verifyAccountAsync({
+        email: params.email,
+        code: code.join('')
+      }))
+  
+      const response = payload as GraphQLResponse<Boolean>
+      setResponse(response)
+      if (!response.errors && response.data) {
+        router.replace('/auth/verification/success')
+      } else {
+        setCode(defaultValues)
+        setSubmitting(false)
+      }
+    }
+    
+    async function onResendCode() {
+      if (resending) {
+        return
+      }
+
+      setResending(true)
+      setResent(false)
+      setResponse(undefined)
+  
+      const { payload } = await dispatch(resendVerificationWithEmailAsync({
+        email: params.email
+      }))
+  
+      const response = payload as GraphQLResponse<Boolean>
+      setResponse(response)
+      if (!response.errors && response.data) {
+        setResent(true)
+      } else {
+        setCode(defaultValues)
+        setSubmitting(false)
+      }
+    }
+
+    const valid = code.join('').length === 6
+
     return (
       <Card className="w-full max-w-sm">
         <CardHeader>
@@ -32,15 +79,19 @@ const VerificationScreen = () => {
         <CardContent className="grid gap-4">
             <GraphQLError nativeID="RegisterError" response={response}></GraphQLError>
 
-            <Button loading={submitting} disabled={submitting} className="w-full mt-2">
+            {resent && <Text className={'text-success text-sm font-semibold'}>Resent the email activation successfully!</Text>}
+
+            <DigitInput onComplete={(code) => setCode(code)}></DigitInput>
+
+            <Button onPress={() => onVerifyAccount()} loading={submitting || resending} disabled={submitting || !valid || resending} className="w-full mt-2">
               <Text>Confirm Account</Text>
             </Button>
 
           <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
             <Text className="text-sm">Don't receive the email? </Text>
-            <Link href={'/auth/login'} className="underline">
+            <Text onPress={() => onResendCode()} className="underline">
               <Text className="font-semibold text-sm">Resend</Text>
-            </Link>
+            </Text>
           </View>
 
           <View className="text-center flex flex-row items-center justify-center flex-wrap">

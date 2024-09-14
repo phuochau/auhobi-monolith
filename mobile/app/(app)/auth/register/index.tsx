@@ -35,6 +35,10 @@ const formSchema = z.object({
       message: 'Your password is not matched',
     })
 })
+.refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"], // path of error
+})
 
 const RegisterScreen = () => {
     const router = useRouter()
@@ -60,14 +64,15 @@ const RegisterScreen = () => {
       setResponse(undefined)
   
       const { payload } = await dispatch(registerAsync({
-        ...values,
+        email: values.email,
+        password: values.password,
         useCode: true
       }))
   
       const response = payload as GraphQLResponse<Boolean>
       setResponse(response)
       if (!response.errors && response.data) {
-        router.replace('/auth/verification')
+        router.replace({ pathname: '/auth/verification', params: { email: values.email }})
       } else {
         setSubmitting(false)
       }
