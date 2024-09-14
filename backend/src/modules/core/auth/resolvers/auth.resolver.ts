@@ -44,7 +44,14 @@ export class AuthResolver {
   authRegister(
     @Args({ name: 'input', type: () => AuthRegisterInput }) input: AuthRegisterInput,
   ) {
-    return this.authService.register(input.email, input.password, input.firstName, input.lastName, input.useCode)
+    return this.authService.register(
+      input.email,
+      input.password,
+      input.firstName,
+      input.lastName,
+      input.useCode,
+      input.createUser
+    )
   }
 
   @Mutation(() => Boolean)

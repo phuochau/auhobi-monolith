@@ -68,7 +68,8 @@ const RegisterScreen = () => {
       const { payload } = await dispatch(registerAsync({
         email: values.email,
         password: values.password,
-        useCode: true
+        useCode: true,
+        createUser: true
       }))
   
       const response = payload as GraphQLResponse<Boolean>

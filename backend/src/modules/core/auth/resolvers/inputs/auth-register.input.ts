@@ -16,4 +16,7 @@ export class AuthRegisterInput {
 
     @Field({ nullable: true, defaultValue: false })
     useCode: boolean;
+
+    @Field({ nullable: true, defaultValue: false })
+    createUser: boolean;
 }

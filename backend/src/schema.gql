@@ -2,6 +2,319 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type VehicleBody {
+  name: String!
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type VehicleModelBody {
+  picture: String
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  body: VehicleBody!
+  model: VehicleModel!
+}
+
+type VehicleEngine {
+  name: String!
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type VehicleTransmission {
+  name: String!
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type VehicleBrand {
+  name: String!
+  startYear: Int
+  endYear: Int
+  logo: String
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type VehicleModel {
+  name: String!
+  startYear: Int!
+  metadata: JSON
+  id: ID!
+  endYear: Int
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  parent: VehicleModel
+  brand: VehicleBrand
+  bodies(
+    """Specify to filter the records returned."""
+    filter: VehicleModelBodyFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [VehicleModelBodySort!]! = []
+  ): [VehicleModelBody!]!
+  engines(
+    """Specify to filter the records returned."""
+    filter: VehicleEngineFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [VehicleEngineSort!]! = []
+  ): [VehicleEngine!]!
+  transmissions(
+    """Specify to filter the records returned."""
+    filter: VehicleTransmissionFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [VehicleTransmissionSort!]! = []
+  ): [VehicleTransmission!]!
+}
+
+input VehicleModelBodyFilter {
+  and: [VehicleModelBodyFilter!]
+  or: [VehicleModelBodyFilter!]
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  model: VehicleModelBodyFilterVehicleModelFilter
+  body: VehicleModelBodyFilterVehicleBodyFilter
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
+}
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
+}
+
+input VehicleModelBodyFilterVehicleModelFilter {
+  and: [VehicleModelBodyFilterVehicleModelFilter!]
+  or: [VehicleModelBodyFilterVehicleModelFilter!]
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  id: IDFilterComparison
+  endYear: IntFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input IntFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Int
+  neq: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  in: [Int!]
+  notIn: [Int!]
+  between: IntFieldComparisonBetween
+  notBetween: IntFieldComparisonBetween
+}
+
+input IntFieldComparisonBetween {
+  lower: Int!
+  upper: Int!
+}
+
+input VehicleModelBodyFilterVehicleBodyFilter {
+  and: [VehicleModelBodyFilterVehicleBodyFilter!]
+  or: [VehicleModelBodyFilterVehicleBodyFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleModelBodySort {
+  field: VehicleModelBodySortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum VehicleModelBodySortFields {
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+input VehicleEngineFilter {
+  and: [VehicleEngineFilter!]
+  or: [VehicleEngineFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleEngineSort {
+  field: VehicleEngineSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum VehicleEngineSortFields {
+  name
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+input VehicleTransmissionFilter {
+  and: [VehicleTransmissionFilter!]
+  or: [VehicleTransmissionFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleTransmissionSort {
+  field: VehicleTransmissionSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum VehicleTransmissionSortFields {
+  name
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+type UserVehicle {
+  name: String
+  customModel: String
+  picture: String
+  status: UserVechileStatus
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  owner: User!
+  model: VehicleModel!
+  body: VehicleModelBody!
+  engine: VehicleEngine!
+  transmission: VehicleTransmission!
+}
+
+enum UserVechileStatus {
+  ACTIVATED
+  UNACTIVATED
+  BLOCKED
+}
+
+type User {
+  phone_number: String!
+  avatar: String
+  status: UserStatus!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  account: Account!
+}
+
+enum UserStatus {
+  ACTIVATED
+  UNACTIVATED
+  BLOCKED
+}
+
 type Account {
   email: String!
   role: AccountRole!
@@ -12,6 +325,7 @@ type Account {
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
+  user: User!
 }
 
 enum AccountRole {
@@ -19,11 +333,6 @@ enum AccountRole {
   ADMIN
   SUPERADMIN
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type File {
   name: String!
@@ -655,11 +964,6 @@ type OrgBranch {
   ): OrgBranchMembersConnection!
 }
 
-"""
-The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
-scalar JSON
-
 enum OrgBranchStatus {
   ACTIVATED
   UNACTIVATED
@@ -701,43 +1005,6 @@ input BooleanFieldComparison {
   isNot: Boolean
 }
 
-input IDFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: ID
-  neq: ID
-  gt: ID
-  gte: ID
-  lt: ID
-  lte: ID
-  like: ID
-  notLike: ID
-  iLike: ID
-  notILike: ID
-  in: [ID!]
-  notIn: [ID!]
-}
-
-input DateFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: DateTime
-  neq: DateTime
-  gt: DateTime
-  gte: DateTime
-  lt: DateTime
-  lte: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  between: DateFieldComparisonBetween
-  notBetween: DateFieldComparisonBetween
-}
-
-input DateFieldComparisonBetween {
-  lower: DateTime!
-  upper: DateTime!
-}
-
 input OrgBranchMemberAggregateFilterOrgBranchAggregateFilter {
   and: [OrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
@@ -748,23 +1015,6 @@ input OrgBranchMemberAggregateFilterOrgBranchAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-}
-
-input StringFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: String
-  neq: String
-  gt: String
-  gte: String
-  lt: String
-  lte: String
-  like: String
-  notLike: String
-  iLike: String
-  notILike: String
-  in: [String!]
-  notIn: [String!]
 }
 
 input JSONFilterComparison {
@@ -892,18 +1142,6 @@ enum OrgBranchMemberSortFields {
   createdAt
   updatedAt
   deletedAt
-}
-
-"""Sort Directions"""
-enum SortDirection {
-  ASC
-  DESC
-}
-
-"""Sort Nulls Options"""
-enum SortNulls {
-  NULLS_FIRST
-  NULLS_LAST
 }
 
 type ShopMember {
@@ -4539,245 +4777,10 @@ type ShopMembersAggregateResponse {
   max: ShopMembersMaxAggregate
 }
 
-type VehicleBody {
-  name: String!
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleModelBody {
-  picture: String
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  body: VehicleBody!
-  model: VehicleModel!
-}
-
-type VehicleEngine {
-  name: String!
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleTransmission {
-  name: String!
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleBrand {
-  name: String!
-  startYear: Int
-  endYear: Int
-  logo: String
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleModel {
-  name: String!
-  startYear: Int!
-  metadata: JSON
-  id: ID!
-  endYear: Int
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  parent: VehicleModel
-  brand: VehicleBrand
-  bodies(
-    """Specify to filter the records returned."""
-    filter: VehicleModelBodyFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleModelBodySort!]! = []
-  ): [VehicleModelBody!]!
-  engines(
-    """Specify to filter the records returned."""
-    filter: VehicleEngineFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleEngineSort!]! = []
-  ): [VehicleEngine!]!
-  transmissions(
-    """Specify to filter the records returned."""
-    filter: VehicleTransmissionFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleTransmissionSort!]! = []
-  ): [VehicleTransmission!]!
-}
-
-input VehicleModelBodyFilter {
-  and: [VehicleModelBodyFilter!]
-  or: [VehicleModelBodyFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  model: VehicleModelBodyFilterVehicleModelFilter
-  body: VehicleModelBodyFilterVehicleBodyFilter
-}
-
-input VehicleModelBodyFilterVehicleModelFilter {
-  and: [VehicleModelBodyFilterVehicleModelFilter!]
-  or: [VehicleModelBodyFilterVehicleModelFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input IntFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: Int
-  neq: Int
-  gt: Int
-  gte: Int
-  lt: Int
-  lte: Int
-  in: [Int!]
-  notIn: [Int!]
-  between: IntFieldComparisonBetween
-  notBetween: IntFieldComparisonBetween
-}
-
-input IntFieldComparisonBetween {
-  lower: Int!
-  upper: Int!
-}
-
-input VehicleModelBodyFilterVehicleBodyFilter {
-  and: [VehicleModelBodyFilterVehicleBodyFilter!]
-  or: [VehicleModelBodyFilterVehicleBodyFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelBodySort {
-  field: VehicleModelBodySortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleModelBodySortFields {
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-input VehicleEngineFilter {
-  and: [VehicleEngineFilter!]
-  or: [VehicleEngineFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleEngineSort {
-  field: VehicleEngineSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleEngineSortFields {
-  name
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-input VehicleTransmissionFilter {
-  and: [VehicleTransmissionFilter!]
-  or: [VehicleTransmissionFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleTransmissionSort {
-  field: VehicleTransmissionSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleTransmissionSortFields {
-  name
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-type User {
-  phone_number: String!
-  avatar: String
-  status: UserStatus!
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  account: Account!
-}
-
-enum UserStatus {
-  ACTIVATED
-  UNACTIVATED
-  BLOCKED
-}
-
-type UserVehicle {
-  name: String
-  pic: String
-  status: UserVechileStatus
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  owner: User!
-  model: VehicleModel!
-  body: VehicleModelBody!
-  engine: VehicleEngine!
-  transmission: VehicleTransmission!
-}
-
-enum UserVechileStatus {
-  ACTIVATED
-  UNACTIVATED
-  BLOCKED
-}
-
 type UserVehicleDeleteResponse {
   name: String
-  pic: String
+  customModel: String
+  picture: String
   status: UserVechileStatus
   metadata: JSON
   id: ID
@@ -4807,6 +4810,7 @@ type UserVehicleConnection {
 
 type UserVehicleAggregateGroupBy {
   name: String
+  customModel: String
   status: UserVechileStatus
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
@@ -4816,6 +4820,7 @@ type UserVehicleAggregateGroupBy {
 
 type UserVehicleCountAggregate {
   name: Int
+  customModel: Int
   status: Int
   id: Int
   createdAt: Int
@@ -4825,6 +4830,7 @@ type UserVehicleCountAggregate {
 
 type UserVehicleMinAggregate {
   name: String
+  customModel: String
   status: UserVechileStatus
   id: ID
   createdAt: DateTime
@@ -4834,6 +4840,7 @@ type UserVehicleMinAggregate {
 
 type UserVehicleMaxAggregate {
   name: String
+  customModel: String
   status: UserVechileStatus
   id: ID
   createdAt: DateTime
@@ -5838,6 +5845,35 @@ input AccountAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+  user: AccountAggregateFilterUserAggregateFilter
+}
+
+input AccountAggregateFilterUserAggregateFilter {
+  and: [AccountAggregateFilterUserAggregateFilter!]
+  or: [AccountAggregateFilterUserAggregateFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input UserStatusFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: UserStatus
+  neq: UserStatus
+  gt: UserStatus
+  gte: UserStatus
+  lt: UserStatus
+  lte: UserStatus
+  like: UserStatus
+  notLike: UserStatus
+  iLike: UserStatus
+  notILike: UserStatus
+  in: [UserStatus!]
+  notIn: [UserStatus!]
 }
 
 input CursorPaging {
@@ -5863,6 +5899,18 @@ input AccountFilter {
   lastName: StringFieldComparison
   id: IDFilterComparison
   emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  user: AccountFilterUserFilter
+}
+
+input AccountFilterUserFilter {
+  and: [AccountFilterUserFilter!]
+  or: [AccountFilterUserFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6240,6 +6288,33 @@ input OrgAggregateFilterAccountAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+  user: OrgAggregateFilterAccountAggregateFilterUserAggregateFilter
+}
+
+input OrgAggregateFilterAccountAggregateFilterUserAggregateFilter {
+  and: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilter!]
+  or: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  account: OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter
+}
+
+input OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter {
+  and: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
+  or: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input OrgAggregateFilterShopAggregateFilter {
@@ -6605,6 +6680,18 @@ input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+  user: OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter
+}
+
+input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter {
+  and: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter!]
+  or: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
 }
 
 input OrgFilter {
@@ -6626,6 +6713,33 @@ input OrgFilter {
 input OrgFilterAccountFilter {
   and: [OrgFilterAccountFilter!]
   or: [OrgFilterAccountFilter!]
+  email: StringFieldComparison
+  role: AccountRoleFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  id: IDFilterComparison
+  emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  user: OrgFilterAccountFilterUserFilter
+}
+
+input OrgFilterAccountFilterUserFilter {
+  and: [OrgFilterAccountFilterUserFilter!]
+  or: [OrgFilterAccountFilterUserFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  account: OrgFilterAccountFilterUserFilterAccountFilter
+}
+
+input OrgFilterAccountFilterUserFilterAccountFilter {
+  and: [OrgFilterAccountFilterUserFilterAccountFilter!]
+  or: [OrgFilterAccountFilterUserFilterAccountFilter!]
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
@@ -6997,6 +7111,18 @@ input OrgFilterOrgMemberFilterAccountFilter {
   lastName: StringFieldComparison
   id: IDFilterComparison
   emailVerified: BooleanFieldComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  user: OrgFilterOrgMemberFilterAccountFilterUserFilter
+}
+
+input OrgFilterOrgMemberFilterAccountFilterUserFilter {
+  and: [OrgFilterOrgMemberFilterAccountFilterUserFilter!]
+  or: [OrgFilterOrgMemberFilterAccountFilterUserFilter!]
+  phone_number: StringFieldComparison
+  status: UserStatusFilterComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7629,6 +7755,7 @@ input UserVehicleAggregateFilter {
   and: [UserVehicleAggregateFilter!]
   or: [UserVehicleAggregateFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -7710,27 +7837,11 @@ input UserVehicleAggregateFilterUserAggregateFilter {
   deletedAt: DateFieldComparison
 }
 
-input UserStatusFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: UserStatus
-  neq: UserStatus
-  gt: UserStatus
-  gte: UserStatus
-  lt: UserStatus
-  lte: UserStatus
-  like: UserStatus
-  notLike: UserStatus
-  iLike: UserStatus
-  notILike: UserStatus
-  in: [UserStatus!]
-  notIn: [UserStatus!]
-}
-
 input UserVehicleFilter {
   and: [UserVehicleFilter!]
   or: [UserVehicleFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -7803,6 +7914,7 @@ input UserVehicleSort {
 
 enum UserVehicleSortFields {
   name
+  customModel
   status
   id
   createdAt
@@ -8060,6 +8172,7 @@ input ServiceLogBillAggregateFilterUserVehicleAggregateFilter {
   and: [ServiceLogBillAggregateFilterUserVehicleAggregateFilter!]
   or: [ServiceLogBillAggregateFilterUserVehicleAggregateFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8095,6 +8208,7 @@ input ServiceLogBillFilterUserVehicleFilter {
   and: [ServiceLogBillFilterUserVehicleFilter!]
   or: [ServiceLogBillFilterUserVehicleFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8134,6 +8248,7 @@ input ServiceLogAggregateFilterUserVehicleAggregateFilter {
   and: [ServiceLogAggregateFilterUserVehicleAggregateFilter!]
   or: [ServiceLogAggregateFilterUserVehicleAggregateFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8173,6 +8288,7 @@ input ServiceLogFilterUserVehicleFilter {
   and: [ServiceLogFilterUserVehicleFilter!]
   or: [ServiceLogFilterUserVehicleFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8221,6 +8337,7 @@ type Mutation {
   authRequestPasswordReset(input: AuthRequestPasswordResetInput!): Boolean!
   authConfirmPasswordReset(input: AuthConfirmPasswordResetInput!): Boolean!
   authConfirmPasswordResetByCode(input: AuthConfirmPasswordResetByCodeInput!): Boolean!
+  setUserOnAccount(input: SetUserOnAccountInput!): Account!
   createOneAccount(input: CreateOneAccountInput!): Account!
   createManyAccounts(input: CreateManyAccountsInput!): [Account!]!
   updateOneAccount(input: UpdateOneAccountInput!): Account!
@@ -8463,6 +8580,7 @@ input AuthRegisterInput {
   firstName: String
   lastName: String
   useCode: Boolean = false
+  createUser: Boolean = false
 }
 
 input AuthResendVerificationInput {
@@ -8499,6 +8617,14 @@ input AuthConfirmPasswordResetByCodeInput {
   password: String!
 }
 
+input SetUserOnAccountInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
 input CreateOneAccountInput {
   """The record to create"""
   account: AccountDTO!
@@ -8509,6 +8635,14 @@ input AccountDTO {
   role: AccountRole!
   firstName: String
   lastName: String
+  user: UserDTO!
+}
+
+input UserDTO {
+  phone_number: String!
+  avatar: String
+  status: UserStatus!
+  account: ID!
 }
 
 input CreateManyAccountsInput {
@@ -10263,14 +10397,15 @@ input CreateOneUserVehicleInput {
 
 input UserVehicleDTO {
   name: String
-  pic: String
+  customModel: String
+  picture: String
   status: UserVechileStatus
   metadata: JSON
   owner: ID
-  model: ID!
-  body: ID!
-  engine: ID!
-  transmission: ID!
+  model: ID
+  body: ID
+  engine: ID
+  transmission: ID
 }
 
 input CreateManyUserVehiclesInput {
@@ -10298,6 +10433,7 @@ input UserVehicleUpdateFilter {
   and: [UserVehicleUpdateFilter!]
   or: [UserVehicleUpdateFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -10319,6 +10455,7 @@ input UserVehicleDeleteFilter {
   and: [UserVehicleDeleteFilter!]
   or: [UserVehicleDeleteFilter!]
   name: StringFieldComparison
+  customModel: StringFieldComparison
   status: UserVechileStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -10329,13 +10466,6 @@ input UserVehicleDeleteFilter {
 input CreateOneUserInput {
   """The record to create"""
   user: UserDTO!
-}
-
-input UserDTO {
-  phone_number: String!
-  avatar: String
-  status: UserStatus!
-  account: ID!
 }
 
 input CreateManyUsersInput {

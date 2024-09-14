@@ -1,1 +1,1 @@
-export const TABLE_PREFIX = `end-user`
+export const TABLE_PREFIX = `end_user`

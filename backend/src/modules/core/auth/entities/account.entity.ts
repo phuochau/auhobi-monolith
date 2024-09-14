@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Index, BaseEntity, OneToOne } from 'typeorm';
-import { FilterableField } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../../constants';
 import { AccountRole } from './enums/account-role.enum';
-import { User } from '../../../end-user/entities/user.entity';
+import { User, UserDTO } from '../../../end-user/entities/user.entity';
 import { genXToOneOptions } from '../../database/helpers/genXToOneOptions';
 
 @ObjectType()
@@ -34,6 +34,7 @@ class BaseClass extends BaseEntity {
  * Entity
  */
 @ObjectType()
+@FilterableRelation('user', () => User, { update: { enabled: true }})
 @Entity({ name: `${TABLE_PREFIX}_accounts` })
 export class Account extends BaseClass {
   @FilterableField(() => ID)
@@ -72,4 +73,6 @@ export class Account extends BaseClass {
 
 @InputType()
 export class AccountDTO extends BaseClass {
+  @FilterableField(() => UserDTO)
+  user: User;
 }

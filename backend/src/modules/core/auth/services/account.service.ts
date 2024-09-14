@@ -58,7 +58,26 @@ export class AccountService {
 
   async createOneAccount(email: string, password: string, firstName: string, lastName: string): Promise<Account | undefined> {
     const hash = await this.encrypt(password)
-    const account = this.repo.create({ email, password: hash, role: AccountRole.USER, firstName: firstName, lastName: lastName })
+    const account = this.repo.create({
+      email,
+      password: hash,
+      role: AccountRole.USER,
+      firstName: firstName,
+      lastName: lastName
+    })
+    return this.repo.save(account)
+  }
+
+  async createOneAccountWithUser(email: string, password: string, firstName: string, lastName: string): Promise<Account | undefined> {
+    const hash = await this.encrypt(password)
+    const account = this.repo.create({
+      email,
+      password: hash,
+      role: AccountRole.USER,
+      firstName: firstName,
+      lastName: lastName,
+      user: {}
+    })
     return this.repo.save(account)
   }
 

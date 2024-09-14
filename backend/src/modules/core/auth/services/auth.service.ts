@@ -125,7 +125,7 @@ export class AuthService {
     }
   }
 
-  async register(email: string, pass: string, firstName: string, lastName: string, useCode: boolean): Promise<boolean> {
+  async register(email: string, pass: string, firstName: string, lastName: string, useCode: boolean, createUser: boolean): Promise<boolean> {
     let acc = await this.accountService.findAccountByEmail(email)
     if (acc) {
       if (!acc.emailVerified) {
@@ -136,7 +136,7 @@ export class AuthService {
       throw new ConflictException(ErrorCodes.AUTH_ACCOUNT_EXISTS)
     }
 
-    acc = await this.accountService.createOneAccount(email, pass, firstName, lastName)
+    acc = await this.accountService.createOneAccountWithUser(email, pass, firstName, lastName)
     await this.createVerificationCode(acc, useCode)
     return true
   }
