@@ -36,7 +36,7 @@ const VerificationScreen = () => {
       const response = payload as GraphQLResponse<Boolean>
       setResponse(response)
       if (!response.errors && response.data) {
-        router.replace('/auth/verification/success')
+        router.replace('/auth/register/verification/success')
       } else {
         setCode(defaultValues)
         setSubmitting(false)

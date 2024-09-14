@@ -10,7 +10,7 @@ import { Text } from "@/components/ui/text"
 import { BadgeCheck } from "@/lib/icons/BadgeCheck"
 import { useRouter } from "expo-router"
 
-export default function Verfication() {
+export default function VerificationSuccessScreen() {
   const router = useRouter()
 
   return (
@@ -21,7 +21,7 @@ export default function Verfication() {
         </div>
         <CardTitle className="text-2xl">Congratulations</CardTitle>
         <CardDescription>
-          Your email has already been confirmed. You can now login to the application.
+          Your password has been reset. You can now login to the application.
         </CardDescription>
       </CardHeader>
       <CardFooter>
