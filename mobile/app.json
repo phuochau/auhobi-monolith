@@ -13,10 +13,7 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "CFBundleAllowMixedLocalizations": true
-      }
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -28,10 +25,6 @@
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
-    },
-    "locales": {
-      "en": "./localization/en.json",
-      "vi": "./localization/vi.json"
     },
     "plugins": [
       "expo-router",

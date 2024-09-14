@@ -17,6 +17,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { loginAsync } from "@/store/auth/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { ErrorCodes } from "@/graphql/error-codes"
+import { i18n, t } from "@/localization"
  
 const formSchema = z.object({
   email: z
@@ -74,7 +75,7 @@ const LoginScreen = () => {
     return (
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Log In</CardTitle>
+          <CardTitle className="text-2xl">{t('login')}</CardTitle>
           <CardDescription>
             Enter your email below to login to your account.
           </CardDescription>
