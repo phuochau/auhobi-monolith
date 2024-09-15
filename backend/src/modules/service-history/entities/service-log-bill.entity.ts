@@ -49,6 +49,6 @@ export class ServiceLogBill extends BaseClass {
  */
 @InputType()
 export class ServiceLogBillDTO extends BaseClass {
-  @FilterableField(() => [ID])
+  @FilterableField(() => ID)
   log: ServiceLog
 }

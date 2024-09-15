@@ -6,6 +6,7 @@ export const ServiceLogFragment = gql`
     	date
     	mileage
     	type
+    	media
     	id
     	createdAt
     	updatedAt

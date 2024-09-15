@@ -5276,7 +5276,6 @@ type ServiceLog {
     """Specify to sort results."""
     sorting: [ServiceLogBillSort!]! = []
   ): ServiceLogBillsConnection
-  bill: ServiceLogBill
 }
 
 enum ServiceLogType {
@@ -11101,7 +11100,7 @@ input CreateOneServiceLogBillInput {
 input ServiceLogBillDTO {
   total: Float!
   media: [String!]
-  log: [ID!]!
+  log: ID!
 }
 
 input CreateManyServiceLogBillsInput {
