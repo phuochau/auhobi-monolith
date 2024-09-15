@@ -2405,6 +2405,22 @@ export type DeleteOneVehicleTransmissionInput = {
   id: Scalars['ID']['input'];
 };
 
+export enum ErrorCodes {
+  AuthAccountExists = 'AUTH_ACCOUNT_EXISTS',
+  AuthAccountNotFound = 'AUTH_ACCOUNT_NOT_FOUND',
+  AuthAccountPendingActivation = 'AUTH_ACCOUNT_PENDING_ACTIVATION',
+  AuthForbidden = 'AUTH_FORBIDDEN',
+  AuthRequestExpired = 'AUTH_REQUEST_EXPIRED',
+  AuthRequestNotFound = 'AUTH_REQUEST_NOT_FOUND',
+  OrgBranchNotFound = 'ORG_BRANCH_NOT_FOUND',
+  ProductImportEmptyRecords = 'PRODUCT_IMPORT_EMPTY_RECORDS',
+  ProductPriceImportEmptyRecords = 'PRODUCT_PRICE_IMPORT_EMPTY_RECORDS',
+  SaleBranchSaleChannelNotFound = 'SALE_BRANCH_SALE_CHANNEL_NOT_FOUND',
+  SaleOrderImportParseFailure = 'SALE_ORDER_IMPORT_PARSE_FAILURE',
+  UploadFileNotFound = 'UPLOAD_FILE_NOT_FOUND',
+  UploadMediaNotFound = 'UPLOAD_MEDIA_NOT_FOUND'
+}
+
 export type File = {
   __typename?: 'File';
   createdAt: Scalars['DateTime']['output'];
@@ -9621,6 +9637,7 @@ export type Query = {
   customer: Customer;
   customerAggregate: Array<CustomerAggregateResponse>;
   customers: CustomerConnection;
+  errorCodes: ErrorCodes;
   file: File;
   fileAggregate: Array<FileAggregateResponse>;
   files: FileConnection;
@@ -13573,6 +13590,7 @@ export type ResolversTypes = ResolversObject<{
   DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
   DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
   DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
+  ErrorCodes: ErrorCodes;
   File: ResolverTypeWrapper<File>;
   FileAggregateFilter: FileAggregateFilter;
   FileAggregateFilterAccountAggregateFilter: FileAggregateFilterAccountAggregateFilter;
@@ -18605,6 +18623,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   customer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<QueryCustomerArgs, 'id'>>;
   customerAggregate?: Resolver<Array<ResolversTypes['CustomerAggregateResponse']>, ParentType, ContextType, Partial<QueryCustomerAggregateArgs>>;
   customers?: Resolver<ResolversTypes['CustomerConnection'], ParentType, ContextType, RequireFields<QueryCustomersArgs, 'filter' | 'paging' | 'sorting'>>;
+  errorCodes?: Resolver<ResolversTypes['ErrorCodes'], ParentType, ContextType>;
   file?: Resolver<ResolversTypes['File'], ParentType, ContextType, RequireFields<QueryFileArgs, 'id'>>;
   fileAggregate?: Resolver<Array<ResolversTypes['FileAggregateResponse']>, ParentType, ContextType, Partial<QueryFileAggregateArgs>>;
   files?: Resolver<ResolversTypes['FileConnection'], ParentType, ContextType, RequireFields<QueryFilesArgs, 'filter' | 'paging' | 'sorting'>>;

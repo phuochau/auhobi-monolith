@@ -2,7 +2,7 @@ import { PassportStrategy } from '@nestjs/passport'
 import * as PassportCustom from 'passport-custom';
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
-import { ErrorCodes } from '../../../../config/error-codes';
+import { ErrorCodes } from '../../../shared/enums/error-codes';
 import { AccountService } from '../services/account.service';
 import { Account } from '../entities/account.entity';
 

@@ -1,9 +1,9 @@
 import { HttpService } from "@/lib/http";
 import _ from "lodash";
-import { ErrorCodes } from "./error-codes";
 import { print as DocumentNodeToString } from 'graphql/language/printer';
 import { DocumentNode } from "graphql";
 import { GraphQLResponse } from "./types/graphql-response";
+import { ErrorCodes } from "./gql/generated-models";
 
 class GraphQLClient {
     instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
@@ -85,7 +85,7 @@ class GraphQLClient {
     isForbidden = <T>(response: GraphQLResponse<T>): boolean => {
         if (response?.errors?.length) {
             const codes = response.errors.map(item => item.message)
-            if (codes.includes(ErrorCodes.AUTH_FORBIDDEN)) {
+            if (codes.includes(ErrorCodes.AuthForbidden)) {
                 return true
             }
         }

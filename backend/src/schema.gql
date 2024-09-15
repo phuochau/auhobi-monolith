@@ -5629,6 +5629,7 @@ type Query {
     """Specify to sort results."""
     sorting: [MediaSort!]! = []
   ): MediaConnection!
+  errorCodes: ErrorCodes!
   apiKeyAggregate(
     """Filter to find records to aggregate on"""
     filter: ApiKeyAggregateFilter
@@ -6655,6 +6656,22 @@ enum MediaSortFields {
   createdAt
   updatedAt
   deletedAt
+}
+
+enum ErrorCodes {
+  UPLOAD_MEDIA_NOT_FOUND
+  UPLOAD_FILE_NOT_FOUND
+  AUTH_FORBIDDEN
+  AUTH_ACCOUNT_NOT_FOUND
+  AUTH_ACCOUNT_PENDING_ACTIVATION
+  AUTH_ACCOUNT_EXISTS
+  AUTH_REQUEST_EXPIRED
+  AUTH_REQUEST_NOT_FOUND
+  ORG_BRANCH_NOT_FOUND
+  PRODUCT_IMPORT_EMPTY_RECORDS
+  PRODUCT_PRICE_IMPORT_EMPTY_RECORDS
+  SALE_BRANCH_SALE_CHANNEL_NOT_FOUND
+  SALE_ORDER_IMPORT_PARSE_FAILURE
 }
 
 input ApiKeyAggregateFilter {

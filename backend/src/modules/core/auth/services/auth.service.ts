@@ -5,7 +5,7 @@ import { Account } from '../entities/account.entity';
 import { LoginResult } from '../entities/objects/login-result';
 import { AccountVerificationService } from './account-verification.service';
 import { AccountPasswordResetService } from './account-password-reset.service';
-import { ErrorCodes } from '../../../../config/error-codes';
+import { ErrorCodes } from '../../../shared/enums/error-codes';
 import dayjs from 'dayjs';
 
 @Injectable()

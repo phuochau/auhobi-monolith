@@ -11,11 +11,13 @@ import { CommerceModule } from './modules/commerce/commerce.module';
 import { EndUserModule } from './modules/end-user/end-user.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { ServiceHistoryModule } from './modules/service-history/service-history.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 @Module({
   imports: [
     AdminModule,
     CoreModule,
+    SharedModule,
     ApplicationModule,
     OrganizationModule,
     CrmModule,

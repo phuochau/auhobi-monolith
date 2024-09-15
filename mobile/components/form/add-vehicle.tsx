@@ -1,19 +1,16 @@
 import { Text } from '@/components/ui/text'
-import { useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
-import { LoginResult } from "@/graphql/gql/generated-models"
+import { UserVehicle } from "@/graphql/gql/generated-models"
 import { GraphQLError } from "@/components/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { loginAsync } from "@/store/user/actions/login-async.action"
-import { GraphQLAPI } from "@/graphql/api"
-import { ErrorCodes } from "@/graphql/error-codes"
+import { addVehicleAsync } from '@/store/user/actions/add-vehicle-async.action'
  
 const formSchema = z.object({
   name: z
@@ -24,11 +21,15 @@ const formSchema = z.object({
     .min(1, { message: 'Must have at least 1 character' })
 })
 
-const AddVehicle = () => {
-    const router = useRouter()
+export interface AddVehicleProps {
+  onSuccess?: (userVehicle: UserVehicle) => any
+}
+
+const AddVehicle = (props: AddVehicleProps) => {
+    const { onSuccess } = props
     const dispatch = useAppDispatch()
     const [submitting, setSubmitting] = useState(false)
-    const [response, setResponse] = useState<GraphQLResponse<LoginResult>>()
+    const [response, setResponse] = useState<GraphQLResponse<UserVehicle>>()
 
     const {
       control,
@@ -43,23 +44,18 @@ const AddVehicle = () => {
     })
  
     async function onSubmit(values: z.infer<typeof formSchema>) {
-      // setSubmitting(true)
-      // setResponse(undefined)
+      setSubmitting(true)
+      setResponse(undefined)
   
-      // const { payload } = await dispatch(loginAsync({ ...values, useCode: true }))
-  
-      // const response = payload as GraphQLResponse<LoginResult>
-      // setResponse(response)
-      // if (!response.errors && response.data) {
-      //   router.replace('/dashboard')
-      // } else {
-      //   const errorCode = GraphQLAPI.getErrorString(response)
-      //   if (errorCode === ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION) {
-      //     router.replace({ pathname: '/auth/register/verification', params: { email: values.email, resent: 'true' }})
-      //   } else {
-      //     setSubmitting(false)
-      //   }
-      // }
+      const { payload } = await dispatch(addVehicleAsync({ userVehicle: values }))
+      const response = payload as GraphQLResponse<UserVehicle>
+      setResponse(response)
+      if (!response.errors && response.data) {
+        if (onSuccess) {
+          onSuccess(response.data)
+        }
+      } 
+      setSubmitting(false)
     }
     
     return (

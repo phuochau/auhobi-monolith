@@ -5,7 +5,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const registerAsync = createAsyncThunk<GraphQLResponse<Boolean>, AuthRegisterInput>(
-    'auth/registerAsync',
+    'user/registerAsync',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.guestQuery<Boolean, MutationAuthRegisterArgs>(AuthRegisterMutation, { input })

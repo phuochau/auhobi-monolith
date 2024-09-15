@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Account, LoginResult } from '@/graphql/gql/generated-models'
+import { Account, LoginResult, UserVehicle } from '@/graphql/gql/generated-models'
 import { GraphQLResponseAction } from '../types/graphql-response-payload'
 import { loginAsync } from './actions/login-async.action'
+import { addVehicleAsync } from './actions/add-vehicle-async.action'
+import _ from 'lodash'
 
 // Define a type for the slice state
 export interface UserState {
@@ -28,6 +30,22 @@ export const userSlice = createSlice({
         return {
           ...state,
           ...payload.data
+        }
+      }
+      return state
+    }),
+    builder.addMatcher<GraphQLResponseAction<UserVehicle>>(addVehicleAsync.settled, (state, { payload }) => {
+      if (!payload.errors && payload.data) {
+        const account = state.account
+        const currentUserVehicles = account!.user!.vehicles?.nodes || []
+        const userVehicle = payload.data!
+
+        currentUserVehicles.push(userVehicle)
+
+
+        return {
+          ...state,
+          account: _.set(account!, 'user.vehicles.nodes', currentUserVehicles)
         }
       }
       return state

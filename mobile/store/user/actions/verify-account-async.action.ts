@@ -5,7 +5,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const verifyAccountAsync = createAsyncThunk<GraphQLResponse<Boolean>, AuthVerifyAccountByCodeInput>(
-    'auth/verifyAccountAsync',
+    'user/verifyAccountAsync',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.guestQuery<Boolean, MutationAuthVerifyByCodeArgs>(AuthVerifyByCodeMutation, { input })

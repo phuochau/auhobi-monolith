@@ -5,7 +5,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const requestPasswordResetAsync = createAsyncThunk<GraphQLResponse<Boolean>, AuthRequestPasswordResetInput>(
-    'auth/requestPasswordResetAsync',
+    'user/requestPasswordResetAsync',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.guestQuery<Boolean, MutationAuthRequestPasswordResetArgs>(AuthRequestPasswordResetMutation, { input })

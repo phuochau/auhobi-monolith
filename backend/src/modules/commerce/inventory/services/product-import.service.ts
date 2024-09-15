@@ -3,7 +3,7 @@ import axios from 'axios'
 import * as CSVParser from 'csv-parse';
 import { Product } from '../entities/product.entity';
 import { Account } from 'src/modules/core/auth/entities/account.entity';
-import { ErrorCodes } from 'src/config/error-codes';
+import { ErrorCodes } from 'src/modules/shared/enums/error-codes';
 import { FileService } from 'src/modules/core/upload/services/file.service';
 import { OrgBranchService } from 'src/modules/organization/services/org-branch.service';
 import { ProductImportCSVRecord } from '../types/product-import-csv-record';
