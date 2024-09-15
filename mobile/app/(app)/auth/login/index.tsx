@@ -74,7 +74,7 @@ const LoginScreen = () => {
     
     return (
       <>
-        <Stack.Screen options={{ headerShown: true, title: 'Login' }} />
+        <Stack.Screen options={{ headerShown: true, title: 'Login', headerBackButtonMenuEnabled: true }} />
         <Card className="w-full max-w-sm">
           <CardHeader>
             <CardTitle className="text-2xl">{t('login')}</CardTitle>

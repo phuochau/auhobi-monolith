@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router"
+import { Stack, useRouter } from "expo-router"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import AddVehicle from "@/components/form/add-vehicle"
 import { UserVehicle } from "@/graphql/gql/generated-models"
@@ -24,23 +24,26 @@ const AddVehicleScreen = () => {
     }
 
     return (
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">Add Vehicle</CardTitle>
-          <CardDescription>
-            Add your first vehicle
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-            <AddVehicle onSuccess={onSuccess} />
+      <>
+        <Stack.Screen options={{ headerShown: false }} />
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Add Vehicle</CardTitle>
+            <CardDescription>
+              Add your first vehicle
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+              <AddVehicle onSuccess={onSuccess} />
 
-          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
-            <Button onPress={onSwitchAccount} variant={'link'} className="underline">
-              <Text className="font-semibold text-sm">Switch to another account</Text>
-            </Button>
-          </View>
-        </CardContent>
-      </Card>
+            <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
+              <Button onPress={onSwitchAccount} variant={'link'} className="underline">
+                <Text className="font-semibold text-sm">Switch to another account</Text>
+              </Button>
+            </View>
+          </CardContent>
+        </Card>
+      </>
     )
 }
 
