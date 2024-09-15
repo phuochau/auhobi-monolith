@@ -11,6 +11,7 @@ import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { addVehicleAsync } from '@/store/user/actions/add-vehicle-async.action'
+import { View } from 'react-native'
  
 const formSchema = z.object({
   name: z
@@ -22,7 +23,7 @@ const formSchema = z.object({
 })
 
 export interface AddVehicleProps {
-  onSuccess?: (userVehicle: UserVehicle) => any
+  onSuccess: (userVehicle: UserVehicle) => any
 }
 
 const AddVehicle = (props: AddVehicleProps) => {
@@ -51,21 +52,19 @@ const AddVehicle = (props: AddVehicleProps) => {
       const response = payload as GraphQLResponse<UserVehicle>
       setResponse(response)
       if (!response.errors && response.data) {
-        if (onSuccess) {
-          onSuccess(response.data)
-        }
+        onSuccess(response.data)
       } 
       setSubmitting(false)
     }
     
     return (
-      <>
+      <View className='gap-4'>
         <GraphQLError nativeID="AddVehicleError" response={response}></GraphQLError>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              placeholder="Name"
+              placeholder="Name or Nick Name of your car (e.g: Báo)"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
@@ -83,7 +82,6 @@ const AddVehicle = (props: AddVehicleProps) => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              secureTextEntry
             />
           )}
           name="customModel"
@@ -93,7 +91,7 @@ const AddVehicle = (props: AddVehicleProps) => {
         <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
           <Text>Add Vehicle</Text>
         </Button>
-      </>
+      </View>
     )
 }
 

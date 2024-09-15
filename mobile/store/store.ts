@@ -11,7 +11,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, combineReducers({
   app: appReducer,
-  auth: userReducer
+  user: userReducer
 }))
 
 export const store = configureStore({

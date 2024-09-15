@@ -27,11 +27,12 @@ export const appSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(REHYDRATE, (state) => {
-      if (state.locale) {
-        i18n.locale = state.locale
+    builder.addCase<typeof REHYDRATE, { type: typeof REHYDRATE, payload: Partial<{ app: AppState }> }>(REHYDRATE, (state, action) => {
+      const appState = action.payload?.app
+      if (appState?.locale) {
+        i18n.locale = appState.locale
       }
-      return state
+      return appState
     })
   },
 })

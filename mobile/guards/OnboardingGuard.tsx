@@ -3,11 +3,11 @@ import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export interface AuthGuardProps {
+export interface OnboardingGuardProps {
     children: React.ReactElement
 }
 
-export function AuthGuard({ children }: AuthGuardProps) {
+export function OnboardingGuard({ children }: OnboardingGuardProps) {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
   const account = useSelector(selectCurrentAccount)
@@ -16,8 +16,8 @@ export function AuthGuard({ children }: AuthGuardProps) {
     if (!account) {
       return router.replace({ pathname: '/auth' })
     }
-    if (!account!.user.vehicles?.nodes?.length) {
-      return router.replace({ pathname: '/onboarding' })
+    if (account?.user.vehicles?.nodes?.length) {
+      return router.replace({ pathname: '/dashboard' })
     }
     setLoading(false)
   }, [account])
