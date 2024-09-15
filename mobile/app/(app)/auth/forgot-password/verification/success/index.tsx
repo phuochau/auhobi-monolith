@@ -9,16 +9,17 @@ import {
 import { Text } from "@/components/ui/text"
 import { BadgeCheck } from "@/lib/icons/BadgeCheck"
 import { useRouter } from "expo-router"
+import { View } from "react-native"
 
 export default function VerificationSuccessScreen() {
   const router = useRouter()
 
   return (
-    <Card className="w-full max-w-sm text-center">
+    <Card className="w-full text-center">
       <CardHeader>
-        <div className="flex flex-col items-center mb-2">
+        <View className="flex flex-col items-center mb-2">
             <BadgeCheck size={48} className="text-primary"></BadgeCheck>
-        </div>
+        </View>
         <CardTitle className="text-2xl">Congratulations</CardTitle>
         <CardDescription>
           Your password has been reset. You can now login to the application.

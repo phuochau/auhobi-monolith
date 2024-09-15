@@ -80,7 +80,7 @@ export const DigitInput = (props: DigitInputProps) => {
     }, [value])
 
     return (
-        <View className={cn('flex flex-row items-center justify-between gap-2', className)}>
+        <View className={cn('flex flex-row items-center justify-between gap-2 h-12', className)}>
             {Object.keys(defaultValues).map((key, index) =>
                 <View key={key} className={cn('flex-1', inputContainerClassName)}>
                     <Controller
@@ -113,7 +113,7 @@ export const DigitInput = (props: DigitInputProps) => {
                                         }
                                     }
                                 }}
-                                className={cn('flex-1 text-center !text-xl font-semibold', inputClassName)}
+                                className={cn('flex-1 text-center !text-xl font-semibold h-full', inputClassName)}
                             />
                         )}
                         name={key}

@@ -1,12 +1,12 @@
-import { View } from "react-native"
 import { Text } from '@/components/ui/text'
 import { Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const AuthScreen = () => {
     const router = useRouter()
     return (
-        <View>
+        <SafeAreaView>
           <Stack.Screen options={{ headerShown: false }} />
           <Text>Auth Screen</Text>
           <Button onPress={() => router.push({ pathname: '/auth/login' })}>
@@ -15,7 +15,7 @@ const AuthScreen = () => {
           <Button onPress={() => router.push({ pathname: '/auth/register' })}>
             <Text>Register</Text>
           </Button>
-        </View>
+        </SafeAreaView>
     )
 }
 

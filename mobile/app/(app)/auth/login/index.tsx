@@ -6,7 +6,7 @@ import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { passwordValidation } from "@/lib/validations"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { ErrorCodes, LoginResult } from "@/graphql/gql/generated-models"
@@ -16,7 +16,6 @@ import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
-import { t } from "@/localization"
 import { Navigation } from "@/lib/navigation"
  
 const formSchema = z.object({
@@ -75,9 +74,8 @@ const LoginScreen = () => {
     return (
       <>
         <Stack.Screen options={{ headerShown: true, title: 'Login', headerBackButtonMenuEnabled: true }} />
-        <Card className="w-full max-w-sm">
+        <Card className="w-full rounded-none mt-4">
           <CardHeader>
-            <CardTitle className="text-2xl">{t('login')}</CardTitle>
             <CardDescription>
               Enter your email below to login to your account.
             </CardDescription>

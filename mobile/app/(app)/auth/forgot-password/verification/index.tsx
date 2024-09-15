@@ -80,7 +80,7 @@ const ForgotVerificationScreen = () => {
     const valid = code.join('').length === 6
 
     return (
-      <Card className="w-full max-w-sm">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-2xl">Verify Request</CardTitle>
           <CardDescription>

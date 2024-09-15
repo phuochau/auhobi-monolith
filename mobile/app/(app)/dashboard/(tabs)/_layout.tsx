@@ -28,7 +28,7 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      <Button onPress={() => router.push({ pathname: '/dashboard/add-vehicle' })} className="absolute w-12 h-12 p-0 m-0 -ml-6 rounded-full bottom-6 left-1/2">
+      <Button onPress={() => router.push({ pathname: '/dashboard/add-service-history' })} className="absolute w-12 h-12 p-0 m-0 -ml-6 rounded-full bottom-6 left-1/2">
         <Plus className='text-primary-foreground'></Plus>
       </Button>
     </View>

@@ -55,7 +55,7 @@ const LoginScreen = () => {
     }
     
     return (
-      <Card className="w-full max-w-sm">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="text-2xl">Forgot password</CardTitle>
           <CardDescription>
