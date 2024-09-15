@@ -17,6 +17,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { t } from "@/localization"
+import { Navigation } from "@/lib/navigation"
  
 const formSchema = z.object({
   email: z
@@ -60,7 +61,7 @@ const LoginScreen = () => {
       const response = payload as GraphQLResponse<LoginResult>
       setResponse(response)
       if (!response.errors && response.data) {
-        router.replace('/dashboard')
+        Navigation.reset(router, { pathname: '/dashboard'})
       } else {
         const errorCode = GraphQLAPI.getErrorString(response)
         if (errorCode === ErrorCodes.AuthAccountPendingActivation) {

@@ -5,6 +5,7 @@ import { selectCurrentAccount } from "@/store/user/user.selectors"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { logout } from "@/store/user/user.slice"
 import { meAsync } from "@/store/user/actions/me-async.action"
+import { Navigation } from "@/lib/navigation"
 
 const LoadingScreen = () => {
     const router = useRouter()
@@ -16,13 +17,13 @@ const LoadingScreen = () => {
             try {
                 if (account) {
                     await dispatch(meAsync())
-                    router.replace({ pathname: '/dashboard' })
+                    Navigation.reset(router, { pathname: '/dashboard'})
                 } else {
-                    router.replace({ pathname: '/auth' })
+                    Navigation.reset(router, { pathname: '/auth'})
                 }
             } catch (err) {
                 dispatch(logout())
-                router.replace({ pathname: '/auth' })
+                Navigation.reset(router, { pathname: '/auth'})
             }
         })
     }, [account])

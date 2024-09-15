@@ -1,3 +1,4 @@
+import { Navigation } from "@/lib/navigation";
 import { selectCurrentAccount } from "@/store/user/user.selectors";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -14,10 +15,10 @@ export function OnboardingGuard({ children }: OnboardingGuardProps) {
 
   useEffect(() => {
     if (!account) {
-      return router.replace({ pathname: '/auth' })
+      return Navigation.reset(router, { pathname: '/auth'})
     }
     if (account?.user.vehicles?.nodes?.length) {
-      return router.replace({ pathname: '/dashboard' })
+      return Navigation.reset(router, { pathname: '/dashboard'})
     }
     setLoading(false)
   }, [account])
