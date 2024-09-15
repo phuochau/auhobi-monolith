@@ -1,7 +1,7 @@
 import { Slot, useRouter } from "expo-router"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
-import { selectCurrentAccount } from "@/store/auth/auth.selectors"
+import { selectCurrentAccount } from "@/store/user/user.selectors"
 
 const LoadingScreen = () => {
     const router = useRouter()

@@ -13,7 +13,7 @@ import { GraphQLError } from "@/components/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { registerAsync } from "@/store/auth/actions/register-async.action"
+import { registerAsync } from "@/store/user/actions/register-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { ErrorCodes } from "@/graphql/error-codes"
  

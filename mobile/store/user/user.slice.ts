@@ -1,21 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import { Account, LoginResult } from '@/graphql/gql/generated-models'
 import { GraphQLResponseAction } from '../types/graphql-response-payload'
 import { loginAsync } from './actions/login-async.action'
 
 // Define a type for the slice state
-export interface AuthState {
+export interface UserState {
   account?: Account,
   accessToken?: string,
   refreshToken?: string
 }
 
 // Define the initial state using that type
-const initialState: AuthState = {
+const initialState: UserState = {
 }
 
-export const authSlice = createSlice({
+export const userSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -36,6 +35,6 @@ export const authSlice = createSlice({
   },
 })
 
-export const { logout } = authSlice.actions
+export const { logout } = userSlice.actions
 
-export const authReducer = authSlice.reducer
+export const userReducer = userSlice.reducer

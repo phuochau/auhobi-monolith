@@ -14,7 +14,7 @@ import { FormMessage } from "@/components/ui/form"
 import { z } from "zod"
 import { passwordValidation } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { confirmPasswordResetByCodeAsync } from "@/store/auth/actions/confirm-password-reset-by-code-async.action"
+import { confirmPasswordResetByCodeAsync } from "@/store/user/actions/confirm-password-reset-by-code-async.action"
 
 const defaultValues = ['', '', '', '', '', '']
  

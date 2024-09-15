@@ -1,4 +1,4 @@
-import { selectCurrentAccount } from "@/store/auth/auth.selectors";
+import { selectCurrentAccount } from "@/store/user/user.selectors";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

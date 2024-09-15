@@ -16,7 +16,7 @@ export default function TabLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Orders',
+            title: 'Service History',
             tabBarIcon: ({ color }) => <Home color={color} />,
           }}
         />
@@ -28,9 +28,9 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      <Button onPress={() => router.push({ pathname: '/dashboard/order-import' })} className="absolute w-12 h-12 p-0 m-0 -ml-6 rounded-full bottom-6 left-1/2">
+      {/* <Button onPress={() => router.push({ pathname: '/dashboard/order-import' })} className="absolute w-12 h-12 p-0 m-0 -ml-6 rounded-full bottom-6 left-1/2">
         <Plus className='text-primary-foreground'></Plus>
-      </Button>
+      </Button> */}
     </View>
   );
 }

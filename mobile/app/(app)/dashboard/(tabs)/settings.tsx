@@ -5,7 +5,7 @@ import { Stack, useRouter } from "expo-router"
 const Settings = () => {
     return (
         <View>
-          <Text>Orders</Text>
+          <Text>Settings</Text>
         </View>
     )
 }

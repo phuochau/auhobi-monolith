@@ -14,10 +14,10 @@ import { GraphQLError } from "@/components/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { loginAsync } from "@/store/auth/actions/login-async.action"
+import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { ErrorCodes } from "@/graphql/error-codes"
-import { i18n, t } from "@/localization"
+import { t } from "@/localization"
  
 const formSchema = z.object({
   email: z

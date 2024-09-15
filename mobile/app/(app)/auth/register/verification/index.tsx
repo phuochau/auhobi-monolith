@@ -8,8 +8,8 @@ import { GraphQLError } from "@/components/graphql-error"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { DigitInput } from "@/components/digit-input"
-import { verifyAccountAsync } from "@/store/auth/actions/verify-account-async.action"
-import { resendVerificationWithEmailAsync } from "@/store/auth/actions/resend-verification-with-email-async.action"
+import { verifyAccountAsync } from "@/store/user/actions/verify-account-async.action"
+import { resendVerificationWithEmailAsync } from "@/store/user/actions/resend-verification-with-email-async.action"
 
 const defaultValues = ['', '', '', '', '', '']
 
