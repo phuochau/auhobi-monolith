@@ -4,7 +4,6 @@ import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { ServiceLog } from './service-log.entity';
 import { UserVehicle } from '../../end-user/entities/user-vehicle.entity';
-import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()
@@ -22,7 +21,6 @@ class BaseClass extends BaseEntity {
  * Entity
  */
 @ObjectType()
-@FilterableRelation('vehicle', () => UserVehicle)
 @FilterableRelation('log', () => ServiceLog)
 @Entity({ name: `${TABLE_PREFIX}_log_bills` })
 export class ServiceLogBill extends BaseClass {
@@ -30,10 +28,7 @@ export class ServiceLogBill extends BaseClass {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ManyToOne(() => UserVehicle, genXToOneOptions())
-  vehicle: UserVehicle
-
-  @ManyToOne(() => ServiceLog, genXToOneOptions())
+  @ManyToOne(() => ServiceLog)
   log: ServiceLog
 
   @FilterableField()
@@ -54,9 +49,6 @@ export class ServiceLogBill extends BaseClass {
  */
 @InputType()
 export class ServiceLogBillDTO extends BaseClass {
-  @FilterableField(() => ID)
-  vehicle: UserVehicle
-
   @FilterableField(() => [ID])
   log: ServiceLog
 }

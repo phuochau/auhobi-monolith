@@ -18,7 +18,7 @@ const formSchema = z.object({
   fileOrMediaIds: z.array(z.string())
 })
 
-const Orders = () => {
+const AddServiceHistory = () => {
     const router = useRouter()
     const dispatch = useDispatch()
     const [submitting, setSubmitting] = useState(false)
@@ -79,4 +79,4 @@ const Orders = () => {
     )
 }
 
-export default Orders
+export default AddServiceHistory

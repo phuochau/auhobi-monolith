@@ -5346,12 +5346,27 @@ type ServiceLog {
   date: DateTime
   mileage: Float
   type: ServiceLogType!
+  media: [String!]!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
+  billsAggregate(
+    """Filter to find records to aggregate on"""
+    filter: ServiceLogBillAggregateFilter
+  ): [ServiceLogBillsAggregateResponse!]!
   garage: Garage
   vehicle: UserVehicle!
+  bills(
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: ServiceLogBillFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ServiceLogBillSort!]! = []
+  ): ServiceLogBillsConnection
   bill: ServiceLogBill
 }
 
@@ -5366,6 +5381,83 @@ enum ServiceLogType {
   OTHER
 }
 
+input ServiceLogBillAggregateFilter {
+  and: [ServiceLogBillAggregateFilter!]
+  or: [ServiceLogBillAggregateFilter!]
+  total: NumberFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  log: ServiceLogBillAggregateFilterServiceLogAggregateFilter
+}
+
+input ServiceLogBillAggregateFilterServiceLogAggregateFilter {
+  and: [ServiceLogBillAggregateFilterServiceLogAggregateFilter!]
+  or: [ServiceLogBillAggregateFilterServiceLogAggregateFilter!]
+  description: StringFieldComparison
+  date: DateFieldComparison
+  type: ServiceLogTypeFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ServiceLogTypeFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ServiceLogType
+  neq: ServiceLogType
+  gt: ServiceLogType
+  gte: ServiceLogType
+  lt: ServiceLogType
+  lte: ServiceLogType
+  like: ServiceLogType
+  notLike: ServiceLogType
+  iLike: ServiceLogType
+  notILike: ServiceLogType
+  in: [ServiceLogType!]
+  notIn: [ServiceLogType!]
+}
+
+input ServiceLogBillFilter {
+  and: [ServiceLogBillFilter!]
+  or: [ServiceLogBillFilter!]
+  total: NumberFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  log: ServiceLogBillFilterServiceLogFilter
+}
+
+input ServiceLogBillFilterServiceLogFilter {
+  and: [ServiceLogBillFilterServiceLogFilter!]
+  or: [ServiceLogBillFilterServiceLogFilter!]
+  description: StringFieldComparison
+  date: DateFieldComparison
+  type: ServiceLogTypeFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ServiceLogBillSort {
+  field: ServiceLogBillSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum ServiceLogBillSortFields {
+  total
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
 type ServiceLogBill {
   total: Float!
   media: [String!]
@@ -5373,7 +5465,6 @@ type ServiceLogBill {
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
-  vehicle: UserVehicle!
   log: ServiceLog!
 }
 
@@ -5459,6 +5550,7 @@ type ServiceLogDeleteResponse {
   date: DateTime
   mileage: Float
   type: ServiceLogType
+  media: [String!]
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -5539,6 +5631,66 @@ type ServiceLogAggregateResponse {
   avg: ServiceLogAvgAggregate
   min: ServiceLogMinAggregate
   max: ServiceLogMaxAggregate
+}
+
+type ServiceLogBillsConnection {
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Array of nodes."""
+  nodes: [ServiceLogBill!]!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type ServiceLogBillsAggregateGroupBy {
+  total: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type ServiceLogBillsCountAggregate {
+  total: Int
+  id: Int
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type ServiceLogBillsSumAggregate {
+  total: Float
+}
+
+type ServiceLogBillsAvgAggregate {
+  total: Float
+}
+
+type ServiceLogBillsMinAggregate {
+  total: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type ServiceLogBillsMaxAggregate {
+  total: Float
+  id: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type ServiceLogBillsAggregateResponse {
+  groupBy: ServiceLogBillsAggregateGroupBy
+  count: ServiceLogBillsCountAggregate
+  sum: ServiceLogBillsSumAggregate
+  avg: ServiceLogBillsAvgAggregate
+  min: ServiceLogBillsMinAggregate
+  max: ServiceLogBillsMaxAggregate
 }
 
 type Query {
@@ -8462,109 +8614,6 @@ enum VehicleModelSortFields {
   deletedAt
 }
 
-input ServiceLogBillAggregateFilter {
-  and: [ServiceLogBillAggregateFilter!]
-  or: [ServiceLogBillAggregateFilter!]
-  total: NumberFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  log: ServiceLogBillAggregateFilterServiceLogAggregateFilter
-  vehicle: ServiceLogBillAggregateFilterUserVehicleAggregateFilter
-}
-
-input ServiceLogBillAggregateFilterServiceLogAggregateFilter {
-  and: [ServiceLogBillAggregateFilterServiceLogAggregateFilter!]
-  or: [ServiceLogBillAggregateFilterServiceLogAggregateFilter!]
-  description: StringFieldComparison
-  date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ServiceLogTypeFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: ServiceLogType
-  neq: ServiceLogType
-  gt: ServiceLogType
-  gte: ServiceLogType
-  lt: ServiceLogType
-  lte: ServiceLogType
-  like: ServiceLogType
-  notLike: ServiceLogType
-  iLike: ServiceLogType
-  notILike: ServiceLogType
-  in: [ServiceLogType!]
-  notIn: [ServiceLogType!]
-}
-
-input ServiceLogBillAggregateFilterUserVehicleAggregateFilter {
-  and: [ServiceLogBillAggregateFilterUserVehicleAggregateFilter!]
-  or: [ServiceLogBillAggregateFilterUserVehicleAggregateFilter!]
-  name: StringFieldComparison
-  customModel: StringFieldComparison
-  status: UserVechileStatusFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ServiceLogBillFilter {
-  and: [ServiceLogBillFilter!]
-  or: [ServiceLogBillFilter!]
-  total: NumberFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  log: ServiceLogBillFilterServiceLogFilter
-  vehicle: ServiceLogBillFilterUserVehicleFilter
-}
-
-input ServiceLogBillFilterServiceLogFilter {
-  and: [ServiceLogBillFilterServiceLogFilter!]
-  or: [ServiceLogBillFilterServiceLogFilter!]
-  description: StringFieldComparison
-  date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ServiceLogBillFilterUserVehicleFilter {
-  and: [ServiceLogBillFilterUserVehicleFilter!]
-  or: [ServiceLogBillFilterUserVehicleFilter!]
-  name: StringFieldComparison
-  customModel: StringFieldComparison
-  status: UserVechileStatusFilterComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input ServiceLogBillSort {
-  field: ServiceLogBillSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum ServiceLogBillSortFields {
-  total
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
 input ServiceLogAggregateFilter {
   and: [ServiceLogAggregateFilter!]
   or: [ServiceLogAggregateFilter!]
@@ -8577,6 +8626,7 @@ input ServiceLogAggregateFilter {
   deletedAt: DateFieldComparison
   vehicle: ServiceLogAggregateFilterUserVehicleAggregateFilter
   garage: ServiceLogAggregateFilterGarageAggregateFilter
+  bills: ServiceLogAggregateFilterServiceLogBillAggregateFilter
 }
 
 input ServiceLogAggregateFilterUserVehicleAggregateFilter {
@@ -8605,6 +8655,16 @@ input ServiceLogAggregateFilterGarageAggregateFilter {
   deletedAt: DateFieldComparison
 }
 
+input ServiceLogAggregateFilterServiceLogBillAggregateFilter {
+  and: [ServiceLogAggregateFilterServiceLogBillAggregateFilter!]
+  or: [ServiceLogAggregateFilterServiceLogBillAggregateFilter!]
+  total: NumberFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
 input ServiceLogFilter {
   and: [ServiceLogFilter!]
   or: [ServiceLogFilter!]
@@ -8617,6 +8677,7 @@ input ServiceLogFilter {
   deletedAt: DateFieldComparison
   vehicle: ServiceLogFilterUserVehicleFilter
   garage: ServiceLogFilterGarageFilter
+  bills: ServiceLogFilterServiceLogBillFilter
 }
 
 input ServiceLogFilterUserVehicleFilter {
@@ -8639,6 +8700,16 @@ input ServiceLogFilterGarageFilter {
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input ServiceLogFilterServiceLogBillFilter {
+  and: [ServiceLogFilterServiceLogBillFilter!]
+  or: [ServiceLogFilterServiceLogBillFilter!]
+  total: NumberFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -11280,7 +11351,6 @@ input CreateOneServiceLogBillInput {
 input ServiceLogBillDTO {
   total: Float!
   media: [String!]
-  vehicle: ID!
   log: [ID!]!
 }
 
@@ -11345,9 +11415,10 @@ input ServiceLogDTO {
   date: DateTime
   mileage: Float
   type: ServiceLogType!
+  media: [String!]!
   vehicle: ID!
   garage: ID
-  media: [ID!]
+  bills: [ServiceLogBillDTO!]
 }
 
 input CreateManyServiceLogsInput {
