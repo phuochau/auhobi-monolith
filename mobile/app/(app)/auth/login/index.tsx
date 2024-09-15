@@ -1,6 +1,6 @@
 import { View } from "react-native"
 import { Text } from '@/components/ui/text'
-import { Link, useRouter } from "expo-router"
+import { Link, Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -73,62 +73,65 @@ const LoginScreen = () => {
     }
     
     return (
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">{t('login')}</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-            <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  placeholder="Email"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="email"
-            />
-            <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
+      <>
+        <Stack.Screen options={{ headerShown: true, title: 'Login' }} />
+        <Card className="w-full max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">{t('login')}</CardTitle>
+            <CardDescription>
+              Enter your email below to login to your account.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+              <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    placeholder="Email"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="email"
+              />
+              <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  placeholder="Password"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  secureTextEntry
-                />
-              )}
-              name="password"
-            />
-            <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    placeholder="Password"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    secureTextEntry
+                  />
+                )}
+                name="password"
+              />
+              <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
 
-            <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-              <Text>Log In</Text>
-            </Button>
+              <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+                <Text>Log In</Text>
+              </Button>
 
-            <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
-              <Text className="text-sm">Don't have an account? </Text>
-              <Link href={'/auth/register'} className="underline">
-                <Text className="font-semibold text-sm">Register</Text>
-              </Link>
-            </View>
+              <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
+                <Text className="text-sm">Don't have an account? </Text>
+                <Link href={'/auth/register'} className="underline">
+                  <Text className="font-semibold text-sm">Register</Text>
+                </Link>
+              </View>
 
-            <View className="text-center flex flex-row items-center justify-center flex-wrap">
-              <Link href={'/auth/forgot-password'} className="underline">
-                <Text className="font-semibold text-sm">Forgot password</Text>
-              </Link>
-            </View>
-        </CardContent>
-      </Card>
+              <View className="text-center flex flex-row items-center justify-center flex-wrap">
+                <Link href={'/auth/forgot-password'} className="underline">
+                  <Text className="font-semibold text-sm">Forgot password</Text>
+                </Link>
+              </View>
+          </CardContent>
+        </Card>
+      </>
     )
 }
 

@@ -4,9 +4,9 @@ import { Stack } from 'expo-router/stack';
 export default function AuthLayout() {
   return (
     <GuestGuard>
-      <Stack>
+      <Stack id='auth'>
         <Stack.Screen name="/" />
-        <Stack.Screen name="/login" options={{ headerShown: true, title: 'Login' }} />
+        <Stack.Screen name="/login" />
         <Stack.Screen name="/register" options={{ headerShown: true, title: 'Register' }} />
         <Stack.Screen name="/register/verification" options={{ headerShown: true, title: 'Confirmation' }} />
         <Stack.Screen name="/register/verification/success" options={{ headerShown: true, title: 'Confirmed' }} />
