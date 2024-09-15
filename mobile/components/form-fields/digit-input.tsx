@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { View } from "react-native"
-import { Input } from "./ui/input"
+import { Input } from "../ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
@@ -123,7 +123,3 @@ export const DigitInput = (props: DigitInputProps) => {
     )
 }
 DigitInput.displayName = 'DigitInput';
-
-DigitInput.defaultProps = {
-    length: 6
-}

@@ -2,7 +2,7 @@ import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { FilterableField, FilterableOffsetConnection, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { TABLE_PREFIX } from '../constants';
-import { Garage } from '../../garage/entities/garage.entity';
+import { Garage, GarageDTO } from '../../garage/entities/garage.entity';
 import { UserVehicle } from '../../end-user/entities/user-vehicle.entity';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 import { ServiceLogType } from './enums/service-log-type.enum';
@@ -37,8 +37,8 @@ class BaseClass extends BaseEntity {
  * Entity
  */
 @ObjectType()
-@FilterableOffsetConnection('bills', () => ServiceLogBill, { nullable: true })
-@FilterableRelation('garage', () => Garage, { nullable: true })
+@FilterableOffsetConnection('bills', () => ServiceLogBill, { nullable: true, update: { enabled: true } })
+@FilterableRelation('garage', () => Garage, { nullable: true, update: { enabled: true } })
 @FilterableRelation('vehicle', () => UserVehicle)
 @Entity({ name: `${TABLE_PREFIX}_logs` })
 export class ServiceLog extends BaseClass {
@@ -76,7 +76,7 @@ export class ServiceLogDTO extends BaseClass {
   @FilterableField(() => ID)
   vehicle: UserVehicle
 
-  @FilterableField(() => ID, { nullable: true })
+  @FilterableField(() => [GarageDTO], { nullable: true })
   garage: Garage;
 
   @Field(() => [ServiceLogBillDTO], { nullable: true })

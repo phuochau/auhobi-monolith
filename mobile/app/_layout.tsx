@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import { Slot, SplashScreen } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { PortalHost } from '@rn-primitives/portal';
 import * as React from 'react';
 import { Platform } from 'react-native';
 import { NAV_THEME } from '@/lib/constants';
@@ -63,6 +64,7 @@ export default function RootLayout() {
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
         <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
         <Slot />
+        <PortalHost />
       </ThemeProvider>
   );
 }

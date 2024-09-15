@@ -8781,6 +8781,9 @@ type Mutation {
   updateManyServiceLogBills(input: UpdateManyServiceLogBillsInput!): UpdateManyResponse!
   deleteOneServiceLogBill(input: DeleteOneServiceLogBillInput!): ServiceLogBillDeleteResponse!
   deleteManyServiceLogBills(input: DeleteManyServiceLogBillsInput!): DeleteManyResponse!
+  setGarageOnServiceLog(input: SetGarageOnServiceLogInput!): ServiceLog!
+  addBillsToServiceLog(input: AddBillsToServiceLogInput!): ServiceLog!
+  setBillsOnServiceLog(input: SetBillsOnServiceLogInput!): ServiceLog!
   createOneServiceLog(input: CreateOneServiceLogInput!): ServiceLog!
   createManyServiceLogs(input: CreateManyServiceLogsInput!): [ServiceLog!]!
   updateOneServiceLog(input: UpdateOneServiceLogInput!): ServiceLog!
@@ -11154,6 +11157,30 @@ input ServiceLogBillDeleteFilter {
   deletedAt: DateFieldComparison
 }
 
+input SetGarageOnServiceLogInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input AddBillsToServiceLogInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input SetBillsOnServiceLogInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
 input CreateOneServiceLogInput {
   """The record to create"""
   serviceLog: ServiceLogDTO!
@@ -11166,7 +11193,7 @@ input ServiceLogDTO {
   type: ServiceLogType!
   media: [String!]!
   vehicle: ID!
-  garage: ID
+  garage: [GarageDTO!]
   bills: [ServiceLogBillDTO!]
 }
 

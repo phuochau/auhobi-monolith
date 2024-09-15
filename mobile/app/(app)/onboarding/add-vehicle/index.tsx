@@ -1,6 +1,6 @@
 import { Stack, useRouter } from "expo-router"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import AddVehicle from "@/components/form/add-vehicle"
+import AddVehicle from "@/components/forms/add-vehicle"
 import { UserVehicle } from "@/graphql/gql/generated-models"
 import { View, Text } from "react-native"
 import { Button } from "@/components/ui/button"

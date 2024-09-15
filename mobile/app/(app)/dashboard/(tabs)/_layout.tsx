@@ -11,7 +11,7 @@ export default function TabLayout() {
   const router = useRouter()
   
   return (
-    <View className="w-full h-full relative">
+    <View className="flex-1 w-full h-full relative">
       <Tabs screenOptions={{ tabBarActiveTintColor: colors.primary }}>
         <Tabs.Screen
           name="index"

@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { ErrorCodes, LoginResult } from "@/graphql/gql/generated-models"
-import { GraphQLError } from "@/components/graphql-error"
+import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
