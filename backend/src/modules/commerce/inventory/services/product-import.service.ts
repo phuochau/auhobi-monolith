@@ -12,7 +12,6 @@ import path from 'path'
 import _ from 'lodash';
 import { UploadService } from 'src/modules/core/upload/services/upload.service';
 import { MimeUtil } from 'src/lib/mime';
-import { Media } from 'src/modules/core/upload/entities/media.entity';
 import { ProductService } from './product.service';
 import { ProductType } from '../entities/product-type.entity';
 import { ProductTypeService } from './product-type.service';
@@ -23,6 +22,7 @@ import { ProductCategoryService } from './product-category.service';
 import { SKUGeneratorService } from './sku-generator.service';
 import { LoggerService } from 'src/modules/core/logger/services/logger.service';
 import { OrgBranch } from 'src/modules/organization/entities/org-branch.entity';
+import { File } from 'src/modules/core/upload/entities/file.entity'
 
 @Injectable()
 export class ProductImportService {
@@ -82,14 +82,14 @@ export class ProductImportService {
           return null
         }
       
-        let productImage: Media;
+        let productImage: File;
         if (record.image?.length) {
             try {
                 const buffer = await Http.downloadFile(record.image)
                 const ext = path.extname(record.image)
                 const mimetype = await MimeUtil.getMimeType(ext)
                 if (buffer) {
-                    productImage = await this.uploadService.addMediaByBuffer(buffer, mimetype)
+                    productImage = await this.uploadService.addFileByBuffer(buffer, mimetype)
                 }
             } catch (err) {
                 this.logger.warn(err)

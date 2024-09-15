@@ -1,12 +1,9 @@
 import { File, FileDTO } from "./file.entity"
-import { Media, MediaDTO } from "./media.entity"
 
 export const Entities = [
-    File,
-    Media
+    File
 ]
 
 export const DTOs = [
-    FileDTO,
-    MediaDTO
+    FileDTO
 ]

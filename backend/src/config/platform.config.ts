@@ -5,7 +5,6 @@ export const PlatformConfig = {
     maxSize: 1024 * 1024 * 10, // 10MB
     mediaMimeTypes: ["image/png", "image/jpeg", "image/jpg", "image/heic"],
     fileMimeTypes: ["text/csv"],
-    mediaSubfolder: 'media',
     fileSubfolder: 'files'
   },
   encryption: {

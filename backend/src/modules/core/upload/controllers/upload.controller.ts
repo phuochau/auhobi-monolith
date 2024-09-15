@@ -15,7 +15,7 @@ export class UploadController {
   @Put('addMedia')
   @UseInterceptors(FileInterceptor('file'))
   addMedia(@UploadedFile(new MediaUploadValidationPipe()) file: Express.Multer.File) {
-    return this.uploadService.addMedia(file)
+    return this.uploadService.addFile(file)
   }
   
   @Put('addFile')

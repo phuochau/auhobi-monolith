@@ -557,19 +557,6 @@ type File {
   createdBy: Account!
 }
 
-type Media {
-  name: String!
-  mimetype: String!
-  refId: String
-  url: String!
-  secureUrl: String
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  createdBy: Account!
-}
-
 type DeleteManyResponse {
   """The number of records deleted."""
   deletedCount: Int!
@@ -681,84 +668,6 @@ type FileAggregateResponse {
   count: FileCountAggregate
   min: FileMinAggregate
   max: FileMaxAggregate
-}
-
-type MediaDeleteResponse {
-  name: String
-  mimetype: String
-  refId: String
-  url: String
-  secureUrl: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type MediaEdge {
-  """The node containing the Media"""
-  node: Media!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type MediaConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [MediaEdge!]!
-
-  """Fetch total count of records"""
-  totalCount: Int!
-}
-
-type MediaAggregateGroupBy {
-  name: String
-  mimetype: String
-  refId: String
-  id: ID
-  createdAt(by: GroupBy! = DAY): DateTime
-  updatedAt(by: GroupBy! = DAY): DateTime
-  deletedAt(by: GroupBy! = DAY): DateTime
-}
-
-type MediaCountAggregate {
-  name: Int
-  mimetype: Int
-  refId: Int
-  id: Int
-  createdAt: Int
-  updatedAt: Int
-  deletedAt: Int
-}
-
-type MediaMinAggregate {
-  name: String
-  mimetype: String
-  refId: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type MediaMaxAggregate {
-  name: String
-  mimetype: String
-  refId: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type MediaAggregateResponse {
-  groupBy: MediaAggregateGroupBy
-  count: MediaCountAggregate
-  min: MediaMinAggregate
-  max: MediaMaxAggregate
 }
 
 type AccountPasswordReset {
@@ -5767,20 +5676,6 @@ type Query {
     """Specify to sort results."""
     sorting: [FileSort!]! = []
   ): FileConnection!
-  mediaAggregate(
-    """Filter to find records to aggregate on"""
-    filter: MediaAggregateFilter
-  ): [MediaAggregateResponse!]!
-  media(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: MediaFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [MediaSort!]! = []
-  ): MediaConnection!
   errorCodes: ErrorCodes!
   apiKeyAggregate(
     """Filter to find records to aggregate on"""
@@ -6731,76 +6626,6 @@ input FileSort {
 }
 
 enum FileSortFields {
-  name
-  mimetype
-  refId
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-input MediaAggregateFilter {
-  and: [MediaAggregateFilter!]
-  or: [MediaAggregateFilter!]
-  name: StringFieldComparison
-  mimetype: StringFieldComparison
-  refId: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: MediaAggregateFilterAccountAggregateFilter
-}
-
-input MediaAggregateFilterAccountAggregateFilter {
-  and: [MediaAggregateFilterAccountAggregateFilter!]
-  or: [MediaAggregateFilterAccountAggregateFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input MediaFilter {
-  and: [MediaFilter!]
-  or: [MediaFilter!]
-  name: StringFieldComparison
-  mimetype: StringFieldComparison
-  refId: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  createdBy: MediaFilterAccountFilter
-}
-
-input MediaFilterAccountFilter {
-  and: [MediaFilterAccountFilter!]
-  or: [MediaFilterAccountFilter!]
-  email: StringFieldComparison
-  role: AccountRoleFilterComparison
-  firstName: StringFieldComparison
-  lastName: StringFieldComparison
-  id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input MediaSort {
-  field: MediaSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum MediaSortFields {
   name
   mimetype
   refId
@@ -8768,12 +8593,6 @@ type Mutation {
   updateManyFiles(input: UpdateManyFilesInput!): UpdateManyResponse!
   deleteOneFile(input: DeleteOneFileInput!): FileDeleteResponse!
   deleteManyFiles(input: DeleteManyFilesInput!): DeleteManyResponse!
-  createOneMedia(input: CreateOneMediaInput!): Media!
-  createManyMedia(input: CreateManyMediaInput!): [Media!]!
-  updateOneMedia(input: UpdateOneMediaInput!): Media!
-  updateManyMedia(input: UpdateManyMediaInput!): UpdateManyResponse!
-  deleteOneMedia(input: DeleteOneMediaInput!): MediaDeleteResponse!
-  deleteManyMedia(input: DeleteManyMediaInput!): DeleteManyResponse!
   createOneApiKey(input: CreateOneApiKeyInput!): ApiKey!
   createManyApiKeys(input: CreateManyApiKeysInput!): [ApiKey!]!
   updateOneApiKey(input: UpdateOneApiKeyInput!): ApiKey!
@@ -9308,75 +9127,6 @@ input DeleteManyFilesInput {
 input FileDeleteFilter {
   and: [FileDeleteFilter!]
   or: [FileDeleteFilter!]
-  name: StringFieldComparison
-  mimetype: StringFieldComparison
-  refId: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CreateOneMediaInput {
-  """The record to create"""
-  media: MediaDTO!
-}
-
-input MediaDTO {
-  name: String!
-  mimetype: String!
-  refId: String
-  url: String!
-  secureUrl: String
-  createdBy: ID
-}
-
-input CreateManyMediaInput {
-  """Array of records to create"""
-  media: [MediaDTO!]!
-}
-
-input UpdateOneMediaInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: MediaDTO!
-}
-
-input UpdateManyMediaInput {
-  """Filter used to find fields to update"""
-  filter: MediaUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: MediaDTO!
-}
-
-input MediaUpdateFilter {
-  and: [MediaUpdateFilter!]
-  or: [MediaUpdateFilter!]
-  name: StringFieldComparison
-  mimetype: StringFieldComparison
-  refId: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneMediaInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyMediaInput {
-  """Filter to find records to delete"""
-  filter: MediaDeleteFilter!
-}
-
-input MediaDeleteFilter {
-  and: [MediaDeleteFilter!]
-  or: [MediaDeleteFilter!]
   name: StringFieldComparison
   mimetype: StringFieldComparison
   refId: StringFieldComparison
