@@ -5255,7 +5255,7 @@ type ServiceLog {
   date: DateTime
   mileage: Float
   type: ServiceLogType!
-  media: [String!]!
+  media: [String!]
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -11191,7 +11191,7 @@ input ServiceLogDTO {
   date: DateTime
   mileage: Float
   type: ServiceLogType!
-  media: [String!]!
+  media: [String!]
   vehicle: ID!
   garage: [GarageDTO!]
   bills: [ServiceLogBillDTO!]

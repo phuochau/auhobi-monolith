@@ -62,7 +62,6 @@ const AddServiceHistory = () => {
         date: values.date,
         type: values.type as ServiceLogType,
         mileage: parseInt(values.mileage),
-        media: [],
         vehicle: vehicle!.id
       }
     }))

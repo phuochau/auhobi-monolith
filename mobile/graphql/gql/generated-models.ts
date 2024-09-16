@@ -926,6 +926,13 @@ export type AddAddressesToCustomerInput = {
   relationIds: Array<Scalars['ID']['input']>;
 };
 
+export type AddBillsToServiceLogInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
 export type AddBodiesToVehicleModelInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
@@ -2996,6 +3003,7 @@ export type LoginResult = {
 export type Mutation = {
   __typename?: 'Mutation';
   addAddressesToCustomer: Customer;
+  addBillsToServiceLog: ServiceLog;
   addBodiesToVehicleModel: VehicleModel;
   addBranchesToOrg: Org;
   addMembersToOrg: Org;
@@ -3146,8 +3154,10 @@ export type Mutation = {
   deleteOneVehicleTransmission: VehicleTransmissionDeleteResponse;
   productImportByFile: Array<Product>;
   setAddressesOnCustomer: Customer;
+  setBillsOnServiceLog: ServiceLog;
   setBodiesOnVehicleModel: VehicleModel;
   setBranchesOnOrg: Org;
+  setGarageOnServiceLog: ServiceLog;
   setMembersOnOrg: Org;
   setMembersOnOrgBranch: OrgBranch;
   setMembersOnShop: Shop;
@@ -3230,6 +3240,11 @@ export type Mutation = {
 
 export type MutationAddAddressesToCustomerArgs = {
   input: AddAddressesToCustomerInput;
+};
+
+
+export type MutationAddBillsToServiceLogArgs = {
+  input: AddBillsToServiceLogInput;
 };
 
 
@@ -3983,6 +3998,11 @@ export type MutationSetAddressesOnCustomerArgs = {
 };
 
 
+export type MutationSetBillsOnServiceLogArgs = {
+  input: SetBillsOnServiceLogInput;
+};
+
+
 export type MutationSetBodiesOnVehicleModelArgs = {
   input: SetBodiesOnVehicleModelInput;
 };
@@ -3990,6 +4010,11 @@ export type MutationSetBodiesOnVehicleModelArgs = {
 
 export type MutationSetBranchesOnOrgArgs = {
   input: SetBranchesOnOrgInput;
+};
+
+
+export type MutationSetGarageOnServiceLogArgs = {
+  input: SetGarageOnServiceLogInput;
 };
 
 
@@ -9949,7 +9974,7 @@ export type ServiceLog = {
   description?: Maybe<Scalars['String']['output']>;
   garage?: Maybe<Garage>;
   id: Scalars['ID']['output'];
-  media: Array<Scalars['String']['output']>;
+  media?: Maybe<Array<Scalars['String']['output']>>;
   mileage?: Maybe<Scalars['Float']['output']>;
   type: ServiceLogType;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -10352,8 +10377,8 @@ export type ServiceLogDto = {
   bills?: InputMaybe<Array<ServiceLogBillDto>>;
   date?: InputMaybe<Scalars['DateTime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  garage?: InputMaybe<Scalars['ID']['input']>;
-  media: Array<Scalars['String']['input']>;
+  garage?: InputMaybe<Array<GarageDto>>;
+  media?: InputMaybe<Array<Scalars['String']['input']>>;
   mileage?: InputMaybe<Scalars['Float']['input']>;
   type: ServiceLogType;
   vehicle: Scalars['ID']['input'];
@@ -10533,6 +10558,13 @@ export type SetAddressesOnCustomerInput = {
   relationIds: Array<Scalars['ID']['input']>;
 };
 
+export type SetBillsOnServiceLogInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The ids of the relations. */
+  relationIds: Array<Scalars['ID']['input']>;
+};
+
 export type SetBodiesOnVehicleModelInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
@@ -10545,6 +10577,13 @@ export type SetBranchesOnOrgInput = {
   id: Scalars['ID']['input'];
   /** The ids of the relations. */
   relationIds: Array<Scalars['ID']['input']>;
+};
+
+export type SetGarageOnServiceLogInput = {
+  /** The id of the record. */
+  id: Scalars['ID']['input'];
+  /** The id of relation. */
+  relationId: Scalars['ID']['input'];
 };
 
 export type SetMembersOnOrgBranchInput = {
@@ -13153,6 +13192,7 @@ export type ResolversTypes = ResolversObject<{
   AccountVerficationSortFields: AccountVerficationSortFields;
   AccountVerficationUpdateFilter: AccountVerficationUpdateFilter;
   AddAddressesToCustomerInput: AddAddressesToCustomerInput;
+  AddBillsToServiceLogInput: AddBillsToServiceLogInput;
   AddBodiesToVehicleModelInput: AddBodiesToVehicleModelInput;
   AddBranchesToOrgInput: AddBranchesToOrgInput;
   AddMembersToOrgBranchInput: AddMembersToOrgBranchInput;
@@ -13899,8 +13939,10 @@ export type ResolversTypes = ResolversObject<{
   ServiceLogTypeFilterComparison: ServiceLogTypeFilterComparison;
   ServiceLogUpdateFilter: ServiceLogUpdateFilter;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
+  SetBillsOnServiceLogInput: SetBillsOnServiceLogInput;
   SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
+  SetGarageOnServiceLogInput: SetGarageOnServiceLogInput;
   SetMembersOnOrgBranchInput: SetMembersOnOrgBranchInput;
   SetMembersOnOrgInput: SetMembersOnOrgInput;
   SetMembersOnShopInput: SetMembersOnShopInput;
@@ -14235,6 +14277,7 @@ export type ResolversParentTypes = ResolversObject<{
   AccountVerficationSort: AccountVerficationSort;
   AccountVerficationUpdateFilter: AccountVerficationUpdateFilter;
   AddAddressesToCustomerInput: AddAddressesToCustomerInput;
+  AddBillsToServiceLogInput: AddBillsToServiceLogInput;
   AddBodiesToVehicleModelInput: AddBodiesToVehicleModelInput;
   AddBranchesToOrgInput: AddBranchesToOrgInput;
   AddMembersToOrgBranchInput: AddMembersToOrgBranchInput;
@@ -14952,8 +14995,10 @@ export type ResolversParentTypes = ResolversObject<{
   ServiceLogTypeFilterComparison: ServiceLogTypeFilterComparison;
   ServiceLogUpdateFilter: ServiceLogUpdateFilter;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
+  SetBillsOnServiceLogInput: SetBillsOnServiceLogInput;
   SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
+  SetGarageOnServiceLogInput: SetGarageOnServiceLogInput;
   SetMembersOnOrgBranchInput: SetMembersOnOrgBranchInput;
   SetMembersOnOrgInput: SetMembersOnOrgInput;
   SetMembersOnShopInput: SetMembersOnShopInput;
@@ -16031,6 +16076,7 @@ export type LoginResultResolvers<ContextType = any, ParentType extends Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   addAddressesToCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationAddAddressesToCustomerArgs, 'input'>>;
+  addBillsToServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationAddBillsToServiceLogArgs, 'input'>>;
   addBodiesToVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationAddBodiesToVehicleModelArgs, 'input'>>;
   addBranchesToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddBranchesToOrgArgs, 'input'>>;
   addMembersToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddMembersToOrgArgs, 'input'>>;
@@ -16181,8 +16227,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmissionDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleTransmissionArgs, 'input'>>;
   productImportByFile?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationProductImportByFileArgs, 'input'>>;
   setAddressesOnCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationSetAddressesOnCustomerArgs, 'input'>>;
+  setBillsOnServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationSetBillsOnServiceLogArgs, 'input'>>;
   setBodiesOnVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationSetBodiesOnVehicleModelArgs, 'input'>>;
   setBranchesOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetBranchesOnOrgArgs, 'input'>>;
+  setGarageOnServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationSetGarageOnServiceLogArgs, 'input'>>;
   setMembersOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetMembersOnOrgArgs, 'input'>>;
   setMembersOnOrgBranch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType, RequireFields<MutationSetMembersOnOrgBranchArgs, 'input'>>;
   setMembersOnShop?: Resolver<ResolversTypes['Shop'], ParentType, ContextType, RequireFields<MutationSetMembersOnShopArgs, 'input'>>;
@@ -18356,7 +18404,7 @@ export type ServiceLogResolvers<ContextType = any, ParentType extends ResolversP
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   garage?: Resolver<Maybe<ResolversTypes['Garage']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  media?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   type?: Resolver<ResolversTypes['ServiceLogType'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
