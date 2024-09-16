@@ -2117,6 +2117,18 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/primitive/-/primitive-1.1.0.tgz#42ef83b3b56dccad5d703ae8c42919a68798bbe2"
   integrity sha512-4Z8dn6Upk0qk4P74xBhZ6Hd/w0mPEzOOLxy4xiPXOXqjF7jZS0VAKk7/x/H6FyY2zCkYJqePf1G5KmkmNJ4RBA==
 
+"@radix-ui/react-alert-dialog@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-alert-dialog/-/react-alert-dialog-1.1.1.tgz#f49c987b9e4f2bf37005b3864933e2b3beac907a"
+  integrity sha512-wmCoJwj7byuVuiLKqDLlX7ClSUU0vd9sdCeM+2Ls+uf13+cpSJoMgwysHq1SGVVkJj5Xn0XWi1NoRCdkMpr6Mw==
+  dependencies:
+    "@radix-ui/primitive" "1.1.0"
+    "@radix-ui/react-compose-refs" "1.1.0"
+    "@radix-ui/react-context" "1.1.0"
+    "@radix-ui/react-dialog" "1.1.1"
+    "@radix-ui/react-primitive" "2.0.0"
+    "@radix-ui/react-slot" "1.1.0"
+
 "@radix-ui/react-arrow@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-arrow/-/react-arrow-1.1.0.tgz#744f388182d360b86285217e43b6c63633f39e7a"
@@ -2151,7 +2163,7 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/react-context/-/react-context-1.1.0.tgz#6df8d983546cfd1999c8512f3a8ad85a6e7fcee8"
   integrity sha512-OKrckBy+sMEgYM/sMmqmErVn0kZqrHPJze+Ql3DzYsDDp0hl0L62nx/2122/Bvps1qz645jlcu2tD9lrRSdf8A==
 
-"@radix-ui/react-dialog@^1.0.5":
+"@radix-ui/react-dialog@1.1.1", "@radix-ui/react-dialog@^1.0.5":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-dialog/-/react-dialog-1.1.1.tgz#4906507f7b4ad31e22d7dad69d9330c87c431d44"
   integrity sha512-zysS+iU4YP3STKNS6USvFVqI4qqx8EpiwmT5TuCApVEBca+eRCbONi4EgzfNSuVnOXvC5UPHHMjs8RXO6DH9Bg==
@@ -2881,6 +2893,24 @@
   resolved "https://registry.yarnpkg.com/@repeaterjs/repeater/-/repeater-3.0.6.tgz#be23df0143ceec3c69f8b6c2517971a5578fdaa2"
   integrity sha512-Javneu5lsuhwNCryN+pXH93VPQ8g0dBX7wItHFgYiwQmzE1sVdg5tWHiOgHywzL2W21XQopa7IwIEnNbmeUJYA==
 
+"@rn-primitives/alert-dialog@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rn-primitives/alert-dialog/-/alert-dialog-1.0.4.tgz#adb5f076636d43975a4748e21304ac18d5592d71"
+  integrity sha512-GSewmmlZcJjC0luZujuxNyC4dwdGu1sOwSXNEj39qILqbNw4XMBhQvP4fBr8uVxssqLa6m3jjaGf38IVVSldqQ==
+  dependencies:
+    "@radix-ui/react-alert-dialog" "^1.1.1"
+    "@rn-primitives/hooks" "1.0.4"
+    "@rn-primitives/slot" "1.0.4"
+    "@rn-primitives/types" "1.0.4"
+
+"@rn-primitives/avatar@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@rn-primitives/avatar/-/avatar-1.0.5.tgz#a769725382a6ada97d3ec0309470262f5c2b0996"
+  integrity sha512-C9KJKgRQSDcBXxFBL0dbB/2ihAukTnOChpPxn5MV8rBjylOk3G5UCW/30MRr//zxNhGeFZQhHIoBeDH7wfClbw==
+  dependencies:
+    "@rn-primitives/slot" "1.0.4"
+    "@rn-primitives/types" "1.0.4"
+
 "@rn-primitives/dialog@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@rn-primitives/dialog/-/dialog-1.0.3.tgz#f4bc67f00669e826423e1919cca56b9bff156b93"
@@ -2931,12 +2961,12 @@
     "@rn-primitives/slot" "1.0.4"
     "@rn-primitives/types" "1.0.4"
 
-"@rn-primitives/slot@1.0.3", "@rn-primitives/slot@^1.0.3":
+"@rn-primitives/slot@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@rn-primitives/slot/-/slot-1.0.3.tgz#878b488dd7844703eb0b4dbc51c239e1bdb0ca11"
   integrity sha512-sSDYwD2upLQUOva2cmNfaJqZlN+o0E/wa8uXEDEIYj6MJsG/O0k1t0jGXMqLP8BsQ3ZaTtUbqnG9eW/VQFOmdQ==
 
-"@rn-primitives/slot@1.0.4":
+"@rn-primitives/slot@1.0.4", "@rn-primitives/slot@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@rn-primitives/slot/-/slot-1.0.4.tgz#606f6db4ac03df374207a242c43723c1f5af51d1"
   integrity sha512-sB+5xIY3mzphco3EN2JXQ7F7BAhsx1ufj0eP4EBu1uV45SbuEF7Zjg4czfiYftVc69rrPXpIgyK6dnMAD2/+pw==
@@ -2950,12 +2980,12 @@
     "@rn-primitives/slot" "1.0.3"
     "@rn-primitives/types" "1.0.3"
 
-"@rn-primitives/types@1.0.3", "@rn-primitives/types@^1.0.3":
+"@rn-primitives/types@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@rn-primitives/types/-/types-1.0.3.tgz#1d0b084663859a889e5b7359eb2afe62ff311adb"
   integrity sha512-5GY4J6SBN2JosYS/8bvQZOZL+HZk85COaFlNnjiL3efoa9gH+v1dNi0F2gW/Gr0PuGF/xo/z0iOiVc5KrDsAkQ==
 
-"@rn-primitives/types@1.0.4":
+"@rn-primitives/types@1.0.4", "@rn-primitives/types@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@rn-primitives/types/-/types-1.0.4.tgz#0dc50d60449fe62d9262f5577347280840bf98dd"
   integrity sha512-pp5H+IFrZym52/ZKMXUV4YUViX1yLBlSh4DfUgwxOAICOLKThbEXbEEinm0C3NSRzqXLmD/zJZI4pAGlh1J5iA==
@@ -5174,6 +5204,18 @@ expo-font@~12.0.9:
   integrity sha512-seTCyf0tbgkAnp3ZI9ZfK9QVtURQUgFnuj+GuJ5TSnN0XsOtVe1s2RxTvmMgkfuvfkzcjJ69gyRpsZS1cC8hjw==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image-loader@~4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-4.7.0.tgz#d403106822de80bda12d644c82b7a3b7983c0f0b"
+  integrity sha512-cx+MxxsAMGl9AiWnQUzrkJMJH4eNOGlu7XkLGnAXSJrRoIiciGaKqzeaD326IyCTV+Z1fXvIliSgNW+DscvD8g==
+
+expo-image-picker@~15.0.7:
+  version "15.0.7"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-15.0.7.tgz#eb25abfdb03cb940f0418add3d9814439526b025"
+  integrity sha512-u8qiPZNfDb+ap6PJ8pq2iTO7JKX+ikAUQ0K0c7gXGliKLxoXgDdDmXxz9/6QdICTshJBJlBvI0MwY5NWu7A/uw==
+  dependencies:
+    expo-image-loader "~4.7.0"
 
 expo-keep-awake@~13.0.2:
   version "13.0.2"

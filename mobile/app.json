@@ -38,6 +38,12 @@
             "usesCleartextTraffic": true
           }
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you change profile avatar, service log images."
+        }
       ]
     ],
     "experiments": {

@@ -18,6 +18,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DataUtils } from "@/lib/data-utils"
 import { addServiceLogAsync } from "@/store/service-log/actions/add-service-log-async.action"
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
+import { AttachmentInput } from "@/components/form-fields/attachment-input"
+import { Label } from "@/components/ui/label"
  
 const formSchema = z.object({
   date: z.string(),
@@ -140,6 +142,19 @@ const AddServiceHistory = () => {
                 name="type"
               />
               <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
+
+              <Label nativeID="MediaLabel">Images</Label>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <AttachmentInput
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+                name="media"
+              />
 
               <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
                 <Text>Save</Text>
