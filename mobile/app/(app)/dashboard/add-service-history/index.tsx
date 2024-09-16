@@ -9,14 +9,15 @@ import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { Input } from "@/components/ui/input"
-import { useAppDispatch } from "@/hooks/store.hooks"
+import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { ServiceLog, ServiceLogType } from "@/graphql/gql/generated-models"
 import { FormMessage } from "@/components/ui/form"
 import { DateTimeInput } from "@/components/form-fields/date-time-input"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { DataUtils } from "@/lib/data-utils"
-import { cn } from "@/lib/utils"
+import { addServiceLogAsync } from "@/store/service-log/actions/add-service-log-async.action"
+import { selectCurrentVehicle } from "@/store/user/user.selectors"
  
 const formSchema = z.object({
   date: z.string(),
@@ -30,6 +31,8 @@ const formSchema = z.object({
 const AddServiceHistory = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
+  const vehicle = useAppSelector(selectCurrentVehicle)
+  console.log(vehicle)
   const [submitting, setSubmitting] = useState(false)
   const [response, setResponse] = useState<GraphQLResponse<ServiceLog>>()
   const types = DataUtils.enumToKeyValueArray(ServiceLogType)
@@ -41,12 +44,36 @@ const AddServiceHistory = () => {
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: ''
+      date: (new Date()).toISOString()
     }
   })
 
   function getLabelFromTypeValue(value: string) {
     return types.find(type => type[1] === value)?.[0] || ''
+  }
+ 
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setSubmitting(true)
+    setResponse(undefined)
+
+    console.log(values)
+    const { payload } = await dispatch(addServiceLogAsync({
+      serviceLog: {
+        date: values.date,
+        type: values.type as ServiceLogType,
+        mileage: parseInt(values.mileage),
+        media: [],
+        vehicle: vehicle!.id
+      }
+    }))
+
+    const response = payload as GraphQLResponse<ServiceLog>
+    console.log(response)
+    setResponse(response)
+    if (!response.errors && response.data) {
+      router.dismiss()
+    }
+    setSubmitting(false)
   }
 
   return (
@@ -94,17 +121,20 @@ const AddServiceHistory = () => {
                 render={({ field: { onChange, onBlur, value } }) => (
                   <Select
                     value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
-                    onValueChange={(option) => onChange(option?.value)}
+                    onValueChange={(option) => {
+                      onChange(option?.value)
+                      onBlur()
+                    }}
                   >
                     <SelectTrigger>
                       <SelectValue
-                        className={cn("text-base lg:text-sm native:text-lg native:leading-[1.25] text-foreground placeholder:text-muted-foreground", !value?.length && 'text-muted-foreground')}
                         placeholder={'Select Type'}
+                        value={value}
                       />
                     </SelectTrigger>
                     <SelectContent className="w-full">
                       {types.map(type =>
-                        <SelectItem label={type[0]} value={type[1]!}>
+                        <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
                           {type[0]}
                         </SelectItem>)}
                     </SelectContent>
@@ -113,6 +143,10 @@ const AddServiceHistory = () => {
                 name="type"
               />
               <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
+
+              <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+                <Text>Save</Text>
+              </Button>
 
           </CardContent>
         </Card>

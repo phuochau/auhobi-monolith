@@ -28,9 +28,9 @@ class BaseClass extends BaseEntity {
   @Column()
   type: ServiceLogType;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   @Column("text", { array: true, default: [] })
-  media: string[];
+  media?: string[];
 }
 
 /**

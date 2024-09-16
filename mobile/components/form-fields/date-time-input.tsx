@@ -1,7 +1,7 @@
 import { forwardRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import { cn } from '@/lib/utils';
-import DateTimePicker, { AndroidNativeProps, DateTimePickerEvent, IOSNativeProps, WindowsNativeProps } from '@react-native-community/datetimepicker';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import dayjs from 'dayjs'
 import { Calendar } from '@/lib/icons/Calendar'
 import { Clock8 } from '@/lib/icons/Clock8'

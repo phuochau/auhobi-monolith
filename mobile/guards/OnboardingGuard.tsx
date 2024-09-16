@@ -1,8 +1,8 @@
+import { useAppSelector } from "@/hooks/store.hooks";
 import { Navigation } from "@/lib/navigation";
 import { selectCurrentAccount } from "@/store/user/user.selectors";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 export interface OnboardingGuardProps {
     children: React.ReactElement
@@ -11,7 +11,7 @@ export interface OnboardingGuardProps {
 export function OnboardingGuard({ children }: OnboardingGuardProps) {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
-  const account = useSelector(selectCurrentAccount)
+  const account = useAppSelector(selectCurrentAccount)
 
   useEffect(() => {
     if (!account) {

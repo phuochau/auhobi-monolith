@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
+    "android:reverse": "adb reverse tcp:3001 tcp:3001",
     "lint": "expo lint",
     "codegen": "yarn gql-models-codegen && yarn gql-fragments-gen",
     "gql-models-codegen": "graphql-codegen --config ./gql-schema-codegen.ts",
