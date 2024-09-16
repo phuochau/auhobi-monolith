@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Text } from '@/components/ui/text'
-import { date, z } from "zod"
+import { z } from "zod"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
@@ -32,7 +32,6 @@ const AddServiceHistory = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const vehicle = useAppSelector(selectCurrentVehicle)
-  console.log(vehicle)
   const [submitting, setSubmitting] = useState(false)
   const [response, setResponse] = useState<GraphQLResponse<ServiceLog>>()
   const types = DataUtils.enumToKeyValueArray(ServiceLogType)
@@ -56,7 +55,6 @@ const AddServiceHistory = () => {
     setSubmitting(true)
     setResponse(undefined)
 
-    console.log(values)
     const { payload } = await dispatch(addServiceLogAsync({
       serviceLog: {
         date: values.date,
@@ -67,9 +65,9 @@ const AddServiceHistory = () => {
     }))
 
     const response = payload as GraphQLResponse<ServiceLog>
-    console.log(response)
     setResponse(response)
     if (!response.errors && response.data) {
+      // TODO: Show Toast message
       router.dismiss()
     }
     setSubmitting(false)
