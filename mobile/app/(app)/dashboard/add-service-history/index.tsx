@@ -77,7 +77,7 @@ const AddServiceHistory = () => {
 
   return (
     <View className="w-full h-full">
-        <Stack.Screen options={{ title: 'Import Order' }} />
+        <Stack.Screen options={{ title: 'Add Service History' }} />
 
         <Card className="w-full">
           <CardHeader>
