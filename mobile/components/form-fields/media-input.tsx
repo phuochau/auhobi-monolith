@@ -7,16 +7,16 @@ import { Pickers } from "@/lib/pickers";
 import { Plus } from "@/lib/icons/Plus";
 
 /**
- * AttachmentImage
+ * ImageDisplay
  */
-type AttachmentImageProps = React.ComponentPropsWithoutRef<typeof View> & {
+type ImageDisplayProps = React.ComponentPropsWithoutRef<typeof View> & {
     uri: string,
     imageClassName?: string
 }
 
-const AttachmentImage =  React.forwardRef<
+const ImageDisplay =  React.forwardRef<
     React.ElementRef<typeof View>,
-    AttachmentImageProps
+    ImageDisplayProps
 >(({ className, imageClassName, uri, ...props }, ref) => (
     <View
         ref={ref}
@@ -26,25 +26,25 @@ const AttachmentImage =  React.forwardRef<
         <Image source={{ uri }} className={cn("aspect-auto w-full h-full object-cover", imageClassName)} />
     </View>
 ));
-AttachmentImage.displayName = 'AttachmentImage';
+ImageDisplay.displayName = 'ImageDisplay';
 
 /**
- * AttachmentInput
+ * MediaInput
  */
 
-type AttachmentInputProps = React.ComponentPropsWithoutRef<typeof View> & {
-    addImagesText?: string,
+type MediaInputProps = React.ComponentPropsWithoutRef<typeof View> & {
+    addText?: string,
     value?: string[],
     onChange?: (value: string[]) => any,
     imageContainerClassName?: string,
     onBlur?: () => any
 }
 
-const AttachmentInput =  React.forwardRef<
+const MediaInput =  React.forwardRef<
     React.ElementRef<typeof View>,
-    AttachmentInputProps
+    MediaInputProps
 >(({
-    addImagesText = 'Add',
+    addText = 'Add',
     value,
     onChange,
     onBlur,
@@ -74,15 +74,15 @@ const AttachmentInput =  React.forwardRef<
             {...props}
         >
             <Button onPress={onAddImages} variant={'secondary'} className="flex flex-row items-center justify-center gap-2">
-                <Text>{addImagesText}</Text>
+                <Text>{addText}</Text>
                 <Plus className="text-secondary-foreground" width={16}></Plus>
             </Button>
             <View className={cn('grid grid-cols-4 gap-2', imageContainerClassName)}>
-                {images.map((uri, index) => <AttachmentImage key={`${index}-${uri}`} uri={uri} />)}
+                {images.map((uri, index) => <ImageDisplay key={`${index}-${uri}`} uri={uri} />)}
             </View>
         </View>
     )
 });
-AttachmentInput.displayName = 'AttachmentInput';
+MediaInput.displayName = 'MediaInput';
 
-export { AttachmentImage, AttachmentInput }
+export { ImageDisplay, MediaInput }

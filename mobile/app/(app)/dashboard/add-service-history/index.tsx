@@ -18,7 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DataUtils } from "@/lib/data-utils"
 import { addServiceLogAsync } from "@/store/service-log/actions/add-service-log-async.action"
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
-import { AttachmentInput } from "@/components/form-fields/attachment-input"
+import { MediaInput } from "@/components/form-fields/media-input"
 import { Label } from "@/components/ui/label"
  
 const formSchema = z.object({
@@ -147,7 +147,7 @@ const AddServiceHistory = () => {
               <Controller
                 control={control}
                 render={({ field: { onChange, onBlur, value } }) => (
-                  <AttachmentInput
+                  <MediaInput
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
