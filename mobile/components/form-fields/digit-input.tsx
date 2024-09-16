@@ -7,7 +7,7 @@ import { Controller, useForm } from "react-hook-form"
 import { useEffect, useRef, useState } from "react"
 import _ from "lodash"
 
-export interface DigitInputProps {
+export type DigitInputProps = {
     length?: number,
     className?: string,
     inputContainerClassName?: string,

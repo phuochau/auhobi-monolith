@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 import { Calendar } from '@/lib/icons/Calendar'
 import { Clock8 } from '@/lib/icons/Clock8'
 
-interface DateTimeInputProps {
+type DateTimeInputProps = {
     containerClassName?: string,
     dateFormat?: string,
     pickerConfig?: {

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 import { ActivityIndicator, Platform } from "react-native"
 import Svg, { Path, Circle } from "react-native-svg"
 
-export interface LoaderProps {
+type LoaderProps = {
     className?: string
 }
 

@@ -22,7 +22,7 @@ const formSchema = z.object({
     .min(1, { message: 'Must have at least 1 character' })
 })
 
-export interface AddVehicleProps {
+export type AddVehicleProps = {
   onSuccess: (userVehicle: UserVehicle) => any
 }
 

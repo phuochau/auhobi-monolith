@@ -4,7 +4,7 @@ import { selectCurrentAccount } from "@/store/user/user.selectors";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 
-export interface AuthGuardProps {
+export type AuthGuardProps = {
     children: React.ReactElement
 }
 

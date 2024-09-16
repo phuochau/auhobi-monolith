@@ -48,7 +48,6 @@ const MediaInput =  React.forwardRef<
     value,
     onChange,
     onBlur,
-    className,
     imageContainerClassName,
     ...props
 }, ref) => {
@@ -70,7 +69,6 @@ const MediaInput =  React.forwardRef<
     return (
         <View
             ref={ref}
-            className={cn('', className)}
             {...props}
         >
             <Button onPress={onAddImages} variant={'secondary'} className="flex flex-row items-center justify-center gap-2">
