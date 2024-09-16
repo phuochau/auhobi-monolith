@@ -4,6 +4,8 @@ import { print as DocumentNodeToString } from 'graphql/language/printer';
 import { DocumentNode } from "graphql";
 import { GraphQLResponse } from "./types/graphql-response";
 import { ErrorCodes } from "./gql/generated-models";
+import { store } from "@/store/store";
+import { logout } from "@/store/user/user.slice";
 
 class GraphQLClient {
     instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
@@ -54,6 +56,8 @@ class GraphQLClient {
             const forbidden = this.isForbidden(gqlResponse)
             
             if (forbidden) {
+                console.log('forbidden', forbidden)
+                store.dispatch(logout())
                 // const refreshResult = await AuthService.refreshToken()
                 // if (refreshResult?.success) {
                 //     return authQuery<T, P>(query, variables)
