@@ -60,8 +60,8 @@ const DialogOverlay = Platform.select({
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { portalHost?: string }
->(({ className, children, portalHost, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { portalHost?: string, xClassName?: string, xStyle?: any }
+>(({ className, children, portalHost, xClassName, xStyle, ...props }, ref) => {
   const { open } = DialogPrimitive.useRootContext();
   return (
     <DialogPortal hostName={portalHost}>
@@ -80,8 +80,9 @@ const DialogContent = React.forwardRef<
           {children}
           <DialogPrimitive.Close
             className={
-              'absolute right-4 top-4 p-0.5 web:group rounded-sm opacity-70 web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none'
+              cn('absolute right-4 top-4 p-0.5 web:group rounded-sm opacity-70 web:ring-offset-background web:transition-opacity web:hover:opacity-100 web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2 web:disabled:pointer-events-none', xClassName)
             }
+            style={xStyle}
           >
             <X
               size={Platform.OS === 'web' ? 16 : 18}

@@ -20,6 +20,7 @@ import { addServiceLogAsync } from "@/store/service-log/actions/add-service-log-
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
 import { MediaInput } from "@/components/form-fields/media-input"
 import { Label } from "@/components/ui/label"
+import { GarageInput } from "@/components/form-fields/garage-input"
  
 const formSchema = z.object({
   date: z.string(),
@@ -84,7 +85,7 @@ const AddServiceHistory = () => {
             <CardDescription>Add a service history of your car</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-              <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
+              <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
 
               <Controller
                 control={control}
@@ -143,6 +144,20 @@ const AddServiceHistory = () => {
               />
               <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
 
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <GarageInput
+                    placeholder="Garage"
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+                name="garage"
+              />
+              <FormMessage nativeID="GarageError" error={errors.garage}></FormMessage>
+
               <Label nativeID="MediaLabel">Images</Label>
               <Controller
                 control={control}
@@ -154,6 +169,19 @@ const AddServiceHistory = () => {
                   />
                 )}
                 name="media"
+              />
+
+              <Label nativeID="BillsLabel">Bills</Label>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <MediaInput
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+                name="bills"
               />
 
               <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
