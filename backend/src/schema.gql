@@ -11269,7 +11269,8 @@ input ServiceLogDTO {
   media: [String!]
   customGarage: String
   vehicle: ID!
-  garage: [GarageDTO!]
+  garageId: ID
+  garage: GarageDTO
   bills: [ServiceLogBillDTO!]
 }
 

@@ -4,8 +4,8 @@ import { CreateOneServiceLogMutation } from "@/graphql/gql/mutations/createOneSe
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const addServiceLogAsync = createAsyncThunk<GraphQLResponse<ServiceLog>, CreateOneServiceLogInput>(
-    'user/addServiceLogAsync',
+export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, CreateOneServiceLogInput>(
+    'user/addServiceLog',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.authQuery<ServiceLog, MutationCreateOneServiceLogArgs>(CreateOneServiceLogMutation, { input })

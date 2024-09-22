@@ -53,6 +53,7 @@ class GraphQLClient {
         })
         .then((res: any) => this.parseError<T>(res))
         .then(async (gqlResponse) => {
+            console.log(gqlResponse)
             const forbidden = this.isForbidden(gqlResponse)
             
             if (forbidden) {

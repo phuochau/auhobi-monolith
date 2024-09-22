@@ -10449,7 +10449,8 @@ export type ServiceLogDto = {
   customGarage?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['DateTime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  garage?: InputMaybe<Array<GarageDto>>;
+  garage?: InputMaybe<GarageDto>;
+  garageId?: InputMaybe<Scalars['ID']['input']>;
   media?: InputMaybe<Array<Scalars['String']['input']>>;
   mileage?: InputMaybe<Scalars['Float']['input']>;
   type: ServiceLogType;

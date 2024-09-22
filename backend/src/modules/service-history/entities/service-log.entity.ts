@@ -80,7 +80,10 @@ export class ServiceLogDTO extends BaseClass {
   @FilterableField(() => ID)
   vehicle: UserVehicle
 
-  @FilterableField(() => [GarageDTO], { nullable: true })
+  @FilterableField(() => ID, { nullable: true })
+  garageId: string;
+
+  @FilterableField(() => GarageDTO, { nullable: true })
   garage: Garage;
 
   @Field(() => [ServiceLogBillDTO], { nullable: true })

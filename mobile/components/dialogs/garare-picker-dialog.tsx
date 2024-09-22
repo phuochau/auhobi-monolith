@@ -22,10 +22,15 @@ export enum GarageType {
     CUSTOM,
 }
 
+export interface GaragePickerResult {
+    type: GarageType,
+    data: Garage | PlaceAutocompleteResult | string
+}
+
 export type GaragePickerDialogProps = {
     open?: boolean,
     onRequestClose?: () => any,
-    onChange?: (type: GarageType, garage: any) => any
+    onChange?: (result: GaragePickerResult) => any
 }
 
 const GaragePickerDialog = (props: GaragePickerDialogProps) => {
@@ -69,12 +74,13 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
     }
   }
 
-  function chooseGarage(type: GarageType, garage: any) {
+  function chooseGarage(type: GarageType, data: any) {
     if (onRequestClose) {
         onRequestClose()
     }
     if (onChange) {
-        onChange(type, garage)
+        onChange({ type, data })
+        setKeyword('')
     }
   }
 
@@ -105,7 +111,7 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
     <Portal name='garage-input-model'>
         <View className='absolute top-0 left-0 bottom-0 right-0 bg-background flex flex-col' style={{ paddingTop: insets.top }}>
             <View className='px-4 py-4'>
-                <Input value={keyword} onChangeText={updateKeyword} />
+                <Input value={keyword} onChangeText={updateKeyword} placeholder='Search Garage' />
             </View>
             <Separator />
             
@@ -135,7 +141,7 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
 
                         <View className='flex flex-col'>
                             {gPlaces.map((place, index) =>
-                                <Pressable key={`${place.place_id}${index}`} onPress={() => chooseGarage(GarageType.GOOGLE_MAPS, true)}>
+                                <Pressable key={`${place.place_id}${index}`} onPress={() => chooseGarage(GarageType.GOOGLE_MAPS, place)}>
                                     <View className='flex flex-row px-4 py-2.5 gap-4'>
                                         <Image source={{ uri: 'https://lh5.googleusercontent.com/p/AF1QipPxIOaHYtWnE0nfQ6DM75PVVpAt2uXP8y6-gvKO=w408-h544-k-no' }} className='mt-1.5 aspect-square w-12 h-12 rounded' />
                                         <View className='flex-1 flex flex-col'>
@@ -149,8 +155,8 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
                     </>}
             </ScrollView>
 
-            <View className='px-4' style={{ paddingVertical: insets.bottom }}>
-                <Button onPress={onRequestClose}>
+            <View className='px-4' style={{ paddingBottom: insets.bottom + 16, paddingTop: 16 }}>
+                <Button variant={'outline'} onPress={onRequestClose}>
                     <Text>Close</Text>
                 </Button>
             </View>

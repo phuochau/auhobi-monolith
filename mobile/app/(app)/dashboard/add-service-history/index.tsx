@@ -5,29 +5,34 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Text } from '@/components/ui/text'
 import { z } from "zod"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, FieldError, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { Input } from "@/components/ui/input"
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { ServiceLog, ServiceLogType } from "@/graphql/gql/generated-models"
+import { Garage, ServiceLog, ServiceLogDto, ServiceLogType } from "@/graphql/gql/generated-models"
 import { FormMessage } from "@/components/ui/form"
 import { DateTimeInput } from "@/components/form-fields/date-time-input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { DataUtils } from "@/lib/data-utils"
-import { addServiceLogAsync } from "@/store/service-log/actions/add-service-log-async.action"
+import { addServiceLog } from "@/store/service-log/actions/add-service-log.action"
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
 import { MediaInput } from "@/components/form-fields/media-input"
 import { Label } from "@/components/ui/label"
 import { GarageInput } from "@/components/form-fields/garage-input"
+import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
+import { PlaceAutocompleteResult } from "@googlemaps/google-maps-services-js"
  
 const formSchema = z.object({
   date: z.string(),
   mileage: z.string(),
   type: z.string(),
   media: z.string().array().optional(),
-  garage: z.string().optional(),
+  garage: z.object({
+    type: z.nativeEnum(GarageType),
+    data: z.any()
+  }).optional(),
   bills: z.string().array().optional()
 })
 
@@ -58,13 +63,32 @@ const AddServiceHistory = () => {
     setSubmitting(true)
     setResponse(undefined)
 
-    const { payload } = await dispatch(addServiceLogAsync({
-      serviceLog: {
-        date: values.date,
-        type: values.type as ServiceLogType,
-        mileage: parseInt(values.mileage),
-        vehicle: vehicle!.id
+    const serviceLogInput: ServiceLogDto = {
+      date: values.date,
+      type: values.type as ServiceLogType,
+      mileage: parseInt(values.mileage),
+      vehicle: vehicle!.id
+    }
+
+    if (values.garage) {
+      if (values.garage.type === GarageType.CUSTOM) {
+        serviceLogInput.customGarage = values.garage.data as string
+      } else if (values.garage.type === GarageType.GOOGLE_MAPS) {
+        const place = values.garage.data as PlaceAutocompleteResult
+        if (place) {
+          serviceLogInput.garage = {
+            name: place.structured_formatting?.main_text || place.place_id,
+            gplace_id: place.place_id
+          }
+        }
+      } else {
+        const garage = values.garage.data as Garage
+        serviceLogInput.garageId = garage.id
       }
+    }
+
+    const { payload } = await dispatch(addServiceLog({
+      serviceLog: serviceLogInput
     }))
 
     const response = payload as GraphQLResponse<ServiceLog>
@@ -148,15 +172,17 @@ const AddServiceHistory = () => {
                 control={control}
                 render={({ field: { onChange, onBlur, value } }) => (
                   <GarageInput
-                    placeholder="Garage"
-                    value={value}
-                    onBlur={onBlur}
+                    value={(value as GaragePickerResult | undefined)}
+                    textInput={{
+                      onBlur: onBlur,
+                      placeholder: "Garage"
+                    }}
                     onChange={onChange}
                   />
                 )}
                 name="garage"
               />
-              <FormMessage nativeID="GarageError" error={errors.garage}></FormMessage>
+              <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
 
               <Label nativeID="MediaLabel">Images</Label>
               <Controller
