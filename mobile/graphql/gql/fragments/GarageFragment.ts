@@ -4,7 +4,13 @@ export const GarageFragment = gql`
     fragment GarageFragment on Garage {
     	name
     	description
-    	address
+    	phone_number
+    	gplace_id
+    	addressDistanceKm
+    	addressDistrict
+    	addressCity
+    	addressWard
+    	addressFull
     	lat
     	lng
     	logo

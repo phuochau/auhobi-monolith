@@ -12,6 +12,10 @@ import { ServiceLogBill, ServiceLogBillDTO } from './service-log-bill.entity';
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
+  @FilterableField(() => ServiceLogType)
+  @Column()
+  type: ServiceLogType;
+
   @FilterableField({ nullable: true })
   @Column({ nullable: true })
   description?: string;
@@ -24,13 +28,13 @@ class BaseClass extends BaseEntity {
   @Column({ type: 'decimal', nullable: true })
   mileage?: number;
 
-  @FilterableField(() => ServiceLogType)
-  @Column()
-  type: ServiceLogType;
-
   @Field(() => [String], { nullable: true })
   @Column("text", { array: true, default: [], nullable: true })
   media?: string[];
+
+  @Field(() => String, { nullable: true })
+  @Column({ nullable: true })
+  customGarage?: string;
 }
 
 /**

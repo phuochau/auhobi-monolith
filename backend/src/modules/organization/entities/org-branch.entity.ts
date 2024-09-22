@@ -15,6 +15,10 @@ class BaseClass extends BaseEntity {
   @Column()
   name: string;
   
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  phone_number: string;
+  
   @FilterableField(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
   details: string;

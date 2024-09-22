@@ -15,8 +15,6 @@ export class ApiKeyVerifierStrategy extends PassportStrategy(CustomStrategy) {
   async validate(req: any): Promise<ApiKey> {
     if (req.headers?.key?.length) {
       try {
-        // key: abc
-        // secret: abc
         const key = req.headers['key']
         const secret = req.headers['secret']
         return this.apiKeyService.findValidKey(key, secret)

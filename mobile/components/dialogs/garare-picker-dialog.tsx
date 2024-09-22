@@ -11,34 +11,75 @@ import { Button } from '../ui/button';
 import { useRef, useState } from 'react';
 import { GoogleApi } from '@/lib/google-api';
 import { PlaceAutocompleteResult } from '@googlemaps/google-maps-services-js';
+import { GraphQLAPI } from '@/graphql/api';
+import { Garage, GarageConnection, GarageSortFields, QueryGaragesArgs, SortDirection } from '@/graphql/gql/generated-models';
+import { GaragesQuery } from '@/graphql/gql/queries/garages';
+import { TriangleAlert } from '@/lib/icons/TriangleAlert';
+
+export enum GarageType {
+    DEFAULT = 1,
+    GOOGLE_MAPS,
+    CUSTOM,
+}
 
 export type GaragePickerDialogProps = {
     open?: boolean,
     onRequestClose?: () => any,
-    onChange?: (garage: any) => any
+    onChange?: (type: GarageType, garage: any) => any
 }
 
 const GaragePickerDialog = (props: GaragePickerDialogProps) => {
   const { open, onRequestClose, onChange } = props
   const insets = useSafeAreaInsets();
   const [keyword, setKeyword] = useState<string>('')
-  const [places, setPlaces] = useState<PlaceAutocompleteResult[]>([])
+  const [searching, setSearching] = useState<boolean>(false)
+  const [garages, setGarages] = useState<Garage[]>([])
+  const [gPlaces, setGPlaces] = useState<PlaceAutocompleteResult[]>([])
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
   
   if (!open) {
     return null
   }
 
-  function chooseGarage(garage: any) {
+  async function fetchGarages(text: string): Promise<Garage[]> {
+    try {
+        const result = await GraphQLAPI.authQuery<GarageConnection, QueryGaragesArgs>(GaragesQuery, {
+            paging: { first: 5 },
+            filter: {
+                name: { iLike: `%${text}%` }
+            },
+            sorting: [{ field: GarageSortFields.Name, direction: SortDirection.Asc }]
+        })
+
+        return (result.data?.edges || []).map(item => item.node)
+    } catch (err) {
+        console.log(err)
+        return []
+    }
+  }
+
+
+  async function fetchGaragesOnGoogleMaps(text: string): Promise<PlaceAutocompleteResult[]> {
+    try {
+        const gPredictions = await GoogleApi.searchGarages(text)
+        return gPredictions
+    } catch (err) {
+        console.log(err)
+        return []
+    }
+  }
+
+  function chooseGarage(type: GarageType, garage: any) {
     if (onRequestClose) {
         onRequestClose()
     }
     if (onChange) {
-        onChange(garage)
+        onChange(type, garage)
     }
   }
 
   function updateKeyword(text: string) {
+    setSearching(true)
     setKeyword(text)
     startSearch(text)
   }
@@ -49,18 +90,16 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
     }
 
     timeoutRef.current = setTimeout(async () => {
-        try {
-            const predictions = await GoogleApi.searchGarages(text)
-            console.log(JSON.stringify(predictions))
-            if (predictions) {
-                setPlaces(predictions)
-            }
-        } catch (err) {
-            console.log(err)
-            setPlaces([])
-        }
+        const garages = await fetchGarages(text)
+        const gPlaces = await fetchGaragesOnGoogleMaps(text)
+
+        setGarages(garages)
+        setGPlaces(gPlaces)
+        setSearching(false)
     }, 1000)
   }
+
+  const emptyResult = !Boolean(garages.length) && !Boolean(gPlaces.length)
 
   return (
     <Portal name='garage-input-model'>
@@ -71,22 +110,43 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
             <Separator />
             
             <ScrollView>
-                <View className='flex flex-col'>
-                    {places.map((place, index) =>
-                        <Pressable key={`${place.place_id}${index}`} onPress={() => chooseGarage(true)}>
-                            <View className='flex flex-row px-4 py-2.5 gap-4'>
-                                <Image source={{ uri: 'https://lh5.googleusercontent.com/p/AF1QipPxIOaHYtWnE0nfQ6DM75PVVpAt2uXP8y6-gvKO=w408-h544-k-no' }} className='mt-1.5 aspect-square w-12 h-12 rounded' />
-                                <View className='flex-1 flex flex-col'>
-                                    <Label nativeID="GarageName">{place.structured_formatting?.main_text || place.description}</Label>
-                                    <Text className='text-sm text-muted-foreground'>{place.description}</Text>
-                                </View>
-                                <View className='mt-0.5'>
-                                    <Text className='text-sm text-muted-foreground'>10.3km</Text>
-                                </View>
-                            </View>
-                            <Separator />
-                        </Pressable>)}
-                </View>
+                {emptyResult && Boolean(keyword.length) && !searching &&
+                    <View className="flex flex-col items-center justify-center px-4 gap-2 py-12">
+                        <TriangleAlert className='text-muted-foreground' size={48} />
+                        <Text className='text-sm font-semibold text-muted-foreground'>There is no results.</Text>
+                        <Button onPress={() => chooseGarage(GarageType.CUSTOM, keyword)}><Text>Choose "{keyword}"</Text></Button>
+                    </View>}
+
+                {!emptyResult && 
+                    <>
+                        <View className='flex flex-col'>
+                            {garages.map((garage, index) =>
+                                <Pressable key={`${garage.id}${index}`} onPress={() => chooseGarage(GarageType.DEFAULT, garage)}>
+                                    <View className='flex flex-row px-4 py-2.5 gap-4'>
+                                        <Image source={{ uri: garage.media?.[0] }} className='mt-1.5 aspect-square w-12 h-12 rounded' />
+                                        <View className='flex-1 flex flex-col'>
+                                            <Label nativeID="GarageName">{garage.name}</Label>
+                                            <Text className='text-sm text-muted-foreground'>{garage.addressFull}</Text>
+                                        </View>
+                                    </View>
+                                    <Separator />
+                                </Pressable>)}
+                        </View>
+
+                        <View className='flex flex-col'>
+                            {gPlaces.map((place, index) =>
+                                <Pressable key={`${place.place_id}${index}`} onPress={() => chooseGarage(GarageType.GOOGLE_MAPS, true)}>
+                                    <View className='flex flex-row px-4 py-2.5 gap-4'>
+                                        <Image source={{ uri: 'https://lh5.googleusercontent.com/p/AF1QipPxIOaHYtWnE0nfQ6DM75PVVpAt2uXP8y6-gvKO=w408-h544-k-no' }} className='mt-1.5 aspect-square w-12 h-12 rounded' />
+                                        <View className='flex-1 flex flex-col'>
+                                            <Label nativeID="GarageName">{place.structured_formatting?.main_text || place.description}</Label>
+                                            <Text className='text-sm text-muted-foreground'>{place.description}</Text>
+                                        </View>
+                                    </View>
+                                    <Separator />
+                                </Pressable>)}
+                        </View>
+                    </>}
             </ScrollView>
 
             <View className='px-4' style={{ paddingVertical: insets.bottom }}>

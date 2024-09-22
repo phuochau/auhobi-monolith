@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 export const GarageAggregateGroupByFragment = gql`
     fragment GarageAggregateGroupByFragment on GarageAggregateGroupBy {
     	name
-    	address
+    	phone_number
+    	gplace_id
     	lat
     	lng
     	status

@@ -1060,6 +1060,7 @@ enum OrgBranchRole {
 
 type OrgBranch {
   name: String!
+  phone_number: String
   details: JSON
   status: OrgBranchStatus!
   id: ID!
@@ -1128,6 +1129,7 @@ input OrgBranchMemberAggregateFilterOrgBranchAggregateFilter {
   and: [OrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -1218,6 +1220,7 @@ input OrgBranchMemberFilterOrgBranchFilter {
   and: [OrgBranchMemberFilterOrgBranchFilter!]
   or: [OrgBranchMemberFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -1569,6 +1572,7 @@ input OrgBranchAggregateFilter {
   and: [OrgBranchAggregateFilter!]
   or: [OrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -1621,6 +1625,7 @@ input ShopAggregateFilterOrgBranchAggregateFilter {
   and: [ShopAggregateFilterOrgBranchAggregateFilter!]
   or: [ShopAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -1709,6 +1714,7 @@ input OrgBranchFilter {
   and: [OrgBranchFilter!]
   or: [OrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -1750,6 +1756,7 @@ input OrgBranchSort {
 
 enum OrgBranchSortFields {
   name
+  phone_number
   details
   status
   id
@@ -1777,6 +1784,7 @@ input ShopFilterOrgBranchFilter {
   and: [ShopFilterOrgBranchFilter!]
   or: [ShopFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -1994,6 +2002,7 @@ type OrgBranchMemberAggregateResponse {
 
 type OrgBranchDeleteResponse {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2023,6 +2032,7 @@ type OrgBranchConnection {
 
 type OrgBranchAggregateGroupBy {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2033,6 +2043,7 @@ type OrgBranchAggregateGroupBy {
 
 type OrgBranchCountAggregate {
   name: Int
+  phone_number: Int
   details: Int
   status: Int
   id: Int
@@ -2043,6 +2054,7 @@ type OrgBranchCountAggregate {
 
 type OrgBranchMinAggregate {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2053,6 +2065,7 @@ type OrgBranchMinAggregate {
 
 type OrgBranchMaxAggregate {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2305,6 +2318,7 @@ type OrgShopsAggregateResponse {
 
 type OrgBranchesAggregateGroupBy {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2315,6 +2329,7 @@ type OrgBranchesAggregateGroupBy {
 
 type OrgBranchesCountAggregate {
   name: Int
+  phone_number: Int
   details: Int
   status: Int
   id: Int
@@ -2325,6 +2340,7 @@ type OrgBranchesCountAggregate {
 
 type OrgBranchesMinAggregate {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2335,6 +2351,7 @@ type OrgBranchesMinAggregate {
 
 type OrgBranchesMaxAggregate {
   name: String
+  phone_number: String
   details: JSON
   status: OrgBranchStatus
   id: ID
@@ -2733,7 +2750,13 @@ type CustomerAddressesAggregateResponse {
 type Garage {
   name: String!
   description: String
-  address: String
+  phone_number: String
+  gplace_id: String
+  addressDistanceKm: Float
+  addressDistrict: String
+  addressCity: String
+  addressWard: String
+  addressFull: String
   lat: Float
   lng: Float
   logo: String
@@ -2757,7 +2780,13 @@ enum GarageStatus {
 type GarageDeleteResponse {
   name: String
   description: String
-  address: String
+  phone_number: String
+  gplace_id: String
+  addressDistanceKm: Float
+  addressDistrict: String
+  addressCity: String
+  addressWard: String
+  addressFull: String
   lat: Float
   lng: Float
   logo: String
@@ -2791,7 +2820,8 @@ type GarageConnection {
 
 type GarageAggregateGroupBy {
   name: String
-  address: String
+  phone_number: String
+  gplace_id: String
   lat: Float
   lng: Float
   status: GarageStatus
@@ -2803,7 +2833,8 @@ type GarageAggregateGroupBy {
 
 type GarageCountAggregate {
   name: Int
-  address: Int
+  phone_number: Int
+  gplace_id: Int
   lat: Int
   lng: Int
   status: Int
@@ -2827,7 +2858,8 @@ type GarageAvgAggregate {
 
 type GarageMinAggregate {
   name: String
-  address: String
+  phone_number: String
+  gplace_id: String
   lat: Float
   lng: Float
   status: GarageStatus
@@ -2839,7 +2871,8 @@ type GarageMinAggregate {
 
 type GarageMaxAggregate {
   name: String
-  address: String
+  phone_number: String
+  gplace_id: String
   lat: Float
   lng: Float
   status: GarageStatus
@@ -2926,6 +2959,7 @@ input ProductAggregateFilterOrgBranchAggregateFilter {
   and: [ProductAggregateFilterOrgBranchAggregateFilter!]
   or: [ProductAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -3000,6 +3034,7 @@ input ProductFilterOrgBranchFilter {
   and: [ProductFilterOrgBranchFilter!]
   or: [ProductFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -3268,6 +3303,7 @@ input ProductCategoryAggregateFilterOrgBranchAggregateFilter {
   and: [ProductCategoryAggregateFilterOrgBranchAggregateFilter!]
   or: [ProductCategoryAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -3344,6 +3380,7 @@ input ProductCategoryFilterOrgBranchFilter {
   and: [ProductCategoryFilterOrgBranchFilter!]
   or: [ProductCategoryFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -5251,11 +5288,12 @@ type VehicleTransmissionConnection {
 }
 
 type ServiceLog {
+  type: ServiceLogType!
   description: String
   date: DateTime
   mileage: Float
-  type: ServiceLogType!
   media: [String!]
+  customGarage: String
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -5303,9 +5341,9 @@ input ServiceLogBillAggregateFilter {
 input ServiceLogBillAggregateFilterServiceLogAggregateFilter {
   and: [ServiceLogBillAggregateFilterServiceLogAggregateFilter!]
   or: [ServiceLogBillAggregateFilterServiceLogAggregateFilter!]
+  type: ServiceLogTypeFilterComparison
   description: StringFieldComparison
   date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5343,9 +5381,9 @@ input ServiceLogBillFilter {
 input ServiceLogBillFilterServiceLogFilter {
   and: [ServiceLogBillFilterServiceLogFilter!]
   or: [ServiceLogBillFilterServiceLogFilter!]
+  type: ServiceLogTypeFilterComparison
   description: StringFieldComparison
   date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -5454,11 +5492,12 @@ type ServiceLogBillAggregateResponse {
 }
 
 type ServiceLogDeleteResponse {
+  type: ServiceLogType
   description: String
   date: DateTime
   mileage: Float
-  type: ServiceLogType
   media: [String!]
+  customGarage: String
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -5485,9 +5524,9 @@ type ServiceLogConnection {
 }
 
 type ServiceLogAggregateGroupBy {
+  type: ServiceLogType
   description: String
   date(by: GroupBy! = DAY): DateTime
-  type: ServiceLogType
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
   updatedAt(by: GroupBy! = DAY): DateTime
@@ -5495,9 +5534,9 @@ type ServiceLogAggregateGroupBy {
 }
 
 type ServiceLogCountAggregate {
+  type: Int
   description: Int
   date: Int
-  type: Int
   id: Int
   createdAt: Int
   updatedAt: Int
@@ -5513,9 +5552,9 @@ type ServiceLogAvgAggregate {
 }
 
 type ServiceLogMinAggregate {
+  type: ServiceLogType
   description: String
   date: DateTime
-  type: ServiceLogType
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -5523,9 +5562,9 @@ type ServiceLogMinAggregate {
 }
 
 type ServiceLogMaxAggregate {
+  type: ServiceLogType
   description: String
   date: DateTime
-  type: ServiceLogType
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -6779,6 +6818,7 @@ input OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter {
   and: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -6858,6 +6898,7 @@ input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateF
   and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -6919,6 +6960,7 @@ input OrgAggregateFilterOrgBranchAggregateFilter {
   and: [OrgAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -6975,6 +7017,7 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggre
   and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7011,6 +7054,7 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOr
   and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7092,6 +7136,7 @@ input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggre
   and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7226,6 +7271,7 @@ input OrgFilterShopFilterOrgBranchFilter {
   and: [OrgFilterShopFilterOrgBranchFilter!]
   or: [OrgFilterShopFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7305,6 +7351,7 @@ input OrgFilterShopFilterOrgFilterOrgBranchFilter {
   and: [OrgFilterShopFilterOrgFilterOrgBranchFilter!]
   or: [OrgFilterShopFilterOrgFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7366,6 +7413,7 @@ input OrgFilterOrgBranchFilter {
   and: [OrgFilterOrgBranchFilter!]
   or: [OrgFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7422,6 +7470,7 @@ input OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter {
   and: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
   or: [OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7458,6 +7507,7 @@ input OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter {
   and: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
   or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7539,6 +7589,7 @@ input OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter {
   and: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
   or: [OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7693,6 +7744,7 @@ input ProductTypeAggregateFilterOrgBranchAggregateFilter {
   and: [ProductTypeAggregateFilterOrgBranchAggregateFilter!]
   or: [ProductTypeAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7731,6 +7783,7 @@ input ProductTypeFilterOrgBranchFilter {
   and: [ProductTypeFilterOrgBranchFilter!]
   or: [ProductTypeFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7784,6 +7837,7 @@ input ProductUnitAggregateFilterOrgBranchAggregateFilter {
   and: [ProductUnitAggregateFilterOrgBranchAggregateFilter!]
   or: [ProductUnitAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -7822,6 +7876,7 @@ input ProductUnitFilterOrgBranchFilter {
   and: [ProductUnitFilterOrgBranchFilter!]
   or: [ProductUnitFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -8022,6 +8077,7 @@ input OrderAggregateFilterOrgBranchAggregateFilter {
   and: [OrderAggregateFilterOrgBranchAggregateFilter!]
   or: [OrderAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -8065,6 +8121,7 @@ input OrderFilterOrgBranchFilter {
   and: [OrderFilterOrgBranchFilter!]
   or: [OrderFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -8096,7 +8153,8 @@ input GarageAggregateFilter {
   and: [GarageAggregateFilter!]
   or: [GarageAggregateFilter!]
   name: StringFieldComparison
-  address: StringFieldComparison
+  phone_number: StringFieldComparison
+  gplace_id: StringFieldComparison
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
@@ -8129,6 +8187,7 @@ input GarageAggregateFilterOrgBranchAggregateFilter {
   and: [GarageAggregateFilterOrgBranchAggregateFilter!]
   or: [GarageAggregateFilterOrgBranchAggregateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -8153,7 +8212,8 @@ input GarageFilter {
   and: [GarageFilter!]
   or: [GarageFilter!]
   name: StringFieldComparison
-  address: StringFieldComparison
+  phone_number: StringFieldComparison
+  gplace_id: StringFieldComparison
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
@@ -8169,6 +8229,7 @@ input GarageFilterOrgBranchFilter {
   and: [GarageFilterOrgBranchFilter!]
   or: [GarageFilterOrgBranchFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -8197,7 +8258,8 @@ input GarageSort {
 
 enum GarageSortFields {
   name
-  address
+  phone_number
+  gplace_id
   lat
   lng
   status
@@ -8441,9 +8503,9 @@ enum VehicleModelSortFields {
 input ServiceLogAggregateFilter {
   and: [ServiceLogAggregateFilter!]
   or: [ServiceLogAggregateFilter!]
+  type: ServiceLogTypeFilterComparison
   description: StringFieldComparison
   date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8469,7 +8531,8 @@ input ServiceLogAggregateFilterGarageAggregateFilter {
   and: [ServiceLogAggregateFilterGarageAggregateFilter!]
   or: [ServiceLogAggregateFilterGarageAggregateFilter!]
   name: StringFieldComparison
-  address: StringFieldComparison
+  phone_number: StringFieldComparison
+  gplace_id: StringFieldComparison
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
@@ -8492,9 +8555,9 @@ input ServiceLogAggregateFilterServiceLogBillAggregateFilter {
 input ServiceLogFilter {
   and: [ServiceLogFilter!]
   or: [ServiceLogFilter!]
+  type: ServiceLogTypeFilterComparison
   description: StringFieldComparison
   date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8520,7 +8583,8 @@ input ServiceLogFilterGarageFilter {
   and: [ServiceLogFilterGarageFilter!]
   or: [ServiceLogFilterGarageFilter!]
   name: StringFieldComparison
-  address: StringFieldComparison
+  phone_number: StringFieldComparison
+  gplace_id: StringFieldComparison
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
@@ -8547,9 +8611,9 @@ input ServiceLogSort {
 }
 
 enum ServiceLogSortFields {
+  type
   description
   date
-  type
   id
   createdAt
   updatedAt
@@ -9292,6 +9356,7 @@ input CreateOneOrgBranchInput {
 
 input OrgBranchDTO {
   name: String!
+  phone_number: String
   details: JSON
   status: OrgBranchStatus!
   org: ID
@@ -9323,6 +9388,7 @@ input OrgBranchUpdateFilter {
   and: [OrgBranchUpdateFilter!]
   or: [OrgBranchUpdateFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -9345,6 +9411,7 @@ input OrgBranchDeleteFilter {
   and: [OrgBranchDeleteFilter!]
   or: [OrgBranchDeleteFilter!]
   name: StringFieldComparison
+  phone_number: StringFieldComparison
   details: JSONFilterComparison
   status: OrgBranchStatusFilterComparison
   id: IDFilterComparison
@@ -10480,7 +10547,13 @@ input CreateOneGarageInput {
 input GarageDTO {
   name: String!
   description: String
-  address: String
+  phone_number: String
+  gplace_id: String
+  addressDistanceKm: Float
+  addressDistrict: String
+  addressCity: String
+  addressWard: String
+  addressFull: String
   lat: Float
   lng: Float
   logo: String
@@ -10516,7 +10589,8 @@ input GarageUpdateFilter {
   and: [GarageUpdateFilter!]
   or: [GarageUpdateFilter!]
   name: StringFieldComparison
-  address: StringFieldComparison
+  phone_number: StringFieldComparison
+  gplace_id: StringFieldComparison
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
@@ -10540,7 +10614,8 @@ input GarageDeleteFilter {
   and: [GarageDeleteFilter!]
   or: [GarageDeleteFilter!]
   name: StringFieldComparison
-  address: StringFieldComparison
+  phone_number: StringFieldComparison
+  gplace_id: StringFieldComparison
   lat: NumberFieldComparison
   lng: NumberFieldComparison
   status: GarageStatusFilterComparison
@@ -11187,11 +11262,12 @@ input CreateOneServiceLogInput {
 }
 
 input ServiceLogDTO {
+  type: ServiceLogType!
   description: String
   date: DateTime
   mileage: Float
-  type: ServiceLogType!
   media: [String!]
+  customGarage: String
   vehicle: ID!
   garage: [GarageDTO!]
   bills: [ServiceLogBillDTO!]
@@ -11221,9 +11297,9 @@ input UpdateManyServiceLogsInput {
 input ServiceLogUpdateFilter {
   and: [ServiceLogUpdateFilter!]
   or: [ServiceLogUpdateFilter!]
+  type: ServiceLogTypeFilterComparison
   description: StringFieldComparison
   date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -11243,9 +11319,9 @@ input DeleteManyServiceLogsInput {
 input ServiceLogDeleteFilter {
   and: [ServiceLogDeleteFilter!]
   or: [ServiceLogDeleteFilter!]
+  type: ServiceLogTypeFilterComparison
   description: StringFieldComparison
   date: DateFieldComparison
-  type: ServiceLogTypeFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison

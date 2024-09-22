@@ -21,10 +21,34 @@ class BaseClass extends BaseEntity {
   @Field({ nullable: true })
   @Column({ nullable: true })
   description: string;
-
+  
   @FilterableField({ nullable: true })
   @Column({ nullable: true })
-  address: string;
+  phone_number: string;
+  
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  gplace_id: string;
+
+  @Field({ nullable: true })
+  @Column('decimal', { nullable: true })
+  addressDistanceKm: number;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressDistrict: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressCity: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressWard: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressFull: string;
 
   @FilterableField({ nullable: true })
   @Column('decimal', { nullable: true })

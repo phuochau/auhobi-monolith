@@ -56,7 +56,6 @@ class GraphQLClient {
             const forbidden = this.isForbidden(gqlResponse)
             
             if (forbidden) {
-                console.log('forbidden', forbidden)
                 store.dispatch(logout())
                 // const refreshResult = await AuthService.refreshToken()
                 // if (refreshResult?.success) {

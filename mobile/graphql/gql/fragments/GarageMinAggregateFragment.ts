@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 export const GarageMinAggregateFragment = gql`
     fragment GarageMinAggregateFragment on GarageMinAggregate {
     	name
-    	address
+    	phone_number
+    	gplace_id
     	lat
     	lng
     	status

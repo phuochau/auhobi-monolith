@@ -2625,11 +2625,16 @@ export type FileUpdateFilter = {
 
 export type Garage = {
   __typename?: 'Garage';
-  address?: Maybe<Scalars['String']['output']>;
+  addressCity?: Maybe<Scalars['String']['output']>;
+  addressDistanceKm?: Maybe<Scalars['Float']['output']>;
+  addressDistrict?: Maybe<Scalars['String']['output']>;
+  addressFull?: Maybe<Scalars['String']['output']>;
+  addressWard?: Maybe<Scalars['String']['output']>;
   branch: OrgBranch;
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  gplace_id?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   lat?: Maybe<Scalars['Float']['output']>;
   lng?: Maybe<Scalars['Float']['output']>;
@@ -2638,22 +2643,24 @@ export type Garage = {
   metadata?: Maybe<Scalars['JSON']['output']>;
   name: Scalars['String']['output'];
   org: Org;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<GarageStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type GarageAggregateFilter = {
-  address?: InputMaybe<StringFieldComparison>;
   and?: InputMaybe<Array<GarageAggregateFilter>>;
   branch?: InputMaybe<GarageAggregateFilterOrgBranchAggregateFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  gplace_id?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   lat?: InputMaybe<NumberFieldComparison>;
   lng?: InputMaybe<NumberFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<GarageAggregateFilter>>;
   org?: InputMaybe<GarageAggregateFilterOrgAggregateFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<GarageStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -2678,19 +2685,21 @@ export type GarageAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<GarageAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type GarageAggregateGroupBy = {
   __typename?: 'GarageAggregateGroupBy';
-  address?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  gplace_id?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lat?: Maybe<Scalars['Float']['output']>;
   lng?: Maybe<Scalars['Float']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<GarageStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2739,21 +2748,27 @@ export type GarageConnection = {
 
 export type GarageCountAggregate = {
   __typename?: 'GarageCountAggregate';
-  address?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
+  gplace_id?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   lat?: Maybe<Scalars['Int']['output']>;
   lng?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  phone_number?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
 export type GarageDto = {
-  address?: InputMaybe<Scalars['String']['input']>;
+  addressCity?: InputMaybe<Scalars['String']['input']>;
+  addressDistanceKm?: InputMaybe<Scalars['Float']['input']>;
+  addressDistrict?: InputMaybe<Scalars['String']['input']>;
+  addressFull?: InputMaybe<Scalars['String']['input']>;
+  addressWard?: InputMaybe<Scalars['String']['input']>;
   branch?: InputMaybe<Scalars['ID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  gplace_id?: InputMaybe<Scalars['String']['input']>;
   lat?: InputMaybe<Scalars['Float']['input']>;
   lng?: InputMaybe<Scalars['Float']['input']>;
   logo?: InputMaybe<Scalars['String']['input']>;
@@ -2761,29 +2776,36 @@ export type GarageDto = {
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
   org?: InputMaybe<Scalars['ID']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<GarageStatus>;
 };
 
 export type GarageDeleteFilter = {
-  address?: InputMaybe<StringFieldComparison>;
   and?: InputMaybe<Array<GarageDeleteFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  gplace_id?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   lat?: InputMaybe<NumberFieldComparison>;
   lng?: InputMaybe<NumberFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<GarageDeleteFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<GarageStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type GarageDeleteResponse = {
   __typename?: 'GarageDeleteResponse';
-  address?: Maybe<Scalars['String']['output']>;
+  addressCity?: Maybe<Scalars['String']['output']>;
+  addressDistanceKm?: Maybe<Scalars['Float']['output']>;
+  addressDistrict?: Maybe<Scalars['String']['output']>;
+  addressFull?: Maybe<Scalars['String']['output']>;
+  addressWard?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  gplace_id?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lat?: Maybe<Scalars['Float']['output']>;
   lng?: Maybe<Scalars['Float']['output']>;
@@ -2791,6 +2813,7 @@ export type GarageDeleteResponse = {
   media?: Maybe<Array<Scalars['String']['output']>>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<GarageStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2804,17 +2827,18 @@ export type GarageEdge = {
 };
 
 export type GarageFilter = {
-  address?: InputMaybe<StringFieldComparison>;
   and?: InputMaybe<Array<GarageFilter>>;
   branch?: InputMaybe<GarageFilterOrgBranchFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  gplace_id?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   lat?: InputMaybe<NumberFieldComparison>;
   lng?: InputMaybe<NumberFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<GarageFilter>>;
   org?: InputMaybe<GarageFilterOrgFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<GarageStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -2827,6 +2851,7 @@ export type GarageFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<GarageFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -2845,26 +2870,28 @@ export type GarageFilterOrgFilter = {
 
 export type GarageMaxAggregate = {
   __typename?: 'GarageMaxAggregate';
-  address?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  gplace_id?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lat?: Maybe<Scalars['Float']['output']>;
   lng?: Maybe<Scalars['Float']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<GarageStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type GarageMinAggregate = {
   __typename?: 'GarageMinAggregate';
-  address?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  gplace_id?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lat?: Maybe<Scalars['Float']['output']>;
   lng?: Maybe<Scalars['Float']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<GarageStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -2876,13 +2903,14 @@ export type GarageSort = {
 };
 
 export enum GarageSortFields {
-  Address = 'address',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
+  GplaceId = 'gplace_id',
   Id = 'id',
   Lat = 'lat',
   Lng = 'lng',
   Name = 'name',
+  PhoneNumber = 'phone_number',
   Status = 'status',
   UpdatedAt = 'updatedAt'
 }
@@ -2918,15 +2946,16 @@ export type GarageSumAggregate = {
 };
 
 export type GarageUpdateFilter = {
-  address?: InputMaybe<StringFieldComparison>;
   and?: InputMaybe<Array<GarageUpdateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  gplace_id?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   lat?: InputMaybe<NumberFieldComparison>;
   lng?: InputMaybe<NumberFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<GarageUpdateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<GarageStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4498,6 +4527,7 @@ export type OrderAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrderAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -4674,6 +4704,7 @@ export type OrderFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrderFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5270,6 +5301,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilter = {
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilter>>;
   org?: InputMaybe<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5312,6 +5344,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranc
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5374,6 +5407,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFi
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5455,6 +5489,7 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranc
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5535,6 +5570,7 @@ export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggr
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5572,6 +5608,7 @@ export type OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter = {
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilter>>;
   org?: InputMaybe<OrgAggregateFilterShopAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5688,6 +5725,7 @@ export type OrgBranch = {
   membersAggregate: Array<OrgBranchMembersAggregateResponse>;
   name: Scalars['String']['output'];
   org: Org;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status: OrgBranchStatus;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5714,6 +5752,7 @@ export type OrgBranchAggregateFilter = {
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchAggregateFilter>>;
   org?: InputMaybe<OrgBranchAggregateFilterOrgAggregateFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5748,6 +5787,7 @@ export type OrgBranchAggregateGroupBy = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5792,6 +5832,7 @@ export type OrgBranchCountAggregate = {
   details?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  phone_number?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
@@ -5801,6 +5842,7 @@ export type OrgBranchDto = {
   members?: InputMaybe<Array<OrgBranchMemberDto>>;
   name: Scalars['String']['input'];
   org?: InputMaybe<Scalars['ID']['input']>;
+  phone_number?: InputMaybe<Scalars['String']['input']>;
   status: OrgBranchStatus;
 };
 
@@ -5812,6 +5854,7 @@ export type OrgBranchDeleteFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchDeleteFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5823,6 +5866,7 @@ export type OrgBranchDeleteResponse = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5845,6 +5889,7 @@ export type OrgBranchFilter = {
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchFilter>>;
   org?: InputMaybe<OrgBranchFilterOrgFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5879,6 +5924,7 @@ export type OrgBranchMaxAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -5930,6 +5976,7 @@ export type OrgBranchMemberAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6065,6 +6112,7 @@ export type OrgBranchMemberFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6193,6 +6241,7 @@ export type OrgBranchMinAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -6233,6 +6282,7 @@ export enum OrgBranchSortFields {
   Details = 'details',
   Id = 'id',
   Name = 'name',
+  PhoneNumber = 'phone_number',
   Status = 'status',
   UpdatedAt = 'updatedAt'
 }
@@ -6268,6 +6318,7 @@ export type OrgBranchUpdateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchUpdateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6279,6 +6330,7 @@ export type OrgBranchesAggregateGroupBy = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -6308,6 +6360,7 @@ export type OrgBranchesCountAggregate = {
   details?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['Int']['output']>;
+  phone_number?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
@@ -6319,6 +6372,7 @@ export type OrgBranchesMaxAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -6330,6 +6384,7 @@ export type OrgBranchesMinAggregate = {
   details?: Maybe<Scalars['JSON']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<OrgBranchStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -6477,6 +6532,7 @@ export type OrgFilterOrgBranchFilter = {
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilter>>;
   org?: InputMaybe<OrgFilterOrgBranchFilterOrgFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6516,6 +6572,7 @@ export type OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6558,6 +6615,7 @@ export type OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6662,6 +6720,7 @@ export type OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6714,6 +6773,7 @@ export type OrgFilterShopFilterOrgBranchFilter = {
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterShopFilterOrgBranchFilter>>;
   org?: InputMaybe<OrgFilterShopFilterOrgBranchFilterOrgFilter>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6779,6 +6839,7 @@ export type OrgFilterShopFilterOrgFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -7412,6 +7473,7 @@ export type ProductAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -7606,6 +7668,7 @@ export type ProductCategoryAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductCategoryAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -7733,6 +7796,7 @@ export type ProductCategoryFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductCategoryFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -7968,6 +8032,7 @@ export type ProductFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -8783,6 +8848,7 @@ export type ProductTypeAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductTypeAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -8910,6 +8976,7 @@ export type ProductTypeFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductTypeFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -9095,6 +9162,7 @@ export type ProductUnitAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductUnitAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -9222,6 +9290,7 @@ export type ProductUnitFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ProductUnitFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -9969,6 +10038,7 @@ export type ServiceLog = {
   bills?: Maybe<ServiceLogBillsConnection>;
   billsAggregate: Array<ServiceLogBillsAggregateResponse>;
   createdAt: Scalars['DateTime']['output'];
+  customGarage?: Maybe<Scalars['String']['output']>;
   date?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -10009,15 +10079,16 @@ export type ServiceLogAggregateFilter = {
 };
 
 export type ServiceLogAggregateFilterGarageAggregateFilter = {
-  address?: InputMaybe<StringFieldComparison>;
   and?: InputMaybe<Array<ServiceLogAggregateFilterGarageAggregateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  gplace_id?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   lat?: InputMaybe<NumberFieldComparison>;
   lng?: InputMaybe<NumberFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ServiceLogAggregateFilterGarageAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<GarageStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -10375,6 +10446,7 @@ export type ServiceLogCountAggregate = {
 
 export type ServiceLogDto = {
   bills?: InputMaybe<Array<ServiceLogBillDto>>;
+  customGarage?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['DateTime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   garage?: InputMaybe<Array<GarageDto>>;
@@ -10399,6 +10471,7 @@ export type ServiceLogDeleteFilter = {
 export type ServiceLogDeleteResponse = {
   __typename?: 'ServiceLogDeleteResponse';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  customGarage?: Maybe<Scalars['String']['output']>;
   date?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -10433,15 +10506,16 @@ export type ServiceLogFilter = {
 };
 
 export type ServiceLogFilterGarageFilter = {
-  address?: InputMaybe<StringFieldComparison>;
   and?: InputMaybe<Array<ServiceLogFilterGarageFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  gplace_id?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   lat?: InputMaybe<NumberFieldComparison>;
   lng?: InputMaybe<NumberFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ServiceLogFilterGarageFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<GarageStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -10753,6 +10827,7 @@ export type ShopAggregateFilterOrgBranchAggregateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ShopAggregateFilterOrgBranchAggregateFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -10885,6 +10960,7 @@ export type ShopFilterOrgBranchFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ShopFilterOrgBranchFilter>>;
+  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<OrgBranchStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -15939,11 +16015,16 @@ export type FileMinAggregateResolvers<ContextType = any, ParentType extends Reso
 }>;
 
 export type GarageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Garage'] = ResolversParentTypes['Garage']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  addressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressFull?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressWard?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   branch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gplace_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -15952,19 +16033,21 @@ export type GarageResolvers<ContextType = any, ParentType extends ResolversParen
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   org?: Resolver<ResolversTypes['Org'], ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type GarageAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageAggregateGroupBy'] = ResolversParentTypes['GarageAggregateGroupBy']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<GarageAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<GarageAggregateGroupByDeletedAtArgs, 'by'>>;
+  gplace_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<GarageAggregateGroupByUpdatedAtArgs, 'by'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -15995,23 +16078,29 @@ export type GarageConnectionResolvers<ContextType = any, ParentType extends Reso
 }>;
 
 export type GarageCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageCountAggregate'] = ResolversParentTypes['GarageCountAggregate']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  gplace_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type GarageDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageDeleteResponse'] = ResolversParentTypes['GarageDeleteResponse']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  addressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressFull?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressWard?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gplace_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -16019,6 +16108,7 @@ export type GarageDeleteResponseResolvers<ContextType = any, ParentType extends 
   media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16031,26 +16121,28 @@ export type GarageEdgeResolvers<ContextType = any, ParentType extends ResolversP
 }>;
 
 export type GarageMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageMaxAggregate'] = ResolversParentTypes['GarageMaxAggregate']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  gplace_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type GarageMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageMinAggregate'] = ResolversParentTypes['GarageMinAggregate']> = ResolversObject<{
-  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  gplace_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lat?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   lng?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['GarageStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16695,6 +16787,7 @@ export type OrgBranchResolvers<ContextType = any, ParentType extends ResolversPa
   membersAggregate?: Resolver<Array<ResolversTypes['OrgBranchMembersAggregateResponse']>, ParentType, ContextType, Partial<OrgBranchMembersAggregateArgs>>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   org?: Resolver<ResolversTypes['Org'], ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<ResolversTypes['OrgBranchStatus'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16706,6 +16799,7 @@ export type OrgBranchAggregateGroupByResolvers<ContextType = any, ParentType ext
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<OrgBranchAggregateGroupByUpdatedAtArgs, 'by'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16732,6 +16826,7 @@ export type OrgBranchCountAggregateResolvers<ContextType = any, ParentType exten
   details?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16743,6 +16838,7 @@ export type OrgBranchDeleteResponseResolvers<ContextType = any, ParentType exten
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16760,6 +16856,7 @@ export type OrgBranchMaxAggregateResolvers<ContextType = any, ParentType extends
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16929,6 +17026,7 @@ export type OrgBranchMinAggregateResolvers<ContextType = any, ParentType extends
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16940,6 +17038,7 @@ export type OrgBranchesAggregateGroupByResolvers<ContextType = any, ParentType e
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16966,6 +17065,7 @@ export type OrgBranchesCountAggregateResolvers<ContextType = any, ParentType ext
   details?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16977,6 +17077,7 @@ export type OrgBranchesMaxAggregateResolvers<ContextType = any, ParentType exten
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16988,6 +17089,7 @@ export type OrgBranchesMinAggregateResolvers<ContextType = any, ParentType exten
   details?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['OrgBranchStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -18399,6 +18501,7 @@ export type ServiceLogResolvers<ContextType = any, ParentType extends ResolversP
   bills?: Resolver<Maybe<ResolversTypes['ServiceLogBillsConnection']>, ParentType, ContextType, RequireFields<ServiceLogBillsArgs, 'filter' | 'paging' | 'sorting'>>;
   billsAggregate?: Resolver<Array<ResolversTypes['ServiceLogBillsAggregateResponse']>, ParentType, ContextType, Partial<ServiceLogBillsAggregateArgs>>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  customGarage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -18611,6 +18714,7 @@ export type ServiceLogCountAggregateResolvers<ContextType = any, ParentType exte
 
 export type ServiceLogDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLogDeleteResponse'] = ResolversParentTypes['ServiceLogDeleteResponse']> = ResolversObject<{
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  customGarage?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   date?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
