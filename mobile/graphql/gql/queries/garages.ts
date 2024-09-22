@@ -3,16 +3,24 @@ import gql from 'graphql-tag'
 export const GaragesQuery = gql`
     query Garages($paging: CursorPaging!, $filter: GarageFilter!, $sorting: [GarageSort!]!) {
     	garages(paging: $paging, filter: $filter, sorting: $sorting) {
+    		pageInfo {
+    			hasNextPage
+    			hasPreviousPage
+    			startCursor
+    			endCursor
+    		}
     		edges {
     			node {
     				name
     				description
     				phone_number
     				gplace_id
-    				addressDistanceKm
+    				addressStreetAndNo
+    				addressWard
     				addressDistrict
     				addressCity
-    				addressWard
+    				addressCoutry
+    				addressPostalCode
     				addressFull
     				lat
     				lng
@@ -25,7 +33,9 @@ export const GaragesQuery = gql`
     				updatedAt
     				deletedAt
     			}
+    			cursor
     		}
+    		totalCount
     	}
     }
 `

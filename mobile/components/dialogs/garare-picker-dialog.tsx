@@ -97,10 +97,11 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
 
     timeoutRef.current = setTimeout(async () => {
         const garages = await fetchGarages(text)
+        const garagePlaceIds = garages.map(item => item.gplace_id)
         const gPlaces = await fetchGaragesOnGoogleMaps(text)
 
         setGarages(garages)
-        setGPlaces(gPlaces)
+        setGPlaces(gPlaces.filter(item => !garagePlaceIds.includes(item.place_id)))
         setSearching(false)
     }, 1000)
   }
@@ -110,14 +111,14 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
   return (
     <Portal name='garage-input-model'>
         <View className='absolute top-0 left-0 bottom-0 right-0 bg-background flex flex-col' style={{ paddingTop: insets.top }}>
-            <View className='px-4 py-4'>
+            <View className='px-5 py-4'>
                 <Input value={keyword} onChangeText={updateKeyword} placeholder='Search Garage' />
             </View>
             <Separator />
             
             <ScrollView>
                 {emptyResult && Boolean(keyword.length) && !searching &&
-                    <View className="flex flex-col items-center justify-center px-4 gap-2 py-12">
+                    <View className="flex flex-col items-center justify-center px-5 gap-2 py-12">
                         <TriangleAlert className='text-muted-foreground' size={48} />
                         <Text className='text-sm font-semibold text-muted-foreground'>There is no results.</Text>
                         <Button onPress={() => chooseGarage(GarageType.CUSTOM, keyword)}><Text>Choose "{keyword}"</Text></Button>
@@ -128,8 +129,8 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
                         <View className='flex flex-col'>
                             {garages.map((garage, index) =>
                                 <Pressable key={`${garage.id}${index}`} onPress={() => chooseGarage(GarageType.DEFAULT, garage)}>
-                                    <View className='flex flex-row px-4 py-2.5 gap-4'>
-                                        {garage.media?.length && <Image source={{ uri: garage.media?.[0] }} className='mt-1.5 aspect-square w-12 h-12 rounded' />}
+                                    <View className='flex flex-row px-5 py-2.5 gap-4'>
+                                        {Boolean(garage.logo) && <Image source={{ uri: garage.media?.[0] }} className='mt-1.5 aspect-square w-12 h-12 rounded' />}
                                         <View className='flex-1 flex flex-col'>
                                             <Label nativeID="GarageName">{garage.name}</Label>
                                             <Text className='text-sm text-muted-foreground'>{garage.addressFull}</Text>
@@ -142,7 +143,7 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
                         <View className='flex flex-col'>
                             {gPlaces.map((place, index) =>
                                 <Pressable key={`${place.place_id}${index}`} onPress={() => chooseGarage(GarageType.GOOGLE_MAPS, place)}>
-                                    <View className='flex flex-row px-4 py-2.5 gap-4'>
+                                    <View className='flex flex-row px-5 py-2.5 gap-4'>
                                         <View className='flex-1 flex flex-col'>
                                             <Label nativeID="GarageName">{place.structured_formatting?.main_text || place.description}</Label>
                                             <Text className='text-sm text-muted-foreground'>{place.description}</Text>
@@ -154,7 +155,7 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
                     </>}
             </ScrollView>
 
-            <View className='px-4' style={{ paddingBottom: insets.bottom + 16, paddingTop: 16 }}>
+            <View className='px-5' style={{ paddingBottom: insets.bottom + 16, paddingTop: 16 }}>
                 <Button variant={'outline'} onPress={onRequestClose}>
                     <Text>Close</Text>
                 </Button>
