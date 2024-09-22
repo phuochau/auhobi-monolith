@@ -31,8 +31,12 @@ class BaseClass extends BaseEntity {
   gplace_id: string;
 
   @Field({ nullable: true })
-  @Column('decimal', { nullable: true })
-  addressDistanceKm: number;
+  @Column({ nullable: true })
+  addressStreetAndNo: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressWard: string;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
@@ -44,7 +48,11 @@ class BaseClass extends BaseEntity {
 
   @Field({ nullable: true })
   @Column({ nullable: true })
-  addressWard: string;
+  addressCoutry: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressPostalCode: string;
 
   @Field({ nullable: true })
   @Column({ nullable: true })

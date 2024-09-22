@@ -9,10 +9,12 @@ export const OrderFragment = gql`
     	commissionPrice
     	netPrice
     	note
-    	shippingAddressDistanceKm
+    	shippingAddressStreetAndNo
+    	shippingAddressWard
     	shippingAddressDistrict
     	shippingAddressCity
-    	shippingAddressWard
+    	shippingAddressCoutry
+    	shippingAddressPostalCode
     	shippingAddressFull
     	id
     	createdAt

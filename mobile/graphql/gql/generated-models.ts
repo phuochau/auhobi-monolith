@@ -2626,9 +2626,11 @@ export type FileUpdateFilter = {
 export type Garage = {
   __typename?: 'Garage';
   addressCity?: Maybe<Scalars['String']['output']>;
-  addressDistanceKm?: Maybe<Scalars['Float']['output']>;
+  addressCoutry?: Maybe<Scalars['String']['output']>;
   addressDistrict?: Maybe<Scalars['String']['output']>;
   addressFull?: Maybe<Scalars['String']['output']>;
+  addressPostalCode?: Maybe<Scalars['String']['output']>;
+  addressStreetAndNo?: Maybe<Scalars['String']['output']>;
   addressWard?: Maybe<Scalars['String']['output']>;
   branch: OrgBranch;
   createdAt: Scalars['DateTime']['output'];
@@ -2762,9 +2764,11 @@ export type GarageCountAggregate = {
 
 export type GarageDto = {
   addressCity?: InputMaybe<Scalars['String']['input']>;
-  addressDistanceKm?: InputMaybe<Scalars['Float']['input']>;
+  addressCoutry?: InputMaybe<Scalars['String']['input']>;
   addressDistrict?: InputMaybe<Scalars['String']['input']>;
   addressFull?: InputMaybe<Scalars['String']['input']>;
+  addressPostalCode?: InputMaybe<Scalars['String']['input']>;
+  addressStreetAndNo?: InputMaybe<Scalars['String']['input']>;
   addressWard?: InputMaybe<Scalars['String']['input']>;
   branch?: InputMaybe<Scalars['ID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -2798,9 +2802,11 @@ export type GarageDeleteFilter = {
 export type GarageDeleteResponse = {
   __typename?: 'GarageDeleteResponse';
   addressCity?: Maybe<Scalars['String']['output']>;
-  addressDistanceKm?: Maybe<Scalars['Float']['output']>;
+  addressCoutry?: Maybe<Scalars['String']['output']>;
   addressDistrict?: Maybe<Scalars['String']['output']>;
   addressFull?: Maybe<Scalars['String']['output']>;
+  addressPostalCode?: Maybe<Scalars['String']['output']>;
+  addressStreetAndNo?: Maybe<Scalars['String']['output']>;
   addressWard?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -4481,9 +4487,11 @@ export type Order = {
   note?: Maybe<Scalars['String']['output']>;
   refId?: Maybe<Scalars['String']['output']>;
   shippingAddressCity?: Maybe<Scalars['String']['output']>;
-  shippingAddressDistanceKm?: Maybe<Scalars['Float']['output']>;
+  shippingAddressCoutry?: Maybe<Scalars['String']['output']>;
   shippingAddressDistrict?: Maybe<Scalars['String']['output']>;
   shippingAddressFull?: Maybe<Scalars['String']['output']>;
+  shippingAddressPostalCode?: Maybe<Scalars['String']['output']>;
+  shippingAddressStreetAndNo?: Maybe<Scalars['String']['output']>;
   shippingAddressWard?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -4616,9 +4624,11 @@ export type OrderDto = {
   products?: InputMaybe<Array<OrderProductDto>>;
   refId?: InputMaybe<Scalars['String']['input']>;
   shippingAddressCity?: InputMaybe<Scalars['String']['input']>;
-  shippingAddressDistanceKm?: InputMaybe<Scalars['Float']['input']>;
+  shippingAddressCoutry?: InputMaybe<Scalars['String']['input']>;
   shippingAddressDistrict?: InputMaybe<Scalars['String']['input']>;
   shippingAddressFull?: InputMaybe<Scalars['String']['input']>;
+  shippingAddressPostalCode?: InputMaybe<Scalars['String']['input']>;
+  shippingAddressStreetAndNo?: InputMaybe<Scalars['String']['input']>;
   shippingAddressWard?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -4650,9 +4660,11 @@ export type OrderDeleteResponse = {
   note?: Maybe<Scalars['String']['output']>;
   refId?: Maybe<Scalars['String']['output']>;
   shippingAddressCity?: Maybe<Scalars['String']['output']>;
-  shippingAddressDistanceKm?: Maybe<Scalars['Float']['output']>;
+  shippingAddressCoutry?: Maybe<Scalars['String']['output']>;
   shippingAddressDistrict?: Maybe<Scalars['String']['output']>;
   shippingAddressFull?: Maybe<Scalars['String']['output']>;
+  shippingAddressPostalCode?: Maybe<Scalars['String']['output']>;
+  shippingAddressStreetAndNo?: Maybe<Scalars['String']['output']>;
   shippingAddressWard?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -16017,9 +16029,11 @@ export type FileMinAggregateResolvers<ContextType = any, ParentType extends Reso
 
 export type GarageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Garage'] = ResolversParentTypes['Garage']> = ResolversObject<{
   addressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  addressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  addressCoutry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addressFull?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressPostalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressStreetAndNo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addressWard?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   branch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
@@ -16094,9 +16108,11 @@ export type GarageCountAggregateResolvers<ContextType = any, ParentType extends 
 
 export type GarageDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['GarageDeleteResponse'] = ResolversParentTypes['GarageDeleteResponse']> = ResolversObject<{
   addressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  addressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  addressCoutry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addressFull?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressPostalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  addressStreetAndNo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   addressWard?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -16423,9 +16439,11 @@ export type OrderResolvers<ContextType = any, ParentType extends ResolversParent
   note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  shippingAddressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  shippingAddressCoutry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressFull?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  shippingAddressPostalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  shippingAddressStreetAndNo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressWard?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -16497,9 +16515,11 @@ export type OrderDeleteResponseResolvers<ContextType = any, ParentType extends R
   note?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressCity?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  shippingAddressDistanceKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  shippingAddressCoutry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressDistrict?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressFull?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  shippingAddressPostalCode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  shippingAddressStreetAndNo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   shippingAddressWard?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

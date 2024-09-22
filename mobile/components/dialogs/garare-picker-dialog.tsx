@@ -129,7 +129,7 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
                             {garages.map((garage, index) =>
                                 <Pressable key={`${garage.id}${index}`} onPress={() => chooseGarage(GarageType.DEFAULT, garage)}>
                                     <View className='flex flex-row px-4 py-2.5 gap-4'>
-                                        <Image source={{ uri: garage.media?.[0] }} className='mt-1.5 aspect-square w-12 h-12 rounded' />
+                                        {garage.media?.length && <Image source={{ uri: garage.media?.[0] }} className='mt-1.5 aspect-square w-12 h-12 rounded' />}
                                         <View className='flex-1 flex flex-col'>
                                             <Label nativeID="GarageName">{garage.name}</Label>
                                             <Text className='text-sm text-muted-foreground'>{garage.addressFull}</Text>
@@ -143,7 +143,6 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
                             {gPlaces.map((place, index) =>
                                 <Pressable key={`${place.place_id}${index}`} onPress={() => chooseGarage(GarageType.GOOGLE_MAPS, place)}>
                                     <View className='flex flex-row px-4 py-2.5 gap-4'>
-                                        <Image source={{ uri: 'https://lh5.googleusercontent.com/p/AF1QipPxIOaHYtWnE0nfQ6DM75PVVpAt2uXP8y6-gvKO=w408-h544-k-no' }} className='mt-1.5 aspect-square w-12 h-12 rounded' />
                                         <View className='flex-1 flex flex-col'>
                                             <Label nativeID="GarageName">{place.structured_formatting?.main_text || place.description}</Label>
                                             <Text className='text-sm text-muted-foreground'>{place.description}</Text>

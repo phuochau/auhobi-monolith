@@ -2752,10 +2752,12 @@ type Garage {
   description: String
   phone_number: String
   gplace_id: String
-  addressDistanceKm: Float
+  addressStreetAndNo: String
+  addressWard: String
   addressDistrict: String
   addressCity: String
-  addressWard: String
+  addressCoutry: String
+  addressPostalCode: String
   addressFull: String
   lat: Float
   lng: Float
@@ -2782,10 +2784,12 @@ type GarageDeleteResponse {
   description: String
   phone_number: String
   gplace_id: String
-  addressDistanceKm: Float
+  addressStreetAndNo: String
+  addressWard: String
   addressDistrict: String
   addressCity: String
-  addressWard: String
+  addressCoutry: String
+  addressPostalCode: String
   addressFull: String
   lat: Float
   lng: Float
@@ -3478,10 +3482,12 @@ type Order {
   commissionPrice: Float
   netPrice: Float!
   note: String
-  shippingAddressDistanceKm: Float
+  shippingAddressStreetAndNo: String
+  shippingAddressWard: String
   shippingAddressDistrict: String
   shippingAddressCity: String
-  shippingAddressWard: String
+  shippingAddressCoutry: String
+  shippingAddressPostalCode: String
   shippingAddressFull: String
   id: ID!
   createdAt: DateTime!
@@ -3691,10 +3697,12 @@ type OrderDeleteResponse {
   commissionPrice: Float
   netPrice: Float
   note: String
-  shippingAddressDistanceKm: Float
+  shippingAddressStreetAndNo: String
+  shippingAddressWard: String
   shippingAddressDistrict: String
   shippingAddressCity: String
-  shippingAddressWard: String
+  shippingAddressCoutry: String
+  shippingAddressPostalCode: String
   shippingAddressFull: String
   id: ID
   createdAt: DateTime
@@ -10321,10 +10329,12 @@ input OrderDTO {
   commissionPrice: Float
   netPrice: Float!
   note: String
-  shippingAddressDistanceKm: Float
+  shippingAddressStreetAndNo: String
+  shippingAddressWard: String
   shippingAddressDistrict: String
   shippingAddressCity: String
-  shippingAddressWard: String
+  shippingAddressCoutry: String
+  shippingAddressPostalCode: String
   shippingAddressFull: String
   branch: ID!
   customer: ID!
@@ -10549,10 +10559,12 @@ input GarageDTO {
   description: String
   phone_number: String
   gplace_id: String
-  addressDistanceKm: Float
+  addressStreetAndNo: String
+  addressWard: String
   addressDistrict: String
   addressCity: String
-  addressWard: String
+  addressCoutry: String
+  addressPostalCode: String
   addressFull: String
   lat: Float
   lng: Float

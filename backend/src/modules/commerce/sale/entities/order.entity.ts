@@ -40,21 +40,29 @@ class BaseClass extends BaseEntity {
     note: string;
 
     @Field({ nullable: true })
-    @Column('decimal', { nullable: true })
-    shippingAddressDistanceKm: number;
-
+    @Column({ nullable: true })
+    shippingAddressStreetAndNo: string;
+  
+    @Field({ nullable: true })
+    @Column({ nullable: true })
+    shippingAddressWard: string;
+  
     @Field({ nullable: true })
     @Column({ nullable: true })
     shippingAddressDistrict: string;
-
+  
     @Field({ nullable: true })
     @Column({ nullable: true })
     shippingAddressCity: string;
 
     @Field({ nullable: true })
     @Column({ nullable: true })
-    shippingAddressWard: string;
-
+    shippingAddressCoutry: string;
+  
+    @Field({ nullable: true })
+    @Column({ nullable: true })
+    shippingAddressPostalCode: string;
+  
     @Field({ nullable: true })
     @Column({ nullable: true })
     shippingAddressFull: string;

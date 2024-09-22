@@ -6,10 +6,12 @@ export const GarageFragment = gql`
     	description
     	phone_number
     	gplace_id
-    	addressDistanceKm
+    	addressStreetAndNo
+    	addressWard
     	addressDistrict
     	addressCity
-    	addressWard
+    	addressCoutry
+    	addressPostalCode
     	addressFull
     	lat
     	lng
