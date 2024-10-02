@@ -67,7 +67,7 @@ async function appendGarageDTO(serviceLogInput: ServiceLogDto, values: AddServic
 }
 
 export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddServiceLogInput>(
-    'user/addServiceLog',
+    'service-log/addServiceLog',
     async (values, thunkApi) => {
         try {
             const { vehicle } = values

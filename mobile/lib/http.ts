@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosRequestTransformer } from 'axios'
 
 const DEFAULT_HEADERS = {
     "content-type": "application/json",
@@ -20,8 +20,9 @@ export interface PostOption {
 export interface PutOption {
     uri: string
     query?: { [key: string]: any},
-    data: string,
-    headers?: any
+    data: any,
+    headers?: any,
+    transformRequest?: AxiosRequestTransformer | AxiosRequestTransformer[]
 }
     
 export interface DeleteOption {
@@ -84,14 +85,15 @@ export class HttpService {
     async post<T>(option: PostOption): Promise<T> {
         return this.instance.post<T>(option.uri, option.data, {
             params: this.buildQuery(option.query),
-            headers: this.buildHeaders(option.headers)
+            headers: this.buildHeaders(option.headers),
         }).then(res => res.data)
     }
 
     async put<T>(option: PutOption): Promise<T> {
         return this.instance.put(option.uri, option.data, {
             params: this.buildQuery(option.query),
-            headers: this.buildHeaders(option.headers)
+            headers: this.buildHeaders(option.headers),
+            transformRequest: option.transformRequest
         }).then(res => res.data)
     }
     
