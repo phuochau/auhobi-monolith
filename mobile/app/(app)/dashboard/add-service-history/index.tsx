@@ -11,7 +11,7 @@ import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { Input } from "@/components/ui/input"
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { Garage, GarageDto, ServiceLog, ServiceLogDto, ServiceLogType } from "@/graphql/gql/generated-models"
+import { ServiceLog, ServiceLogType } from "@/graphql/gql/generated-models"
 import { FormMessage } from "@/components/ui/form"
 import { DateTimeInput } from "@/components/form-fields/date-time-input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -22,8 +22,6 @@ import { MediaInput } from "@/components/form-fields/media-input"
 import { Label } from "@/components/ui/label"
 import { GarageInput } from "@/components/form-fields/garage-input"
 import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
-import { PlaceAutocompleteResult } from "@googlemaps/google-maps-services-js"
-import { GoogleApi } from "@/lib/google-api"
 
 const formSchema = z.object({
   date: z.string(),
@@ -60,66 +58,13 @@ const AddServiceHistory = () => {
     return types.find(type => type[1] === value)?.[0] || ''
   }
 
-  async function appendGarageDTO(serviceLogInput: ServiceLogDto, values: z.infer<typeof formSchema>): Promise<ServiceLogDto> {
-    if (values.garage) {
-      if (values.garage.type === GarageType.CUSTOM) {
-        serviceLogInput.customGarage = values.garage.data as string
-      } else if (values.garage.type === GarageType.GOOGLE_MAPS) {
-        const place = values.garage.data as PlaceAutocompleteResult
-        try {
-          const geoLocation = await GoogleApi.fetchGeolocation(place.place_id)
-          serviceLogInput.garage = {
-            name: place.structured_formatting?.main_text || place.place_id,
-            gplace_id: place.place_id,
-            addressFull: place.description
-          }
-          if (geoLocation) {
-            serviceLogInput.garage = {
-              ...serviceLogInput.garage,
-              lat: geoLocation.geometry?.location?.lat,
-              lng: geoLocation.geometry?.location?.lng,
-              addressFull: geoLocation.formatted_address
-            }
-            const address = GoogleApi.getAddressFromGeoLocation(geoLocation)
-
-            if (address) {
-              serviceLogInput.garage = {
-                ...serviceLogInput.garage,
-                addressStreetAndNo: `${address.streetNumber || address.streetAddress} ${address.route || ''} ${address.neighborhood || ''}`.trim(),
-                addressWard: address.ward,
-                addressDistrict: address.district,
-                addressCity: address.city,
-                addressCoutry: address.country,
-                addressPostalCode: address.postalCode
-              }
-            }
-          }
-        } catch (err) {
-
-        }
-      } else {
-        const garage = values.garage.data as Garage
-        serviceLogInput.garageId = garage.id
-      }
-    }
-
-    return serviceLogInput
-  }
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setSubmitting(true)
     setResponse(undefined)
 
-    let serviceLogInput: ServiceLogDto = {
-      date: values.date,
-      type: values.type as ServiceLogType,
-      mileage: parseInt(values.mileage),
-      vehicle: vehicle!.id
-    }
-    serviceLogInput = await appendGarageDTO(serviceLogInput, values)
-
     const { payload } = await dispatch(addServiceLog({
-      serviceLog: serviceLogInput
+      ...values,
+      vehicle: vehicle!
     }))
 
     const response = payload as GraphQLResponse<ServiceLog>

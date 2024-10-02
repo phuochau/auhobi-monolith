@@ -15,6 +15,7 @@ import { GraphQLAPI } from '@/graphql/api';
 import { Garage, GarageConnection, GarageSortFields, QueryGaragesArgs, SortDirection } from '@/graphql/gql/generated-models';
 import { GaragesQuery } from '@/graphql/gql/queries/garages';
 import { TriangleAlert } from '@/lib/icons/TriangleAlert';
+import React from 'react';
 
 export enum GarageType {
     DEFAULT = 1,
