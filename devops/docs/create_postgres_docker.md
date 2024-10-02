@@ -1,1 +1,1 @@
-docker run --name babibear-postgres -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres:15.7
+docker run --name auhobi -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres:15.7
