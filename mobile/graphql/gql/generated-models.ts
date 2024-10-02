@@ -10179,8 +10179,8 @@ export type ServiceLogBill = {
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
   log: ServiceLog;
-  media?: Maybe<Array<Scalars['String']['output']>>;
-  total: Scalars['Float']['output'];
+  media?: Maybe<Scalars['String']['output']>;
+  total?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -10266,9 +10266,9 @@ export type ServiceLogBillCountAggregate = {
 };
 
 export type ServiceLogBillDto = {
-  log: Scalars['ID']['input'];
-  media?: InputMaybe<Array<Scalars['String']['input']>>;
-  total: Scalars['Float']['input'];
+  log?: InputMaybe<Scalars['ID']['input']>;
+  media?: InputMaybe<Scalars['String']['input']>;
+  total?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type ServiceLogBillDeleteFilter = {
@@ -10286,7 +10286,7 @@ export type ServiceLogBillDeleteResponse = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  media?: Maybe<Array<Scalars['String']['output']>>;
+  media?: Maybe<Scalars['String']['output']>;
   total?: Maybe<Scalars['Float']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -18567,8 +18567,8 @@ export type ServiceLogBillResolvers<ContextType = any, ParentType extends Resolv
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   log?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType>;
-  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  total?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  media?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -18617,7 +18617,7 @@ export type ServiceLogBillDeleteResponseResolvers<ContextType = any, ParentType 
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  media?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   total?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

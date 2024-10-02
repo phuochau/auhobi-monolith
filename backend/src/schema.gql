@@ -5413,8 +5413,8 @@ enum ServiceLogBillSortFields {
 }
 
 type ServiceLogBill {
-  total: Float!
-  media: [String!]
+  total: Float
+  media: String
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
@@ -5424,7 +5424,7 @@ type ServiceLogBill {
 
 type ServiceLogBillDeleteResponse {
   total: Float
-  media: [String!]
+  media: String
   id: ID
   createdAt: DateTime
   updatedAt: DateTime
@@ -11188,9 +11188,9 @@ input CreateOneServiceLogBillInput {
 }
 
 input ServiceLogBillDTO {
-  total: Float!
-  media: [String!]
-  log: ID!
+  total: Float
+  media: String
+  log: ID
 }
 
 input CreateManyServiceLogBillsInput {

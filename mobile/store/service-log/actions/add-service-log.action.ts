@@ -18,7 +18,10 @@ export interface AddServiceLogInput {
         type: GarageType;
         data?: any;
     } | undefined;
-    bills?: string[] | undefined;
+    bills?: {
+      total: number;
+      media: string;
+    }[]
 }
 
 async function appendGarageDTO(serviceLogInput: ServiceLogDto, values: AddServiceLogInput): Promise<ServiceLogDto> {
