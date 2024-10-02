@@ -9,21 +9,23 @@ import { Plus } from "@/lib/icons/Plus";
 /**
  * ImageDisplay
  */
-type ImageDisplayProps = React.ComponentPropsWithoutRef<typeof View> & {
-    uri: string,
-    imageClassName?: string
+export type ImageDisplayProps = React.ComponentPropsWithoutRef<typeof Image> & {
+    containerClassName?: string
 }
 
+
 const ImageDisplay =  React.forwardRef<
-    React.ElementRef<typeof View>,
+    React.ElementRef<typeof Image>,
     ImageDisplayProps
->(({ className, imageClassName, uri, ...props }, ref) => (
-    <View
-        ref={ref}
-        className={cn('h-full w-full', className)}
-        {...props}
-    >
-        <Image source={{ uri }} className={cn("aspect-auto w-full h-full object-cover", imageClassName)} />
+>(({ className, containerClassName, source, ...props }, ref) => (
+    <View className={cn("relative", containerClassName)}>
+        <Image
+            ref={ref}
+            source={source}
+            className={cn("", className)}
+            resizeMode="cover"
+            {...props}
+        />
     </View>
 ));
 ImageDisplay.displayName = 'ImageDisplay';
@@ -75,8 +77,8 @@ const MediaInput =  React.forwardRef<
                 <Text>{addText}</Text>
                 <Plus className="text-secondary-foreground" width={16}></Plus>
             </Button>
-            <View className={cn('grid grid-cols-4 gap-2', imageContainerClassName)}>
-                {images.map((uri, index) => <ImageDisplay key={`${index}-${uri}`} uri={uri} />)}
+            <View className={cn('flex flex-row flex-wrap gap-2 mt-4', imageContainerClassName)}>
+                {images.map((uri, index) => <ImageDisplay key={`${index}-${uri}`} source={{ uri }} className="w-16 h-16" />)}
             </View>
         </View>
     )

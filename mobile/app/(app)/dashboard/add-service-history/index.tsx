@@ -1,4 +1,4 @@
-import { View } from "react-native"
+import { ScrollView, View } from "react-native"
 import { Stack, useRouter } from "expo-router"
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { useState } from "react"
@@ -24,7 +24,7 @@ import { GarageInput } from "@/components/form-fields/garage-input"
 import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
 import { PlaceAutocompleteResult } from "@googlemaps/google-maps-services-js"
 import { GoogleApi } from "@/lib/google-api"
- 
+
 const formSchema = z.object({
   date: z.string(),
   mileage: z.string(),
@@ -105,7 +105,7 @@ const AddServiceHistory = () => {
 
     return serviceLogInput
   }
- 
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setSubmitting(true)
     setResponse(undefined)
@@ -133,120 +133,122 @@ const AddServiceHistory = () => {
 
   return (
     <View className="w-full h-full">
-        <Stack.Screen options={{ title: 'Add Service History' }} />
+      <Stack.Screen options={{ title: 'Add Service History' }} />
 
+      <ScrollView className="flex-1">
         <Card className="w-full">
           <CardHeader>
             <CardDescription>Add a service history of your car</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-              <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <DateTimeInput
-                    placeholder="Date"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="date"
-              />
-              <FormMessage nativeID="DateError" error={errors.date}></FormMessage>
+            <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    placeholder="Mileage"
-                    keyboardType="number-pad"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="mileage"
-              />
-              <FormMessage nativeID="MileageError" error={errors.mileage}></FormMessage>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <DateTimeInput
+                  placeholder="Date"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="date"
+            />
+            <FormMessage nativeID="DateError" error={errors.date}></FormMessage>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Select
-                    value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
-                    onValueChange={(option) => {
-                      onChange(option?.value)
-                      onBlur()
-                    }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue
-                        placeholder={'Select Type'}
-                        value={value}
-                      />
-                    </SelectTrigger>
-                    <SelectContent className="w-full">
-                      {types.map(type =>
-                        <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
-                          {type[0]}
-                        </SelectItem>)}
-                    </SelectContent>
-                  </Select>
-                )}
-                name="type"
-              />
-              <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Mileage"
+                  keyboardType="number-pad"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="mileage"
+            />
+            <FormMessage nativeID="MileageError" error={errors.mileage}></FormMessage>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <GarageInput
-                    value={(value as GaragePickerResult | undefined)}
-                    textInput={{
-                      onBlur: onBlur,
-                      placeholder: "Garage"
-                    }}
-                    onChange={onChange}
-                  />
-                )}
-                name="garage"
-              />
-              <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Select
+                  value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
+                  onValueChange={(option) => {
+                    onChange(option?.value)
+                    onBlur()
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={'Select Type'}
+                      value={value}
+                    />
+                  </SelectTrigger>
+                  <SelectContent className="w-full">
+                    {types.map(type =>
+                      <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
+                        {type[0]}
+                      </SelectItem>)}
+                  </SelectContent>
+                </Select>
+              )}
+              name="type"
+            />
+            <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
 
-              <Label nativeID="MediaLabel">Images</Label>
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <MediaInput
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                  />
-                )}
-                name="media"
-              />
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <GarageInput
+                  value={(value as GaragePickerResult | undefined)}
+                  textInput={{
+                    onBlur: onBlur,
+                    placeholder: "Garage"
+                  }}
+                  onChange={onChange}
+                />
+              )}
+              name="garage"
+            />
+            <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
 
-              <Label nativeID="BillsLabel">Bills</Label>
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <MediaInput
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                  />
-                )}
-                name="bills"
-              />
+            <Label nativeID="MediaLabel">Images</Label>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <MediaInput
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                />
+              )}
+              name="media"
+            />
 
-              <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-                <Text>Save</Text>
-              </Button>
+            <Label nativeID="BillsLabel">Bills</Label>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <MediaInput
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                />
+              )}
+              name="bills"
+            />
 
+            <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+              <Text>Save</Text>
+            </Button>
           </CardContent>
         </Card>
+      </ScrollView>
     </View>
   )
 }
