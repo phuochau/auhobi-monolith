@@ -1,6 +1,5 @@
 import { GraphQLAPI } from "@/graphql/api"
 import { File } from "@/graphql/gql/generated-models"
-import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
 export type AddMediaInput = {
@@ -9,7 +8,7 @@ export type AddMediaInput = {
     mimeType: string
 }
 
-export const addMedia = createAsyncThunk<GraphQLResponse<File>, AddMediaInput>(
+export const addMedia = createAsyncThunk<File, AddMediaInput>(
     'media/addMedia',
     async (file, thunkApi) => {
         try {

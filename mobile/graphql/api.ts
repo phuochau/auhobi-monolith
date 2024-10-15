@@ -10,6 +10,7 @@ import { Platform } from "react-native";
 
 class GraphQLClient {
     instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
+    restInstance = new HttpService(process.env.EXPO_PUBLIC_REST_URL!)
     accessToken: string | undefined;
     refreshToken: string  | undefined;
 
@@ -54,7 +55,6 @@ class GraphQLClient {
         })
         .then((res: any) => this.parseError<T>(res))
         .then(async (gqlResponse) => {
-            console.log(gqlResponse)
             const forbidden = this.isForbidden(gqlResponse)
             
             if (forbidden) {
@@ -69,15 +69,16 @@ class GraphQLClient {
         })
     }
 
-    uploadMedia = async (fileName: string, filePath: string, mimetype: string): Promise<GraphQLResponse<File>> => {
+    uploadMedia = async (fileName: string, filePath: string, mimetype: string): Promise<File> => {
         const formData = new FormData();
+
         formData.append('file', {
             uri: Platform.OS === 'android' ? filePath : filePath.replace('file://', ''),
             type: mimetype,
             name: fileName,
         } as unknown as Blob);
 
-        return this.instance.put<any>({
+        return this.restInstance.put<File>({
             uri: 'upload/addMedia',
             data: formData,
             headers: {
@@ -87,17 +88,6 @@ class GraphQLClient {
             transformRequest: () => {
                 return formData;
             }
-        })
-        .then((res: any) => this.parseError<File>(res))
-        .then(async (gqlResponse) => {
-            console.log(gqlResponse)
-            const forbidden = this.isForbidden(gqlResponse)
-            
-            if (forbidden) {
-                store.dispatch(logout())
-            }
-
-            return gqlResponse
         })
     }
 

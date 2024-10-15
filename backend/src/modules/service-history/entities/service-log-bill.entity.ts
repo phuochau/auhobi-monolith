@@ -3,18 +3,17 @@ import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToO
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { ServiceLog } from './service-log.entity';
-import { UserVehicle } from '../../end-user/entities/user-vehicle.entity';
 
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @FilterableField()
-  @Column()
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
   total: number;
 
-  @Field(() => [String], { nullable: true })
-  @Column("text", { array: true, default: [] })
-  media: string[];
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  media: string;
 }
 
 /**
@@ -49,6 +48,6 @@ export class ServiceLogBill extends BaseClass {
  */
 @InputType()
 export class ServiceLogBillDTO extends BaseClass {
-  @FilterableField(() => ID)
+  @FilterableField(() => ID, { nullable: true })
   log: ServiceLog
 }

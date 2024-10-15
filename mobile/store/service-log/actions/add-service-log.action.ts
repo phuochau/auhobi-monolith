@@ -1,8 +1,9 @@
 import { GarageType } from "@/components/dialogs/garare-picker-dialog";
 import { GraphQLAPI } from "@/graphql/api";
-import { Garage, MutationCreateOneServiceLogArgs, ServiceLog, ServiceLogDto, ServiceLogType, UserVehicle } from "@/graphql/gql/generated-models";
+import { File, Garage, MutationCreateOneServiceLogArgs, ServiceLog, ServiceLogDto, ServiceLogType, UserVehicle } from "@/graphql/gql/generated-models";
 import { CreateOneServiceLogMutation } from "@/graphql/gql/mutations/createOneServiceLog";
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
+import { FileUtils } from "@/lib/file-utils";
 import { GoogleApi } from "@/lib/google-api";
 import { PlaceAutocompleteResult } from "@googlemaps/google-maps-services-js";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -17,7 +18,10 @@ export interface AddServiceLogInput {
         type: GarageType;
         data?: any;
     } | undefined;
-    bills?: string[] | undefined;
+    bills?: {
+      total: number;
+      media: string;
+    }[]
 }
 
 async function appendGarageDTO(serviceLogInput: ServiceLogDto, values: AddServiceLogInput): Promise<ServiceLogDto> {
@@ -72,11 +76,19 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
         try {
             const { vehicle } = values
 
+            let media: File[] = []
+            if (values.media?.length) {
+              media = await Promise.all(values.media.map(filePath => {
+                return GraphQLAPI.uploadMedia(FileUtils.getFileName(filePath), filePath, FileUtils.getMimeType(filePath))
+              }))
+            }
+
             let serviceLogInput: ServiceLogDto = {
               date: values.date,
               type: values.type as ServiceLogType,
               mileage: parseInt(values.mileage),
-              vehicle: vehicle!.id
+              vehicle: vehicle!.id,
+              media: media.map(m => m.id)
             }
             serviceLogInput = await appendGarageDTO(serviceLogInput, values)
             const res = await GraphQLAPI.authQuery<ServiceLog, MutationCreateOneServiceLogArgs>(CreateOneServiceLogMutation, {

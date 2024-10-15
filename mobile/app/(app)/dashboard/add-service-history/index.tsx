@@ -22,6 +22,7 @@ import { MediaInput } from "@/components/form-fields/media-input"
 import { Label } from "@/components/ui/label"
 import { GarageInput } from "@/components/form-fields/garage-input"
 import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
+import { BillInput } from "@/components/form-fields/bill-input"
 
 const formSchema = z.object({
   date: z.string(),
@@ -32,7 +33,10 @@ const formSchema = z.object({
     type: z.nativeEnum(GarageType),
     data: z.any()
   }).optional(),
-  bills: z.string().array().optional()
+  bills: z.object({
+    total: z.number(),
+    media: z.string()
+  }).array().optional()
 })
 
 const AddServiceHistory = () => {
@@ -179,7 +183,7 @@ const AddServiceHistory = () => {
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <MediaInput
+                <BillInput
                   value={value}
                   onBlur={onBlur}
                   onChange={onChange}
