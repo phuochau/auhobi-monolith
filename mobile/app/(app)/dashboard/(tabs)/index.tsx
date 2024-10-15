@@ -1,11 +1,15 @@
-import { View } from "react-native"
-import { Text } from '@/components/ui/text'
+import { FlatList } from "react-native"
+import { ServiceHistoryItem } from "@/components/rich/service-history-item"
+
+const DATA = [1,2,3,4,5,6,7,8,9,10]
 
 const ServiceHistory = () => {
     return (
-        <View>
-          <Text>Service History</Text>
-        </View>
+        <FlatList
+          data={DATA}
+          renderItem={({item}) => <ServiceHistoryItem />}
+          keyExtractor={item => item.toString()}
+        />
     )
 }
 
