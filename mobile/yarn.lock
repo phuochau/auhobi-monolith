@@ -3084,10 +3084,15 @@
   resolved "https://registry.yarnpkg.com/@rn-primitives/slot/-/slot-1.0.3.tgz#878b488dd7844703eb0b4dbc51c239e1bdb0ca11"
   integrity sha512-sSDYwD2upLQUOva2cmNfaJqZlN+o0E/wa8uXEDEIYj6MJsG/O0k1t0jGXMqLP8BsQ3ZaTtUbqnG9eW/VQFOmdQ==
 
-"@rn-primitives/slot@1.0.4", "@rn-primitives/slot@^1.0.4":
+"@rn-primitives/slot@1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@rn-primitives/slot/-/slot-1.0.4.tgz#606f6db4ac03df374207a242c43723c1f5af51d1"
   integrity sha512-sB+5xIY3mzphco3EN2JXQ7F7BAhsx1ufj0eP4EBu1uV45SbuEF7Zjg4czfiYftVc69rrPXpIgyK6dnMAD2/+pw==
+
+"@rn-primitives/slot@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@rn-primitives/slot/-/slot-1.0.5.tgz#9b54166563190d732aa8e40e9420c2ecdf2eb684"
+  integrity sha512-tZWTKtQETDaVsqiMvFZjyLCM1VcOPnd5LcT6saYiiONJPtQNUvJHqMH7Ny3+frOc3CEwADgTNRJpKtOKxVDNzA==
 
 "@rn-primitives/tabs@^1.0.3":
   version "1.0.3"
@@ -3103,10 +3108,15 @@
   resolved "https://registry.yarnpkg.com/@rn-primitives/types/-/types-1.0.3.tgz#1d0b084663859a889e5b7359eb2afe62ff311adb"
   integrity sha512-5GY4J6SBN2JosYS/8bvQZOZL+HZk85COaFlNnjiL3efoa9gH+v1dNi0F2gW/Gr0PuGF/xo/z0iOiVc5KrDsAkQ==
 
-"@rn-primitives/types@1.0.4", "@rn-primitives/types@^1.0.4":
+"@rn-primitives/types@1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@rn-primitives/types/-/types-1.0.4.tgz#0dc50d60449fe62d9262f5577347280840bf98dd"
   integrity sha512-pp5H+IFrZym52/ZKMXUV4YUViX1yLBlSh4DfUgwxOAICOLKThbEXbEEinm0C3NSRzqXLmD/zJZI4pAGlh1J5iA==
+
+"@rn-primitives/types@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@rn-primitives/types/-/types-1.0.5.tgz#1062b6cd9c458ead495ec262e99310d19ecd7a9d"
+  integrity sha512-1E+5O/3HQRiGJk5nR6RqOqMrlwf3pbkTkDgp/L3f9iWZ+LH7kFv+fBwMCLehrAJTzvZe/p3PpARdun5eLwEo8Q==
 
 "@rnx-kit/chromium-edge-launcher@^1.0.0":
   version "1.0.0"

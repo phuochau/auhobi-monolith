@@ -8,6 +8,7 @@ const ServiceHistory = () => {
         <FlatList
           data={DATA}
           renderItem={({item}) => <ServiceHistoryItem />}
+          contentContainerClassName="gap-4"
           keyExtractor={item => item.toString()}
         />
     )
