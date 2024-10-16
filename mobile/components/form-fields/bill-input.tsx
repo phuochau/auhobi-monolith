@@ -7,6 +7,7 @@ import { Pickers } from "@/lib/pickers";
 import { Plus } from "@/lib/icons/Plus";
 import { Input } from "../ui/input";
 import { ServiceLogBillDto } from "@/graphql/gql/generated-models";
+import { Label } from "../ui/label";
 
 /**
  * BillDisplay
@@ -22,21 +23,23 @@ const BillDisplay =  React.forwardRef<
     React.ElementRef<typeof View>,
     BillDisplayProps
 >(({ className, data, imageClassName, onChange, ...props }, ref) => (
-    <View ref={ref} className={cn("relative flex flex-row gap-2", className)} {...props}>
+    <View ref={ref} className={cn("w-full relative flex flex-row items-center gap-2", className)} {...props}>
         <Image
             source={{ uri: data.media! }}
-            className={cn("w-16 h-16", imageClassName)}
+            className={cn("w-12 h-12", imageClassName)}
             resizeMode="cover"
         />
         <Input
             className="flex-1"
             keyboardType="number-pad"
+            placeholder="Total (e.g: 200000000)"
             value={data.total ? data.total.toString() : ''}
             onChangeText={(total) => onChange({
                 ...data,
                 total: total?.length ? parseInt(total): undefined
             })}
         />
+        <Label nativeID="totalCurrency">đ</Label>
     </View>
 ));
 BillDisplay.displayName = 'BillDisplay';

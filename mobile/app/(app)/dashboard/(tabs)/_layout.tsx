@@ -11,7 +11,7 @@ export default function TabLayout() {
   const router = useRouter()
   
   return (
-    <View className="flex-1 w-full h-full relative">
+    <View className="flex-1 w-full h-full relative pb-2">
       <Tabs screenOptions={{ tabBarActiveTintColor: colors.primary }}>
         <Tabs.Screen
           name="index"
@@ -28,7 +28,7 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-      <Button onPress={() => router.push({ pathname: '/dashboard/add-service-history' })} className="absolute w-12 h-12 p-0 m-0 -ml-6 rounded-full bottom-6 left-1/2">
+      <Button onPress={() => router.push({ pathname: '/dashboard/add-service-history' })} className="absolute w-12 h-12 p-0 m-0 -ml-6 rounded-full bottom-8 left-1/2">
         <Plus className='text-primary-foreground'></Plus>
       </Button>
     </View>
