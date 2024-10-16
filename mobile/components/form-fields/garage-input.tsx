@@ -26,7 +26,6 @@ const GarageInput =  React.forwardRef<
     const [textValue, setTextValue] = useState<string>(getTextFromValue(value))
 
     function openDialog() {
-        console.log('open dialog')
         setGarageDialogOpen(true)
     }
 

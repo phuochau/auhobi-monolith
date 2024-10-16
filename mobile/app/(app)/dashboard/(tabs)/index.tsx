@@ -41,8 +41,6 @@ const ServiceHistory = () => {
     fetchLogs()
   }, [])
 
-  console.log(logs)
-
   return (
     <FlatList
       data={logs}

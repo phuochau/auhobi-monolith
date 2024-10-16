@@ -105,6 +105,7 @@ const RegisterScreen = () => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  autoCapitalize="none"
                 />
               )}
               name="email"

@@ -17,6 +17,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { Navigation } from "@/lib/navigation"
+import React from "react"
  
 const formSchema = z.object({
   email: z
@@ -90,6 +91,7 @@ const LoginScreen = () => {
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
+                    autoCapitalize="none"
                   />
                 )}
                 name="email"

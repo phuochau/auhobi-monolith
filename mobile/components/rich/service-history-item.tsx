@@ -14,8 +14,6 @@ export type ServiceHistoryItemProps = {
 export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
     const { data } = props
 
-    console.log(JSON.stringify(data))
-
     function getTotalBill(): number {
         const bills: ServiceLogBill[] = data.node.bills?.nodes || []
         return _.sumBy(bills, item => item.total || 0)
@@ -23,6 +21,7 @@ export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
 
     const attachments = data.node.media || []
     const billMedia = (data.node.bills?.nodes || []).map(item => item.media).filter(item => !_.isNil(item))
+    const garageName = data.node.garage ? data.node.garage.name : data.node.customGarage
 
     return (
         <View className="px-4">
@@ -34,7 +33,7 @@ export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
                             <Badge variant={'outline'}><Text>{getTotalBill()}đ</Text></Badge>
                         </View>
                     </View>
-                    <CardDescription>{userService.formatDate(data.node.createdAt)}</CardDescription>
+                    <CardDescription>{userService.formatDate(data.node.createdAt)}{Boolean(garageName?.length) ? ` | ${garageName}` : ''}</CardDescription>
                 </CardHeader>
 
                 {Boolean(data.node.description?.length) &&
