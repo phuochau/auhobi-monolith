@@ -11,8 +11,8 @@ class BaseClass extends BaseEntity {
   @Column({ nullable: true })
   total: number;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
+  @Field(() => String, { nullable: true })
+  @Column('text', { nullable: true })
   media: string;
 }
 

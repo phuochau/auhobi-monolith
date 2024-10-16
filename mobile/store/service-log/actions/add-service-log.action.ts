@@ -1,6 +1,6 @@
 import { GarageType } from "@/components/dialogs/garare-picker-dialog";
 import { GraphQLAPI } from "@/graphql/api";
-import { File, Garage, MutationCreateOneServiceLogArgs, ServiceLog, ServiceLogDto, ServiceLogType, UserVehicle } from "@/graphql/gql/generated-models";
+import { File, Garage, MutationCreateOneServiceLogArgs, ServiceLog, ServiceLogBillDto, ServiceLogDto, ServiceLogType, UserVehicle } from "@/graphql/gql/generated-models";
 import { CreateOneServiceLogMutation } from "@/graphql/gql/mutations/createOneServiceLog";
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { FileUtils } from "@/lib/file-utils";
@@ -70,6 +70,27 @@ async function appendGarageDTO(serviceLogInput: ServiceLogDto, values: AddServic
   return serviceLogInput
 }
 
+async function appendBillDTOs (serviceLogInput: ServiceLogDto, values: AddServiceLogInput): Promise<ServiceLogDto> {
+  if (values?.bills?.length) {
+    const billDTOs: ServiceLogBillDto[] = []
+    for (const input of values.bills) {
+      
+      let media: File | undefined = undefined;
+      if (input.media) {
+        media = await GraphQLAPI.uploadMedia(FileUtils.getFileName(input.media), input.media, FileUtils.getMimeType(input.media))
+      }
+
+      billDTOs.push({
+        media: media ? media.url : undefined,
+        total: input.total
+      })
+    }
+    serviceLogInput.bills = billDTOs
+  }
+
+  return serviceLogInput
+}
+
 export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddServiceLogInput>(
     'service-log/addServiceLog',
     async (values, thunkApi) => {
@@ -88,9 +109,12 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
               type: values.type as ServiceLogType,
               mileage: parseInt(values.mileage),
               vehicle: vehicle!.id,
-              media: media.map(m => m.id)
+              media: media.map(m => m.url)
             }
+
             serviceLogInput = await appendGarageDTO(serviceLogInput, values)
+            serviceLogInput = await appendBillDTOs(serviceLogInput, values)
+
             const res = await GraphQLAPI.authQuery<ServiceLog, MutationCreateOneServiceLogArgs>(CreateOneServiceLogMutation, {
                 input: {
                     serviceLog: serviceLogInput
