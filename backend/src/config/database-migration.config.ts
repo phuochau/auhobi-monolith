@@ -1,8 +1,6 @@
 require('dotenv').config()
 import { DataSource, DataSourceOptions } from 'typeorm'
 
-console.log(process.env)
-
 export default new DataSource({
   type: process.env.DB_TYPE,
   host: process.env.DB_HOST,
