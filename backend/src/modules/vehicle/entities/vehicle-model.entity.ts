@@ -14,6 +14,10 @@ import { VehicleDrive } from './vehicle-drive.entity';
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  refId: string;
+
   @FilterableField()
   @Column()
   name: string;
@@ -49,17 +53,17 @@ export class VehicleModel extends BaseClass {
   @ManyToOne(() => VehicleBaseModel, genXToOneOptions({ nullable: true }))
   baseModel?: VehicleBaseModel
 
-  @ManyToOne(() => VehicleSize, genXToOneOptions({ nullable: true }))
-  size?: VehicleSize
+  @ManyToOne(() => VehicleDrive, genXToOneOptions({ nullable: true }))
+  drive?: VehicleDrive
 
   @ManyToOne(() => VehicleEngine, genXToOneOptions({ nullable: true }))
   engine?: VehicleEngine
 
-  @ManyToOne(() => VehicleDrive, genXToOneOptions({ nullable: true }))
-  drive?: VehicleDrive
-
   @ManyToOne(() => VehicleTransmission, genXToOneOptions({ nullable: true }))
   transmission?: VehicleTransmission
+
+  @ManyToOne(() => VehicleSize, genXToOneOptions({ nullable: true }))
+  size?: VehicleSize
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })

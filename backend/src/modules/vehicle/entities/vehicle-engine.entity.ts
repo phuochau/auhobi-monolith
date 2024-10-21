@@ -9,17 +9,33 @@ import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @FilterableField()
-  @Column()
-  name: string;
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  refId: string;
 
   @FilterableField({ nullable: true })
   @Column({ nullable: true })
-  cyclinder?: number;
+  name?: string;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  displacement?: string;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  cylinders?: number;
 
   @FilterableField({ nullable: true })
   @Column('text', { nullable: true })
   description?: string;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  evMotor?: string;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  phevBlended?: boolean;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
