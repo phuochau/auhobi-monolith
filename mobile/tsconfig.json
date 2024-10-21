@@ -1,18 +1,3 @@
-{
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts",
-    "global.d.ts"
-  ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d106d36f11fa45b0352a1643150a6973181e51544a8f8f4c5363ac29d5c00230
+size 261

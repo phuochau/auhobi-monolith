@@ -1,15 +1,3 @@
-{
-  "$schema": "https://json.schemastore.org/nest-cli",
-  "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
-  "compilerOptions": {
-    "deleteOutDir": true,   
-    "assets": [
-      {
-        "include": "**/*.ejs",
-        "outDir": "dist",
-        "watchAssets": true
-      }
-    ]
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:526c9e7791bc4ba8abd6e5d6fbd6f5eda4e3f190927418f7ea1a83e251cca2ca
+size 298
