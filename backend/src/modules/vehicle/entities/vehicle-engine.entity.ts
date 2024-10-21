@@ -31,6 +31,10 @@ class BaseClass extends BaseEntity {
 
   @FilterableField({ nullable: true })
   @Column({ nullable: true })
+  atv?: string;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
   evMotor?: string;
 
   @FilterableField({ nullable: true })

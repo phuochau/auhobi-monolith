@@ -14,7 +14,7 @@ import { VehicleModel } from "../modules/vehicle/entities/vehicle-model.entity";
 const vehicleJsonPath = path.join(process.cwd(), 'src/migrations/data/all-vehicles-model.json')
 
 
-export class ImportVehiclesJson1729488437034 implements MigrationInterface {
+export class ImportVehiclesJson1729490593640 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         /**
@@ -47,6 +47,7 @@ export class ImportVehiclesJson1729488437034 implements MigrationInterface {
             const inEngineCylinders =  vehicle.cyclinders
             const inEngineDisplacement = vehicle.displ
             const inEvMotor = vehicle.evmotor
+            const inAtv = vehicle.atvtype
 
             const inFuelType = vehicle.fueltype
             const inFuelType1 = vehicle.fueltype1
@@ -62,7 +63,7 @@ export class ImportVehiclesJson1729488437034 implements MigrationInterface {
             const size = await this.getOrCreateSize(queryRunner, inSize)
             const transmission = await this.getOrCreateTransmission(queryRunner, inTransmission)
             const engineFuel = await this.getOrCreateEngineFuel(queryRunner, inFuel)
-            const engine = await this.getOrCreateEngine(queryRunner, inEngineId, inEngineName, engineFuel.id, inEngineCylinders, inEngineDisplacement, inEvMotor, inPhevblended)
+            const engine = await this.getOrCreateEngine(queryRunner, inEngineId, inEngineName, engineFuel.id, inEngineCylinders, inEngineDisplacement, inEvMotor, inPhevblended, inAtv)
             const model = await this.getOrCreateModel(queryRunner, inId, inModel, inYear, brand.id, baseModel.id, drive.id, engine.id, transmission.id, size.id)
 
             console.log(`Imported model ${brand.name} ${model.name}.`)
@@ -112,7 +113,8 @@ export class ImportVehiclesJson1729488437034 implements MigrationInterface {
         cylinders: number,
         displacement: string,
         evMotor: string,
-        phevBlended: boolean
+        phevBlended: boolean,
+        atv: string
     ): Promise<VehicleEngine> {
         const repo = queryRunner.manager.getRepository<VehicleEngine>(VehicleEngine)
         let engine = await repo.findOneBy({ refId: refId })
@@ -124,6 +126,7 @@ export class ImportVehiclesJson1729488437034 implements MigrationInterface {
                 displacement,
                 evMotor,
                 phevBlended,
+                atv
             }).then(item => _.get(item, 'raw[0]'))
         }
         return engine
