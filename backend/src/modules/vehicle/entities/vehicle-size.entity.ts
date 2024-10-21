@@ -1,10 +1,8 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
-import { VehicleEngineFuel, VehicleEngineFuelDTO } from './vehicle-engine-fuel.entity';
-import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()
@@ -13,31 +11,20 @@ class BaseClass extends BaseEntity {
   @Column()
   name: string;
 
-  @FilterableField({ nullable: true })
-  @Column({ nullable: true })
-  cyclinder?: number;
-
-  @FilterableField({ nullable: true })
-  @Column('text', { nullable: true })
-  description?: string;
-
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
-  metadata?: any
+  metadata: any
 }
 
 /**
  * Entity
  */
 @ObjectType()
-@Entity({ name: `${TABLE_PREFIX}_engines` })
-export class VehicleEngine extends BaseClass {
+@Entity({ name: `${TABLE_PREFIX}_sizes` })
+export class VehicleSize extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
-  @ManyToOne(() => VehicleEngineFuel, genXToOneOptions({ nullable: true }))
-  fuel?: VehicleEngineFuel
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -56,7 +43,5 @@ export class VehicleEngine extends BaseClass {
  * DTO
  */
 @InputType()
-export class VehicleEngineDTO extends BaseClass {
-  @FilterableField(() => ID, { nullable: true })
-  fuel?: VehicleEngineFuel
+export class VehicleSizeDTO extends BaseClass {
 }

@@ -1,8 +1,10 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
-import { FilterableField } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
+import { VehicleBrand } from './vehicle-brand.entity';
+import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 
 @ObjectType()
 @InputType()
@@ -13,18 +15,22 @@ class BaseClass extends BaseEntity {
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any
+  metadata?: any
 }
 
 /**
  * Entity
  */
 @ObjectType()
-@Entity({ name: `${TABLE_PREFIX}_bodies` })
-export class VehicleBody extends BaseClass {
+@FilterableRelation('brand', () => VehicleBrand)
+@Entity({ name: `${TABLE_PREFIX}_base_models` })
+export class VehicleBaseModel extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
+
+  @ManyToOne(() => VehicleBrand, genXToOneOptions())
+  brand: VehicleBrand
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -43,5 +49,5 @@ export class VehicleBody extends BaseClass {
  * DTO
  */
 @InputType()
-export class VehicleBodyDTO extends BaseClass {
+export class VehicleBaseModelDTO extends BaseClass {
 }

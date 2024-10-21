@@ -1,14 +1,15 @@
 import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
-import { FilterableField, FilterableRelation, FilterableUnPagedRelation, IDField } from '@ptc-org/nestjs-query-graphql';
+import { FilterableField, FilterableRelation, IDField } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
-import { VehicleModelBody, VehicleModelBodyDTO } from './vehicle-model-body.entity';
 import { VehicleEngine } from './vehicle-engine.entity';
 import { VehicleTransmission } from './vehicle-transmission.entity';
 import { VehicleBrand } from './vehicle-brand.entity';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
-import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
+import { VehicleSize } from './vehicle-size.entity';
+import { VehicleBaseModel } from './vehicle-base-model.entity';
+import { VehicleDrive } from './vehicle-drive.entity';
 
 @ObjectType()
 @InputType()
@@ -19,22 +20,23 @@ class BaseClass extends BaseEntity {
 
   @FilterableField(() => Int)
   @Column({ type: 'int' })
-  startYear: number
+  manufacturingYear: number
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any
+  metadata?: any
 }
 
 /**
  * Entity
  */
 @ObjectType()
-@FilterableRelation('parent', () => VehicleModel, { nullable: true })
-@FilterableUnPagedRelation('bodies', () => VehicleModelBody, { update: { enabled: true } })
-@FilterableRelation('brand', () => VehicleBrand, { nullable: true })
-@FilterableUnPagedRelation('engines', () => VehicleEngine)
-@FilterableUnPagedRelation('transmissions', () => VehicleTransmission)
+@FilterableRelation('size', () => VehicleSize, { update: { enabled: true } })
+@FilterableRelation('brand', () => VehicleBrand)
+@FilterableRelation('baseModel', () => VehicleBaseModel)
+@FilterableRelation('drive', () => VehicleDrive)
+@FilterableRelation('engine', () => VehicleEngine)
+@FilterableRelation('transmission', () => VehicleTransmission)
 @Entity({ name: `${TABLE_PREFIX}_models` })
 export class VehicleModel extends BaseClass {
   @IDField(() => ID)
@@ -42,28 +44,22 @@ export class VehicleModel extends BaseClass {
   id: string;
 
   @ManyToOne(() => VehicleBrand, genXToOneOptions())
-  @JoinColumn({ name: 'brand_id' })
   brand: VehicleBrand
 
-  @ManyToOne(() => VehicleModel, genXToOneOptions({ nullable: true }))
-  @JoinColumn({ name: 'parent_id' })
-  parent: VehicleModel
+  @ManyToOne(() => VehicleBaseModel, genXToOneOptions({ nullable: true }))
+  baseModel?: VehicleBaseModel
 
-  @ManyToMany(() => VehicleModelBody, (p) => p.model, genXToManyOptions())
-  @JoinTable()
-  bodies: VehicleModelBody[]
+  @ManyToOne(() => VehicleSize, genXToOneOptions({ nullable: true }))
+  size?: VehicleSize
 
-  @ManyToMany(() => VehicleEngine, genXToManyOptions())
-  @JoinTable()
-  engines: VehicleEngine[]
+  @ManyToOne(() => VehicleEngine, genXToOneOptions({ nullable: true }))
+  engine?: VehicleEngine
 
-  @ManyToMany(() => VehicleTransmission, genXToManyOptions())
-  @JoinTable()
-  transmissions: VehicleTransmission[]
+  @ManyToOne(() => VehicleDrive, genXToOneOptions({ nullable: true }))
+  drive?: VehicleDrive
 
-  @FilterableField(() => Int, { nullable: true })
-  @Column({ type: 'int', nullable: true })
-  endYear: number
+  @ManyToOne(() => VehicleTransmission, genXToOneOptions({ nullable: true }))
+  transmission?: VehicleTransmission
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -86,15 +82,18 @@ export class VehicleModelDTO extends BaseClass {
   @FilterableField(() => ID)
   brand: VehicleBrand
 
-  @FilterableField(() => ID)
-  parent: VehicleModel
+  @FilterableField(() => ID, { nullable: true })
+  baseModel?: VehicleBaseModel
 
-  @FilterableField(() => [VehicleModelBodyDTO])
-  bodies: VehicleModelBody[]
+  @FilterableField(() => ID, { nullable: true })
+  size?: VehicleSize
 
-  @FilterableField(() => [ID])
-  engines: VehicleEngine[]
+  @FilterableField(() => ID, { nullable: true })
+  drive?: VehicleDrive
 
-  @FilterableField(() => [ID])
-  transmissions: VehicleTransmission[]
+  @FilterableField(() => ID, { nullable: true })
+  engine?: VehicleEngine
+
+  @FilterableField(() => ID, { nullable: true })
+  transmission?: VehicleTransmission
 }

@@ -1,24 +1,30 @@
-import { VehicleBody, VehicleBodyDTO } from "./vehicle-body.entity"
+import { VehicleSize, VehicleSizeDTO } from "./vehicle-size.entity"
 import { VehicleBrand, VehicleBrandDTO } from "./vehicle-brand.entity"
 import { VehicleEngine, VehicleEngineDTO } from "./vehicle-engine.entity"
-import { VehicleModelBody, VehicleModelBodyDTO } from "./vehicle-model-body.entity"
 import { VehicleModel, VehicleModelDTO } from "./vehicle-model.entity"
 import { VehicleTransmission, VehicleTransmissionDTO } from "./vehicle-transmission.entity"
+import { VehicleBaseModel, VehicleBaseModelDTO } from "./vehicle-base-model.entity"
+import { VehicleDrive, VehicleDriveDTO } from "./vehicle-drive.entity"
+import { VehicleEngineFuel, VehicleEngineFuelDTO } from "./vehicle-engine-fuel.entity"
 
 export const Entities = [
-    VehicleBody,
+    VehicleBaseModel,
     VehicleBrand,
+    VehicleDrive,
+    VehicleEngineFuel,
     VehicleEngine,
-    VehicleModelBody,
     VehicleModel,
-    VehicleTransmission
+    VehicleSize,
+    VehicleTransmission,
 ]
 
 export const DTOs = [
-    VehicleBodyDTO,
+    VehicleBaseModelDTO,
     VehicleBrandDTO,
+    VehicleDriveDTO,
+    VehicleEngineFuelDTO,
     VehicleEngineDTO,
-    VehicleModelBodyDTO,
     VehicleModelDTO,
+    VehicleSizeDTO,
     VehicleTransmissionDTO
 ]

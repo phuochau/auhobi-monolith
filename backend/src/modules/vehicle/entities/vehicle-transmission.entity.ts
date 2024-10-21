@@ -13,7 +13,7 @@ class BaseClass extends BaseEntity {
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any
+  metadata?: any
 }
 
 /**

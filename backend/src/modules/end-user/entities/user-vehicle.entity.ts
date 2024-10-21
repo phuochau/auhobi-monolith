@@ -5,10 +5,7 @@ import GraphQLJSON from 'graphql-type-json';
 import { TABLE_PREFIX } from '../constants';
 import { VehicleModel } from '../../vehicle/entities/vehicle-model.entity';
 import _ from 'lodash';
-import { VehicleModelBody } from '../../../modules/vehicle/entities/vehicle-model-body.entity';
-import { VehicleEngine } from '../../../modules/vehicle/entities/vehicle-engine.entity';
-import { VehicleTransmission } from '../../../modules/vehicle/entities/vehicle-transmission.entity';
-import { UserVechileStatus } from './enums/user-vehicle-status.enum';
+import { UserVechileStatus as UserVechicleStatus } from './enums/user-vehicle-status.enum';
 import { User } from './user.entity';
 import { GqlContext } from '../../core/graphql/types/gql-context';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
@@ -26,15 +23,15 @@ class BaseClass extends BaseEntity {
 
   @Field({ nullable: true })
   @Column({ nullable: true })
-  picture: string;
+  picture?: string;
 
-  @FilterableField(() => UserVechileStatus, { nullable: true })
-  @Column({  nullable: false, default: UserVechileStatus.ACTIVATED })
-  status: UserVechileStatus;
+  @FilterableField(() => UserVechicleStatus, { nullable: true })
+  @Column({  nullable: false, default: UserVechicleStatus.ACTIVATED })
+  status: UserVechicleStatus;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
-  metadata: any
+  metadata?: any
 }
 
 /**
@@ -43,9 +40,6 @@ class BaseClass extends BaseEntity {
 @ObjectType()
 @FilterableRelation('owner', () => User)
 @FilterableRelation('model', () => VehicleModel)
-@FilterableRelation('body', () => VehicleModelBody)
-@FilterableRelation('engine', () => VehicleEngine)
-@FilterableRelation('transmission', () => VehicleTransmission)
 @Entity({ name: `${TABLE_PREFIX}_user_vehicles` })
 export class UserVehicle extends BaseClass {
   @FilterableField(() => ID)
@@ -57,15 +51,6 @@ export class UserVehicle extends BaseClass {
 
   @ManyToOne(() => VehicleModel, genXToOneOptions({ nullable: true }))
   model?: VehicleModel;
-
-  @ManyToOne(() => VehicleModelBody, genXToOneOptions({ nullable: true }))
-  body?: VehicleModelBody;
-
-  @ManyToOne(() => VehicleEngine, genXToOneOptions({ nullable: true }))
-  engine?: VehicleEngine;
-
-  @ManyToOne(() => VehicleTransmission, genXToOneOptions({ nullable: true }))
-  transmission?: VehicleTransmission;
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -94,13 +79,4 @@ export class UserVehicleDTO extends BaseClass {
 
   @FilterableField(() => ID, { nullable: true })
   model: VehicleModel;
-
-  @FilterableField(() => ID, { nullable: true })
-  body: VehicleModelBody;
-
-  @FilterableField(() => ID, { nullable: true })
-  engine: VehicleEngine;
-
-  @FilterableField(() => ID, { nullable: true })
-  transmission: VehicleTransmission;
 }
