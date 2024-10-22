@@ -6,7 +6,7 @@ import { CrawlerController } from "./crawler-controller"
 import { Browser, Page } from "playwright"
 import { expect } from "playwright/test"
 
-const DELAY_FETCH_SECONDS = 4
+const DELAY_FETCH_SECONDS = 2
 
 export namespace CarsDataCrawler {
     export const BASE_URL = '`https://www.cars-data.com'
