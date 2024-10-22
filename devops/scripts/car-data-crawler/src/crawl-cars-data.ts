@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Timer } from '../lib/timer';
 import path from 'path';
 import _ from 'lodash'
+import chalk from 'chalk';
 import { CarsDataCrawler } from '../lib/cars-data.crawler';
 
 chromium.use(StealthPlugin());
@@ -48,28 +49,28 @@ chromium.launch({ headless: true }).then(async (browser) => {
     do {
         const xmlTypeUrl = CarsDataCrawler.getTypeXMLUrl(xmlIndex)
         if (parsedTypeXmlUrls.includes(xmlTypeUrl)) {
-            console.log('[SKIP]', xmlTypeUrl)
+            chalk.yellow('[SKIP]', xmlTypeUrl)
             xmlIndex++
             continue
         }
 
-        console.log(`==================== PARSING TYPE XML: ${xmlIndex} ====================`)
+        chalk.blue.underline(`==================== PARSING TYPE XML: ${xmlIndex} ====================`)
 
         await Timer.wait(2)
         vehicleUrls = await axios.get(xmlTypeUrl).then(res => res.data)
 
         if (vehicleUrls) {
             const items: any[] = _.get(xmlParser.parse(vehicleUrls), 'urlset.url', [])
-            console.log(`Found ${items.length} vehicle urls`)
+            chalk.green(`Found ${items.length} vehicle urls`)
 
             for (const item of items) {
                 try {
                     if (isURLExist(parsedVehicleUrls, item)) {
-                        console.log('[SKIP]', item.loc)
+                        chalk.yellow('[SKIP]', item.loc)
                         continue
                     }
                     const vehicle = await CarsDataCrawler.crawlVehicle(browser, item.loc)
-                    console.log('Parsed vehicle at:', item.loc)
+                    chalk.green('[SUCCESS]', item.loc)
 
                     parsedVehicles.push(vehicle)
                     parsedVehicleUrls.push({
@@ -78,7 +79,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
                     })
 
                 } catch (err) {
-                    console.log('Error when parsing:', item.loc, err)
+                    chalk.red('[ERROR] Failed to parse:', item.loc, err)
                     if (!isURLExist(failedVehicleUrls, item)) {
                         failedVehicleUrls.push({
                             loc: item.loc,
@@ -99,6 +100,8 @@ chromium.launch({ headless: true }).then(async (browser) => {
             fs.writeFileSync(parsedTypeXMLPath, JSON.stringify(parsedTypeXmlUrls), { encoding: 'utf8', flag: 'w' })
 
             xmlIndex++
+        } else {
+            chalk.yellow(`[EMPTY] urls at:`, xmlTypeUrl)
         }
     } while (vehicleUrls)
 });
