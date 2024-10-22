@@ -14,7 +14,7 @@ import { VehicleModel } from "../modules/vehicle/entities/vehicle-model.entity";
 const vehicleJsonPath = path.join(process.cwd(), 'src/migrations/data/all-vehicles-model.json')
 
 
-export class ImportVehiclesJson1729490593640 implements MigrationInterface {
+export class ImportVehiclesJson1729567642858 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         /**
@@ -32,7 +32,8 @@ export class ImportVehiclesJson1729490593640 implements MigrationInterface {
          * - drive (RWD, FWD, etc)
          * - 
          */
-        const allVehicleModels: any[] = JSON.parse(fs.readFileSync(vehicleJsonPath, { encoding: 'utf-8' }))
+        let allVehicleModels: any[] = JSON.parse(fs.readFileSync(vehicleJsonPath, { encoding: 'utf-8' }))
+        allVehicleModels = _.sortBy(allVehicleModels, ['make', 'baseModel', 'year', 'model'])
 
         for (let vehicle of allVehicleModels) {
             const inId = vehicle.id
@@ -48,6 +49,8 @@ export class ImportVehiclesJson1729490593640 implements MigrationInterface {
             const inEngineDisplacement = vehicle.displ
             const inEvMotor = vehicle.evmotor
             const inAtv = vehicle.atvtype
+            const inTurbocharge = Boolean(vehicle.tcharger)
+            const inSupercharger = Boolean(vehicle.scharger)
 
             const inFuelType = vehicle.fueltype
             const inFuelType1 = vehicle.fueltype1
@@ -63,7 +66,19 @@ export class ImportVehiclesJson1729490593640 implements MigrationInterface {
             const size = await this.getOrCreateSize(queryRunner, inSize)
             const transmission = await this.getOrCreateTransmission(queryRunner, inTransmission)
             const engineFuel = await this.getOrCreateEngineFuel(queryRunner, inFuel)
-            const engine = await this.getOrCreateEngine(queryRunner, inEngineId, inEngineName, engineFuel.id, inEngineCylinders, inEngineDisplacement, inEvMotor, inPhevblended, inAtv)
+            const engine = await this.getOrCreateEngine(
+                queryRunner,
+                inEngineId,
+                inEngineName,
+                engineFuel.id,
+                inEngineCylinders,
+                inEngineDisplacement,
+                inEvMotor,
+                inPhevblended,
+                inAtv,
+                inTurbocharge,
+                inSupercharger
+            )
             const model = await this.getOrCreateModel(queryRunner, inId, inModel, inYear, brand.id, baseModel.id, drive.id, engine.id, transmission.id, size.id)
 
             console.log(`Imported model ${brand.name} ${model.name}.`)
@@ -114,7 +129,9 @@ export class ImportVehiclesJson1729490593640 implements MigrationInterface {
         displacement: string,
         evMotor: string,
         phevBlended: boolean,
-        atv: string
+        atv: string,
+        turbocharger: boolean,
+        supercharger: boolean
     ): Promise<VehicleEngine> {
         const repo = queryRunner.manager.getRepository<VehicleEngine>(VehicleEngine)
         let engine = await repo.findOneBy({ refId: refId })
@@ -126,7 +143,9 @@ export class ImportVehiclesJson1729490593640 implements MigrationInterface {
                 displacement,
                 evMotor,
                 phevBlended,
-                atv
+                advancedTechnology: atv,
+                turbocharger,
+                supercharger
             }).then(item => _.get(item, 'raw[0]'))
         }
         return engine

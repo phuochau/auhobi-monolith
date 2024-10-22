@@ -31,15 +31,23 @@ class BaseClass extends BaseEntity {
 
   @FilterableField({ nullable: true })
   @Column({ nullable: true })
-  atv?: string;
+  advancedTechnology?: string;
 
   @FilterableField({ nullable: true })
   @Column({ nullable: true })
   evMotor?: string;
 
   @FilterableField({ nullable: true })
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: false })
   phevBlended?: boolean;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true, default: false })
+  turbocharger?: boolean;
+
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true, default: false })
+  supercharger?: boolean;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
