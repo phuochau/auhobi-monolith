@@ -65,7 +65,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
             for (const item of items) {
                 try {
                     if (isURLExist(parsedVehicleUrls, item)) {
-                        console.log('[SKIP]', item)
+                        console.log('[SKIP]', item.loc)
                         continue
                     }
                     const vehicle = await CarsDataCrawler.crawlVehicle(browser, item.loc)
