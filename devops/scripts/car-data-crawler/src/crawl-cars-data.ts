@@ -6,7 +6,6 @@ import axios from 'axios';
 import { Timer } from '../lib/timer';
 import path from 'path';
 import _ from 'lodash'
-import chalk from 'chalk';
 import { CarsDataCrawler } from '../lib/cars-data.crawler';
 
 chromium.use(StealthPlugin());
@@ -15,7 +14,6 @@ const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
 const parsedTypeXMLPath = path.join(BASE_DIR, 'parsed_type_xml_urls.json')
 const parsedVehicleUrlsPath = path.join(BASE_DIR, 'parsed_vehicle_urls.json')
 const failedVehicleUrlsPath = path.join(BASE_DIR, 'failed_vehicles_urls.json')
-const vehiclesPath = path.join(BASE_DIR, 'vehicles.json')
 
 const isURLExist = (list: any[], url: any) => {
     const found = list.find(item => item.loc === url.loc)
@@ -44,33 +42,34 @@ chromium.launch({ headless: true }).then(async (browser) => {
     const parsedTypeXmlUrls: any[] = JSON.parse(await safeReadFile(parsedTypeXMLPath, '[]'))
     const parsedVehicleUrls: any[] = JSON.parse(await safeReadFile(parsedVehicleUrlsPath, '[]'))
     const failedVehicleUrls: any[] = JSON.parse(await safeReadFile(failedVehicleUrlsPath, '[]'))
-
-    const parsedVehicles: any[] = JSON.parse(await safeReadFile(vehiclesPath, '[]'))
     do {
+        const vehiclesPath = path.join(BASE_DIR, `vehicles${xmlIndex}.json`)
+        const parsedVehicles: any[] = JSON.parse(await safeReadFile(vehiclesPath, '[]'))
         const xmlTypeUrl = CarsDataCrawler.getTypeXMLUrl(xmlIndex)
+
         if (parsedTypeXmlUrls.includes(xmlTypeUrl)) {
-            chalk.yellow('[SKIP]', xmlTypeUrl)
+            console.log('[SKIP]', xmlTypeUrl)
             xmlIndex++
             continue
         }
 
-        chalk.blue.underline(`==================== PARSING TYPE XML: ${xmlIndex} ====================`)
+        console.log('\x1b[35m', '==================== PARSING TYPE XML: ${xmlIndex} ====================', '\x1b[0m')
 
         await Timer.wait(2)
         vehicleUrls = await axios.get(xmlTypeUrl).then(res => res.data)
 
         if (vehicleUrls) {
             const items: any[] = _.get(xmlParser.parse(vehicleUrls), 'urlset.url', [])
-            chalk.green(`Found ${items.length} vehicle urls`)
+            console.log('\x1b[32m', 'Found ${items.length} vehicle urls', '\x1b[0m')
 
             for (const item of items) {
                 try {
                     if (isURLExist(parsedVehicleUrls, item)) {
-                        chalk.yellow('[SKIP]', item.loc)
+                        console.log('\x1b[43m', '[SKIP]', item.loc, '\x1b[0m')
                         continue
                     }
                     const vehicle = await CarsDataCrawler.crawlVehicle(browser, item.loc)
-                    chalk.green('[SUCCESS]', item.loc)
+                    console.log('\x1b[32m', '[SUCCESS]', item.loc, '\x1b[0m')
 
                     parsedVehicles.push(vehicle)
                     parsedVehicleUrls.push({
@@ -79,7 +78,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
                     })
 
                 } catch (err) {
-                    chalk.red('[ERROR] Failed to parse:', item.loc, err)
+                    console.log('\x1b[41m', '[ERROR] Failed to parse:', item.loc, err, '\x1b[0m')
                     if (!isURLExist(failedVehicleUrls, item)) {
                         failedVehicleUrls.push({
                             loc: item.loc,
@@ -101,7 +100,9 @@ chromium.launch({ headless: true }).then(async (browser) => {
 
             xmlIndex++
         } else {
-            chalk.yellow(`[EMPTY] urls at:`, xmlTypeUrl)
+            console.log('\x1b[43m', `[EMPTY] urls at:`, xmlTypeUrl, '\x1b[0m')
         }
     } while (vehicleUrls)
+
+    browser.close()
 });
