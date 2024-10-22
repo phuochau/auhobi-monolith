@@ -53,14 +53,14 @@ chromium.launch({ headless: true }).then(async (browser) => {
             continue
         }
 
-        console.log('\x1b[35m', '==================== PARSING TYPE XML: ${xmlIndex} ====================', '\x1b[0m')
+        console.log('\x1b[35m', `==================== PARSING TYPE XML: ${xmlIndex} ====================`, '\x1b[0m')
 
         await Timer.wait(2)
         vehicleUrls = await axios.get(xmlTypeUrl).then(res => res.data)
 
         if (vehicleUrls) {
             const items: any[] = _.get(xmlParser.parse(vehicleUrls), 'urlset.url', [])
-            console.log('\x1b[32m', 'Found ${items.length} vehicle urls', '\x1b[0m')
+            console.log('\x1b[32m', `Found ${items.length} vehicle urls`, '\x1b[0m')
 
             for (const item of items) {
                 try {
