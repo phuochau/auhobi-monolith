@@ -95,8 +95,10 @@ chromium.launch({ headless: true }).then(async (browser) => {
 
             console.log('Waiting for next fetch......')
 
-            parsedTypeXmlUrls.push(xmlTypeUrl)
-            fs.writeFileSync(parsedTypeXMLPath, JSON.stringify(parsedTypeXmlUrls), { encoding: 'utf8', flag: 'w' })
+            if (!failedVehicleUrls.length) {
+                parsedTypeXmlUrls.push(xmlTypeUrl)
+                fs.writeFileSync(parsedTypeXMLPath, JSON.stringify(parsedTypeXmlUrls), { encoding: 'utf8', flag: 'w' })
+            }
 
             xmlIndex++
         } else {
