@@ -44,7 +44,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
     const parsedVehicleUrls: any[] = JSON.parse(await safeReadFile(parsedVehicleUrlsPath, '[]'))
     const failedVehicleUrls: any[] = JSON.parse(await safeReadFile(failedVehicleUrlsPath, '[]'))
 
-    const parsedVehicles: any[] = []
+    const parsedVehicles: any[] = JSON.parse(await safeReadFile(vehiclesPath, '[]'))
     do {
         const xmlTypeUrl = CarsDataCrawler.getTypeXMLUrl(xmlIndex)
         if (parsedTypeXmlUrls.includes(xmlTypeUrl)) {
