@@ -74,6 +74,10 @@ chromium.launch({ headless: true }).then(async (browser) => {
                         lastmod: item.lastmod
                     })
 
+                    if (isURLExist(failedVehicleUrls, item)) {
+                        failedVehicleUrls.splice(failedVehicleUrls.indexOf(item), 1)
+                    }
+
                 } catch (err) {
                     console.log('\x1b[41m', '[ERROR] Failed to parse:', item.loc, err, '\x1b[0m')
                     if (!isURLExist(failedVehicleUrls, item)) {
