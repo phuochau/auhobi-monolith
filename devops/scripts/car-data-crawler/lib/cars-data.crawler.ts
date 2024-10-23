@@ -5,6 +5,7 @@ import { Url } from "./url"
 import { CrawlerController } from "./crawler-controller"
 import { Browser, Page } from "playwright"
 import { expect } from "playwright/test"
+import { goto } from "./playwright"
 
 const DELAY_FETCH_SECONDS = 5
 
@@ -43,7 +44,7 @@ export namespace CarsDataCrawler {
 
     export const crawlBasicInfo = async (page: Page, url: string): Promise<any> => {
         await Timer.wait(DELAY_FETCH_SECONDS)
-        await page.goto(url)
+        await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
         const carName = (await page.locator('.title h1').textContent())?.trim()
@@ -58,7 +59,7 @@ export namespace CarsDataCrawler {
         expect(imagesPage).toBeTruthy()
 
         await Timer.wait(DELAY_FETCH_SECONDS)
-        await page.goto(imagesPage!)
+        await goto(page, imagesPage!)
 
         const imageRows = await page.$$('.row.img100')
 
@@ -115,7 +116,7 @@ export namespace CarsDataCrawler {
 
     export const crawlSeparateSpecs = async (page: Page, url: string): Promise<any> => {
         await Timer.wait(DELAY_FETCH_SECONDS)
-        await page.goto(url)
+        await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
 
