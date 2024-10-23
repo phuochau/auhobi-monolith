@@ -62,6 +62,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
             const items: any[] = _.get(xmlParser.parse(vehicleUrls), 'urlset.url', [])
             console.log('\x1b[32m', `Found ${items.length} vehicle urls`, '\x1b[0m')
 
+            let itemIndex = 0
             for (const item of items) {
                 try {
                     if (isURLExist(parsedVehicleUrls, item)) {
@@ -69,7 +70,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
                         continue
                     }
                     const vehicle = await CarsDataCrawler.crawlVehicle(browser, item.loc)
-                    console.log('\x1b[32m', '[SUCCESS]', item.loc, '\x1b[0m')
+                    console.log('\x1b[32m', '[SUCCESS]', new Date().toString(), itemIndex, item.loc, '\x1b[0m')
 
                     parsedVehicles.push(vehicle)
                     parsedVehicleUrls.push({
@@ -91,6 +92,8 @@ chromium.launch({ headless: true }).then(async (browser) => {
                 fs.writeFileSync(vehiclesPath, JSON.stringify(parsedVehicles), { encoding: 'utf8', flag: 'w' })
                 fs.writeFileSync(parsedVehicleUrlsPath, JSON.stringify(parsedVehicleUrls), { encoding: 'utf8', flag: 'w' })
                 fs.writeFileSync(failedVehicleUrlsPath, JSON.stringify(failedVehicleUrls), { encoding: 'utf8', flag: 'w' })
+
+                itemIndex++
             }
 
             console.log('Waiting for next fetch......')
