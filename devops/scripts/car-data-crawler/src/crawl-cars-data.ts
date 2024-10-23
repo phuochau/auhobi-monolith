@@ -10,11 +10,6 @@ import { CarsDataCrawler } from '../lib/cars-data.crawler';
 
 chromium.use(StealthPlugin());
 
-const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
-const parsedTypeXMLPath = path.join(BASE_DIR, 'parsed_type_xml_urls.json')
-const parsedVehicleUrlsPath = path.join(BASE_DIR, 'parsed_vehicle_urls.json')
-const failedVehicleUrlsPath = path.join(BASE_DIR, 'failed_vehicles_urls.json')
-
 const isURLExist = (list: any[], url: any) => {
     const found = list.find(item => item.loc === url.loc)
 
@@ -39,11 +34,11 @@ chromium.launch({ headless: true }).then(async (browser) => {
     let xmlIndex = 0
     const xmlParser = new XMLParser();
 
-    const parsedTypeXmlUrls: any[] = JSON.parse(await safeReadFile(parsedTypeXMLPath, '[]'))
-    const parsedVehicleUrls: any[] = JSON.parse(await safeReadFile(parsedVehicleUrlsPath, '[]'))
-    const failedVehicleUrls: any[] = JSON.parse(await safeReadFile(failedVehicleUrlsPath, '[]'))
+    const parsedTypeXmlUrls: any[] = JSON.parse(await safeReadFile(CarsDataCrawler.PARSED_TYPE_XML_PATH, '[]'))
+    const parsedVehicleUrls: any[] = JSON.parse(await safeReadFile(CarsDataCrawler.PARSED_VEHICLE_URLS_PATH, '[]'))
+    const failedVehicleUrls: any[] = JSON.parse(await safeReadFile(CarsDataCrawler.FAILED_VEHICLE_URLS_PATH, '[]'))
     do {
-        const vehiclesPath = path.join(BASE_DIR, `vehicles${xmlIndex}.json`)
+        const vehiclesPath = CarsDataCrawler.getLocalVehiclesPathAtTypeIndex(xmlIndex)
         const parsedVehicles: any[] = JSON.parse(await safeReadFile(vehiclesPath, '[]'))
         const xmlTypeUrl = CarsDataCrawler.getTypeXMLUrl(xmlIndex)
 
@@ -91,8 +86,8 @@ chromium.launch({ headless: true }).then(async (browser) => {
 
                 // Keep track at run-time
                 fs.writeFileSync(vehiclesPath, JSON.stringify(parsedVehicles), { encoding: 'utf8', flag: 'w' })
-                fs.writeFileSync(parsedVehicleUrlsPath, JSON.stringify(parsedVehicleUrls), { encoding: 'utf8', flag: 'w' })
-                fs.writeFileSync(failedVehicleUrlsPath, JSON.stringify(failedVehicleUrls), { encoding: 'utf8', flag: 'w' })
+                fs.writeFileSync(CarsDataCrawler.PARSED_VEHICLE_URLS_PATH, JSON.stringify(parsedVehicleUrls), { encoding: 'utf8', flag: 'w' })
+                fs.writeFileSync(CarsDataCrawler.FAILED_VEHICLE_URLS_PATH, JSON.stringify(failedVehicleUrls), { encoding: 'utf8', flag: 'w' })
 
                 itemIndex++
             }
@@ -101,7 +96,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
 
             if (!failedVehicleUrls.length) {
                 parsedTypeXmlUrls.push(xmlTypeUrl)
-                fs.writeFileSync(parsedTypeXMLPath, JSON.stringify(parsedTypeXmlUrls), { encoding: 'utf8', flag: 'w' })
+                fs.writeFileSync(CarsDataCrawler.PARSED_TYPE_XML_PATH, JSON.stringify(parsedTypeXmlUrls), { encoding: 'utf8', flag: 'w' })
             }
 
             xmlIndex++

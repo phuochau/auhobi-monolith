@@ -6,14 +6,24 @@ import { CrawlerController } from "./crawler-controller"
 import { Browser, Page } from "playwright"
 import { expect } from "playwright/test"
 import { goto } from "./playwright"
+import path from "path"
 
 const DELAY_FETCH_SECONDS = 5
 
 export namespace CarsDataCrawler {
-    export const BASE_URL = '`https://www.cars-data.com'
+    export const BASE_URL = 'https://www.cars-data.com'
+    
+    export const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
+    export const PARSED_TYPE_XML_PATH = path.join(BASE_DIR, 'parsed_type_xml_urls.json')
+    export const PARSED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'parsed_vehicle_urls.json')
+    export const FAILED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'failed_vehicles_urls.json')
 
     export const getTypeXMLUrl = (index: number) => {
-        return `https://www.cars-data.com/en/types-el-${index}.xml`
+        return `${BASE_URL}/en/types-el-${index}.xml`
+    }
+
+    export const getLocalVehiclesPathAtTypeIndex = (xmlIndex: number) => {
+        return path.join(CarsDataCrawler.BASE_DIR, 'vehicles', `vehicles${xmlIndex}.json`)
     }
 
     export const crawlVehicle = async (browser: Browser, url: string): Promise<any> => {
