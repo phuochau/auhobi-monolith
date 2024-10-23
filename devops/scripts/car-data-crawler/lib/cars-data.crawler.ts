@@ -7,6 +7,8 @@ import { Browser, Page } from "playwright"
 import { expect } from "playwright/test"
 import { goto } from "./playwright"
 import path from "path"
+import fs from 'fs'
+import axios from "axios"
 
 const DELAY_FETCH_SECONDS = 5
 
@@ -22,8 +24,12 @@ export namespace CarsDataCrawler {
         return `${BASE_URL}/en/types-el-${index}.xml`
     }
 
+    export const getLocalVehiclesFolder = () => {
+        return path.join(CarsDataCrawler.BASE_DIR, 'vehicles')
+    }
+
     export const getLocalVehiclesPathAtTypeIndex = (xmlIndex: number) => {
-        return path.join(CarsDataCrawler.BASE_DIR, 'vehicles', `vehicles${xmlIndex}.json`)
+        return path.join(getLocalVehiclesFolder(), `vehicles${xmlIndex}.json`)
     }
 
     export const crawlVehicle = async (browser: Browser, url: string): Promise<any> => {
@@ -91,6 +97,7 @@ export namespace CarsDataCrawler {
         return {
             name: carName,
             description: carDescription,
+            ref: url,
             images: imageUrls
         }
     }
@@ -136,4 +143,18 @@ export namespace CarsDataCrawler {
         const tables = await container!.$$('table')
         return crawlTableFeatures(tables)
     }
+
+    export const downloadImage = async (url: string, filepath: string) => {
+        const response = await axios({
+          url,
+          method: 'GET',
+          responseType: 'stream',
+        })
+        return new Promise((resolve, reject) => {
+          response.data
+            .pipe(fs.createWriteStream(filepath))
+            .on('error', reject)
+            .once('close', () => resolve(filepath))
+        })
+      }
 }
