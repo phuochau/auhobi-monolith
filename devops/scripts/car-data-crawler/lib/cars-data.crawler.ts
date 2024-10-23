@@ -20,12 +20,16 @@ export namespace CarsDataCrawler {
     export const PARSED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'parsed_vehicle_urls.json')
     export const FAILED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'failed_vehicles_urls.json')
 
+    export const DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH = path.join(BASE_DIR, 'downloaded_vehicle_image_collection.json')
+    export const DOWNLOADED_VEHICLE_IMAGES_PATH = path.join(BASE_DIR, 'downloaded_vehicle_image_urls.json')
+    export const DOWNLOADED_VEHICLE_IMAGES_FAILED_PATH = path.join(BASE_DIR, 'downloaded_failed_vehicle_image_urls.json')
+
     export const getTypeXMLUrl = (index: number) => {
         return `${BASE_URL}/en/types-el-${index}.xml`
     }
 
     export const getLocalVehiclesFolder = () => {
-        return path.join(CarsDataCrawler.BASE_DIR, 'vehicles')
+        return path.join(BASE_DIR, 'vehicles')
     }
 
     export const getLocalVehiclesPathAtTypeIndex = (xmlIndex: number) => {
@@ -144,17 +148,24 @@ export namespace CarsDataCrawler {
         return crawlTableFeatures(tables)
     }
 
-    export const downloadImage = async (url: string, filepath: string) => {
+    export const getLocalImagePath = (filename: string) => {
+        return path.join(path.join(CarsDataCrawler.BASE_DIR, 'images'), filename)
+    }
+
+    export const downloadImage = async (url: string, filepath: string): Promise<boolean> => {
         const response = await axios({
           url,
           method: 'GET',
           responseType: 'stream',
         })
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           response.data
             .pipe(fs.createWriteStream(filepath))
-            .on('error', reject)
-            .once('close', () => resolve(filepath))
+            .on('error', (err: any) => {
+                console.error(err)
+                resolve(false)
+            })
+            .once('close', () => resolve(true))
         })
       }
 }
