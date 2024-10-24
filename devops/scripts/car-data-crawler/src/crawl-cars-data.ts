@@ -22,7 +22,6 @@ chromium.launch({ headless: true }).then(async (browser) => {
 
     const parsedTypeXmlUrls: any[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.PARSED_TYPE_XML_PATH, '[]'))
     const parsedVehicleUrls: any[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.PARSED_VEHICLE_URLS_PATH, '[]'))
-    const failedVehicleUrls: any[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.FAILED_VEHICLE_URLS_PATH, '[]'))
     do {
         const vehiclesPath = CarsDataCrawler.getLocalVehiclesPathAtTypeIndex(xmlIndex)
         const parsedVehicles: any[] = JSON.parse(await FileUtils.safeReadFile(vehiclesPath, '[]'))
@@ -44,6 +43,7 @@ chromium.launch({ headless: true }).then(async (browser) => {
             console.log('\x1b[32m', `Found ${items.length} vehicle urls`, '\x1b[0m')
 
             let itemIndex = 0
+            const failedVehicleUrls: any[] = []
             for (const item of items) {
                 try {
                     if (isURLExist(parsedVehicleUrls, item)) {
