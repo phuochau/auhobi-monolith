@@ -30,7 +30,8 @@ chromium.launch({ headless: true }).then(async (browser) => {
         if (parsedTypeXmlUrls.includes(xmlTypeUrl)) {
             console.log('[SKIP]', xmlTypeUrl)
             xmlIndex++
-            continue
+            vehicleUrls = true
+            continue 
         }
 
         console.log('\x1b[35m', `==================== PARSING TYPE XML: ${xmlIndex} ====================`, '\x1b[0m')
