@@ -1,4 +1,3 @@
-import axios from 'axios'
 import fs from 'fs'
 import { CarsDataCrawler } from '../lib/cars-data.crawler';
 import _ from 'lodash';
