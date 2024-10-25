@@ -10,7 +10,6 @@ function run() {
     fs.readdir(vehileFolder, async (err, files) => {
         const downloadedCollections: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH, '[]'))
         const downloadedImages: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_PATH, '[]'))
-        const failedImages: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_FAILED_PATH, '[]'))
 
         for (const filename of files) {
             const file = path.join(vehileFolder, filename)
@@ -18,6 +17,8 @@ function run() {
                 console.log('\x1b[43m', '[SKIP]', file, '\x1b[0m')
                 continue
             }
+
+            const failedImages: string[] = []
 
             console.log('\x1b[35m', '============', file ,'============','\x1b[0m')
             const vehicles = JSON.parse(fs.readFileSync(file, 'utf8'))
@@ -52,8 +53,10 @@ function run() {
                 }
             }
 
-            downloadedCollections.push(file)
-            FileUtils.overwrite(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH, JSON.stringify(downloadedCollections))
+            if (!failedImages.length) {
+                downloadedCollections.push(file)
+                FileUtils.overwrite(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH, JSON.stringify(downloadedCollections))
+            }
         }
     });
 }
