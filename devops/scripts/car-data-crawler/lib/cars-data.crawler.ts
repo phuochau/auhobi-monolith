@@ -10,7 +10,7 @@ import path from "path"
 import fs from 'fs'
 import axios from "axios"
 
-const DELAY_FETCH_SECONDS = 3.5
+const DELAY_FETCH_SECONDS = 3.8
 
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
