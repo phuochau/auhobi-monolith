@@ -2,14 +2,6 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 import fs from 'fs'
 import path from 'path';
 import _ from "lodash";
-import { VehicleBrand } from "../../modules/vehicle/entities/vehicle-brand.entity";
-import { VehicleBaseModel } from "../../modules/vehicle/entities/vehicle-base-model.entity";
-import { VehicleEngineFuel } from "../../modules/vehicle/entities/vehicle-engine-fuel.entity";
-import { VehicleEngine } from "../../modules/vehicle/entities/vehicle-engine.entity";
-import { VehicleDrive } from "../../modules/vehicle/entities/vehicle-drive.entity";
-import { VehicleBody } from "../../modules/vehicle/entities/vehicle-body.entity";
-import { VehicleTransmission } from "../../modules/vehicle/entities/vehicle-transmission.entity";
-import { VehicleModel } from "../../modules/vehicle/entities/vehicle-model.entity";
 import { CarDataVehicle } from "./types/car-data-vehicle";
 
 const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com')
@@ -42,68 +34,59 @@ export class ImportVehiclesJson1729904536528 implements MigrationInterface {
         for (const file of files) {
             const filepath = path.join(VEHICLES_DIR, file)
             let vehicles: CarDataVehicle[] = JSON.parse(fs.readFileSync(filepath, 'utf-8'))
-            vehicles = _.sortBy(vehicles, ['make', 'baseModel', 'year', 'model'])
-        }
 
-        let allVehicleModels: any[] = JSON.parse(fs.readFileSync(vehicleJsonPath, { encoding: 'utf-8' }))
-        allVehicleModels = _.sortBy(allVehicleModels, ['make', 'baseModel', 'year', 'model'])
-
-        for (let vehicle of allVehicleModels) {
-            const inId = vehicle.id
-            const inBrand = vehicle.make
-            const inBaseModel = vehicle.basemodel
-            const inModel = vehicle.model
-            const inYear = vehicle.year
-            const inDrive = vehicle.vclass
-            const inSize = vehicle.vclass
-            const inEngineId = vehicle.engid
-            const inEngineName = _.get(vehicle, 'eng_dscr[0]')
-            const inEngineCylinders =  vehicle.cyclinders
-            const inEngineDisplacement = vehicle.displ
-            const inEvMotor = vehicle.evmotor
-            const inAtv = vehicle.atvtype
-            const inTurbocharge = Boolean(vehicle.tcharger)
-            const inSupercharger = Boolean(vehicle.scharger)
-
-            const inFuelType = vehicle.fueltype
-            const inFuelType1 = vehicle.fueltype1
-            const inFuelType2 = vehicle.fueltype2
-            const inFuel = [inFuelType, inFuelType1, inFuelType2].filter(item => !_.isNil(item)).join(', ')
-
-            const inTransmission = vehicle.trany
-            const inPhevblended = Boolean(vehicle.phevblended)
-
-            const brand = await this.getOrCreateBrand(queryRunner, inBrand)
-            const baseModel = await this.getOrCreateBaseModel(queryRunner, brand.id, inBaseModel)
-            const drive = await this.getOrCreateDrive(queryRunner, inDrive)
-            const size = await this.getOrCreateSize(queryRunner, inSize)
-            const transmission = await this.getOrCreateTransmission(queryRunner, inTransmission)
-            const engineFuel = await this.getOrCreateEngineFuel(queryRunner, inFuel)
-            const engine = await this.getOrCreateEngine(
-                queryRunner,
-                inEngineId,
-                inEngineName,
-                engineFuel.id,
-                inEngineCylinders,
-                inEngineDisplacement,
-                inEvMotor,
-                inPhevblended,
-                inAtv,
-                inTurbocharge,
-                inSupercharger
-            )
-            const model = await this.getOrCreateModel(queryRunner, inId, inModel, inYear, brand.id, baseModel.id, drive.id, engine.id, transmission.id, size.id)
-
-            console.log(`Imported model ${brand.name} ${model.name}.`)
+            for (let vehicle of vehicles) {
+                const inId = vehicle.ref
+                const inBrand = vehicle.brandName
+                const inModel = vehicle.name
+                const inYear = vehicle.tech
+                const inDrive = vehicle.vclass
+                const inSize = vehicle.vclass
+                const inEngineId = vehicle.engid
+                const inEngineName = _.get(vehicle, 'eng_dscr[0]')
+                const inEngineCylinders =  vehicle.cyclinders
+                const inEngineDisplacement = vehicle.displ
+                const inEvMotor = vehicle.evmotor
+                const inAtv = vehicle.atvtype
+                const inTurbocharge = Boolean(vehicle.tcharger)
+                const inSupercharger = Boolean(vehicle.scharger)
+    
+                const inFuelType = vehicle.fueltype
+                const inFuelType1 = vehicle.fueltype1
+                const inFuelType2 = vehicle.fueltype2
+                const inFuel = [inFuelType, inFuelType1, inFuelType2].filter(item => !_.isNil(item)).join(', ')
+    
+                const inTransmission = vehicle.trany
+                const inPhevblended = Boolean(vehicle.phevblended)
+    
+                const brand = await this.getOrCreateBrand(queryRunner, inBrand)
+                const baseModel = await this.getOrCreateBaseModel(queryRunner, brand.id, inBaseModel)
+                const drive = await this.getOrCreateDrive(queryRunner, inDrive)
+                const size = await this.getOrCreateSize(queryRunner, inSize)
+                const transmission = await this.getOrCreateTransmission(queryRunner, inTransmission)
+                const engineFuel = await this.getOrCreateEngineFuel(queryRunner, inFuel)
+                const engine = await this.getOrCreateEngine(
+                    queryRunner,
+                    inEngineId,
+                    inEngineName,
+                    engineFuel.id,
+                    inEngineCylinders,
+                    inEngineDisplacement,
+                    inEvMotor,
+                    inPhevblended,
+                    inAtv,
+                    inTurbocharge,
+                    inSupercharger
+                )
+                const model = await this.getOrCreateModel(queryRunner, inId, inModel, inYear, brand.id, baseModel.id, drive.id, engine.id, transmission.id, size.id)
+    
+                console.log(`Imported model ${brand.name} ${model.name}.`)
+            }
         }
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        const allVehicleModels: any[] = JSON.parse(fs.readFileSync(vehicleJsonPath, { encoding: 'utf-8' }))
-        const repo = queryRunner.manager.getRepository<VehicleModel>(VehicleModel)
-        for (let vehicle of allVehicleModels) {
-            await repo.delete({ refId: vehicle.id })
-        }
+        //  Can't do for now
     }
 
     private async getOrCreateBrand(queryRunner: QueryRunner, brandName: string): Promise<VehicleBrand> {

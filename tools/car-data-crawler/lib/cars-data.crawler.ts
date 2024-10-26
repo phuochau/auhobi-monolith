@@ -9,6 +9,7 @@ import { goto } from "./playwright"
 import path from "path"
 import fs from 'fs'
 import axios from "axios"
+import { Option, Size, Tech } from "./models/car-data-vehicle"
 
 const DELAY_FETCH_SECONDS = 4
 
@@ -42,19 +43,22 @@ export namespace CarsDataCrawler {
         basicPage.close()
 
         const techPage = await CrawlerController.getNewPage(browser)
-        const tech = await CarsDataCrawler.crawlSeparateSpecs(techPage, Url.join(url, 'tech'))
+        const tech: Tech[] = await CarsDataCrawler.crawlSeparateSpecs(techPage, Url.join(url, 'tech'))
         techPage.close()
 
         const optionsPage = await CrawlerController.getNewPage(browser)
-        const options = await CarsDataCrawler.crawlSeparateSpecs(optionsPage, Url.join(url, 'options'))
+        const options: Option[] = await CarsDataCrawler.crawlSeparateSpecs(optionsPage, Url.join(url, 'options'))
         optionsPage.close()
 
         const sizesPage = await CrawlerController.getNewPage(browser)
-        const sizes = await CarsDataCrawler.crawlSeparateSpecs(sizesPage, Url.join(url, 'sizes'))
+        const sizes: Size[] = await CarsDataCrawler.crawlSeparateSpecs(sizesPage, Url.join(url, 'sizes'))
         sizesPage.close()
+
+        const years = CarsDataCrawler.getYears(options)
 
         return {
             ...basicInfo,
+            ...years,
             tech,
             options,
             sizes
@@ -122,8 +126,15 @@ export namespace CarsDataCrawler {
                 for (const row of rows) {
                     const cols = await row.$$('td')
                     if (cols.length === 2) {
-                        const name = await cols[0].textContent()
+                        let name = await cols[0].textContent()
                         const value = await cols[1].textContent()
+
+                        if (name) {
+                            if (name.endsWith(':')) {
+                                name = name.substring(0, name.length - 1)
+                            }
+                            name = name?.trim()
+                        }
 
                         if (name?.length) {
                             features[name] = value
@@ -149,6 +160,21 @@ export namespace CarsDataCrawler {
 
         const tables = await container!.$$('table')
         return crawlTableFeatures(tables)
+    }
+
+    export const getYears = (options: Option[]) => {
+        let priceHistory = options.find(opt => opt.title === 'NEW PRICE HISTORY')
+
+        const features = priceHistory?.features || []
+        const priceKeys: string[] = Object.keys(features).sort()
+
+        const startYear = parseInt(_.first(priceKeys)!.replace(/([A-z])\w+/g, '').trim())
+        const endYear = parseInt(_.last(priceKeys)!.replace(/([A-z])\w+/g, '').trim())
+
+        return {
+            startYear,
+            endYear
+        }
     }
 
     export const getLocalImagePath = (filename: string) => {
