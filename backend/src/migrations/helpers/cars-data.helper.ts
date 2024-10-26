@@ -1,8 +1,11 @@
-import { CarDataVehicle } from "../types/car-data-vehicle";
+import { CarDataVehicle, Tech } from "../types/car-data-vehicle";
 
 export namespace CarsDataHelper {
-    export const getDrive = (vehicle: CarDataVehicle): string => {
-        const tech = vehicle.tech.find(item => item.title === 'DRIVE')
-        return tech.features["Drive Wheel"]
+    export const getTechGeneralSection = (vehicle: CarDataVehicle): Tech => {
+        return vehicle.tech.find(item => item.title === 'GENERAL')
+    }
+
+    export const getTechDriveSection = (vehicle: CarDataVehicle): Tech => {
+        return vehicle.tech.find(item => item.title === 'DRIVE')
     }
 }
