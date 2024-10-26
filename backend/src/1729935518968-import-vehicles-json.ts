@@ -2,14 +2,15 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 import fs from 'fs'
 import path from 'path';
 import _ from "lodash";
-import { CarDataVehicle } from "./types/car-data-vehicle";
+import { CarDataVehicle } from "./migrations/types/car-data-vehicle";
+import { CarsDataHelper } from "./migrations/helpers/cars-data.helper";
 
 const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com')
 const VEHICLES_DIR = path.join(BASE_DIR, 'vehicles')
 const IMAGES_DIR = path.join(BASE_DIR, 'images')
 
 
-export class ImportVehiclesJson1729904536528 implements MigrationInterface {
+export class ImportVehiclesJson1729935518968 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         /**
@@ -39,8 +40,10 @@ export class ImportVehiclesJson1729904536528 implements MigrationInterface {
                 const inId = vehicle.ref
                 const inBrand = vehicle.brandName
                 const inModel = vehicle.name
-                const inYear = vehicle.tech
-                const inDrive = vehicle.vclass
+                const inStartYear = vehicle.startYear
+                const inEndYear = vehicle.endYear
+                const inDrive = CarsDataHelper.getDrive(vehicle)
+
                 const inSize = vehicle.vclass
                 const inEngineId = vehicle.engid
                 const inEngineName = _.get(vehicle, 'eng_dscr[0]')

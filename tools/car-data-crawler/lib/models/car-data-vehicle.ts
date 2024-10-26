@@ -26,7 +26,7 @@ export interface TechFeatures {
     "Segment"?: string
     "Introduction"?: string
     "End"?: string
-    "Drive Wheel "?: string
+    "Drive Wheel"?: string
     "Engine/motor Type"?: string
     "Fuel Type"?: string
     "Power"?: string

@@ -54,7 +54,7 @@ export namespace CarsDataCrawler {
         const sizes: Size[] = await CarsDataCrawler.crawlSeparateSpecs(sizesPage, Url.join(url, 'sizes'))
         sizesPage.close()
 
-        const years = CarsDataCrawler.getYears(options)
+        const years = CarsDataCrawler.getYears(tech)
 
         return {
             ...basicInfo,
@@ -162,14 +162,22 @@ export namespace CarsDataCrawler {
         return crawlTableFeatures(tables)
     }
 
-    export const getYears = (options: Option[]) => {
-        let priceHistory = options.find(opt => opt.title === 'NEW PRICE HISTORY')
+    export const getYears = (techs: Tech[]) => {
+        let general = techs.find(opt => opt.title === 'GENERAL')
 
-        const features = priceHistory?.features || []
-        const priceKeys: string[] = Object.keys(features).sort()
+        let startYear = null
+        let endYear = null
 
-        const startYear = parseInt(_.first(priceKeys)!.replace(/([A-z])\w+/g, '').trim())
-        const endYear = parseInt(_.last(priceKeys)!.replace(/([A-z])\w+/g, '').trim())
+        const introduction = general?.features['Introduction']
+        const end = general?.features['End']
+
+        if (introduction) {
+            startYear = parseInt(introduction.replace(/([A-z])\w+/g, '').trim())
+        }
+
+        if (end) {
+            endYear = parseInt(end.replace(/([A-z])\w+/g, '').trim())
+        }
 
         return {
             startYear,
