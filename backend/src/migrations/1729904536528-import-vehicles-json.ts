@@ -10,8 +10,11 @@ import { VehicleDrive } from "../../modules/vehicle/entities/vehicle-drive.entit
 import { VehicleBody } from "../../modules/vehicle/entities/vehicle-body.entity";
 import { VehicleTransmission } from "../../modules/vehicle/entities/vehicle-transmission.entity";
 import { VehicleModel } from "../../modules/vehicle/entities/vehicle-model.entity";
+import { CarDataVehicle } from "./types/car-data-vehicle";
 
-const vehicleJsonPath = path.join(process.cwd(), 'src/migrations/data/all-vehicles-model.json')
+const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com')
+const VEHICLES_DIR = path.join(BASE_DIR, 'vehicles')
+const IMAGES_DIR = path.join(BASE_DIR, 'images')
 
 
 export class ImportVehiclesJson1729904536528 implements MigrationInterface {
@@ -32,6 +35,16 @@ export class ImportVehiclesJson1729904536528 implements MigrationInterface {
          * - drive (RWD, FWD, etc)
          * - 
          */
+
+
+        const files = fs.readdirSync(VEHICLES_DIR)
+
+        for (const file of files) {
+            const filepath = path.join(VEHICLES_DIR, file)
+            let vehicles: CarDataVehicle[] = JSON.parse(fs.readFileSync(filepath, 'utf-8'))
+            vehicles = _.sortBy(vehicles, ['make', 'baseModel', 'year', 'model'])
+        }
+
         let allVehicleModels: any[] = JSON.parse(fs.readFileSync(vehicleJsonPath, { encoding: 'utf-8' }))
         allVehicleModels = _.sortBy(allVehicleModels, ['make', 'baseModel', 'year', 'model'])
 

@@ -69,6 +69,8 @@ export namespace CarsDataCrawler {
         await expect(page.locator('.title h1')).toBeVisible()
         const carName = (await page.locator('.title h1').textContent())?.trim()
 
+        const brandName = (await page.locator('.title a').getAttribute('title'))?.trim()
+
         await expect(page.locator('.title h2')).toBeVisible()
         const carDescription = (await page.locator('.title h2').textContent())?.trim()
 
@@ -100,6 +102,7 @@ export namespace CarsDataCrawler {
 
         return {
             name: carName,
+            brandName,
             description: carDescription,
             ref: url,
             images: imageUrls
