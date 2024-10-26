@@ -1,4 +1,4 @@
-import { VehicleSize, VehicleSizeDTO } from "./vehicle-size.entity"
+import { VehicleBody, VehicleBodyDTO } from "./vehicle-body.entity"
 import { VehicleBrand, VehicleBrandDTO } from "./vehicle-brand.entity"
 import { VehicleEngine, VehicleEngineDTO } from "./vehicle-engine.entity"
 import { VehicleModel, VehicleModelDTO } from "./vehicle-model.entity"
@@ -14,7 +14,7 @@ export const Entities = [
     VehicleEngineFuel,
     VehicleEngine,
     VehicleModel,
-    VehicleSize,
+    VehicleBody,
     VehicleTransmission,
 ]
 
@@ -25,6 +25,6 @@ export const DTOs = [
     VehicleEngineFuelDTO,
     VehicleEngineDTO,
     VehicleModelDTO,
-    VehicleSizeDTO,
+    VehicleBodyDTO,
     VehicleTransmissionDTO
 ]

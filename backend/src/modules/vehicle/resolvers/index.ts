@@ -1,4 +1,4 @@
-import { VehicleSizeResolver } from "./vehicle-size.resolver";
+import { VehicleBodyResolver } from "./vehicle-body.resolver";
 import { VehicleBrandResolver } from "./vehicle-brand.resolver";
 import { VehicleEngineResolver } from "./vehicle-engine.resolver";
 import { VehicleModelResolver } from "./vehicle-model.resolver";
@@ -14,6 +14,6 @@ export const Resolvers = [
     VehicleEngineFuelResolver,
     VehicleEngineResolver,
     VehicleModelResolver,
-    VehicleSizeResolver,
+    VehicleBodyResolver,
     VehicleTransmissionResolver
 ]

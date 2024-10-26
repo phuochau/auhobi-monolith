@@ -2,14 +2,14 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 import fs from 'fs'
 import path from 'path';
 import _ from "lodash";
-import { VehicleBrand } from "../modules/vehicle/entities/vehicle-brand.entity";
-import { VehicleBaseModel } from "../modules/vehicle/entities/vehicle-base-model.entity";
-import { VehicleEngineFuel } from "../modules/vehicle/entities/vehicle-engine-fuel.entity";
-import { VehicleEngine } from "../modules/vehicle/entities/vehicle-engine.entity";
-import { VehicleDrive } from "../modules/vehicle/entities/vehicle-drive.entity";
-import { VehicleSize } from "../modules/vehicle/entities/vehicle-size.entity";
-import { VehicleTransmission } from "../modules/vehicle/entities/vehicle-transmission.entity";
-import { VehicleModel } from "../modules/vehicle/entities/vehicle-model.entity";
+import { VehicleBrand } from "../../modules/vehicle/entities/vehicle-brand.entity";
+import { VehicleBaseModel } from "../../modules/vehicle/entities/vehicle-base-model.entity";
+import { VehicleEngineFuel } from "../../modules/vehicle/entities/vehicle-engine-fuel.entity";
+import { VehicleEngine } from "../../modules/vehicle/entities/vehicle-engine.entity";
+import { VehicleDrive } from "../../modules/vehicle/entities/vehicle-drive.entity";
+import { VehicleBody } from "../../modules/vehicle/entities/vehicle-body.entity";
+import { VehicleTransmission } from "../../modules/vehicle/entities/vehicle-transmission.entity";
+import { VehicleModel } from "../../modules/vehicle/entities/vehicle-model.entity";
 
 const vehicleJsonPath = path.join(process.cwd(), 'src/migrations/data/all-vehicles-model.json')
 
@@ -160,8 +160,8 @@ export class ImportVehiclesJson1729567642858 implements MigrationInterface {
         return drive
     }
 
-    private async getOrCreateSize(queryRunner: QueryRunner, sizeName: string): Promise<VehicleSize> {
-        const repo = queryRunner.manager.getRepository<VehicleSize>(VehicleSize)
+    private async getOrCreateSize(queryRunner: QueryRunner, sizeName: string): Promise<VehicleBody> {
+        const repo = queryRunner.manager.getRepository<VehicleBody>(VehicleBody)
         let size = await repo.findOneBy({ name: sizeName })
         if (!size) {
             size = await repo.insert({ name: sizeName }).then(item => _.get(item, 'raw[0]'))

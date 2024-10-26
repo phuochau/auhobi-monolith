@@ -7,7 +7,7 @@ import { VehicleEngine } from './vehicle-engine.entity';
 import { VehicleTransmission } from './vehicle-transmission.entity';
 import { VehicleBrand } from './vehicle-brand.entity';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
-import { VehicleSize } from './vehicle-size.entity';
+import { VehicleBody } from './vehicle-body.entity';
 import { VehicleBaseModel } from './vehicle-base-model.entity';
 import { VehicleDrive } from './vehicle-drive.entity';
 
@@ -35,7 +35,7 @@ class BaseClass extends BaseEntity {
  * Entity
  */
 @ObjectType()
-@FilterableRelation('size', () => VehicleSize, { update: { enabled: true } })
+@FilterableRelation('body', () => VehicleBody, { update: { enabled: true } })
 @FilterableRelation('brand', () => VehicleBrand)
 @FilterableRelation('baseModel', () => VehicleBaseModel)
 @FilterableRelation('drive', () => VehicleDrive)
@@ -62,8 +62,8 @@ export class VehicleModel extends BaseClass {
   @ManyToOne(() => VehicleTransmission, genXToOneOptions({ nullable: true }))
   transmission?: VehicleTransmission
 
-  @ManyToOne(() => VehicleSize, genXToOneOptions({ nullable: true }))
-  size?: VehicleSize
+  @ManyToOne(() => VehicleBody, genXToOneOptions({ nullable: true }))
+  body?: VehicleBody
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -90,7 +90,7 @@ export class VehicleModelDTO extends BaseClass {
   baseModel?: VehicleBaseModel
 
   @FilterableField(() => ID, { nullable: true })
-  size?: VehicleSize
+  body?: VehicleBody
 
   @FilterableField(() => ID, { nullable: true })
   drive?: VehicleDrive
