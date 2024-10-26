@@ -18,13 +18,14 @@ const AuthScreen = () => {
         <View className="flex-1 flex flex-col justify-end gap-4 pb-4">
           <Button
             size={'lg'}
-            className="text-lg bg-primary"
+            className="bg-primary"
             onPress={() => router.push({ pathname: '/auth/login' })}
           >
             <Text>Login</Text>
           </Button>
           <Button
             variant={'outline'}
+            size={'lg'}
             onPress={() => router.push({ pathname: '/auth/register' })}
           >
             <Text>Register</Text>
