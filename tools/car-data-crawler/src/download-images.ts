@@ -4,12 +4,13 @@ import _ from 'lodash';
 import { FileUtils } from '../lib/file-utils';
 import path from 'path';
 import { Timer } from '../lib/timer';
+import { Http } from '../lib/http';
 
 function run() {
-   const vehileFolder = CarsDataCrawler.getLocalVehiclesFolder()
+   const vehileFolder = CarsDataCrawler.VEHICLE_PARSED_DATA_DIR
     fs.readdir(vehileFolder, async (err, files) => {
-        const downloadedCollections: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH, '[]'))
-        const downloadedImages: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_PATH, '[]'))
+        const downloadedCollections: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_COLLECTION_PATH, '[]'))
+        const downloadedImages: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_PATH, '[]'))
 
         for (const filename of files) {
             const file = path.join(vehileFolder, filename)
@@ -33,9 +34,9 @@ function run() {
                     }
 
                     const filename = _.last(url.split('/'))
-                    const localFilePath = CarsDataCrawler.getLocalImagePath(filename!)
+                    const localFilePath = CarsDataCrawler.vehicleGetLocalImagePath(filename!)
                     await Timer.wait(5)
-                    const success = await CarsDataCrawler.downloadImage(url, localFilePath)
+                    const success = await Http.downloadImage(url, localFilePath)
 
                     if (success) {
                         console.log('\x1b[32m', '[DOWNLOADED]', new Date().toString(), url, '\x1b[0m')
@@ -48,14 +49,14 @@ function run() {
                         failedImages.push(url)
                     }
 
-                    FileUtils.overwrite(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_FAILED_PATH, JSON.stringify(failedImages))
-                    FileUtils.overwrite(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_PATH, JSON.stringify(downloadedImages))
+                    FileUtils.overwrite(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_FAILED_PATH, JSON.stringify(failedImages))
+                    FileUtils.overwrite(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_PATH, JSON.stringify(downloadedImages))
                 }
             }
 
             if (!failedImages.length) {
                 downloadedCollections.push(file)
-                FileUtils.overwrite(CarsDataCrawler.DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH, JSON.stringify(downloadedCollections))
+                FileUtils.overwrite(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_COLLECTION_PATH, JSON.stringify(downloadedCollections))
             }
         }
     });

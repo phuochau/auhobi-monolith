@@ -7,55 +7,147 @@ import { Browser, Page } from "playwright"
 import { expect } from "playwright/test"
 import { goto } from "./playwright"
 import path from "path"
-import fs from 'fs'
-import axios from "axios"
+import { XMLParser } from "fast-xml-parser";
 import { Option, Size, Tech } from "./models/car-data-vehicle"
 import { FileUtils } from "./file-utils"
+import { Http } from "./http"
+import axios from "axios"
 
 const DELAY_FETCH_SECONDS = 4
 
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
-
     export const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
-    export const PARSED_TYPE_XML_PATH = path.join(BASE_DIR, 'parsed_type_xml_urls.json')
-    export const PARSED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'parsed_vehicle_urls.json')
-    export const FAILED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'failed_vehicles_urls.json')
 
-    export const DOWNLOADED_VEHICLE_IMAGES_COLLECTION_PATH = path.join(BASE_DIR, 'downloaded_vehicle_image_collection.json')
-    export const DOWNLOADED_VEHICLE_IMAGES_PATH = path.join(BASE_DIR, 'downloaded_vehicle_image_urls.json')
-    export const DOWNLOADED_VEHICLE_IMAGES_FAILED_PATH = path.join(BASE_DIR, 'downloaded_failed_vehicle_image_urls.json')
+    export const VEHICLE_BASE_DIR = path.join(BASE_DIR, 'vehicles')
+    export const VEHICLE_PARSED_DATA_DIR = path.join(BASE_DIR, 'json')
+    export const VEHICLE_PARSED_TYPE_XML_PATH = path.join(VEHICLE_BASE_DIR, 'parsed_type_xml_urls.json')
+    export const VEHICLE_PARSED_URLS_PATH = path.join(VEHICLE_BASE_DIR, 'parsed_vehicle_urls.json')
+    export const VEHICLE_FAILED_URLS_PATH = path.join(VEHICLE_BASE_DIR, 'failed_vehicles_urls.json')
 
-    export const getTypeXMLUrl = (index: number) => {
+    export const VEHICLE_DOWNLOADED_IMAGES_DIR = path.join(VEHICLE_BASE_DIR, 'images')
+    export const VEHICLE_DOWNLOADED_IMAGES_COLLECTION_PATH = path.join(VEHICLE_BASE_DIR, 'downloaded_vehicle_image_collection.json')
+    export const VEHICLE_DOWNLOADED_IMAGES_PATH = path.join(VEHICLE_BASE_DIR, 'downloaded_vehicle_image_urls.json')
+    export const VEHICLE_DOWNLOADED_IMAGES_FAILED_PATH = path.join(VEHICLE_BASE_DIR, 'downloaded_failed_vehicle_image_urls.json')
+
+    export const vehicleGetTypeXMLUrl = (index: number) => {
         return `${BASE_URL}/en/types-en-${index}.xml`
     }
 
-    export const getLocalVehiclesFolder = () => {
-        return path.join(BASE_DIR, 'vehicles')
+    export const vehicleGetLocalDataPathAtTypeIndex = (xmlIndex: number) => {
+        return path.join(VEHICLE_PARSED_DATA_DIR, `vehicles${xmlIndex}.json`)
     }
 
-    export const getLocalVehiclesPathAtTypeIndex = (xmlIndex: number) => {
-        return path.join(getLocalVehiclesFolder(), `vehicles${xmlIndex}.json`)
+    export const vehicleGetLocalImagePath = (filename: string) => {
+        return path.join(VEHICLE_DOWNLOADED_IMAGES_DIR, filename)
     }
 
-    export const crawlVehicle = async (browser: Browser, url: string): Promise<any> => {
+    export const isURLExist = (list: any[], url: any) => {
+        const found = list.find(item => item.loc === url.loc)
+    
+        return found?.lastmod === url?.lastmod
+    }
+
+    export const vehicleCrawAll = async(browser: Browser): Promise<void> => {
+        let vehicleUrls: any = null
+        let xmlIndex = 0
+        const xmlParser = new XMLParser();
+
+        const parsedTypeXmlUrls: any[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_PARSED_TYPE_XML_PATH, '[]'))
+        const parsedVehicleUrls: any[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_PARSED_URLS_PATH, '[]'))
+        do {
+            const vehiclesPath = CarsDataCrawler.vehicleGetLocalDataPathAtTypeIndex(xmlIndex)
+            const parsedVehicles: any[] = JSON.parse(await FileUtils.safeReadFile(vehiclesPath, '[]'))
+            const xmlTypeUrl = CarsDataCrawler.vehicleGetTypeXMLUrl(xmlIndex)
+
+            if (parsedTypeXmlUrls.includes(xmlTypeUrl)) {
+                console.log('[SKIP]', xmlTypeUrl)
+                xmlIndex++
+                vehicleUrls = true
+                continue 
+            }
+
+            console.log('\x1b[35m', `==================== PARSING TYPE XML: ${xmlIndex} ====================`, '\x1b[0m')
+
+            await Timer.wait(2)
+            vehicleUrls = await axios.get(xmlTypeUrl).then(res => res.data)
+
+            if (vehicleUrls) {
+                const items: any[] = _.get(xmlParser.parse(vehicleUrls), 'urlset.url', [])
+                console.log('\x1b[32m', `Found ${items.length} vehicle urls`, '\x1b[0m')
+
+                let itemIndex = 0
+                const failedVehicleUrls: any[] = []
+                for (const item of items) {
+                    try {
+                        if (isURLExist(parsedVehicleUrls, item)) {
+                            console.log('\x1b[43m', '[SKIP]', `${itemIndex}`, item.loc, '\x1b[0m')
+                            itemIndex++
+                            continue
+                        }
+                        const vehicle = await CarsDataCrawler.vehicleCrawlSingleVehicle(browser, item.loc)
+                        console.log('\x1b[32m', '[SUCCESS]', new Date().toString(), `${itemIndex}`, item.loc, '\x1b[0m')
+
+                        parsedVehicles.push(vehicle)
+                        parsedVehicleUrls.push({
+                            loc: item.loc,
+                            lastmod: item.lastmod
+                        })
+
+                        if (isURLExist(failedVehicleUrls, item)) {
+                            failedVehicleUrls.splice(failedVehicleUrls.indexOf(item), 1)
+                        }
+
+                    } catch (err) {
+                        console.log('\x1b[41m', '[ERROR] Failed to parse:', item.loc, err, '\x1b[0m')
+                        if (!isURLExist(failedVehicleUrls, item)) {
+                            failedVehicleUrls.push({
+                                loc: item.loc,
+                                lastmod: item.lastmod
+                            })
+                        }
+                    }
+
+                    // Keep track at run-time
+                    FileUtils.overwrite(vehiclesPath, JSON.stringify(parsedVehicles))
+                    FileUtils.overwrite(CarsDataCrawler.VEHICLE_PARSED_URLS_PATH, JSON.stringify(parsedVehicleUrls))
+                    FileUtils.overwrite(CarsDataCrawler.VEHICLE_FAILED_URLS_PATH, JSON.stringify(failedVehicleUrls))
+
+                    itemIndex++
+                }
+
+                console.log('Waiting for next fetch......')
+
+                if (!failedVehicleUrls.length) {
+                    parsedTypeXmlUrls.push(xmlTypeUrl)
+                    FileUtils.overwrite(CarsDataCrawler.VEHICLE_PARSED_TYPE_XML_PATH, JSON.stringify(parsedTypeXmlUrls))
+                }
+
+                xmlIndex++
+            } else {
+                console.log('\x1b[43m', `[EMPTY] urls at:`, xmlTypeUrl, '\x1b[0m')
+            }
+        } while (vehicleUrls)
+    }
+
+    export const vehicleCrawlSingleVehicle = async (browser: Browser, url: string): Promise<any> => {
         const basicPage = await CrawlerController.getNewPage(browser)
-        const basicInfo = await crawlBasicInfo(basicPage, url)
+        const basicInfo = await vehicleCrawlBasicInfo(basicPage, url)
         basicPage.close()
 
         const techPage = await CrawlerController.getNewPage(browser)
-        const tech: Tech[] = await CarsDataCrawler.crawlSeparateSpecs(techPage, Url.join(url, 'tech'))
+        const tech: Tech[] = await CarsDataCrawler.vehicleCrawlSeparateSpecs(techPage, Url.join(url, 'tech'))
         techPage.close()
 
         const optionsPage = await CrawlerController.getNewPage(browser)
-        const options: Option[] = await CarsDataCrawler.crawlSeparateSpecs(optionsPage, Url.join(url, 'options'))
+        const options: Option[] = await CarsDataCrawler.vehicleCrawlSeparateSpecs(optionsPage, Url.join(url, 'options'))
         optionsPage.close()
 
         const sizesPage = await CrawlerController.getNewPage(browser)
-        const sizes: Size[] = await CarsDataCrawler.crawlSeparateSpecs(sizesPage, Url.join(url, 'sizes'))
+        const sizes: Size[] = await CarsDataCrawler.vehicleCrawlSeparateSpecs(sizesPage, Url.join(url, 'sizes'))
         sizesPage.close()
 
-        const years = CarsDataCrawler.getYears(tech)
+        const years = CarsDataCrawler.vehicleGetManufacturingYears(tech)
 
         return {
             ...basicInfo,
@@ -67,7 +159,7 @@ export namespace CarsDataCrawler {
     }
 
 
-    export const crawlBasicInfo = async (page: Page, url: string): Promise<any> => {
+    export const vehicleCrawlBasicInfo = async (page: Page, url: string): Promise<any> => {
         await Timer.wait(DELAY_FETCH_SECONDS)
         await goto(page, url)
 
@@ -114,7 +206,7 @@ export namespace CarsDataCrawler {
         }
     }
 
-    const crawlTableFeatures = async (tables: ElementHandleForTag<"table">[]) => {
+    const vehicleCrawlTableFeatures = async (tables: ElementHandleForTag<"table">[]) => {
         const sections: any[] = []
         for (const table of tables) {
             let rows = await table.$$('tr')
@@ -150,7 +242,7 @@ export namespace CarsDataCrawler {
         return sections
     }
 
-    export const crawlSeparateSpecs = async (page: Page, url: string): Promise<any> => {
+    export const vehicleCrawlSeparateSpecs = async (page: Page, url: string): Promise<any> => {
         await Timer.wait(DELAY_FETCH_SECONDS)
         await goto(page, url)
 
@@ -160,10 +252,10 @@ export namespace CarsDataCrawler {
         expect(container).toBeTruthy()
 
         const tables = await container!.$$('table')
-        return crawlTableFeatures(tables)
+        return vehicleCrawlTableFeatures(tables)
     }
 
-    export const getYears = (techs: Tech[]) => {
+    export const vehicleGetManufacturingYears = (techs: Tech[]) => {
         let general = techs.find(opt => opt.title === 'GENERAL')
 
         let startYear = null
@@ -186,39 +278,18 @@ export namespace CarsDataCrawler {
         }
     }
 
-    export const getLocalImagePath = (filename: string) => {
-        return path.join(path.join(CarsDataCrawler.BASE_DIR, 'images'), filename)
-    }
-
-    export const downloadImage = async (url: string, filepath: string): Promise<boolean> => {
-        const response = await axios({
-            url,
-            method: 'GET',
-            responseType: 'stream',
-        })
-        return new Promise((resolve) => {
-            response.data
-                .pipe(fs.createWriteStream(filepath, { flags: 'w' }))
-                .on('error', (err: any) => {
-                    console.error(err)
-                    resolve(false)
-                })
-                .once('close', () => resolve(true))
-        })
-    }
-
     /**
      * Brand logos
      */
     export const BRANDS_PATH = path.join(BASE_DIR, 'brands', 'brands.json')
     export const BRANDS_IMAGES_DIR = path.join(BASE_DIR, 'brands', 'images')
 
-    export const getBrandListUrl = (): string => {
+    export const brandGetListUrl = (): string => {
         return `${BASE_URL}/en/car-brands-cars-logos.html`
     }
 
-    export const crawlBrandLogos = async (browser: Browser): Promise<boolean> => {
-        const url = getBrandListUrl()
+    export const brandCrawlLogos = async (browser: Browser): Promise<boolean> => {
+        const url = brandGetListUrl()
         const page = await CrawlerController.getNewPage(browser)
         await goto(page, url)
 
@@ -232,7 +303,7 @@ export namespace CarsDataCrawler {
                 const brandName = await element.getAttribute('title')
                 const imageSrc = await element.$('img').then(img => img?.getAttribute('src'))
                 const filename = FileUtils.getFileName(imageSrc!)!
-                await downloadImage(imageSrc!, path.join(BRANDS_IMAGES_DIR, filename))
+                await Http.downloadImage(imageSrc!, path.join(BRANDS_IMAGES_DIR, filename))
                 console.log('\x1b[32m', '[DOWNLOADED]', new Date().toString(), brandName, imageSrc, '\x1b[0m')
                 brands.push({
                     name: brandName,
@@ -244,4 +315,8 @@ export namespace CarsDataCrawler {
         console.log('\x1b[32m', 'SUCCESS!!!!!!', '\x1b[0m')
         return true
     }
+
+    /**
+     * Utilities
+     */
 }
