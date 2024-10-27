@@ -26,7 +26,7 @@ export namespace CarsDataCrawler {
     export const DOWNLOADED_VEHICLE_IMAGES_FAILED_PATH = path.join(BASE_DIR, 'downloaded_failed_vehicle_image_urls.json')
 
     export const getTypeXMLUrl = (index: number) => {
-        return `${BASE_URL}/en/types-el-${index}.xml`
+        return `${BASE_URL}/en/types-en-${index}.xml`
     }
 
     export const getLocalVehiclesFolder = () => {
