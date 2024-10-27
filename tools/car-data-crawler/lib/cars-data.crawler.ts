@@ -379,6 +379,7 @@ export namespace CarsDataCrawler {
      * Base Model
      */
     export const BASE_MODEL_BASE_DIR = path.join(BASE_DIR, 'base_models')
+    export const BASE_MODEL_PARSED_URL_PATH = path.join(BRAND_BASE_DIR, 'parsed_urls.json')
     export const BASE_MODEL_DATA_PATH = path.join(BRAND_BASE_DIR, 'base_models.json')
     export const BASE_MODEL_IMAGES_DIR = path.join(BRAND_BASE_DIR, 'images')
 
@@ -392,17 +393,25 @@ export namespace CarsDataCrawler {
 
         Logger.info('[FOUND]', brandElements.length, 'brands')
 
-        const brands: any[] = []
+        const parsedUrls: string[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_PARSED_URL_PATH, '[]'))
+        const brands: any[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_DATA_PATH, '[]'))
+
         for (const element of brandElements) {
             const brandName = await element.getAttribute('title')
             const brandUrl = await element.getAttribute('href')
 
-            brands.push({
-                brandName,
-                brandUrl
-            })
+            const isExist = brands.find(item => item.brandName)
+
+            if (!Boolean(isExist)) {
+                brands.push({
+                    brandName,
+                    brandUrl
+                })
+            }
         }
         await brandsPage.close()
+
+
 
         // Process models
         for (let brandIndex = 0; brandIndex < brands.length; brandIndex++) {
@@ -410,12 +419,20 @@ export namespace CarsDataCrawler {
             Logger.info('=========', brand.brandName, '=========')
             Logger.info('[BRAND URL]', brand.brandUrl)
 
+            if (parsedUrls.includes(brand.brandUrl)) {
+                continue
+            }
+
             // e.g: brandUrl - https://www.cars-data.com/en/bmw
             const baseModels: any[] = await baseModelCrawlModels(browser, brand.brandUrl)
 
             for (let modelIndex = 0; modelIndex < baseModels.length; modelIndex++) {
                 const baseModel = baseModels[modelIndex]
                 // e.g: modelUrl - https://www.cars-data.com/en/bmw/5-series
+
+                if (parsedUrls.includes(baseModel.baseModelUrl)) {
+                    continue
+                }
                 
                 Logger.info('[BASE MODEL URL]', baseModel.baseModelUrl)
                 const subBaseModels: any[] = await baseModelCrawlModels(browser, baseModel.baseModelUrl!)
@@ -424,6 +441,11 @@ export namespace CarsDataCrawler {
                     const subBaseModel = subBaseModels[subModelIndex]
                     // e.g: subModelUrl - https://www.cars-data.com/en/bmw-5-series-2020/4654
                     const subModelUrl = subBaseModel.baseModelUrl
+
+                    if (parsedUrls.includes(subModelUrl)) {
+                        continue
+                    }
+
                     Logger.info('[SUB BASE MODEL URL]', subModelUrl)
 
                     const subModelPage = await CrawlerController.getNewPage(browser)
@@ -446,13 +468,20 @@ export namespace CarsDataCrawler {
                     }
 
                     subBaseModels[subModelIndex].models = models
+                    parsedUrls.push(subModelUrl)
                     await subModelPage.close()
                 }
 
+                parsedUrls.push(baseModel.baseModelUrl)
                 baseModels[modelIndex].subBaseModels = subBaseModels
             }
 
+            parsedUrls.push(brand.brandUrl)
             brands[brandIndex].baseModels = baseModels
+
+            FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(brands))
+            FileUtils.overwrite(BASE_MODEL_PARSED_URL_PATH, JSON.stringify(parsedUrls))
+            Logger.info('[COMPLETE] BRAND', brand.brandName)
         }
 
         FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(brands))
