@@ -13,6 +13,7 @@ import { FileUtils } from "./file-utils"
 import { Http } from "./http"
 import axios from "axios"
 import fs from 'fs'
+import { Logger } from "./logger"
 
 const DELAY_FETCH_SECONDS = 4
 
@@ -62,32 +63,32 @@ export namespace CarsDataCrawler {
             const xmlTypeUrl = CarsDataCrawler.vehicleGetTypeXMLUrl(xmlIndex)
 
             if (parsedTypeXmlUrls.includes(xmlTypeUrl)) {
-                console.log('[SKIP]', xmlTypeUrl)
+                Logger.warn('[SKIP]', xmlTypeUrl)
                 xmlIndex++
                 vehicleUrls = true
                 continue 
             }
 
-            console.log('\x1b[35m', `==================== PARSING TYPE XML: ${xmlIndex} ====================`, '\x1b[0m')
+            Logger.info('TYPE XML:', xmlIndex, xmlTypeUrl)
 
             await Timer.wait(2)
             vehicleUrls = await axios.get(xmlTypeUrl).then(res => res.data)
 
             if (vehicleUrls) {
                 const items: any[] = _.get(xmlParser.parse(vehicleUrls), 'urlset.url', [])
-                console.log('\x1b[32m', `Found ${items.length} vehicle urls`, '\x1b[0m')
+                Logger.info(`Found ${items.length} vehicle urls`)
 
                 let itemIndex = 0
                 const failedVehicleUrls: any[] = []
                 for (const item of items) {
                     try {
                         if (isURLExist(parsedVehicleUrls, item)) {
-                            console.log('\x1b[43m', '[SKIP]', `${itemIndex}`, item.loc, '\x1b[0m')
+                            Logger.warn('[SKIP]', itemIndex, item.loc)
                             itemIndex++
                             continue
                         }
                         const vehicle = await CarsDataCrawler.vehicleCrawlSingleVehicle(browser, item.loc)
-                        console.log('\x1b[32m', '[SUCCESS]', new Date().toString(), `${itemIndex}`, item.loc, '\x1b[0m')
+                        Logger.success('[SUCCESS]', `${itemIndex}`, item.loc)
 
                         parsedVehicles.push(vehicle)
                         parsedVehicleUrls.push({
@@ -100,7 +101,7 @@ export namespace CarsDataCrawler {
                         }
 
                     } catch (err) {
-                        console.log('\x1b[41m', '[ERROR] Failed to parse:', item.loc, err, '\x1b[0m')
+                        Logger.error('[ERROR]', item.loc, err)
                         if (!isURLExist(failedVehicleUrls, item)) {
                             failedVehicleUrls.push({
                                 loc: item.loc,
@@ -117,7 +118,7 @@ export namespace CarsDataCrawler {
                     itemIndex++
                 }
 
-                console.log('Waiting for next fetch......')
+                Logger.info('Waiting for next fetch......')
 
                 if (!failedVehicleUrls.length) {
                     parsedTypeXmlUrls.push(xmlTypeUrl)
@@ -126,7 +127,7 @@ export namespace CarsDataCrawler {
 
                 xmlIndex++
             } else {
-                console.log('\x1b[43m', `[EMPTY] urls at:`, xmlTypeUrl, '\x1b[0m')
+                Logger.warn('[EMPTY]', xmlTypeUrl)
             }
         } while (vehicleUrls)
     }
@@ -291,13 +292,14 @@ export namespace CarsDataCrawler {
             for (const filename of files) {
                 const file = path.join(vehileFolder, filename)
                 if (downloadedCollections.includes(file)) {
-                    console.log('\x1b[43m', '[SKIP]', file, '\x1b[0m')
+                    Logger.warn('[SKIP]', file)
                     continue
                 }
 
                 const failedImages: string[] = []
 
-                console.log('\x1b[35m', '============', file, '============', '\x1b[0m')
+                Logger.info('============', file, '============')
+
                 const vehicles = JSON.parse(fs.readFileSync(file, 'utf8'))
 
                 for (const vehicle of vehicles) {
@@ -305,7 +307,7 @@ export namespace CarsDataCrawler {
 
                     for (const url of imageUrls) {
                         if (downloadedImages.includes(url)) {
-                            console.log('\x1b[43m', '[SKIP]', url, '\x1b[0m')
+                            Logger.warn('[SKIP]', url)
                             continue
                         }
 
@@ -315,13 +317,13 @@ export namespace CarsDataCrawler {
                         const success = await Http.downloadImage(url, localFilePath)
 
                         if (success) {
-                            console.log('\x1b[32m', '[DOWNLOADED]', new Date().toString(), url, '\x1b[0m')
+                            Logger.success('[DOWNLOADED]', url)
                             downloadedImages.push(url)
                             if (failedImages.includes(url)) {
                                 failedImages.splice(failedImages.indexOf(url), 1)
                             }
                         } else {
-                            console.log('\x1b[41m', '[ERROR]', url, '\x1b[0m')
+                            Logger.error('[ERROR]', url)
                             failedImages.push(url)
                         }
 
@@ -349,7 +351,7 @@ export namespace CarsDataCrawler {
         return `${BASE_URL}/en/car-brands-cars-logos.html`
     }
 
-    export const brandCrawlLogos = async (browser: Browser): Promise<boolean> => {
+    export const brandCrawlLogos = async (browser: Browser): Promise<void> => {
         const url = brandGetListUrl()
         const page = await CrawlerController.getNewPage(browser)
         await goto(page, url)
@@ -365,7 +367,7 @@ export namespace CarsDataCrawler {
                 const imageSrc = await element.$('img').then(img => img?.getAttribute('src'))
                 const filename = FileUtils.getFileName(imageSrc!)!
                 await Http.downloadImage(imageSrc!, path.join(BRAND_IMAGES_DIR, filename))
-                console.log('\x1b[32m', '[DOWNLOADED]', new Date().toString(), brandName, imageSrc, '\x1b[0m')
+                Logger.success('[DOWNLOADED]', brandName, imageSrc)
                 brands.push({
                     name: brandName,
                     image: filename
@@ -373,11 +375,17 @@ export namespace CarsDataCrawler {
             }
             FileUtils.overwrite(BRAND_DATA_PATH, JSON.stringify(brands))
         }
-        console.log('\x1b[32m', 'SUCCESS!!!!!!', '\x1b[0m')
-        return true
+        Logger.success('DONE!!!!!!')
     }
 
     /**
-     * Utilities
+     * Base Model
      */
+    export const BASE_MODEL_BASE_DIR = path.join(BASE_DIR, 'base_models')
+    export const BASE_MODEL_DATA_PATH = path.join(BRAND_BASE_DIR, 'base_models.json')
+    export const BASE_MODEL_IMAGES_DIR = path.join(BRAND_BASE_DIR, 'images')
+
+    export const baseModelCrawlAll = async (browser: Browser): Promise<void> => {
+    }
+
 }
