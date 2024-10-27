@@ -10,7 +10,8 @@
     "@types/user-agents": "^1.0.4"
   },
   "scripts": {
-    "brands": "npx tsx src/crawl-brand-logos.ts",
+    "brands": "npx tsx src/crawl-brands.ts",
+    "base-models": "npx tsx src/crawl-base-models.ts",
     "vehicles": "npx tsx src/crawl-cars-data.ts",
     "vehicles:images": "npx tsx src/crawl-cars-images.ts"
   },

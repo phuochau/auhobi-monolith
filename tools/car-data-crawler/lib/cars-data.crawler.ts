@@ -15,7 +15,7 @@ import axios from "axios"
 import fs from 'fs'
 import { Logger } from "./logger"
 
-const DELAY_FETCH_SECONDS = 4
+const DELAY_BROWSER_FETCH_SECONDS = 3
 
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
@@ -134,20 +134,20 @@ export namespace CarsDataCrawler {
 
     export const vehicleCrawlSingleVehicle = async (browser: Browser, url: string): Promise<any> => {
         const basicPage = await CrawlerController.getNewPage(browser)
-        const basicInfo = await vehicleCrawlBasicInfo(basicPage, url)
-        basicPage.close()
+        const basicInfo = await vehicleCrawlBasicInfo(basicPage, url, browser)
+        await basicPage.close()
 
         const techPage = await CrawlerController.getNewPage(browser)
         const tech: Tech[] = await CarsDataCrawler.vehicleCrawlSeparateSpecs(techPage, Url.join(url, 'tech'))
-        techPage.close()
+        await techPage.close()
 
         const optionsPage = await CrawlerController.getNewPage(browser)
         const options: Option[] = await CarsDataCrawler.vehicleCrawlSeparateSpecs(optionsPage, Url.join(url, 'options'))
-        optionsPage.close()
+        await optionsPage.close()
 
         const sizesPage = await CrawlerController.getNewPage(browser)
         const sizes: Size[] = await CarsDataCrawler.vehicleCrawlSeparateSpecs(sizesPage, Url.join(url, 'sizes'))
-        sizesPage.close()
+        await sizesPage.close()
 
         const years = CarsDataCrawler.vehicleGetManufacturingYears(tech)
 
@@ -161,8 +161,8 @@ export namespace CarsDataCrawler {
     }
 
 
-    export const vehicleCrawlBasicInfo = async (page: Page, url: string): Promise<any> => {
-        await Timer.wait(DELAY_FETCH_SECONDS)
+    export const vehicleCrawlBasicInfo = async (page: Page, url: string, browser: Browser): Promise<any> => {
+        await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
         await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
@@ -176,11 +176,12 @@ export namespace CarsDataCrawler {
         const viewMoreImagesElement = page.getByText('View More images', { exact: true }).first()
         await expect(viewMoreImagesElement).toBeVisible()
 
-        const imagesPage = await viewMoreImagesElement.getAttribute('href')
-        expect(imagesPage).toBeTruthy()
+        const imagesUrl = await viewMoreImagesElement.getAttribute('href')
+        expect(imagesUrl).toBeTruthy()
 
-        await Timer.wait(DELAY_FETCH_SECONDS)
-        await goto(page, imagesPage!)
+        await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
+        const imagesPage = await CrawlerController.getNewPage(browser)
+        await goto(imagesPage, imagesUrl!)
 
         const imageRows = await page.$$('.row.img100')
 
@@ -190,14 +191,14 @@ export namespace CarsDataCrawler {
             urls = urls
                 .filter(url => !_.isNil(url))
                 .map(url => {
-                    const parts = url.split('/')
-
-                    return `${BASE_URL}${[...[parts[0], parts[1]], ...parts.slice(4)].join('/')}`
+                    return getOnlineImageUrlFromThumbUrl(url)
                 })
             imageUrls.push(...urls)
         }
 
         imageUrls = _.uniq(imageUrls.sort())
+
+        await imagesPage.close()
 
         return {
             name: carName,
@@ -245,7 +246,7 @@ export namespace CarsDataCrawler {
     }
 
     export const vehicleCrawlSeparateSpecs = async (page: Page, url: string): Promise<any> => {
-        await Timer.wait(DELAY_FETCH_SECONDS)
+        await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
         await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
@@ -351,13 +352,12 @@ export namespace CarsDataCrawler {
         return `${BASE_URL}/en/car-brands-cars-logos.html`
     }
 
-    export const brandCrawlLogos = async (browser: Browser): Promise<void> => {
+    export const brandCrawlAll = async (browser: Browser): Promise<void> => {
         const url = brandGetListUrl()
         const page = await CrawlerController.getNewPage(browser)
         await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
-
         const brandElements = await page.$$('.models a')
 
         const brands: any[] = []
@@ -375,6 +375,8 @@ export namespace CarsDataCrawler {
             }
             FileUtils.overwrite(BRAND_DATA_PATH, JSON.stringify(brands))
         }
+
+        await page.close()
         Logger.success('DONE!!!!!!')
     }
 
@@ -386,6 +388,77 @@ export namespace CarsDataCrawler {
     export const BASE_MODEL_IMAGES_DIR = path.join(BRAND_BASE_DIR, 'images')
 
     export const baseModelCrawlAll = async (browser: Browser): Promise<void> => {
+        const url = brandGetListUrl()
+        const brandsPage = await CrawlerController.getNewPage(browser)
+        await goto(brandsPage, url)
+
+        await expect(brandsPage.locator('.title h1')).toBeVisible()
+        const brandElements = await brandsPage.$$('.models a')
+
+        Logger.info('[FOUND]', brandElements.length, 'brands')
+
+        const brands: any[] = []
+        if (brandElements.length) {
+            for (const element of brandElements) {
+                const brandName = await element.getAttribute('title')
+                const brandUrl = await element.getAttribute('href')
+
+                brands.push({
+                    brandName,
+                    brandUrl
+                })
+            }
+        }
+        await brandsPage.close()
+
+        // Process models
+        for (let brandIndex = 0; brandIndex < brands.length; brandIndex++) {
+            const brand = brands[brandIndex]
+            Logger.info('=========', brand.brandName, '=========')
+            Logger.info('[URL]', brand.brandUrl)
+
+            // go to brand models url
+            await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
+            const brandPage = await CrawlerController.getNewPage(browser)
+            await goto(brandPage, brand.brandUrl)
+
+            const brandModels: any[] = []
+            await expect(brandPage.locator('section.models .row.title h1')).toBeVisible()
+
+            const brandModelsElements = await brandPage.$$('section.models a:not(.google-anno)')
+
+            brands[brandIndex].models = []
+            for (const model of brandModelsElements) {
+                const modelUrl = await model.getAttribute('href')
+                const modelName = await model.getAttribute('title')
+                const modelImageUrl = await model.$('picture img').then(ele => ele?.getAttribute('src'))
+                
+                if (modelImageUrl) {
+                    brands[brandIndex].models.push({
+                        modelName,
+                        modelUrl,
+                        modelImage: getOnlineImageUrlFromThumbUrl(modelImageUrl)
+                    })
+                    Logger.info('[SUCCESS] MODEL', modelName)
+                }
+            }
+
+            await brandPage.close()
+
+            break;
+        }
+
+        console.log(JSON.stringify(brands))
+        Logger.success('DONE!!!!!!')
+    }
+
+    /**
+     * Utilities
+     */
+
+    export const getOnlineImageUrlFromThumbUrl = (uri: string): string => {
+        const parts = uri.split('/')
+        return `${BASE_URL}${[...[parts[0], parts[1]], ...parts.slice(4)].join('/')}`
     }
 
 }
