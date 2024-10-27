@@ -20,7 +20,7 @@ export namespace CarsDataCrawler {
     export const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
 
     export const VEHICLE_BASE_DIR = path.join(BASE_DIR, 'vehicles')
-    export const VEHICLE_PARSED_DATA_DIR = path.join(BASE_DIR, 'json')
+    export const VEHICLE_PARSED_DATA_DIR = path.join(VEHICLE_BASE_DIR, 'json')
     export const VEHICLE_PARSED_TYPE_XML_PATH = path.join(VEHICLE_BASE_DIR, 'parsed_type_xml_urls.json')
     export const VEHICLE_PARSED_URLS_PATH = path.join(VEHICLE_BASE_DIR, 'parsed_vehicle_urls.json')
     export const VEHICLE_FAILED_URLS_PATH = path.join(VEHICLE_BASE_DIR, 'failed_vehicles_urls.json')
@@ -281,8 +281,9 @@ export namespace CarsDataCrawler {
     /**
      * Brand logos
      */
-    export const BRANDS_PATH = path.join(BASE_DIR, 'brands', 'brands.json')
-    export const BRANDS_IMAGES_DIR = path.join(BASE_DIR, 'brands', 'images')
+    export const BRAND_BASE_DIR = path.join(BASE_DIR, 'brands')
+    export const BRAND_DATA_PATH = path.join(BRAND_BASE_DIR, 'brands.json')
+    export const BRAND_IMAGES_DIR = path.join(BRAND_BASE_DIR, 'images')
 
     export const brandGetListUrl = (): string => {
         return `${BASE_URL}/en/car-brands-cars-logos.html`
@@ -303,14 +304,14 @@ export namespace CarsDataCrawler {
                 const brandName = await element.getAttribute('title')
                 const imageSrc = await element.$('img').then(img => img?.getAttribute('src'))
                 const filename = FileUtils.getFileName(imageSrc!)!
-                await Http.downloadImage(imageSrc!, path.join(BRANDS_IMAGES_DIR, filename))
+                await Http.downloadImage(imageSrc!, path.join(BRAND_IMAGES_DIR, filename))
                 console.log('\x1b[32m', '[DOWNLOADED]', new Date().toString(), brandName, imageSrc, '\x1b[0m')
                 brands.push({
                     name: brandName,
                     image: filename
                 })
             }
-            FileUtils.overwrite(BRANDS_PATH, JSON.stringify(brands))
+            FileUtils.overwrite(BRAND_DATA_PATH, JSON.stringify(brands))
         }
         console.log('\x1b[32m', 'SUCCESS!!!!!!', '\x1b[0m')
         return true
