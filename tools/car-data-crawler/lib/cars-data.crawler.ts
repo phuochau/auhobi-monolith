@@ -429,10 +429,6 @@ export namespace CarsDataCrawler {
             for (let modelIndex = 0; modelIndex < baseModels.length; modelIndex++) {
                 const baseModel = baseModels[modelIndex]
                 // e.g: modelUrl - https://www.cars-data.com/en/bmw/5-series
-
-                if (parsedUrls.includes(baseModel.baseModelUrl)) {
-                    continue
-                }
                 
                 Logger.info('[BASE MODEL URL]', baseModel.baseModelUrl)
                 const subBaseModels: any[] = await baseModelCrawlModels(browser, baseModel.baseModelUrl!)
@@ -441,10 +437,6 @@ export namespace CarsDataCrawler {
                     const subBaseModel = subBaseModels[subModelIndex]
                     // e.g: subModelUrl - https://www.cars-data.com/en/bmw-5-series-2020/4654
                     const subModelUrl = subBaseModel.baseModelUrl
-
-                    if (parsedUrls.includes(subModelUrl)) {
-                        continue
-                    }
 
                     Logger.info('[SUB BASE MODEL URL]', subModelUrl)
 
@@ -468,11 +460,9 @@ export namespace CarsDataCrawler {
                     }
 
                     subBaseModels[subModelIndex].models = models
-                    parsedUrls.push(subModelUrl)
                     await subModelPage.close()
                 }
 
-                parsedUrls.push(baseModel.baseModelUrl)
                 baseModels[modelIndex].subBaseModels = subBaseModels
             }
 
