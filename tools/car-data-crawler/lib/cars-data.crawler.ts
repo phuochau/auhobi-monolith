@@ -10,12 +10,13 @@ import path from "path"
 import fs from 'fs'
 import axios from "axios"
 import { Option, Size, Tech } from "./models/car-data-vehicle"
+import { FileUtils } from "./file-utils"
 
 const DELAY_FETCH_SECONDS = 4
 
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
-    
+
     export const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
     export const PARSED_TYPE_XML_PATH = path.join(BASE_DIR, 'parsed_type_xml_urls.json')
     export const PARSED_VEHICLE_URLS_PATH = path.join(BASE_DIR, 'parsed_vehicle_urls.json')
@@ -64,7 +65,7 @@ export namespace CarsDataCrawler {
             sizes
         }
     }
-    
+
 
     export const crawlBasicInfo = async (page: Page, url: string): Promise<any> => {
         await Timer.wait(DELAY_FETCH_SECONDS)
@@ -117,7 +118,7 @@ export namespace CarsDataCrawler {
         const sections: any[] = []
         for (const table of tables) {
             let rows = await table.$$('tr')
-            
+
             if (rows.length > 0) {
                 const sectionTitle = (await rows[0].textContent())!.trim()
                 rows = rows.slice(1)
@@ -191,18 +192,56 @@ export namespace CarsDataCrawler {
 
     export const downloadImage = async (url: string, filepath: string): Promise<boolean> => {
         const response = await axios({
-          url,
-          method: 'GET',
-          responseType: 'stream',
+            url,
+            method: 'GET',
+            responseType: 'stream',
         })
         return new Promise((resolve) => {
-          response.data
-            .pipe(fs.createWriteStream(filepath))
-            .on('error', (err: any) => {
-                console.error(err)
-                resolve(false)
-            })
-            .once('close', () => resolve(true))
+            response.data
+                .pipe(fs.createWriteStream(filepath, { flags: 'w' }))
+                .on('error', (err: any) => {
+                    console.error(err)
+                    resolve(false)
+                })
+                .once('close', () => resolve(true))
         })
-      }
+    }
+
+    /**
+     * Brand logos
+     */
+    export const BRANDS_PATH = path.join(BASE_DIR, 'brands', 'brands.json')
+    export const BRANDS_IMAGES_DIR = path.join(BASE_DIR, 'brands', 'images')
+
+    export const getBrandListUrl = (): string => {
+        return `${BASE_URL}/en/car-brands-cars-logos.html`
+    }
+
+    export const crawlBrandLogos = async (browser: Browser): Promise<boolean> => {
+        const url = getBrandListUrl()
+        const page = await CrawlerController.getNewPage(browser)
+        await goto(page, url)
+
+        await expect(page.locator('.title h1')).toBeVisible()
+
+        const brandElements = await page.$$('.models a')
+
+        const brands: any[] = []
+        if (brandElements.length) {
+            for (const element of brandElements) {
+                const brandName = await element.getAttribute('title')
+                const imageSrc = await element.$('img').then(img => img?.getAttribute('src'))
+                const filename = FileUtils.getFileName(imageSrc!)!
+                await downloadImage(imageSrc!, path.join(BRANDS_IMAGES_DIR, filename))
+                console.log('\x1b[32m', '[DOWNLOADED]', new Date().toString(), brandName, imageSrc, '\x1b[0m')
+                brands.push({
+                    name: brandName,
+                    image: filename
+                })
+            }
+            FileUtils.overwrite(BRANDS_PATH, JSON.stringify(brands))
+        }
+        console.log('\x1b[32m', 'SUCCESS!!!!!!', '\x1b[0m')
+        return true
+    }
 }

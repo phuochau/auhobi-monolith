@@ -1,13 +1,10 @@
-import { chromium } from "playwright-extra";
-import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { XMLParser } from "fast-xml-parser";
 import axios from 'axios';
 import { Timer } from '../lib/timer';
 import _ from 'lodash'
 import { CarsDataCrawler } from '../lib/cars-data.crawler';
 import { FileUtils } from "../lib/file-utils";
-
-chromium.use(StealthPlugin());
+import { CrawlerController } from "../lib/crawler-controller";
 
 const isURLExist = (list: any[], url: any) => {
     const found = list.find(item => item.loc === url.loc)
@@ -15,7 +12,7 @@ const isURLExist = (list: any[], url: any) => {
     return found?.lastmod === url?.lastmod
 }
 
-chromium.launch({ headless: true }).then(async (browser) => {
+CrawlerController.getChromium().launch({ headless: true }).then(async (browser) => {
     let vehicleUrls: any = null
     let xmlIndex = 0
     const xmlParser = new XMLParser();
