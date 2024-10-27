@@ -282,7 +282,7 @@ export namespace CarsDataCrawler {
     /**
      * Download cars images
      */
-    export const vehicleDownloadImages = async (): Promise<void> => {
+    export const vehicleCrawlCarImages = async (): Promise<void> => {
         const vehileFolder = CarsDataCrawler.VEHICLE_PARSED_DATA_DIR
         fs.readdir(vehileFolder, async (err, files) => {
             const downloadedCollections: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_COLLECTION_PATH, '[]'))

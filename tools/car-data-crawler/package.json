@@ -10,9 +10,9 @@
     "@types/user-agents": "^1.0.4"
   },
   "scripts": {
-    "crawl": "npx tsx src/crawl-cars-data.ts",
     "brands": "npx tsx src/crawl-brand-logos.ts",
-    "download-images": "npx tsx src/download-cars-images.ts"
+    "vehicles": "npx tsx src/crawl-cars-data.ts",
+    "vehicles:images": "npx tsx src/crawl-cars-images.ts"
   },
   "dependencies": {
     "axios": "^1.7.7",
