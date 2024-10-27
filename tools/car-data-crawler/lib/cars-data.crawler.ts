@@ -15,8 +15,6 @@ import axios from "axios"
 import fs from 'fs'
 import { Logger } from "./logger"
 
-const DELAY_BROWSER_FETCH_SECONDS = 2
-
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
     export const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
@@ -162,7 +160,6 @@ export namespace CarsDataCrawler {
 
 
     export const vehicleCrawlBasicInfo = async (page: Page, url: string, browser: Browser): Promise<any> => {
-        await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
         await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
@@ -179,7 +176,6 @@ export namespace CarsDataCrawler {
         const imagesUrl = await viewMoreImagesElement.getAttribute('href')
         expect(imagesUrl).toBeTruthy()
 
-        await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
         const imagesPage = await CrawlerController.getNewPage(browser)
         await goto(imagesPage, imagesUrl!)
 
@@ -246,7 +242,6 @@ export namespace CarsDataCrawler {
     }
 
     export const vehicleCrawlSeparateSpecs = async (page: Page, url: string): Promise<any> => {
-        await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
         await goto(page, url)
 
         await expect(page.locator('.title h1')).toBeVisible()
@@ -314,7 +309,7 @@ export namespace CarsDataCrawler {
 
                         const filename = _.last(url.split('/'))
                         const localFilePath = CarsDataCrawler.vehicleGetLocalImagePath(filename!)
-                        await Timer.wait(5)
+                        await Timer.wait(3)
                         const success = await Http.downloadImage(url, localFilePath)
 
                         if (success) {
@@ -398,16 +393,14 @@ export namespace CarsDataCrawler {
         Logger.info('[FOUND]', brandElements.length, 'brands')
 
         const brands: any[] = []
-        if (brandElements.length) {
-            for (const element of brandElements) {
-                const brandName = await element.getAttribute('title')
-                const brandUrl = await element.getAttribute('href')
+        for (const element of brandElements) {
+            const brandName = await element.getAttribute('title')
+            const brandUrl = await element.getAttribute('href')
 
-                brands.push({
-                    brandName,
-                    brandUrl
-                })
-            }
+            brands.push({
+                brandName,
+                brandUrl
+            })
         }
         await brandsPage.close()
 
@@ -415,41 +408,88 @@ export namespace CarsDataCrawler {
         for (let brandIndex = 0; brandIndex < brands.length; brandIndex++) {
             const brand = brands[brandIndex]
             Logger.info('=========', brand.brandName, '=========')
-            Logger.info('[URL]', brand.brandUrl)
+            Logger.info('[BRAND URL]', brand.brandUrl)
 
-            // go to brand models url
-            await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
-            const brandPage = await CrawlerController.getNewPage(browser)
-            await goto(brandPage, brand.brandUrl)
+            // e.g: brandUrl - https://www.cars-data.com/en/bmw
+            const baseModels: any[] = await baseModelCrawlModels(browser, brand.brandUrl)
 
-            const brandModels: any[] = []
-            await expect(brandPage.locator('section.models .row.title h1')).toBeVisible()
-
-            const brandModelsElements = await brandPage.$$('section.models a:not(.google-anno)')
-
-            brands[brandIndex].models = []
-            for (const model of brandModelsElements) {
-                const modelUrl = await model.getAttribute('href')
-                const modelName = await model.getAttribute('title')
-                const modelImageUrl = await model.$('picture img').then(ele => ele?.getAttribute('src'))
+            for (let modelIndex = 0; modelIndex < baseModels.length; modelIndex++) {
+                const baseModel = baseModels[modelIndex]
+                // e.g: modelUrl - https://www.cars-data.com/en/bmw/5-series
                 
-                if (modelImageUrl) {
-                    brands[brandIndex].models.push({
-                        modelName,
-                        modelUrl,
-                        modelImage: getOnlineImageUrlFromThumbUrl(modelImageUrl)
-                    })
-                    Logger.info('[SUCCESS] MODEL', modelName)
+                Logger.info('[BASE MODEL URL]', baseModel.baseModelUrl)
+                const subBaseModels: any[] = await baseModelCrawlModels(browser, baseModel.baseModelUrl!)
+
+                for (let subModelIndex = 0; subModelIndex < subBaseModels.length; subModelIndex++) {
+                    const subBaseModel = subBaseModels[subModelIndex]
+                    // e.g: subModelUrl - https://www.cars-data.com/en/bmw-5-series-2020/4654
+                    const subModelUrl = subBaseModel.baseModelUrl
+                    Logger.info('[SUB BASE MODEL URL]', subModelUrl)
+
+                    const subModelPage = await CrawlerController.getNewPage(browser)
+                    await goto(subModelPage, subModelUrl)
+
+                    const modelElements = await subModelPage.$$('.types .row a')
+                    
+                    const models: any = []
+
+                    for (const element of modelElements) {
+                        const modelName = await element.getAttribute('title')
+                        const modelUrl = await element.getAttribute('href')
+
+                        Logger.info('[FOUND]', modelName, modelUrl)
+
+                        models.push({
+                            modelName,
+                            modelUrl
+                        })
+                    }
+
+                    subBaseModels[subModelIndex].models = models
+                    await subModelPage.close()
                 }
+
+                baseModels[modelIndex].subBaseModels = subBaseModels
             }
 
-            await brandPage.close()
-
-            break;
+            brands[brandIndex].baseModels = baseModels
         }
 
-        console.log(JSON.stringify(brands))
+        FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(brands))
         Logger.success('DONE!!!!!!')
+    }
+
+    export const baseModelCrawlModels = async (browser: Browser, parentUrl: string) => {
+        // go to brand models url
+        const listPage = await CrawlerController.getNewPage(browser)
+        await goto(listPage, parentUrl)
+
+        await expect(listPage.locator('section.models .row.title h1')).toBeVisible()
+
+        const baseModelElements = await listPage.$$('section.models a:not(.google-anno)')
+
+        const baseModels: any[] = []
+        for (const baseModel of baseModelElements) {
+            const baseModelUrl = await baseModel.getAttribute('href')
+            const baseModelName = await baseModel.getAttribute('title')
+            const baseModelImageUrl = await baseModel.$('picture img').then(ele => ele?.getAttribute('src'))
+            
+            if (baseModelImageUrl) {
+                const exist = Boolean(baseModels.find(item => item.baseModelUrl === baseModelUrl)) || baseModelUrl === parentUrl
+                if (!exist) {
+                    baseModels.push({
+                        baseModelName,
+                        baseModelUrl,
+                        baseModelImageUrl: getOnlineImageUrlFromThumbUrl(baseModelImageUrl)
+                    })
+                    Logger.success('[SUCCESS] MODEL', baseModelName, baseModelUrl)
+                }
+            }
+        }
+
+        await listPage.close()
+
+        return baseModels
     }
 
     /**

@@ -1,5 +1,9 @@
 import { Page } from "playwright-core";
+import { Timer } from "./timer";
 
-export const goto = (page: Page, url: string) => {
+const DELAY_BROWSER_FETCH_SECONDS = 2
+
+export const goto = async (page: Page, url: string) => {
+    await Timer.wait(DELAY_BROWSER_FETCH_SECONDS)
     return page.goto(url, { timeout: 120 * 1000})
 }
