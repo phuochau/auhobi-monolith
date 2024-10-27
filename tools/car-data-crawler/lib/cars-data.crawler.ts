@@ -15,7 +15,7 @@ import axios from "axios"
 import fs from 'fs'
 import { Logger } from "./logger"
 
-const DELAY_BROWSER_FETCH_SECONDS = 3
+const DELAY_BROWSER_FETCH_SECONDS = 2
 
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
