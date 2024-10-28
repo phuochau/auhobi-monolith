@@ -81,7 +81,7 @@ export namespace CarsDataCrawler {
                 for (const item of items) {
                     try {
                         if (isURLExist(parsedVehicleUrls, item)) {
-                            Logger.warn('[SKIP]', itemIndex, item.loc)
+                            Logger.warn('[SKIP]', `${itemIndex}`, item.loc)
                             itemIndex++
                             continue
                         }
