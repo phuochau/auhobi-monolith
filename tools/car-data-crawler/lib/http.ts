@@ -8,6 +8,7 @@ export namespace Http {
             method: 'GET',
             responseType: 'stream',
         })
+
         return new Promise((resolve) => {
             response.data
                 .pipe(fs.createWriteStream(filepath, { flags: 'w' }))

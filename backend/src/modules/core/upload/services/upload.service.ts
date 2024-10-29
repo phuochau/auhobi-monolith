@@ -23,8 +23,8 @@ export class UploadService {
         })
     }
 
-    async addFileByBuffer(buffer: Buffer, mimetype: string): Promise<File> {
-        const response = await this.cloudinaryService.uploadByBuffer(buffer, mimetype, PlatformConfig.fileUpload.fileSubfolder)
+    async addFileByBuffer(buffer: Buffer, mimetype: string, overwriteFolder?: string): Promise<File> {
+        const response = await this.cloudinaryService.uploadByBuffer(buffer, mimetype, overwriteFolder || PlatformConfig.fileUpload.fileSubfolder)
         return this.fileService.createOne({
             name: response.original_filename,
             mimetype: mimetype,

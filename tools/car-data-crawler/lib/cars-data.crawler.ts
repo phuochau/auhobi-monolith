@@ -361,7 +361,10 @@ export namespace CarsDataCrawler {
                 const brandName = await element.getAttribute('title')
                 const imageSrc = await element.$('img').then(img => img?.getAttribute('src'))
                 const filename = FileUtils.getFileName(imageSrc!)!
+
+                Timer.wait(1)
                 await Http.downloadImage(imageSrc!, path.join(BRAND_IMAGES_DIR, filename))
+                
                 Logger.success('[DOWNLOADED]', brandName, imageSrc)
                 brands.push({
                     name: brandName,
