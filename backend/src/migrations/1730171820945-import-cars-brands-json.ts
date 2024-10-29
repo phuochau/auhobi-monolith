@@ -12,7 +12,7 @@ const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars
 const BRANDS_JSON = path.join(BASE_DIR, 'brands.json')
 const BRANDS_IMAGES_DIR = path.join(BASE_DIR, 'images')
 
-export class ImportBrandsJson1730171820945 implements MigrationInterface {
+export class ImportCarsBrandsJson1730171820945 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const cloudService = new CloudinaryService()

@@ -2,11 +2,11 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 import fs from 'fs'
 import path from 'path';
 import _ from "lodash";
-import { CarDataVehicle } from "./migrations/types/car-data-vehicle";
-import { CarsDataHelper } from "./migrations/helpers/cars-data.helper";
-import { VehicleBrand } from "./modules/vehicle/entities/vehicle-brand.entity";
-import { VehicleModel } from "./modules/vehicle/entities/vehicle-model.entity";
-import { VehicleBody } from "./modules/vehicle/entities/vehicle-body.entity";
+import { CarDataVehicle } from "./types/car-data-vehicle";
+import { CarsDataHelper } from "./helpers/cars-data.helper";
+import { VehicleBrand } from "../modules/vehicle/entities/vehicle-brand.entity";
+import { VehicleModel } from "../modules/vehicle/entities/vehicle-model.entity";
+import { VehicleBody } from "../modules/vehicle/entities/vehicle-body.entity";
 
 const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com/vehicles')
 const JSON_DIR = path.join(BASE_DIR, 'json')
