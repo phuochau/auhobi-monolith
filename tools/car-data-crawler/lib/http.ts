@@ -19,4 +19,12 @@ export namespace Http {
                 .once('close', () => resolve(true))
         })
     }
+
+    export const downloadImageAsBuffer = async (url: string): Promise<Buffer> => {
+        return axios<ArrayBuffer>({
+            url,
+            method: 'GET',
+            responseType: 'arraybuffer',
+        }).then(res => Buffer.from(res.data))
+    }
 }

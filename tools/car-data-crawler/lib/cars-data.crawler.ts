@@ -49,6 +49,14 @@ export namespace CarsDataCrawler {
     }
 
     export const vehicleCrawAll = async(browser: Browser): Promise<void> => {
+        if (!fs.existsSync(VEHICLE_PARSED_DATA_DIR)) {
+            fs.mkdirSync(VEHICLE_PARSED_DATA_DIR, { recursive: true })
+        }
+
+        if (!fs.existsSync(VEHICLE_DOWNLOADED_IMAGES_DIR)) {
+            fs.mkdirSync(VEHICLE_DOWNLOADED_IMAGES_DIR, { recursive: true })
+        }
+
         let vehicleUrls: any = null
         let xmlIndex = 0
         const xmlParser = new XMLParser();
@@ -280,7 +288,12 @@ export namespace CarsDataCrawler {
      * Download cars images
      */
     export const vehicleCrawlCarImages = async (): Promise<void> => {
+        if (!fs.existsSync(VEHICLE_DOWNLOADED_IMAGES_DIR)) {
+            fs.mkdirSync(VEHICLE_DOWNLOADED_IMAGES_DIR, { recursive: true })
+        }
+
         const vehileFolder = CarsDataCrawler.VEHICLE_PARSED_DATA_DIR
+
         fs.readdir(vehileFolder, async (err, files) => {
             const downloadedCollections: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_COLLECTION_PATH, '[]'))
             const downloadedImages: string[] = JSON.parse(await FileUtils.safeReadFile(CarsDataCrawler.VEHICLE_DOWNLOADED_IMAGES_PATH, '[]'))
@@ -348,6 +361,10 @@ export namespace CarsDataCrawler {
     }
 
     export const brandCrawlAll = async (browser: Browser): Promise<void> => {
+        if (!fs.existsSync(BRAND_IMAGES_DIR)) {
+            fs.mkdirSync(BRAND_IMAGES_DIR, { recursive: true })
+        }
+        
         const url = brandGetListUrl()
         const page = await CrawlerController.getNewPage(browser)
         await goto(page, url)
@@ -387,6 +404,10 @@ export namespace CarsDataCrawler {
     export const BASE_MODEL_IMAGES_DIR = path.join(BRAND_BASE_DIR, 'images')
 
     export const baseModelCrawlAll = async (browser: Browser): Promise<void> => {
+        if (!fs.existsSync(BASE_MODEL_IMAGES_DIR)) {
+            fs.mkdirSync(BASE_MODEL_IMAGES_DIR, { recursive: true })
+        }
+
         const url = brandGetListUrl()
         const brandsPage = await CrawlerController.getNewPage(browser)
         await goto(brandsPage, url)

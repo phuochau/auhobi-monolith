@@ -16,7 +16,6 @@
     "vehicles:images": "npx tsx src/crawl-cars-images.ts"
   },
   "dependencies": {
-    "@imgly/background-removal-node": "^1.4.5",
     "axios": "^1.7.7",
     "fast-xml-parser": "^4.5.0",
     "lodash": "^4.17.21",
