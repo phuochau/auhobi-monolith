@@ -36,7 +36,7 @@ export class ImportVehiclesJson1730643801704 implements MigrationInterface {
     
                 const brand = await this.getOrCreateBrand(queryRunner, inBrand)
                 const body = await this.getOrCreateBody(queryRunner, inBody)
-                const model = await this.getOrCreateModel(
+                await this.getOrCreateModel(
                     queryRunner,
                     inRef,
                     inModel,
