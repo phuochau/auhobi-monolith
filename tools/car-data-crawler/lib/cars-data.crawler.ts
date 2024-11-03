@@ -543,4 +543,12 @@ export namespace CarsDataCrawler {
         return `${BASE_URL}${[...[parts[0], parts[1]], ...parts.slice(4)].join('/')}`
     }
 
+    export const getThumbUrlFromOnlineImageUrl = (uri: string): string => {
+        // https://www.cars-data.com/pictures/abarth/abarth-124-spider_3560_12.jpg
+        // TO
+        // https://www.cars-data.com/pictures/thumbs/350px/abarth/abarth-124-spider_3560_12.jpg
+        const parts = uri.replace(BASE_URL, '').split('/')
+        return `${BASE_URL}${[...[parts[0], parts[1], 'thumbs/350px'], ...parts.slice(4)].join('/')}`
+    }
+
 }
