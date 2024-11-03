@@ -51,6 +51,10 @@ class BaseClass extends BaseEntity {
   @Column({ nullable: true })
   transmission?: string;
 
+  @Field(() => [String], { nullable: true })
+  @Column("text", { array: true, default: [] })
+  images: string[];
+
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
   metadata?: any

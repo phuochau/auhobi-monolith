@@ -414,8 +414,6 @@ export namespace CarsDataCrawler {
         }
         await brandsPage.close()
 
-
-
         // Process models
         for (let brandIndex = 0; brandIndex < brands.length; brandIndex++) {
             const brand = brands[brandIndex]
@@ -427,14 +425,14 @@ export namespace CarsDataCrawler {
             }
 
             // e.g: brandUrl - https://www.cars-data.com/en/bmw
-            const baseModels: any[] = await baseModelCrawlModels(browser, brand.brandUrl)
+            const baseModels: any[] = await baseModelCrawlModels(browser, brand.brandName, brand.brandUrl)
 
             for (let modelIndex = 0; modelIndex < baseModels.length; modelIndex++) {
                 const baseModel = baseModels[modelIndex]
                 // e.g: modelUrl - https://www.cars-data.com/en/bmw/5-series
                 
                 Logger.info('[BASE MODEL URL]', baseModel.baseModelUrl)
-                const subBaseModels: any[] = await baseModelCrawlModels(browser, baseModel.baseModelUrl!)
+                const subBaseModels: any[] = await baseModelCrawlModels(browser, brand.brandName, baseModel.baseModelUrl!)
 
                 for (let subModelIndex = 0; subModelIndex < subBaseModels.length; subModelIndex++) {
                     const subBaseModel = subBaseModels[subModelIndex]
@@ -481,7 +479,7 @@ export namespace CarsDataCrawler {
         Logger.success('DONE!!!!!!')
     }
 
-    export const baseModelCrawlModels = async (browser: Browser, parentUrl: string) => {
+    export const baseModelCrawlModels = async (browser: Browser, brandName: string, parentUrl: string) => {
         // go to brand models url
         const listPage = await CrawlerController.getNewPage(browser)
         await goto(listPage, parentUrl)
@@ -500,6 +498,7 @@ export namespace CarsDataCrawler {
                 const exist = Boolean(baseModels.find(item => item.baseModelUrl === baseModelUrl)) || baseModelUrl === parentUrl
                 if (!exist) {
                     baseModels.push({
+                        brandName,
                         baseModelName,
                         baseModelUrl,
                         baseModelImageUrl: getOnlineImageUrlFromThumbUrl(baseModelImageUrl)

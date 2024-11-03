@@ -9,9 +9,17 @@ import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  refId: string;
+  
   @FilterableField()
   @Column()
   name: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  image?: string;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })
@@ -23,6 +31,7 @@ class BaseClass extends BaseEntity {
  */
 @ObjectType()
 @FilterableRelation('brand', () => VehicleBrand)
+@FilterableRelation('parent', () => VehicleBaseModel)
 @Entity({ name: `${TABLE_PREFIX}_base_models` })
 export class VehicleBaseModel extends BaseClass {
   @FilterableField(() => ID)
@@ -31,6 +40,9 @@ export class VehicleBaseModel extends BaseClass {
 
   @ManyToOne(() => VehicleBrand, genXToOneOptions())
   brand: VehicleBrand
+
+  @ManyToOne(() => VehicleBaseModel, genXToOneOptions({ nullable: true }))
+  parent?: VehicleBaseModel
 
   @FilterableField()
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP(6)" })
@@ -50,4 +62,9 @@ export class VehicleBaseModel extends BaseClass {
  */
 @InputType()
 export class VehicleBaseModelDTO extends BaseClass {
+  @FilterableField(() => ID)
+  brand: VehicleBrand
+
+  @FilterableField(() => ID, { nullable: true })
+  parent?: VehicleBaseModel
 }
