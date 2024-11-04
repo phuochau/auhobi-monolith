@@ -5,7 +5,7 @@ import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../constants';
 import { BeforeCreateOne, CreateOneInputType, FilterableField, FilterableOffsetConnection, FilterableRelation, QueryOptions } from '@ptc-org/nestjs-query-graphql';
 import GraphQLJSON from 'graphql-type-json';
-import { OrgRole } from './enums/ORG-role.enum';
+import { OrgRole } from './enums/org-role.enum';
 import { Account } from '../../core/auth/entities/account.entity';
 import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';

@@ -3,7 +3,7 @@ import { Org } from './org.entity';
 import { ObjectType, InputType, ID } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
-import { OrgRole } from './enums/ORG-role.enum';
+import { OrgRole } from './enums/org-role.enum';
 import { Account } from '../../core/auth/entities/account.entity';
 
 @ObjectType()
