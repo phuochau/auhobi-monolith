@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:53131915a3e19281d284c5e9937c9cde2269a7dea6e208174c47678923fe0677
-size 72
+{
+    "name": "GraphQL",
+    "schemaPath": "../backend/src/schema.gql"
+}

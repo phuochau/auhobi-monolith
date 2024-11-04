@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2d2d7b2ff1830d670cdfc79e4b0839a0c19f28b4bab080a90648ce7a9a3e0853
-size 103
+{
+  "platforms": "universal",
+  "aliases": {
+    "components": "@/components",
+    "lib": "@/lib"
+  }
+}
