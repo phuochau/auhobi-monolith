@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "nest": "yarn nest",
+    "dotenv": "yarn dotenv",
     "build": "nest build",
     "dev": "rm -rf dist && nest start --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -17,7 +18,7 @@
     "migration:generate": "yarn typeorm migration:generate -d src/config/database-migration.config.ts",
     "migration:migrate": "yarn typeorm migration:run -d src/config/database-migration.config.ts",
     "migration:revert": "yarn typeorm migration:revert -d src/config/database-migration.config.ts",
-    "prod:env": "yarn dotenv -e .env.prod",
+    "prod:env": "dotenv -e .env.prod",
     "prod:start": "yarn run prod:env node dist/main",
     "prod:migration:migrate": "yarn run prod:env yarn run migration:migrate",
     "test": "jest",
