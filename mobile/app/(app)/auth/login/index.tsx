@@ -17,8 +17,10 @@ import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { Navigation } from "@/lib/navigation"
 import React from "react"
-import { Mail } from "@/lib/icons/Mail"
-import { Lock } from "@/lib/icons/Lock"
+import { GoogleSignInButton } from "@/components/ui/google-signin-button"
+import { FacebookSignInButton } from "@/components/ui/facebook-signin-button"
+import { AppleSignInButton } from "@/components/ui/apple-signin-button"
+import { Separator } from "@/components/ui/separator"
 
 const formSchema = z.object({
   email: z
@@ -113,7 +115,7 @@ const LoginScreen = () => {
           <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
 
           <View className="text-center flex flex-row items-center justify-center flex-wrap">
-          <Text className="text-muted-foreground">Forgot your password? </Text>
+            <Text className="text-muted-foreground">Forgot your password? </Text>
             <Link href={'/auth/forgot-password'} className="underline">
               <Text className="font-semibold text-primary">Reset it</Text>
             </Link>
@@ -122,6 +124,19 @@ const LoginScreen = () => {
           <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
             <Text>Sign In</Text>
           </Button>
+
+          <View className="relative flex flex-col items-center justify-center my-4">
+            <Separator />
+            <View className="absolute px-6 bg-background">
+              <Text className="text-muted-foreground">or</Text>
+            </View>
+          </View>
+
+          <FacebookSignInButton />
+
+          <GoogleSignInButton />
+
+          <AppleSignInButton />
         </View>
 
         <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
