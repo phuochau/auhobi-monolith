@@ -17,6 +17,8 @@ import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { Navigation } from "@/lib/navigation"
 import React from "react"
+import { Mail } from "@/lib/icons/Mail"
+import { Lock } from "@/lib/icons/Lock"
 
 const formSchema = z.object({
   email: z
@@ -75,9 +77,9 @@ const LoginScreen = () => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '', headerBackButtonMenuEnabled: true }} />
       <View className="w-full h-full flex flex-col p-6">
-        <Text className="text-4xl mb-2 text-primary-foreground font-semibold">Login</Text>
-        <Text className="text-secondary mb-8">Enter your credentials below to login to your account.</Text>
-        <View className="gap-4">
+        <Text className="text-4xl mb-2 text-foreground font-semibold">Sign in to Auhobi</Text>
+        <Text className="text-muted-foreground mb-8">Enter your credentials below to login to your account.</Text>
+        <View className="gap-4 flex-1">
           <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
           <Controller
             control={control}
@@ -88,6 +90,7 @@ const LoginScreen = () => {
                 onChangeText={onChange}
                 value={value}
                 autoCapitalize="none"
+                keyboardType="email-address"
               />
             )}
             name="email"
@@ -109,22 +112,23 @@ const LoginScreen = () => {
           />
           <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
 
-          <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-            <Text>Log In</Text>
-          </Button>
-
-          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
-            <Text className="text-secondary">Don't have an account? </Text>
-            <Link href={'/auth/register'} className="underline">
-              <Text className="font-semibold text-secondary">Sign up</Text>
-            </Link>
-          </View>
-
           <View className="text-center flex flex-row items-center justify-center flex-wrap">
+          <Text className="text-muted-foreground">Forgot your password? </Text>
             <Link href={'/auth/forgot-password'} className="underline">
-              <Text className="font-semibold text-secondary">Forgot your password?</Text>
+              <Text className="font-semibold text-primary">Reset it</Text>
             </Link>
           </View>
+
+          <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+            <Text>Sign In</Text>
+          </Button>
+        </View>
+
+        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+          <Text className="text-muted-foreground">Don't have an account? </Text>
+          <Link href={'/auth/register'} className="underline">
+            <Text className="font-semibold text-primary">Sign up</Text>
+          </Link>
         </View>
       </View>
     </>
