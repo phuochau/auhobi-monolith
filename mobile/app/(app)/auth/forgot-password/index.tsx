@@ -58,15 +58,16 @@ const LoginScreen = () => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '', headerBackButtonMenuEnabled: true }} />
       <View className="w-full h-full flex flex-col p-6">
-        <Text className="text-4xl mb-2 text-primary-foreground font-semibold">Forgot password</Text>
-        <Text className="text-secondary mb-8">Enter your email below to reset your password.</Text>
-        <View className="gap-4">
+        <Text className="text-4xl mb-2 text-foreground font-semibold">Forgot password</Text>
+        <Text className="text-muted-foreground mb-8">Enter your email below to reset your password.</Text>
+        <View className="flex-1 gap-4">
           <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <Input
                 placeholder="Email"
+                keyboardType="email-address"
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -79,13 +80,13 @@ const LoginScreen = () => {
           <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
             <Text>Reset password</Text>
           </Button>
+        </View>
 
-          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
-            <Text className="text-secondary">Remember your account? </Text>
-            <Link href={'/auth/login'} className="underline">
-              <Text className="font-semibold text-secondary">Login</Text>
-            </Link>
-          </View>
+        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+          <Text className="text-muted-foreground">Remember your account? </Text>
+          <Link href={'/auth/login'} className="underline">
+            <Text className="font-semibold text-primary">Sign In</Text>
+          </Link>
         </View>
       </View>
     </>

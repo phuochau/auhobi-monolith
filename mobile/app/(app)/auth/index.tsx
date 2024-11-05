@@ -3,6 +3,7 @@ import { Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ImageBackground, View, Image } from 'react-native'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 const AuthScreen = () => {
   const router = useRouter()
@@ -18,17 +19,13 @@ const AuthScreen = () => {
         <View className="flex-1 flex flex-col justify-end gap-4 pb-4">
           <Button
             size={'lg'}
-            className="bg-primary"
+            className="bg-primary relative"
             onPress={() => router.push({ pathname: '/auth/login' })}
           >
-            <Text>Login</Text>
-          </Button>
-          <Button
-            variant={'outline'}
-            size={'lg'}
-            onPress={() => router.push({ pathname: '/auth/register' })}
-          >
-            <Text>Register</Text>
+            <Text>Getting Started</Text>
+            <View className='absolute top-2.5 right-4'>
+              <MaterialIcons name="arrow-right-alt" size={32} color="white" />
+            </View>
           </Button>
         </View>
       </ImageBackground>

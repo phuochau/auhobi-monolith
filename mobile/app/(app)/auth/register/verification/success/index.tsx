@@ -30,8 +30,8 @@ export default function VerificationSuccessScreen() {
             </CardDescription>
           </CardHeader>
           <CardFooter>
-            <Button className="w-full" onPress={() => router.push({ pathname: '/auth/login' })}>
-                <Text>Login</Text>
+            <Button size={'lg'} className="w-full" onPress={() => router.push({ pathname: '/auth/login' })}>
+                <Text>Sign In</Text>
             </Button>
           </CardFooter>
         </Card>

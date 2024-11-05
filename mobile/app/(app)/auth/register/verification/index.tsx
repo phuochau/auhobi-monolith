@@ -73,33 +73,34 @@ const VerificationScreen = () => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '', headerBackButtonMenuEnabled: true }} />
       <View className="w-full h-full flex flex-col p-6">
-        <Text className="text-4xl mb-2 text-primary-foreground font-semibold">Activate Account</Text>
-        <Text className="text-secondary mb-8">Please check your email inbox to get verification code. Enter the verification code below to activate your account.</Text>
-        <CardContent className="grid gap-4">
-          <GraphQLError nativeID="RegisterError" response={response}></GraphQLError>
+        <Text className="text-4xl mb-2 text-foreground font-semibold">Activate Account</Text>
+        <Text className="text-muted-foreground mb-8">Please check your email inbox to get verification code. Enter the verification code below to activate your account.</Text>
+        <View className="flex-1 gap-4">
+          <GraphQLError nativeID="VerificationError" response={response}></GraphQLError>
 
           {resent && <Text className={'text-success text-sm font-semibold'}>Resent the email activation successfully!</Text>}
 
           <DigitInput onComplete={(code) => setCode(code)}></DigitInput>
 
-          <Button size={'lg'} onPress={() => onVerifyAccount()} loading={submitting || resending} disabled={submitting || !valid || resending} className="w-full mt-2">
-            <Text>Confirm Account</Text>
-          </Button>
-
-          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
-            <Text className="text-secondary">Don't receive the email? </Text>
+          <View className="mt-4 text-center flex flex-row items-center flex-wrap">
+            <Text className="text-muted-foreground">Don't receive the email? </Text>
             <Text onPress={() => onResendCode()} className="underline">
-              <Text className="font-semibold text-secondary">Resend</Text>
+              <Text className="font-semibold text-primary">Resend</Text>
             </Text>
           </View>
 
-          <View className="text-center flex flex-row items-center justify-center flex-wrap">
-            <Text className="text-secondary">Already verified your account? </Text>
-            <Link href={'/auth/login'} className="underline">
-              <Text className="font-semibold text-secondary">Login</Text>
-            </Link>
-          </View>
-        </CardContent>
+          <Button size={'lg'} onPress={() => onVerifyAccount()} loading={submitting || resending} disabled={submitting || !valid || resending} className="w-full mt-2">
+            <Text>Confirm</Text>
+          </Button>
+        </View>
+
+        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+          <Text className="text-muted-foreground">Already verified your account? </Text>
+          <Link href={'/auth/login'} className="underline">
+            <Text className="font-semibold text-primary">Sign In</Text>
+          </Link>
+        </View>
+
       </View>
     </>
   )
