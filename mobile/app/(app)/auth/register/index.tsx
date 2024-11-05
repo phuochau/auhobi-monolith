@@ -16,6 +16,10 @@ import { registerAsync } from "@/store/user/actions/register-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { ErrorCodes } from "@/graphql/gql/generated-models"
 import React from "react"
+import { Separator } from "@/components/ui/separator"
+import { FacebookSignInButton } from "@/components/ui/facebook-signin-button"
+import { GoogleSignInButton } from "@/components/ui/google-signin-button"
+import { AppleSignInButton } from "@/components/ui/apple-signin-button"
 
 const formSchema = z.object({
   email: z
@@ -90,9 +94,9 @@ const RegisterScreen = () => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '', headerBackButtonMenuEnabled: true }} />
       <View className="w-full h-full flex flex-col p-6">
-        <Text className="text-4xl mb-2 text-primary-foreground font-semibold">Sign Up</Text>
-        <Text className="text-secondary mb-8">Enter your information to create a new account.</Text>
-        <View className="gap-4">
+        <Text className="text-4xl mb-2 text-foreground font-semibold">Sign Up</Text>
+        <Text className="text-muted-foreground mb-8">Enter your information to create a new account.</Text>
+        <View className="flex-1 gap-4">
           <GraphQLError nativeID="RegisterError" response={response}></GraphQLError>
 
           <Controller
@@ -103,6 +107,7 @@ const RegisterScreen = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
+                keyboardType="email-address"
                 autoCapitalize="none"
               />
             )}
@@ -140,16 +145,40 @@ const RegisterScreen = () => {
           />
           <FormMessage nativeID="ConfirmPasswordError" error={errors.confirmPassword}></FormMessage>
 
+        <View className="mb-6 flex flex-row items-center flex-wrap">
+          <Text className="text-muted-foreground">By signing up, you agree to our </Text>
+          <Link href={'/auth/login'} className="underline">
+            <Text className="font-semibold text-primary">Terms of Service</Text>
+          </Link>
+          <Text className="text-muted-foreground"> and </Text>
+          <Link href={'/auth/login'} className="underline">
+            <Text className="font-semibold text-primary">Privacy Policy</Text>
+          </Link>
+        </View>
+
           <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-            <Text>Continue</Text>
+            <Text>Sign Up</Text>
           </Button>
 
-          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
-            <Text className="text-secondary">Already have an account? </Text>
-            <Link href={'/auth/login'} className="underline">
-              <Text className="font-semibold text-secondary">Login</Text>
-            </Link>
+          <View className="relative flex flex-col items-center justify-center my-4">
+            <Separator />
+            <View className="absolute px-6 bg-background">
+              <Text className="text-muted-foreground">or</Text>
+            </View>
           </View>
+
+          <FacebookSignInButton text="Sign up with Facebook" />
+
+          <GoogleSignInButton text="Sign up with Google" />
+
+          <AppleSignInButton text="Sign up with Apple" />
+        </View>
+
+        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+          <Text className="text-muted-foreground">Already have an account? </Text>
+          <Link href={'/auth/login'} className="underline">
+            <Text className="font-semibold text-primary">Sign In</Text>
+          </Link>
         </View>
       </View>
     </>

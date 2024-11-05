@@ -114,7 +114,7 @@ const LoginScreen = () => {
           />
           <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
 
-          <View className="text-center flex flex-row items-center justify-center flex-wrap">
+          <View className="flex flex-row items-center flex-wrap">
             <Text className="text-muted-foreground">Forgot your password? </Text>
             <Link href={'/auth/forgot-password'} className="underline">
               <Text className="font-semibold text-primary">Reset it</Text>
