@@ -64,7 +64,7 @@ const AddVehicle = (props: AddVehicleProps) => {
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
             <Input
-              placeholder="Name or Nick Name of your car (e.g: Báo)"
+              placeholder="Nick Name of your car (e.g: Speed Hunter)"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
@@ -88,8 +88,8 @@ const AddVehicle = (props: AddVehicleProps) => {
         />
         <FormMessage nativeID="CustomModelError" error={errors.customModel}></FormMessage>
 
-        <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-          <Text>Add Vehicle</Text>
+        <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+          <Text>Add Car</Text>
         </Button>
       </View>
     )

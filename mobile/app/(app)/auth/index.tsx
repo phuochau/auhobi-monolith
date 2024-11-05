@@ -1,14 +1,15 @@
 import { Text } from '@/components/ui/text'
 import { Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
-import { SafeAreaView } from "react-native-safe-area-context"
 import { ImageBackground, View, Image } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { StatusBar } from 'expo-status-bar';
 
 const AuthScreen = () => {
   const router = useRouter()
   return (
-    <SafeAreaView>
+    <View>
+      <StatusBar style={'light'} />
       <Stack.Screen options={{ headerShown: false }} />
       <ImageBackground source={require('@/assets/images/home/bg.jpg')} resizeMode="cover" className='w-full h-full flex flex-col p-6'>
         <View className="flex-1 flex flex-col gap-y-2 pt-12">
@@ -20,7 +21,8 @@ const AuthScreen = () => {
           <Button
             size={'lg'}
             className="bg-primary relative"
-            onPress={() => router.push({ pathname: '/auth/login' })}
+            // onPress={() => router.push({ pathname: '/auth/login' })}
+            onPress={() => router.push({ pathname: '/onboarding' })}
           >
             <Text>Getting Started</Text>
             <View className='absolute top-2.5 right-4'>
@@ -29,7 +31,7 @@ const AuthScreen = () => {
           </Button>
         </View>
       </ImageBackground>
-    </SafeAreaView>
+    </View>
   )
 }
 
