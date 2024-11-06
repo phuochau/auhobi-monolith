@@ -2,8 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type VehicleBody {
+type VehicleBrand {
   name: String!
+  logo: String
   metadata: JSON
   id: ID!
   createdAt: DateTime!
@@ -21,258 +22,48 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type VehicleModelBody {
-  picture: String
+type VehicleBody {
+  name: String!
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+type VehicleBaseModel {
+  refId: String
+  name: String!
+  image: String
+  metadata: JSON
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  brand: VehicleBrand!
+  parent: VehicleBaseModel
+}
+
+type VehicleModel {
+  refId: String
+  name: String!
+  startYear: Int
+  endYear: Int
+  drive: String
+  engineType: String
+  fuelType: String
+  maxPower: String
+  maxTorque: String
+  transmission: String
+  images: [String!]
+  metadata: JSON
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
   body: VehicleBody!
-  model: VehicleModel!
-}
-
-type VehicleEngine {
-  name: String!
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleTransmission {
-  name: String!
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleBrand {
-  name: String!
-  startYear: Int
-  endYear: Int
-  logo: String
-  metadata: JSON
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleModel {
-  name: String!
-  startYear: Int!
-  metadata: JSON
-  id: ID!
-  endYear: Int
-  createdAt: DateTime!
-  updatedAt: DateTime
-  deletedAt: DateTime
-  parent: VehicleModel
-  brand: VehicleBrand
-  bodies(
-    """Specify to filter the records returned."""
-    filter: VehicleModelBodyFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleModelBodySort!]! = []
-  ): [VehicleModelBody!]!
-  engines(
-    """Specify to filter the records returned."""
-    filter: VehicleEngineFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleEngineSort!]! = []
-  ): [VehicleEngine!]!
-  transmissions(
-    """Specify to filter the records returned."""
-    filter: VehicleTransmissionFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleTransmissionSort!]! = []
-  ): [VehicleTransmission!]!
-}
-
-input VehicleModelBodyFilter {
-  and: [VehicleModelBodyFilter!]
-  or: [VehicleModelBodyFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  model: VehicleModelBodyFilterVehicleModelFilter
-  body: VehicleModelBodyFilterVehicleBodyFilter
-}
-
-input IDFilterComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: ID
-  neq: ID
-  gt: ID
-  gte: ID
-  lt: ID
-  lte: ID
-  like: ID
-  notLike: ID
-  iLike: ID
-  notILike: ID
-  in: [ID!]
-  notIn: [ID!]
-}
-
-input DateFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: DateTime
-  neq: DateTime
-  gt: DateTime
-  gte: DateTime
-  lt: DateTime
-  lte: DateTime
-  in: [DateTime!]
-  notIn: [DateTime!]
-  between: DateFieldComparisonBetween
-  notBetween: DateFieldComparisonBetween
-}
-
-input DateFieldComparisonBetween {
-  lower: DateTime!
-  upper: DateTime!
-}
-
-input VehicleModelBodyFilterVehicleModelFilter {
-  and: [VehicleModelBodyFilterVehicleModelFilter!]
-  or: [VehicleModelBodyFilterVehicleModelFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input StringFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: String
-  neq: String
-  gt: String
-  gte: String
-  lt: String
-  lte: String
-  like: String
-  notLike: String
-  iLike: String
-  notILike: String
-  in: [String!]
-  notIn: [String!]
-}
-
-input IntFieldComparison {
-  is: Boolean
-  isNot: Boolean
-  eq: Int
-  neq: Int
-  gt: Int
-  gte: Int
-  lt: Int
-  lte: Int
-  in: [Int!]
-  notIn: [Int!]
-  between: IntFieldComparisonBetween
-  notBetween: IntFieldComparisonBetween
-}
-
-input IntFieldComparisonBetween {
-  lower: Int!
-  upper: Int!
-}
-
-input VehicleModelBodyFilterVehicleBodyFilter {
-  and: [VehicleModelBodyFilterVehicleBodyFilter!]
-  or: [VehicleModelBodyFilterVehicleBodyFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelBodySort {
-  field: VehicleModelBodySortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleModelBodySortFields {
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-"""Sort Directions"""
-enum SortDirection {
-  ASC
-  DESC
-}
-
-"""Sort Nulls Options"""
-enum SortNulls {
-  NULLS_FIRST
-  NULLS_LAST
-}
-
-input VehicleEngineFilter {
-  and: [VehicleEngineFilter!]
-  or: [VehicleEngineFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleEngineSort {
-  field: VehicleEngineSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleEngineSortFields {
-  name
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-input VehicleTransmissionFilter {
-  and: [VehicleTransmissionFilter!]
-  or: [VehicleTransmissionFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleTransmissionSort {
-  field: VehicleTransmissionSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleTransmissionSortFields {
-  name
-  id
-  createdAt
-  updatedAt
-  deletedAt
+  brand: VehicleBrand!
+  baseModel: VehicleBaseModel!
 }
 
 type UserVehicle {
@@ -287,9 +78,6 @@ type UserVehicle {
   deletedAt: DateTime
   owner: User!
   model: VehicleModel!
-  body: VehicleModelBody!
-  engine: VehicleEngine!
-  transmission: VehicleTransmission!
 }
 
 enum UserVechileStatus {
@@ -339,11 +127,25 @@ input UserVehicleAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-  transmission: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter
-  engine: UserVehicleAggregateFilterVehicleEngineAggregateFilter
-  body: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter
   model: UserVehicleAggregateFilterVehicleModelAggregateFilter
   owner: UserVehicleAggregateFilterUserAggregateFilter
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
 }
 
 input UserVechileStatusFilterComparison {
@@ -363,45 +165,80 @@ input UserVechileStatusFilterComparison {
   notIn: [UserVechileStatus!]
 }
 
-input UserVehicleAggregateFilterVehicleTransmissionAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
 }
 
-input UserVehicleAggregateFilterVehicleEngineAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleEngineAggregateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  between: DateFieldComparisonBetween
+  notBetween: DateFieldComparisonBetween
 }
 
-input UserVehicleAggregateFilterVehicleModelBodyAggregateFilter {
-  and: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
-  or: [UserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
 }
 
 input UserVehicleAggregateFilterVehicleModelAggregateFilter {
   and: [UserVehicleAggregateFilterVehicleModelAggregateFilter!]
   or: [UserVehicleAggregateFilterVehicleModelAggregateFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
-  id: IDFilterComparison
   endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+}
+
+input IntFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Int
+  neq: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  in: [Int!]
+  notIn: [Int!]
+  between: IntFieldComparisonBetween
+  notBetween: IntFieldComparisonBetween
+}
+
+input IntFieldComparisonBetween {
+  lower: Int!
+  upper: Int!
 }
 
 input UserVehicleAggregateFilterUserAggregateFilter {
@@ -450,49 +287,24 @@ input UserVehicleFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-  transmission: UserVehicleFilterVehicleTransmissionFilter
-  engine: UserVehicleFilterVehicleEngineFilter
-  body: UserVehicleFilterVehicleModelBodyFilter
   model: UserVehicleFilterVehicleModelFilter
   owner: UserVehicleFilterUserFilter
-}
-
-input UserVehicleFilterVehicleTransmissionFilter {
-  and: [UserVehicleFilterVehicleTransmissionFilter!]
-  or: [UserVehicleFilterVehicleTransmissionFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilterVehicleEngineFilter {
-  and: [UserVehicleFilterVehicleEngineFilter!]
-  or: [UserVehicleFilterVehicleEngineFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input UserVehicleFilterVehicleModelBodyFilter {
-  and: [UserVehicleFilterVehicleModelBodyFilter!]
-  or: [UserVehicleFilterVehicleModelBodyFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
 }
 
 input UserVehicleFilterVehicleModelFilter {
   and: [UserVehicleFilterVehicleModelFilter!]
   or: [UserVehicleFilterVehicleModelFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
-  id: IDFilterComparison
   endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -523,6 +335,18 @@ enum UserVehicleSortFields {
   createdAt
   updatedAt
   deletedAt
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
 }
 
 type Account {
@@ -5168,8 +4992,6 @@ type VehicleBodyConnection {
 
 type VehicleBrandDeleteResponse {
   name: String
-  startYear: Int
-  endYear: Int
   logo: String
   metadata: JSON
   id: ID
@@ -5194,61 +5016,20 @@ type VehicleBrandConnection {
   edges: [VehicleBrandEdge!]!
 }
 
-type VehicleEngineDeleteResponse {
-  name: String
-  metadata: JSON
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleEngineEdge {
-  """The node containing the VehicleEngine"""
-  node: VehicleEngine!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type VehicleEngineConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [VehicleEngineEdge!]!
-}
-
-type VehicleModelBodyDeleteResponse {
-  picture: String
-  id: ID
-  createdAt: DateTime
-  updatedAt: DateTime
-  deletedAt: DateTime
-}
-
-type VehicleModelBodyEdge {
-  """The node containing the VehicleModelBody"""
-  node: VehicleModelBody!
-
-  """Cursor for this node."""
-  cursor: ConnectionCursor!
-}
-
-type VehicleModelBodyConnection {
-  """Paging information"""
-  pageInfo: PageInfo!
-
-  """Array of edges."""
-  edges: [VehicleModelBodyEdge!]!
-}
-
 type VehicleModelDeleteResponse {
+  refId: String
   name: String
   startYear: Int
+  endYear: Int
+  drive: String
+  engineType: String
+  fuelType: String
+  maxPower: String
+  maxTorque: String
+  transmission: String
+  images: [String!]
   metadata: JSON
   id: ID
-  endYear: Int
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
@@ -5270,8 +5051,10 @@ type VehicleModelConnection {
   edges: [VehicleModelEdge!]!
 }
 
-type VehicleTransmissionDeleteResponse {
+type VehicleBaseModelDeleteResponse {
+  refId: String
   name: String
+  image: String
   metadata: JSON
   id: ID
   createdAt: DateTime
@@ -5279,20 +5062,20 @@ type VehicleTransmissionDeleteResponse {
   deletedAt: DateTime
 }
 
-type VehicleTransmissionEdge {
-  """The node containing the VehicleTransmission"""
-  node: VehicleTransmission!
+type VehicleBaseModelEdge {
+  """The node containing the VehicleBaseModel"""
+  node: VehicleBaseModel!
 
   """Cursor for this node."""
   cursor: ConnectionCursor!
 }
 
-type VehicleTransmissionConnection {
+type VehicleBaseModelConnection {
   """Paging information"""
   pageInfo: PageInfo!
 
   """Array of edges."""
-  edges: [VehicleTransmissionEdge!]!
+  edges: [VehicleBaseModelEdge!]!
 }
 
 type ServiceLog {
@@ -6065,20 +5848,20 @@ type Query {
     """Specify to sort results."""
     sorting: [UserSort!]! = []
   ): UserConnection!
-  vehicleBody(
+  vehicleBaseModel(
     """The id of the record to find."""
     id: ID!
-  ): VehicleBody!
-  vehicleBodies(
+  ): VehicleBaseModel!
+  vehicleBaseModels(
     """Limit or page results."""
     paging: CursorPaging! = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: VehicleBodyFilter! = {}
+    filter: VehicleBaseModelFilter! = {}
 
     """Specify to sort results."""
-    sorting: [VehicleBodySort!]! = []
-  ): VehicleBodyConnection!
+    sorting: [VehicleBaseModelSort!]! = []
+  ): VehicleBaseModelConnection!
   vehicleBrand(
     """The id of the record to find."""
     id: ID!
@@ -6093,34 +5876,6 @@ type Query {
     """Specify to sort results."""
     sorting: [VehicleBrandSort!]! = []
   ): VehicleBrandConnection!
-  vehicleEngine(
-    """The id of the record to find."""
-    id: ID!
-  ): VehicleEngine!
-  vehicleEngines(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: VehicleEngineFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleEngineSort!]! = []
-  ): VehicleEngineConnection!
-  vehicleModelBody(
-    """The id of the record to find."""
-    id: ID!
-  ): VehicleModelBody!
-  vehicleModelBodies(
-    """Limit or page results."""
-    paging: CursorPaging! = {first: 10}
-
-    """Specify to filter the records returned."""
-    filter: VehicleModelBodyFilter! = {}
-
-    """Specify to sort results."""
-    sorting: [VehicleModelBodySort!]! = []
-  ): VehicleModelBodyConnection!
   vehicleModel(
     """The id of the record to find."""
     id: ID!
@@ -6135,20 +5890,20 @@ type Query {
     """Specify to sort results."""
     sorting: [VehicleModelSort!]! = []
   ): VehicleModelConnection!
-  vehicleTransmission(
+  vehicleBody(
     """The id of the record to find."""
     id: ID!
-  ): VehicleTransmission!
-  vehicleTransmissions(
+  ): VehicleBody!
+  vehicleBodies(
     """Limit or page results."""
     paging: CursorPaging! = {first: 10}
 
     """Specify to filter the records returned."""
-    filter: VehicleTransmissionFilter! = {}
+    filter: VehicleBodyFilter! = {}
 
     """Specify to sort results."""
-    sorting: [VehicleTransmissionSort!]! = []
-  ): VehicleTransmissionConnection!
+    sorting: [VehicleBodySort!]! = []
+  ): VehicleBodyConnection!
   serviceLogBillAggregate(
     """Filter to find records to aggregate on"""
     filter: ServiceLogBillAggregateFilter
@@ -6251,49 +6006,24 @@ input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-  transmission: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter
-  engine: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter
-  body: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter
   model: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter
   owner: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter
-}
-
-input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter {
-  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
-  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter {
-  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter!]
-  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter {
-  and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
-  or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
 }
 
 input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter {
   and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter!]
   or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
-  id: IDFilterComparison
   endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6388,49 +6118,24 @@ input AccountFilterUserFilterUserVehicleFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
-  transmission: AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter
-  engine: AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter
-  body: AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter
   model: AccountFilterUserFilterUserVehicleFilterVehicleModelFilter
   owner: AccountFilterUserFilterUserVehicleFilterUserFilter
-}
-
-input AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter {
-  and: [AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter!]
-  or: [AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter {
-  and: [AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter!]
-  or: [AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter {
-  and: [AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter!]
-  or: [AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
 }
 
 input AccountFilterUserFilterUserVehicleFilterVehicleModelFilter {
   and: [AccountFilterUserFilterUserVehicleFilterVehicleModelFilter!]
   or: [AccountFilterUserFilterUserVehicleFilterVehicleModelFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
-  id: IDFilterComparison
   endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -8370,6 +8075,155 @@ enum UserSortFields {
   deletedAt
 }
 
+input VehicleBaseModelFilter {
+  and: [VehicleBaseModelFilter!]
+  or: [VehicleBaseModelFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  parent: VehicleBaseModelFilterVehicleBaseModelFilter
+  brand: VehicleBaseModelFilterVehicleBrandFilter
+}
+
+input VehicleBaseModelFilterVehicleBaseModelFilter {
+  and: [VehicleBaseModelFilterVehicleBaseModelFilter!]
+  or: [VehicleBaseModelFilterVehicleBaseModelFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleBaseModelFilterVehicleBrandFilter {
+  and: [VehicleBaseModelFilterVehicleBrandFilter!]
+  or: [VehicleBaseModelFilterVehicleBrandFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleBaseModelSort {
+  field: VehicleBaseModelSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum VehicleBaseModelSortFields {
+  refId
+  name
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+input VehicleBrandFilter {
+  and: [VehicleBrandFilter!]
+  or: [VehicleBrandFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleBrandSort {
+  field: VehicleBrandSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum VehicleBrandSortFields {
+  name
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
+input VehicleModelFilter {
+  and: [VehicleModelFilter!]
+  or: [VehicleModelFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+  baseModel: VehicleModelFilterVehicleBaseModelFilter
+  brand: VehicleModelFilterVehicleBrandFilter
+  body: VehicleModelFilterVehicleBodyFilter
+}
+
+input VehicleModelFilterVehicleBaseModelFilter {
+  and: [VehicleModelFilterVehicleBaseModelFilter!]
+  or: [VehicleModelFilterVehicleBaseModelFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleModelFilterVehicleBrandFilter {
+  and: [VehicleModelFilterVehicleBrandFilter!]
+  or: [VehicleModelFilterVehicleBrandFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleModelFilterVehicleBodyFilter {
+  and: [VehicleModelFilterVehicleBodyFilter!]
+  or: [VehicleModelFilterVehicleBodyFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input VehicleModelSort {
+  field: VehicleModelSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum VehicleModelSortFields {
+  refId
+  name
+  startYear
+  endYear
+  drive
+  engineType
+  fuelType
+  maxPower
+  maxTorque
+  transmission
+  id
+  createdAt
+  updatedAt
+  deletedAt
+}
+
 input VehicleBodyFilter {
   and: [VehicleBodyFilter!]
   or: [VehicleBodyFilter!]
@@ -8389,120 +8243,6 @@ input VehicleBodySort {
 enum VehicleBodySortFields {
   name
   id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-input VehicleBrandFilter {
-  and: [VehicleBrandFilter!]
-  or: [VehicleBrandFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  endYear: IntFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleBrandSort {
-  field: VehicleBrandSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleBrandSortFields {
-  name
-  startYear
-  endYear
-  id
-  createdAt
-  updatedAt
-  deletedAt
-}
-
-input VehicleModelFilter {
-  and: [VehicleModelFilter!]
-  or: [VehicleModelFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-  brand: VehicleModelFilterVehicleBrandFilter
-  parent: VehicleModelFilterVehicleModelFilter
-  transmissions: VehicleModelFilterVehicleTransmissionFilter
-  engines: VehicleModelFilterVehicleEngineFilter
-  bodies: VehicleModelFilterVehicleModelBodyFilter
-}
-
-input VehicleModelFilterVehicleBrandFilter {
-  and: [VehicleModelFilterVehicleBrandFilter!]
-  or: [VehicleModelFilterVehicleBrandFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  endYear: IntFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelFilterVehicleModelFilter {
-  and: [VehicleModelFilterVehicleModelFilter!]
-  or: [VehicleModelFilterVehicleModelFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelFilterVehicleTransmissionFilter {
-  and: [VehicleModelFilterVehicleTransmissionFilter!]
-  or: [VehicleModelFilterVehicleTransmissionFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelFilterVehicleEngineFilter {
-  and: [VehicleModelFilterVehicleEngineFilter!]
-  or: [VehicleModelFilterVehicleEngineFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelFilterVehicleModelBodyFilter {
-  and: [VehicleModelFilterVehicleModelBodyFilter!]
-  or: [VehicleModelFilterVehicleModelBodyFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input VehicleModelSort {
-  field: VehicleModelSortFields!
-  direction: SortDirection!
-  nulls: SortNulls
-}
-
-enum VehicleModelSortFields {
-  name
-  startYear
-  id
-  endYear
   createdAt
   updatedAt
   deletedAt
@@ -8809,44 +8549,31 @@ type Mutation {
   updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
   deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
   deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
-  createOneVehicleBody(input: CreateOneVehicleBodyInput!): VehicleBody!
-  createManyVehicleBodies(input: CreateManyVehicleBodiesInput!): [VehicleBody!]!
-  updateOneVehicleBody(input: UpdateOneVehicleBodyInput!): VehicleBody!
-  updateManyVehicleBodies(input: UpdateManyVehicleBodiesInput!): UpdateManyResponse!
-  deleteOneVehicleBody(input: DeleteOneVehicleBodyInput!): VehicleBodyDeleteResponse!
-  deleteManyVehicleBodies(input: DeleteManyVehicleBodiesInput!): DeleteManyResponse!
+  createOneVehicleBaseModel(input: CreateOneVehicleBaseModelInput!): VehicleBaseModel!
+  createManyVehicleBaseModels(input: CreateManyVehicleBaseModelsInput!): [VehicleBaseModel!]!
+  updateOneVehicleBaseModel(input: UpdateOneVehicleBaseModelInput!): VehicleBaseModel!
+  updateManyVehicleBaseModels(input: UpdateManyVehicleBaseModelsInput!): UpdateManyResponse!
+  deleteOneVehicleBaseModel(input: DeleteOneVehicleBaseModelInput!): VehicleBaseModelDeleteResponse!
+  deleteManyVehicleBaseModels(input: DeleteManyVehicleBaseModelsInput!): DeleteManyResponse!
   createOneVehicleBrand(input: CreateOneVehicleBrandInput!): VehicleBrand!
   createManyVehicleBrands(input: CreateManyVehicleBrandsInput!): [VehicleBrand!]!
   updateOneVehicleBrand(input: UpdateOneVehicleBrandInput!): VehicleBrand!
   updateManyVehicleBrands(input: UpdateManyVehicleBrandsInput!): UpdateManyResponse!
   deleteOneVehicleBrand(input: DeleteOneVehicleBrandInput!): VehicleBrandDeleteResponse!
   deleteManyVehicleBrands(input: DeleteManyVehicleBrandsInput!): DeleteManyResponse!
-  createOneVehicleEngine(input: CreateOneVehicleEngineInput!): VehicleEngine!
-  createManyVehicleEngines(input: CreateManyVehicleEnginesInput!): [VehicleEngine!]!
-  updateOneVehicleEngine(input: UpdateOneVehicleEngineInput!): VehicleEngine!
-  updateManyVehicleEngines(input: UpdateManyVehicleEnginesInput!): UpdateManyResponse!
-  deleteOneVehicleEngine(input: DeleteOneVehicleEngineInput!): VehicleEngineDeleteResponse!
-  deleteManyVehicleEngines(input: DeleteManyVehicleEnginesInput!): DeleteManyResponse!
-  createOneVehicleModelBody(input: CreateOneVehicleModelBodyInput!): VehicleModelBody!
-  createManyVehicleModelBodies(input: CreateManyVehicleModelBodiesInput!): [VehicleModelBody!]!
-  updateOneVehicleModelBody(input: UpdateOneVehicleModelBodyInput!): VehicleModelBody!
-  updateManyVehicleModelBodies(input: UpdateManyVehicleModelBodiesInput!): UpdateManyResponse!
-  deleteOneVehicleModelBody(input: DeleteOneVehicleModelBodyInput!): VehicleModelBodyDeleteResponse!
-  deleteManyVehicleModelBodies(input: DeleteManyVehicleModelBodiesInput!): DeleteManyResponse!
-  addBodiesToVehicleModel(input: AddBodiesToVehicleModelInput!): VehicleModel!
-  setBodiesOnVehicleModel(input: SetBodiesOnVehicleModelInput!): VehicleModel!
+  setBodyOnVehicleModel(input: SetBodyOnVehicleModelInput!): VehicleModel!
   createOneVehicleModel(input: CreateOneVehicleModelInput!): VehicleModel!
   createManyVehicleModels(input: CreateManyVehicleModelsInput!): [VehicleModel!]!
   updateOneVehicleModel(input: UpdateOneVehicleModelInput!): VehicleModel!
   updateManyVehicleModels(input: UpdateManyVehicleModelsInput!): UpdateManyResponse!
   deleteOneVehicleModel(input: DeleteOneVehicleModelInput!): VehicleModelDeleteResponse!
   deleteManyVehicleModels(input: DeleteManyVehicleModelsInput!): DeleteManyResponse!
-  createOneVehicleTransmission(input: CreateOneVehicleTransmissionInput!): VehicleTransmission!
-  createManyVehicleTransmissions(input: CreateManyVehicleTransmissionsInput!): [VehicleTransmission!]!
-  updateOneVehicleTransmission(input: UpdateOneVehicleTransmissionInput!): VehicleTransmission!
-  updateManyVehicleTransmissions(input: UpdateManyVehicleTransmissionsInput!): UpdateManyResponse!
-  deleteOneVehicleTransmission(input: DeleteOneVehicleTransmissionInput!): VehicleTransmissionDeleteResponse!
-  deleteManyVehicleTransmissions(input: DeleteManyVehicleTransmissionsInput!): DeleteManyResponse!
+  createOneVehicleBody(input: CreateOneVehicleBodyInput!): VehicleBody!
+  createManyVehicleBodies(input: CreateManyVehicleBodiesInput!): [VehicleBody!]!
+  updateOneVehicleBody(input: UpdateOneVehicleBodyInput!): VehicleBody!
+  updateManyVehicleBodies(input: UpdateManyVehicleBodiesInput!): UpdateManyResponse!
+  deleteOneVehicleBody(input: DeleteOneVehicleBodyInput!): VehicleBodyDeleteResponse!
+  deleteManyVehicleBodies(input: DeleteManyVehicleBodiesInput!): DeleteManyResponse!
   createOneServiceLogBill(input: CreateOneServiceLogBillInput!): ServiceLogBill!
   createManyServiceLogBills(input: CreateManyServiceLogBillsInput!): [ServiceLogBill!]!
   updateOneServiceLogBill(input: UpdateOneServiceLogBillInput!): ServiceLogBill!
@@ -10650,9 +10377,6 @@ input UserVehicleDTO {
   metadata: JSON
   owner: ID
   model: ID
-  body: ID
-  engine: ID
-  transmission: ID
 }
 
 input CreateManyUserVehiclesInput {
@@ -10784,6 +10508,235 @@ input UserDeleteFilter {
   deletedAt: DateFieldComparison
 }
 
+input CreateOneVehicleBaseModelInput {
+  """The record to create"""
+  vehicleBaseModel: VehicleBaseModelDTO!
+}
+
+input VehicleBaseModelDTO {
+  refId: String
+  name: String!
+  image: String
+  metadata: JSON
+  brand: ID!
+  parent: ID
+}
+
+input CreateManyVehicleBaseModelsInput {
+  """Array of records to create"""
+  vehicleBaseModels: [VehicleBaseModelDTO!]!
+}
+
+input UpdateOneVehicleBaseModelInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: VehicleBaseModelDTO!
+}
+
+input UpdateManyVehicleBaseModelsInput {
+  """Filter used to find fields to update"""
+  filter: VehicleBaseModelUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: VehicleBaseModelDTO!
+}
+
+input VehicleBaseModelUpdateFilter {
+  and: [VehicleBaseModelUpdateFilter!]
+  or: [VehicleBaseModelUpdateFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneVehicleBaseModelInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyVehicleBaseModelsInput {
+  """Filter to find records to delete"""
+  filter: VehicleBaseModelDeleteFilter!
+}
+
+input VehicleBaseModelDeleteFilter {
+  and: [VehicleBaseModelDeleteFilter!]
+  or: [VehicleBaseModelDeleteFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input CreateOneVehicleBrandInput {
+  """The record to create"""
+  vehicleBrand: VehicleBrandDTO!
+}
+
+input VehicleBrandDTO {
+  name: String!
+  logo: String
+  metadata: JSON
+}
+
+input CreateManyVehicleBrandsInput {
+  """Array of records to create"""
+  vehicleBrands: [VehicleBrandDTO!]!
+}
+
+input UpdateOneVehicleBrandInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: VehicleBrandDTO!
+}
+
+input UpdateManyVehicleBrandsInput {
+  """Filter used to find fields to update"""
+  filter: VehicleBrandUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: VehicleBrandDTO!
+}
+
+input VehicleBrandUpdateFilter {
+  and: [VehicleBrandUpdateFilter!]
+  or: [VehicleBrandUpdateFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneVehicleBrandInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyVehicleBrandsInput {
+  """Filter to find records to delete"""
+  filter: VehicleBrandDeleteFilter!
+}
+
+input VehicleBrandDeleteFilter {
+  and: [VehicleBrandDeleteFilter!]
+  or: [VehicleBrandDeleteFilter!]
+  name: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input SetBodyOnVehicleModelInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input CreateOneVehicleModelInput {
+  """The record to create"""
+  vehicleModel: VehicleModelDTO!
+}
+
+input VehicleModelDTO {
+  refId: String
+  name: String!
+  startYear: Int
+  endYear: Int
+  drive: String
+  engineType: String
+  fuelType: String
+  maxPower: String
+  maxTorque: String
+  transmission: String
+  images: [String!]
+  metadata: JSON
+  brand: ID!
+  baseModel: ID
+  body: ID
+}
+
+input CreateManyVehicleModelsInput {
+  """Array of records to create"""
+  vehicleModels: [VehicleModelDTO!]!
+}
+
+input UpdateOneVehicleModelInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: VehicleModelDTO!
+}
+
+input UpdateManyVehicleModelsInput {
+  """Filter used to find fields to update"""
+  filter: VehicleModelUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: VehicleModelDTO!
+}
+
+input VehicleModelUpdateFilter {
+  and: [VehicleModelUpdateFilter!]
+  or: [VehicleModelUpdateFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
+input DeleteOneVehicleModelInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyVehicleModelsInput {
+  """Filter to find records to delete"""
+  filter: VehicleModelDeleteFilter!
+}
+
+input VehicleModelDeleteFilter {
+  and: [VehicleModelDeleteFilter!]
+  or: [VehicleModelDeleteFilter!]
+  refId: StringFieldComparison
+  name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
+  drive: StringFieldComparison
+  engineType: StringFieldComparison
+  fuelType: StringFieldComparison
+  maxPower: StringFieldComparison
+  maxTorque: StringFieldComparison
+  transmission: StringFieldComparison
+  id: IDFilterComparison
+  createdAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+  deletedAt: DateFieldComparison
+}
+
 input CreateOneVehicleBodyInput {
   """The record to create"""
   vehicleBody: VehicleBodyDTO!
@@ -10838,343 +10791,6 @@ input DeleteManyVehicleBodiesInput {
 input VehicleBodyDeleteFilter {
   and: [VehicleBodyDeleteFilter!]
   or: [VehicleBodyDeleteFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CreateOneVehicleBrandInput {
-  """The record to create"""
-  vehicleBrand: VehicleBrandDTO!
-}
-
-input VehicleBrandDTO {
-  name: String!
-  startYear: Int
-  endYear: Int
-  logo: String
-  metadata: JSON
-}
-
-input CreateManyVehicleBrandsInput {
-  """Array of records to create"""
-  vehicleBrands: [VehicleBrandDTO!]!
-}
-
-input UpdateOneVehicleBrandInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: VehicleBrandDTO!
-}
-
-input UpdateManyVehicleBrandsInput {
-  """Filter used to find fields to update"""
-  filter: VehicleBrandUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: VehicleBrandDTO!
-}
-
-input VehicleBrandUpdateFilter {
-  and: [VehicleBrandUpdateFilter!]
-  or: [VehicleBrandUpdateFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  endYear: IntFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneVehicleBrandInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyVehicleBrandsInput {
-  """Filter to find records to delete"""
-  filter: VehicleBrandDeleteFilter!
-}
-
-input VehicleBrandDeleteFilter {
-  and: [VehicleBrandDeleteFilter!]
-  or: [VehicleBrandDeleteFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  endYear: IntFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CreateOneVehicleEngineInput {
-  """The record to create"""
-  vehicleEngine: VehicleEngineDTO!
-}
-
-input VehicleEngineDTO {
-  name: String!
-  metadata: JSON
-}
-
-input CreateManyVehicleEnginesInput {
-  """Array of records to create"""
-  vehicleEngines: [VehicleEngineDTO!]!
-}
-
-input UpdateOneVehicleEngineInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: VehicleEngineDTO!
-}
-
-input UpdateManyVehicleEnginesInput {
-  """Filter used to find fields to update"""
-  filter: VehicleEngineUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: VehicleEngineDTO!
-}
-
-input VehicleEngineUpdateFilter {
-  and: [VehicleEngineUpdateFilter!]
-  or: [VehicleEngineUpdateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneVehicleEngineInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyVehicleEnginesInput {
-  """Filter to find records to delete"""
-  filter: VehicleEngineDeleteFilter!
-}
-
-input VehicleEngineDeleteFilter {
-  and: [VehicleEngineDeleteFilter!]
-  or: [VehicleEngineDeleteFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CreateOneVehicleModelBodyInput {
-  """The record to create"""
-  vehicleModelBody: VehicleModelBodyDTO!
-}
-
-input VehicleModelBodyDTO {
-  picture: String
-  model: VehicleModelDTO!
-  body: VehicleBodyDTO!
-}
-
-input VehicleModelDTO {
-  name: String!
-  startYear: Int!
-  metadata: JSON
-  brand: ID!
-  parent: ID!
-  bodies: [VehicleModelBodyDTO!]!
-  engines: [ID!]!
-  transmissions: [ID!]!
-}
-
-input CreateManyVehicleModelBodiesInput {
-  """Array of records to create"""
-  vehicleModelBodies: [VehicleModelBodyDTO!]!
-}
-
-input UpdateOneVehicleModelBodyInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: VehicleModelBodyDTO!
-}
-
-input UpdateManyVehicleModelBodiesInput {
-  """Filter used to find fields to update"""
-  filter: VehicleModelBodyUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: VehicleModelBodyDTO!
-}
-
-input VehicleModelBodyUpdateFilter {
-  and: [VehicleModelBodyUpdateFilter!]
-  or: [VehicleModelBodyUpdateFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneVehicleModelBodyInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyVehicleModelBodiesInput {
-  """Filter to find records to delete"""
-  filter: VehicleModelBodyDeleteFilter!
-}
-
-input VehicleModelBodyDeleteFilter {
-  and: [VehicleModelBodyDeleteFilter!]
-  or: [VehicleModelBodyDeleteFilter!]
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input AddBodiesToVehicleModelInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input SetBodiesOnVehicleModelInput {
-  """The id of the record."""
-  id: ID!
-
-  """The ids of the relations."""
-  relationIds: [ID!]!
-}
-
-input CreateOneVehicleModelInput {
-  """The record to create"""
-  vehicleModel: VehicleModelDTO!
-}
-
-input CreateManyVehicleModelsInput {
-  """Array of records to create"""
-  vehicleModels: [VehicleModelDTO!]!
-}
-
-input UpdateOneVehicleModelInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: VehicleModelDTO!
-}
-
-input UpdateManyVehicleModelsInput {
-  """Filter used to find fields to update"""
-  filter: VehicleModelUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: VehicleModelDTO!
-}
-
-input VehicleModelUpdateFilter {
-  and: [VehicleModelUpdateFilter!]
-  or: [VehicleModelUpdateFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneVehicleModelInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyVehicleModelsInput {
-  """Filter to find records to delete"""
-  filter: VehicleModelDeleteFilter!
-}
-
-input VehicleModelDeleteFilter {
-  and: [VehicleModelDeleteFilter!]
-  or: [VehicleModelDeleteFilter!]
-  name: StringFieldComparison
-  startYear: IntFieldComparison
-  id: IDFilterComparison
-  endYear: IntFieldComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input CreateOneVehicleTransmissionInput {
-  """The record to create"""
-  vehicleTransmission: VehicleTransmissionDTO!
-}
-
-input VehicleTransmissionDTO {
-  name: String!
-  metadata: JSON
-}
-
-input CreateManyVehicleTransmissionsInput {
-  """Array of records to create"""
-  vehicleTransmissions: [VehicleTransmissionDTO!]!
-}
-
-input UpdateOneVehicleTransmissionInput {
-  """The id of the record to update"""
-  id: ID!
-
-  """The update to apply."""
-  update: VehicleTransmissionDTO!
-}
-
-input UpdateManyVehicleTransmissionsInput {
-  """Filter used to find fields to update"""
-  filter: VehicleTransmissionUpdateFilter!
-
-  """The update to apply to all records found using the filter"""
-  update: VehicleTransmissionDTO!
-}
-
-input VehicleTransmissionUpdateFilter {
-  and: [VehicleTransmissionUpdateFilter!]
-  or: [VehicleTransmissionUpdateFilter!]
-  name: StringFieldComparison
-  id: IDFilterComparison
-  createdAt: DateFieldComparison
-  updatedAt: DateFieldComparison
-  deletedAt: DateFieldComparison
-}
-
-input DeleteOneVehicleTransmissionInput {
-  """The id of the record to delete."""
-  id: ID!
-}
-
-input DeleteManyVehicleTransmissionsInput {
-  """Filter to find records to delete"""
-  filter: VehicleTransmissionDeleteFilter!
-}
-
-input VehicleTransmissionDeleteFilter {
-  and: [VehicleTransmissionDeleteFilter!]
-  or: [VehicleTransmissionDeleteFilter!]
   name: StringFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison

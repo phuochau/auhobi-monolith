@@ -210,7 +210,10 @@ const VehicleInput =  React.forwardRef<
 
             {custom &&
                 <Input
-                    placeholder="e.g: BMW 520i 2016 LCI"
+                    placeholder="Custom model (e.g: BMW 520i 2016 LCI)"
+                    value={value?.customModel}
+                    onChangeText={(text) => onValueChange('customModel', text)}
+                    onBlur={onBlur}
                 />}
 
             <View className="text-center flex flex-row items-center">

@@ -31,7 +31,7 @@ class BaseClass extends BaseEntity {
  */
 @ObjectType()
 @FilterableRelation('brand', () => VehicleBrand)
-@FilterableRelation('parent', () => VehicleBaseModel)
+@FilterableRelation('parent', () => VehicleBaseModel, { nullable: true })
 @Entity({ name: `${TABLE_PREFIX}_base_models` })
 export class VehicleBaseModel extends BaseClass {
   @FilterableField(() => ID)
