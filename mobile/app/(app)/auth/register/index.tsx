@@ -17,9 +17,9 @@ import { GraphQLAPI } from "@/graphql/api"
 import { ErrorCodes } from "@/graphql/gql/generated-models"
 import React from "react"
 import { Separator } from "@/components/ui/separator"
-import { FacebookSignInButton } from "@/components/ui/facebook-signin-button"
-import { GoogleSignInButton } from "@/components/ui/google-signin-button"
-import { AppleSignInButton } from "@/components/ui/apple-signin-button"
+import { FacebookSignInButton } from "@/components/rich/auth/facebook-signin-button"
+import { GoogleSignInButton } from "@/components/rich/auth/google-signin-button"
+import { AppleSignInButton } from "@/components/rich/auth/apple-signin-button"
 
 const formSchema = z.object({
   email: z

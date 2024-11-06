@@ -1,6 +1,6 @@
 import { Text } from '@/components/ui/text'
 import { Button } from "@/components/ui/button"
-import { useForm, Controller } from "react-hook-form"
+import { useForm, Controller, FieldError } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Input } from "@/components/ui/input"
@@ -12,14 +12,14 @@ import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { addVehicleAsync } from '@/store/user/actions/add-vehicle-async.action'
 import { View } from 'react-native'
+import { VehicleInput } from '../form-fields/vehicle-input'
+import { Image } from 'react-native'
  
 const formSchema = z.object({
   name: z
     .string()
     .min(1, { message: 'Must have at least 1 character' }),
-  customModel: z
-    .string()
-    .min(1, { message: 'Must have at least 1 character' })
+  vehicle: z.any()
 })
 
 export type AddVehicleProps = {
@@ -39,8 +39,7 @@ const AddVehicle = (props: AddVehicleProps) => {
     } = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        name: '',
-        customModel: ''
+        name: ''
       }
     })
  
@@ -59,6 +58,13 @@ const AddVehicle = (props: AddVehicleProps) => {
     
     return (
       <View className='gap-4'>
+        <View className='flex flex-col items-center justify-center py-12'>
+          <Image
+            className='w-full h-24'
+            source={require('@/assets/icons/car-side-view.png')}
+            resizeMode='contain'
+          />
+        </View>
         <GraphQLError nativeID="AddVehicleError" response={response}></GraphQLError>
         <Controller
           control={control}
@@ -77,16 +83,15 @@ const AddVehicle = (props: AddVehicleProps) => {
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              placeholder="e.g: BMW 520i 2016 LCI"
+            <VehicleInput
               onBlur={onBlur}
-              onChangeText={onChange}
+              onChange={onChange}
               value={value}
             />
           )}
-          name="customModel"
+          name="vehicle"
         />
-        <FormMessage nativeID="CustomModelError" error={errors.customModel}></FormMessage>
+        <FormMessage nativeID="VehicleError" error={errors.vehicle as FieldError}></FormMessage>
 
         <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
           <Text>Add Car</Text>

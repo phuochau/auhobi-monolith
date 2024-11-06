@@ -17,9 +17,9 @@ import { loginAsync } from "@/store/user/actions/login-async.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { Navigation } from "@/lib/navigation"
 import React from "react"
-import { GoogleSignInButton } from "@/components/ui/google-signin-button"
-import { FacebookSignInButton } from "@/components/ui/facebook-signin-button"
-import { AppleSignInButton } from "@/components/ui/apple-signin-button"
+import { GoogleSignInButton } from "@/components/rich/auth/google-signin-button"
+import { FacebookSignInButton } from "@/components/rich/auth/facebook-signin-button"
+import { AppleSignInButton } from "@/components/rich/auth/apple-signin-button"
 import { Separator } from "@/components/ui/separator"
 
 const formSchema = z.object({

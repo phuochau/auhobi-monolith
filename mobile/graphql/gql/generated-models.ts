@@ -92,18 +92,15 @@ export type AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserA
 
 export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter>>;
-  body?: InputMaybe<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   customModel?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  engine?: InputMaybe<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter>;
   id?: InputMaybe<IdFilterComparison>;
   model?: InputMaybe<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter>>;
   owner?: InputMaybe<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter>;
   status?: InputMaybe<UserVechileStatusFilterComparison>;
-  transmission?: InputMaybe<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -118,44 +115,22 @@ export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterU
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter = {
-  and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
 export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter = {
-  and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter = {
-  and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter>>;
+  transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -324,18 +299,15 @@ export type AccountFilterUserFilterAccountFilterUserFilter = {
 
 export type AccountFilterUserFilterUserVehicleFilter = {
   and?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilter>>;
-  body?: InputMaybe<AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   customModel?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  engine?: InputMaybe<AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter>;
   id?: InputMaybe<IdFilterComparison>;
   model?: InputMaybe<AccountFilterUserFilterUserVehicleFilterVehicleModelFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilter>>;
   owner?: InputMaybe<AccountFilterUserFilterUserVehicleFilterUserFilter>;
   status?: InputMaybe<UserVechileStatusFilterComparison>;
-  transmission?: InputMaybe<AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -350,44 +322,22 @@ export type AccountFilterUserFilterUserVehicleFilterUserFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter = {
-  and?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter = {
-  and?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
 export type AccountFilterUserFilterUserVehicleFilterVehicleModelFilter = {
   and?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleModelFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleModelFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter = {
-  and?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter>>;
+  transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -933,13 +883,6 @@ export type AddBillsToServiceLogInput = {
   relationIds: Array<Scalars['ID']['input']>;
 };
 
-export type AddBodiesToVehicleModelInput = {
-  /** The id of the record. */
-  id: Scalars['ID']['input'];
-  /** The ids of the relations. */
-  relationIds: Array<Scalars['ID']['input']>;
-};
-
 export type AddBranchesToOrgInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
@@ -1399,6 +1342,11 @@ export type CreateManyUsersInput = {
   users: Array<UserDto>;
 };
 
+export type CreateManyVehicleBaseModelsInput = {
+  /** Array of records to create */
+  vehicleBaseModels: Array<VehicleBaseModelDto>;
+};
+
 export type CreateManyVehicleBodiesInput = {
   /** Array of records to create */
   vehicleBodies: Array<VehicleBodyDto>;
@@ -1409,24 +1357,9 @@ export type CreateManyVehicleBrandsInput = {
   vehicleBrands: Array<VehicleBrandDto>;
 };
 
-export type CreateManyVehicleEnginesInput = {
-  /** Array of records to create */
-  vehicleEngines: Array<VehicleEngineDto>;
-};
-
-export type CreateManyVehicleModelBodiesInput = {
-  /** Array of records to create */
-  vehicleModelBodies: Array<VehicleModelBodyDto>;
-};
-
 export type CreateManyVehicleModelsInput = {
   /** Array of records to create */
   vehicleModels: Array<VehicleModelDto>;
-};
-
-export type CreateManyVehicleTransmissionsInput = {
-  /** Array of records to create */
-  vehicleTransmissions: Array<VehicleTransmissionDto>;
 };
 
 export type CreateOneAccountInput = {
@@ -1554,6 +1487,11 @@ export type CreateOneUserVehicleInput = {
   userVehicle: UserVehicleDto;
 };
 
+export type CreateOneVehicleBaseModelInput = {
+  /** The record to create */
+  vehicleBaseModel: VehicleBaseModelDto;
+};
+
 export type CreateOneVehicleBodyInput = {
   /** The record to create */
   vehicleBody: VehicleBodyDto;
@@ -1564,24 +1502,9 @@ export type CreateOneVehicleBrandInput = {
   vehicleBrand: VehicleBrandDto;
 };
 
-export type CreateOneVehicleEngineInput = {
-  /** The record to create */
-  vehicleEngine: VehicleEngineDto;
-};
-
-export type CreateOneVehicleModelBodyInput = {
-  /** The record to create */
-  vehicleModelBody: VehicleModelBodyDto;
-};
-
 export type CreateOneVehicleModelInput = {
   /** The record to create */
   vehicleModel: VehicleModelDto;
-};
-
-export type CreateOneVehicleTransmissionInput = {
-  /** The record to create */
-  vehicleTransmission: VehicleTransmissionDto;
 };
 
 export type CursorPaging = {
@@ -2207,6 +2130,11 @@ export type DeleteManyUsersInput = {
   filter: UserDeleteFilter;
 };
 
+export type DeleteManyVehicleBaseModelsInput = {
+  /** Filter to find records to delete */
+  filter: VehicleBaseModelDeleteFilter;
+};
+
 export type DeleteManyVehicleBodiesInput = {
   /** Filter to find records to delete */
   filter: VehicleBodyDeleteFilter;
@@ -2217,24 +2145,9 @@ export type DeleteManyVehicleBrandsInput = {
   filter: VehicleBrandDeleteFilter;
 };
 
-export type DeleteManyVehicleEnginesInput = {
-  /** Filter to find records to delete */
-  filter: VehicleEngineDeleteFilter;
-};
-
-export type DeleteManyVehicleModelBodiesInput = {
-  /** Filter to find records to delete */
-  filter: VehicleModelBodyDeleteFilter;
-};
-
 export type DeleteManyVehicleModelsInput = {
   /** Filter to find records to delete */
   filter: VehicleModelDeleteFilter;
-};
-
-export type DeleteManyVehicleTransmissionsInput = {
-  /** Filter to find records to delete */
-  filter: VehicleTransmissionDeleteFilter;
 };
 
 export type DeleteOneAccountInput = {
@@ -2362,6 +2275,11 @@ export type DeleteOneUserVehicleInput = {
   id: Scalars['ID']['input'];
 };
 
+export type DeleteOneVehicleBaseModelInput = {
+  /** The id of the record to delete. */
+  id: Scalars['ID']['input'];
+};
+
 export type DeleteOneVehicleBodyInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
@@ -2372,22 +2290,7 @@ export type DeleteOneVehicleBrandInput = {
   id: Scalars['ID']['input'];
 };
 
-export type DeleteOneVehicleEngineInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
-export type DeleteOneVehicleModelBodyInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
 export type DeleteOneVehicleModelInput = {
-  /** The id of the record to delete. */
-  id: Scalars['ID']['input'];
-};
-
-export type DeleteOneVehicleTransmissionInput = {
   /** The id of the record to delete. */
   id: Scalars['ID']['input'];
 };
@@ -3039,7 +2942,6 @@ export type Mutation = {
   __typename?: 'Mutation';
   addAddressesToCustomer: Customer;
   addBillsToServiceLog: ServiceLog;
-  addBodiesToVehicleModel: VehicleModel;
   addBranchesToOrg: Org;
   addMembersToOrg: Org;
   addMembersToOrgBranch: OrgBranch;
@@ -3088,12 +2990,10 @@ export type Mutation = {
   createManyShops: Array<Shop>;
   createManyUserVehicles: Array<UserVehicle>;
   createManyUsers: Array<User>;
+  createManyVehicleBaseModels: Array<VehicleBaseModel>;
   createManyVehicleBodies: Array<VehicleBody>;
   createManyVehicleBrands: Array<VehicleBrand>;
-  createManyVehicleEngines: Array<VehicleEngine>;
-  createManyVehicleModelBodies: Array<VehicleModelBody>;
   createManyVehicleModels: Array<VehicleModel>;
-  createManyVehicleTransmissions: Array<VehicleTransmission>;
   createOneAccount: Account;
   createOneAccountPasswordReset: AccountPasswordReset;
   createOneAccountVerfication: AccountVerfication;
@@ -3119,12 +3019,10 @@ export type Mutation = {
   createOneShopMember: ShopMember;
   createOneUser: User;
   createOneUserVehicle: UserVehicle;
+  createOneVehicleBaseModel: VehicleBaseModel;
   createOneVehicleBody: VehicleBody;
   createOneVehicleBrand: VehicleBrand;
-  createOneVehicleEngine: VehicleEngine;
   createOneVehicleModel: VehicleModel;
-  createOneVehicleModelBody: VehicleModelBody;
-  createOneVehicleTransmission: VehicleTransmission;
   deleteManyAccountPasswordResets: DeleteManyResponse;
   deleteManyAccountVerfications: DeleteManyResponse;
   deleteManyAccounts: DeleteManyResponse;
@@ -3150,12 +3048,10 @@ export type Mutation = {
   deleteManyShops: DeleteManyResponse;
   deleteManyUserVehicles: DeleteManyResponse;
   deleteManyUsers: DeleteManyResponse;
+  deleteManyVehicleBaseModels: DeleteManyResponse;
   deleteManyVehicleBodies: DeleteManyResponse;
   deleteManyVehicleBrands: DeleteManyResponse;
-  deleteManyVehicleEngines: DeleteManyResponse;
-  deleteManyVehicleModelBodies: DeleteManyResponse;
   deleteManyVehicleModels: DeleteManyResponse;
-  deleteManyVehicleTransmissions: DeleteManyResponse;
   deleteOneAccount: AccountDeleteResponse;
   deleteOneAccountPasswordReset: AccountPasswordResetDeleteResponse;
   deleteOneAccountVerfication: AccountVerficationDeleteResponse;
@@ -3181,16 +3077,14 @@ export type Mutation = {
   deleteOneShopMember: ShopMemberDeleteResponse;
   deleteOneUser: UserDeleteResponse;
   deleteOneUserVehicle: UserVehicleDeleteResponse;
+  deleteOneVehicleBaseModel: VehicleBaseModelDeleteResponse;
   deleteOneVehicleBody: VehicleBodyDeleteResponse;
   deleteOneVehicleBrand: VehicleBrandDeleteResponse;
-  deleteOneVehicleEngine: VehicleEngineDeleteResponse;
   deleteOneVehicleModel: VehicleModelDeleteResponse;
-  deleteOneVehicleModelBody: VehicleModelBodyDeleteResponse;
-  deleteOneVehicleTransmission: VehicleTransmissionDeleteResponse;
   productImportByFile: Array<Product>;
   setAddressesOnCustomer: Customer;
   setBillsOnServiceLog: ServiceLog;
-  setBodiesOnVehicleModel: VehicleModel;
+  setBodyOnVehicleModel: VehicleModel;
   setBranchesOnOrg: Org;
   setGarageOnServiceLog: ServiceLog;
   setMembersOnOrg: Org;
@@ -3233,12 +3127,10 @@ export type Mutation = {
   updateManyShops: UpdateManyResponse;
   updateManyUserVehicles: UpdateManyResponse;
   updateManyUsers: UpdateManyResponse;
+  updateManyVehicleBaseModels: UpdateManyResponse;
   updateManyVehicleBodies: UpdateManyResponse;
   updateManyVehicleBrands: UpdateManyResponse;
-  updateManyVehicleEngines: UpdateManyResponse;
-  updateManyVehicleModelBodies: UpdateManyResponse;
   updateManyVehicleModels: UpdateManyResponse;
-  updateManyVehicleTransmissions: UpdateManyResponse;
   updateOneAccount: Account;
   updateOneAccountPasswordReset: AccountPasswordReset;
   updateOneAccountVerfication: AccountVerfication;
@@ -3264,12 +3156,10 @@ export type Mutation = {
   updateOneShopMember: ShopMember;
   updateOneUser: User;
   updateOneUserVehicle: UserVehicle;
+  updateOneVehicleBaseModel: VehicleBaseModel;
   updateOneVehicleBody: VehicleBody;
   updateOneVehicleBrand: VehicleBrand;
-  updateOneVehicleEngine: VehicleEngine;
   updateOneVehicleModel: VehicleModel;
-  updateOneVehicleModelBody: VehicleModelBody;
-  updateOneVehicleTransmission: VehicleTransmission;
 };
 
 
@@ -3280,11 +3170,6 @@ export type MutationAddAddressesToCustomerArgs = {
 
 export type MutationAddBillsToServiceLogArgs = {
   input: AddBillsToServiceLogInput;
-};
-
-
-export type MutationAddBodiesToVehicleModelArgs = {
-  input: AddBodiesToVehicleModelInput;
 };
 
 
@@ -3528,6 +3413,11 @@ export type MutationCreateManyUsersArgs = {
 };
 
 
+export type MutationCreateManyVehicleBaseModelsArgs = {
+  input: CreateManyVehicleBaseModelsInput;
+};
+
+
 export type MutationCreateManyVehicleBodiesArgs = {
   input: CreateManyVehicleBodiesInput;
 };
@@ -3538,23 +3428,8 @@ export type MutationCreateManyVehicleBrandsArgs = {
 };
 
 
-export type MutationCreateManyVehicleEnginesArgs = {
-  input: CreateManyVehicleEnginesInput;
-};
-
-
-export type MutationCreateManyVehicleModelBodiesArgs = {
-  input: CreateManyVehicleModelBodiesInput;
-};
-
-
 export type MutationCreateManyVehicleModelsArgs = {
   input: CreateManyVehicleModelsInput;
-};
-
-
-export type MutationCreateManyVehicleTransmissionsArgs = {
-  input: CreateManyVehicleTransmissionsInput;
 };
 
 
@@ -3683,6 +3558,11 @@ export type MutationCreateOneUserVehicleArgs = {
 };
 
 
+export type MutationCreateOneVehicleBaseModelArgs = {
+  input: CreateOneVehicleBaseModelInput;
+};
+
+
 export type MutationCreateOneVehicleBodyArgs = {
   input: CreateOneVehicleBodyInput;
 };
@@ -3693,23 +3573,8 @@ export type MutationCreateOneVehicleBrandArgs = {
 };
 
 
-export type MutationCreateOneVehicleEngineArgs = {
-  input: CreateOneVehicleEngineInput;
-};
-
-
 export type MutationCreateOneVehicleModelArgs = {
   input: CreateOneVehicleModelInput;
-};
-
-
-export type MutationCreateOneVehicleModelBodyArgs = {
-  input: CreateOneVehicleModelBodyInput;
-};
-
-
-export type MutationCreateOneVehicleTransmissionArgs = {
-  input: CreateOneVehicleTransmissionInput;
 };
 
 
@@ -3838,6 +3703,11 @@ export type MutationDeleteManyUsersArgs = {
 };
 
 
+export type MutationDeleteManyVehicleBaseModelsArgs = {
+  input: DeleteManyVehicleBaseModelsInput;
+};
+
+
 export type MutationDeleteManyVehicleBodiesArgs = {
   input: DeleteManyVehicleBodiesInput;
 };
@@ -3848,23 +3718,8 @@ export type MutationDeleteManyVehicleBrandsArgs = {
 };
 
 
-export type MutationDeleteManyVehicleEnginesArgs = {
-  input: DeleteManyVehicleEnginesInput;
-};
-
-
-export type MutationDeleteManyVehicleModelBodiesArgs = {
-  input: DeleteManyVehicleModelBodiesInput;
-};
-
-
 export type MutationDeleteManyVehicleModelsArgs = {
   input: DeleteManyVehicleModelsInput;
-};
-
-
-export type MutationDeleteManyVehicleTransmissionsArgs = {
-  input: DeleteManyVehicleTransmissionsInput;
 };
 
 
@@ -3993,6 +3848,11 @@ export type MutationDeleteOneUserVehicleArgs = {
 };
 
 
+export type MutationDeleteOneVehicleBaseModelArgs = {
+  input: DeleteOneVehicleBaseModelInput;
+};
+
+
 export type MutationDeleteOneVehicleBodyArgs = {
   input: DeleteOneVehicleBodyInput;
 };
@@ -4003,23 +3863,8 @@ export type MutationDeleteOneVehicleBrandArgs = {
 };
 
 
-export type MutationDeleteOneVehicleEngineArgs = {
-  input: DeleteOneVehicleEngineInput;
-};
-
-
 export type MutationDeleteOneVehicleModelArgs = {
   input: DeleteOneVehicleModelInput;
-};
-
-
-export type MutationDeleteOneVehicleModelBodyArgs = {
-  input: DeleteOneVehicleModelBodyInput;
-};
-
-
-export type MutationDeleteOneVehicleTransmissionArgs = {
-  input: DeleteOneVehicleTransmissionInput;
 };
 
 
@@ -4038,8 +3883,8 @@ export type MutationSetBillsOnServiceLogArgs = {
 };
 
 
-export type MutationSetBodiesOnVehicleModelArgs = {
-  input: SetBodiesOnVehicleModelInput;
+export type MutationSetBodyOnVehicleModelArgs = {
+  input: SetBodyOnVehicleModelInput;
 };
 
 
@@ -4253,6 +4098,11 @@ export type MutationUpdateManyUsersArgs = {
 };
 
 
+export type MutationUpdateManyVehicleBaseModelsArgs = {
+  input: UpdateManyVehicleBaseModelsInput;
+};
+
+
 export type MutationUpdateManyVehicleBodiesArgs = {
   input: UpdateManyVehicleBodiesInput;
 };
@@ -4263,23 +4113,8 @@ export type MutationUpdateManyVehicleBrandsArgs = {
 };
 
 
-export type MutationUpdateManyVehicleEnginesArgs = {
-  input: UpdateManyVehicleEnginesInput;
-};
-
-
-export type MutationUpdateManyVehicleModelBodiesArgs = {
-  input: UpdateManyVehicleModelBodiesInput;
-};
-
-
 export type MutationUpdateManyVehicleModelsArgs = {
   input: UpdateManyVehicleModelsInput;
-};
-
-
-export type MutationUpdateManyVehicleTransmissionsArgs = {
-  input: UpdateManyVehicleTransmissionsInput;
 };
 
 
@@ -4408,6 +4243,11 @@ export type MutationUpdateOneUserVehicleArgs = {
 };
 
 
+export type MutationUpdateOneVehicleBaseModelArgs = {
+  input: UpdateOneVehicleBaseModelInput;
+};
+
+
 export type MutationUpdateOneVehicleBodyArgs = {
   input: UpdateOneVehicleBodyInput;
 };
@@ -4418,23 +4258,8 @@ export type MutationUpdateOneVehicleBrandArgs = {
 };
 
 
-export type MutationUpdateOneVehicleEngineArgs = {
-  input: UpdateOneVehicleEngineInput;
-};
-
-
 export type MutationUpdateOneVehicleModelArgs = {
   input: UpdateOneVehicleModelInput;
-};
-
-
-export type MutationUpdateOneVehicleModelBodyArgs = {
-  input: UpdateOneVehicleModelBodyInput;
-};
-
-
-export type MutationUpdateOneVehicleTransmissionArgs = {
-  input: UpdateOneVehicleTransmissionInput;
 };
 
 export type NumberFieldComparison = {
@@ -9534,18 +9359,14 @@ export type Query = {
   userVehicleAggregate: Array<UserVehicleAggregateResponse>;
   userVehicles: UserVehicleConnection;
   users: UserConnection;
+  vehicleBaseModel: VehicleBaseModel;
+  vehicleBaseModels: VehicleBaseModelConnection;
   vehicleBodies: VehicleBodyConnection;
   vehicleBody: VehicleBody;
   vehicleBrand: VehicleBrand;
   vehicleBrands: VehicleBrandConnection;
-  vehicleEngine: VehicleEngine;
-  vehicleEngines: VehicleEngineConnection;
   vehicleModel: VehicleModel;
-  vehicleModelBodies: VehicleModelBodyConnection;
-  vehicleModelBody: VehicleModelBody;
   vehicleModels: VehicleModelConnection;
-  vehicleTransmission: VehicleTransmission;
-  vehicleTransmissions: VehicleTransmissionConnection;
 };
 
 
@@ -9974,6 +9795,18 @@ export type QueryUsersArgs = {
 };
 
 
+export type QueryVehicleBaseModelArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryVehicleBaseModelsArgs = {
+  filter?: VehicleBaseModelFilter;
+  paging?: CursorPaging;
+  sorting?: Array<VehicleBaseModelSort>;
+};
+
+
 export type QueryVehicleBodiesArgs = {
   filter?: VehicleBodyFilter;
   paging?: CursorPaging;
@@ -9998,31 +9831,7 @@ export type QueryVehicleBrandsArgs = {
 };
 
 
-export type QueryVehicleEngineArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryVehicleEnginesArgs = {
-  filter?: VehicleEngineFilter;
-  paging?: CursorPaging;
-  sorting?: Array<VehicleEngineSort>;
-};
-
-
 export type QueryVehicleModelArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryVehicleModelBodiesArgs = {
-  filter?: VehicleModelBodyFilter;
-  paging?: CursorPaging;
-  sorting?: Array<VehicleModelBodySort>;
-};
-
-
-export type QueryVehicleModelBodyArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -10031,18 +9840,6 @@ export type QueryVehicleModelsArgs = {
   filter?: VehicleModelFilter;
   paging?: CursorPaging;
   sorting?: Array<VehicleModelSort>;
-};
-
-
-export type QueryVehicleTransmissionArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryVehicleTransmissionsArgs = {
-  filter?: VehicleTransmissionFilter;
-  paging?: CursorPaging;
-  sorting?: Array<VehicleTransmissionSort>;
 };
 
 export type ServiceLog = {
@@ -10652,11 +10449,11 @@ export type SetBillsOnServiceLogInput = {
   relationIds: Array<Scalars['ID']['input']>;
 };
 
-export type SetBodiesOnVehicleModelInput = {
+export type SetBodyOnVehicleModelInput = {
   /** The id of the record. */
   id: Scalars['ID']['input'];
-  /** The ids of the relations. */
-  relationIds: Array<Scalars['ID']['input']>;
+  /** The id of relation. */
+  relationId: Scalars['ID']['input'];
 };
 
 export type SetBranchesOnOrgInput = {
@@ -11573,6 +11370,13 @@ export type UpdateManyUsersInput = {
   update: UserDto;
 };
 
+export type UpdateManyVehicleBaseModelsInput = {
+  /** Filter used to find fields to update */
+  filter: VehicleBaseModelUpdateFilter;
+  /** The update to apply to all records found using the filter */
+  update: VehicleBaseModelDto;
+};
+
 export type UpdateManyVehicleBodiesInput = {
   /** Filter used to find fields to update */
   filter: VehicleBodyUpdateFilter;
@@ -11587,32 +11391,11 @@ export type UpdateManyVehicleBrandsInput = {
   update: VehicleBrandDto;
 };
 
-export type UpdateManyVehicleEnginesInput = {
-  /** Filter used to find fields to update */
-  filter: VehicleEngineUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: VehicleEngineDto;
-};
-
-export type UpdateManyVehicleModelBodiesInput = {
-  /** Filter used to find fields to update */
-  filter: VehicleModelBodyUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: VehicleModelBodyDto;
-};
-
 export type UpdateManyVehicleModelsInput = {
   /** Filter used to find fields to update */
   filter: VehicleModelUpdateFilter;
   /** The update to apply to all records found using the filter */
   update: VehicleModelDto;
-};
-
-export type UpdateManyVehicleTransmissionsInput = {
-  /** Filter used to find fields to update */
-  filter: VehicleTransmissionUpdateFilter;
-  /** The update to apply to all records found using the filter */
-  update: VehicleTransmissionDto;
 };
 
 export type UpdateOneAccountInput = {
@@ -11790,6 +11573,13 @@ export type UpdateOneUserVehicleInput = {
   update: UserVehicleDto;
 };
 
+export type UpdateOneVehicleBaseModelInput = {
+  /** The id of the record to update */
+  id: Scalars['ID']['input'];
+  /** The update to apply. */
+  update: VehicleBaseModelDto;
+};
+
 export type UpdateOneVehicleBodyInput = {
   /** The id of the record to update */
   id: Scalars['ID']['input'];
@@ -11804,32 +11594,11 @@ export type UpdateOneVehicleBrandInput = {
   update: VehicleBrandDto;
 };
 
-export type UpdateOneVehicleEngineInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: VehicleEngineDto;
-};
-
-export type UpdateOneVehicleModelBodyInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: VehicleModelBodyDto;
-};
-
 export type UpdateOneVehicleModelInput = {
   /** The id of the record to update */
   id: Scalars['ID']['input'];
   /** The update to apply. */
   update: VehicleModelDto;
-};
-
-export type UpdateOneVehicleTransmissionInput = {
-  /** The id of the record to update */
-  id: Scalars['ID']['input'];
-  /** The update to apply. */
-  update: VehicleTransmissionDto;
 };
 
 export type User = {
@@ -12120,11 +11889,9 @@ export type UserVechileStatusFilterComparison = {
 
 export type UserVehicle = {
   __typename?: 'UserVehicle';
-  body: VehicleModelBody;
   createdAt: Scalars['DateTime']['output'];
   customModel?: Maybe<Scalars['String']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  engine: VehicleEngine;
   id: Scalars['ID']['output'];
   metadata?: Maybe<Scalars['JSON']['output']>;
   model: VehicleModel;
@@ -12132,24 +11899,20 @@ export type UserVehicle = {
   owner: User;
   picture?: Maybe<Scalars['String']['output']>;
   status?: Maybe<UserVechileStatus>;
-  transmission: VehicleTransmission;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type UserVehicleAggregateFilter = {
   and?: InputMaybe<Array<UserVehicleAggregateFilter>>;
-  body?: InputMaybe<UserVehicleAggregateFilterVehicleModelBodyAggregateFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   customModel?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  engine?: InputMaybe<UserVehicleAggregateFilterVehicleEngineAggregateFilter>;
   id?: InputMaybe<IdFilterComparison>;
   model?: InputMaybe<UserVehicleAggregateFilterVehicleModelAggregateFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserVehicleAggregateFilter>>;
   owner?: InputMaybe<UserVehicleAggregateFilterUserAggregateFilter>;
   status?: InputMaybe<UserVechileStatusFilterComparison>;
-  transmission?: InputMaybe<UserVehicleAggregateFilterVehicleTransmissionAggregateFilter>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12164,44 +11927,22 @@ export type UserVehicleAggregateFilterUserAggregateFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type UserVehicleAggregateFilterVehicleEngineAggregateFilter = {
-  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleEngineAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleEngineAggregateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
 export type UserVehicleAggregateFilterVehicleModelAggregateFilter = {
   and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelAggregateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelAggregateFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type UserVehicleAggregateFilterVehicleModelBodyAggregateFilter = {
-  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelBodyAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleModelBodyAggregateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type UserVehicleAggregateFilterVehicleTransmissionAggregateFilter = {
-  and?: InputMaybe<Array<UserVehicleAggregateFilterVehicleTransmissionAggregateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<UserVehicleAggregateFilterVehicleTransmissionAggregateFilter>>;
+  transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12261,16 +12002,13 @@ export type UserVehicleCountAggregate = {
 };
 
 export type UserVehicleDto = {
-  body?: InputMaybe<Scalars['ID']['input']>;
   customModel?: InputMaybe<Scalars['String']['input']>;
-  engine?: InputMaybe<Scalars['ID']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   model?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   owner?: InputMaybe<Scalars['ID']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<UserVechileStatus>;
-  transmission?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type UserVehicleDeleteFilter = {
@@ -12308,18 +12046,15 @@ export type UserVehicleEdge = {
 
 export type UserVehicleFilter = {
   and?: InputMaybe<Array<UserVehicleFilter>>;
-  body?: InputMaybe<UserVehicleFilterVehicleModelBodyFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   customModel?: InputMaybe<StringFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  engine?: InputMaybe<UserVehicleFilterVehicleEngineFilter>;
   id?: InputMaybe<IdFilterComparison>;
   model?: InputMaybe<UserVehicleFilterVehicleModelFilter>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserVehicleFilter>>;
   owner?: InputMaybe<UserVehicleFilterUserFilter>;
   status?: InputMaybe<UserVechileStatusFilterComparison>;
-  transmission?: InputMaybe<UserVehicleFilterVehicleTransmissionFilter>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12334,44 +12069,22 @@ export type UserVehicleFilterUserFilter = {
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
-export type UserVehicleFilterVehicleEngineFilter = {
-  and?: InputMaybe<Array<UserVehicleFilterVehicleEngineFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<UserVehicleFilterVehicleEngineFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type UserVehicleFilterVehicleModelBodyFilter = {
-  and?: InputMaybe<Array<UserVehicleFilterVehicleModelBodyFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<UserVehicleFilterVehicleModelBodyFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
 export type UserVehicleFilterVehicleModelFilter = {
   and?: InputMaybe<Array<UserVehicleFilterVehicleModelFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserVehicleFilterVehicleModelFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type UserVehicleFilterVehicleTransmissionFilter = {
-  and?: InputMaybe<Array<UserVehicleFilterVehicleTransmissionFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<UserVehicleFilterVehicleTransmissionFilter>>;
+  transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12487,6 +12200,128 @@ export type UserVehiclesMinAggregate = {
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
+export type VehicleBaseModel = {
+  __typename?: 'VehicleBaseModel';
+  brand: VehicleBrand;
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name: Scalars['String']['output'];
+  parent?: Maybe<VehicleBaseModel>;
+  refId?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleBaseModelConnection = {
+  __typename?: 'VehicleBaseModelConnection';
+  /** Array of edges. */
+  edges: Array<VehicleBaseModelEdge>;
+  /** Paging information */
+  pageInfo: PageInfo;
+};
+
+export type VehicleBaseModelDto = {
+  brand: Scalars['ID']['input'];
+  image?: InputMaybe<Scalars['String']['input']>;
+  metadata?: InputMaybe<Scalars['JSON']['input']>;
+  name: Scalars['String']['input'];
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  refId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type VehicleBaseModelDeleteFilter = {
+  and?: InputMaybe<Array<VehicleBaseModelDeleteFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBaseModelDeleteFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBaseModelDeleteResponse = {
+  __typename?: 'VehicleBaseModelDeleteResponse';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  refId?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type VehicleBaseModelEdge = {
+  __typename?: 'VehicleBaseModelEdge';
+  /** Cursor for this node. */
+  cursor: Scalars['ConnectionCursor']['output'];
+  /** The node containing the VehicleBaseModel */
+  node: VehicleBaseModel;
+};
+
+export type VehicleBaseModelFilter = {
+  and?: InputMaybe<Array<VehicleBaseModelFilter>>;
+  brand?: InputMaybe<VehicleBaseModelFilterVehicleBrandFilter>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBaseModelFilter>>;
+  parent?: InputMaybe<VehicleBaseModelFilterVehicleBaseModelFilter>;
+  refId?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBaseModelFilterVehicleBaseModelFilter = {
+  and?: InputMaybe<Array<VehicleBaseModelFilterVehicleBaseModelFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBaseModelFilterVehicleBaseModelFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBaseModelFilterVehicleBrandFilter = {
+  and?: InputMaybe<Array<VehicleBaseModelFilterVehicleBrandFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBaseModelFilterVehicleBrandFilter>>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleBaseModelSort = {
+  direction: SortDirection;
+  field: VehicleBaseModelSortFields;
+  nulls?: InputMaybe<SortNulls>;
+};
+
+export enum VehicleBaseModelSortFields {
+  CreatedAt = 'createdAt',
+  DeletedAt = 'deletedAt',
+  Id = 'id',
+  Name = 'name',
+  RefId = 'refId',
+  UpdatedAt = 'updatedAt'
+}
+
+export type VehicleBaseModelUpdateFilter = {
+  and?: InputMaybe<Array<VehicleBaseModelUpdateFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleBaseModelUpdateFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
 export type VehicleBody = {
   __typename?: 'VehicleBody';
   createdAt: Scalars['DateTime']['output'];
@@ -12576,12 +12411,10 @@ export type VehicleBrand = {
   __typename?: 'VehicleBrand';
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  endYear?: Maybe<Scalars['Int']['output']>;
   id: Scalars['ID']['output'];
   logo?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name: Scalars['String']['output'];
-  startYear?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -12594,22 +12427,18 @@ export type VehicleBrandConnection = {
 };
 
 export type VehicleBrandDto = {
-  endYear?: InputMaybe<Scalars['Int']['input']>;
   logo?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
-  startYear?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type VehicleBrandDeleteFilter = {
   and?: InputMaybe<Array<VehicleBrandDeleteFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  endYear?: InputMaybe<IntFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBrandDeleteFilter>>;
-  startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12617,12 +12446,10 @@ export type VehicleBrandDeleteResponse = {
   __typename?: 'VehicleBrandDeleteResponse';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  endYear?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   logo?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name?: Maybe<Scalars['String']['output']>;
-  startYear?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -12638,11 +12465,9 @@ export type VehicleBrandFilter = {
   and?: InputMaybe<Array<VehicleBrandFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  endYear?: InputMaybe<IntFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBrandFilter>>;
-  startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12655,10 +12480,8 @@ export type VehicleBrandSort = {
 export enum VehicleBrandSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
-  EndYear = 'endYear',
   Id = 'id',
   Name = 'name',
-  StartYear = 'startYear',
   UpdatedAt = 'updatedAt'
 }
 
@@ -12666,238 +12489,33 @@ export type VehicleBrandUpdateFilter = {
   and?: InputMaybe<Array<VehicleBrandUpdateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  endYear?: InputMaybe<IntFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBrandUpdateFilter>>;
-  startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleEngine = {
-  __typename?: 'VehicleEngine';
-  createdAt: Scalars['DateTime']['output'];
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id: Scalars['ID']['output'];
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  name: Scalars['String']['output'];
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleEngineConnection = {
-  __typename?: 'VehicleEngineConnection';
-  /** Array of edges. */
-  edges: Array<VehicleEngineEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-};
-
-export type VehicleEngineDto = {
-  metadata?: InputMaybe<Scalars['JSON']['input']>;
-  name: Scalars['String']['input'];
-};
-
-export type VehicleEngineDeleteFilter = {
-  and?: InputMaybe<Array<VehicleEngineDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleEngineDeleteFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleEngineDeleteResponse = {
-  __typename?: 'VehicleEngineDeleteResponse';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleEngineEdge = {
-  __typename?: 'VehicleEngineEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the VehicleEngine */
-  node: VehicleEngine;
-};
-
-export type VehicleEngineFilter = {
-  and?: InputMaybe<Array<VehicleEngineFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleEngineFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleEngineSort = {
-  direction: SortDirection;
-  field: VehicleEngineSortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum VehicleEngineSortFields {
-  CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
-  Id = 'id',
-  Name = 'name',
-  UpdatedAt = 'updatedAt'
-}
-
-export type VehicleEngineUpdateFilter = {
-  and?: InputMaybe<Array<VehicleEngineUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleEngineUpdateFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type VehicleModel = {
   __typename?: 'VehicleModel';
-  bodies: Array<VehicleModelBody>;
-  brand?: Maybe<VehicleBrand>;
+  baseModel: VehicleBaseModel;
+  body: VehicleBody;
+  brand: VehicleBrand;
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  drive?: Maybe<Scalars['String']['output']>;
   endYear?: Maybe<Scalars['Int']['output']>;
-  engines: Array<VehicleEngine>;
+  engineType?: Maybe<Scalars['String']['output']>;
+  fuelType?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  images?: Maybe<Array<Scalars['String']['output']>>;
+  maxPower?: Maybe<Scalars['String']['output']>;
+  maxTorque?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name: Scalars['String']['output'];
-  parent?: Maybe<VehicleModel>;
-  startYear: Scalars['Int']['output'];
-  transmissions: Array<VehicleTransmission>;
+  refId?: Maybe<Scalars['String']['output']>;
+  startYear?: Maybe<Scalars['Int']['output']>;
+  transmission?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-
-export type VehicleModelBodiesArgs = {
-  filter?: VehicleModelBodyFilter;
-  sorting?: Array<VehicleModelBodySort>;
-};
-
-
-export type VehicleModelEnginesArgs = {
-  filter?: VehicleEngineFilter;
-  sorting?: Array<VehicleEngineSort>;
-};
-
-
-export type VehicleModelTransmissionsArgs = {
-  filter?: VehicleTransmissionFilter;
-  sorting?: Array<VehicleTransmissionSort>;
-};
-
-export type VehicleModelBody = {
-  __typename?: 'VehicleModelBody';
-  body: VehicleBody;
-  createdAt: Scalars['DateTime']['output'];
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id: Scalars['ID']['output'];
-  model: VehicleModel;
-  picture?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleModelBodyConnection = {
-  __typename?: 'VehicleModelBodyConnection';
-  /** Array of edges. */
-  edges: Array<VehicleModelBodyEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-};
-
-export type VehicleModelBodyDto = {
-  body: VehicleBodyDto;
-  model: VehicleModelDto;
-  picture?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type VehicleModelBodyDeleteFilter = {
-  and?: InputMaybe<Array<VehicleModelBodyDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleModelBodyDeleteFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelBodyDeleteResponse = {
-  __typename?: 'VehicleModelBodyDeleteResponse';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  picture?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleModelBodyEdge = {
-  __typename?: 'VehicleModelBodyEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the VehicleModelBody */
-  node: VehicleModelBody;
-};
-
-export type VehicleModelBodyFilter = {
-  and?: InputMaybe<Array<VehicleModelBodyFilter>>;
-  body?: InputMaybe<VehicleModelBodyFilterVehicleBodyFilter>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  model?: InputMaybe<VehicleModelBodyFilterVehicleModelFilter>;
-  or?: InputMaybe<Array<VehicleModelBodyFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelBodyFilterVehicleBodyFilter = {
-  and?: InputMaybe<Array<VehicleModelBodyFilterVehicleBodyFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleModelBodyFilterVehicleBodyFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelBodyFilterVehicleModelFilter = {
-  and?: InputMaybe<Array<VehicleModelBodyFilterVehicleModelFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  endYear?: InputMaybe<IntFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleModelBodyFilterVehicleModelFilter>>;
-  startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelBodySort = {
-  direction: SortDirection;
-  field: VehicleModelBodySortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum VehicleModelBodySortFields {
-  CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
-  Id = 'id',
-  UpdatedAt = 'updatedAt'
-}
-
-export type VehicleModelBodyUpdateFilter = {
-  and?: InputMaybe<Array<VehicleModelBodyUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleModelBodyUpdateFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
 export type VehicleModelConnection = {
@@ -12909,25 +12527,39 @@ export type VehicleModelConnection = {
 };
 
 export type VehicleModelDto = {
-  bodies: Array<VehicleModelBodyDto>;
+  baseModel?: InputMaybe<Scalars['ID']['input']>;
+  body?: InputMaybe<Scalars['ID']['input']>;
   brand: Scalars['ID']['input'];
-  engines: Array<Scalars['ID']['input']>;
+  drive?: InputMaybe<Scalars['String']['input']>;
+  endYear?: InputMaybe<Scalars['Int']['input']>;
+  engineType?: InputMaybe<Scalars['String']['input']>;
+  fuelType?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
+  maxPower?: InputMaybe<Scalars['String']['input']>;
+  maxTorque?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
-  parent: Scalars['ID']['input'];
-  startYear: Scalars['Int']['input'];
-  transmissions: Array<Scalars['ID']['input']>;
+  refId?: InputMaybe<Scalars['String']['input']>;
+  startYear?: InputMaybe<Scalars['Int']['input']>;
+  transmission?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type VehicleModelDeleteFilter = {
   and?: InputMaybe<Array<VehicleModelDeleteFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleModelDeleteFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
+  transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12935,11 +12567,19 @@ export type VehicleModelDeleteResponse = {
   __typename?: 'VehicleModelDeleteResponse';
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  drive?: Maybe<Scalars['String']['output']>;
   endYear?: Maybe<Scalars['Int']['output']>;
+  engineType?: Maybe<Scalars['String']['output']>;
+  fuelType?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  images?: Maybe<Array<Scalars['String']['output']>>;
+  maxPower?: Maybe<Scalars['String']['output']>;
+  maxTorque?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  refId?: Maybe<Scalars['String']['output']>;
   startYear?: Maybe<Scalars['Int']['output']>;
+  transmission?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
@@ -12953,18 +12593,44 @@ export type VehicleModelEdge = {
 
 export type VehicleModelFilter = {
   and?: InputMaybe<Array<VehicleModelFilter>>;
-  bodies?: InputMaybe<VehicleModelFilterVehicleModelBodyFilter>;
+  baseModel?: InputMaybe<VehicleModelFilterVehicleBaseModelFilter>;
+  body?: InputMaybe<VehicleModelFilterVehicleBodyFilter>;
   brand?: InputMaybe<VehicleModelFilterVehicleBrandFilter>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
-  engines?: InputMaybe<VehicleModelFilterVehicleEngineFilter>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleModelFilter>>;
-  parent?: InputMaybe<VehicleModelFilterVehicleModelFilter>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
-  transmissions?: InputMaybe<VehicleModelFilterVehicleTransmissionFilter>;
+  transmission?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleBaseModelFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleBaseModelFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleBaseModelFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
+  updatedAt?: InputMaybe<DateFieldComparison>;
+};
+
+export type VehicleModelFilterVehicleBodyFilter = {
+  and?: InputMaybe<Array<VehicleModelFilterVehicleBodyFilter>>;
+  createdAt?: InputMaybe<DateFieldComparison>;
+  deletedAt?: InputMaybe<DateFieldComparison>;
+  id?: InputMaybe<IdFilterComparison>;
+  name?: InputMaybe<StringFieldComparison>;
+  or?: InputMaybe<Array<VehicleModelFilterVehicleBodyFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -12972,52 +12638,9 @@ export type VehicleModelFilterVehicleBrandFilter = {
   and?: InputMaybe<Array<VehicleModelFilterVehicleBrandFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
-  endYear?: InputMaybe<IntFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleModelFilterVehicleBrandFilter>>;
-  startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelFilterVehicleEngineFilter = {
-  and?: InputMaybe<Array<VehicleModelFilterVehicleEngineFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleModelFilterVehicleEngineFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelFilterVehicleModelBodyFilter = {
-  and?: InputMaybe<Array<VehicleModelFilterVehicleModelBodyFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  or?: InputMaybe<Array<VehicleModelFilterVehicleModelBodyFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelFilterVehicleModelFilter = {
-  and?: InputMaybe<Array<VehicleModelFilterVehicleModelFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  endYear?: InputMaybe<IntFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleModelFilterVehicleModelFilter>>;
-  startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleModelFilterVehicleTransmissionFilter = {
-  and?: InputMaybe<Array<VehicleModelFilterVehicleTransmissionFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleModelFilterVehicleTransmissionFilter>>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -13030,10 +12653,17 @@ export type VehicleModelSort = {
 export enum VehicleModelSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
+  Drive = 'drive',
   EndYear = 'endYear',
+  EngineType = 'engineType',
+  FuelType = 'fuelType',
   Id = 'id',
+  MaxPower = 'maxPower',
+  MaxTorque = 'maxTorque',
   Name = 'name',
+  RefId = 'refId',
   StartYear = 'startYear',
+  Transmission = 'transmission',
   UpdatedAt = 'updatedAt'
 }
 
@@ -13041,96 +12671,18 @@ export type VehicleModelUpdateFilter = {
   and?: InputMaybe<Array<VehicleModelUpdateFilter>>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
+  drive?: InputMaybe<StringFieldComparison>;
   endYear?: InputMaybe<IntFieldComparison>;
+  engineType?: InputMaybe<StringFieldComparison>;
+  fuelType?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  maxPower?: InputMaybe<StringFieldComparison>;
+  maxTorque?: InputMaybe<StringFieldComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleModelUpdateFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleTransmission = {
-  __typename?: 'VehicleTransmission';
-  createdAt: Scalars['DateTime']['output'];
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id: Scalars['ID']['output'];
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  name: Scalars['String']['output'];
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleTransmissionConnection = {
-  __typename?: 'VehicleTransmissionConnection';
-  /** Array of edges. */
-  edges: Array<VehicleTransmissionEdge>;
-  /** Paging information */
-  pageInfo: PageInfo;
-};
-
-export type VehicleTransmissionDto = {
-  metadata?: InputMaybe<Scalars['JSON']['input']>;
-  name: Scalars['String']['input'];
-};
-
-export type VehicleTransmissionDeleteFilter = {
-  and?: InputMaybe<Array<VehicleTransmissionDeleteFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleTransmissionDeleteFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleTransmissionDeleteResponse = {
-  __typename?: 'VehicleTransmissionDeleteResponse';
-  createdAt?: Maybe<Scalars['DateTime']['output']>;
-  deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  metadata?: Maybe<Scalars['JSON']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['DateTime']['output']>;
-};
-
-export type VehicleTransmissionEdge = {
-  __typename?: 'VehicleTransmissionEdge';
-  /** Cursor for this node. */
-  cursor: Scalars['ConnectionCursor']['output'];
-  /** The node containing the VehicleTransmission */
-  node: VehicleTransmission;
-};
-
-export type VehicleTransmissionFilter = {
-  and?: InputMaybe<Array<VehicleTransmissionFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleTransmissionFilter>>;
-  updatedAt?: InputMaybe<DateFieldComparison>;
-};
-
-export type VehicleTransmissionSort = {
-  direction: SortDirection;
-  field: VehicleTransmissionSortFields;
-  nulls?: InputMaybe<SortNulls>;
-};
-
-export enum VehicleTransmissionSortFields {
-  CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
-  Id = 'id',
-  Name = 'name',
-  UpdatedAt = 'updatedAt'
-}
-
-export type VehicleTransmissionUpdateFilter = {
-  and?: InputMaybe<Array<VehicleTransmissionUpdateFilter>>;
-  createdAt?: InputMaybe<DateFieldComparison>;
-  deletedAt?: InputMaybe<DateFieldComparison>;
-  id?: InputMaybe<IdFilterComparison>;
-  name?: InputMaybe<StringFieldComparison>;
-  or?: InputMaybe<Array<VehicleTransmissionUpdateFilter>>;
+  transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
 
@@ -13213,10 +12765,7 @@ export type ResolversTypes = ResolversObject<{
   AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter: AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter;
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter;
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter;
-  AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter;
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter;
-  AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter;
-  AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter;
   AccountAggregateGroupBy: ResolverTypeWrapper<AccountAggregateGroupBy>;
   AccountAggregateResponse: ResolverTypeWrapper<AccountAggregateResponse>;
   AccountAvgAggregate: ResolverTypeWrapper<AccountAvgAggregate>;
@@ -13232,10 +12781,7 @@ export type ResolversTypes = ResolversObject<{
   AccountFilterUserFilterAccountFilterUserFilter: AccountFilterUserFilterAccountFilterUserFilter;
   AccountFilterUserFilterUserVehicleFilter: AccountFilterUserFilterUserVehicleFilter;
   AccountFilterUserFilterUserVehicleFilterUserFilter: AccountFilterUserFilterUserVehicleFilterUserFilter;
-  AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter: AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter;
-  AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter: AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter;
   AccountFilterUserFilterUserVehicleFilterVehicleModelFilter: AccountFilterUserFilterUserVehicleFilterVehicleModelFilter;
-  AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter: AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter;
   AccountMaxAggregate: ResolverTypeWrapper<AccountMaxAggregate>;
   AccountMinAggregate: ResolverTypeWrapper<AccountMinAggregate>;
   AccountPasswordReset: ResolverTypeWrapper<AccountPasswordReset>;
@@ -13282,7 +12828,6 @@ export type ResolversTypes = ResolversObject<{
   AccountVerficationUpdateFilter: AccountVerficationUpdateFilter;
   AddAddressesToCustomerInput: AddAddressesToCustomerInput;
   AddBillsToServiceLogInput: AddBillsToServiceLogInput;
-  AddBodiesToVehicleModelInput: AddBodiesToVehicleModelInput;
   AddBranchesToOrgInput: AddBranchesToOrgInput;
   AddMembersToOrgBranchInput: AddMembersToOrgBranchInput;
   AddMembersToOrgInput: AddMembersToOrgInput;
@@ -13350,12 +12895,10 @@ export type ResolversTypes = ResolversObject<{
   CreateManyShopsInput: CreateManyShopsInput;
   CreateManyUserVehiclesInput: CreateManyUserVehiclesInput;
   CreateManyUsersInput: CreateManyUsersInput;
+  CreateManyVehicleBaseModelsInput: CreateManyVehicleBaseModelsInput;
   CreateManyVehicleBodiesInput: CreateManyVehicleBodiesInput;
   CreateManyVehicleBrandsInput: CreateManyVehicleBrandsInput;
-  CreateManyVehicleEnginesInput: CreateManyVehicleEnginesInput;
-  CreateManyVehicleModelBodiesInput: CreateManyVehicleModelBodiesInput;
   CreateManyVehicleModelsInput: CreateManyVehicleModelsInput;
-  CreateManyVehicleTransmissionsInput: CreateManyVehicleTransmissionsInput;
   CreateOneAccountInput: CreateOneAccountInput;
   CreateOneAccountPasswordResetInput: CreateOneAccountPasswordResetInput;
   CreateOneAccountVerficationInput: CreateOneAccountVerficationInput;
@@ -13381,12 +12924,10 @@ export type ResolversTypes = ResolversObject<{
   CreateOneShopMemberInput: CreateOneShopMemberInput;
   CreateOneUserInput: CreateOneUserInput;
   CreateOneUserVehicleInput: CreateOneUserVehicleInput;
+  CreateOneVehicleBaseModelInput: CreateOneVehicleBaseModelInput;
   CreateOneVehicleBodyInput: CreateOneVehicleBodyInput;
   CreateOneVehicleBrandInput: CreateOneVehicleBrandInput;
-  CreateOneVehicleEngineInput: CreateOneVehicleEngineInput;
-  CreateOneVehicleModelBodyInput: CreateOneVehicleModelBodyInput;
   CreateOneVehicleModelInput: CreateOneVehicleModelInput;
-  CreateOneVehicleTransmissionInput: CreateOneVehicleTransmissionInput;
   CursorPaging: CursorPaging;
   Customer: ResolverTypeWrapper<Customer>;
   CustomerAddress: ResolverTypeWrapper<CustomerAddress>;
@@ -13455,12 +12996,10 @@ export type ResolversTypes = ResolversObject<{
   DeleteManyShopsInput: DeleteManyShopsInput;
   DeleteManyUserVehiclesInput: DeleteManyUserVehiclesInput;
   DeleteManyUsersInput: DeleteManyUsersInput;
+  DeleteManyVehicleBaseModelsInput: DeleteManyVehicleBaseModelsInput;
   DeleteManyVehicleBodiesInput: DeleteManyVehicleBodiesInput;
   DeleteManyVehicleBrandsInput: DeleteManyVehicleBrandsInput;
-  DeleteManyVehicleEnginesInput: DeleteManyVehicleEnginesInput;
-  DeleteManyVehicleModelBodiesInput: DeleteManyVehicleModelBodiesInput;
   DeleteManyVehicleModelsInput: DeleteManyVehicleModelsInput;
-  DeleteManyVehicleTransmissionsInput: DeleteManyVehicleTransmissionsInput;
   DeleteOneAccountInput: DeleteOneAccountInput;
   DeleteOneAccountPasswordResetInput: DeleteOneAccountPasswordResetInput;
   DeleteOneAccountVerficationInput: DeleteOneAccountVerficationInput;
@@ -13486,12 +13025,10 @@ export type ResolversTypes = ResolversObject<{
   DeleteOneShopMemberInput: DeleteOneShopMemberInput;
   DeleteOneUserInput: DeleteOneUserInput;
   DeleteOneUserVehicleInput: DeleteOneUserVehicleInput;
+  DeleteOneVehicleBaseModelInput: DeleteOneVehicleBaseModelInput;
   DeleteOneVehicleBodyInput: DeleteOneVehicleBodyInput;
   DeleteOneVehicleBrandInput: DeleteOneVehicleBrandInput;
-  DeleteOneVehicleEngineInput: DeleteOneVehicleEngineInput;
-  DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
   DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
-  DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
   ErrorCodes: ErrorCodes;
   File: ResolverTypeWrapper<File>;
   FileAggregateFilter: FileAggregateFilter;
@@ -14029,7 +13566,7 @@ export type ResolversTypes = ResolversObject<{
   ServiceLogUpdateFilter: ServiceLogUpdateFilter;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
   SetBillsOnServiceLogInput: SetBillsOnServiceLogInput;
-  SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
+  SetBodyOnVehicleModelInput: SetBodyOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
   SetGarageOnServiceLogInput: SetGarageOnServiceLogInput;
   SetMembersOnOrgBranchInput: SetMembersOnOrgBranchInput;
@@ -14131,12 +13668,10 @@ export type ResolversTypes = ResolversObject<{
   UpdateManyShopsInput: UpdateManyShopsInput;
   UpdateManyUserVehiclesInput: UpdateManyUserVehiclesInput;
   UpdateManyUsersInput: UpdateManyUsersInput;
+  UpdateManyVehicleBaseModelsInput: UpdateManyVehicleBaseModelsInput;
   UpdateManyVehicleBodiesInput: UpdateManyVehicleBodiesInput;
   UpdateManyVehicleBrandsInput: UpdateManyVehicleBrandsInput;
-  UpdateManyVehicleEnginesInput: UpdateManyVehicleEnginesInput;
-  UpdateManyVehicleModelBodiesInput: UpdateManyVehicleModelBodiesInput;
   UpdateManyVehicleModelsInput: UpdateManyVehicleModelsInput;
-  UpdateManyVehicleTransmissionsInput: UpdateManyVehicleTransmissionsInput;
   UpdateOneAccountInput: UpdateOneAccountInput;
   UpdateOneAccountPasswordResetInput: UpdateOneAccountPasswordResetInput;
   UpdateOneAccountVerficationInput: UpdateOneAccountVerficationInput;
@@ -14162,12 +13697,10 @@ export type ResolversTypes = ResolversObject<{
   UpdateOneShopMemberInput: UpdateOneShopMemberInput;
   UpdateOneUserInput: UpdateOneUserInput;
   UpdateOneUserVehicleInput: UpdateOneUserVehicleInput;
+  UpdateOneVehicleBaseModelInput: UpdateOneVehicleBaseModelInput;
   UpdateOneVehicleBodyInput: UpdateOneVehicleBodyInput;
   UpdateOneVehicleBrandInput: UpdateOneVehicleBrandInput;
-  UpdateOneVehicleEngineInput: UpdateOneVehicleEngineInput;
-  UpdateOneVehicleModelBodyInput: UpdateOneVehicleModelBodyInput;
   UpdateOneVehicleModelInput: UpdateOneVehicleModelInput;
-  UpdateOneVehicleTransmissionInput: UpdateOneVehicleTransmissionInput;
   User: ResolverTypeWrapper<User>;
   UserAggregateFilter: UserAggregateFilter;
   UserAggregateFilterAccountAggregateFilter: UserAggregateFilterAccountAggregateFilter;
@@ -14195,10 +13728,7 @@ export type ResolversTypes = ResolversObject<{
   UserVehicle: ResolverTypeWrapper<UserVehicle>;
   UserVehicleAggregateFilter: UserVehicleAggregateFilter;
   UserVehicleAggregateFilterUserAggregateFilter: UserVehicleAggregateFilterUserAggregateFilter;
-  UserVehicleAggregateFilterVehicleEngineAggregateFilter: UserVehicleAggregateFilterVehicleEngineAggregateFilter;
   UserVehicleAggregateFilterVehicleModelAggregateFilter: UserVehicleAggregateFilterVehicleModelAggregateFilter;
-  UserVehicleAggregateFilterVehicleModelBodyAggregateFilter: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter;
-  UserVehicleAggregateFilterVehicleTransmissionAggregateFilter: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter;
   UserVehicleAggregateGroupBy: ResolverTypeWrapper<UserVehicleAggregateGroupBy>;
   UserVehicleAggregateResponse: ResolverTypeWrapper<UserVehicleAggregateResponse>;
   UserVehicleConnection: ResolverTypeWrapper<UserVehicleConnection>;
@@ -14209,10 +13739,7 @@ export type ResolversTypes = ResolversObject<{
   UserVehicleEdge: ResolverTypeWrapper<UserVehicleEdge>;
   UserVehicleFilter: UserVehicleFilter;
   UserVehicleFilterUserFilter: UserVehicleFilterUserFilter;
-  UserVehicleFilterVehicleEngineFilter: UserVehicleFilterVehicleEngineFilter;
-  UserVehicleFilterVehicleModelBodyFilter: UserVehicleFilterVehicleModelBodyFilter;
   UserVehicleFilterVehicleModelFilter: UserVehicleFilterVehicleModelFilter;
-  UserVehicleFilterVehicleTransmissionFilter: UserVehicleFilterVehicleTransmissionFilter;
   UserVehicleMaxAggregate: ResolverTypeWrapper<UserVehicleMaxAggregate>;
   UserVehicleMinAggregate: ResolverTypeWrapper<UserVehicleMinAggregate>;
   UserVehicleSort: UserVehicleSort;
@@ -14224,6 +13751,18 @@ export type ResolversTypes = ResolversObject<{
   UserVehiclesCountAggregate: ResolverTypeWrapper<UserVehiclesCountAggregate>;
   UserVehiclesMaxAggregate: ResolverTypeWrapper<UserVehiclesMaxAggregate>;
   UserVehiclesMinAggregate: ResolverTypeWrapper<UserVehiclesMinAggregate>;
+  VehicleBaseModel: ResolverTypeWrapper<VehicleBaseModel>;
+  VehicleBaseModelConnection: ResolverTypeWrapper<VehicleBaseModelConnection>;
+  VehicleBaseModelDTO: VehicleBaseModelDto;
+  VehicleBaseModelDeleteFilter: VehicleBaseModelDeleteFilter;
+  VehicleBaseModelDeleteResponse: ResolverTypeWrapper<VehicleBaseModelDeleteResponse>;
+  VehicleBaseModelEdge: ResolverTypeWrapper<VehicleBaseModelEdge>;
+  VehicleBaseModelFilter: VehicleBaseModelFilter;
+  VehicleBaseModelFilterVehicleBaseModelFilter: VehicleBaseModelFilterVehicleBaseModelFilter;
+  VehicleBaseModelFilterVehicleBrandFilter: VehicleBaseModelFilterVehicleBrandFilter;
+  VehicleBaseModelSort: VehicleBaseModelSort;
+  VehicleBaseModelSortFields: VehicleBaseModelSortFields;
+  VehicleBaseModelUpdateFilter: VehicleBaseModelUpdateFilter;
   VehicleBody: ResolverTypeWrapper<VehicleBody>;
   VehicleBodyConnection: ResolverTypeWrapper<VehicleBodyConnection>;
   VehicleBodyDTO: VehicleBodyDto;
@@ -14244,53 +13783,19 @@ export type ResolversTypes = ResolversObject<{
   VehicleBrandSort: VehicleBrandSort;
   VehicleBrandSortFields: VehicleBrandSortFields;
   VehicleBrandUpdateFilter: VehicleBrandUpdateFilter;
-  VehicleEngine: ResolverTypeWrapper<VehicleEngine>;
-  VehicleEngineConnection: ResolverTypeWrapper<VehicleEngineConnection>;
-  VehicleEngineDTO: VehicleEngineDto;
-  VehicleEngineDeleteFilter: VehicleEngineDeleteFilter;
-  VehicleEngineDeleteResponse: ResolverTypeWrapper<VehicleEngineDeleteResponse>;
-  VehicleEngineEdge: ResolverTypeWrapper<VehicleEngineEdge>;
-  VehicleEngineFilter: VehicleEngineFilter;
-  VehicleEngineSort: VehicleEngineSort;
-  VehicleEngineSortFields: VehicleEngineSortFields;
-  VehicleEngineUpdateFilter: VehicleEngineUpdateFilter;
   VehicleModel: ResolverTypeWrapper<VehicleModel>;
-  VehicleModelBody: ResolverTypeWrapper<VehicleModelBody>;
-  VehicleModelBodyConnection: ResolverTypeWrapper<VehicleModelBodyConnection>;
-  VehicleModelBodyDTO: VehicleModelBodyDto;
-  VehicleModelBodyDeleteFilter: VehicleModelBodyDeleteFilter;
-  VehicleModelBodyDeleteResponse: ResolverTypeWrapper<VehicleModelBodyDeleteResponse>;
-  VehicleModelBodyEdge: ResolverTypeWrapper<VehicleModelBodyEdge>;
-  VehicleModelBodyFilter: VehicleModelBodyFilter;
-  VehicleModelBodyFilterVehicleBodyFilter: VehicleModelBodyFilterVehicleBodyFilter;
-  VehicleModelBodyFilterVehicleModelFilter: VehicleModelBodyFilterVehicleModelFilter;
-  VehicleModelBodySort: VehicleModelBodySort;
-  VehicleModelBodySortFields: VehicleModelBodySortFields;
-  VehicleModelBodyUpdateFilter: VehicleModelBodyUpdateFilter;
   VehicleModelConnection: ResolverTypeWrapper<VehicleModelConnection>;
   VehicleModelDTO: VehicleModelDto;
   VehicleModelDeleteFilter: VehicleModelDeleteFilter;
   VehicleModelDeleteResponse: ResolverTypeWrapper<VehicleModelDeleteResponse>;
   VehicleModelEdge: ResolverTypeWrapper<VehicleModelEdge>;
   VehicleModelFilter: VehicleModelFilter;
+  VehicleModelFilterVehicleBaseModelFilter: VehicleModelFilterVehicleBaseModelFilter;
+  VehicleModelFilterVehicleBodyFilter: VehicleModelFilterVehicleBodyFilter;
   VehicleModelFilterVehicleBrandFilter: VehicleModelFilterVehicleBrandFilter;
-  VehicleModelFilterVehicleEngineFilter: VehicleModelFilterVehicleEngineFilter;
-  VehicleModelFilterVehicleModelBodyFilter: VehicleModelFilterVehicleModelBodyFilter;
-  VehicleModelFilterVehicleModelFilter: VehicleModelFilterVehicleModelFilter;
-  VehicleModelFilterVehicleTransmissionFilter: VehicleModelFilterVehicleTransmissionFilter;
   VehicleModelSort: VehicleModelSort;
   VehicleModelSortFields: VehicleModelSortFields;
   VehicleModelUpdateFilter: VehicleModelUpdateFilter;
-  VehicleTransmission: ResolverTypeWrapper<VehicleTransmission>;
-  VehicleTransmissionConnection: ResolverTypeWrapper<VehicleTransmissionConnection>;
-  VehicleTransmissionDTO: VehicleTransmissionDto;
-  VehicleTransmissionDeleteFilter: VehicleTransmissionDeleteFilter;
-  VehicleTransmissionDeleteResponse: ResolverTypeWrapper<VehicleTransmissionDeleteResponse>;
-  VehicleTransmissionEdge: ResolverTypeWrapper<VehicleTransmissionEdge>;
-  VehicleTransmissionFilter: VehicleTransmissionFilter;
-  VehicleTransmissionSort: VehicleTransmissionSort;
-  VehicleTransmissionSortFields: VehicleTransmissionSortFields;
-  VehicleTransmissionUpdateFilter: VehicleTransmissionUpdateFilter;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -14302,10 +13807,7 @@ export type ResolversParentTypes = ResolversObject<{
   AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter: AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter;
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter;
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter;
-  AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleEngineAggregateFilter;
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter;
-  AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelBodyAggregateFilter;
-  AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleTransmissionAggregateFilter;
   AccountAggregateGroupBy: AccountAggregateGroupBy;
   AccountAggregateResponse: AccountAggregateResponse;
   AccountAvgAggregate: AccountAvgAggregate;
@@ -14321,10 +13823,7 @@ export type ResolversParentTypes = ResolversObject<{
   AccountFilterUserFilterAccountFilterUserFilter: AccountFilterUserFilterAccountFilterUserFilter;
   AccountFilterUserFilterUserVehicleFilter: AccountFilterUserFilterUserVehicleFilter;
   AccountFilterUserFilterUserVehicleFilterUserFilter: AccountFilterUserFilterUserVehicleFilterUserFilter;
-  AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter: AccountFilterUserFilterUserVehicleFilterVehicleEngineFilter;
-  AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter: AccountFilterUserFilterUserVehicleFilterVehicleModelBodyFilter;
   AccountFilterUserFilterUserVehicleFilterVehicleModelFilter: AccountFilterUserFilterUserVehicleFilterVehicleModelFilter;
-  AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter: AccountFilterUserFilterUserVehicleFilterVehicleTransmissionFilter;
   AccountMaxAggregate: AccountMaxAggregate;
   AccountMinAggregate: AccountMinAggregate;
   AccountPasswordReset: AccountPasswordReset;
@@ -14367,7 +13866,6 @@ export type ResolversParentTypes = ResolversObject<{
   AccountVerficationUpdateFilter: AccountVerficationUpdateFilter;
   AddAddressesToCustomerInput: AddAddressesToCustomerInput;
   AddBillsToServiceLogInput: AddBillsToServiceLogInput;
-  AddBodiesToVehicleModelInput: AddBodiesToVehicleModelInput;
   AddBranchesToOrgInput: AddBranchesToOrgInput;
   AddMembersToOrgBranchInput: AddMembersToOrgBranchInput;
   AddMembersToOrgInput: AddMembersToOrgInput;
@@ -14434,12 +13932,10 @@ export type ResolversParentTypes = ResolversObject<{
   CreateManyShopsInput: CreateManyShopsInput;
   CreateManyUserVehiclesInput: CreateManyUserVehiclesInput;
   CreateManyUsersInput: CreateManyUsersInput;
+  CreateManyVehicleBaseModelsInput: CreateManyVehicleBaseModelsInput;
   CreateManyVehicleBodiesInput: CreateManyVehicleBodiesInput;
   CreateManyVehicleBrandsInput: CreateManyVehicleBrandsInput;
-  CreateManyVehicleEnginesInput: CreateManyVehicleEnginesInput;
-  CreateManyVehicleModelBodiesInput: CreateManyVehicleModelBodiesInput;
   CreateManyVehicleModelsInput: CreateManyVehicleModelsInput;
-  CreateManyVehicleTransmissionsInput: CreateManyVehicleTransmissionsInput;
   CreateOneAccountInput: CreateOneAccountInput;
   CreateOneAccountPasswordResetInput: CreateOneAccountPasswordResetInput;
   CreateOneAccountVerficationInput: CreateOneAccountVerficationInput;
@@ -14465,12 +13961,10 @@ export type ResolversParentTypes = ResolversObject<{
   CreateOneShopMemberInput: CreateOneShopMemberInput;
   CreateOneUserInput: CreateOneUserInput;
   CreateOneUserVehicleInput: CreateOneUserVehicleInput;
+  CreateOneVehicleBaseModelInput: CreateOneVehicleBaseModelInput;
   CreateOneVehicleBodyInput: CreateOneVehicleBodyInput;
   CreateOneVehicleBrandInput: CreateOneVehicleBrandInput;
-  CreateOneVehicleEngineInput: CreateOneVehicleEngineInput;
-  CreateOneVehicleModelBodyInput: CreateOneVehicleModelBodyInput;
   CreateOneVehicleModelInput: CreateOneVehicleModelInput;
-  CreateOneVehicleTransmissionInput: CreateOneVehicleTransmissionInput;
   CursorPaging: CursorPaging;
   Customer: Customer;
   CustomerAddress: CustomerAddress;
@@ -14536,12 +14030,10 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteManyShopsInput: DeleteManyShopsInput;
   DeleteManyUserVehiclesInput: DeleteManyUserVehiclesInput;
   DeleteManyUsersInput: DeleteManyUsersInput;
+  DeleteManyVehicleBaseModelsInput: DeleteManyVehicleBaseModelsInput;
   DeleteManyVehicleBodiesInput: DeleteManyVehicleBodiesInput;
   DeleteManyVehicleBrandsInput: DeleteManyVehicleBrandsInput;
-  DeleteManyVehicleEnginesInput: DeleteManyVehicleEnginesInput;
-  DeleteManyVehicleModelBodiesInput: DeleteManyVehicleModelBodiesInput;
   DeleteManyVehicleModelsInput: DeleteManyVehicleModelsInput;
-  DeleteManyVehicleTransmissionsInput: DeleteManyVehicleTransmissionsInput;
   DeleteOneAccountInput: DeleteOneAccountInput;
   DeleteOneAccountPasswordResetInput: DeleteOneAccountPasswordResetInput;
   DeleteOneAccountVerficationInput: DeleteOneAccountVerficationInput;
@@ -14567,12 +14059,10 @@ export type ResolversParentTypes = ResolversObject<{
   DeleteOneShopMemberInput: DeleteOneShopMemberInput;
   DeleteOneUserInput: DeleteOneUserInput;
   DeleteOneUserVehicleInput: DeleteOneUserVehicleInput;
+  DeleteOneVehicleBaseModelInput: DeleteOneVehicleBaseModelInput;
   DeleteOneVehicleBodyInput: DeleteOneVehicleBodyInput;
   DeleteOneVehicleBrandInput: DeleteOneVehicleBrandInput;
-  DeleteOneVehicleEngineInput: DeleteOneVehicleEngineInput;
-  DeleteOneVehicleModelBodyInput: DeleteOneVehicleModelBodyInput;
   DeleteOneVehicleModelInput: DeleteOneVehicleModelInput;
-  DeleteOneVehicleTransmissionInput: DeleteOneVehicleTransmissionInput;
   File: File;
   FileAggregateFilter: FileAggregateFilter;
   FileAggregateFilterAccountAggregateFilter: FileAggregateFilterAccountAggregateFilter;
@@ -15085,7 +14575,7 @@ export type ResolversParentTypes = ResolversObject<{
   ServiceLogUpdateFilter: ServiceLogUpdateFilter;
   SetAddressesOnCustomerInput: SetAddressesOnCustomerInput;
   SetBillsOnServiceLogInput: SetBillsOnServiceLogInput;
-  SetBodiesOnVehicleModelInput: SetBodiesOnVehicleModelInput;
+  SetBodyOnVehicleModelInput: SetBodyOnVehicleModelInput;
   SetBranchesOnOrgInput: SetBranchesOnOrgInput;
   SetGarageOnServiceLogInput: SetGarageOnServiceLogInput;
   SetMembersOnOrgBranchInput: SetMembersOnOrgBranchInput;
@@ -15182,12 +14672,10 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateManyShopsInput: UpdateManyShopsInput;
   UpdateManyUserVehiclesInput: UpdateManyUserVehiclesInput;
   UpdateManyUsersInput: UpdateManyUsersInput;
+  UpdateManyVehicleBaseModelsInput: UpdateManyVehicleBaseModelsInput;
   UpdateManyVehicleBodiesInput: UpdateManyVehicleBodiesInput;
   UpdateManyVehicleBrandsInput: UpdateManyVehicleBrandsInput;
-  UpdateManyVehicleEnginesInput: UpdateManyVehicleEnginesInput;
-  UpdateManyVehicleModelBodiesInput: UpdateManyVehicleModelBodiesInput;
   UpdateManyVehicleModelsInput: UpdateManyVehicleModelsInput;
-  UpdateManyVehicleTransmissionsInput: UpdateManyVehicleTransmissionsInput;
   UpdateOneAccountInput: UpdateOneAccountInput;
   UpdateOneAccountPasswordResetInput: UpdateOneAccountPasswordResetInput;
   UpdateOneAccountVerficationInput: UpdateOneAccountVerficationInput;
@@ -15213,12 +14701,10 @@ export type ResolversParentTypes = ResolversObject<{
   UpdateOneShopMemberInput: UpdateOneShopMemberInput;
   UpdateOneUserInput: UpdateOneUserInput;
   UpdateOneUserVehicleInput: UpdateOneUserVehicleInput;
+  UpdateOneVehicleBaseModelInput: UpdateOneVehicleBaseModelInput;
   UpdateOneVehicleBodyInput: UpdateOneVehicleBodyInput;
   UpdateOneVehicleBrandInput: UpdateOneVehicleBrandInput;
-  UpdateOneVehicleEngineInput: UpdateOneVehicleEngineInput;
-  UpdateOneVehicleModelBodyInput: UpdateOneVehicleModelBodyInput;
   UpdateOneVehicleModelInput: UpdateOneVehicleModelInput;
-  UpdateOneVehicleTransmissionInput: UpdateOneVehicleTransmissionInput;
   User: User;
   UserAggregateFilter: UserAggregateFilter;
   UserAggregateFilterAccountAggregateFilter: UserAggregateFilterAccountAggregateFilter;
@@ -15243,10 +14729,7 @@ export type ResolversParentTypes = ResolversObject<{
   UserVehicle: UserVehicle;
   UserVehicleAggregateFilter: UserVehicleAggregateFilter;
   UserVehicleAggregateFilterUserAggregateFilter: UserVehicleAggregateFilterUserAggregateFilter;
-  UserVehicleAggregateFilterVehicleEngineAggregateFilter: UserVehicleAggregateFilterVehicleEngineAggregateFilter;
   UserVehicleAggregateFilterVehicleModelAggregateFilter: UserVehicleAggregateFilterVehicleModelAggregateFilter;
-  UserVehicleAggregateFilterVehicleModelBodyAggregateFilter: UserVehicleAggregateFilterVehicleModelBodyAggregateFilter;
-  UserVehicleAggregateFilterVehicleTransmissionAggregateFilter: UserVehicleAggregateFilterVehicleTransmissionAggregateFilter;
   UserVehicleAggregateGroupBy: UserVehicleAggregateGroupBy;
   UserVehicleAggregateResponse: UserVehicleAggregateResponse;
   UserVehicleConnection: UserVehicleConnection;
@@ -15257,10 +14740,7 @@ export type ResolversParentTypes = ResolversObject<{
   UserVehicleEdge: UserVehicleEdge;
   UserVehicleFilter: UserVehicleFilter;
   UserVehicleFilterUserFilter: UserVehicleFilterUserFilter;
-  UserVehicleFilterVehicleEngineFilter: UserVehicleFilterVehicleEngineFilter;
-  UserVehicleFilterVehicleModelBodyFilter: UserVehicleFilterVehicleModelBodyFilter;
   UserVehicleFilterVehicleModelFilter: UserVehicleFilterVehicleModelFilter;
-  UserVehicleFilterVehicleTransmissionFilter: UserVehicleFilterVehicleTransmissionFilter;
   UserVehicleMaxAggregate: UserVehicleMaxAggregate;
   UserVehicleMinAggregate: UserVehicleMinAggregate;
   UserVehicleSort: UserVehicleSort;
@@ -15271,6 +14751,17 @@ export type ResolversParentTypes = ResolversObject<{
   UserVehiclesCountAggregate: UserVehiclesCountAggregate;
   UserVehiclesMaxAggregate: UserVehiclesMaxAggregate;
   UserVehiclesMinAggregate: UserVehiclesMinAggregate;
+  VehicleBaseModel: VehicleBaseModel;
+  VehicleBaseModelConnection: VehicleBaseModelConnection;
+  VehicleBaseModelDTO: VehicleBaseModelDto;
+  VehicleBaseModelDeleteFilter: VehicleBaseModelDeleteFilter;
+  VehicleBaseModelDeleteResponse: VehicleBaseModelDeleteResponse;
+  VehicleBaseModelEdge: VehicleBaseModelEdge;
+  VehicleBaseModelFilter: VehicleBaseModelFilter;
+  VehicleBaseModelFilterVehicleBaseModelFilter: VehicleBaseModelFilterVehicleBaseModelFilter;
+  VehicleBaseModelFilterVehicleBrandFilter: VehicleBaseModelFilterVehicleBrandFilter;
+  VehicleBaseModelSort: VehicleBaseModelSort;
+  VehicleBaseModelUpdateFilter: VehicleBaseModelUpdateFilter;
   VehicleBody: VehicleBody;
   VehicleBodyConnection: VehicleBodyConnection;
   VehicleBodyDTO: VehicleBodyDto;
@@ -15289,49 +14780,18 @@ export type ResolversParentTypes = ResolversObject<{
   VehicleBrandFilter: VehicleBrandFilter;
   VehicleBrandSort: VehicleBrandSort;
   VehicleBrandUpdateFilter: VehicleBrandUpdateFilter;
-  VehicleEngine: VehicleEngine;
-  VehicleEngineConnection: VehicleEngineConnection;
-  VehicleEngineDTO: VehicleEngineDto;
-  VehicleEngineDeleteFilter: VehicleEngineDeleteFilter;
-  VehicleEngineDeleteResponse: VehicleEngineDeleteResponse;
-  VehicleEngineEdge: VehicleEngineEdge;
-  VehicleEngineFilter: VehicleEngineFilter;
-  VehicleEngineSort: VehicleEngineSort;
-  VehicleEngineUpdateFilter: VehicleEngineUpdateFilter;
   VehicleModel: VehicleModel;
-  VehicleModelBody: VehicleModelBody;
-  VehicleModelBodyConnection: VehicleModelBodyConnection;
-  VehicleModelBodyDTO: VehicleModelBodyDto;
-  VehicleModelBodyDeleteFilter: VehicleModelBodyDeleteFilter;
-  VehicleModelBodyDeleteResponse: VehicleModelBodyDeleteResponse;
-  VehicleModelBodyEdge: VehicleModelBodyEdge;
-  VehicleModelBodyFilter: VehicleModelBodyFilter;
-  VehicleModelBodyFilterVehicleBodyFilter: VehicleModelBodyFilterVehicleBodyFilter;
-  VehicleModelBodyFilterVehicleModelFilter: VehicleModelBodyFilterVehicleModelFilter;
-  VehicleModelBodySort: VehicleModelBodySort;
-  VehicleModelBodyUpdateFilter: VehicleModelBodyUpdateFilter;
   VehicleModelConnection: VehicleModelConnection;
   VehicleModelDTO: VehicleModelDto;
   VehicleModelDeleteFilter: VehicleModelDeleteFilter;
   VehicleModelDeleteResponse: VehicleModelDeleteResponse;
   VehicleModelEdge: VehicleModelEdge;
   VehicleModelFilter: VehicleModelFilter;
+  VehicleModelFilterVehicleBaseModelFilter: VehicleModelFilterVehicleBaseModelFilter;
+  VehicleModelFilterVehicleBodyFilter: VehicleModelFilterVehicleBodyFilter;
   VehicleModelFilterVehicleBrandFilter: VehicleModelFilterVehicleBrandFilter;
-  VehicleModelFilterVehicleEngineFilter: VehicleModelFilterVehicleEngineFilter;
-  VehicleModelFilterVehicleModelBodyFilter: VehicleModelFilterVehicleModelBodyFilter;
-  VehicleModelFilterVehicleModelFilter: VehicleModelFilterVehicleModelFilter;
-  VehicleModelFilterVehicleTransmissionFilter: VehicleModelFilterVehicleTransmissionFilter;
   VehicleModelSort: VehicleModelSort;
   VehicleModelUpdateFilter: VehicleModelUpdateFilter;
-  VehicleTransmission: VehicleTransmission;
-  VehicleTransmissionConnection: VehicleTransmissionConnection;
-  VehicleTransmissionDTO: VehicleTransmissionDto;
-  VehicleTransmissionDeleteFilter: VehicleTransmissionDeleteFilter;
-  VehicleTransmissionDeleteResponse: VehicleTransmissionDeleteResponse;
-  VehicleTransmissionEdge: VehicleTransmissionEdge;
-  VehicleTransmissionFilter: VehicleTransmissionFilter;
-  VehicleTransmissionSort: VehicleTransmissionSort;
-  VehicleTransmissionUpdateFilter: VehicleTransmissionUpdateFilter;
 }>;
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = ResolversObject<{
@@ -16186,7 +15646,6 @@ export type LoginResultResolvers<ContextType = any, ParentType extends Resolvers
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   addAddressesToCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationAddAddressesToCustomerArgs, 'input'>>;
   addBillsToServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationAddBillsToServiceLogArgs, 'input'>>;
-  addBodiesToVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationAddBodiesToVehicleModelArgs, 'input'>>;
   addBranchesToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddBranchesToOrgArgs, 'input'>>;
   addMembersToOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationAddMembersToOrgArgs, 'input'>>;
   addMembersToOrgBranch?: Resolver<ResolversTypes['OrgBranch'], ParentType, ContextType, RequireFields<MutationAddMembersToOrgBranchArgs, 'input'>>;
@@ -16235,12 +15694,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createManyShops?: Resolver<Array<ResolversTypes['Shop']>, ParentType, ContextType, RequireFields<MutationCreateManyShopsArgs, 'input'>>;
   createManyUserVehicles?: Resolver<Array<ResolversTypes['UserVehicle']>, ParentType, ContextType, RequireFields<MutationCreateManyUserVehiclesArgs, 'input'>>;
   createManyUsers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateManyUsersArgs, 'input'>>;
+  createManyVehicleBaseModels?: Resolver<Array<ResolversTypes['VehicleBaseModel']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBaseModelsArgs, 'input'>>;
   createManyVehicleBodies?: Resolver<Array<ResolversTypes['VehicleBody']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBodiesArgs, 'input'>>;
   createManyVehicleBrands?: Resolver<Array<ResolversTypes['VehicleBrand']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleBrandsArgs, 'input'>>;
-  createManyVehicleEngines?: Resolver<Array<ResolversTypes['VehicleEngine']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleEnginesArgs, 'input'>>;
-  createManyVehicleModelBodies?: Resolver<Array<ResolversTypes['VehicleModelBody']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleModelBodiesArgs, 'input'>>;
   createManyVehicleModels?: Resolver<Array<ResolversTypes['VehicleModel']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleModelsArgs, 'input'>>;
-  createManyVehicleTransmissions?: Resolver<Array<ResolversTypes['VehicleTransmission']>, ParentType, ContextType, RequireFields<MutationCreateManyVehicleTransmissionsArgs, 'input'>>;
   createOneAccount?: Resolver<ResolversTypes['Account'], ParentType, ContextType, RequireFields<MutationCreateOneAccountArgs, 'input'>>;
   createOneAccountPasswordReset?: Resolver<ResolversTypes['AccountPasswordReset'], ParentType, ContextType, RequireFields<MutationCreateOneAccountPasswordResetArgs, 'input'>>;
   createOneAccountVerfication?: Resolver<ResolversTypes['AccountVerfication'], ParentType, ContextType, RequireFields<MutationCreateOneAccountVerficationArgs, 'input'>>;
@@ -16266,12 +15723,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createOneShopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<MutationCreateOneShopMemberArgs, 'input'>>;
   createOneUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateOneUserArgs, 'input'>>;
   createOneUserVehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType, RequireFields<MutationCreateOneUserVehicleArgs, 'input'>>;
+  createOneVehicleBaseModel?: Resolver<ResolversTypes['VehicleBaseModel'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBaseModelArgs, 'input'>>;
   createOneVehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBodyArgs, 'input'>>;
   createOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleBrandArgs, 'input'>>;
-  createOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleEngineArgs, 'input'>>;
   createOneVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleModelArgs, 'input'>>;
-  createOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleModelBodyArgs, 'input'>>;
-  createOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<MutationCreateOneVehicleTransmissionArgs, 'input'>>;
   deleteManyAccountPasswordResets?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyAccountPasswordResetsArgs, 'input'>>;
   deleteManyAccountVerfications?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyAccountVerficationsArgs, 'input'>>;
   deleteManyAccounts?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyAccountsArgs, 'input'>>;
@@ -16297,12 +15752,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteManyShops?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyShopsArgs, 'input'>>;
   deleteManyUserVehicles?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyUserVehiclesArgs, 'input'>>;
   deleteManyUsers?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyUsersArgs, 'input'>>;
+  deleteManyVehicleBaseModels?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBaseModelsArgs, 'input'>>;
   deleteManyVehicleBodies?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBodiesArgs, 'input'>>;
   deleteManyVehicleBrands?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleBrandsArgs, 'input'>>;
-  deleteManyVehicleEngines?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleEnginesArgs, 'input'>>;
-  deleteManyVehicleModelBodies?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleModelBodiesArgs, 'input'>>;
   deleteManyVehicleModels?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleModelsArgs, 'input'>>;
-  deleteManyVehicleTransmissions?: Resolver<ResolversTypes['DeleteManyResponse'], ParentType, ContextType, RequireFields<MutationDeleteManyVehicleTransmissionsArgs, 'input'>>;
   deleteOneAccount?: Resolver<ResolversTypes['AccountDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneAccountArgs, 'input'>>;
   deleteOneAccountPasswordReset?: Resolver<ResolversTypes['AccountPasswordResetDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneAccountPasswordResetArgs, 'input'>>;
   deleteOneAccountVerfication?: Resolver<ResolversTypes['AccountVerficationDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneAccountVerficationArgs, 'input'>>;
@@ -16328,16 +15781,14 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteOneShopMember?: Resolver<ResolversTypes['ShopMemberDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneShopMemberArgs, 'input'>>;
   deleteOneUser?: Resolver<ResolversTypes['UserDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneUserArgs, 'input'>>;
   deleteOneUserVehicle?: Resolver<ResolversTypes['UserVehicleDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneUserVehicleArgs, 'input'>>;
+  deleteOneVehicleBaseModel?: Resolver<ResolversTypes['VehicleBaseModelDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBaseModelArgs, 'input'>>;
   deleteOneVehicleBody?: Resolver<ResolversTypes['VehicleBodyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBodyArgs, 'input'>>;
   deleteOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrandDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleBrandArgs, 'input'>>;
-  deleteOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngineDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleEngineArgs, 'input'>>;
   deleteOneVehicleModel?: Resolver<ResolversTypes['VehicleModelDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleModelArgs, 'input'>>;
-  deleteOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBodyDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleModelBodyArgs, 'input'>>;
-  deleteOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmissionDeleteResponse'], ParentType, ContextType, RequireFields<MutationDeleteOneVehicleTransmissionArgs, 'input'>>;
   productImportByFile?: Resolver<Array<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<MutationProductImportByFileArgs, 'input'>>;
   setAddressesOnCustomer?: Resolver<ResolversTypes['Customer'], ParentType, ContextType, RequireFields<MutationSetAddressesOnCustomerArgs, 'input'>>;
   setBillsOnServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationSetBillsOnServiceLogArgs, 'input'>>;
-  setBodiesOnVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationSetBodiesOnVehicleModelArgs, 'input'>>;
+  setBodyOnVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationSetBodyOnVehicleModelArgs, 'input'>>;
   setBranchesOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetBranchesOnOrgArgs, 'input'>>;
   setGarageOnServiceLog?: Resolver<ResolversTypes['ServiceLog'], ParentType, ContextType, RequireFields<MutationSetGarageOnServiceLogArgs, 'input'>>;
   setMembersOnOrg?: Resolver<ResolversTypes['Org'], ParentType, ContextType, RequireFields<MutationSetMembersOnOrgArgs, 'input'>>;
@@ -16380,12 +15831,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateManyShops?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyShopsArgs, 'input'>>;
   updateManyUserVehicles?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyUserVehiclesArgs, 'input'>>;
   updateManyUsers?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyUsersArgs, 'input'>>;
+  updateManyVehicleBaseModels?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBaseModelsArgs, 'input'>>;
   updateManyVehicleBodies?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBodiesArgs, 'input'>>;
   updateManyVehicleBrands?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleBrandsArgs, 'input'>>;
-  updateManyVehicleEngines?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleEnginesArgs, 'input'>>;
-  updateManyVehicleModelBodies?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleModelBodiesArgs, 'input'>>;
   updateManyVehicleModels?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleModelsArgs, 'input'>>;
-  updateManyVehicleTransmissions?: Resolver<ResolversTypes['UpdateManyResponse'], ParentType, ContextType, RequireFields<MutationUpdateManyVehicleTransmissionsArgs, 'input'>>;
   updateOneAccount?: Resolver<ResolversTypes['Account'], ParentType, ContextType, RequireFields<MutationUpdateOneAccountArgs, 'input'>>;
   updateOneAccountPasswordReset?: Resolver<ResolversTypes['AccountPasswordReset'], ParentType, ContextType, RequireFields<MutationUpdateOneAccountPasswordResetArgs, 'input'>>;
   updateOneAccountVerfication?: Resolver<ResolversTypes['AccountVerfication'], ParentType, ContextType, RequireFields<MutationUpdateOneAccountVerficationArgs, 'input'>>;
@@ -16411,12 +15860,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateOneShopMember?: Resolver<ResolversTypes['ShopMember'], ParentType, ContextType, RequireFields<MutationUpdateOneShopMemberArgs, 'input'>>;
   updateOneUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateOneUserArgs, 'input'>>;
   updateOneUserVehicle?: Resolver<ResolversTypes['UserVehicle'], ParentType, ContextType, RequireFields<MutationUpdateOneUserVehicleArgs, 'input'>>;
+  updateOneVehicleBaseModel?: Resolver<ResolversTypes['VehicleBaseModel'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBaseModelArgs, 'input'>>;
   updateOneVehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBodyArgs, 'input'>>;
   updateOneVehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleBrandArgs, 'input'>>;
-  updateOneVehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleEngineArgs, 'input'>>;
   updateOneVehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleModelArgs, 'input'>>;
-  updateOneVehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleModelBodyArgs, 'input'>>;
-  updateOneVehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<MutationUpdateOneVehicleTransmissionArgs, 'input'>>;
 }>;
 
 export type OffsetPageInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['OffsetPageInfo'] = ResolversParentTypes['OffsetPageInfo']> = ResolversObject<{
@@ -18504,18 +17951,14 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   userVehicleAggregate?: Resolver<Array<ResolversTypes['UserVehicleAggregateResponse']>, ParentType, ContextType, Partial<QueryUserVehicleAggregateArgs>>;
   userVehicles?: Resolver<ResolversTypes['UserVehicleConnection'], ParentType, ContextType, RequireFields<QueryUserVehiclesArgs, 'filter' | 'paging' | 'sorting'>>;
   users?: Resolver<ResolversTypes['UserConnection'], ParentType, ContextType, RequireFields<QueryUsersArgs, 'filter' | 'paging' | 'sorting'>>;
+  vehicleBaseModel?: Resolver<ResolversTypes['VehicleBaseModel'], ParentType, ContextType, RequireFields<QueryVehicleBaseModelArgs, 'id'>>;
+  vehicleBaseModels?: Resolver<ResolversTypes['VehicleBaseModelConnection'], ParentType, ContextType, RequireFields<QueryVehicleBaseModelsArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleBodies?: Resolver<ResolversTypes['VehicleBodyConnection'], ParentType, ContextType, RequireFields<QueryVehicleBodiesArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleBody?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType, RequireFields<QueryVehicleBodyArgs, 'id'>>;
   vehicleBrand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType, RequireFields<QueryVehicleBrandArgs, 'id'>>;
   vehicleBrands?: Resolver<ResolversTypes['VehicleBrandConnection'], ParentType, ContextType, RequireFields<QueryVehicleBrandsArgs, 'filter' | 'paging' | 'sorting'>>;
-  vehicleEngine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType, RequireFields<QueryVehicleEngineArgs, 'id'>>;
-  vehicleEngines?: Resolver<ResolversTypes['VehicleEngineConnection'], ParentType, ContextType, RequireFields<QueryVehicleEnginesArgs, 'filter' | 'paging' | 'sorting'>>;
   vehicleModel?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType, RequireFields<QueryVehicleModelArgs, 'id'>>;
-  vehicleModelBodies?: Resolver<ResolversTypes['VehicleModelBodyConnection'], ParentType, ContextType, RequireFields<QueryVehicleModelBodiesArgs, 'filter' | 'paging' | 'sorting'>>;
-  vehicleModelBody?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType, RequireFields<QueryVehicleModelBodyArgs, 'id'>>;
   vehicleModels?: Resolver<ResolversTypes['VehicleModelConnection'], ParentType, ContextType, RequireFields<QueryVehicleModelsArgs, 'filter' | 'paging' | 'sorting'>>;
-  vehicleTransmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType, RequireFields<QueryVehicleTransmissionArgs, 'id'>>;
-  vehicleTransmissions?: Resolver<ResolversTypes['VehicleTransmissionConnection'], ParentType, ContextType, RequireFields<QueryVehicleTransmissionsArgs, 'filter' | 'paging' | 'sorting'>>;
 }>;
 
 export type ServiceLogResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceLog'] = ResolversParentTypes['ServiceLog']> = ResolversObject<{
@@ -19113,11 +18556,9 @@ export type UserMinAggregateResolvers<ContextType = any, ParentType extends Reso
 }>;
 
 export type UserVehicleResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserVehicle'] = ResolversParentTypes['UserVehicle']> = ResolversObject<{
-  body?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   customModel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  engine?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   model?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType>;
@@ -19125,7 +18566,6 @@ export type UserVehicleResolvers<ContextType = any, ParentType extends Resolvers
   owner?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['UserVechileStatus']>, ParentType, ContextType>;
-  transmission?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -19267,6 +18707,44 @@ export type UserVehiclesMinAggregateResolvers<ContextType = any, ParentType exte
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type VehicleBaseModelResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBaseModel'] = ResolversParentTypes['VehicleBaseModel']> = ResolversObject<{
+  brand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  parent?: Resolver<Maybe<ResolversTypes['VehicleBaseModel']>, ParentType, ContextType>;
+  refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBaseModelConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBaseModelConnection'] = ResolversParentTypes['VehicleBaseModelConnection']> = ResolversObject<{
+  edges?: Resolver<Array<ResolversTypes['VehicleBaseModelEdge']>, ParentType, ContextType>;
+  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBaseModelDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBaseModelDeleteResponse'] = ResolversParentTypes['VehicleBaseModelDeleteResponse']> = ResolversObject<{
+  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type VehicleBaseModelEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBaseModelEdge'] = ResolversParentTypes['VehicleBaseModelEdge']> = ResolversObject<{
+  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
+  node?: Resolver<ResolversTypes['VehicleBaseModel'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type VehicleBodyResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBody'] = ResolversParentTypes['VehicleBody']> = ResolversObject<{
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -19302,12 +18780,10 @@ export type VehicleBodyEdgeResolvers<ContextType = any, ParentType extends Resol
 export type VehicleBrandResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBrand'] = ResolversParentTypes['VehicleBrand']> = ResolversObject<{
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -19321,12 +18797,10 @@ export type VehicleBrandConnectionResolvers<ContextType = any, ParentType extend
 export type VehicleBrandDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleBrandDeleteResponse'] = ResolversParentTypes['VehicleBrandDeleteResponse']> = ResolversObject<{
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -19337,84 +18811,26 @@ export type VehicleBrandEdgeResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type VehicleEngineResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngine'] = ResolversParentTypes['VehicleEngine']> = ResolversObject<{
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleEngineConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngineConnection'] = ResolversParentTypes['VehicleEngineConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['VehicleEngineEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleEngineDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngineDeleteResponse'] = ResolversParentTypes['VehicleEngineDeleteResponse']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleEngineEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleEngineEdge'] = ResolversParentTypes['VehicleEngineEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['VehicleEngine'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type VehicleModelResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModel'] = ResolversParentTypes['VehicleModel']> = ResolversObject<{
-  bodies?: Resolver<Array<ResolversTypes['VehicleModelBody']>, ParentType, ContextType, RequireFields<VehicleModelBodiesArgs, 'filter' | 'sorting'>>;
-  brand?: Resolver<Maybe<ResolversTypes['VehicleBrand']>, ParentType, ContextType>;
+  baseModel?: Resolver<ResolversTypes['VehicleBaseModel'], ParentType, ContextType>;
+  body?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType>;
+  brand?: Resolver<ResolversTypes['VehicleBrand'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  drive?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  engines?: Resolver<Array<ResolversTypes['VehicleEngine']>, ParentType, ContextType, RequireFields<VehicleModelEnginesArgs, 'filter' | 'sorting'>>;
+  engineType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  fuelType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  maxPower?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  maxTorque?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  parent?: Resolver<Maybe<ResolversTypes['VehicleModel']>, ParentType, ContextType>;
-  startYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  transmissions?: Resolver<Array<ResolversTypes['VehicleTransmission']>, ParentType, ContextType, RequireFields<VehicleModelTransmissionsArgs, 'filter' | 'sorting'>>;
+  refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  transmission?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleModelBodyResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBody'] = ResolversParentTypes['VehicleModelBody']> = ResolversObject<{
-  body?: Resolver<ResolversTypes['VehicleBody'], ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  model?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType>;
-  picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleModelBodyConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBodyConnection'] = ResolversParentTypes['VehicleModelBodyConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['VehicleModelBodyEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleModelBodyDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBodyDeleteResponse'] = ResolversParentTypes['VehicleModelBodyDeleteResponse']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleModelBodyEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelBodyEdge'] = ResolversParentTypes['VehicleModelBodyEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['VehicleModelBody'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -19427,11 +18843,19 @@ export type VehicleModelConnectionResolvers<ContextType = any, ParentType extend
 export type VehicleModelDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelDeleteResponse'] = ResolversParentTypes['VehicleModelDeleteResponse']> = ResolversObject<{
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  drive?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   endYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  engineType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  fuelType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  images?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  maxPower?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  maxTorque?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  transmission?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -19439,38 +18863,6 @@ export type VehicleModelDeleteResponseResolvers<ContextType = any, ParentType ex
 export type VehicleModelEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleModelEdge'] = ResolversParentTypes['VehicleModelEdge']> = ResolversObject<{
   cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
   node?: Resolver<ResolversTypes['VehicleModel'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleTransmissionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmission'] = ResolversParentTypes['VehicleTransmission']> = ResolversObject<{
-  createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleTransmissionConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmissionConnection'] = ResolversParentTypes['VehicleTransmissionConnection']> = ResolversObject<{
-  edges?: Resolver<Array<ResolversTypes['VehicleTransmissionEdge']>, ParentType, ContextType>;
-  pageInfo?: Resolver<ResolversTypes['PageInfo'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleTransmissionDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmissionDeleteResponse'] = ResolversParentTypes['VehicleTransmissionDeleteResponse']> = ResolversObject<{
-  createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type VehicleTransmissionEdgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['VehicleTransmissionEdge'] = ResolversParentTypes['VehicleTransmissionEdge']> = ResolversObject<{
-  cursor?: Resolver<ResolversTypes['ConnectionCursor'], ParentType, ContextType>;
-  node?: Resolver<ResolversTypes['VehicleTransmission'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -19855,6 +19247,10 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   UserVehiclesCountAggregate?: UserVehiclesCountAggregateResolvers<ContextType>;
   UserVehiclesMaxAggregate?: UserVehiclesMaxAggregateResolvers<ContextType>;
   UserVehiclesMinAggregate?: UserVehiclesMinAggregateResolvers<ContextType>;
+  VehicleBaseModel?: VehicleBaseModelResolvers<ContextType>;
+  VehicleBaseModelConnection?: VehicleBaseModelConnectionResolvers<ContextType>;
+  VehicleBaseModelDeleteResponse?: VehicleBaseModelDeleteResponseResolvers<ContextType>;
+  VehicleBaseModelEdge?: VehicleBaseModelEdgeResolvers<ContextType>;
   VehicleBody?: VehicleBodyResolvers<ContextType>;
   VehicleBodyConnection?: VehicleBodyConnectionResolvers<ContextType>;
   VehicleBodyDeleteResponse?: VehicleBodyDeleteResponseResolvers<ContextType>;
@@ -19863,21 +19259,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   VehicleBrandConnection?: VehicleBrandConnectionResolvers<ContextType>;
   VehicleBrandDeleteResponse?: VehicleBrandDeleteResponseResolvers<ContextType>;
   VehicleBrandEdge?: VehicleBrandEdgeResolvers<ContextType>;
-  VehicleEngine?: VehicleEngineResolvers<ContextType>;
-  VehicleEngineConnection?: VehicleEngineConnectionResolvers<ContextType>;
-  VehicleEngineDeleteResponse?: VehicleEngineDeleteResponseResolvers<ContextType>;
-  VehicleEngineEdge?: VehicleEngineEdgeResolvers<ContextType>;
   VehicleModel?: VehicleModelResolvers<ContextType>;
-  VehicleModelBody?: VehicleModelBodyResolvers<ContextType>;
-  VehicleModelBodyConnection?: VehicleModelBodyConnectionResolvers<ContextType>;
-  VehicleModelBodyDeleteResponse?: VehicleModelBodyDeleteResponseResolvers<ContextType>;
-  VehicleModelBodyEdge?: VehicleModelBodyEdgeResolvers<ContextType>;
   VehicleModelConnection?: VehicleModelConnectionResolvers<ContextType>;
   VehicleModelDeleteResponse?: VehicleModelDeleteResponseResolvers<ContextType>;
   VehicleModelEdge?: VehicleModelEdgeResolvers<ContextType>;
-  VehicleTransmission?: VehicleTransmissionResolvers<ContextType>;
-  VehicleTransmissionConnection?: VehicleTransmissionConnectionResolvers<ContextType>;
-  VehicleTransmissionDeleteResponse?: VehicleTransmissionDeleteResponseResolvers<ContextType>;
-  VehicleTransmissionEdge?: VehicleTransmissionEdgeResolvers<ContextType>;
 }>;
 

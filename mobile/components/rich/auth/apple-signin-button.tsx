@@ -1,5 +1,5 @@
-import { Button } from "./button"
-import { Text } from './text'
+import { Button } from "../../ui/button"
+import { Text } from '../../ui/text'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export type AppleSignInButtonProps = {
