@@ -21,8 +21,7 @@ const AuthScreen = () => {
           <Button
             size={'lg'}
             className="bg-primary relative"
-            // onPress={() => router.push({ pathname: '/auth/login' })}
-            onPress={() => router.push({ pathname: '/onboarding' })}
+            onPress={() => router.push({ pathname: '/auth/login' })}
           >
             <Text>Getting Started</Text>
             <View className='absolute top-2.5 right-4'>
