@@ -7,13 +7,14 @@
   "devDependencies": {
     "@types/lodash": "^4.17.12",
     "@types/node": "^22.7.7",
-    "@types/user-agents": "^1.0.4"
+    "@types/user-agents": "^1.0.4",
+    "tsx": "^4.19.2"
   },
   "scripts": {
-    "brands": "npx tsx src/crawl-brands.ts",
-    "base-models": "npx tsx src/crawl-base-models.ts",
-    "vehicles": "npx tsx src/crawl-cars-data.ts",
-    "vehicles:images": "npx tsx src/crawl-cars-images.ts"
+    "brands": "yarn tsx src/crawl-brands.ts",
+    "base-models": "yarn tsx src/crawl-base-models.ts",
+    "vehicles": "yarn tsx src/crawl-cars-data.ts",
+    "vehicles:images": "yarn tsx src/crawl-cars-images.ts"
   },
   "dependencies": {
     "axios": "^1.7.7",
