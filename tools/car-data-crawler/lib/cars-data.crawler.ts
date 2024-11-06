@@ -486,6 +486,7 @@ export namespace CarsDataCrawler {
                 }
 
                 baseModels[modelIndex].subBaseModels = subBaseModels
+                Logger.success('[COMPLETE] BASE MODEL:', baseModel.baseModelName)
             }
 
             parsedUrls.push(brand.brandUrl)
@@ -524,7 +525,6 @@ export namespace CarsDataCrawler {
                         baseModelUrl,
                         baseModelImageUrl: getOnlineImageUrlFromThumbUrl(baseModelImageUrl)
                     })
-                    Logger.success('[SUCCESS] MODEL', baseModelName, baseModelUrl)
                 }
             }
         }
