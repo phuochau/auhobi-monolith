@@ -399,9 +399,9 @@ export namespace CarsDataCrawler {
      * Base Model
      */
     export const BASE_MODEL_BASE_DIR = path.join(BASE_DIR, 'base_models')
-    export const BASE_MODEL_PARSED_URL_PATH = path.join(BRAND_BASE_DIR, 'parsed_urls.json')
-    export const BASE_MODEL_DATA_PATH = path.join(BRAND_BASE_DIR, 'base_models.json')
-    export const BASE_MODEL_IMAGES_DIR = path.join(BRAND_BASE_DIR, 'images')
+    export const BASE_MODEL_PARSED_URL_PATH = path.join(BASE_MODEL_BASE_DIR, 'parsed_urls.json')
+    export const BASE_MODEL_DATA_PATH = path.join(BASE_MODEL_BASE_DIR, 'base_models.json')
+    export const BASE_MODEL_IMAGES_DIR = path.join(BASE_MODEL_BASE_DIR, 'images')
 
     export const baseModelCrawlAll = async (browser: Browser): Promise<void> => {
         if (!fs.existsSync(BASE_MODEL_IMAGES_DIR)) {
@@ -424,7 +424,7 @@ export namespace CarsDataCrawler {
             const brandName = await element.getAttribute('title')
             const brandUrl = await element.getAttribute('href')
 
-            const isExist = brands.find(item => item.brandName)
+            const isExist = brands.find(item => item.brandName === brandName)
 
             if (!Boolean(isExist)) {
                 brands.push({
