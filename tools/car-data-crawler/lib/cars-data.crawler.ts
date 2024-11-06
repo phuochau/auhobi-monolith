@@ -418,16 +418,16 @@ export namespace CarsDataCrawler {
         Logger.info('[FOUND]', brandElements.length, 'brands')
 
         const parsedUrls: string[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_PARSED_URL_PATH, '[]'))
-        const brands: any[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_DATA_PATH, '[]'))
+        const parsedBaseModels: any[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_DATA_PATH, '[]'))
 
         for (const element of brandElements) {
             const brandName = await element.getAttribute('title')
             const brandUrl = await element.getAttribute('href')
 
-            const isExist = brands.find(item => item.brandName === brandName)
+            const isExist = parsedBaseModels.find(item => item.brandName === brandName)
 
             if (!Boolean(isExist)) {
-                brands.push({
+                parsedBaseModels.push({
                     brandName,
                     brandUrl
                 })
@@ -436,8 +436,8 @@ export namespace CarsDataCrawler {
         await brandsPage.close()
 
         // Process models
-        for (let brandIndex = 0; brandIndex < brands.length; brandIndex++) {
-            const brand = brands[brandIndex]
+        for (let brandIndex = 0; brandIndex < parsedBaseModels.length; brandIndex++) {
+            const brand = parsedBaseModels[brandIndex]
             Logger.info('=========', brand.brandName, '=========')
             Logger.info('[BRAND URL]', brand.brandUrl)
 
@@ -489,14 +489,14 @@ export namespace CarsDataCrawler {
             }
 
             parsedUrls.push(brand.brandUrl)
-            brands[brandIndex].baseModels = baseModels
+            parsedBaseModels[brandIndex].baseModels = baseModels
 
-            FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(brands))
+            FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(parsedBaseModels))
             FileUtils.overwrite(BASE_MODEL_PARSED_URL_PATH, JSON.stringify(parsedUrls))
             Logger.info('[COMPLETE] BRAND', brand.brandName)
         }
 
-        FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(brands))
+        FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(parsedBaseModels))
         Logger.success('DONE!!!!!!')
     }
 
