@@ -67,7 +67,7 @@ type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
   ButtonExtProps;
 
 const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>(
-  ({ className, variant, size = 'lg', loading, children, ...props }, ref) => {
+  ({ className, variant, size, loading, children, ...props }, ref) => {
     return (
       <TextClassContext.Provider
         value={cn(

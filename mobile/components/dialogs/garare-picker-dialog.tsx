@@ -16,7 +16,6 @@ import { Garage, GarageConnection, GarageSortFields, QueryGaragesArgs, SortDirec
 import { GaragesQuery } from '@/graphql/gql/queries/garages';
 import { TriangleAlert } from '@/lib/icons/TriangleAlert';
 import React from 'react';
-import { X } from '@/lib/icons/X';
 
 export enum GarageType {
     DEFAULT = 1,
@@ -162,7 +161,7 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
             </ScrollView>
 
             <View className='px-5' style={{ paddingBottom: insets.bottom + 16, paddingTop: 16 }}>
-                <Button variant={'outline'} onPress={onRequestClose}>
+                <Button size={'lg'} variant={'outline'} onPress={onRequestClose}>
                     <Text>Close</Text>
                 </Button>
             </View>

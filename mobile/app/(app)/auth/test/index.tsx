@@ -189,7 +189,7 @@ const AddServiceHistory = () => {
               name="bills"
             />
 
-            <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+            <Button loading={submitting} disabled={submitting} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Save</Text>
             </Button>
           </View>

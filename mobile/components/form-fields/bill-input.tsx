@@ -8,6 +8,10 @@ import { Plus } from "@/lib/icons/Plus";
 import { Input } from "../ui/input";
 import { ServiceLogBillDto } from "@/graphql/gql/generated-models";
 import { Label } from "../ui/label";
+import { X } from "@/lib/icons/X";
+import _ from "lodash";
+import Feather from '@expo/vector-icons/Feather';
+import { useTheme } from "@react-navigation/native";
 
 /**
  * BillDisplay
@@ -15,33 +19,41 @@ import { Label } from "../ui/label";
 export type BillDisplayProps = React.ComponentPropsWithoutRef<typeof View> & {
     data: ServiceLogBillDto,
     imageClassName?: string,
-    onChange: (change: ServiceLogBillDto) => any
+    onChange: (change: ServiceLogBillDto) => any,
+    onRequestRemove?: () => any
 }
 
 
 const BillDisplay =  React.forwardRef<
     React.ElementRef<typeof View>,
     BillDisplayProps
->(({ className, data, imageClassName, onChange, ...props }, ref) => (
-    <View ref={ref} className={cn("w-full relative flex flex-row items-center gap-2", className)} {...props}>
-        <Image
-            source={{ uri: data.media! }}
-            className={cn("w-12 h-12", imageClassName)}
-            resizeMode="cover"
-        />
-        <Input
-            className="flex-1"
-            keyboardType="number-pad"
-            placeholder="Total (e.g: 200000000)"
-            value={data.total ? data.total.toString() : ''}
-            onChangeText={(total) => onChange({
-                ...data,
-                total: total?.length ? parseInt(total): undefined
-            })}
-        />
-        <Label nativeID="totalCurrency">đ</Label>
-    </View>
-));
+>(({ className, data, imageClassName, onChange, onRequestRemove, ...props }, ref) => {
+    const { colors } = useTheme();
+    
+    return (
+        <View ref={ref} className={cn("w-full relative flex flex-row items-center gap-2", className)} {...props}>
+            <Image
+                source={{ uri: data.media! }}
+                className={cn("w-12 h-12", imageClassName)}
+                resizeMode="cover"
+            />
+            <Input
+                containerClassName="flex-1"
+                keyboardType="number-pad"
+                placeholder="Total (e.g: 200000000)"
+                value={data.total ? data.total.toString() : ''}
+                onChangeText={(total) => onChange({
+                    ...data,
+                    total: total?.length ? parseInt(total): undefined
+                })}
+            />
+            <Label nativeID="totalCurrency">đ</Label>
+            <Button onPress={onRequestRemove} variant={'link'} size={'icon'}>
+            <Feather name="minus-circle" size={24} color={colors['notification']} />
+            </Button>
+        </View>
+    )
+});
 BillDisplay.displayName = 'BillDisplay';
 
 /**
@@ -94,6 +106,12 @@ const BillInput =  React.forwardRef<
         }
     }
 
+    function onRemoveItemAtIndex(index: number) {
+        if (onChange) {
+            onChange(_.remove(items, index))
+        }
+    }
+
     return (
         <View
             ref={ref}
@@ -109,6 +127,7 @@ const BillInput =  React.forwardRef<
                         key={`${index}-${item.media}`}
                         data={item}
                         onChange={change => onItemChange(change, index)}
+                        onRequestRemove={() => onRemoveItemAtIndex(index)}
                     />
                 )}
             </View>
