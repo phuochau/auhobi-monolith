@@ -117,7 +117,6 @@ const AddServiceHistory = () => {
               name="type"
             />
             <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
-
             
             <Controller
               control={control}
