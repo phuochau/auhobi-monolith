@@ -2,12 +2,10 @@ import { registerEnumType } from "@nestjs/graphql";
 
 export enum ServiceLogType {
   MAINTENANCE = 1,
-  REPAIR = 2,
-  DETAILING = 3,
-  RETROFIT = 4,
-  TUNING = 5,
-  SOFTWARE = 6,
-  PAPERWORK = 7,
+  RETROFIT = 2,
+  UPGRADING = 3,
+  TUNING = 4,
+  DETAILING = 5,
   OTHER = 100
 }
 

@@ -10399,11 +10399,9 @@ export enum ServiceLogType {
   Detailing = 'DETAILING',
   Maintenance = 'MAINTENANCE',
   Other = 'OTHER',
-  Paperwork = 'PAPERWORK',
-  Repair = 'REPAIR',
   Retrofit = 'RETROFIT',
-  Software = 'SOFTWARE',
-  Tuning = 'TUNING'
+  Tuning = 'TUNING',
+  Upgrading = 'UPGRADING'
 }
 
 export type ServiceLogTypeFilterComparison = {
