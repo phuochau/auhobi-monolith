@@ -1,6 +1,5 @@
 import { ScrollView, View } from "react-native"
 import { Stack, useRouter } from "expo-router"
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Text } from '@/components/ui/text'
@@ -90,6 +89,36 @@ const AddServiceHistory = () => {
           <Text className="text-muted-foreground mb-8">It's better to remember everything</Text>
           <View className="flex-1 gap-4">
             <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Select
+                  value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
+                  onValueChange={(option) => {
+                    onChange(option?.value)
+                    onBlur()
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={'Select Type'}
+                      value={value}
+                    />
+                  </SelectTrigger>
+                  <SelectContent className="w-full">
+                    {types.map(type =>
+                      <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
+                        {type[0]}
+                      </SelectItem>)}
+                  </SelectContent>
+                </Select>
+              )}
+              name="type"
+            />
+            <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
+
+            
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
@@ -122,39 +151,11 @@ const AddServiceHistory = () => {
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <Select
-                  value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
-                  onValueChange={(option) => {
-                    onChange(option?.value)
-                    onBlur()
-                  }}
-                >
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={'Select Type'}
-                      value={value}
-                    />
-                  </SelectTrigger>
-                  <SelectContent className="w-full">
-                    {types.map(type =>
-                      <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
-                        {type[0]}
-                      </SelectItem>)}
-                  </SelectContent>
-                </Select>
-              )}
-              name="type"
-            />
-            <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
-
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
                 <GarageInput
                   value={(value as GaragePickerResult | undefined)}
                   textInput={{
                     onBlur: onBlur,
-                    placeholder: "Garage"
+                    placeholder: "Garage (optional)"
                   }}
                   onChange={onChange}
                 />
