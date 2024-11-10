@@ -5,6 +5,7 @@ import { Mail } from '@/lib/icons/Mail';
 import { Lock } from '@/lib/icons/Lock';
 import { Eye } from '@/lib/icons/Eye';
 import { EyeOff } from '@/lib/icons/EyeOff';
+import numeral from 'numeral'
 
 export type InputProps = React.ComponentPropsWithoutRef<typeof TextInput> & {
   icon?: React.ReactElement,
@@ -15,12 +16,23 @@ export type InputProps = React.ComponentPropsWithoutRef<typeof TextInput> & {
 const Input = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   InputProps
->(({ icon, className, containerClassName, placeholderClassName, secureTextEntry, ...props }, ref) => {
+>(({
+  icon,
+  className,
+  containerClassName,
+  placeholderClassName,
+  secureTextEntry,
+  value,
+  onChangeText,
+  ...props
+}, ref) => {
   const [shownPassword, setShownPassword] = React.useState(false)
+  const isNumericInput = props.keyboardType === 'numeric'
+  const isEmailInput = props.keyboardType === 'email-address'
 
   let rightIcon = null
 
-  if (props.keyboardType === 'email-address') {
+  if (isEmailInput) {
     icon = <Mail className="text-muted-foreground" size={20} />
   }
 
@@ -31,6 +43,22 @@ const Input = React.forwardRef<
   }
 
 
+  function onUpdateText(text: string): void {
+    if (onChangeText) {
+      if (isNumericInput) {
+        const numValue = numeral(text).value()
+        onChangeText(numValue ? `${numValue}` : '')
+      } else {
+        onChangeText(text)
+      }
+    }
+  }
+
+  let maskedValue = value
+
+  if (isNumericInput) {
+    maskedValue = numeral(value || '').format('0,0')
+  }
 
   return (
     <View className={cn('relative', containerClassName)}>
@@ -45,6 +73,8 @@ const Input = React.forwardRef<
         )}
         placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
         {...props}
+        value={maskedValue}
+        onChangeText={text => onUpdateText(text)}
         secureTextEntry={secureTextEntry && !shownPassword}
       />
       {icon && <View className='absolute h-full flex items-center justify-center left-4'>{icon}</View>}
