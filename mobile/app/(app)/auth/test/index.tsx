@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label"
 import { GarageInput } from "@/components/form-fields/garage-input"
 import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
 import { BillInput } from "@/components/form-fields/bill-input"
+import React from "react"
 
 const formSchema = z.object({
   date: z.string(),
@@ -81,18 +82,14 @@ const AddServiceHistory = () => {
   }
 
   return (
-    <View className="w-full h-full">
-      <Stack.Screen options={{ title: 'Add Service History' }} />
-
-      <ScrollView className="flex-1">
-        <Card className="w-full">
-          <CardHeader>
-            <CardDescription>Add a service history of your car</CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-
+    <>
+      <Stack.Screen options={{ headerShown: true, headerTitle: '' }} />
+      <View className="w-full h-full flex flex-col p-6">
+        <ScrollView className="flex-1">
+          <Text className="text-4xl mb-2 text-foreground font-semibold">Add Service History</Text>
+          <Text className="text-muted-foreground mb-8">It's better to remember everything</Text>
+          <View className="flex-1 gap-4">
             <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
-
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
@@ -195,10 +192,10 @@ const AddServiceHistory = () => {
             <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Save</Text>
             </Button>
-          </CardContent>
-        </Card>
-      </ScrollView>
-    </View>
+          </View>
+        </ScrollView>
+      </View>
+    </>
   )
 }
 

@@ -69,6 +69,7 @@ const DateTimeInput = forwardRef<
                 placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
                 value={displayText}
                 {...props}
+                editable={false}
             />
 
             <View className="absolute right-2.5 top-2.5">

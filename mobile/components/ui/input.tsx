@@ -7,14 +7,15 @@ import { Eye } from '@/lib/icons/Eye';
 import { EyeOff } from '@/lib/icons/EyeOff';
 
 export type InputProps = React.ComponentPropsWithoutRef<typeof TextInput> & {
-  icon?: React.ReactElement
+  icon?: React.ReactElement,
+  containerClassName?: string
 }
 
 
 const Input = React.forwardRef<
   React.ElementRef<typeof TextInput>,
   InputProps
->(({ icon, className, placeholderClassName, secureTextEntry, ...props }, ref) => {
+>(({ icon, className, containerClassName, placeholderClassName, secureTextEntry, ...props }, ref) => {
   const [shownPassword, setShownPassword] = React.useState(false)
 
   let rightIcon = null
@@ -32,7 +33,7 @@ const Input = React.forwardRef<
 
 
   return (
-    <View className='relative'>
+    <View className={cn('relative', containerClassName)}>
       <TextInput
         ref={ref}
         className={cn(

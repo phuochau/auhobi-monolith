@@ -1,7 +1,7 @@
 'use client'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, Image, Pressable, ScrollView } from 'react-native';
+import { View, Image, Pressable, ScrollView, Platform } from 'react-native';
 import { Input } from '../ui/input';
 import { Portal } from '@rn-primitives/portal';
 import { Separator } from '../ui/separator';
@@ -16,6 +16,7 @@ import { Garage, GarageConnection, GarageSortFields, QueryGaragesArgs, SortDirec
 import { GaragesQuery } from '@/graphql/gql/queries/garages';
 import { TriangleAlert } from '@/lib/icons/TriangleAlert';
 import React from 'react';
+import { X } from '@/lib/icons/X';
 
 export enum GarageType {
     DEFAULT = 1,
@@ -112,12 +113,16 @@ const GaragePickerDialog = (props: GaragePickerDialogProps) => {
   return (
     <Portal name='garage-input-model'>
         <View className='absolute top-0 left-0 bottom-0 right-0 bg-background flex flex-col' style={{ paddingTop: insets.top }}>
-            <View className='px-5 py-4'>
-                <Input value={keyword} onChangeText={updateKeyword} placeholder='Search Garage' />
+            <View className='px-5 py-4 flex flex-row items-center gap-2 w-full'>
+                <Button size={'icon'} variant={'link'} onPress={onRequestClose}>
+                    <Image source={require('@/assets/icons/left-arrow.png')} className='w-10 h-10' resizeMode='contain' />
+                </Button>
+                <Input value={keyword} onChangeText={updateKeyword} placeholder='Search Garage' containerClassName='flex-1' />
             </View>
+            
             <Separator />
             
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps={'always'}>
                 {emptyResult && Boolean(keyword.length) && !searching &&
                     <View className="flex flex-col items-center justify-center px-5 gap-2 py-12">
                         <TriangleAlert className='text-muted-foreground' size={48} />
