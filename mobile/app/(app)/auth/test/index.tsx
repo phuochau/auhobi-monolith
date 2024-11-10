@@ -23,11 +23,13 @@ import { GarageInput } from "@/components/form-fields/garage-input"
 import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
 import { BillInput } from "@/components/form-fields/bill-input"
 import React from "react"
+import { Textarea } from "@/components/ui/textarea"
 
 const formSchema = z.object({
+  type: z.string(),
+  description: z.string().optional(),
   date: z.string(),
   mileage: z.string(),
-  type: z.string(),
   media: z.string().array().optional(),
   garage: z.object({
     type: z.nativeEnum(GarageType),
@@ -117,6 +119,20 @@ const AddServiceHistory = () => {
               name="type"
             />
             <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Textarea
+                  placeholder="Description (optional)"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="description"
+            />
+            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
             
             <Controller
               control={control}
@@ -162,6 +178,20 @@ const AddServiceHistory = () => {
               name="garage"
             />
             <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Textarea
+                  placeholder="Description"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="description"
+            />
+            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
 
             <Label nativeID="MediaLabel">Images</Label>
             <Controller
