@@ -1,7 +1,7 @@
 'use client'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { View, Image, Pressable, ScrollView, Platform } from 'react-native';
+import { View, Image, Pressable, ScrollView } from 'react-native';
 import { Input } from '../ui/input';
 import { Portal } from '@rn-primitives/portal';
 import { Separator } from '../ui/separator';

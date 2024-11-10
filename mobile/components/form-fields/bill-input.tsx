@@ -49,7 +49,7 @@ const BillDisplay =  React.forwardRef<
             />
             <Label nativeID="totalCurrency">đ</Label>
             <Button onPress={onRequestRemove} variant={'link'} size={'icon'}>
-            <Feather name="minus-circle" size={24} color={colors['notification']} />
+                <Feather name="minus-circle" size={24} color={colors['notification']} />
             </Button>
         </View>
     )
@@ -108,7 +108,8 @@ const BillInput =  React.forwardRef<
 
     function onRemoveItemAtIndex(index: number) {
         if (onChange) {
-            onChange(_.remove(items, index))
+            _.pullAt(items, index)
+            onChange(items)
         }
     }
 

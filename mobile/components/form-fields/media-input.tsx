@@ -1,33 +1,49 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import { Button } from "../ui/button";
 import { Text } from "../ui/text";
 import { Pickers } from "@/lib/pickers";
 import { Plus } from "@/lib/icons/Plus";
+import Feather from "@expo/vector-icons/Feather";
+import { useTheme } from "@react-navigation/native";
+import { BlurView } from 'expo-blur';
+import _ from "lodash";
 
 /**
  * ImageDisplay
  */
 export type ImageDisplayProps = React.ComponentPropsWithoutRef<typeof Image> & {
-    containerClassName?: string
+    containerClassName?: string,
+    onRequestRemove?: () => any
 }
 
 
-const ImageDisplay =  React.forwardRef<
+const ImageDisplay = React.forwardRef<
     React.ElementRef<typeof Image>,
     ImageDisplayProps
->(({ className, containerClassName, source, ...props }, ref) => (
-    <View className={cn("relative", containerClassName)}>
-        <Image
-            ref={ref}
-            source={source}
-            className={cn("", className)}
-            resizeMode="cover"
-            {...props}
-        />
-    </View>
-));
+>(({ className, containerClassName, source, onRequestRemove, ...props }, ref) => {
+    const { colors } = useTheme();
+    
+    return (
+        <View className={cn("relative", containerClassName)}>
+            <View className="relative rounded-xl overflow-hidden">
+                <Image
+                    ref={ref}
+                    source={source}
+                    className={cn("w-full h-full rounded-xl", className)}
+                    resizeMode="cover"
+                    {...props}
+                />
+                <TouchableOpacity onPress={onRequestRemove} className="absolute top-0 right-0">
+                    <BlurView intensity={100} className="p-0.5">
+                        <Feather name="x" size={20} color={colors['background']} />
+                    </BlurView>
+                </TouchableOpacity>
+            </View>
+        </View>
+    )
+});
 ImageDisplay.displayName = 'ImageDisplay';
 
 /**
@@ -42,7 +58,7 @@ type MediaInputProps = React.ComponentPropsWithoutRef<typeof View> & {
     onBlur?: () => any
 }
 
-const MediaInput =  React.forwardRef<
+const MediaInput = React.forwardRef<
     React.ElementRef<typeof View>,
     MediaInputProps
 >(({
@@ -68,6 +84,13 @@ const MediaInput =  React.forwardRef<
         }
     }
 
+    function onRemoveImage(index: number): void {
+        if (onChange) {
+            _.pullAt(images, index)
+            onChange(images)
+        }
+    }
+
     return (
         <View
             ref={ref}
@@ -77,8 +100,15 @@ const MediaInput =  React.forwardRef<
                 <Text>{addText}</Text>
                 <Plus className="text-secondary-foreground" width={16}></Plus>
             </Button>
-            <View className={cn('flex flex-row flex-wrap gap-2 mt-4', imageContainerClassName)}>
-                {images.map((uri, index) => <ImageDisplay key={`${index}-${uri}`} source={{ uri }} className="w-16 h-16" />)}
+            <View className={cn('flex flex-row flex-wrap mt-4 -mx-1', imageContainerClassName)}>
+                {images.map((uri, index) =>
+                    <ImageDisplay 
+                        key={`${index}-${uri}`}
+                        source={{ uri }}
+                        containerClassName="w-1/4 aspect-square p-1"
+                        onRequestRemove={() => onRemoveImage(index)}
+                    />
+                )}
             </View>
         </View>
     )
