@@ -1,6 +1,5 @@
 import { ScrollView, View } from "react-native"
 import { Stack, useRouter } from "expo-router"
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Text } from '@/components/ui/text'
@@ -23,16 +22,21 @@ import { Label } from "@/components/ui/label"
 import { GarageInput } from "@/components/form-fields/garage-input"
 import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-picker-dialog"
 import { BillInput } from "@/components/form-fields/bill-input"
+import React from "react"
+import { Textarea } from "@/components/ui/textarea"
+import { LinkInput } from "@/components/form-fields/link-input"
 
 const formSchema = z.object({
+  type: z.string(),
+  description: z.string().optional(),
   date: z.string(),
   mileage: z.string(),
-  type: z.string(),
-  media: z.string().array().optional(),
   garage: z.object({
     type: z.nativeEnum(GarageType),
     data: z.any()
   }).optional(),
+  links: z.string().url().array().optional(),
+  media: z.string().array().optional(),
   bills: z.object({
     total: z.number(),
     media: z.string()
@@ -81,46 +85,14 @@ const AddServiceHistory = () => {
   }
 
   return (
-    <View className="w-full h-full">
-      <Stack.Screen options={{ title: 'Add Service History' }} />
-
-      <ScrollView className="flex-1">
-        <Card className="w-full">
-          <CardHeader>
-            <CardDescription>Add a service history of your car</CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-
+    <>
+      <Stack.Screen options={{ headerShown: true, headerTitle: '' }} />
+      <View className="w-full h-full flex flex-col">
+        <ScrollView className="flex-1" contentContainerClassName="p-6">
+          <Text className="text-4xl mb-2 text-foreground font-semibold">Add Service History</Text>
+          <Text className="text-muted-foreground mb-8">It's better to remember everything</Text>
+          <View className="flex-1 gap-4">
             <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
-
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <DateTimeInput
-                  placeholder="Date"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="date"
-            />
-            <FormMessage nativeID="DateError" error={errors.date}></FormMessage>
-
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  placeholder="Mileage"
-                  keyboardType="number-pad"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="mileage"
-            />
-            <FormMessage nativeID="MileageError" error={errors.mileage}></FormMessage>
 
             <Controller
               control={control}
@@ -153,11 +125,54 @@ const AddServiceHistory = () => {
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
+                <Textarea
+                  placeholder="Description (optional)"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="description"
+            />
+            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
+            
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <DateTimeInput
+                  placeholder="Date"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="date"
+            />
+            <FormMessage nativeID="DateError" error={errors.date}></FormMessage>
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Mileage"
+                  keyboardType="numeric"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="mileage"
+            />
+            <FormMessage nativeID="MileageError" error={errors.mileage}></FormMessage>
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
                 <GarageInput
                   value={(value as GaragePickerResult | undefined)}
                   textInput={{
                     onBlur: onBlur,
-                    placeholder: "Garage"
+                    placeholder: "Garage (optional)"
                   }}
                   onChange={onChange}
                 />
@@ -165,6 +180,34 @@ const AddServiceHistory = () => {
               name="garage"
             />
             <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
+
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Textarea
+                  placeholder="Description"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="description"
+            />
+            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
+
+            <Label nativeID="LinkLabel">Links</Label>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <LinkInput
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                />
+              )}
+              name="links"
+            />
+            <FormMessage nativeID="LinkError" error={errors?.links?.length ? errors.links.pop!() : undefined}></FormMessage>
 
             <Label nativeID="MediaLabel">Images</Label>
             <Controller
@@ -178,6 +221,7 @@ const AddServiceHistory = () => {
               )}
               name="media"
             />
+            <FormMessage nativeID="MediaError" error={errors?.media?.length ? errors.media.pop!() : undefined}></FormMessage>
 
             <Label nativeID="BillsLabel">Bills</Label>
             <Controller
@@ -191,14 +235,15 @@ const AddServiceHistory = () => {
               )}
               name="bills"
             />
+            <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
 
-            <Button loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+            <Button loading={submitting} disabled={submitting} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Save</Text>
             </Button>
-          </CardContent>
-        </Card>
-      </ScrollView>
-    </View>
+          </View>
+        </ScrollView>
+      </View>
+    </>
   )
 }
 
