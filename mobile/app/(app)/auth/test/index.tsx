@@ -85,8 +85,8 @@ const AddServiceHistory = () => {
   return (
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '' }} />
-      <View className="w-full h-full flex flex-col p-6">
-        <ScrollView className="flex-1">
+      <View className="w-full h-full flex flex-col">
+        <ScrollView className="flex-1" contentContainerClassName="p-6">
           <Text className="text-4xl mb-2 text-foreground font-semibold">Add Service History</Text>
           <Text className="text-muted-foreground mb-8">It's better to remember everything</Text>
           <View className="flex-1 gap-4">
