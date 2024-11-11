@@ -30,6 +30,10 @@ class BaseClass extends BaseEntity {
 
   @Field(() => [String], { nullable: true })
   @Column("text", { array: true, default: [], nullable: true })
+  links?: string[];
+
+  @Field(() => [String], { nullable: true })
+  @Column("text", { array: true, default: [], nullable: true })
   media?: string[];
 
   @Field(() => String, { nullable: true })

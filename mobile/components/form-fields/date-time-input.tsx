@@ -1,10 +1,10 @@
 import React, { forwardRef, useState } from 'react';
-import { TextInput, Touchable, TouchableOpacity, View } from 'react-native';
+import { TextInput, TouchableOpacity, View } from 'react-native';
 import { cn } from '@/lib/utils';
 import dayjs from 'dayjs'
 import { Calendar } from '@/lib/icons/Calendar'
 import { Clock8 } from '@/lib/icons/Clock8'
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogDescription, DialogFooter, DialogClose } from '../ui/dialog';
+import { Dialog, DialogTrigger, DialogContent, DialogFooter, DialogClose } from '../ui/dialog';
 import DateTimePicker from 'react-native-ui-datepicker';
 import { Button } from '../ui/button';
 import { Text } from '../ui/text'

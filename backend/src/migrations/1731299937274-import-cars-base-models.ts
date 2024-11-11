@@ -6,7 +6,7 @@ import { MigrationHelpers } from "./helpers/migration-helper";
 import { VehicleBaseModel } from "../modules/vehicle/entities/vehicle-base-model.entity";
 import { VehicleBrand } from "../modules/vehicle/entities/vehicle-brand.entity";
 import _ from "lodash";
-import { VehicleModel } from "src/modules/vehicle/entities/vehicle-model.entity";
+import { VehicleModel } from "../modules/vehicle/entities/vehicle-model.entity";
 
 
 const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com/base_models')
@@ -14,7 +14,7 @@ const BASE_MODELS_JSON = path.join(BASE_DIR, 'base_models.json')
 const BASE_MODELS_IMAGES_DIR = path.join(BASE_DIR, 'images')
 const REMOTE_IMAGES_SUBFOLDER = 'car-data/base-models'
 
-export class ImportCarsBaseModels1730643801705 implements MigrationInterface {
+export class ImportCarsBaseModels1731299937274 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const baseModels: CarDataBaseModel[] = JSON.parse(fs.readFileSync(BASE_MODELS_JSON, 'utf-8'))
