@@ -1,6 +1,7 @@
 import '@/global.css';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { Theme, ThemeProvider } from '@react-navigation/native';
 import { Slot, SplashScreen } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -61,10 +62,12 @@ export default function RootLayout() {
   }
 
   return (
+    <KeyboardProvider>
       <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
         <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
         <Slot />
         <PortalHost />
       </ThemeProvider>
+    </KeyboardProvider>
   );
 }
