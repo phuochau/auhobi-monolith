@@ -5,6 +5,7 @@ import { Mail } from '@/lib/icons/Mail';
 import { Lock } from '@/lib/icons/Lock';
 import { Eye } from '@/lib/icons/Eye';
 import { EyeOff } from '@/lib/icons/EyeOff';
+import { Link } from '@/lib/icons/Link';
 import numeral from 'numeral'
 
 export type InputProps = React.ComponentPropsWithoutRef<typeof TextInput> & {
@@ -29,6 +30,7 @@ const Input = React.forwardRef<
   const [shownPassword, setShownPassword] = React.useState(false)
   const isNumericInput = props.keyboardType === 'numeric'
   const isEmailInput = props.keyboardType === 'email-address'
+  const isUrlInput = props.keyboardType === 'url'
 
   let rightIcon = null
 
@@ -40,6 +42,10 @@ const Input = React.forwardRef<
     icon = <Lock className="text-muted-foreground" size={20} />
     
     rightIcon = shownPassword ? <EyeOff className="text-muted-foreground" size={20} /> : <Eye className="text-muted-foreground" size={20} />
+  }
+
+  if (isUrlInput) {
+    icon = <Link className="text-muted-foreground" size={20} />
   }
 
 

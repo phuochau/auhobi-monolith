@@ -24,17 +24,19 @@ import { GaragePickerResult, GarageType } from "@/components/dialogs/garare-pick
 import { BillInput } from "@/components/form-fields/bill-input"
 import React from "react"
 import { Textarea } from "@/components/ui/textarea"
+import { LinkInput } from "@/components/form-fields/link-input"
 
 const formSchema = z.object({
   type: z.string(),
   description: z.string().optional(),
   date: z.string(),
   mileage: z.string(),
-  media: z.string().array().optional(),
   garage: z.object({
     type: z.nativeEnum(GarageType),
     data: z.any()
   }).optional(),
+  links: z.string().url().array().optional(),
+  media: z.string().array().optional(),
   bills: z.object({
     total: z.number(),
     media: z.string()
@@ -153,7 +155,7 @@ const AddServiceHistory = () => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <Input
                   placeholder="Mileage"
-                  keyboardType="number-pad"
+                  keyboardType="numeric"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -193,6 +195,20 @@ const AddServiceHistory = () => {
             />
             <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
 
+            <Label nativeID="LinkLabel">Links</Label>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <LinkInput
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                />
+              )}
+              name="links"
+            />
+            <FormMessage nativeID="LinkError" error={errors?.links?.length ? errors.links.pop!() : undefined}></FormMessage>
+
             <Label nativeID="MediaLabel">Images</Label>
             <Controller
               control={control}
@@ -205,6 +221,7 @@ const AddServiceHistory = () => {
               )}
               name="media"
             />
+            <FormMessage nativeID="MediaError" error={errors?.media?.length ? errors.media.pop!() : undefined}></FormMessage>
 
             <Label nativeID="BillsLabel">Bills</Label>
             <Controller
@@ -218,6 +235,7 @@ const AddServiceHistory = () => {
               )}
               name="bills"
             />
+            <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
 
             <Button loading={submitting} disabled={submitting} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Save</Text>

@@ -39,7 +39,7 @@ const BillDisplay =  React.forwardRef<
             />
             <Input
                 containerClassName="flex-1"
-                keyboardType="number-pad"
+                keyboardType="numeric"
                 placeholder="Total (e.g: 200000000)"
                 value={data.total ? data.total.toString() : ''}
                 onChangeText={(total) => onChange({
@@ -137,4 +137,4 @@ const BillInput =  React.forwardRef<
 });
 BillInput.displayName = 'BillInput';
 
-export { BillDisplay as ImageDisplay, BillInput }
+export { BillDisplay, BillInput }
