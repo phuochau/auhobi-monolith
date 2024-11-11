@@ -13,6 +13,7 @@ export const CreateOneServiceLogMutation = gql`
     		createdAt
     		updatedAt
     		deletedAt
+			links
     		garage {
     			id
     		}
