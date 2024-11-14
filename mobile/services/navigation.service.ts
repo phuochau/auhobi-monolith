@@ -2,7 +2,7 @@ import { NativeStackNavigationOptions } from "@react-navigation/native-stack/src
 
 export class NavigationService {
     static getDefaultScreenOptions = (): NativeStackNavigationOptions => ({
-        headerBackTitleVisible: false,
+        headerBackButtonDisplayMode: 'minimal',
         headerBackButtonMenuEnabled: true,
         headerShadowVisible: false,
         headerBackImageSource: require('@/assets/icons/left-arrow.png')

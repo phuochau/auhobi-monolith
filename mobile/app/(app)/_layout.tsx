@@ -12,7 +12,7 @@ export default function AppLayout() {
 
   return (
     <StoreProvider>
-        <Slot />
+      <Slot />
     </StoreProvider>
   )
 }

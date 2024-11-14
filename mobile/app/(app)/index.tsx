@@ -1,10 +1,12 @@
-import { Slot, useRouter } from "expo-router"
+import React from 'react'
+import { Stack, useRouter } from "expo-router"
 import { useEffect } from "react"
 import { selectCurrentAccount } from "@/store/user/user.selectors"
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { logout } from "@/store/user/user.slice"
 import { meAsync } from "@/store/user/actions/me-async.action"
 import { Navigation } from "@/lib/navigation"
+import { NavigationService } from '@/services/navigation.service'
 
 const LoadingScreen = () => {
     const router = useRouter()
@@ -29,7 +31,13 @@ const LoadingScreen = () => {
 
 
     
-    return (<Slot />)
+    return (
+        <Stack screenOptions={NavigationService.getDefaultScreenOptions()}>
+            <Stack.Screen name="auth" />
+            <Stack.Screen name="dashboard" />
+            <Stack.Screen name="onboarding" />
+        </Stack>
+    )
 }
 
 export default LoadingScreen

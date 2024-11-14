@@ -4,7 +4,7 @@ import { Stack } from 'expo-router/stack';
 export default function DashboardLayout() {
   return (
     <AuthGuard>
-      <Stack id='dashboard'>
+      <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="/add-vehicle"

@@ -1,8 +1,8 @@
 import '@/global.css';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Theme, ThemeProvider } from '@react-navigation/native';
-import { Slot, SplashScreen } from 'expo-router';
+import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
+import { Slot, SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { PortalHost } from '@rn-primitives/portal';
 import * as React from 'react';
@@ -11,10 +11,12 @@ import { NAV_THEME } from '@/lib/constants';
 import { useColorScheme } from '@/lib/useColorScheme';
 
 const LIGHT_THEME: Theme = {
+  ...DefaultTheme,
   dark: false,
   colors: NAV_THEME.light,
 };
 const DARK_THEME: Theme = {
+  ...DarkTheme,
   dark: true,
   colors: NAV_THEME.dark,
 };
@@ -63,7 +65,10 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <Slot />
+      <Stack>
+        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
       <PortalHost />
     </ThemeProvider>
   );
