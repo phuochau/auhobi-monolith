@@ -15,17 +15,19 @@ const LoadingScreen = () => {
 
     useEffect(() => {
         setTimeout(async () => {
-            try {
-                if (account) {
-                    await dispatch(meAsync())
-                    Navigation.reset(router, { pathname: '/dashboard'})
-                } else {
-                    Navigation.reset(router, { pathname: '/auth'})
-                }
-            } catch (err) {
-                dispatch(logout())
-                Navigation.reset(router, { pathname: '/auth'})
-            }
+            console.log('go here')
+            Navigation.reset(router, { pathname: '/dashboard'})
+            // try {
+            //     if (account) {
+            //         await dispatch(meAsync())
+            //         Navigation.reset(router, { pathname: '/dashboard'})
+            //     } else {
+            //         Navigation.reset(router, { pathname: '/auth'})
+            //     }
+            // } catch (err) {
+            //     dispatch(logout())
+            //     Navigation.reset(router, { pathname: '/auth'})
+            // }
         })
     }, [account])
 

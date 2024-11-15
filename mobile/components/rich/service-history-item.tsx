@@ -6,6 +6,8 @@ import { ServiceLogBill, ServiceLogEdge } from "@/graphql/gql/generated-models"
 import _ from "lodash"
 import { userService } from "@/services/user.service"
 import { Label } from "../ui/label"
+import { MediaGrid } from "../ui/media-grid"
+import { NumberUtils } from "@/lib/number.utils"
 
 export type ServiceHistoryItemProps = {
     data: ServiceLogEdge
@@ -24,14 +26,15 @@ export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
     const garageName = data.node.garage ? data.node.garage.name : data.node.customGarage
 
     return (
-        <View className="px-4">
-            <Card className="border">
+        <View className="px-6">
+            <Card>
                 <CardHeader>
                     <View className="flex flex-row items-start mb-1">
                         <Badge><Text>{data.node.type}</Text></Badge>
-                        <View className="flex-1 flex-row justify-end">
-                            <Badge variant={'outline'}><Text>{getTotalBill()}đ</Text></Badge>
-                        </View>
+                        {data.node.mileage &&
+                            <View className="flex-1 flex-row justify-end">
+                                <Badge variant={'outline'}><Text>{NumberUtils.format(data.node.mileage)} km</Text></Badge>
+                            </View>}
                     </View>
                     <CardDescription>{userService.formatDate(data.node.createdAt)}{Boolean(garageName?.length) ? ` | ${garageName}` : ''}</CardDescription>
                 </CardHeader>
@@ -42,24 +45,21 @@ export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
                     </CardContent>}
                     
                 <CardFooter className="flex flex-col items-start gap-4">
-                    {attachments.length > 0 &&
-                        <View className="flex flex-col gap-1">
+                    {attachments.length > 0 && 
+                        <View className="flex flex-col gap-1 w-full">
                             <Label nativeID="mediaLabel">Media</Label>
-                            <View className="flex flex-row gap-2 flex-wrap">
-                                {attachments.map(url =>
-                                    <Image source={{ uri: url }} className="w-16 h-16 object-fit" resizeMode="cover" />
-                                )}
-                            </View>
-                        </View>}
-
+                            <MediaGrid urls={attachments} />
+                        </View>
+                    }
                     {billMedia.length > 0 &&
-                        <View className="flex flex-col gap-1">
-                            <Label nativeID="billLabel">Bills</Label>
-                            <View className="flex flex-row gap-2 flex-wrap">
-                                {billMedia.map(url =>
-                                    <Image source={{ uri: url }} className="w-16 h-16 object-fit" resizeMode="cover" />
-                                )}
+                        <View className="flex flex-col gap-1 w-full">
+                            <View className="flex flex-row items-center">
+                                <Label nativeID="mediaLabel" className="flex-1">Bills</Label>
+                                <View className="flex-1 flex-row justify-end">
+                                    <Badge variant={'outline'}><Text>{NumberUtils.format(getTotalBill())}đ</Text></Badge>
+                                </View>
                             </View>
+                            <MediaGrid urls={billMedia} />
                         </View>}
                 </CardFooter>
             </Card>

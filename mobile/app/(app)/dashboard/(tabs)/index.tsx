@@ -8,6 +8,8 @@ import { listServiceLog } from "@/store/service-log/actions/list-service-logs.ac
 import { ServiceLogConnection, ServiceLogEdge, ServiceLogSortFields, SortDirection } from "@/graphql/gql/generated-models"
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
 
+const MOCKING_DATA = require('./logs.json')
+
 const ServiceHistory = () => {
   const dispatch = useAppDispatch()
   const vehicle = useAppSelector(selectCurrentVehicle)
@@ -38,14 +40,16 @@ const ServiceHistory = () => {
   }
 
   useEffect(() => {
-    fetchLogs()
+    setLoading(false)
+    setLogs(MOCKING_DATA)
+    // fetchLogs()
   }, [])
 
   return (
     <FlatList
       data={logs}
       renderItem={({item}) => <ServiceHistoryItem data={item} />}
-      contentContainerClassName="gap-4"
+      contentContainerClassName="gap-6 py-6"
       keyExtractor={item => item.toString()}
       ListEmptyComponent={loading ? <Loader /> : <EmptyContainer title="Empty" />}
     />

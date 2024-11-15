@@ -1,0 +1,328 @@
+[
+    {
+        "node": {
+            "type": "REPAIR",
+            "description": "Routine service check and oil change",
+            "date": "2024-03-02T02:58:02.172752",
+            "mileage": 17792.12,
+            "media": [
+                "https://tse3.mm.bing.net/th?id=OIP.jFu0rDvl4XhFbNkIlTkIrgHaEx&w=305&h=305&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "362718a1-4b2c-4cb2-8e84-2ed23a2bb025",
+            "createdAt": "2024-10-11T02:58:02.173471",
+            "updatedAt": "2023-03-14T02:58:02.173482",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "4eff2047-783d-4396-8b20-1a37ca4d8e20",
+                        "total": 69.6,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2023-02-09T02:58:02.173572",
+                        "media": "https://tse3.mm.bing.net/th?id=OIP.jFu0rDvl4XhFbNkIlTkIrgHaEx&w=305&h=305&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursoree608bde-23dc-4e20-95c9-1c31024d630f"
+    },
+    {
+        "node": {
+            "type": "MAINTENANCE",
+            "description": "Routine service check and oil change",
+            "date": "2023-06-04T02:58:02.173740",
+            "mileage": 21595.31,
+            "media": [
+                "https://tse4.mm.bing.net/th?id=OIP.7tB-WA2SQud6P-aPJDJzuAHaEL&w=267&h=267&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "61ce50f1-f42c-46f6-8c09-4fe46c61ff81",
+            "createdAt": "2024-10-06T02:58:02.174070",
+            "updatedAt": "2024-05-14T02:58:02.174086",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "22f07c29-2502-4981-b2dd-9f00d05dc4fb",
+                        "total": 113.18,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2022-09-04T02:58:02.174171",
+                        "media": "https://tse4.mm.bing.net/th?id=OIP.7tB-WA2SQud6P-aPJDJzuAHaEL&w=267&h=267&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursor7c09b773-7c08-4642-960a-b72ee4dcbe57"
+    },
+    {
+        "node": {
+            "type": "REPAIR",
+            "description": "Routine service check and oil change",
+            "date": "2023-10-17T02:58:02.174252",
+            "mileage": 27293.57,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "75e931fc-cb61-46ba-ac61-3ce77b51981e",
+            "createdAt": "2022-03-10T02:58:02.174453",
+            "updatedAt": "2024-08-22T02:58:02.174467",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "fcf25e13-b224-412e-8884-ecbefea3e2cf",
+                        "total": 262.69,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2023-09-17T02:58:02.174710",
+                        "media": "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursor35a21924-31ac-4ee3-913f-f046e6c71efe"
+    },
+    {
+        "node": {
+            "type": "MAINTENANCE",
+            "description": "Routine service check and oil change",
+            "date": "2022-10-22T02:58:02.175051",
+            "mileage": 23905.66,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "6b075099-be12-4ef1-8a0f-75edb25bf823",
+            "createdAt": "2023-01-23T02:58:02.175138",
+            "updatedAt": "2022-07-14T02:58:02.175147",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "9d30fcf1-2eb8-423c-8ebf-921f789a29c4",
+                        "total": 330.59,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2024-02-22T02:58:02.175228",
+                        "media": "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursor01523357-4a85-4e6c-aedb-2bcc19b88fee"
+    },
+    {
+        "node": {
+            "type": "MAINTENANCE",
+            "description": "Routine service check and oil change",
+            "date": "2023-10-06T02:58:02.175259",
+            "mileage": 10662.81,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "d3da9c82-b353-48a8-abbb-a4b1a989a005",
+            "createdAt": "2023-06-24T02:58:02.175334",
+            "updatedAt": "2022-09-08T02:58:02.175342",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "7ff89b5f-0ca9-45a0-baf6-9d8ada3e0c54",
+                        "total": 436.68,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2023-02-09T02:58:02.175371",
+                        "media": "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursord583715c-e3da-4557-a79b-a713b285d069"
+    },
+    {
+        "node": {
+            "type": "MAINTENANCE",
+            "description": "Routine service check and oil change",
+            "date": "2022-07-29T02:58:02.175391",
+            "mileage": 10645.58,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "0c22d0b3-edd1-4868-bbd5-92030ba0871f",
+            "createdAt": "2024-10-19T02:58:02.175457",
+            "updatedAt": "2022-03-22T02:58:02.175463",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "8ae892a2-7dbe-4c7a-9d92-b3ef08d11fcf",
+                        "total": 324.02,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2022-06-02T02:58:02.175485",
+                        "media": "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursorc825473e-629a-47c0-a309-cb2cbf3941ab"
+    },
+    {
+        "node": {
+            "type": "REPAIR",
+            "description": "Routine service check and oil change",
+            "date": "2022-11-21T02:58:02.175514",
+            "mileage": 42505.58,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "1dfc2b66-d44e-470f-898f-7f54f7db8c5a",
+            "createdAt": "2022-09-09T02:58:02.175664",
+            "updatedAt": "2023-09-12T02:58:02.175715",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "14bd568f-0ace-47ad-b920-826f91aa8033",
+                        "total": 472.97,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2024-06-22T02:58:02.175869",
+                        "media": "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursor6e882ee3-d559-4fa0-ba8c-5bed7d1f29f5"
+    },
+    {
+        "node": {
+            "type": "MAINTENANCE",
+            "description": "Routine service check and oil change",
+            "date": "2022-08-24T02:58:02.175924",
+            "mileage": 37096.74,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7",
+                "https://tse3.mm.bing.net/th?id=OIP.6oyKaTg2H3f4b2NZoYkVQwHaE7&w=315&h=315&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "72211eb6-ba31-412e-9ec2-b295cea064ac",
+            "createdAt": "2023-10-24T02:58:02.175966",
+            "updatedAt": "2023-04-08T02:58:02.175970",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "78c3a131-35c1-4577-ba0b-5d464832a337",
+                        "total": 457.28,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2024-09-23T02:58:02.175981",
+                        "media": "https://tse3.mm.bing.net/th?id=OIP.6oyKaTg2H3f4b2NZoYkVQwHaE7&w=315&h=315&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursoraaefd884-ffa6-4a2a-8daa-8ed48f65972b"
+    },
+    {
+        "node": {
+            "type": "MAINTENANCE",
+            "description": "Routine service check and oil change",
+            "date": "2024-06-24T02:58:02.175992",
+            "mileage": 33410.64,
+            "media": [
+                "https://tse1.mm.bing.net/th?id=OIP.uUDaDfo39AxaRILU3Rp7fQHaD4&w=248&h=248&c=7",
+                "https://tse3.mm.bing.net/th?id=OIP.6oyKaTg2H3f4b2NZoYkVQwHaE7&w=315&h=315&c=7"
+            ],
+            "customGarage": "John's Auto Repair",
+            "id": "3940b547-7db9-4f4e-bc34-6a7f33ee38e1",
+            "createdAt": "2022-06-19T02:58:02.176009",
+            "updatedAt": "2022-06-21T02:58:02.176011",
+            "deletedAt": null,
+            "garage": {
+                "name": "City Garage",
+                "address": "123 Main St, Anytown"
+            },
+            "vehicle": {
+                "name": "Honda Accord",
+                "model": "2020 EX-L"
+            },
+            "bills": {
+                "nodes": [
+                    {
+                        "id": "56447349-bb16-4080-8da2-cf24400876c8",
+                        "total": 382.23,
+                        "description": "Oil change and filter replacement",
+                        "createdAt": "2024-03-21T02:58:02.176020",
+                        "media": "https://tse3.mm.bing.net/th?id=OIP.6oyKaTg2H3f4b2NZoYkVQwHaE7&w=315&h=315&c=7"
+                    }
+                ]
+            }
+        },
+        "cursor": "cursore290b602-aab5-4a2f-9e32-26643ea23c4b"
+    }
+]
