@@ -3,14 +3,16 @@ import { Text } from '@/components/ui/text'
 import { Button } from "@/components/ui/button"
 import { User } from '@/lib/icons/User'
 import { LogOut } from '@/lib/icons/LogOut'
-import { useAppDispatch } from "@/hooks/store.hooks"
+import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { signOutAction } from "@/store/user/actions/sign-out.action"
 import { Navigation } from "@/lib/navigation"
 import { useRouter } from "expo-router"
+import { selectCurrentAccount } from "@/store/user/user.selectors"
 
 const Settings = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
+  const currentAccount = useAppSelector(selectCurrentAccount)
 
   async function signOut() {
     const success = await dispatch(signOutAction())
@@ -32,7 +34,7 @@ const Settings = () => {
             </View>
           }
         >
-          <Text>hau.vophuoc@gmail.com</Text>
+          <Text>{currentAccount?.email}</Text>
         </Button>
         <Button
           variant={'menu'}
