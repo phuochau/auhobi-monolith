@@ -6,8 +6,7 @@ import { Text } from "../ui/text";
 import { Plus } from "@/lib/icons/Plus";
 import { Input } from "../ui/input";
 import _ from "lodash";
-import Feather from '@expo/vector-icons/Feather';
-import { useTheme } from "@react-navigation/native";
+import { CircleMinus } from '@/lib/icons/CircleMinus'
 
 export type LinkInputItemProps = React.ComponentPropsWithoutRef<typeof View> & {
     value: string,
@@ -22,8 +21,6 @@ const LinkInputItem =  React.forwardRef<
     React.ElementRef<typeof View>,
     LinkInputItemProps
 >(({ className, value, imageClassName, onChangeText, onRequestRemove, onBlur, ...props }, ref) => {
-    const { colors } = useTheme();
-    
     return (
         <View ref={ref} className={cn("w-full relative flex flex-row items-center gap-2", className)} {...props}>
             <Input
@@ -36,7 +33,7 @@ const LinkInputItem =  React.forwardRef<
                 onBlur={onBlur}
             />
             <Button onPress={onRequestRemove} variant={'link'} size={'icon'}>
-                <Feather name="minus-circle" size={24} color={colors['notification']} />
+                <CircleMinus className="text-destructive" size={24} />
             </Button>
         </View>
     )

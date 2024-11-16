@@ -3,14 +3,13 @@ import { Dimensions, Image, TouchableOpacity, View } from 'react-native'
 import _ from "lodash"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { BlurView } from 'expo-blur';
-import Feather from "@expo/vector-icons/Feather"
-import { useTheme } from "@react-navigation/native"
 import { Portal } from "@rn-primitives/portal"
 import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel"
 import { cn } from "@/lib/utils";
+import { X } from '@/lib/icons/X'
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 export type LightboxProps = {
     open: boolean,
@@ -24,7 +23,6 @@ export const Lightbox = (props: LightboxProps) => {
     const ref = useRef<ICarouselInstance>(null)
     const [currentIndex, setCurrentIndex] = useState(props.activeIndex || 0)
     const insets = useSafeAreaInsets();
-    const { colors } = useTheme();
 
     function closeDialog() {
         if (requestClose) {
@@ -57,8 +55,8 @@ export const Lightbox = (props: LightboxProps) => {
                     snapEnabled={true}
                     pagingEnabled={true}
                     data={mediaUrls}
-                    width={windowWidth}
-                    height={windowHeight}
+                    width={deviceWidth}
+                    height={deviceHeight}
                     defaultIndex={currentIndex}
                     renderItem={(data) => <Image key={data.item} source={{ uri: data.item }} className="w-full h-full" resizeMode="cover" />}
                     onSnapToItem={(index: number) => setCurrentIndex(index)}
@@ -78,7 +76,7 @@ export const Lightbox = (props: LightboxProps) => {
                     onPress={() => closeDialog()}
                 >
                     <BlurView intensity={80} tint="dark" className="w-10 h-10 flex flex-col items-center justify-center">
-                        <Feather name="x" size={20} color={colors['background']} />
+                        <X size={20} className="text-background" />
                     </BlurView>
                 </TouchableOpacity>
             </View>

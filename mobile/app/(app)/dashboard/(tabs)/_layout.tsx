@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Home } from '@/lib/icons/Home';
-import { Sun } from '@/lib/icons/Sun';
+import { User } from '@/lib/icons/User';
 import { Plus } from '@/lib/icons/Plus';
 import { useTheme } from '@react-navigation/native';
 import { Tabs, useRouter } from 'expo-router';
@@ -27,7 +27,7 @@ export default function TabLayout() {
           name="settings"
           options={{
             title: 'Settings',
-            tabBarIcon: ({ color }) => <Sun color={color} />,
+            tabBarIcon: ({ color }) => <User color={color} />,
           }}
         />
       </Tabs>

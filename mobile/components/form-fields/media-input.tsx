@@ -5,10 +5,9 @@ import { Button } from "../ui/button";
 import { Text } from "../ui/text";
 import { Pickers } from "@/lib/pickers";
 import { Plus } from "@/lib/icons/Plus";
-import Feather from "@expo/vector-icons/Feather";
-import { useTheme } from "@react-navigation/native";
 import { BlurView } from 'expo-blur';
 import _ from "lodash";
+import { X } from '@/lib/icons/X'
 
 /**
  * ImageDisplay
@@ -23,8 +22,6 @@ const ImageDisplay = React.forwardRef<
     React.ElementRef<typeof Image>,
     ImageDisplayProps
 >(({ className, containerClassName, source, onRequestRemove, ...props }, ref) => {
-    const { colors } = useTheme();
-    
     return (
         <View className={cn("relative", containerClassName)}>
             <View className="relative rounded-xl overflow-hidden">
@@ -36,8 +33,8 @@ const ImageDisplay = React.forwardRef<
                     {...props}
                 />
                 <TouchableOpacity onPress={onRequestRemove} className="absolute top-0 right-0">
-                    <BlurView intensity={100} className="p-0.5">
-                        <Feather name="x" size={20} color={colors['background']} />
+                    <BlurView intensity={80} tint="dark" className="p-0.5">
+                        <X size={20} className="text-background" />
                     </BlurView>
                 </TouchableOpacity>
             </View>

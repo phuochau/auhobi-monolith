@@ -2,7 +2,7 @@ import { Text } from '@/components/ui/text'
 import { Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
 import { ImageBackground, View, Image } from 'react-native'
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { MoveRight } from '@/lib/icons/MoveRight';
 import { StatusBar } from 'expo-status-bar';
 
 const AuthScreen = () => {
@@ -24,8 +24,8 @@ const AuthScreen = () => {
             onPress={() => router.push({ pathname: '/auth/login' })}
           >
             <Text>Getting Started</Text>
-            <View className='absolute top-2.5 right-4'>
-              <MaterialIcons name="arrow-right-alt" size={32} color="white" />
+            <View className='absolute top-3.5 right-6'>
+              <MoveRight className='text-primary-foreground' />
             </View>
           </Button>
         </View>
