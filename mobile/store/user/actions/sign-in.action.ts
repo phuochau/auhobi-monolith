@@ -4,8 +4,8 @@ import { AuthLoginMutation } from "@/graphql/gql/mutations/authLogin";
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loginAsync = createAsyncThunk<GraphQLResponse<LoginResult>, AuthLoginInput>(
-    'user/loginAsync',
+export const signInAction = createAsyncThunk<GraphQLResponse<LoginResult>, AuthLoginInput>(
+    'user/signIn',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.guestQuery<LoginResult, MutationAuthLoginArgs>(AuthLoginMutation, { input })

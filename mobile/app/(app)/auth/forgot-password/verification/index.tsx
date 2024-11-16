@@ -2,7 +2,6 @@ import { View } from "react-native"
 import { Text } from '@/components/ui/text'
 import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState } from "react"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { useAppDispatch } from "@/hooks/store.hooks"
@@ -14,7 +13,7 @@ import { FormMessage } from "@/components/ui/form"
 import { z } from "zod"
 import { passwordValidation } from "@/lib/validations"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { confirmPasswordResetByCodeAsync } from "@/store/user/actions/confirm-password-reset-by-code-async.action"
+import { confirmPasswordResetByCodeAction } from "@/store/user/actions/confirm-password-reset-by-code.action"
 import React from "react"
 
 const defaultValues = ['', '', '', '', '', '']
@@ -62,7 +61,7 @@ const ForgotVerificationScreen = () => {
     setSubmitting(true)
     setResponse(undefined)
 
-    const { payload } = await dispatch(confirmPasswordResetByCodeAsync({
+    const { payload } = await dispatch(confirmPasswordResetByCodeAction({
       email: params.email,
       code: code.join(''),
       password: values.password

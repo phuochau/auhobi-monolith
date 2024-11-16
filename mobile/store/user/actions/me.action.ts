@@ -4,8 +4,8 @@ import { MeQuery } from "@/graphql/gql/queries/me";
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const meAsync = createAsyncThunk<GraphQLResponse<Account>>(
-    'user/meAsync',
+export const meAction = createAsyncThunk<GraphQLResponse<Account>>(
+    'user/me',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.authQuery<Account, any>(MeQuery)

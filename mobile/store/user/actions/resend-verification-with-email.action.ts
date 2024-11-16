@@ -4,8 +4,8 @@ import { AuthResendVerificationWithEmailMutation } from "@/graphql/gql/mutations
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const resendVerificationWithEmailAsync = createAsyncThunk<GraphQLResponse<Boolean>, AuthResendVerificationWithEmailInput>(
-    'user/resendVerificationWithEmailAsync',
+export const resendVerificationWithEmailAction = createAsyncThunk<GraphQLResponse<Boolean>, AuthResendVerificationWithEmailInput>(
+    'user/resendVerificationWithEmail',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.guestQuery<Boolean, MutationAuthResendVerificationWithEmailArgs>(AuthResendVerificationWithEmailMutation, { input })

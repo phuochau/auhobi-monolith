@@ -11,7 +11,7 @@ import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { requestPasswordResetAsync } from "@/store/user/actions/request-password-reset-async.action"
+import { requestPasswordResetAction } from "@/store/user/actions/request-password-reset.action"
 import React from "react"
 
 const formSchema = z.object({
@@ -44,7 +44,7 @@ const LoginScreen = () => {
     setSubmitting(true)
     setResponse(undefined)
 
-    const { payload } = await dispatch(requestPasswordResetAsync({ ...values, useCode: true }))
+    const { payload } = await dispatch(requestPasswordResetAction({ ...values, useCode: true }))
 
     const response = payload as GraphQLResponse<Boolean>
     setResponse(response)

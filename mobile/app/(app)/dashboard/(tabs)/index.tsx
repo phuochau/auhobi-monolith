@@ -50,7 +50,7 @@ const ServiceHistory = () => {
       data={logs}
       renderItem={({item}) => <ServiceHistoryItem data={item} />}
       contentContainerClassName="gap-6 py-6"
-      keyExtractor={item => item.toString()}
+      keyExtractor={item => item.node.id}
       ListEmptyComponent={loading ? <Loader /> : <EmptyContainer title="Empty" />}
     />
   )

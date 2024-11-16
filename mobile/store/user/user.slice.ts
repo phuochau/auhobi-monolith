@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Account, LoginResult, UserVehicle } from '@/graphql/gql/generated-models'
 import { GraphQLResponseAction } from '../types/graphql-response-payload'
-import { loginAsync } from './actions/login-async.action'
-import { addVehicleAsync } from './actions/add-vehicle-async.action'
+import { signInAction } from './actions/sign-in.action'
+import { addVehicleAction } from './actions/add-vehicle.action'
 import _ from 'lodash'
 import { REHYDRATE } from 'redux-persist'
 import { GraphQLAPI } from '@/graphql/api'
-import { meAsync } from './actions/me-async.action'
+import { meAction } from './actions/me.action'
+import { signOutAction } from './actions/sign-out.action'
 
 // Define a type for the slice state
 export interface UserState {
@@ -23,9 +24,6 @@ export const userSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout: (state) => {
-      return initialState
-    },
   },
   extraReducers: (builder) => {
     builder.addCase<typeof REHYDRATE, { type: typeof REHYDRATE, payload: Partial<{ user: UserState }> }>(REHYDRATE, (state, action) => {
@@ -35,7 +33,7 @@ export const userSlice = createSlice({
       }
       return userState
     }),
-    builder.addMatcher<GraphQLResponseAction<Account>>(meAsync.settled, (state, { payload }) => {
+    builder.addMatcher<GraphQLResponseAction<Account>>(meAction.settled, (state, { payload }) => {
       if (!payload.errors && payload.data) {
         return {
           ...state,
@@ -44,7 +42,7 @@ export const userSlice = createSlice({
       }
       return state
     }),
-    builder.addMatcher<GraphQLResponseAction<LoginResult>>(loginAsync.settled, (state, { payload }) => {
+    builder.addMatcher<GraphQLResponseAction<LoginResult>>(signInAction.settled, (state, { payload }) => {
       if (!payload.errors && payload.data) {
         return {
           ...state,
@@ -53,7 +51,7 @@ export const userSlice = createSlice({
       }
       return state
     }),
-    builder.addMatcher<GraphQLResponseAction<UserVehicle>>(addVehicleAsync.settled, (state, { payload }) => {
+    builder.addMatcher<GraphQLResponseAction<UserVehicle>>(addVehicleAction.settled, (state, { payload }) => {
       if (!payload.errors && payload.data) {
         const account = _.cloneDeep(state.account)
         const currentUserVehicles = account!.user!.vehicles?.nodes || []
@@ -68,10 +66,15 @@ export const userSlice = createSlice({
         }
       }
       return state
+    }),
+    builder.addMatcher<boolean>(signOutAction.settled, (state, result) => {
+      if (result) {
+        return initialState
+      }
+
+      return state
     })
   },
 })
-
-export const { logout } = userSlice.actions
 
 export const userReducer = userSlice.reducer

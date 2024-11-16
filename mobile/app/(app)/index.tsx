@@ -3,10 +3,10 @@ import { Stack, useRouter } from "expo-router"
 import { useEffect } from "react"
 import { selectCurrentAccount } from "@/store/user/user.selectors"
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
-import { logout } from "@/store/user/user.slice"
-import { meAsync } from "@/store/user/actions/me-async.action"
+import { meAction } from "@/store/user/actions/me.action"
 import { Navigation } from "@/lib/navigation"
 import { NavigationService } from '@/services/navigation.service'
+import { signOutAction } from '@/store/user/actions/sign-out.action'
 
 const LoadingScreen = () => {
     const router = useRouter()
@@ -18,13 +18,13 @@ const LoadingScreen = () => {
             Navigation.reset(router, { pathname: '/dashboard'})
             // try {
             //     if (account) {
-            //         await dispatch(meAsync())
+            //         await dispatch(meAction())
             //         Navigation.reset(router, { pathname: '/dashboard'})
             //     } else {
             //         Navigation.reset(router, { pathname: '/auth'})
             //     }
             // } catch (err) {
-            //     dispatch(logout())
+            //     dispatch(signOutAction())
             //     Navigation.reset(router, { pathname: '/auth'})
             // }
         })

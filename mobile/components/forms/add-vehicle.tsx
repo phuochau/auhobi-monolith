@@ -10,7 +10,7 @@ import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { addVehicleAsync } from '@/store/user/actions/add-vehicle-async.action'
+import { addVehicleAction } from '@/store/user/actions/add-vehicle.action'
 import { View } from 'react-native'
 import { VehicleInput } from '../form-fields/vehicle-input'
 import { Image } from 'react-native'
@@ -47,7 +47,7 @@ const AddVehicle = (props: AddVehicleProps) => {
       setSubmitting(true)
       setResponse(undefined)
   
-      const { payload } = await dispatch(addVehicleAsync({ userVehicle: values }))
+      const { payload } = await dispatch(addVehicleAction({ userVehicle: values }))
       const response = payload as GraphQLResponse<UserVehicle>
       setResponse(response)
       if (!response.errors && response.data) {

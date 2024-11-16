@@ -8,8 +8,8 @@ import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { DigitInput } from "@/components/form-fields/digit-input"
-import { verifyAccountAsync } from "@/store/user/actions/verify-account-async.action"
-import { resendVerificationWithEmailAsync } from "@/store/user/actions/resend-verification-with-email-async.action"
+import { verifyAccountAction } from "@/store/user/actions/verify-account.action"
+import { resendVerificationWithEmailAction } from "@/store/user/actions/resend-verification-with-email.action"
 import React from "react"
 
 const defaultValues = ['', '', '', '', '', '']
@@ -29,7 +29,7 @@ const VerificationScreen = () => {
     setResponse(undefined)
     setResent(false)
 
-    const { payload } = await dispatch(verifyAccountAsync({
+    const { payload } = await dispatch(verifyAccountAction({
       email: params.email,
       code: code.join('')
     }))
@@ -53,7 +53,7 @@ const VerificationScreen = () => {
     setResent(false)
     setResponse(undefined)
 
-    const { payload } = await dispatch(resendVerificationWithEmailAsync({
+    const { payload } = await dispatch(resendVerificationWithEmailAction({
       email: params.email
     }))
 

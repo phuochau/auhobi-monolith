@@ -13,7 +13,7 @@ import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
-import { loginAsync } from "@/store/user/actions/login-async.action"
+import { signInAction } from "@/store/user/actions/sign-in.action"
 import { GraphQLAPI } from "@/graphql/api"
 import { Navigation } from "@/lib/navigation"
 import React from "react"
@@ -59,7 +59,7 @@ const LoginScreen = () => {
     setSubmitting(true)
     setResponse(undefined)
 
-    const { payload } = await dispatch(loginAsync({ ...values, useCode: true }))
+    const { payload } = await dispatch(signInAction({ ...values, useCode: true }))
 
     const response = payload as GraphQLResponse<LoginResult>
     setResponse(response)

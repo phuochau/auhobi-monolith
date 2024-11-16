@@ -4,8 +4,8 @@ import { AuthConfirmPasswordResetByCodeMutation } from "@/graphql/gql/mutations/
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const confirmPasswordResetByCodeAsync = createAsyncThunk<GraphQLResponse<Boolean>, AuthConfirmPasswordResetByCodeInput>(
-    'user/confirmPasswordResetByCodeAsync',
+export const confirmPasswordResetByCodeAction = createAsyncThunk<GraphQLResponse<Boolean>, AuthConfirmPasswordResetByCodeInput>(
+    'user/confirmPasswordResetByCode',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.guestQuery<Boolean, MutationAuthConfirmPasswordResetByCodeArgs>(AuthConfirmPasswordResetByCodeMutation, { input })

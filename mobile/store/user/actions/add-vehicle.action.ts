@@ -4,8 +4,8 @@ import { CreateOneUserVehicleMutation } from "@/graphql/gql/mutations/createOneU
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const addVehicleAsync = createAsyncThunk<GraphQLResponse<UserVehicle>, CreateOneUserVehicleInput>(
-    'user/addVehicleAsync',
+export const addVehicleAction = createAsyncThunk<GraphQLResponse<UserVehicle>, CreateOneUserVehicleInput>(
+    'user/addVehicle',
     async (input, thunkApi) => {
         try {
             const res = await GraphQLAPI.authQuery<UserVehicle, MutationCreateOneUserVehicleArgs>(CreateOneUserVehicleMutation, { input })
