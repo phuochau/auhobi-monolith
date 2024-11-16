@@ -24,6 +24,7 @@
     "prod-local:env": "dotenv -e .env.prod-local",
     "prod-local:start": "yarn run prod-local:env node dist/main",
     "prod-local:migration:migrate": "yarn run prod-local:env yarn run migration:migrate",
+    "prod-local:tunnel": "ssh -R 80:localhost:3001 serveo.net",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

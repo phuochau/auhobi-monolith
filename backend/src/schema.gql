@@ -5083,6 +5083,7 @@ type ServiceLog {
   description: String
   date: DateTime
   mileage: Float
+  links: [String!]
   media: [String!]
   customGarage: String
   id: ID!
@@ -5285,6 +5286,7 @@ type ServiceLogDeleteResponse {
   description: String
   date: DateTime
   mileage: Float
+  links: [String!]
   media: [String!]
   customGarage: String
   id: ID
@@ -10892,6 +10894,7 @@ input ServiceLogDTO {
   description: String
   date: DateTime
   mileage: Float
+  links: [String!]
   media: [String!]
   customGarage: String
   vehicle: ID!
