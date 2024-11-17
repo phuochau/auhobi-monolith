@@ -25,6 +25,7 @@ import { BillInput } from "@/components/form-fields/bill-input"
 import React from "react"
 import { Textarea } from "@/components/ui/textarea"
 import { LinkInput } from "@/components/form-fields/link-input"
+import { Toast } from "@/components/ui/toast-config"
 
 const formSchema = z.object({
   type: z.string(),
@@ -78,7 +79,7 @@ const AddServiceHistory = () => {
     const response = payload as GraphQLResponse<ServiceLog>
     setResponse(response)
     if (!response.errors && response.data) {
-      // TODO: Show Toast message
+      Toast.success('Successfully added the service history!');
       router.dismiss()
     }
     setSubmitting(false)

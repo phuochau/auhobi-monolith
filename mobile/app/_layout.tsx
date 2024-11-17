@@ -2,7 +2,7 @@ import '@/global.css';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from '@react-navigation/native';
-import { Slot, SplashScreen, Stack } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { PortalHost } from '@rn-primitives/portal';
 import * as React from 'react';
@@ -10,6 +10,8 @@ import { Platform } from 'react-native';
 import { NAV_THEME } from '@/lib/constants';
 import { useColorScheme } from '@/lib/useColorScheme';
 import { ConfirmationService } from '@/services/confirmation.service';
+import BaseToast from 'react-native-toast-message';
+import { Toast } from '@/components/ui/toast-config';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -71,6 +73,7 @@ export default function RootLayout() {
         <Stack.Screen name="+not-found" />
       </Stack>
       {ConfirmationService.render()}
+      <BaseToast config={Toast.customConfig} />
       <PortalHost />
     </ThemeProvider>
   );
