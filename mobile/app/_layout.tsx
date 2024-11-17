@@ -9,6 +9,7 @@ import * as React from 'react';
 import { Platform } from 'react-native';
 import { NAV_THEME } from '@/lib/constants';
 import { useColorScheme } from '@/lib/useColorScheme';
+import { ConfirmationService } from '@/services/confirmation.service';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -69,6 +70,7 @@ export default function RootLayout() {
         <Stack.Screen name="(app)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
+      {ConfirmationService.render()}
       <PortalHost />
     </ThemeProvider>
   );

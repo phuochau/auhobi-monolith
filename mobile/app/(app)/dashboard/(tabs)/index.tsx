@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { listServiceLog } from "@/store/service-log/actions/list-service-logs.action"
 import { ServiceLogConnection, ServiceLogEdge, ServiceLogSortFields, SortDirection } from "@/graphql/gql/generated-models"
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
+import { ConfirmationService } from "@/services/confirmation.service"
 
 const MOCKING_DATA = require('./logs.json')
 
@@ -43,8 +44,15 @@ const ServiceHistory = () => {
 
   }
 
-  function onDElete(item: ServiceLogEdge): void {
-    
+  function onDelete(item: ServiceLogEdge): void {
+    ConfirmationService.open({
+      title: 'Confirmation',
+      description: 'Are you sure you want to delete the log?',
+      confirmClassName: 'bg-destructive',
+      onConfirm: () => {
+        console.log('confirm')
+      }
+    })
   }
 
   useEffect(() => {
@@ -60,7 +68,7 @@ const ServiceHistory = () => {
         <ServiceHistoryItem
           data={item}
           onRequestEdit={onEdit}
-          onRequestDelete={onDElete}
+          onRequestDelete={onDelete}
           />
       }
       contentContainerClassName="gap-6 py-6"
