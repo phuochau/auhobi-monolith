@@ -8,13 +8,20 @@ import { userService } from "@/services/user.service"
 import { Label } from "../ui/label"
 import { MediaGrid } from "../ui/media-grid"
 import { NumberUtils } from "@/lib/number.utils"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
+import { Button } from "../ui/button"
+import { Ellipsis } from "@/lib/icons/Ellipsis"
+import { SquarePen } from '@/lib/icons/SquarePen'
+import { Trash2 } from '@/lib/icons/Trash2'
 
 export type ServiceHistoryItemProps = {
-    data: ServiceLogEdge
+    data: ServiceLogEdge,
+    onRequestEdit: (data: ServiceLogEdge) => any,
+    onRequestDelete: (data: ServiceLogEdge) => any
 }
 
 export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
-    const { data } = props
+    const { data, onRequestEdit, onRequestDelete } = props
 
     function getTotalBill(): number {
         const bills: ServiceLogBill[] = data.node.bills?.nodes || []
@@ -28,13 +35,30 @@ export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
     return (
         <View className="px-6">
             <Card>
-                <CardHeader>
-                    <View className="flex flex-row items-start mb-1">
-                        <Badge><Text>{data.node.type}</Text></Badge>
-                        {data.node.mileage &&
-                            <View className="flex-1 flex-row justify-end">
-                                <Badge variant={'outline'}><Text>{NumberUtils.format(data.node.mileage)} km</Text></Badge>
-                            </View>}
+                <CardHeader className="pt-4">
+                    <View className="flex flex-row items-center justify-center mb-1 gap-2">
+                        <View className="flex-1 flex flex-row">
+                            <Badge><Text>{data.node.type}</Text></Badge>
+                        </View>
+                        {data.node.mileage && <Badge variant={'outline'}><Text>{NumberUtils.format(data.node.mileage)} km</Text></Badge>}
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant='ghost' size='icon' className="-mr-2">
+                                    <Ellipsis size={20} className="text-foreground" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent insets={{ right: 16 }}  className='w-32 native:w-32'>
+                                <DropdownMenuItem onPress={() => onRequestEdit(data)}>
+                                    <SquarePen size={16} className="text-foreground" />
+                                    <Text className="text-foreground">Edit</Text>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onPress={() => onRequestDelete(data)}>
+                                    <Trash2 size={16} className="text-destructive" />
+                                    <Text className="text-destructive">Delete</Text>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
                     </View>
                     <CardDescription>{userService.formatDate(data.node.createdAt)}{Boolean(garageName?.length) ? ` | ${garageName}` : ''}</CardDescription>
                 </CardHeader>
@@ -43,9 +67,9 @@ export const ServiceHistoryItem = (props: ServiceHistoryItemProps) => {
                     <CardContent>
                         <Text>{data.node.description}</Text>
                     </CardContent>}
-                    
+
                 <CardFooter className="flex flex-col items-start gap-4">
-                    {attachments.length > 0 && 
+                    {attachments.length > 0 &&
                         <View className="flex flex-col gap-1 w-full">
                             <Label nativeID="mediaLabel">Media</Label>
                             <MediaGrid urls={attachments} />
