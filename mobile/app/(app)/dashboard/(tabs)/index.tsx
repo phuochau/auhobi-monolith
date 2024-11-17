@@ -5,9 +5,10 @@ import { Loader } from "@/components/ui/loader"
 import { EmptyContainer } from "@/components/ui/empty-container"
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { listServiceLog } from "@/store/service-log/actions/list-service-logs.action"
-import { ServiceLogConnection, ServiceLogEdge, ServiceLogSortFields, SortDirection } from "@/graphql/gql/generated-models"
+import { ServiceLogConnection, ServiceLogDeleteResponse, ServiceLogEdge, ServiceLogSortFields, SortDirection } from "@/graphql/gql/generated-models"
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
 import { ConfirmationService } from "@/services/confirmation.service"
+import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
 
 const MOCKING_DATA = require('./logs.json')
 
@@ -49,8 +50,17 @@ const ServiceHistory = () => {
       title: 'Confirmation',
       description: 'Are you sure you want to delete the log?',
       confirmClassName: 'bg-destructive',
-      onConfirm: () => {
-        console.log('confirm')
+      onConfirm: async () => {
+        try {
+          const res = await dispatch<any>(deleteServiceLogAction({ input: { id: item.node.id } }))
+          const payload = res.payload?.data as ServiceLogDeleteResponse;
+
+          if (payload.id) {
+            // fetchLogs()
+          }
+        } catch (err) {
+          console.log(err)
+        }
       }
     })
   }
