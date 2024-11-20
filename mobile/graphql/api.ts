@@ -5,8 +5,8 @@ import { DocumentNode } from "graphql";
 import { GraphQLResponse } from "./types/graphql-response";
 import { ErrorCodes, File } from "./gql/generated-models";
 import { store } from "@/store/store";
-import { logout } from "@/store/user/user.slice";
 import { Platform } from "react-native";
+import { signOutAction } from "@/store/user/actions/sign-out.action";
 
 class GraphQLClient {
     instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
@@ -58,7 +58,7 @@ class GraphQLClient {
             const forbidden = this.isForbidden(gqlResponse)
             
             if (forbidden) {
-                store.dispatch(logout())
+                store.dispatch(signOutAction())
                 // const refreshResult = await AuthService.refreshToken()
                 // if (refreshResult?.success) {
                 //     return authQuery<T, P>(query, variables)

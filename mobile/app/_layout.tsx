@@ -11,7 +11,7 @@ import { NAV_THEME } from '@/lib/constants';
 import { useColorScheme } from '@/lib/useColorScheme';
 import { ConfirmationService } from '@/services/confirmation.service';
 import BaseToast from 'react-native-toast-message';
-import { Toast } from '@/components/ui/toast-config';
+import { Toast } from '@/components/ui/toast';
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,

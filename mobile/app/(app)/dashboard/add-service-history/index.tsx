@@ -25,7 +25,7 @@ import { BillInput } from "@/components/form-fields/bill-input"
 import React from "react"
 import { Textarea } from "@/components/ui/textarea"
 import { LinkInput } from "@/components/form-fields/link-input"
-import { Toast } from "@/components/ui/toast-config"
+import { Toast } from "@/components/ui/toast"
 
 const formSchema = z.object({
   type: z.string(),
