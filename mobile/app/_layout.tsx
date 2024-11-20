@@ -12,6 +12,11 @@ import { useColorScheme } from '@/lib/useColorScheme';
 import { ConfirmationService } from '@/services/confirmation.service';
 import BaseToast from 'react-native-toast-message';
 import { Toast } from '@/components/ui/toast';
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://f674e4fa06bd870be3878dc76eac5188@o4508331377557504.ingest.us.sentry.io/4508331380375552'
+});
 
 const LIGHT_THEME: Theme = {
   ...DefaultTheme,
@@ -32,7 +37,7 @@ export {
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+function RootLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
@@ -78,3 +83,5 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+export default Sentry.wrap(RootLayout);

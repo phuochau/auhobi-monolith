@@ -83,7 +83,14 @@
           "iosUrlScheme": "com.googleusercontent.apps.auhobi"
         }
       ],
-      "expo-apple-authentication"
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "react-native",
+          "organization": "auhobi"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
