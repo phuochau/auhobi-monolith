@@ -3,6 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
+    "build:local": "eas build --platform android --local",
     "start": "expo start",
     "start:tunnel": "npx expo start --tunnel",
     "android": "expo run:android",
