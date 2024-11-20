@@ -4,9 +4,16 @@ import { Button } from "@/components/ui/button"
 import { ImageBackground, View, Image } from 'react-native'
 import { MoveRight } from '@/lib/icons/MoveRight';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
+import { FacebookApi } from '@/lib/facebook-api';
 
 const AuthScreen = () => {
   const router = useRouter()
+
+  useEffect(() => {
+    FacebookApi.initSDK()
+  }, [])
+
   return (
     <View>
       <StatusBar style={'light'} />

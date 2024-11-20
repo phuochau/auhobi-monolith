@@ -1,4 +1,14 @@
 {
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
   "expo": {
     "name": "mobile",
     "slug": "auhobi",
@@ -14,7 +24,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesAppleSignIn": true
     },
     "android": {
       "adaptiveIcon": {
@@ -51,7 +62,28 @@
           "photosPermission": "The app accesses your photos to let you change profile avatar, service log images.",
           "cameraPermission": "The app accesses your photos to let you change profile avatar, service log images."
         }
-      ]
+      ],
+      "expo-tracking-transparency",
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "506007135770023",
+          "clientToken": "1c502cce2025fac81eb51824aeee8cf2",
+          "displayName": "Auhobi",
+          "scheme": "fb506007135770023",
+          "advertiserIDCollectionEnabled": false,
+          "autoLogAppEventsEnabled": false,
+          "isAutoInitEnabled": true,
+          "iosUserTrackingPermission": "This identifier will be used to deliver personalized ads to you."
+        }
+      ],
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.auhobi"
+        }
+      ],
+      "expo-apple-authentication"
     ],
     "experiments": {
       "typedRoutes": true
