@@ -25,7 +25,18 @@
     },
     "ios": {
       "supportsTablet": true,
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -33,7 +44,9 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "com.google.android.gms.permission.AD_ID",
+        "android.permission.INTERNET"
       ],
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.auhobi.mobile"
@@ -100,6 +113,12 @@
         "projectId": "331b128b-06e1-4bbf-b18d-c16b605c2487"
       }
     },
-    "owner": "hauvo"
+    "owner": "hauvo",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/331b128b-06e1-4bbf-b18d-c16b605c2487"
+    }
   }
 }
