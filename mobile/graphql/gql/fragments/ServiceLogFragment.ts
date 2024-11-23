@@ -6,6 +6,7 @@ export const ServiceLogFragment = gql`
     	description
     	date
     	mileage
+    	links
     	media
     	customGarage
     	id

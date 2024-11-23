@@ -24,12 +24,17 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
+  appleUserId?: Maybe<Scalars['String']['output']>;
+  authMethod: AccountAuthMethod;
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
-  email: Scalars['String']['output'];
+  email?: Maybe<Scalars['String']['output']>;
   emailVerified: Scalars['Boolean']['output'];
+  facebookUserId?: Maybe<Scalars['String']['output']>;
   firstName?: Maybe<Scalars['String']['output']>;
+  googleUserId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  isActivated: Scalars['Boolean']['output'];
   lastName?: Maybe<Scalars['String']['output']>;
   role: AccountRole;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -38,12 +43,17 @@ export type Account = {
 
 export type AccountAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -66,12 +76,17 @@ export type AccountAggregateFilterUserAggregateFilter = {
 
 export type AccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -136,12 +151,17 @@ export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterV
 
 export type AccountAggregateGroupBy = {
   __typename?: 'AccountAggregateGroupBy';
+  appleUserId?: Maybe<Scalars['String']['output']>;
+  authMethod?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   emailVerified?: Maybe<Scalars['Boolean']['output']>;
+  facebookUserId?: Maybe<Scalars['String']['output']>;
   firstName?: Maybe<Scalars['String']['output']>;
+  googleUserId?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  isActivated?: Maybe<Scalars['Boolean']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
   role?: Maybe<AccountRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -172,8 +192,34 @@ export type AccountAggregateResponse = {
   sum?: Maybe<AccountSumAggregate>;
 };
 
+export enum AccountAuthMethod {
+  Apple = 'APPLE',
+  Email = 'EMAIL',
+  Facebook = 'FACEBOOK',
+  Google = 'GOOGLE',
+  Phone = 'PHONE'
+}
+
+export type AccountAuthMethodFilterComparison = {
+  eq?: InputMaybe<AccountAuthMethod>;
+  gt?: InputMaybe<AccountAuthMethod>;
+  gte?: InputMaybe<AccountAuthMethod>;
+  iLike?: InputMaybe<AccountAuthMethod>;
+  in?: InputMaybe<Array<AccountAuthMethod>>;
+  is?: InputMaybe<Scalars['Boolean']['input']>;
+  isNot?: InputMaybe<Scalars['Boolean']['input']>;
+  like?: InputMaybe<AccountAuthMethod>;
+  lt?: InputMaybe<AccountAuthMethod>;
+  lte?: InputMaybe<AccountAuthMethod>;
+  neq?: InputMaybe<AccountAuthMethod>;
+  notILike?: InputMaybe<AccountAuthMethod>;
+  notIn?: InputMaybe<Array<AccountAuthMethod>>;
+  notLike?: InputMaybe<AccountAuthMethod>;
+};
+
 export type AccountAvgAggregate = {
   __typename?: 'AccountAvgAggregate';
+  authMethod?: Maybe<Scalars['Float']['output']>;
   role?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -189,20 +235,29 @@ export type AccountConnection = {
 
 export type AccountCountAggregate = {
   __typename?: 'AccountCountAggregate';
+  appleUserId?: Maybe<Scalars['Int']['output']>;
+  authMethod?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   email?: Maybe<Scalars['Int']['output']>;
   emailVerified?: Maybe<Scalars['Int']['output']>;
+  facebookUserId?: Maybe<Scalars['Int']['output']>;
   firstName?: Maybe<Scalars['Int']['output']>;
+  googleUserId?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  isActivated?: Maybe<Scalars['Int']['output']>;
   lastName?: Maybe<Scalars['Int']['output']>;
   role?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
 export type AccountDto = {
-  email: Scalars['String']['input'];
+  appleUserId?: InputMaybe<Scalars['String']['input']>;
+  authMethod: AccountAuthMethod;
+  email?: InputMaybe<Scalars['String']['input']>;
+  facebookUserId?: InputMaybe<Scalars['String']['input']>;
   firstName?: InputMaybe<Scalars['String']['input']>;
+  googleUserId?: InputMaybe<Scalars['String']['input']>;
   lastName?: InputMaybe<Scalars['String']['input']>;
   role: AccountRole;
   user: UserDto;
@@ -210,12 +265,17 @@ export type AccountDto = {
 
 export type AccountDeleteFilter = {
   and?: InputMaybe<Array<AccountDeleteFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountDeleteFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -224,12 +284,17 @@ export type AccountDeleteFilter = {
 
 export type AccountDeleteResponse = {
   __typename?: 'AccountDeleteResponse';
+  appleUserId?: Maybe<Scalars['String']['output']>;
+  authMethod?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   emailVerified?: Maybe<Scalars['Boolean']['output']>;
+  facebookUserId?: Maybe<Scalars['String']['output']>;
   firstName?: Maybe<Scalars['String']['output']>;
+  googleUserId?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  isActivated?: Maybe<Scalars['Boolean']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
   role?: Maybe<AccountRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -245,12 +310,17 @@ export type AccountEdge = {
 
 export type AccountFilter = {
   and?: InputMaybe<Array<AccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -273,12 +343,17 @@ export type AccountFilterUserFilter = {
 
 export type AccountFilterUserFilterAccountFilter = {
   and?: InputMaybe<Array<AccountFilterUserFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -343,10 +418,14 @@ export type AccountFilterUserFilterUserVehicleFilterVehicleModelFilter = {
 
 export type AccountMaxAggregate = {
   __typename?: 'AccountMaxAggregate';
+  appleUserId?: Maybe<Scalars['String']['output']>;
+  authMethod?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  facebookUserId?: Maybe<Scalars['String']['output']>;
   firstName?: Maybe<Scalars['String']['output']>;
+  googleUserId?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
   role?: Maybe<AccountRole>;
@@ -355,10 +434,14 @@ export type AccountMaxAggregate = {
 
 export type AccountMinAggregate = {
   __typename?: 'AccountMinAggregate';
+  appleUserId?: Maybe<Scalars['String']['output']>;
+  authMethod?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  facebookUserId?: Maybe<Scalars['String']['output']>;
   firstName?: Maybe<Scalars['String']['output']>;
+  googleUserId?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
   role?: Maybe<AccountRole>;
@@ -394,12 +477,17 @@ export type AccountPasswordResetAggregateFilter = {
 
 export type AccountPasswordResetAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountPasswordResetAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountPasswordResetAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -523,12 +611,17 @@ export type AccountPasswordResetFilter = {
 
 export type AccountPasswordResetFilterAccountFilter = {
   and?: InputMaybe<Array<AccountPasswordResetFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountPasswordResetFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -617,12 +710,17 @@ export type AccountSort = {
 };
 
 export enum AccountSortFields {
+  AppleUserId = 'appleUserId',
+  AuthMethod = 'authMethod',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Email = 'email',
   EmailVerified = 'emailVerified',
+  FacebookUserId = 'facebookUserId',
   FirstName = 'firstName',
+  GoogleUserId = 'googleUserId',
   Id = 'id',
+  IsActivated = 'isActivated',
   LastName = 'lastName',
   Role = 'role',
   UpdatedAt = 'updatedAt'
@@ -630,17 +728,23 @@ export enum AccountSortFields {
 
 export type AccountSumAggregate = {
   __typename?: 'AccountSumAggregate';
+  authMethod?: Maybe<Scalars['Float']['output']>;
   role?: Maybe<Scalars['Float']['output']>;
 };
 
 export type AccountUpdateFilter = {
   and?: InputMaybe<Array<AccountUpdateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountUpdateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -676,12 +780,17 @@ export type AccountVerficationAggregateFilter = {
 
 export type AccountVerficationAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountVerficationAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountVerficationAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -805,12 +914,17 @@ export type AccountVerficationFilter = {
 
 export type AccountVerficationFilterAccountFilter = {
   and?: InputMaybe<Array<AccountVerficationFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountVerficationFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -1173,6 +1287,14 @@ export type AuthLoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
   useCode?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AuthLoginSocialInput = {
+  email?: InputMaybe<Scalars['String']['input']>;
+  firstName?: InputMaybe<Scalars['String']['input']>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
+  photo?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['String']['input'];
 };
 
 export type AuthRefreshTokenInput = {
@@ -2340,12 +2462,17 @@ export type FileAggregateFilter = {
 
 export type FileAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<FileAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<FileAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -2464,12 +2591,17 @@ export type FileFilter = {
 
 export type FileFilterAccountFilter = {
   and?: InputMaybe<Array<FileFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<FileFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -2958,6 +3090,9 @@ export type Mutation = {
   authConfirmPasswordReset: Scalars['Boolean']['output'];
   authConfirmPasswordResetByCode: Scalars['Boolean']['output'];
   authLogin: LoginResult;
+  authLoginByApple: LoginResult;
+  authLoginByFacebook: LoginResult;
+  authLoginByGoogle: LoginResult;
   authRefreshToken: LoginResult;
   authRegister: Scalars['Boolean']['output'];
   authRequestPasswordReset: Scalars['Boolean']['output'];
@@ -3250,6 +3385,21 @@ export type MutationAuthConfirmPasswordResetByCodeArgs = {
 
 export type MutationAuthLoginArgs = {
   input: AuthLoginInput;
+};
+
+
+export type MutationAuthLoginByAppleArgs = {
+  input: AuthLoginSocialInput;
+};
+
+
+export type MutationAuthLoginByFacebookArgs = {
+  input: AuthLoginSocialInput;
+};
+
+
+export type MutationAuthLoginByGoogleArgs = {
+  input: AuthLoginSocialInput;
 };
 
 
@@ -5076,12 +5226,17 @@ export type OrgAggregateFilter = {
 
 export type OrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5104,12 +5259,17 @@ export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilter = {
 
 export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5161,12 +5321,17 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter = {
 
 export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5224,12 +5389,17 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFi
 
 export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5264,12 +5434,17 @@ export type OrgAggregateFilterOrgMemberAggregateFilter = {
 
 export type OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5306,12 +5481,17 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter = {
 
 export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5387,12 +5567,17 @@ export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilter = {
 
 export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5487,12 +5672,17 @@ export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter = {
 
 export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5793,12 +5983,17 @@ export type OrgBranchMemberAggregateFilter = {
 
 export type OrgBranchMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgBranchMemberAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -5929,12 +6124,17 @@ export type OrgBranchMemberFilter = {
 
 export type OrgBranchMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgBranchMemberFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6307,12 +6507,17 @@ export type OrgFilter = {
 
 export type OrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6335,12 +6540,17 @@ export type OrgFilterAccountFilterUserFilter = {
 
 export type OrgFilterAccountFilterUserFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterAccountFilterUserFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterAccountFilterUserFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6389,12 +6599,17 @@ export type OrgFilterOrgBranchFilterOrgBranchMemberFilter = {
 
 export type OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6432,12 +6647,17 @@ export type OrgFilterOrgBranchFilterOrgFilter = {
 
 export type OrgFilterOrgBranchFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6495,12 +6715,17 @@ export type OrgFilterOrgMemberFilter = {
 
 export type OrgFilterOrgMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgMemberFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6537,12 +6762,17 @@ export type OrgFilterOrgMemberFilterOrgFilter = {
 
 export type OrgFilterOrgMemberFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6656,12 +6886,17 @@ export type OrgFilterShopFilterOrgFilter = {
 
 export type OrgFilterShopFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6718,12 +6953,17 @@ export type OrgFilterShopFilterShopMemberFilter = {
 
 export type OrgFilterShopFilterShopMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6780,12 +7020,17 @@ export type OrgMemberAggregateFilter = {
 
 export type OrgMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgMemberAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgMemberAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -6915,12 +7160,17 @@ export type OrgMemberFilter = {
 
 export type OrgMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgMemberFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgMemberFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -9853,6 +10103,7 @@ export type ServiceLog = {
   description?: Maybe<Scalars['String']['output']>;
   garage?: Maybe<Garage>;
   id: Scalars['ID']['output'];
+  links?: Maybe<Array<Scalars['String']['output']>>;
   media?: Maybe<Array<Scalars['String']['output']>>;
   mileage?: Maybe<Scalars['Float']['output']>;
   type: ServiceLogType;
@@ -10260,6 +10511,7 @@ export type ServiceLogDto = {
   description?: InputMaybe<Scalars['String']['input']>;
   garage?: InputMaybe<GarageDto>;
   garageId?: InputMaybe<Scalars['ID']['input']>;
+  links?: InputMaybe<Array<Scalars['String']['input']>>;
   media?: InputMaybe<Array<Scalars['String']['input']>>;
   mileage?: InputMaybe<Scalars['Float']['input']>;
   type: ServiceLogType;
@@ -10286,6 +10538,7 @@ export type ServiceLogDeleteResponse = {
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  links?: Maybe<Array<Scalars['String']['output']>>;
   media?: Maybe<Array<Scalars['String']['output']>>;
   mileage?: Maybe<Scalars['Float']['output']>;
   type?: Maybe<ServiceLogType>;
@@ -10830,12 +11083,17 @@ export type ShopMemberAggregateFilter = {
 
 export type ShopMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -10959,12 +11217,17 @@ export type ShopMemberFilter = {
 
 export type ShopMemberFilterAccountFilter = {
   and?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -11640,12 +11903,17 @@ export type UserAggregateFilter = {
 
 export type UserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -11769,12 +12037,17 @@ export type UserFilter = {
 
 export type UserFilterAccountFilter = {
   and?: InputMaybe<Array<UserFilterAccountFilter>>;
+  appleUserId?: InputMaybe<StringFieldComparison>;
+  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
   emailVerified?: InputMaybe<BooleanFieldComparison>;
+  facebookUserId?: InputMaybe<StringFieldComparison>;
   firstName?: InputMaybe<StringFieldComparison>;
+  googleUserId?: InputMaybe<StringFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
+  isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserFilterAccountFilter>>;
   role?: InputMaybe<AccountRoleFilterComparison>;
@@ -12766,6 +13039,8 @@ export type ResolversTypes = ResolversObject<{
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter;
   AccountAggregateGroupBy: ResolverTypeWrapper<AccountAggregateGroupBy>;
   AccountAggregateResponse: ResolverTypeWrapper<AccountAggregateResponse>;
+  AccountAuthMethod: AccountAuthMethod;
+  AccountAuthMethodFilterComparison: AccountAuthMethodFilterComparison;
   AccountAvgAggregate: ResolverTypeWrapper<AccountAvgAggregate>;
   AccountConnection: ResolverTypeWrapper<AccountConnection>;
   AccountCountAggregate: ResolverTypeWrapper<AccountCountAggregate>;
@@ -12858,6 +13133,7 @@ export type ResolversTypes = ResolversObject<{
   AuthConfirmPasswordResetByCodeInput: AuthConfirmPasswordResetByCodeInput;
   AuthConfirmPasswordResetInput: AuthConfirmPasswordResetInput;
   AuthLoginInput: AuthLoginInput;
+  AuthLoginSocialInput: AuthLoginSocialInput;
   AuthRefreshTokenInput: AuthRefreshTokenInput;
   AuthRegisterInput: AuthRegisterInput;
   AuthRequestPasswordResetInput: AuthRequestPasswordResetInput;
@@ -13808,6 +14084,7 @@ export type ResolversParentTypes = ResolversObject<{
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter;
   AccountAggregateGroupBy: AccountAggregateGroupBy;
   AccountAggregateResponse: AccountAggregateResponse;
+  AccountAuthMethodFilterComparison: AccountAuthMethodFilterComparison;
   AccountAvgAggregate: AccountAvgAggregate;
   AccountConnection: AccountConnection;
   AccountCountAggregate: AccountCountAggregate;
@@ -13895,6 +14172,7 @@ export type ResolversParentTypes = ResolversObject<{
   AuthConfirmPasswordResetByCodeInput: AuthConfirmPasswordResetByCodeInput;
   AuthConfirmPasswordResetInput: AuthConfirmPasswordResetInput;
   AuthLoginInput: AuthLoginInput;
+  AuthLoginSocialInput: AuthLoginSocialInput;
   AuthRefreshTokenInput: AuthRefreshTokenInput;
   AuthRegisterInput: AuthRegisterInput;
   AuthRequestPasswordResetInput: AuthRequestPasswordResetInput;
@@ -14793,12 +15071,17 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = ResolversObject<{
+  appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  authMethod?: Resolver<ResolversTypes['AccountAuthMethod'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   emailVerified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  facebookUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  isActivated?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['AccountRole'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -14807,12 +15090,17 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
 }>;
 
 export type AccountAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountAggregateGroupBy'] = ResolversParentTypes['AccountAggregateGroupBy']> = ResolversObject<{
+  appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByDeletedAtArgs, 'by'>>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   emailVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  facebookUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  isActivated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByUpdatedAtArgs, 'by'>>;
@@ -14830,6 +15118,7 @@ export type AccountAggregateResponseResolvers<ContextType = any, ParentType exte
 }>;
 
 export type AccountAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountAvgAggregate'] = ResolversParentTypes['AccountAvgAggregate']> = ResolversObject<{
+  authMethod?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -14842,12 +15131,17 @@ export type AccountConnectionResolvers<ContextType = any, ParentType extends Res
 }>;
 
 export type AccountCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountCountAggregate'] = ResolversParentTypes['AccountCountAggregate']> = ResolversObject<{
+  appleUserId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  authMethod?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   emailVerified?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  facebookUserId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  googleUserId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  isActivated?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -14855,12 +15149,17 @@ export type AccountCountAggregateResolvers<ContextType = any, ParentType extends
 }>;
 
 export type AccountDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountDeleteResponse'] = ResolversParentTypes['AccountDeleteResponse']> = ResolversObject<{
+  appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   emailVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  facebookUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  isActivated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -14874,10 +15173,14 @@ export type AccountEdgeResolvers<ContextType = any, ParentType extends Resolvers
 }>;
 
 export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountMaxAggregate'] = ResolversParentTypes['AccountMaxAggregate']> = ResolversObject<{
+  appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  facebookUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
@@ -14886,10 +15189,14 @@ export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends R
 }>;
 
 export type AccountMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountMinAggregate'] = ResolversParentTypes['AccountMinAggregate']> = ResolversObject<{
+  appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  facebookUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
@@ -14990,6 +15297,7 @@ export type AccountPasswordResetMinAggregateResolvers<ContextType = any, ParentT
 }>;
 
 export type AccountSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountSumAggregate'] = ResolversParentTypes['AccountSumAggregate']> = ResolversObject<{
+  authMethod?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -15660,6 +15968,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   authConfirmPasswordReset?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthConfirmPasswordResetArgs, 'input'>>;
   authConfirmPasswordResetByCode?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthConfirmPasswordResetByCodeArgs, 'input'>>;
   authLogin?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthLoginArgs, 'input'>>;
+  authLoginByApple?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthLoginByAppleArgs, 'input'>>;
+  authLoginByFacebook?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthLoginByFacebookArgs, 'input'>>;
+  authLoginByGoogle?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthLoginByGoogleArgs, 'input'>>;
   authRefreshToken?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationAuthRefreshTokenArgs, 'input'>>;
   authRegister?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthRegisterArgs, 'input'>>;
   authRequestPasswordReset?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthRequestPasswordResetArgs, 'input'>>;
@@ -17969,6 +18280,7 @@ export type ServiceLogResolvers<ContextType = any, ParentType extends ResolversP
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   garage?: Resolver<Maybe<ResolversTypes['Garage']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  links?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   type?: Resolver<ResolversTypes['ServiceLogType'], ParentType, ContextType>;
@@ -18181,6 +18493,7 @@ export type ServiceLogDeleteResponseResolvers<ContextType = any, ParentType exte
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  links?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   media?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   mileage?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['ServiceLogType']>, ParentType, ContextType>;
