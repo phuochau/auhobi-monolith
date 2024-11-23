@@ -15,6 +15,12 @@ import axios from "axios"
 import fs from 'fs'
 import { Logger } from "./logger"
 
+enum UrlExist {
+    NO,
+    YES,
+    HAS_CHANGE
+}
+
 export namespace CarsDataCrawler {
     export const BASE_URL = 'https://www.cars-data.com'
     export const BASE_DIR = path.join(process.cwd(), 'output/cars-data.com')
@@ -42,10 +48,22 @@ export namespace CarsDataCrawler {
         return path.join(VEHICLE_DOWNLOADED_IMAGES_DIR, filename)
     }
 
-    export const isURLExist = (list: any[], url: any) => {
+    export const isURLExist = (list: any[], url: any): UrlExist => {
         const found = list.find(item => item.loc === url.loc)
+
+        if (!found) {
+            return UrlExist.NO
+        }
+
+        if (found?.lastmod === url?.lastmod) {
+            return UrlExist.YES
+        }
     
-        return found?.lastmod === url?.lastmod
+        return UrlExist.HAS_CHANGE
+    }
+
+    export const getUrlIndex = (list: any[], url: any): number => {
+        return list.findIndex(item => item.loc === url.loc)
     }
 
     export const vehicleCrawAll = async(browser: Browser): Promise<void> => {
@@ -88,19 +106,35 @@ export namespace CarsDataCrawler {
                 const failedVehicleUrls: any[] = []
                 for (const item of items) {
                     try {
-                        if (isURLExist(parsedVehicleUrls, item)) {
+                        const parsedExist = isURLExist(parsedVehicleUrls, item)
+                        if (parsedExist === UrlExist.YES) {
                             Logger.warn('[SKIP]', `${itemIndex}`, item.loc)
                             itemIndex++
                             continue
                         }
-                        const vehicle = await CarsDataCrawler.vehicleCrawlSingleVehicle(browser, item.loc)
-                        Logger.success('[SUCCESS]', `${itemIndex}`, item.loc)
 
-                        parsedVehicles.push(vehicle)
-                        parsedVehicleUrls.push({
-                            loc: item.loc,
-                            lastmod: item.lastmod
-                        })
+
+                        const vehicle = await CarsDataCrawler.vehicleCrawlSingleVehicle(browser, item.loc)
+
+                        if (parsedExist === UrlExist.NO) {
+                            parsedVehicles.push(vehicle)
+                            parsedVehicleUrls.push(item)
+                        } else {
+                            const vehicleIndex = parsedVehicles.findIndex(item => item.ref === item.loc)
+                            if (vehicleIndex > -1) {
+                                parsedVehicles[vehicleIndex] = vehicle
+                            } else {
+                                parsedVehicles.push(vehicle)
+                            }
+
+                            const urlIndex = getUrlIndex(parsedVehicleUrls, item.loc)
+                            if (urlIndex > -1) {
+                                parsedVehicleUrls[urlIndex] = item
+                            } else {
+                                parsedVehicleUrls.push(item)
+                            }
+                        }
+                        Logger.success('[SUCCESS]', `${itemIndex}`, item.loc)
 
                         if (isURLExist(failedVehicleUrls, item)) {
                             failedVehicleUrls.splice(failedVehicleUrls.indexOf(item), 1)
@@ -109,10 +143,7 @@ export namespace CarsDataCrawler {
                     } catch (err) {
                         Logger.error('[ERROR]', item.loc, err)
                         if (!isURLExist(failedVehicleUrls, item)) {
-                            failedVehicleUrls.push({
-                                loc: item.loc,
-                                lastmod: item.lastmod
-                            })
+                            failedVehicleUrls.push(item)
                         }
                     }
 
