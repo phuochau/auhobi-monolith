@@ -99,6 +99,10 @@ export class AccountService {
     return this.repo.save(account)
   }
 
+  /**
+   * Facebook
+   */
+
   async findAccountByFacebookUserId(facebookUserId: string): Promise<Account | undefined> {
     return this.repo.findOne({
       where: { facebookUserId },
@@ -106,25 +110,100 @@ export class AccountService {
     })
   }
 
-  async createAccountByFacebookUser(facebookUserId: string, firstName?: string, lastName?: string, imageUrl?: string): Promise<Account | undefined> {
+  async createAccountByFacebookUser(facebookUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
     const account = this.repo.create({
       facebookUserId,
       authMethod: AccountAuthMethod.FACEBOOK,
       firstName: firstName,
       lastName: lastName,
+      email,
       user: {
-        avatar: imageUrl
+        avatar: avatar
       },
       isActivated: true
     })
     return this.repo.save(account)
   }
 
-  async updateAccountByFacebookUser(account: Account, facebookUserId: string, firstName?: string, lastName?: string, imageUrl?: string): Promise<Account | undefined> {
+  async updateAccountByFacebookUser(account: Account, facebookUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
     account.facebookUserId = facebookUserId
     account.firstName = firstName
     account.lastName = lastName
-    account.user.avatar = imageUrl
+    account.email = email
+    account.user.avatar = avatar
+    account.isActivated = true
+    return this.repo.save(account)
+  }
+
+  /**
+   * Google
+   */
+
+  async findAccountByGoogleUserId(googleUserId: string): Promise<Account | undefined> {
+    return this.repo.findOne({
+      where: { googleUserId },
+      relations: ['user']
+    })
+  }
+
+  async createAccountByGoogleUser(googleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    const account = this.repo.create({
+      googleUserId,
+      authMethod: AccountAuthMethod.GOOGLE,
+      firstName: firstName,
+      lastName: lastName,
+      email,
+      user: {
+        avatar: avatar
+      },
+      isActivated: true
+    })
+    return this.repo.save(account)
+  }
+
+  async updateAccountByGoogleUser(account: Account, googleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    account.googleUserId = googleUserId
+    account.firstName = firstName
+    account.lastName = lastName
+    account.email = email
+    account.user.avatar = avatar
+    account.isActivated = true
+    return this.repo.save(account)
+  }
+
+  /**
+   * Apple
+   */
+
+  async findAccountByAppleUserId(appleUserId: string): Promise<Account | undefined> {
+    return this.repo.findOne({
+      where: { appleUserId },
+      relations: ['user']
+    })
+  }
+
+  async createAccountByAppleUser(appleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    const account = this.repo.create({
+      appleUserId,
+      authMethod: AccountAuthMethod.APPLE,
+      firstName: firstName,
+      lastName: lastName,
+      email,
+      user: {
+        avatar: avatar
+      },
+      isActivated: true
+    })
+    return this.repo.save(account)
+  }
+
+  async updateAccountByAppleUser(account: Account, appleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    account.appleUserId = appleUserId
+    account.firstName = firstName
+    account.lastName = lastName
+    account.email = email
+    account.user.avatar = avatar
+    account.isActivated = true
     return this.repo.save(account)
   }
 }

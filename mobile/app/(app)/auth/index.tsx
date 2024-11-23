@@ -6,12 +6,18 @@ import { MoveRight } from '@/lib/icons/MoveRight';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { FacebookApi } from '@/lib/facebook-api';
+import { GoogleApi } from '@/lib/google-api';
 
 const AuthScreen = () => {
   const router = useRouter()
 
+  async function initSDKs() {
+    await FacebookApi.initSDK()
+    GoogleApi.initSignInSDK()
+  }
+
   useEffect(() => {
-    FacebookApi.initSDK()
+    initSDKs()
   }, [])
 
   return (

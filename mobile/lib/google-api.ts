@@ -1,4 +1,9 @@
 import {AddressType, Client, GeocodeResult, Language, PlaceAutocompleteResult, PlaceAutocompleteType} from "@googlemaps/google-maps-services-js";
+import {
+    ConfigureParams,
+    GoogleSignin,
+    SignInResponse
+  } from '@react-native-google-signin/google-signin';
 import axios from "axios";
 
 export namespace GoogleApi {
@@ -63,5 +68,14 @@ export namespace GoogleApi {
             }
         }
         return null
+    }
+
+    export const initSignInSDK = (options?: ConfigureParams): void => {
+        GoogleSignin.configure(options);
+    }
+
+    export const googleSignIn = async (): Promise<SignInResponse> => {
+        await GoogleSignin.hasPlayServices();
+        return GoogleSignin.signIn();
     }
 }

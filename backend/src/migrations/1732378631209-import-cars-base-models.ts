@@ -14,7 +14,7 @@ const BASE_MODELS_JSON = path.join(BASE_DIR, 'base_models.json')
 const BASE_MODELS_IMAGES_DIR = path.join(BASE_DIR, 'images')
 const REMOTE_IMAGES_SUBFOLDER = 'car-data/base-models'
 
-export class ImportCarsBaseModels1731299937274 implements MigrationInterface {
+export class ImportCarsBaseModels1732378631209 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const baseModels: CarDataBaseModel[] = JSON.parse(fs.readFileSync(BASE_MODELS_JSON, 'utf-8'))

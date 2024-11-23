@@ -1,9 +1,12 @@
 import { Field, InputType } from "@nestjs/graphql";
 
 @InputType()
-export class AuthLoginFacebookInput {
+export class AuthLoginSocialInput {
     @Field()
-    userID: string;
+    userId: string;
+    
+    @Field({ nullable: true })
+    email?: string;
 
     @Field({ nullable: true })
     firstName?: string;
@@ -12,6 +15,6 @@ export class AuthLoginFacebookInput {
     lastName?: string;
 
     @Field({ nullable: true })
-    imageUrl?: string;
+    photo?: string;
 
 }

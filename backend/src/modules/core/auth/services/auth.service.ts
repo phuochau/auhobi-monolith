@@ -7,7 +7,7 @@ import { AccountVerificationService } from './account-verification.service';
 import { AccountPasswordResetService } from './account-password-reset.service';
 import { ErrorCodes } from '../../../shared/enums/error-codes';
 import dayjs from 'dayjs';
-import { AuthLoginFacebookInput } from '../resolvers/inputs/auth-login-facebook.input';
+import { AuthLoginSocialInput } from '../resolvers/inputs/auth-login-social.input';
 
 @Injectable()
 export class AuthService {
@@ -115,14 +115,54 @@ export class AuthService {
    * Social Logins
    */
 
-  async loginByFacebook(fbUserId: string, firstName?: string, lastName?: string, imageUrl?: string): Promise<LoginResult> {
+  async loginByFacebook(fbUserId: string, email?: string, firstName?: string, lastName?: string, photo?: string): Promise<LoginResult> {
     let acc = await this.accountService.findAccountByFacebookUserId(fbUserId)
     if (!acc) {
-      acc = await this.accountService.createAccountByFacebookUser(fbUserId, firstName, lastName, imageUrl)
+      acc = await this.accountService.createAccountByFacebookUser(fbUserId, email, firstName, lastName, photo)
     }
 
     if (!acc.isActivated) {
-      acc = await this.accountService.updateAccountByFacebookUser(acc, fbUserId, firstName, lastName, imageUrl)
+      acc = await this.accountService.updateAccountByFacebookUser(acc, fbUserId, email, firstName, lastName, photo)
+    }
+    
+    const accessToken = await this.generateAccessToken(acc)
+    const refreshToken = await this.updateRefreshToken(acc.id)
+
+    return {
+      account: acc,
+      accessToken,
+      refreshToken
+    };
+  }
+
+  async loginByGoogle(googleUserId: string, email?: string, firstName?: string, lastName?: string, photo?: string): Promise<LoginResult> {
+    let acc = await this.accountService.findAccountByGoogleUserId(googleUserId)
+    if (!acc) {
+      acc = await this.accountService.createAccountByGoogleUser(googleUserId, email, firstName, lastName, photo)
+    }
+
+    if (!acc.isActivated) {
+      acc = await this.accountService.updateAccountByGoogleUser(acc, googleUserId, email, firstName, lastName, photo)
+    }
+    
+    const accessToken = await this.generateAccessToken(acc)
+    const refreshToken = await this.updateRefreshToken(acc.id)
+
+    return {
+      account: acc,
+      accessToken,
+      refreshToken
+    };
+  }
+
+  async loginByApple(appleUserId: string, email?: string, firstName?: string, lastName?: string, photo?: string): Promise<LoginResult> {
+    let acc = await this.accountService.findAccountByAppleUserId(appleUserId)
+    if (!acc) {
+      acc = await this.accountService.createAccountByAppleUser(appleUserId, email, firstName, lastName, photo)
+    }
+
+    if (!acc.isActivated) {
+      acc = await this.accountService.updateAccountByAppleUser(acc, appleUserId, email, firstName, lastName, photo)
     }
     
     const accessToken = await this.generateAccessToken(acc)

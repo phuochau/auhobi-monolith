@@ -40,26 +40,14 @@ class BaseClass extends BaseEntity {
     @FilterableField({ nullable: true })
     @Column({ unique: true, nullable: true })
     appleUserId?: string;
-  
-    @FilterableField(() => GraphQLJSON, { nullable: true })
-    @Column({ type: 'jsonb', nullable: true })
-    appleUserMetadata?: string;
 
     @FilterableField({ nullable: true })
     @Column({ unique: true, nullable: true })
     facebookUserId?: string;
-  
-    @FilterableField(() => GraphQLJSON, { nullable: true })
-    @Column({ type: 'jsonb', nullable: true })
-    facebookUserMetadata?: string;
 
     @FilterableField({ nullable: true })
     @Column({ unique: true, nullable: true })
     googleUserId?: string;
-  
-    @FilterableField(() => GraphQLJSON, { nullable: true })
-    @Column({ type: 'jsonb', nullable: true })
-    googleUserMetadata?: string;
 }
 
 /**

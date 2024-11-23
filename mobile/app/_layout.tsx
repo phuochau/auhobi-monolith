@@ -15,7 +15,7 @@ import { Toast } from '@/components/ui/toast';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
-  dsn: 'https://f674e4fa06bd870be3878dc76eac5188@o4508331377557504.ingest.us.sentry.io/4508331380375552'
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN
 });
 
 const LIGHT_THEME: Theme = {

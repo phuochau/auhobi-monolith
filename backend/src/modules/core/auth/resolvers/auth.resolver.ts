@@ -11,7 +11,7 @@ import { AuthRequestPasswordResetInput } from "./inputs/auth-request-password-re
 import { AuthConfirmPasswordResetInput } from "./inputs/auth-confirm-password-reset.input";
 import { AuthVerifyAccountByCodeInput } from "./inputs/auth-verify-account-by-code.input";
 import { AuthConfirmPasswordResetByCodeInput } from "./inputs/auth-confirm-password-reset-by-code.input";
-import { AuthLoginFacebookInput } from "./inputs/auth-login-facebook.input";
+import { AuthLoginSocialInput } from "./inputs/auth-login-social.input";
 
 @Resolver()
 export class AuthResolver {
@@ -43,9 +43,23 @@ export class AuthResolver {
 
   @Mutation(() => LoginResult)
   authLoginByFacebook(
-    @Args({ name: 'input', type: () => AuthLoginFacebookInput }) input: AuthLoginFacebookInput
+    @Args({ name: 'input', type: () => AuthLoginSocialInput }) input: AuthLoginSocialInput
   ) {
-    return this.authService.loginByFacebook(input.userID, input.firstName, input.lastName, input.imageUrl)
+    return this.authService.loginByFacebook(input.userId, input.email, input.firstName, input.lastName, input.photo)
+  }
+
+  @Mutation(() => LoginResult)
+  authLoginByGoogle(
+    @Args({ name: 'input', type: () => AuthLoginSocialInput }) input: AuthLoginSocialInput
+  ) {
+    return this.authService.loginByGoogle(input.userId, input.email, input.firstName, input.lastName, input.photo)
+  }
+
+  @Mutation(() => LoginResult)
+  authLoginByApple(
+    @Args({ name: 'input', type: () => AuthLoginSocialInput }) input: AuthLoginSocialInput
+  ) {
+    return this.authService.loginByApple(input.userId, input.email, input.firstName, input.lastName, input.photo)
   }
 
   /**

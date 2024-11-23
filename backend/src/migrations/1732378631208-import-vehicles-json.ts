@@ -11,7 +11,7 @@ import { VehicleBody } from "../modules/vehicle/entities/vehicle-body.entity";
 const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com/vehicles')
 const JSON_DIR = path.join(BASE_DIR, 'json')
 
-export class ImportVehiclesJson1731299937273 implements MigrationInterface {
+export class ImportVehiclesJson1732378631208 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const files = fs.readdirSync(JSON_DIR)

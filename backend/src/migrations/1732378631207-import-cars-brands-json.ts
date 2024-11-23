@@ -10,7 +10,7 @@ const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars
 const BRANDS_JSON = path.join(BASE_DIR, 'brands.json')
 const BRANDS_IMAGES_DIR = path.join(BASE_DIR, 'images')
 
-export class ImportCarsBrandsJson1730643801703 implements MigrationInterface {
+export class ImportCarsBrandsJson1732378631207 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const brands: CarDataBrand[] = JSON.parse(fs.readFileSync(BRANDS_JSON, 'utf-8'))
