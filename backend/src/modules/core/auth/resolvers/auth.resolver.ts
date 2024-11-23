@@ -11,6 +11,7 @@ import { AuthRequestPasswordResetInput } from "./inputs/auth-request-password-re
 import { AuthConfirmPasswordResetInput } from "./inputs/auth-confirm-password-reset.input";
 import { AuthVerifyAccountByCodeInput } from "./inputs/auth-verify-account-by-code.input";
 import { AuthConfirmPasswordResetByCodeInput } from "./inputs/auth-confirm-password-reset-by-code.input";
+import { AuthLoginFacebookInput } from "./inputs/auth-login-facebook.input";
 
 @Resolver()
 export class AuthResolver {
@@ -34,6 +35,17 @@ export class AuthResolver {
     @Args({ name: 'input', type: () => AuthRefreshTokenInput }) input: AuthRefreshTokenInput
   ) {
     return this.authService.refreshTokens(input.accountId, input.refreshToken)
+  }
+
+  /**
+   * Login with Socials
+   */
+
+  @Mutation(() => LoginResult)
+  authLoginByFacebook(
+    @Args({ name: 'input', type: () => AuthLoginFacebookInput }) input: AuthLoginFacebookInput
+  ) {
+    return this.authService.loginByFacebook(input.userID, input.firstName, input.lastName, input.imageUrl)
   }
 
   /**

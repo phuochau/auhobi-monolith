@@ -7,6 +7,7 @@ import { AccountVerificationService } from './account-verification.service';
 import { AccountPasswordResetService } from './account-password-reset.service';
 import { ErrorCodes } from '../../../shared/enums/error-codes';
 import dayjs from 'dayjs';
+import { AuthLoginFacebookInput } from '../resolvers/inputs/auth-login-facebook.input';
 
 @Injectable()
 export class AuthService {
@@ -69,6 +70,20 @@ export class AuthService {
     return refreshToken
   }
 
+  async createVerificationCode(acc: Account, useCode: boolean) {
+    const verification = await this.accountVerificationService.createOne(acc)
+    if (useCode) {
+      this.accountVerificationService.sendRequestEmailByCode(verification)
+    } else {
+      this.accountVerificationService.sendRequestEmail(verification)
+    }
+  }
+
+  /**
+   * 
+   * Login
+   */
+
   async login(email: string, pass: string, useCode: boolean): Promise<LoginResult> {
     const acc = await this.accountService.findAccountByEmail(email);
 
@@ -76,7 +91,7 @@ export class AuthService {
       throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND)
     }
     
-    if (!acc.emailVerified) {
+    if (!acc.isActivated) {
       await this.createVerificationCode(acc, useCode)
       throw new NotAcceptableException(ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION)
     }
@@ -96,6 +111,33 @@ export class AuthService {
     };
   }
 
+  /**
+   * Social Logins
+   */
+
+  async loginByFacebook(fbUserId: string, firstName?: string, lastName?: string, imageUrl?: string): Promise<LoginResult> {
+    let acc = await this.accountService.findAccountByFacebookUserId(fbUserId)
+    if (!acc) {
+      acc = await this.accountService.createAccountByFacebookUser(fbUserId, firstName, lastName, imageUrl)
+    }
+
+    if (!acc.isActivated) {
+      acc = await this.accountService.updateAccountByFacebookUser(acc, fbUserId, firstName, lastName, imageUrl)
+    }
+    
+    const accessToken = await this.generateAccessToken(acc)
+    const refreshToken = await this.updateRefreshToken(acc.id)
+
+    return {
+      account: acc,
+      accessToken,
+      refreshToken
+    };
+  }
+
+  /**
+   * Refresh Tokens
+   */
   async refreshTokens(accId: string, oldRefreshToken?: string): Promise<LoginResult> {
     const acc = await this.accountService.findActiveAccountById(accId)
     if (!acc) {
@@ -116,19 +158,10 @@ export class AuthService {
    * Register Flow
    */
 
-  async createVerificationCode(acc: Account, useCode: boolean) {
-    const verification = await this.accountVerificationService.createOne(acc)
-    if (useCode) {
-      this.accountVerificationService.sendRequestEmailByCode(verification)
-    } else {
-      this.accountVerificationService.sendRequestEmail(verification)
-    }
-  }
-
   async register(email: string, pass: string, firstName: string, lastName: string, useCode: boolean, createUser: boolean): Promise<boolean> {
     let acc = await this.accountService.findAccountByEmail(email)
     if (acc) {
-      if (!acc.emailVerified) {
+      if (!acc.isActivated) {
         // Resend email automatically
         await this.createVerificationCode(acc, useCode)
         throw new NotAcceptableException(ErrorCodes.AUTH_ACCOUNT_PENDING_ACTIVATION)

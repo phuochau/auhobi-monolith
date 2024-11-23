@@ -5,17 +5,22 @@ import { TABLE_PREFIX } from '../../constants';
 import { AccountRole } from './enums/account-role.enum';
 import { User, UserDTO } from '../../../end-user/entities/user.entity';
 import { genXToOneOptions } from '../../database/helpers/genXToOneOptions';
+import { AccountAuthMethod } from './enums/account-auth-method.enum';
+import GraphQLJSON from 'graphql-type-json';
 
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-    @FilterableField()
-    @Column({ unique: true })
-    @Index()
-    email: string;
+    @FilterableField(() => AccountAuthMethod)
+    @Column('int', { default: AccountAuthMethod.EMAIL })
+    authMethod: AccountAuthMethod;
 
-    @Column()
-    password: string;
+    @FilterableField({ nullable: true })
+    @Column({ unique: true, nullable: true })
+    email?: string;
+
+    @Column({ nullable: true })
+    password?: string;
 
     @FilterableField(() => AccountRole)
     @Column('int', { default: AccountRole.USER })
@@ -23,11 +28,38 @@ class BaseClass extends BaseEntity {
   
     @FilterableField({ nullable: true })
     @Column({ nullable: true })
-    firstName: string;
+    firstName?: string;
   
     @FilterableField({ nullable: true })
     @Column({ nullable: true })
-    lastName: string;
+    lastName?: string;
+
+    /**
+     * Social
+     */
+    @FilterableField({ nullable: true })
+    @Column({ unique: true, nullable: true })
+    appleUserId?: string;
+  
+    @FilterableField(() => GraphQLJSON, { nullable: true })
+    @Column({ type: 'jsonb', nullable: true })
+    appleUserMetadata?: string;
+
+    @FilterableField({ nullable: true })
+    @Column({ unique: true, nullable: true })
+    facebookUserId?: string;
+  
+    @FilterableField(() => GraphQLJSON, { nullable: true })
+    @Column({ type: 'jsonb', nullable: true })
+    facebookUserMetadata?: string;
+
+    @FilterableField({ nullable: true })
+    @Column({ unique: true, nullable: true })
+    googleUserId?: string;
+  
+    @FilterableField(() => GraphQLJSON, { nullable: true })
+    @Column({ type: 'jsonb', nullable: true })
+    googleUserMetadata?: string;
 }
 
 /**
@@ -45,6 +77,10 @@ export class Account extends BaseClass {
   @FilterableField()
   @Column({ default: false })
   emailVerified: boolean;
+
+  @FilterableField()
+  @Column({ default: false })
+  isActivated: boolean;
 
   @OneToOne(() => User, member => member.account, genXToOneOptions({ nullable: true }))
   user?: User;

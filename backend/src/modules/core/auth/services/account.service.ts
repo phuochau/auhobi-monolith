@@ -6,6 +6,7 @@ import { PlatformConfig } from 'src/config/platform.config';
 import { AccountRole } from '../entities/enums/account-role.enum';
 import { Encryption } from 'src/lib/encryption';
 import dayjs, { Dayjs } from 'dayjs';
+import { AccountAuthMethod } from '../entities/enums/account-auth-method.enum';
 
 @Injectable()
 export class AccountService {
@@ -29,7 +30,7 @@ export class AccountService {
     return this.repo.findOne({ 
       where: {
         id: accId,
-        emailVerified: true
+        isActivated: true
       },
       relations: ['user']
     })
@@ -40,17 +41,17 @@ export class AccountService {
   }
 
   async findActiveAccountByEmail(email: string): Promise<Account | undefined> {
-    return this.repo.findOneBy({ email, emailVerified: true })
+    return this.repo.findOneBy({ email, isActivated: true })
   }
 
   async findUnactiveAccountByEmail(email: string): Promise<Account | undefined> {
-    return this.repo.findOneBy({ email, emailVerified: false })
+    return this.repo.findOneBy({ email, isActivated: false })
   }
 
   async findActiveAccountByRefreshToken(accId: string, refreshToken: string): Promise<Account | undefined> {
     return this.repo.findOneBy({
       id: accId,
-      emailVerified: true,
+      isActivated: true,
       refreshToken,
       refreshTokenExpiredAt: MoreThanOrEqual(dayjs().toDate())
     })
@@ -83,6 +84,7 @@ export class AccountService {
 
   async activeAccount(account: Account): Promise<Account | undefined> {
     account.emailVerified = true
+    account.isActivated = true
     return this.repo.save(account)
   }
 
@@ -94,6 +96,35 @@ export class AccountService {
   async updateRefreshToken(account: Account, refreshToken: string, refreshTokenExpiredAt: Dayjs): Promise<Account | undefined> {
     account.refreshToken = refreshToken
     account.refreshTokenExpiredAt = refreshTokenExpiredAt.toDate()
+    return this.repo.save(account)
+  }
+
+  async findAccountByFacebookUserId(facebookUserId: string): Promise<Account | undefined> {
+    return this.repo.findOne({
+      where: { facebookUserId },
+      relations: ['user']
+    })
+  }
+
+  async createAccountByFacebookUser(facebookUserId: string, firstName?: string, lastName?: string, imageUrl?: string): Promise<Account | undefined> {
+    const account = this.repo.create({
+      facebookUserId,
+      authMethod: AccountAuthMethod.FACEBOOK,
+      firstName: firstName,
+      lastName: lastName,
+      user: {
+        avatar: imageUrl
+      },
+      isActivated: true
+    })
+    return this.repo.save(account)
+  }
+
+  async updateAccountByFacebookUser(account: Account, facebookUserId: string, firstName?: string, lastName?: string, imageUrl?: string): Promise<Account | undefined> {
+    account.facebookUserId = facebookUserId
+    account.firstName = firstName
+    account.lastName = lastName
+    account.user.avatar = imageUrl
     return this.repo.save(account)
   }
 }

@@ -8,26 +8,34 @@ import FBProfile from "react-native-fbsdk-next/lib/typescript/src/FBProfile";
 
 export type FacebookSignInButtonProps = {
     text?: string,
-    onAuthorized?: (profile: FBProfile) => any
+    onAuthorized?: (profile: FBProfile) => any,
+    onCancelled?: () => any
 }
 
 const FacebookSignInButton = (props: FacebookSignInButtonProps) => {
     const {
         text = 'Sign in with Facebook',
-        onAuthorized
+        onAuthorized,
+        onCancelled
     } = props
 
     async function signIn() {
         try {
             const result = await FacebookApi.login()
-            if (result.isCancelled || result.declinedPermissions) {
+
+            if (result.isCancelled) {
+                if (onCancelled) {
+                    onCancelled()
+                }
                 return
             }
 
-            console.log(result)
-            if (result.grantedPermissions) {
+            if (result.declinedPermissions?.length) {
+                Toast.warn(`${result.declinedPermissions.join(', ')} not granted.`)
+            }
+
+            if (result.grantedPermissions?.length) {
                 const profile = await FacebookApi.getProfile()
-                console.log(profile)
                 if (profile && onAuthorized) {
                     onAuthorized(profile)
                 }

@@ -27,7 +27,15 @@ export namespace Toast {
                     {text2?.length && <Text className='text-secondary-foreground font-semibold'>{text2}</Text>}
                 </View>
             </View>
-        )
+        ),
+        warn: ({ text1, text2 }: BaseToastProps) => (
+            <View className='w-full px-6'>
+                <View className='bg-warning h-full p-4 rounded-2xl gap-1'>
+                    {text1?.length && <Text className='text-warning-foreground font-semibold'>{text1}</Text>}
+                    {text2?.length && <Text className='text-warning-foreground font-semibold'>{text2}</Text>}
+                </View>
+            </View>
+        ),
     };
 
     export const info = (message: string, options?: BaseToastProps) => {
@@ -49,6 +57,14 @@ export namespace Toast {
     export const error = (message: string, options?: BaseToastProps) => {
         BaseToast.show({
             type: 'error',
+            text1: message,
+            ...(options || {})
+        })
+    }
+
+    export const warn = (message: string, options?: BaseToastProps) => {
+        BaseToast.show({
+            type: 'warn',
             text1: message,
             ...(options || {})
         })
