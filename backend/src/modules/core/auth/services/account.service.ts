@@ -7,6 +7,7 @@ import { AccountRole } from '../entities/enums/account-role.enum';
 import { Encryption } from 'src/lib/encryption';
 import dayjs, { Dayjs } from 'dayjs';
 import { AccountAuthMethod } from '../entities/enums/account-auth-method.enum';
+import _ from 'lodash';
 
 @Injectable()
 export class AccountService {
@@ -113,7 +114,7 @@ export class AccountService {
   async createAccountByFacebookUser(facebookUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
     const account = this.repo.create({
       facebookUserId,
-      authMethod: AccountAuthMethod.FACEBOOK,
+      authMethods: [AccountAuthMethod.FACEBOOK],
       firstName: firstName,
       lastName: lastName,
       email,
@@ -126,6 +127,7 @@ export class AccountService {
   }
 
   async updateAccountByFacebookUser(account: Account, facebookUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    account.authMethods = _.uniq([...(account.authMethods || []), AccountAuthMethod.FACEBOOK])
     account.facebookUserId = facebookUserId
     account.firstName = firstName
     account.lastName = lastName
@@ -149,7 +151,7 @@ export class AccountService {
   async createAccountByGoogleUser(googleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
     const account = this.repo.create({
       googleUserId,
-      authMethod: AccountAuthMethod.GOOGLE,
+      authMethods: [AccountAuthMethod.GOOGLE],
       firstName: firstName,
       lastName: lastName,
       email,
@@ -162,6 +164,7 @@ export class AccountService {
   }
 
   async updateAccountByGoogleUser(account: Account, googleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    account.authMethods = _.uniq([...(account.authMethods || []), AccountAuthMethod.GOOGLE])
     account.googleUserId = googleUserId
     account.firstName = firstName
     account.lastName = lastName
@@ -185,7 +188,7 @@ export class AccountService {
   async createAccountByAppleUser(appleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
     const account = this.repo.create({
       appleUserId,
-      authMethod: AccountAuthMethod.APPLE,
+      authMethods: [AccountAuthMethod.APPLE],
       firstName: firstName,
       lastName: lastName,
       email,
@@ -198,6 +201,7 @@ export class AccountService {
   }
 
   async updateAccountByAppleUser(account: Account, appleUserId: string, email?:string, firstName?: string, lastName?: string, avatar?: string): Promise<Account | undefined> {
+    account.authMethods = _.uniq([...(account.authMethods || []), AccountAuthMethod.APPLE])
     account.appleUserId = appleUserId
     account.firstName = firstName
     account.lastName = lastName

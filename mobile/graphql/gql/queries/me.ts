@@ -7,12 +7,12 @@ export const MeQuery = gql`
     		role
     		firstName
     		lastName
+    		phoneNumber
     		id
     		createdAt
     		updatedAt
     		deletedAt
     		user {
-    			phone_number
     			avatar
     			status
     			id
@@ -30,6 +30,24 @@ export const MeQuery = gql`
     					createdAt
     					updatedAt
     					deletedAt
+    					model {
+    						refId
+    						name
+    						startYear
+    						endYear
+    						drive
+    						engineType
+    						fuelType
+    						maxPower
+    						maxTorque
+    						transmission
+    						images
+    						metadata
+    						id
+    						createdAt
+    						updatedAt
+    						deletedAt
+    					}
     				}
     			}
     		}

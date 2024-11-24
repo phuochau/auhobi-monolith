@@ -8,27 +8,19 @@ export const AuthLoginMutation = gql`
     			role
     			firstName
     			lastName
+    			phoneNumber
     			id
-    			emailVerified
     			createdAt
     			updatedAt
     			deletedAt
-				user {
-					phone_number
-					avatar
-					status
-					id
-					vehicles {
-						nodes {
-							name
-							customModel
-							picture
-							status
-							metadata
-							id
-						}
-					}
-				}
+    			user {
+    				avatar
+    				status
+    				id
+    				createdAt
+    				updatedAt
+    				deletedAt
+    			}
     		}
     		accessToken
     		refreshToken

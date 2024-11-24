@@ -2,17 +2,19 @@ import gql from 'graphql-tag'
 
 export const AccountCountAggregateFragment = gql`
     fragment AccountCountAggregateFragment on AccountCountAggregate {
-    	authMethod
+    	authMethods
     	email
     	role
     	firstName
     	lastName
+    	phoneNumber
     	appleUserId
     	facebookUserId
     	googleUserId
     	id
-    	emailVerified
     	isActivated
+    	emailVerified
+    	phoneVerified
     	createdAt
     	updatedAt
     	deletedAt

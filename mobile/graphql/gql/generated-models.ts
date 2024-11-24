@@ -25,7 +25,7 @@ export type Scalars = {
 export type Account = {
   __typename?: 'Account';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethod: AccountAuthMethod;
+  authMethods: AccountAuthMethod;
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -36,6 +36,8 @@ export type Account = {
   id: Scalars['ID']['output'];
   isActivated: Scalars['Boolean']['output'];
   lastName?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  phoneVerified: Scalars['Boolean']['output'];
   role: AccountRole;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   user: User;
@@ -44,7 +46,7 @@ export type Account = {
 export type AccountAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -56,6 +58,8 @@ export type AccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<AccountAggregateFilterUserAggregateFilter>;
@@ -68,7 +72,6 @@ export type AccountAggregateFilterUserAggregateFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   vehicles?: InputMaybe<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter>;
@@ -77,7 +80,7 @@ export type AccountAggregateFilterUserAggregateFilter = {
 export type AccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -89,6 +92,8 @@ export type AccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter>;
@@ -100,7 +105,6 @@ export type AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserA
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -125,7 +129,6 @@ export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterU
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -152,7 +155,7 @@ export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterV
 export type AccountAggregateGroupBy = {
   __typename?: 'AccountAggregateGroupBy';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethod?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -163,6 +166,8 @@ export type AccountAggregateGroupBy = {
   id?: Maybe<Scalars['ID']['output']>;
   isActivated?: Maybe<Scalars['Boolean']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  phoneVerified?: Maybe<Scalars['Boolean']['output']>;
   role?: Maybe<AccountRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -219,7 +224,6 @@ export type AccountAuthMethodFilterComparison = {
 
 export type AccountAvgAggregate = {
   __typename?: 'AccountAvgAggregate';
-  authMethod?: Maybe<Scalars['Float']['output']>;
   role?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -236,7 +240,7 @@ export type AccountConnection = {
 export type AccountCountAggregate = {
   __typename?: 'AccountCountAggregate';
   appleUserId?: Maybe<Scalars['Int']['output']>;
-  authMethod?: Maybe<Scalars['Int']['output']>;
+  authMethods?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   email?: Maybe<Scalars['Int']['output']>;
@@ -247,18 +251,21 @@ export type AccountCountAggregate = {
   id?: Maybe<Scalars['Int']['output']>;
   isActivated?: Maybe<Scalars['Int']['output']>;
   lastName?: Maybe<Scalars['Int']['output']>;
+  phoneNumber?: Maybe<Scalars['Int']['output']>;
+  phoneVerified?: Maybe<Scalars['Int']['output']>;
   role?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
 
 export type AccountDto = {
   appleUserId?: InputMaybe<Scalars['String']['input']>;
-  authMethod: AccountAuthMethod;
+  authMethods: AccountAuthMethod;
   email?: InputMaybe<Scalars['String']['input']>;
   facebookUserId?: InputMaybe<Scalars['String']['input']>;
   firstName?: InputMaybe<Scalars['String']['input']>;
   googleUserId?: InputMaybe<Scalars['String']['input']>;
   lastName?: InputMaybe<Scalars['String']['input']>;
+  phoneNumber?: InputMaybe<Scalars['String']['input']>;
   role: AccountRole;
   user: UserDto;
 };
@@ -266,7 +273,7 @@ export type AccountDto = {
 export type AccountDeleteFilter = {
   and?: InputMaybe<Array<AccountDeleteFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -278,6 +285,8 @@ export type AccountDeleteFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountDeleteFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -285,7 +294,7 @@ export type AccountDeleteFilter = {
 export type AccountDeleteResponse = {
   __typename?: 'AccountDeleteResponse';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethod?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -296,6 +305,8 @@ export type AccountDeleteResponse = {
   id?: Maybe<Scalars['ID']['output']>;
   isActivated?: Maybe<Scalars['Boolean']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
+  phoneVerified?: Maybe<Scalars['Boolean']['output']>;
   role?: Maybe<AccountRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -311,7 +322,7 @@ export type AccountEdge = {
 export type AccountFilter = {
   and?: InputMaybe<Array<AccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -323,6 +334,8 @@ export type AccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<AccountFilterUserFilter>;
@@ -335,7 +348,6 @@ export type AccountFilterUserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   vehicles?: InputMaybe<AccountFilterUserFilterUserVehicleFilter>;
@@ -344,7 +356,7 @@ export type AccountFilterUserFilter = {
 export type AccountFilterUserFilterAccountFilter = {
   and?: InputMaybe<Array<AccountFilterUserFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -356,6 +368,8 @@ export type AccountFilterUserFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<AccountFilterUserFilterAccountFilterUserFilter>;
@@ -367,7 +381,6 @@ export type AccountFilterUserFilterAccountFilterUserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilterAccountFilterUserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -392,7 +405,6 @@ export type AccountFilterUserFilterUserVehicleFilterUserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<AccountFilterUserFilterUserVehicleFilterUserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -419,7 +431,7 @@ export type AccountFilterUserFilterUserVehicleFilterVehicleModelFilter = {
 export type AccountMaxAggregate = {
   __typename?: 'AccountMaxAggregate';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethod?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -428,6 +440,7 @@ export type AccountMaxAggregate = {
   googleUserId?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
   role?: Maybe<AccountRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -435,7 +448,7 @@ export type AccountMaxAggregate = {
 export type AccountMinAggregate = {
   __typename?: 'AccountMinAggregate';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethod?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<AccountAuthMethod>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -444,6 +457,7 @@ export type AccountMinAggregate = {
   googleUserId?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
   lastName?: Maybe<Scalars['String']['output']>;
+  phoneNumber?: Maybe<Scalars['String']['output']>;
   role?: Maybe<AccountRole>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -478,7 +492,7 @@ export type AccountPasswordResetAggregateFilter = {
 export type AccountPasswordResetAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountPasswordResetAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -490,6 +504,8 @@ export type AccountPasswordResetAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountPasswordResetAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -612,7 +628,7 @@ export type AccountPasswordResetFilter = {
 export type AccountPasswordResetFilterAccountFilter = {
   and?: InputMaybe<Array<AccountPasswordResetFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -624,6 +640,8 @@ export type AccountPasswordResetFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountPasswordResetFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -711,7 +729,7 @@ export type AccountSort = {
 
 export enum AccountSortFields {
   AppleUserId = 'appleUserId',
-  AuthMethod = 'authMethod',
+  AuthMethods = 'authMethods',
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Email = 'email',
@@ -722,20 +740,21 @@ export enum AccountSortFields {
   Id = 'id',
   IsActivated = 'isActivated',
   LastName = 'lastName',
+  PhoneNumber = 'phoneNumber',
+  PhoneVerified = 'phoneVerified',
   Role = 'role',
   UpdatedAt = 'updatedAt'
 }
 
 export type AccountSumAggregate = {
   __typename?: 'AccountSumAggregate';
-  authMethod?: Maybe<Scalars['Float']['output']>;
   role?: Maybe<Scalars['Float']['output']>;
 };
 
 export type AccountUpdateFilter = {
   and?: InputMaybe<Array<AccountUpdateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -747,6 +766,8 @@ export type AccountUpdateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountUpdateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -781,7 +802,7 @@ export type AccountVerficationAggregateFilter = {
 export type AccountVerficationAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountVerficationAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -793,6 +814,8 @@ export type AccountVerficationAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountVerficationAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -915,7 +938,7 @@ export type AccountVerficationFilter = {
 export type AccountVerficationFilterAccountFilter = {
   and?: InputMaybe<Array<AccountVerficationFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -927,6 +950,8 @@ export type AccountVerficationFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<AccountVerficationFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -2463,7 +2488,7 @@ export type FileAggregateFilter = {
 export type FileAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<FileAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -2475,6 +2500,8 @@ export type FileAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<FileAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -2592,7 +2619,7 @@ export type FileFilter = {
 export type FileFilterAccountFilter = {
   and?: InputMaybe<Array<FileFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -2604,6 +2631,8 @@ export type FileFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<FileFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5227,7 +5256,7 @@ export type OrgAggregateFilter = {
 export type OrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5239,6 +5268,8 @@ export type OrgAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<OrgAggregateFilterAccountAggregateFilterUserAggregateFilter>;
@@ -5251,7 +5282,6 @@ export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilterUserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   vehicles?: InputMaybe<OrgAggregateFilterAccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilter>;
@@ -5260,7 +5290,7 @@ export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilter = {
 export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5272,6 +5302,8 @@ export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAg
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5322,7 +5354,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter = {
 export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5334,6 +5366,8 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountA
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5390,7 +5424,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFi
 export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5402,6 +5436,8 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFi
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5435,7 +5471,7 @@ export type OrgAggregateFilterOrgMemberAggregateFilter = {
 export type OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5447,6 +5483,8 @@ export type OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter>;
@@ -5458,7 +5496,6 @@ export type OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUser
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5482,7 +5519,7 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter = {
 export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5494,6 +5531,8 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountA
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5568,7 +5607,7 @@ export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilter = {
 export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5580,6 +5619,8 @@ export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggreg
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5673,7 +5714,7 @@ export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter = {
 export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5685,6 +5726,8 @@ export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccoun
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -5984,7 +6027,7 @@ export type OrgBranchMemberAggregateFilter = {
 export type OrgBranchMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgBranchMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5996,6 +6039,8 @@ export type OrgBranchMemberAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6125,7 +6170,7 @@ export type OrgBranchMemberFilter = {
 export type OrgBranchMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgBranchMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6137,6 +6182,8 @@ export type OrgBranchMemberFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgBranchMemberFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6508,7 +6555,7 @@ export type OrgFilter = {
 export type OrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6520,6 +6567,8 @@ export type OrgFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<OrgFilterAccountFilterUserFilter>;
@@ -6532,7 +6581,6 @@ export type OrgFilterAccountFilterUserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<OrgFilterAccountFilterUserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   vehicles?: InputMaybe<OrgFilterAccountFilterUserFilterUserVehicleFilter>;
@@ -6541,7 +6589,7 @@ export type OrgFilterAccountFilterUserFilter = {
 export type OrgFilterAccountFilterUserFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterAccountFilterUserFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6553,6 +6601,8 @@ export type OrgFilterAccountFilterUserFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterAccountFilterUserFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6600,7 +6650,7 @@ export type OrgFilterOrgBranchFilterOrgBranchMemberFilter = {
 export type OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6612,6 +6662,8 @@ export type OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6648,7 +6700,7 @@ export type OrgFilterOrgBranchFilterOrgFilter = {
 export type OrgFilterOrgBranchFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6660,6 +6712,8 @@ export type OrgFilterOrgBranchFilterOrgFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6716,7 +6770,7 @@ export type OrgFilterOrgMemberFilter = {
 export type OrgFilterOrgMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6728,6 +6782,8 @@ export type OrgFilterOrgMemberFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   user?: InputMaybe<OrgFilterOrgMemberFilterAccountFilterUserFilter>;
@@ -6739,7 +6795,6 @@ export type OrgFilterOrgMemberFilterAccountFilterUserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterAccountFilterUserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6763,7 +6818,7 @@ export type OrgFilterOrgMemberFilterOrgFilter = {
 export type OrgFilterOrgMemberFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6775,6 +6830,8 @@ export type OrgFilterOrgMemberFilterOrgFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6887,7 +6944,7 @@ export type OrgFilterShopFilterOrgFilter = {
 export type OrgFilterShopFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6899,6 +6956,8 @@ export type OrgFilterShopFilterOrgFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -6954,7 +7013,7 @@ export type OrgFilterShopFilterShopMemberFilter = {
 export type OrgFilterShopFilterShopMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6966,6 +7025,8 @@ export type OrgFilterShopFilterShopMemberFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -7021,7 +7082,7 @@ export type OrgMemberAggregateFilter = {
 export type OrgMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -7033,6 +7094,8 @@ export type OrgMemberAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgMemberAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -7161,7 +7224,7 @@ export type OrgMemberFilter = {
 export type OrgMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -7173,6 +7236,8 @@ export type OrgMemberFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<OrgMemberFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -11084,7 +11149,7 @@ export type ShopMemberAggregateFilter = {
 export type ShopMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -11096,6 +11161,8 @@ export type ShopMemberAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -11218,7 +11285,7 @@ export type ShopMemberFilter = {
 export type ShopMemberFilterAccountFilter = {
   and?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -11230,6 +11297,8 @@ export type ShopMemberFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -11869,7 +11938,6 @@ export type User = {
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id: Scalars['ID']['output'];
-  phone_number?: Maybe<Scalars['String']['output']>;
   status: UserStatus;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   vehicles?: Maybe<UserVehiclesConnection>;
@@ -11895,7 +11963,6 @@ export type UserAggregateFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<UserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   vehicles?: InputMaybe<UserAggregateFilterUserVehicleAggregateFilter>;
@@ -11904,7 +11971,7 @@ export type UserAggregateFilter = {
 export type UserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -11916,6 +11983,8 @@ export type UserAggregateFilterAccountAggregateFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -11937,7 +12006,6 @@ export type UserAggregateGroupBy = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<UserStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -11980,7 +12048,6 @@ export type UserCountAggregate = {
   createdAt?: Maybe<Scalars['Int']['output']>;
   deletedAt?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  phone_number?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['Int']['output']>;
 };
@@ -11988,7 +12055,6 @@ export type UserCountAggregate = {
 export type UserDto = {
   account: Scalars['ID']['input'];
   avatar?: InputMaybe<Scalars['String']['input']>;
-  phone_number?: InputMaybe<Scalars['String']['input']>;
   status: UserStatus;
 };
 
@@ -11998,7 +12064,6 @@ export type UserDeleteFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<UserDeleteFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12009,7 +12074,6 @@ export type UserDeleteResponse = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<UserStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -12029,7 +12093,6 @@ export type UserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<UserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
   vehicles?: InputMaybe<UserFilterUserVehicleFilter>;
@@ -12038,7 +12101,7 @@ export type UserFilter = {
 export type UserFilterAccountFilter = {
   and?: InputMaybe<Array<UserFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethod?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -12050,6 +12113,8 @@ export type UserFilterAccountFilter = {
   isActivated?: InputMaybe<BooleanFieldComparison>;
   lastName?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<UserFilterAccountFilter>>;
+  phoneNumber?: InputMaybe<StringFieldComparison>;
+  phoneVerified?: InputMaybe<BooleanFieldComparison>;
   role?: InputMaybe<AccountRoleFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12071,7 +12136,6 @@ export type UserMaxAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<UserStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -12081,7 +12145,6 @@ export type UserMinAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  phone_number?: Maybe<Scalars['String']['output']>;
   status?: Maybe<UserStatus>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -12096,7 +12159,6 @@ export enum UserSortFields {
   CreatedAt = 'createdAt',
   DeletedAt = 'deletedAt',
   Id = 'id',
-  PhoneNumber = 'phone_number',
   Status = 'status',
   UpdatedAt = 'updatedAt'
 }
@@ -12130,7 +12192,6 @@ export type UserUpdateFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<UserUpdateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12193,7 +12254,6 @@ export type UserVehicleAggregateFilterUserAggregateFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<UserVehicleAggregateFilterUserAggregateFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12335,7 +12395,6 @@ export type UserVehicleFilterUserFilter = {
   deletedAt?: InputMaybe<DateFieldComparison>;
   id?: InputMaybe<IdFilterComparison>;
   or?: InputMaybe<Array<UserVehicleFilterUserFilter>>;
-  phone_number?: InputMaybe<StringFieldComparison>;
   status?: InputMaybe<UserStatusFilterComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -15072,7 +15131,7 @@ export type ResolversParentTypes = ResolversObject<{
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethod?: Resolver<ResolversTypes['AccountAuthMethod'], ParentType, ContextType>;
+  authMethods?: Resolver<ResolversTypes['AccountAuthMethod'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15083,6 +15142,8 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   isActivated?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneVerified?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   role?: Resolver<ResolversTypes['AccountRole'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
@@ -15091,7 +15152,7 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type AccountAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountAggregateGroupBy'] = ResolversParentTypes['AccountAggregateGroupBy']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByDeletedAtArgs, 'by'>>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15102,6 +15163,8 @@ export type AccountAggregateGroupByResolvers<ContextType = any, ParentType exten
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   isActivated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByUpdatedAtArgs, 'by'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -15118,7 +15181,6 @@ export type AccountAggregateResponseResolvers<ContextType = any, ParentType exte
 }>;
 
 export type AccountAvgAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountAvgAggregate'] = ResolversParentTypes['AccountAvgAggregate']> = ResolversObject<{
-  authMethod?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -15132,7 +15194,7 @@ export type AccountConnectionResolvers<ContextType = any, ParentType extends Res
 
 export type AccountCountAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountCountAggregate'] = ResolversParentTypes['AccountCountAggregate']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  authMethod?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -15143,6 +15205,8 @@ export type AccountCountAggregateResolvers<ContextType = any, ParentType extends
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   isActivated?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  phoneVerified?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -15150,7 +15214,7 @@ export type AccountCountAggregateResolvers<ContextType = any, ParentType extends
 
 export type AccountDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountDeleteResponse'] = ResolversParentTypes['AccountDeleteResponse']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15161,6 +15225,8 @@ export type AccountDeleteResponseResolvers<ContextType = any, ParentType extends
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   isActivated?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -15174,7 +15240,7 @@ export type AccountEdgeResolvers<ContextType = any, ParentType extends Resolvers
 
 export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountMaxAggregate'] = ResolversParentTypes['AccountMaxAggregate']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15183,6 +15249,7 @@ export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends R
   googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -15190,7 +15257,7 @@ export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends R
 
 export type AccountMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountMinAggregate'] = ResolversParentTypes['AccountMinAggregate']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethod?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15199,6 +15266,7 @@ export type AccountMinAggregateResolvers<ContextType = any, ParentType extends R
   googleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  phoneNumber?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['AccountRole']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -15297,7 +15365,6 @@ export type AccountPasswordResetMinAggregateResolvers<ContextType = any, ParentT
 }>;
 
 export type AccountSumAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountSumAggregate'] = ResolversParentTypes['AccountSumAggregate']> = ResolversObject<{
-  authMethod?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   role?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -18786,7 +18853,6 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<ResolversTypes['UserStatus'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   vehicles?: Resolver<Maybe<ResolversTypes['UserVehiclesConnection']>, ParentType, ContextType, RequireFields<UserVehiclesArgs, 'filter' | 'paging' | 'sorting'>>;
@@ -18798,7 +18864,6 @@ export type UserAggregateGroupByResolvers<ContextType = any, ParentType extends 
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserAggregateGroupByDeletedAtArgs, 'by'>>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<UserAggregateGroupByUpdatedAtArgs, 'by'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -18823,7 +18888,6 @@ export type UserCountAggregateResolvers<ContextType = any, ParentType extends Re
   createdAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  phone_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -18834,7 +18898,6 @@ export type UserDeleteResponseResolvers<ContextType = any, ParentType extends Re
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -18850,7 +18913,6 @@ export type UserMaxAggregateResolvers<ContextType = any, ParentType extends Reso
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -18860,7 +18922,6 @@ export type UserMinAggregateResolvers<ContextType = any, ParentType extends Reso
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  phone_number?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['UserStatus']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

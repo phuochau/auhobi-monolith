@@ -87,7 +87,6 @@ enum UserVechileStatus {
 }
 
 type User {
-  phone_number: String
   avatar: String
   status: UserStatus!
   id: ID!
@@ -244,7 +243,6 @@ input IntFieldComparisonBetween {
 input UserVehicleAggregateFilterUserAggregateFilter {
   and: [UserVehicleAggregateFilterUserAggregateFilter!]
   or: [UserVehicleAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -313,7 +311,6 @@ input UserVehicleFilterVehicleModelFilter {
 input UserVehicleFilterUserFilter {
   and: [UserVehicleFilterUserFilter!]
   or: [UserVehicleFilterUserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -350,17 +347,19 @@ enum SortNulls {
 }
 
 type Account {
-  authMethod: AccountAuthMethod!
+  authMethods: AccountAuthMethod!
   email: String
   role: AccountRole!
   firstName: String
   lastName: String
+  phoneNumber: String
   appleUserId: String
   facebookUserId: String
   googleUserId: String
   id: ID!
-  emailVerified: Boolean!
   isActivated: Boolean!
+  emailVerified: Boolean!
+  phoneVerified: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime
   deletedAt: DateTime
@@ -538,17 +537,19 @@ type LoginResult {
 }
 
 type AccountDeleteResponse {
-  authMethod: AccountAuthMethod
+  authMethods: AccountAuthMethod
   email: String
   role: AccountRole
   firstName: String
   lastName: String
+  phoneNumber: String
   appleUserId: String
   facebookUserId: String
   googleUserId: String
   id: ID
-  emailVerified: Boolean
   isActivated: Boolean
+  emailVerified: Boolean
+  phoneVerified: Boolean
   createdAt: DateTime
   updatedAt: DateTime
   deletedAt: DateTime
@@ -574,55 +575,58 @@ type AccountConnection {
 }
 
 type AccountAggregateGroupBy {
-  authMethod: AccountAuthMethod
+  authMethods: AccountAuthMethod
   email: String
   role: AccountRole
   firstName: String
   lastName: String
+  phoneNumber: String
   appleUserId: String
   facebookUserId: String
   googleUserId: String
   id: ID
-  emailVerified: Boolean
   isActivated: Boolean
+  emailVerified: Boolean
+  phoneVerified: Boolean
   createdAt(by: GroupBy! = DAY): DateTime
   updatedAt(by: GroupBy! = DAY): DateTime
   deletedAt(by: GroupBy! = DAY): DateTime
 }
 
 type AccountCountAggregate {
-  authMethod: Int
+  authMethods: Int
   email: Int
   role: Int
   firstName: Int
   lastName: Int
+  phoneNumber: Int
   appleUserId: Int
   facebookUserId: Int
   googleUserId: Int
   id: Int
-  emailVerified: Int
   isActivated: Int
+  emailVerified: Int
+  phoneVerified: Int
   createdAt: Int
   updatedAt: Int
   deletedAt: Int
 }
 
 type AccountSumAggregate {
-  authMethod: Float
   role: Float
 }
 
 type AccountAvgAggregate {
-  authMethod: Float
   role: Float
 }
 
 type AccountMinAggregate {
-  authMethod: AccountAuthMethod
+  authMethods: AccountAuthMethod
   email: String
   role: AccountRole
   firstName: String
   lastName: String
+  phoneNumber: String
   appleUserId: String
   facebookUserId: String
   googleUserId: String
@@ -633,11 +637,12 @@ type AccountMinAggregate {
 }
 
 type AccountMaxAggregate {
-  authMethod: AccountAuthMethod
+  authMethods: AccountAuthMethod
   email: String
   role: AccountRole
   firstName: String
   lastName: String
+  phoneNumber: String
   appleUserId: String
   facebookUserId: String
   googleUserId: String
@@ -1037,17 +1042,19 @@ input OrgBranchStatusFilterComparison {
 input OrgBranchMemberAggregateFilterAccountAggregateFilter {
   and: [OrgBranchMemberAggregateFilterAccountAggregateFilter!]
   or: [OrgBranchMemberAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -1116,17 +1123,19 @@ input OrgBranchMemberFilterOrgBranchFilter {
 input OrgBranchMemberFilterAccountFilter {
   and: [OrgBranchMemberFilterAccountFilter!]
   or: [OrgBranchMemberFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -1234,17 +1243,19 @@ input ShopMemberAggregateFilterShopAggregateFilter {
 input ShopMemberAggregateFilterAccountAggregateFilter {
   and: [ShopMemberAggregateFilterAccountAggregateFilter!]
   or: [ShopMemberAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -1277,17 +1288,19 @@ input ShopMemberFilterShopFilter {
 input ShopMemberFilterAccountFilter {
   and: [ShopMemberFilterAccountFilter!]
   or: [ShopMemberFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -1456,17 +1469,19 @@ input OrgStatusFilterComparison {
 input OrgMemberAggregateFilterAccountAggregateFilter {
   and: [OrgMemberAggregateFilterAccountAggregateFilter!]
   or: [OrgMemberAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -1588,17 +1603,19 @@ input OrgMemberFilterOrgFilter {
 input OrgMemberFilterAccountFilter {
   and: [OrgMemberFilterAccountFilter!]
   or: [OrgMemberFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -4921,7 +4938,6 @@ type UserVehicleAggregateResponse {
 }
 
 type UserDeleteResponse {
-  phone_number: String
   avatar: String
   status: UserStatus
   id: ID
@@ -4950,7 +4966,6 @@ type UserConnection {
 }
 
 type UserAggregateGroupBy {
-  phone_number: String
   status: UserStatus
   id: ID
   createdAt(by: GroupBy! = DAY): DateTime
@@ -4959,7 +4974,6 @@ type UserAggregateGroupBy {
 }
 
 type UserCountAggregate {
-  phone_number: Int
   status: Int
   id: Int
   createdAt: Int
@@ -4968,7 +4982,6 @@ type UserCountAggregate {
 }
 
 type UserMinAggregate {
-  phone_number: String
   status: UserStatus
   id: ID
   createdAt: DateTime
@@ -4977,7 +4990,6 @@ type UserMinAggregate {
 }
 
 type UserMaxAggregate {
-  phone_number: String
   status: UserStatus
   id: ID
   createdAt: DateTime
@@ -6030,17 +6042,19 @@ type Query {
 input AccountAggregateFilter {
   and: [AccountAggregateFilter!]
   or: [AccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6050,7 +6064,6 @@ input AccountAggregateFilter {
 input AccountAggregateFilterUserAggregateFilter {
   and: [AccountAggregateFilterUserAggregateFilter!]
   or: [AccountAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6063,17 +6076,19 @@ input AccountAggregateFilterUserAggregateFilter {
 input AccountAggregateFilterUserAggregateFilterAccountAggregateFilter {
   and: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
   or: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6083,7 +6098,6 @@ input AccountAggregateFilterUserAggregateFilterAccountAggregateFilter {
 input AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter {
   and: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter!]
   or: [AccountAggregateFilterUserAggregateFilterAccountAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6127,7 +6141,6 @@ input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicle
 input AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter {
   and: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter!]
   or: [AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6152,17 +6165,19 @@ input CursorPaging {
 input AccountFilter {
   and: [AccountFilter!]
   or: [AccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6172,7 +6187,6 @@ input AccountFilter {
 input AccountFilterUserFilter {
   and: [AccountFilterUserFilter!]
   or: [AccountFilterUserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6185,17 +6199,19 @@ input AccountFilterUserFilter {
 input AccountFilterUserFilterAccountFilter {
   and: [AccountFilterUserFilterAccountFilter!]
   or: [AccountFilterUserFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6205,7 +6221,6 @@ input AccountFilterUserFilterAccountFilter {
 input AccountFilterUserFilterAccountFilterUserFilter {
   and: [AccountFilterUserFilterAccountFilterUserFilter!]
   or: [AccountFilterUserFilterAccountFilterUserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6249,7 +6264,6 @@ input AccountFilterUserFilterUserVehicleFilterVehicleModelFilter {
 input AccountFilterUserFilterUserVehicleFilterUserFilter {
   and: [AccountFilterUserFilterUserVehicleFilterUserFilter!]
   or: [AccountFilterUserFilterUserVehicleFilterUserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6264,17 +6278,19 @@ input AccountSort {
 }
 
 enum AccountSortFields {
-  authMethod
+  authMethods
   email
   role
   firstName
   lastName
+  phoneNumber
   appleUserId
   facebookUserId
   googleUserId
   id
-  emailVerified
   isActivated
+  emailVerified
+  phoneVerified
   createdAt
   updatedAt
   deletedAt
@@ -6297,17 +6313,19 @@ input AccountVerficationAggregateFilter {
 input AccountVerficationAggregateFilterAccountAggregateFilter {
   and: [AccountVerficationAggregateFilterAccountAggregateFilter!]
   or: [AccountVerficationAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6330,17 +6348,19 @@ input AccountVerficationFilter {
 input AccountVerficationFilterAccountFilter {
   and: [AccountVerficationFilterAccountFilter!]
   or: [AccountVerficationFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6380,17 +6400,19 @@ input AccountPasswordResetAggregateFilter {
 input AccountPasswordResetAggregateFilterAccountAggregateFilter {
   and: [AccountPasswordResetAggregateFilterAccountAggregateFilter!]
   or: [AccountPasswordResetAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6413,17 +6435,19 @@ input AccountPasswordResetFilter {
 input AccountPasswordResetFilterAccountFilter {
   and: [AccountPasswordResetFilterAccountFilter!]
   or: [AccountPasswordResetFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6462,17 +6486,19 @@ input FileAggregateFilter {
 input FileAggregateFilterAccountAggregateFilter {
   and: [FileAggregateFilterAccountAggregateFilter!]
   or: [FileAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6494,17 +6520,19 @@ input FileFilter {
 input FileFilterAccountFilter {
   and: [FileFilterAccountFilter!]
   or: [FileFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6601,17 +6629,19 @@ input OrgAggregateFilter {
 input OrgAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6621,7 +6651,6 @@ input OrgAggregateFilterAccountAggregateFilter {
 input OrgAggregateFilterAccountAggregateFilterUserAggregateFilter {
   and: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilter!]
   or: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -6634,17 +6663,19 @@ input OrgAggregateFilterAccountAggregateFilterUserAggregateFilter {
 input OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6734,17 +6765,19 @@ input OrgAggregateFilterShopAggregateFilterOrgAggregateFilter {
 input OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6813,17 +6846,19 @@ input OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterShopAggregat
 input OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6863,17 +6898,19 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter {
 input OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6944,17 +6981,19 @@ input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterOr
 input OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -6992,17 +7031,19 @@ input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter {
 input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7047,17 +7088,19 @@ input OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterOrgMemberAggre
 input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter {
   and: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter!]
   or: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7067,7 +7110,6 @@ input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter {
 input OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter {
   and: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter!]
   or: [OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilterUserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -7094,17 +7136,19 @@ input OrgFilter {
 input OrgFilterAccountFilter {
   and: [OrgFilterAccountFilter!]
   or: [OrgFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7114,7 +7158,6 @@ input OrgFilterAccountFilter {
 input OrgFilterAccountFilterUserFilter {
   and: [OrgFilterAccountFilterUserFilter!]
   or: [OrgFilterAccountFilterUserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -7127,17 +7170,19 @@ input OrgFilterAccountFilterUserFilter {
 input OrgFilterAccountFilterUserFilterAccountFilter {
   and: [OrgFilterAccountFilterUserFilterAccountFilter!]
   or: [OrgFilterAccountFilterUserFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7227,17 +7272,19 @@ input OrgFilterShopFilterOrgFilter {
 input OrgFilterShopFilterOrgFilterAccountFilter {
   and: [OrgFilterShopFilterOrgFilterAccountFilter!]
   or: [OrgFilterShopFilterOrgFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7306,17 +7353,19 @@ input OrgFilterShopFilterShopMemberFilterShopFilter {
 input OrgFilterShopFilterShopMemberFilterAccountFilter {
   and: [OrgFilterShopFilterShopMemberFilterAccountFilter!]
   or: [OrgFilterShopFilterShopMemberFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7356,17 +7405,19 @@ input OrgFilterOrgBranchFilterOrgFilter {
 input OrgFilterOrgBranchFilterOrgFilterAccountFilter {
   and: [OrgFilterOrgBranchFilterOrgFilterAccountFilter!]
   or: [OrgFilterOrgBranchFilterOrgFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7437,17 +7488,19 @@ input OrgFilterOrgBranchFilterOrgBranchMemberFilterOrgBranchFilter {
 input OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter {
   and: [OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter!]
   or: [OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7485,17 +7538,19 @@ input OrgFilterOrgMemberFilterOrgFilter {
 input OrgFilterOrgMemberFilterOrgFilterAccountFilter {
   and: [OrgFilterOrgMemberFilterOrgFilterAccountFilter!]
   or: [OrgFilterOrgMemberFilterOrgFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7540,17 +7595,19 @@ input OrgFilterOrgMemberFilterOrgFilterOrgMemberFilter {
 input OrgFilterOrgMemberFilterAccountFilter {
   and: [OrgFilterOrgMemberFilterAccountFilter!]
   or: [OrgFilterOrgMemberFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -7560,7 +7617,6 @@ input OrgFilterOrgMemberFilterAccountFilter {
 input OrgFilterOrgMemberFilterAccountFilterUserFilter {
   and: [OrgFilterOrgMemberFilterAccountFilterUserFilter!]
   or: [OrgFilterOrgMemberFilterAccountFilterUserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8205,7 +8261,6 @@ enum GarageSortFields {
 input UserAggregateFilter {
   and: [UserAggregateFilter!]
   or: [UserAggregateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8218,17 +8273,19 @@ input UserAggregateFilter {
 input UserAggregateFilterAccountAggregateFilter {
   and: [UserAggregateFilterAccountAggregateFilter!]
   or: [UserAggregateFilterAccountAggregateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -8249,7 +8306,6 @@ input UserAggregateFilterUserVehicleAggregateFilter {
 input UserFilter {
   and: [UserFilter!]
   or: [UserFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -8262,17 +8318,19 @@ input UserFilter {
 input UserFilterAccountFilter {
   and: [UserFilterAccountFilter!]
   or: [UserFilterAccountFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -8297,7 +8355,6 @@ input UserSort {
 }
 
 enum UserSortFields {
-  phone_number
   status
   id
   createdAt
@@ -8900,11 +8957,12 @@ input CreateOneAccountInput {
 }
 
 input AccountDTO {
-  authMethod: AccountAuthMethod!
+  authMethods: AccountAuthMethod!
   email: String
   role: AccountRole!
   firstName: String
   lastName: String
+  phoneNumber: String
   appleUserId: String
   facebookUserId: String
   googleUserId: String
@@ -8912,7 +8970,6 @@ input AccountDTO {
 }
 
 input UserDTO {
-  phone_number: String
   avatar: String
   status: UserStatus!
   account: ID!
@@ -8942,17 +8999,19 @@ input UpdateManyAccountsInput {
 input AccountUpdateFilter {
   and: [AccountUpdateFilter!]
   or: [AccountUpdateFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -8971,17 +9030,19 @@ input DeleteManyAccountsInput {
 input AccountDeleteFilter {
   and: [AccountDeleteFilter!]
   or: [AccountDeleteFilter!]
-  authMethod: AccountAuthMethodFilterComparison
+  authMethods: AccountAuthMethodFilterComparison
   email: StringFieldComparison
   role: AccountRoleFilterComparison
   firstName: StringFieldComparison
   lastName: StringFieldComparison
+  phoneNumber: StringFieldComparison
   appleUserId: StringFieldComparison
   facebookUserId: StringFieldComparison
   googleUserId: StringFieldComparison
   id: IDFilterComparison
-  emailVerified: BooleanFieldComparison
   isActivated: BooleanFieldComparison
+  emailVerified: BooleanFieldComparison
+  phoneVerified: BooleanFieldComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
@@ -10734,7 +10795,6 @@ input UpdateManyUsersInput {
 input UserUpdateFilter {
   and: [UserUpdateFilter!]
   or: [UserUpdateFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
@@ -10755,7 +10815,6 @@ input DeleteManyUsersInput {
 input UserDeleteFilter {
   and: [UserDeleteFilter!]
   or: [UserDeleteFilter!]
-  phone_number: StringFieldComparison
   status: UserStatusFilterComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison

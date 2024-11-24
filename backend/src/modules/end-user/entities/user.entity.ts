@@ -10,10 +10,6 @@ import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-  @FilterableField({ nullable: true })
-  @Column({ nullable: true })
-  phone_number: string;
-
   @Field({ nullable: true })
   @Column({ nullable: true })
   avatar: string;

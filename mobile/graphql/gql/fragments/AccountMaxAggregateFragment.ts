@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 
 export const AccountMaxAggregateFragment = gql`
     fragment AccountMaxAggregateFragment on AccountMaxAggregate {
-    	authMethod
+    	authMethods
     	email
     	role
     	firstName
     	lastName
+    	phoneNumber
     	appleUserId
     	facebookUserId
     	googleUserId

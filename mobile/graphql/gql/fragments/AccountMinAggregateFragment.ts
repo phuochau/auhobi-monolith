@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 
 export const AccountMinAggregateFragment = gql`
     fragment AccountMinAggregateFragment on AccountMinAggregate {
-    	authMethod
+    	authMethods
     	email
     	role
     	firstName
     	lastName
+    	phoneNumber
     	appleUserId
     	facebookUserId
     	googleUserId
