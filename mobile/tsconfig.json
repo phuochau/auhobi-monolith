@@ -15,5 +15,5 @@
     "expo-env.d.ts",
     "global.d.ts",
     "nativewind-env.d.ts"
-  ]
+, "store/user/actions/sign-in-by-facebook.actionts"  ]
 }

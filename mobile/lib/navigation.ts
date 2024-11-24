@@ -5,4 +5,8 @@ export namespace Navigation {
         router.dismissAll()
         router.replace(href)
     }
+
+    export const resetToDashboard = (router: Router) => {
+        reset(router, { pathname: '/dashboard' })
+    }
 }
