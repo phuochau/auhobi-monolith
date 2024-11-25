@@ -1,4 +1,4 @@
-import { View } from "react-native"
+import { View, ScrollView } from "react-native"
 import { Text } from '@/components/ui/text'
 import { Link, Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
@@ -21,6 +21,7 @@ import { GoogleSignInButton } from "@/components/rich/auth/google-signin-button"
 import { FacebookSignInButton } from "@/components/rich/auth/facebook-signin-button"
 import { AppleSignInButton } from "@/components/rich/auth/apple-signin-button"
 import { Separator } from "@/components/ui/separator"
+import { AvoidSoftInputView } from "react-native-avoid-softinput"
 
 const formSchema = z.object({
   email: z
@@ -78,73 +79,77 @@ const LoginScreen = () => {
   return (
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '', headerBackButtonMenuEnabled: true }} />
-      <View className="w-full h-full flex flex-col p-6">
-        <Text className="text-4xl mb-2 text-foreground font-semibold">Sign in to Auhobi</Text>
-        <Text className="text-muted-foreground mb-8">Enter your credentials below to login to your account.</Text>
-        <View className="gap-4 flex-1">
-          <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                placeholder="Email"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                autoCapitalize="none"
-                keyboardType="email-address"
+      <View className="w-full h-full flex flex-col">
+        <AvoidSoftInputView>
+          <ScrollView className="flex-1" contentContainerClassName="p-6">
+            <Text className="text-4xl mb-2 text-foreground font-semibold">Sign in to Auhobi</Text>
+            <Text className="text-muted-foreground mb-8">Enter your credentials below to login to your account.</Text>
+            <View className="gap-4 flex-1">
+              <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    placeholder="Email"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    autoCapitalize="none"
+                    keyboardType="email-address"
+                  />
+                )}
+                name="email"
               />
-            )}
-            name="email"
-          />
-          <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
+              <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
 
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                placeholder="Password"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                secureTextEntry
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    placeholder="Password"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    secureTextEntry
+                  />
+                )}
+                name="password"
               />
-            )}
-            name="password"
-          />
-          <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
+              <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
 
-          <View className="flex flex-row items-center flex-wrap">
-            <Text className="text-muted-foreground">Forgot your password? </Text>
-            <Link href={'/auth/forgot-password'} className="underline">
-              <Text className="font-semibold text-primary">Reset it</Text>
-            </Link>
-          </View>
+              <View className="flex flex-row items-center flex-wrap">
+                <Text className="text-muted-foreground">Forgot your password? </Text>
+                <Link href={'/auth/forgot-password'} className="underline">
+                  <Text className="font-semibold text-primary">Reset it</Text>
+                </Link>
+              </View>
 
-          <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-            <Text>Sign In</Text>
-          </Button>
+              <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+                <Text>Sign In</Text>
+              </Button>
 
-          <View className="relative flex flex-col items-center justify-center my-4">
-            <Separator />
-            <View className="absolute px-6 bg-background">
-              <Text className="text-muted-foreground">or</Text>
+              <View className="relative flex flex-col items-center justify-center my-4">
+                <Separator />
+                <View className="absolute px-6 bg-background">
+                  <Text className="text-muted-foreground">or</Text>
+                </View>
+              </View>
+
+              <FacebookSignInButton />
+
+              <GoogleSignInButton />
+
+              <AppleSignInButton />
             </View>
-          </View>
 
-          <FacebookSignInButton />
-
-          <GoogleSignInButton />
-
-          <AppleSignInButton />
-        </View>
-
-        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
-          <Text className="text-muted-foreground">Don't have an account? </Text>
-          <Link href={'/auth/register'} className="underline">
-            <Text className="font-semibold text-primary">Sign up</Text>
-          </Link>
-        </View>
+            <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+              <Text className="text-muted-foreground">Don't have an account? </Text>
+              <Link href={'/auth/register'} className="underline">
+                <Text className="font-semibold text-primary">Sign up</Text>
+              </Link>
+            </View>
+          </ScrollView>
+        </AvoidSoftInputView>
       </View>
     </>
   )
