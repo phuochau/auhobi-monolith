@@ -69,7 +69,7 @@ const FacebookSignInButton = (props: FacebookSignInButtonProps) => {
                 }
             }
         } catch (err) {
-            Toast.error(_.get(err, 'message', 'Unknow'))
+            Toast.error(_.get(err, 'message', 'There was an error. Please try again.'))
         } finally {
             setSubmitting(false)
         }

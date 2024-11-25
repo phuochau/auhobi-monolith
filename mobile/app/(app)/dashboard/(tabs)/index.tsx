@@ -9,11 +9,13 @@ import { ServiceLogConnection, ServiceLogDeleteResponse, ServiceLogEdge, Service
 import { selectCurrentVehicle } from "@/store/user/user.selectors"
 import { ConfirmationService } from "@/services/confirmation.service"
 import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
+import { useRouter } from "expo-router"
 
 const MOCKING_DATA = require('./logs.json')
 
 const ServiceHistory = () => {
   const dispatch = useAppDispatch()
+  const router = useRouter()
   const vehicle = useAppSelector(selectCurrentVehicle)
   const [loading, setLoading] = useState(true)
   const [logs, setLogs] = useState<ServiceLogEdge[]>([])
@@ -42,7 +44,7 @@ const ServiceHistory = () => {
   }
 
   function onEdit(item: ServiceLogEdge): void {
-
+    router.push({ pathname: '/dashboard/add-service-history', params: { serviceLogId: item.node.id } })
   }
 
   function onDelete(item: ServiceLogEdge): void {

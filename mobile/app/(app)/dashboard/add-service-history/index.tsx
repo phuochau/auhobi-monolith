@@ -1,6 +1,6 @@
 import { ScrollView, View } from "react-native"
-import { Stack, useRouter } from "expo-router"
-import { useState } from "react"
+import { Stack, useLocalSearchParams, useRouter } from "expo-router"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Text } from '@/components/ui/text'
 import { z } from "zod"
@@ -26,6 +26,13 @@ import React from "react"
 import { Textarea } from "@/components/ui/textarea"
 import { LinkInput } from "@/components/form-fields/link-input"
 import { Toast } from "@/components/ui/toast"
+import { getServiceLog } from "@/store/service-log/actions/get-service-log.action"
+import _ from "lodash"
+import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
+
+type AddServiceHistorySearchParams = {
+  serviceLogId?: string
+}
 
 const formSchema = z.object({
   type: z.string(),
@@ -46,8 +53,10 @@ const formSchema = z.object({
 
 const AddServiceHistory = () => {
   const router = useRouter()
+  const params = useLocalSearchParams<AddServiceHistorySearchParams>();
   const dispatch = useAppDispatch()
   const vehicle = useAppSelector(selectCurrentVehicle)
+  const [editingId, setEditingId] = useState<string | undefined>(undefined)
   const [submitting, setSubmitting] = useState(false)
   const [response, setResponse] = useState<GraphQLResponse<ServiceLog>>()
   const types = DataUtils.enumToKeyValueArray(ServiceLogType)
@@ -56,6 +65,7 @@ const AddServiceHistory = () => {
     control,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,23 +77,75 @@ const AddServiceHistory = () => {
     return types.find(type => type[1] === value)?.[0] || ''
   }
 
+  async function fetchServiceLog(id: string) {
+    try {
+      const res = await dispatch<any>(getServiceLog({ id }))
+      const payload = (res.payload?.data) as ServiceLog
+  
+      if (!payload) {
+        Toast.warn('Failed to load service log.');
+        router.dismiss()
+        return
+      }
+
+      setValue('type', payload.type)
+      setValue('description', payload.description || undefined)
+      setValue('date', payload.date)
+      setValue('mileage', payload.mileage ? `${payload.mileage}` : '0')
+      
+      if (payload.garage) {
+        setValue('garage', {
+          type: GarageType.DEFAULT,
+          data: payload.garage
+        })
+      }
+
+      setValue('links', payload.links || [])
+      setValue('media', payload.media || [])
+      if (payload.bills?.nodes?.length) {
+        setValue('bills', payload.bills.nodes.map((item) => ({
+          total: item.total!,
+          media: item.media!
+        })))
+      }
+    } catch (err) {
+      Toast.error(_.get(err, 'message', 'There was an error. Please try again.'));
+    }
+  }
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setSubmitting(true)
     setResponse(undefined)
 
-    const { payload } = await dispatch(addServiceLog({
-      ...values,
-      vehicle: vehicle!
-    }))
-
-    const response = payload as GraphQLResponse<ServiceLog>
-    setResponse(response)
-    if (!response.errors && response.data) {
-      Toast.success('Successfully added the service history!');
-      router.dismiss()
+    try {
+      if (editingId) {
+        await dispatch(deleteServiceLogAction({ input: { id: editingId }}))
+      }
+      const { payload } = await dispatch(addServiceLog({
+        ...values,
+        vehicle: vehicle!
+      }))
+  
+      const response = payload as GraphQLResponse<ServiceLog>
+      setResponse(response)
+      if (!response.errors && response.data) {
+        Toast.success('Successfully added the service history!');
+        router.dismiss()
+      }
+      setSubmitting(false)
+    } catch (err) {
+      Toast.error(_.get(err, 'message', 'There was an error. Please try again.'));
+    } finally {
+      setSubmitting(false)
     }
-    setSubmitting(false)
   }
+
+  useEffect(() => {
+    if (params?.serviceLogId) {
+      setEditingId(params.serviceLogId)
+      fetchServiceLog(params.serviceLogId)
+    }
+  }, [])
 
   return (
     <>

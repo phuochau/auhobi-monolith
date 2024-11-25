@@ -67,7 +67,7 @@ const AppleSignInButton = (props: AppleSignInButtonProps) => {
                     onCancelled()
                 }
             } else {
-                Toast.error(_.get(err, 'message', 'Unknow'))
+                Toast.error(_.get(err, 'message', 'There was an error. Please try again.'))
             }
           } finally {
             setSubmitting(false)

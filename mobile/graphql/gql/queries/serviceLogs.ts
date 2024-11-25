@@ -45,10 +45,6 @@ export const ServiceLogsQuery = gql`
     					deletedAt
     				}
     				bills {
-    					pageInfo {
-    						hasNextPage
-    						hasPreviousPage
-    					}
     					nodes {
     						total
     						media
@@ -57,10 +53,8 @@ export const ServiceLogsQuery = gql`
     						updatedAt
     						deletedAt
     					}
-    					totalCount
     				}
     			}
-    			cursor
     		}
     		totalCount
     	}

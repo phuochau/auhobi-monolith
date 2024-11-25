@@ -1,10 +1,11 @@
 import { GarageType } from "@/components/dialogs/garare-picker-dialog";
 import { GraphQLAPI } from "@/graphql/api";
-import { File, Garage, MutationCreateOneServiceLogArgs, ServiceLog, ServiceLogBillDto, ServiceLogDto, ServiceLogType, UserVehicle } from "@/graphql/gql/generated-models";
+import { Garage, MutationCreateOneServiceLogArgs, ServiceLog, ServiceLogBillDto, ServiceLogDto, ServiceLogType, UserVehicle } from "@/graphql/gql/generated-models";
 import { CreateOneServiceLogMutation } from "@/graphql/gql/mutations/createOneServiceLog";
 import { GraphQLResponse } from "@/graphql/types/graphql-response";
 import { FileUtils } from "@/lib/file-utils";
 import { GoogleApi } from "@/lib/google-api";
+import { UrlUtils } from "@/lib/url-utils";
 import { PlaceAutocompleteResult } from "@googlemaps/google-maps-services-js";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -75,13 +76,17 @@ async function appendBillDTOs (serviceLogInput: ServiceLogDto, values: AddServic
     const billDTOs: ServiceLogBillDto[] = []
     for (const input of values.bills) {
       
-      let media: File | undefined = undefined;
+      let media: string | undefined = undefined;
       if (input.media) {
-        media = await GraphQLAPI.uploadMedia(FileUtils.getFileName(input.media), input.media, FileUtils.getMimeType(input.media))
+        if (UrlUtils.isOnlineUrl(input.media)) {
+          media = input.media
+        } else {
+          media = await GraphQLAPI.uploadMedia(FileUtils.getFileName(input.media), input.media, FileUtils.getMimeType(input.media)).then(f => f.url)
+        }
       }
 
       billDTOs.push({
-        media: media ? media.url : undefined,
+        media,
         total: input.total
       })
     }
@@ -97,11 +102,17 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
         try {
             const { vehicle } = values
 
-            let media: File[] = []
+            let media: string[] = []
             if (values.media?.length) {
-              media = await Promise.all(values.media.map(filePath => {
-                return GraphQLAPI.uploadMedia(FileUtils.getFileName(filePath), filePath, FileUtils.getMimeType(filePath))
-              }))
+              media = await Promise.all(
+                values.media.map(async (filePath: string) => {
+                  if (UrlUtils.isOnlineUrl(filePath)) {
+                    return Promise.resolve(filePath)
+                  }
+                  const f = await GraphQLAPI.uploadMedia(FileUtils.getFileName(filePath), filePath, FileUtils.getMimeType(filePath));
+                  return f.url;
+                })
+              )
             }
 
             let serviceLogInput: ServiceLogDto = {
@@ -109,7 +120,7 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
               type: values.type as ServiceLogType,
               mileage: parseInt(values.mileage),
               vehicle: vehicle!.id,
-              media: media.map(m => m.url)
+              media
             }
 
             serviceLogInput = await appendGarageDTO(serviceLogInput, values)

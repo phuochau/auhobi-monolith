@@ -81,10 +81,10 @@ const GoogleSignInButton = (props: GoogleSignInButtonProps) => {
                 case statusCodes.SIGN_IN_REQUIRED:
                     return;
                 default:
-                    Toast.error(_.get(err, 'message', 'Unknow'))
+                    Toast.error(_.get(err, 'message', 'There was an error. Please try again.'))
                 }
             } else {
-                Toast.error(_.get(err, 'message', 'Unknow'))
+                Toast.error(_.get(err, 'message', 'There was an error. Please try again.'))
             }
         } finally {
             setSubmitting(false)
