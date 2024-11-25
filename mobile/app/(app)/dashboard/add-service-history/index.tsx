@@ -29,6 +29,7 @@ import { Toast } from "@/components/ui/toast"
 import { getServiceLog } from "@/store/service-log/actions/get-service-log.action"
 import _ from "lodash"
 import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
+import { AvoidSoftInputView } from "react-native-avoid-softinput"
 
 type AddServiceHistorySearchParams = {
   serviceLogId?: string
@@ -151,160 +152,162 @@ const AddServiceHistory = () => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '' }} />
       <View className="w-full h-full flex flex-col">
-        <ScrollView className="flex-1" contentContainerClassName="p-6">
-          <Text className="text-4xl mb-2 text-foreground font-semibold">Add Service History</Text>
-          <Text className="text-muted-foreground mb-8">It's better to remember everything</Text>
-          <View className="flex-1 gap-4">
-            <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
+        <AvoidSoftInputView>
+          <ScrollView className="flex-1" contentContainerClassName="p-6">
+            <Text className="text-4xl mb-2 text-foreground font-semibold">Add Service History</Text>
+            <Text className="text-muted-foreground mb-8">It's better to remember everything</Text>
+            <View className="flex-1 gap-4">
+              <GraphQLError nativeID="AddServiceHistoryError" response={response}></GraphQLError>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Select
-                  value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
-                  onValueChange={(option) => {
-                    onChange(option?.value)
-                    onBlur()
-                  }}
-                >
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={'Select Type'}
-                      value={value}
-                    />
-                  </SelectTrigger>
-                  <SelectContent className="w-full">
-                    {types.map(type =>
-                      <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
-                        {type[0]}
-                      </SelectItem>)}
-                  </SelectContent>
-                </Select>
-              )}
-              name="type"
-            />
-            <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Select
+                    value={value ? { value, label: getLabelFromTypeValue(value) } : undefined}
+                    onValueChange={(option) => {
+                      onChange(option?.value)
+                      onBlur()
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={'Select Type'}
+                        value={value}
+                      />
+                    </SelectTrigger>
+                    <SelectContent className="w-full">
+                      {types.map(type =>
+                        <SelectItem key={type[1]} label={type[0]} value={type[1]!}>
+                          {type[0]}
+                        </SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                )}
+                name="type"
+              />
+              <FormMessage nativeID="TypeError" error={errors.type}></FormMessage>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Textarea
-                  placeholder="Description (optional)"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="description"
-            />
-            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
-            
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <DateTimeInput
-                  placeholder="Date"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="date"
-            />
-            <FormMessage nativeID="DateError" error={errors.date}></FormMessage>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Textarea
+                    placeholder="Description (optional)"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="description"
+              />
+              <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
+              
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <DateTimeInput
+                    placeholder="Date"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="date"
+              />
+              <FormMessage nativeID="DateError" error={errors.date}></FormMessage>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  placeholder="Mileage"
-                  keyboardType="numeric"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="mileage"
-            />
-            <FormMessage nativeID="MileageError" error={errors.mileage}></FormMessage>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input
+                    placeholder="Mileage"
+                    keyboardType="numeric"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="mileage"
+              />
+              <FormMessage nativeID="MileageError" error={errors.mileage}></FormMessage>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <GarageInput
-                  value={(value as GaragePickerResult | undefined)}
-                  textInput={{
-                    onBlur: onBlur,
-                    placeholder: "Garage (optional)"
-                  }}
-                  onChange={onChange}
-                />
-              )}
-              name="garage"
-            />
-            <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <GarageInput
+                    value={(value as GaragePickerResult | undefined)}
+                    textInput={{
+                      onBlur: onBlur,
+                      placeholder: "Garage (optional)"
+                    }}
+                    onChange={onChange}
+                  />
+                )}
+                name="garage"
+              />
+              <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Textarea
-                  placeholder="Description"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="description"
-            />
-            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Textarea
+                    placeholder="Description"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="description"
+              />
+              <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
 
-            <Label nativeID="LinkLabel">Links</Label>
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <LinkInput
-                  value={value}
-                  onBlur={onBlur}
-                  onChange={onChange}
-                />
-              )}
-              name="links"
-            />
-            <FormMessage nativeID="LinkError" error={errors?.links?.length ? errors.links.pop!() : undefined}></FormMessage>
+              <Label nativeID="LinkLabel">Links</Label>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <LinkInput
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+                name="links"
+              />
+              <FormMessage nativeID="LinkError" error={errors?.links?.length ? errors.links.pop!() : undefined}></FormMessage>
 
-            <Label nativeID="MediaLabel">Images</Label>
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <MediaInput
-                  value={value}
-                  onBlur={onBlur}
-                  onChange={onChange}
-                />
-              )}
-              name="media"
-            />
-            <FormMessage nativeID="MediaError" error={errors?.media?.length ? errors.media.pop!() : undefined}></FormMessage>
+              <Label nativeID="MediaLabel">Images</Label>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <MediaInput
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+                name="media"
+              />
+              <FormMessage nativeID="MediaError" error={errors?.media?.length ? errors.media.pop!() : undefined}></FormMessage>
 
-            <Label nativeID="BillsLabel">Bills</Label>
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <BillInput
-                  value={value}
-                  onBlur={onBlur}
-                  onChange={onChange}
-                />
-              )}
-              name="bills"
-            />
-            <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
+              <Label nativeID="BillsLabel">Bills</Label>
+              <Controller
+                control={control}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <BillInput
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                  />
+                )}
+                name="bills"
+              />
+              <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
 
-            <Button loading={submitting} disabled={submitting} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-              <Text>Save</Text>
-            </Button>
-          </View>
-        </ScrollView>
+              <Button loading={submitting} disabled={submitting} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+                <Text>Save</Text>
+              </Button>
+            </View>
+          </ScrollView>
+        </AvoidSoftInputView>
       </View>
     </>
   )
