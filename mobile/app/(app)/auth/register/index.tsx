@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { passwordValidation } from "@/lib/validations"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
@@ -20,7 +20,8 @@ import { Separator } from "@/components/ui/separator"
 import { FacebookSignInButton } from "@/components/rich/auth/facebook-signin-button"
 import { GoogleSignInButton } from "@/components/rich/auth/google-signin-button"
 import { AppleSignInButton } from "@/components/rich/auth/apple-signin-button"
-import { AvoidSoftInputView } from "react-native-avoid-softinput"
+import { AvoidSoftInput } from "react-native-avoid-softinput";
+import { useFocusEffect } from "@react-navigation/native";
 
 const formSchema = z.object({
   email: z
@@ -52,6 +53,13 @@ const RegisterScreen = () => {
   const dispatch = useAppDispatch()
   const [submitting, setSubmitting] = useState(false)
   const [response, setResponse] = useState<GraphQLResponse<Boolean>>()
+
+  useFocusEffect(useCallback(() => {
+    AvoidSoftInput.setEnabled(true);
+    return () => {
+      AvoidSoftInput.setEnabled(false);
+    };
+  }, []));
 
   const {
     control,
@@ -95,96 +103,94 @@ const RegisterScreen = () => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTitle: '', headerBackButtonMenuEnabled: true }} />
       <View className="w-full h-full flex flex-col">
-        <AvoidSoftInputView>
-          <ScrollView className="flex-1" contentContainerClassName="p-6">
-            <Text className="text-4xl mb-2 text-foreground font-semibold">Sign Up</Text>
-            <Text className="text-muted-foreground mb-8">Enter your information to create a new account.</Text>
-            <View className="flex-1 gap-4">
-              <GraphQLError nativeID="RegisterError" response={response}></GraphQLError>
+        <ScrollView className="flex-1" contentContainerClassName="p-6">
+          <Text className="text-4xl mb-2 text-foreground font-semibold">Sign Up</Text>
+          <Text className="text-muted-foreground mb-8">Enter your information to create a new account.</Text>
+          <View className="flex-1 gap-4">
+            <GraphQLError nativeID="RegisterError" response={response}></GraphQLError>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    placeholder="Email"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                  />
-                )}
-                name="email"
-              />
-              <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Email"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                />
+              )}
+              name="email"
+            />
+            <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    placeholder="Password"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                    secureTextEntry
-                  />
-                )}
-                name="password"
-              />
-              <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Password"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  secureTextEntry
+                />
+              )}
+              name="password"
+            />
+            <FormMessage nativeID="PasswordError" error={errors.password}></FormMessage>
 
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    placeholder="Confirm Password"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                    secureTextEntry
-                  />
-                )}
-                name="confirmPassword"
-              />
-              <FormMessage nativeID="ConfirmPasswordError" error={errors.confirmPassword}></FormMessage>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input
+                  placeholder="Confirm Password"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  secureTextEntry
+                />
+              )}
+              name="confirmPassword"
+            />
+            <FormMessage nativeID="ConfirmPasswordError" error={errors.confirmPassword}></FormMessage>
 
-              <View className="mb-6 flex flex-row items-center flex-wrap">
-                <Text className="text-muted-foreground">By signing up, you agree to our </Text>
-                <Link href={'/auth/login'} className="underline">
-                  <Text className="font-semibold text-primary">Terms of Service</Text>
-                </Link>
-                <Text className="text-muted-foreground"> and </Text>
-                <Link href={'/auth/login'} className="underline">
-                  <Text className="font-semibold text-primary">Privacy Policy</Text>
-                </Link>
-              </View>
-
-              <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-                <Text>Sign Up</Text>
-              </Button>
-
-              <View className="relative flex flex-col items-center justify-center my-4">
-                <Separator />
-                <View className="absolute px-6 bg-background">
-                  <Text className="text-muted-foreground">or</Text>
-                </View>
-              </View>
-
-              <FacebookSignInButton text="Sign up with Facebook" />
-
-              <GoogleSignInButton text="Sign up with Google" />
-
-              <AppleSignInButton text="Sign up with Apple" />
-            </View>
-
-            <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
-              <Text className="text-muted-foreground">Already have an account? </Text>
+            <View className="mb-6 flex flex-row items-center flex-wrap">
+              <Text className="text-muted-foreground">By signing up, you agree to our </Text>
               <Link href={'/auth/login'} className="underline">
-                <Text className="font-semibold text-primary">Sign In</Text>
+                <Text className="font-semibold text-primary">Terms of Service</Text>
+              </Link>
+              <Text className="text-muted-foreground"> and </Text>
+              <Link href={'/auth/login'} className="underline">
+                <Text className="font-semibold text-primary">Privacy Policy</Text>
               </Link>
             </View>
-          </ScrollView>
-        </AvoidSoftInputView>
+
+            <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+              <Text>Sign Up</Text>
+            </Button>
+
+            <View className="relative flex flex-col items-center justify-center my-4">
+              <Separator />
+              <View className="absolute px-6 bg-background">
+                <Text className="text-muted-foreground">or</Text>
+              </View>
+            </View>
+
+            <FacebookSignInButton text="Sign up with Facebook" />
+
+            <GoogleSignInButton text="Sign up with Google" />
+
+            <AppleSignInButton text="Sign up with Apple" />
+          </View>
+
+          <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+            <Text className="text-muted-foreground">Already have an account? </Text>
+            <Link href={'/auth/login'} className="underline">
+              <Text className="font-semibold text-primary">Sign In</Text>
+            </Link>
+          </View>
+        </ScrollView>
       </View>
     </>
   )
