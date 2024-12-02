@@ -25,16 +25,16 @@ export default class ImportVehicles extends Seeder {
             for (let vehicle of vehicles) {
                 const inRef = vehicle.ref
                 const inBrand = vehicle.brandName
-                const inBody = CarsDataHelper.getTechGeneralSection(vehicle).features['Body Type']
+                const inBody = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Body Type']
                 const inModel = vehicle.name
                 const inStartYear = vehicle.startYear
                 const inEndYear = vehicle.endYear
-                const inDrive = CarsDataHelper.getTechDriveSection(vehicle).features['Drive Wheel']
-                const inEngine = CarsDataHelper.getTechDriveSection(vehicle).features['Engine/motor Type']
-                const inFuel = CarsDataHelper.getTechDriveSection(vehicle).features['Fuel Type']
-                const inTransmission = CarsDataHelper.getTechGeneralSection(vehicle).features['Transmission']
-                const inMaxPower = CarsDataHelper.getTechDriveSection(vehicle).features['Power']
-                const inMaxTorque = CarsDataHelper.getTechDriveSection(vehicle).features['Max Torque']
+                const inDrive = CarsDataHelper.getTechDriveSection(vehicle)?.features['Drive Wheel']
+                const inEngine = CarsDataHelper.getTechDriveSection(vehicle)?.features['Engine/motor Type']
+                const inFuel = CarsDataHelper.getTechDriveSection(vehicle)?.features['Fuel Type']
+                const inTransmission = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Transmission']
+                const inMaxPower = CarsDataHelper.getTechDriveSection(vehicle)?.features['Power']
+                const inMaxTorque = CarsDataHelper.getTechDriveSection(vehicle)?.features['Max Torque']
     
                 const brand = await this.getOrCreateBrand(queryRunner, inBrand)
                 const body = await this.getOrCreateBody(queryRunner, inBody)
@@ -51,7 +51,8 @@ export default class ImportVehicles extends Seeder {
                     inDrive,
                     inTransmission,
                     inMaxPower,
-                    inMaxTorque
+                    inMaxTorque,
+                    vehicle.images.map(item => CarsDataHelper.getThumbUrlFromOnlineImageUrl(item))
                 )
     
                 console.log(`Imported model ${inBrand} ${inModel}.`)
@@ -92,7 +93,8 @@ export default class ImportVehicles extends Seeder {
         drive: string,
         transmission: string,
         maxPower: string,
-        maxTorque: string
+        maxTorque: string,
+        images?: string[],
     ): Promise<VehicleModel> {
         const repo = queryRunner.manager.getRepository<VehicleModel>(VehicleModel)
         let model = await repo.findOneBy({ refId: refId })
@@ -109,7 +111,8 @@ export default class ImportVehicles extends Seeder {
                 drive,
                 transmission,
                 maxPower,
-                maxTorque
+                maxTorque,
+                images: images || []
             }).then(item => _.get(item, 'raw[0]'))
         }
         return model
