@@ -11,7 +11,7 @@ import { AccountAuthMethod } from './enums/account-auth-method.enum';
 @InputType()
 class BaseClass extends BaseEntity {
     @FilterableField(() => AccountAuthMethod)
-    @Column('int', { default: [AccountAuthMethod.EMAIL] })
+    @Column('int', { default: [AccountAuthMethod.EMAIL], array: true })
     authMethods: AccountAuthMethod[];
 
 
