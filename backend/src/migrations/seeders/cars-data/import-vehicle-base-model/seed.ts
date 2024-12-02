@@ -2,12 +2,12 @@ import path from "path";
 import { DataSource, QueryRunner } from "typeorm";
 import fs from 'fs'
 import { CarDataBaseModel } from "../../../types/car-data-base-model";
-import { MigrationHelpers } from "../../../helpers/migration-helper";
 import { VehicleBaseModel } from "../../../../modules/vehicle/entities/vehicle-base-model.entity";
 import { VehicleBrand } from "../../../../modules/vehicle/entities/vehicle-brand.entity";
 import _ from "lodash";
 import { VehicleModel } from "../../../../modules/vehicle/entities/vehicle-model.entity";
 import { Seeder } from "@jorgebodega/typeorm-seeding";
+import { CarsDataHelper } from "../../../helpers/cars-data.helper";
 
 
 const BASE_DIR = path.join(process.cwd(), '../tools/car-data-crawler/output/cars-data.com/base_models')
@@ -18,27 +18,30 @@ const REMOTE_IMAGES_SUBFOLDER = 'car-data/base-models'
 export default class ImportVehicleBaseModels extends Seeder {
     async run(dataSource: DataSource): Promise<void> {
         const queryRunner = dataSource.createQueryRunner()
-        const baseModels: CarDataBaseModel[] = JSON.parse(fs.readFileSync(BASE_MODELS_JSON, 'utf-8'))
+        const brands: any[] = JSON.parse(fs.readFileSync(BASE_MODELS_JSON, 'utf-8'))
 
-        for (const baseModel of baseModels) {
-            let file = await MigrationHelpers.uploadFile(queryRunner, path.join(BASE_MODELS_IMAGES_DIR, baseModel.baseModelImageUrl), REMOTE_IMAGES_SUBFOLDER)
+        for (const brand of brands) {
+            const baseModels: CarDataBaseModel[] = brand.baseModels
+            for (const baseModel of baseModels) {
+                const brand = await this.getBrand(queryRunner, baseModel.brandName)
+                const baseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName, brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(baseModel.baseModelImageUrl))
+                console.log('Imported base model:', baseModel.baseModelName, baseModel.baseModelUrl)
+    
+                if (baseModel.subBaseModels?.length) {
+                    for (const subBaseModel of baseModel.subBaseModels) {
+                        const subBaseModelEntity = await this.getOrCreateBaseModel(queryRunner, subBaseModel.baseModelUrl, subBaseModel.baseModelName, brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(subBaseModel.baseModelImageUrl), baseModelEntity.id)
+                        console.log('Imported sub base model:', subBaseModel.baseModelName, baseModel.baseModelUrl)
 
-            const brand = await this.getBrand(queryRunner, baseModel.brandName)
-            const baseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName, brand.id, file.url)
-
-            if (baseModel.subBaseModels?.length) {
-                for (const subBaseModel of baseModel.subBaseModels) {
-                    if (subBaseModel.baseModelImageUrl !== baseModel.baseModelImageUrl) {
-                        file = await MigrationHelpers.uploadFile(queryRunner, path.join(BASE_MODELS_IMAGES_DIR, subBaseModel.baseModelImageUrl), REMOTE_IMAGES_SUBFOLDER)
-                    }
-
-                    const subBaseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName, brand.id, file.url, baseModelEntity.id)
-
-                    if (subBaseModel.models?.length) {
-                        for (const model of subBaseModel.models) {
-                            const modelEntity = await this.getVehicleModel(queryRunner, model.modelName, model.modelUrl)
-                            modelEntity.baseModel = subBaseModelEntity
-                            await modelEntity.save()
+                        if (subBaseModel.models?.length) {
+                            for (const model of subBaseModel.models) {
+                                console.log('Model url:', model.modelUrl, model)
+                                const modelEntity = await this.getVehicleModel(queryRunner, model.modelUrl)
+                                if (!modelEntity) {
+                                    continue
+                                }
+                                modelEntity.baseModel = subBaseModelEntity
+                                await modelEntity.save()
+                            }
                         }
                     }
                 }
@@ -66,9 +69,9 @@ export default class ImportVehicleBaseModels extends Seeder {
         return item
     }
 
-    private async getVehicleModel(queryRunner: QueryRunner, modelName: string, refId: string): Promise<VehicleModel> {
+    private async getVehicleModel(queryRunner: QueryRunner, refId: string): Promise<VehicleModel> {
         const repo = queryRunner.manager.getRepository<VehicleModel>(VehicleModel)
-        return repo.findOneBy({ name: modelName, refId: refId })
+        return repo.findOneBy({ refId: refId })
     }
 
 }
