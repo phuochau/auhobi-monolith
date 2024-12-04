@@ -36,7 +36,8 @@
             "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
           }
         ]
-      }
+      },
+      "bundleIdentifier": "com.auhobi.mobile"
     },
     "android": {
       "adaptiveIcon": {
