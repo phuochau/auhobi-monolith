@@ -59,10 +59,11 @@ const GoogleSignInButton = (props: GoogleSignInButtonProps) => {
 
                     const response = payload as GraphQLResponse<LoginResult>
 
-                    console.log(response)
                     if (!response.errors && response.data) {
                         setSubmitting(false)
                         Navigation.resetToDashboard(router)
+                    } else {
+                        Toast.error(_.get(response.errors?.[0], 'message', 'There was an error. Please try again.'))
                     }
                 }
             }

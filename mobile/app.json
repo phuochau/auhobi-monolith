@@ -97,6 +97,7 @@
           "iosUrlScheme": "com.googleusercontent.apps.83664194139-7o1d45vinl7nivvop7da4fm60d1pig5t"
         }
       ],
+      ["expo-apple-authentication"],
       [
         "@sentry/react-native/expo",
         {
