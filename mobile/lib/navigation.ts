@@ -9,4 +9,8 @@ export namespace Navigation {
     export const resetToDashboard = (router: Router) => {
         reset(router, { pathname: '/dashboard' })
     }
+
+    export const resetToAuth = (router: Router) => {
+        reset(router, { pathname: '/auth' })
+    }
 }

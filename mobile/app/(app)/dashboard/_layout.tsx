@@ -4,7 +4,7 @@ import { Stack } from 'expo-router/stack';
 
 export default function DashboardLayout() {
   return (
-    // <AuthGuard>
+    <AuthGuard>
       <Stack screenOptions={NavigationService.getDefaultScreenOptions()}>
         <Stack.Screen name="(tabs)" options={NavigationService.getDefaultScreenOptions({ headerShown: false })} />
         <Stack.Screen
@@ -14,6 +14,6 @@ export default function DashboardLayout() {
           }}
         />
       </Stack>
-    // </AuthGuard>
+    </AuthGuard>
   );
 }

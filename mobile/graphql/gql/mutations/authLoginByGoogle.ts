@@ -4,7 +4,6 @@ export const AuthLoginByGoogleMutation = gql`
     mutation AuthLoginByGoogle($input: AuthLoginSocialInput!) {
     	authLoginByGoogle(input: $input) {
     		account {
-    			authMethods
     			email
     			role
     			firstName

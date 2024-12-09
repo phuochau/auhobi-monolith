@@ -25,7 +25,7 @@ export type Scalars = {
 export type Account = {
   __typename?: 'Account';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethods: AccountAuthMethod;
+  authMethods: Array<Scalars['Int']['output']>;
   createdAt: Scalars['DateTime']['output'];
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -46,7 +46,7 @@ export type Account = {
 export type AccountAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -80,7 +80,7 @@ export type AccountAggregateFilterUserAggregateFilter = {
 export type AccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -155,7 +155,7 @@ export type AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterV
 export type AccountAggregateGroupBy = {
   __typename?: 'AccountAggregateGroupBy';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethods?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<Array<Scalars['Int']['output']>>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -197,29 +197,9 @@ export type AccountAggregateResponse = {
   sum?: Maybe<AccountSumAggregate>;
 };
 
-export enum AccountAuthMethod {
-  Apple = 'APPLE',
-  Email = 'EMAIL',
-  Facebook = 'FACEBOOK',
-  Google = 'GOOGLE',
-  Phone = 'PHONE'
-}
-
-export type AccountAuthMethodFilterComparison = {
-  eq?: InputMaybe<AccountAuthMethod>;
-  gt?: InputMaybe<AccountAuthMethod>;
-  gte?: InputMaybe<AccountAuthMethod>;
-  iLike?: InputMaybe<AccountAuthMethod>;
-  in?: InputMaybe<Array<AccountAuthMethod>>;
-  is?: InputMaybe<Scalars['Boolean']['input']>;
-  isNot?: InputMaybe<Scalars['Boolean']['input']>;
-  like?: InputMaybe<AccountAuthMethod>;
-  lt?: InputMaybe<AccountAuthMethod>;
-  lte?: InputMaybe<AccountAuthMethod>;
-  neq?: InputMaybe<AccountAuthMethod>;
-  notILike?: InputMaybe<AccountAuthMethod>;
-  notIn?: InputMaybe<Array<AccountAuthMethod>>;
-  notLike?: InputMaybe<AccountAuthMethod>;
+export type AccountAuthMethodsFilterComparison = {
+  in?: InputMaybe<Array<Array<Scalars['Int']['input']>>>;
+  notIn?: InputMaybe<Array<Array<Scalars['Int']['input']>>>;
 };
 
 export type AccountAvgAggregate = {
@@ -259,7 +239,7 @@ export type AccountCountAggregate = {
 
 export type AccountDto = {
   appleUserId?: InputMaybe<Scalars['String']['input']>;
-  authMethods: AccountAuthMethod;
+  authMethods: Array<Scalars['Int']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   facebookUserId?: InputMaybe<Scalars['String']['input']>;
   firstName?: InputMaybe<Scalars['String']['input']>;
@@ -273,7 +253,7 @@ export type AccountDto = {
 export type AccountDeleteFilter = {
   and?: InputMaybe<Array<AccountDeleteFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -294,7 +274,7 @@ export type AccountDeleteFilter = {
 export type AccountDeleteResponse = {
   __typename?: 'AccountDeleteResponse';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethods?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<Array<Scalars['Int']['output']>>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -322,7 +302,7 @@ export type AccountEdge = {
 export type AccountFilter = {
   and?: InputMaybe<Array<AccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -356,7 +336,7 @@ export type AccountFilterUserFilter = {
 export type AccountFilterUserFilterAccountFilter = {
   and?: InputMaybe<Array<AccountFilterUserFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -431,7 +411,7 @@ export type AccountFilterUserFilterUserVehicleFilterVehicleModelFilter = {
 export type AccountMaxAggregate = {
   __typename?: 'AccountMaxAggregate';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethods?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<Array<Scalars['Int']['output']>>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -448,7 +428,7 @@ export type AccountMaxAggregate = {
 export type AccountMinAggregate = {
   __typename?: 'AccountMinAggregate';
   appleUserId?: Maybe<Scalars['String']['output']>;
-  authMethods?: Maybe<AccountAuthMethod>;
+  authMethods?: Maybe<Array<Scalars['Int']['output']>>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   deletedAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -492,7 +472,7 @@ export type AccountPasswordResetAggregateFilter = {
 export type AccountPasswordResetAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountPasswordResetAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -628,7 +608,7 @@ export type AccountPasswordResetFilter = {
 export type AccountPasswordResetFilterAccountFilter = {
   and?: InputMaybe<Array<AccountPasswordResetFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -754,7 +734,7 @@ export type AccountSumAggregate = {
 export type AccountUpdateFilter = {
   and?: InputMaybe<Array<AccountUpdateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -802,7 +782,7 @@ export type AccountVerficationAggregateFilter = {
 export type AccountVerficationAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<AccountVerficationAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -938,7 +918,7 @@ export type AccountVerficationFilter = {
 export type AccountVerficationFilterAccountFilter = {
   and?: InputMaybe<Array<AccountVerficationFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -2488,7 +2468,7 @@ export type FileAggregateFilter = {
 export type FileAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<FileAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -2619,7 +2599,7 @@ export type FileFilter = {
 export type FileFilterAccountFilter = {
   and?: InputMaybe<Array<FileFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5256,7 +5236,7 @@ export type OrgAggregateFilter = {
 export type OrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5290,7 +5270,7 @@ export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilter = {
 export type OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterAccountAggregateFilterUserAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5354,7 +5334,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilter = {
 export type OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5424,7 +5404,7 @@ export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFi
 export type OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgBranchAggregateFilterOrgBranchMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5471,7 +5451,7 @@ export type OrgAggregateFilterOrgMemberAggregateFilter = {
 export type OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5519,7 +5499,7 @@ export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilter = {
 export type OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterOrgMemberAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5607,7 +5587,7 @@ export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilter = {
 export type OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterOrgAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -5714,7 +5694,7 @@ export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilter = {
 export type OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgAggregateFilterShopAggregateFilterShopMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6027,7 +6007,7 @@ export type OrgBranchMemberAggregateFilter = {
 export type OrgBranchMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgBranchMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6170,7 +6150,7 @@ export type OrgBranchMemberFilter = {
 export type OrgBranchMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgBranchMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6555,7 +6535,7 @@ export type OrgFilter = {
 export type OrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6589,7 +6569,7 @@ export type OrgFilterAccountFilterUserFilter = {
 export type OrgFilterAccountFilterUserFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterAccountFilterUserFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6650,7 +6630,7 @@ export type OrgFilterOrgBranchFilterOrgBranchMemberFilter = {
 export type OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgBranchMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6700,7 +6680,7 @@ export type OrgFilterOrgBranchFilterOrgFilter = {
 export type OrgFilterOrgBranchFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgBranchFilterOrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6770,7 +6750,7 @@ export type OrgFilterOrgMemberFilter = {
 export type OrgFilterOrgMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6818,7 +6798,7 @@ export type OrgFilterOrgMemberFilterOrgFilter = {
 export type OrgFilterOrgMemberFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterOrgMemberFilterOrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -6944,7 +6924,7 @@ export type OrgFilterShopFilterOrgFilter = {
 export type OrgFilterShopFilterOrgFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterShopFilterOrgFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -7013,7 +6993,7 @@ export type OrgFilterShopFilterShopMemberFilter = {
 export type OrgFilterShopFilterShopMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgFilterShopFilterShopMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -7082,7 +7062,7 @@ export type OrgMemberAggregateFilter = {
 export type OrgMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<OrgMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -7224,7 +7204,7 @@ export type OrgMemberFilter = {
 export type OrgMemberFilterAccountFilter = {
   and?: InputMaybe<Array<OrgMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -11149,7 +11129,7 @@ export type ShopMemberAggregateFilter = {
 export type ShopMemberAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<ShopMemberAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -11285,7 +11265,7 @@ export type ShopMemberFilter = {
 export type ShopMemberFilterAccountFilter = {
   and?: InputMaybe<Array<ShopMemberFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -11971,7 +11951,7 @@ export type UserAggregateFilter = {
 export type UserAggregateFilterAccountAggregateFilter = {
   and?: InputMaybe<Array<UserAggregateFilterAccountAggregateFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -12101,7 +12081,7 @@ export type UserFilter = {
 export type UserFilterAccountFilter = {
   and?: InputMaybe<Array<UserFilterAccountFilter>>;
   appleUserId?: InputMaybe<StringFieldComparison>;
-  authMethods?: InputMaybe<AccountAuthMethodFilterComparison>;
+  authMethods?: InputMaybe<AccountAuthMethodsFilterComparison>;
   createdAt?: InputMaybe<DateFieldComparison>;
   deletedAt?: InputMaybe<DateFieldComparison>;
   email?: InputMaybe<StringFieldComparison>;
@@ -13098,8 +13078,7 @@ export type ResolversTypes = ResolversObject<{
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter;
   AccountAggregateGroupBy: ResolverTypeWrapper<AccountAggregateGroupBy>;
   AccountAggregateResponse: ResolverTypeWrapper<AccountAggregateResponse>;
-  AccountAuthMethod: AccountAuthMethod;
-  AccountAuthMethodFilterComparison: AccountAuthMethodFilterComparison;
+  AccountAuthMethodsFilterComparison: AccountAuthMethodsFilterComparison;
   AccountAvgAggregate: ResolverTypeWrapper<AccountAvgAggregate>;
   AccountConnection: ResolverTypeWrapper<AccountConnection>;
   AccountCountAggregate: ResolverTypeWrapper<AccountCountAggregate>;
@@ -14143,7 +14122,7 @@ export type ResolversParentTypes = ResolversObject<{
   AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter: AccountAggregateFilterUserAggregateFilterUserVehicleAggregateFilterVehicleModelAggregateFilter;
   AccountAggregateGroupBy: AccountAggregateGroupBy;
   AccountAggregateResponse: AccountAggregateResponse;
-  AccountAuthMethodFilterComparison: AccountAuthMethodFilterComparison;
+  AccountAuthMethodsFilterComparison: AccountAuthMethodsFilterComparison;
   AccountAvgAggregate: AccountAvgAggregate;
   AccountConnection: AccountConnection;
   AccountCountAggregate: AccountCountAggregate;
@@ -15131,7 +15110,7 @@ export type ResolversParentTypes = ResolversObject<{
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethods?: Resolver<ResolversTypes['AccountAuthMethod'], ParentType, ContextType>;
+  authMethods?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15152,7 +15131,7 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type AccountAggregateGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountAggregateGroupBy'] = ResolversParentTypes['AccountAggregateGroupBy']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<Array<ResolversTypes['Int']>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByCreatedAtArgs, 'by'>>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType, RequireFields<AccountAggregateGroupByDeletedAtArgs, 'by'>>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15214,7 +15193,7 @@ export type AccountCountAggregateResolvers<ContextType = any, ParentType extends
 
 export type AccountDeleteResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountDeleteResponse'] = ResolversParentTypes['AccountDeleteResponse']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<Array<ResolversTypes['Int']>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15240,7 +15219,7 @@ export type AccountEdgeResolvers<ContextType = any, ParentType extends Resolvers
 
 export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountMaxAggregate'] = ResolversParentTypes['AccountMaxAggregate']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<Array<ResolversTypes['Int']>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -15257,7 +15236,7 @@ export type AccountMaxAggregateResolvers<ContextType = any, ParentType extends R
 
 export type AccountMinAggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AccountMinAggregate'] = ResolversParentTypes['AccountMinAggregate']> = ResolversObject<{
   appleUserId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  authMethods?: Resolver<Maybe<ResolversTypes['AccountAuthMethod']>, ParentType, ContextType>;
+  authMethods?: Resolver<Maybe<Array<ResolversTypes['Int']>>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

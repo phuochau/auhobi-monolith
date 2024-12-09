@@ -116,7 +116,16 @@ export class AuthService {
    */
 
   async loginByFacebook(fbUserId: string, email?: string, firstName?: string, lastName?: string, photo?: string): Promise<LoginResult> {
-    let acc = await this.accountService.findAccountByFacebookUserId(fbUserId)
+    let acc: Account;
+
+    if (email?.length) {
+      acc = await this.accountService.findAccountByEmail(fbUserId)
+    }
+
+    if (!acc) {
+      acc = await this.accountService.findAccountByFacebookUserId(fbUserId)
+    }
+
     if (!acc) {
       acc = await this.accountService.createAccountByFacebookUser(fbUserId, email, firstName, lastName, photo)
     }
@@ -136,7 +145,16 @@ export class AuthService {
   }
 
   async loginByGoogle(googleUserId: string, email?: string, firstName?: string, lastName?: string, photo?: string): Promise<LoginResult> {
-    let acc = await this.accountService.findAccountByGoogleUserId(googleUserId)
+    let acc: Account;
+
+    if (email?.length) {
+      acc = await this.accountService.findAccountByEmail(email)
+    }
+
+    if (!acc) {
+      acc = await this.accountService.findAccountByGoogleUserId(googleUserId)
+    }
+
     if (!acc) {
       acc = await this.accountService.createAccountByGoogleUser(googleUserId, email, firstName, lastName, photo)
     }
@@ -156,7 +174,16 @@ export class AuthService {
   }
 
   async loginByApple(appleUserId: string, email?: string, firstName?: string, lastName?: string, photo?: string): Promise<LoginResult> {
-    let acc = await this.accountService.findAccountByAppleUserId(appleUserId)
+    let acc: Account;
+
+    if (email?.length) {
+      acc = await this.accountService.findAccountByEmail(email)
+    }
+
+    if (!acc) {
+      acc = await this.accountService.findAccountByAppleUserId(appleUserId)
+    }
+
     if (!acc) {
       acc = await this.accountService.createAccountByAppleUser(appleUserId, email, firstName, lastName, photo)
     }

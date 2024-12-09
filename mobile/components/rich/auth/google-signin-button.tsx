@@ -58,6 +58,8 @@ const GoogleSignInButton = (props: GoogleSignInButtonProps) => {
                     }))
 
                     const response = payload as GraphQLResponse<LoginResult>
+
+                    console.log(response)
                     if (!response.errors && response.data) {
                         setSubmitting(false)
                         Navigation.resetToDashboard(router)

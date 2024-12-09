@@ -65,6 +65,8 @@ const FacebookSignInButton = (props: FacebookSignInButtonProps) => {
                     if (!response.errors && response.data) {
                         setSubmitting(false)
                         Navigation.resetToDashboard(router)
+                    } else {
+                        Toast.error(_.get(response.errors?.[0], 'message', 'There was an error. Please try again.'))
                     }
                 }
             }

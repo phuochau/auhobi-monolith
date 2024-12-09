@@ -4,10 +4,10 @@ import { UserVehicle } from "@/graphql/gql/generated-models"
 import { View, Text } from "react-native"
 import { Button } from "@/components/ui/button"
 import { useAppDispatch } from "@/hooks/store.hooks"
-import { logout } from "@/store/user/user.slice"
 import { Navigation } from "@/lib/navigation"
 import React from "react"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { signOutAction } from "@/store/user/actions/sign-out.action"
 
 const AddVehicleScreen = () => {
     const router = useRouter()
@@ -15,13 +15,13 @@ const AddVehicleScreen = () => {
  
     function onSuccess(vehicle: UserVehicle) {
       if (vehicle) {
-        Navigation.reset(router, { pathname: '/dashboard'})
+        Navigation.resetToDashboard(router)
       }
     }
 
     function onSwitchAccount() {
-      dispatch(logout())
-      router.push('/auth/login')
+      dispatch(signOutAction())
+      Navigation.resetToAuth(router)
     }
 
     return (

@@ -8,6 +8,9 @@ import { REHYDRATE } from 'redux-persist'
 import { GraphQLAPI } from '@/graphql/api'
 import { meAction } from './actions/me.action'
 import { signOutAction } from './actions/sign-out.action'
+import { signInByFacebookAction } from './actions/sign-in-by-facebook.action'
+import { signInByGoogleAction } from './actions/sign-in-by-google.action'
+import { signInByAppleAction } from './actions/sign-in-by-apple.action'
 
 // Define a type for the slice state
 export interface UserState {
@@ -51,6 +54,33 @@ export const userSlice = createSlice({
       }
       return state
     }),
+    builder.addMatcher<GraphQLResponseAction<LoginResult>>(signInByFacebookAction.settled, (state, { payload }) => {
+      if (!payload.errors && payload.data) {
+        return {
+          ...state,
+          ...payload.data
+        }
+      }
+      return state
+    }),
+    builder.addMatcher<GraphQLResponseAction<LoginResult>>(signInByGoogleAction.settled, (state, { payload }) => {
+      if (!payload.errors && payload.data) {
+        return {
+          ...state,
+          ...payload.data
+        }
+      }
+      return state
+    }),
+    builder.addMatcher<GraphQLResponseAction<LoginResult>>(signInByAppleAction.settled, (state, { payload }) => {
+      if (!payload.errors && payload.data) {
+        return {
+          ...state,
+          ...payload.data
+        }
+      }
+      return state
+    }),
     builder.addMatcher<GraphQLResponseAction<UserVehicle>>(addVehicleAction.settled, (state, { payload }) => {
       if (!payload.errors && payload.data) {
         const account = _.cloneDeep(state.account)
@@ -66,6 +96,9 @@ export const userSlice = createSlice({
         }
       }
       return state
+    }),
+    builder.addMatcher<GraphQLResponseAction<Account>>(signOutAction.settled, (state, action) => {
+      return initialState
     }),
     builder.addMatcher<boolean>(signOutAction.settled, (state, result) => {
       if (result) {

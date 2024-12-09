@@ -71,7 +71,10 @@ export namespace GoogleApi {
     }
 
     export const initSignInSDK = (options?: ConfigureParams): void => {
-        GoogleSignin.configure(options);
+        GoogleSignin.configure({
+            ...(options || {}),
+            iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID
+        });
     }
 
     export const googleSignIn = async (): Promise<SignInResponse> => {

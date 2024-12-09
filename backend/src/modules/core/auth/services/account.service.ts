@@ -24,7 +24,7 @@ export class AccountService {
   }
 
   async findActiveAccountById(accId: string): Promise<Account | undefined> {
-    return this.repo.findOneBy({ id: accId, emailVerified: true })
+    return this.repo.findOneBy({ id: accId, isActivated: true })
   }
 
   async findActiveAccountUserById(accId: string): Promise<Account | undefined> {

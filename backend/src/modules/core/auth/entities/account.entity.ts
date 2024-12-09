@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Index, BaseEntity, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BaseEntity, OneToOne } from 'typeorm';
 import { FilterableField, FilterableRelation, QueryOptions } from '@ptc-org/nestjs-query-graphql';
-import { ID, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { TABLE_PREFIX } from '../../constants';
 import { AccountRole } from './enums/account-role.enum';
 import { User, UserDTO } from '../../../end-user/entities/user.entity';
@@ -10,10 +10,9 @@ import { AccountAuthMethod } from './enums/account-auth-method.enum';
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
-    @FilterableField(() => AccountAuthMethod)
+    @FilterableField(() => [Int], { allowedComparisons: ['in', 'notIn'] })
     @Column('int', { default: [AccountAuthMethod.EMAIL], array: true })
     authMethods: AccountAuthMethod[];
-
 
     @FilterableField({ nullable: true })
     @Column({ unique: true, nullable: true })
