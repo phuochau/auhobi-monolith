@@ -42,9 +42,9 @@ export default class ImportVehicles extends Seeder {
                 if (!brand.startYear || (inStartYear < brand.startYear)) {
                     brand.startYear = inStartYear
                 }
-                if (!brand.endYear || (inEndYear > brand.endYear)) {
-                    brand.endYear = inEndYear
-                }
+                // if (!brand.endYear || (inEndYear > brand.endYear)) {
+                //     brand.endYear = inEndYear
+                // }
                 const brandRepo = queryRunner.manager.getRepository<VehicleBrand>(VehicleBrand)
                 await brandRepo.save(brand)
 

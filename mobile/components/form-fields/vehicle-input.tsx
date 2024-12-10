@@ -1,4 +1,4 @@
-import { VehicleBaseModel, VehicleBaseModelConnection, VehicleBaseModelFilter, VehicleBody, VehicleBrand, VehicleBrandConnection, VehicleModel } from "@/graphql/gql/generated-models"
+import { SortDirection, VehicleBaseModel, VehicleBaseModelConnection, VehicleBaseModelFilter, VehicleBaseModelSortFields, VehicleBrand, VehicleBrandConnection, VehicleBrandSortFields, VehicleModel, VehicleModelConnection, VehicleModelSortFields } from "@/graphql/gql/generated-models"
 import React, { useEffect, useState } from "react"
 import { View } from "react-native"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
@@ -16,7 +16,7 @@ function getYears(): number[] {
     const years = []
     const now = dayjs().year()
 
-    for (let i = 1969; i <= now; i++) {
+    for (let i = now; i >= 1969; i--) {
         years.push(i)
     }
 
@@ -36,15 +36,16 @@ export type VehicleInputValue = {
 export type VehicleInputProps = React.ComponentPropsWithoutRef<typeof View> & {
     value?: VehicleInputValue,
     onChange?: (value: VehicleInputValue) => any,
-    onBlur?: () => any
+    onBlur?: () => any,
+    onSelectModel?: (value: VehicleModel | undefined) => any,
 }
 
 const VehicleInput = React.forwardRef<
     React.ElementRef<typeof View>,
     VehicleInputProps
 >((props, ref) => {
+    const { value, onBlur, onChange, onSelectModel } = props
     const dispatch = useAppDispatch()
-    const { value, onBlur, onChange } = props
     const years = getYears()
     const [custom, setCustom] = useState(false)
     const [brands, setBrands] = useState<VehicleBrand[]>([])
@@ -58,24 +59,25 @@ const VehicleInput = React.forwardRef<
     const shouldShowModel = shouldShowSubBaseModel && Boolean(value?.subBaseModel)
 
     async function fetchBrands() {
+        console.log('fetch brands')
         if (shouldShowBrand) {
             const selectedYear = parseInt(value!.year!)
             const { payload } = await dispatch(fetchVehicleBrandsAction({
+                paging: {
+                    first: 1000
+                },
                 filter: {
                     and: [
                         {
                             startYear: {
                                 lte: selectedYear
                             }
-                        },
-                        {
-                            endYear: {
-                                gte: selectedYear
-                            }
                         }
                     ]
-                }
+                },
+                sorting: [{ direction: SortDirection.Asc, field: VehicleBrandSortFields.Name }]
             }))
+
             const brandConnection = payload as GraphQLResponse<VehicleBrandConnection>
 
             setBrands((brandConnection.data?.edges || []).map(item => item.node))
@@ -116,13 +118,26 @@ const VehicleInput = React.forwardRef<
                         }
                     }
                 )
+            } else {
+                filters.push(
+                    {
+                        parent: {
+                            id: { is: null }
+                        }
+                    }
+                )
             }
 
             const { payload } = await dispatch(fetchVehicleBaseModelsAction({
+                paging: {
+                    first: 1000
+                },
                 filter: {
                     and: filters
-                }
+                },
+                sorting: [{ direction: SortDirection.Asc, field: VehicleBaseModelSortFields.Name }]
             }))
+            console.log(payload)
 
             const baseModelConnection = payload as GraphQLResponse<VehicleBaseModelConnection>
 
@@ -142,18 +157,17 @@ const VehicleInput = React.forwardRef<
                     baseModel: {
                         id: { eq: selectedSubBaseModel }
                     }
-                }
+                },
+                paging: {
+                    first: 1000
+                },
+                sorting: [{ direction: SortDirection.Asc, field: VehicleModelSortFields.Name }]
             }))
-            const brandConnection = payload as GraphQLResponse<VehicleBrandConnection>
 
-            setBrands((brandConnection.data?.edges || []).map(item => item.node))
+            const connection = payload as GraphQLResponse<VehicleModelConnection>
+            setModels((connection.data?.edges || []).map(item => item.node))
         }
     }
-
-    const bodies: VehicleBody[] = [
-        { id: '1', name: 'Hatchback', createdAt: '2024' },
-        { id: '2', name: 'Sedan', createdAt: '2024' },
-    ]
 
     function onValueChange(fieldKey: string, fieldValue: any) {
         if (onChange) {
@@ -201,7 +215,7 @@ const VehicleInput = React.forwardRef<
                     {/** Brand */}
                     {shouldShowBrand &&
                         <Select
-                            value={value?.brand ? { label: `Test Brand`, value: value.brand } : undefined}
+                            value={value?.brand ? { label: brands.find(item => item.id === value.brand)?.name || value.brand, value: value.brand } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('brand', option?.value)
                             }}
@@ -223,9 +237,9 @@ const VehicleInput = React.forwardRef<
                     {/** Base Model */}
                     {shouldShowBaseModel &&
                         <Select
-                            value={value?.baseModel ? { label: `Test Base Model`, value: value.baseModel } : undefined}
+                            value={value?.baseModel ? { label: baseModels.find(item => item.id === value.baseModel)?.name || value.baseModel, value: value.baseModel } : undefined}
                             onValueChange={(option) => {
-                                onValueChange('baseModel', option)
+                                onValueChange('baseModel', option?.value)
                             }}
                         >
                             <SelectTrigger>
@@ -246,9 +260,9 @@ const VehicleInput = React.forwardRef<
                     {/** Sub Base Model */}
                     {shouldShowSubBaseModel &&
                         <Select
-                            value={value?.subBaseModel ? { label: `Test Sub Base Model`, value: value.subBaseModel } : undefined}
+                            value={value?.subBaseModel ? { label: subBaseModels.find(item => item.id === value.subBaseModel)?.name || value.subBaseModel, value: value.subBaseModel } : undefined}
                             onValueChange={(option) => {
-                                onValueChange('subBaseModel', option)
+                                onValueChange('subBaseModel', option?.value)
                             }}
                         >
                             <SelectTrigger>
@@ -269,9 +283,13 @@ const VehicleInput = React.forwardRef<
                     {/** Model */}
                     {shouldShowModel &&
                         <Select
-                            value={value?.model ? { label: `Test Model`, value: value.model } : undefined}
+                            value={value?.model ? { label: models.find(item => item.id === value.model)?.name || value.model, value: value.model } : undefined}
                             onValueChange={(option) => {
-                                onValueChange('model', option)
+                                onValueChange('model', option?.value)
+                                if (onSelectModel && option?.value) {
+                                    const modelId = option!.value!
+                                    onSelectModel(models.find(item => item.id === modelId))
+                                }
                             }}
                         >
                             <SelectTrigger>
