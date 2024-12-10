@@ -18,6 +18,8 @@ const REMOTE_IMAGES_SUBFOLDER = 'car-data/base-models'
 export default class ImportVehicleBaseModels extends Seeder {
     async run(dataSource: DataSource): Promise<void> {
         const queryRunner = dataSource.createQueryRunner()
+        const baseModelRepo = queryRunner.manager.getRepository<VehicleBaseModel>(VehicleBaseModel)
+        
         const brands: any[] = JSON.parse(fs.readFileSync(BASE_MODELS_JSON, 'utf-8'))
 
         for (const brand of brands) {
@@ -51,7 +53,7 @@ export default class ImportVehicleBaseModels extends Seeder {
                                     baseModelEntity.endYear = modelEntity.endYear
                                 }
 
-                                await baseModelEntity.save()
+                                await baseModelRepo.save(baseModelEntity)
 
 
                                 // Update years for sub base model
@@ -63,7 +65,7 @@ export default class ImportVehicleBaseModels extends Seeder {
                                     subBaseModelEntity.endYear = modelEntity.endYear
                                 }
 
-                                await subBaseModelEntity.save()
+                                await baseModelRepo.save(subBaseModelEntity)
                             }
                         }
                     }

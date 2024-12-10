@@ -45,7 +45,8 @@ export default class ImportVehicles extends Seeder {
                 if (!brand.endYear || (inEndYear > brand.endYear)) {
                     brand.endYear = inEndYear
                 }
-                await brand.save()
+                const brandRepo = queryRunner.manager.getRepository<VehicleBrand>(VehicleBrand)
+                await brandRepo.save(brand)
 
                 await this.getOrCreateModel(
                     queryRunner,

@@ -5,6 +5,8 @@ export const VehicleBaseModelFragment = gql`
     	refId
     	name
     	image
+    	startYear
+    	endYear
     	metadata
     	id
     	createdAt

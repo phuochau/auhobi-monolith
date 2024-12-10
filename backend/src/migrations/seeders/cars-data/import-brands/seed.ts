@@ -17,8 +17,9 @@ export default class ImportBrandsSeeder extends Seeder {
         const brands: CarDataBrand[] = JSON.parse(fs.readFileSync(BRANDS_JSON, 'utf-8'))
         
         for (const brand of brands) {
-            const file = await MigrationHelpers.uploadFile(queryRunner, path.join(BRANDS_IMAGES_DIR, brand.image), 'car-data/brands', brand.name)
+            const file = await MigrationHelpers.uploadFile(queryRunner, path.join(BRANDS_IMAGES_DIR, brand.image), 'car-data/brands', _.snakeCase(brand.name))
             await this.getOrCreateBrand(queryRunner, brand.name, file.url)
+            console.log(`Imported brand ${brand.name}.`)
         }
     }
 
