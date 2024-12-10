@@ -20,10 +20,14 @@ export namespace MigrationHelpers {
         }).then(item => _.get(item, 'raw[0]'))
     }
 
-    export const uploadFile = async(queryRunner: QueryRunner, localImagePath: string, remoteSubFolder: string): Promise<File> => {
+    export const uploadFile = async(queryRunner: QueryRunner, localImagePath: string, remoteSubFolder: string, filenameOverride?: string): Promise<File> => {
         const buffer = fs.readFileSync(localImagePath, null)
         const mimeType = await MimeUtil.getMimeType(localImagePath)
-        const response = await cloudService.uploadByBuffer(buffer, mimeType, remoteSubFolder)
+        const response = await cloudService.uploadByBuffer(buffer, mimeType, remoteSubFolder, {
+            overwrite: filenameOverride?.length > 0,
+            filename_override: filenameOverride ? `${filenameOverride}.${await MimeUtil.getExtension(mimeType)}` : undefined,
+            use_filename: filenameOverride?.length > 0
+        })
         return saveFile(queryRunner, mimeType, response)
     }
 }

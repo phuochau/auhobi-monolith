@@ -13,4 +13,9 @@ export namespace MimeUtil {
         const mimeLib = await loadMimeLib() 
         return mimeLib.getType(ext)
     }
+
+    export const getExtension = async (mimeType: string): Promise<string> => {
+        const mimeLib = await loadMimeLib() 
+        return mimeLib.getExtension(mimeType)
+    }
 }

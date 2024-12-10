@@ -38,8 +38,9 @@ export class CloudinaryService {
         return rootDir
     }
     
-    upload(file: Express.Multer.File, folderPath?: string): Promise<CloudinaryResponse> {
+    upload(file: Express.Multer.File, folderPath?: string, options?: Partial<UploadApiOptions>): Promise<CloudinaryResponse> {
         const opts: UploadApiOptions = {
+            ...(options || {}),
             folder: this.getCloudinaryFolderPath(folderPath),
             resource_type: this.getResourceType(file.mimetype)
         };
@@ -54,10 +55,11 @@ export class CloudinaryService {
         });
     }
     
-    uploadByBuffer(buffer: Buffer, mimetype: string, folderPath?: string): Promise<CloudinaryResponse> {
+    uploadByBuffer(buffer: Buffer, mimetype: string, folderPath?: string, options?: Partial<UploadApiOptions>): Promise<CloudinaryResponse> {
         const opts: UploadApiOptions = {
+            ...(options || {}),
             folder: this.getCloudinaryFolderPath(folderPath),
-            resource_type: this.getResourceType(mimetype)
+            resource_type: this.getResourceType(mimetype),
         };
 
         return new Promise<CloudinaryResponse>((resolve, reject) => {
