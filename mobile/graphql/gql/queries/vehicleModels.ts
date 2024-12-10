@@ -27,6 +27,37 @@ export const VehicleModelsQuery = gql`
     				createdAt
     				updatedAt
     				deletedAt
+    				body {
+    					name
+    					metadata
+    					id
+    					createdAt
+    					updatedAt
+    					deletedAt
+    				}
+    				brand {
+    					name
+    					logo
+    					startYear
+    					endYear
+    					metadata
+    					id
+    					createdAt
+    					updatedAt
+    					deletedAt
+    				}
+    				baseModel {
+    					refId
+    					name
+    					image
+    					startYear
+    					endYear
+    					metadata
+    					id
+    					createdAt
+    					updatedAt
+    					deletedAt
+    				}
     			}
     			cursor
     		}

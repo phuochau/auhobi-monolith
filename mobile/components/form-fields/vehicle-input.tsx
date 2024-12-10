@@ -1,5 +1,5 @@
-import { VehicleBaseModel, VehicleBody, VehicleBrand, VehicleModel } from "@/graphql/gql/generated-models"
-import React, { useState } from "react"
+import { VehicleBaseModel, VehicleBaseModelConnection, VehicleBaseModelFilter, VehicleBody, VehicleBrand, VehicleBrandConnection, VehicleModel } from "@/graphql/gql/generated-models"
+import React, { useEffect, useState } from "react"
 import { View } from "react-native"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { Button } from '../ui/button'
@@ -8,8 +8,11 @@ import { Input } from "../ui/input"
 import dayjs from "dayjs"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { fetchVehicleBrandsAction } from "@/store/vehicle/actions/fetchVehicleBrands.action"
+import { GraphQLResponse } from "@/graphql/types/graphql-response"
+import { fetchVehicleBaseModelsAction } from "@/store/vehicle/actions/fetchVehicleBaseModels.action"
+import { fetchVehicleModelsAction } from "@/store/vehicle/actions/fetchVehicleModels.action"
 
-function getYears (): number[] {
+function getYears(): number[] {
     const years = []
     const now = dayjs().year()
 
@@ -25,7 +28,7 @@ export type VehicleInputValue = {
     brand?: string,
     baseModel?: string,
     subBaseModel?: string,
-    body?: string,
+    // body?: string,
     model?: string,
     customModel?: string
 }
@@ -36,44 +39,120 @@ export type VehicleInputProps = React.ComponentPropsWithoutRef<typeof View> & {
     onBlur?: () => any
 }
 
-const VehicleInput =  React.forwardRef<
+const VehicleInput = React.forwardRef<
     React.ElementRef<typeof View>,
     VehicleInputProps
 >((props, ref) => {
     const dispatch = useAppDispatch()
     const { value, onBlur, onChange } = props
-    const [custom, setCustom] = useState(false)
-    // const [brands, setBrands] = useState<VehicleBrand[]>([])
-
     const years = getYears()
+    const [custom, setCustom] = useState(false)
+    const [brands, setBrands] = useState<VehicleBrand[]>([])
+    const [baseModels, setBaseModels] = useState<VehicleBaseModel[]>([])
+    const [subBaseModels, setSubBaseModels] = useState<VehicleBaseModel[]>([])
+    const [models, setModels] = useState<VehicleModel[]>([])
+
+    const shouldShowBrand = Boolean(value?.year)
+    const shouldShowBaseModel = shouldShowBrand && Boolean(value?.brand)
+    const shouldShowSubBaseModel = shouldShowBaseModel && Boolean(value?.baseModel)
+    const shouldShowModel = shouldShowSubBaseModel && Boolean(value?.subBaseModel)
 
     async function fetchBrands() {
-        if (value?.year) {
-            const brands = dispatch(fetchVehicleBrandsAction({
+        if (shouldShowBrand) {
+            const selectedYear = parseInt(value!.year!)
+            const { payload } = await dispatch(fetchVehicleBrandsAction({
                 filter: {
-                    // startYear: value.year
+                    and: [
+                        {
+                            startYear: {
+                                lte: selectedYear
+                            }
+                        },
+                        {
+                            endYear: {
+                                gte: selectedYear
+                            }
+                        }
+                    ]
                 }
             }))
+            const brandConnection = payload as GraphQLResponse<VehicleBrandConnection>
+
+            setBrands((brandConnection.data?.edges || []).map(item => item.node))
         }
     }
 
-    const brands: VehicleBrand[] = [
-        { id: '1', name: 'Audi', createdAt: '2024' },
-        { id: '2', name: 'BMW', createdAt: '2024' },
-        { id: '3', name: 'Mercedes', createdAt: '2024' }
-    ]
-    const baseModels: VehicleBaseModel[] = [
-        { id: '1', name: 'Audi A6', createdAt: '2024', brand: brands[0] },
-        { id: '2', name: 'BMW 5 series', createdAt: '2024', brand: brands[1] },
-        { id: '3', name: 'Mercedes 10', createdAt: '2024', brand: brands[2] }
-    ]
+    async function fetchBaseModels(parentId?: string) {
+        if (shouldShowBaseModel) {
+            if (parentId && !shouldShowSubBaseModel) {
+                return
+            }
+            const selectedYear = parseInt(value!.year!)
+            const selectedBrand = value!.brand!
+
+            const filters: VehicleBaseModelFilter[] = [
+                {
+                    startYear: {
+                        lte: selectedYear
+                    }
+                },
+                {
+                    endYear: {
+                        gte: selectedYear
+                    }
+                },
+                {
+                    brand: {
+                        id: { eq: selectedBrand }
+                    }
+                }
+            ]
+
+            if (parentId) {
+                filters.push(
+                    {
+                        parent: {
+                            id: { eq: parentId }
+                        }
+                    }
+                )
+            }
+
+            const { payload } = await dispatch(fetchVehicleBaseModelsAction({
+                filter: {
+                    and: filters
+                }
+            }))
+
+            const baseModelConnection = payload as GraphQLResponse<VehicleBaseModelConnection>
+
+            if (parentId) {
+                setSubBaseModels((baseModelConnection.data?.edges || []).map(item => item.node))
+            } else {
+                setBaseModels((baseModelConnection.data?.edges || []).map(item => item.node))
+            }
+        }
+    }
+
+    async function fetchModels() {
+        if (shouldShowModel) {
+            const selectedSubBaseModel = value?.subBaseModel
+            const { payload } = await dispatch(fetchVehicleModelsAction({
+                filter: {
+                    baseModel: {
+                        id: { eq: selectedSubBaseModel }
+                    }
+                }
+            }))
+            const brandConnection = payload as GraphQLResponse<VehicleBrandConnection>
+
+            setBrands((brandConnection.data?.edges || []).map(item => item.node))
+        }
+    }
+
     const bodies: VehicleBody[] = [
-        { id: '1', name: 'Hatchback', createdAt: '2024'},
+        { id: '1', name: 'Hatchback', createdAt: '2024' },
         { id: '2', name: 'Sedan', createdAt: '2024' },
-    ]
-    const models: VehicleModel[] = [
-        { id: '1', name: 'BMW 520i', createdAt: '2024', baseModel: baseModels[0], body: bodies[0], brand: brands[0]},
-        { id: '2', name: 'Sedan', createdAt: '2024', baseModel: baseModels[0], body: bodies[0], brand: brands[0] },
     ]
 
     function onValueChange(fieldKey: string, fieldValue: any) {
@@ -89,11 +168,10 @@ const VehicleInput =  React.forwardRef<
         }
     }
 
-    const shouldShowBrand = Boolean(value?.year)
-    const shouldShowBaseModel = shouldShowBrand && Boolean(value?.brand)
-    const shouldShowSubBaseModel = shouldShowBaseModel && Boolean(value?.baseModel)
-    const shouldShowBody = shouldShowSubBaseModel && Boolean(value?.subBaseModel)
-    const shouldShowModel = shouldShowBody && Boolean(value?.body)
+    useEffect(() => { fetchBrands() }, [value?.year])
+    useEffect(() => { fetchBaseModels() }, [value?.brand])
+    useEffect(() => { fetchBaseModels(value?.baseModel) }, [value?.baseModel])
+    useEffect(() => { fetchModels() }, [value?.subBaseModel])
 
     return (
         <View ref={ref} className="gap-4">
@@ -119,11 +197,11 @@ const VehicleInput =  React.forwardRef<
                                 </SelectItem>)}
                         </SelectContent>
                     </Select>
-        
+
                     {/** Brand */}
                     {shouldShowBrand &&
                         <Select
-                            value={value?.brand ? { label: `Test Brand`, value: value.brand} : undefined}
+                            value={value?.brand ? { label: `Test Brand`, value: value.brand } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('brand', option?.value)
                             }}
@@ -141,11 +219,11 @@ const VehicleInput =  React.forwardRef<
                                     </SelectItem>)}
                             </SelectContent>
                         </Select>}
-        
+
                     {/** Base Model */}
                     {shouldShowBaseModel &&
                         <Select
-                            value={value?.baseModel ? { label: `Test Base Model`, value: value.baseModel} : undefined}
+                            value={value?.baseModel ? { label: `Test Base Model`, value: value.baseModel } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('baseModel', option)
                             }}
@@ -163,12 +241,12 @@ const VehicleInput =  React.forwardRef<
                                     </SelectItem>)}
                             </SelectContent>
                         </Select>}
-        
-        
+
+
                     {/** Sub Base Model */}
                     {shouldShowSubBaseModel &&
                         <Select
-                            value={value?.subBaseModel ? { label: `Test Sub Base Model`, value: value.subBaseModel} : undefined}
+                            value={value?.subBaseModel ? { label: `Test Sub Base Model`, value: value.subBaseModel } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('subBaseModel', option)
                             }}
@@ -180,41 +258,18 @@ const VehicleInput =  React.forwardRef<
                                 />
                             </SelectTrigger>
                             <SelectContent className="w-full">
-                                {baseModels.map(baseModel =>
+                                {subBaseModels.map(baseModel =>
                                     <SelectItem key={baseModel.id} label={baseModel.name} value={baseModel.id}>
                                         {baseModel.name}
                                     </SelectItem>)}
                             </SelectContent>
                         </Select>}
-        
-        
-                    {/** Body */}
-                    {shouldShowBody &&
-                        <Select
-                            value={value?.body ? { label: `Test Body`, value: value.body} : undefined}
-                            onValueChange={(option) => {
-                                onValueChange('body', option)
-                            }}
-                        >
-                            <SelectTrigger>
-                                <SelectValue
-                                    placeholder={'Select Body'}
-                                    value={value?.body}
-                                />
-                            </SelectTrigger>
-                            <SelectContent className="w-full">
-                                {bodies.map(body =>
-                                    <SelectItem key={body.id} label={body.name} value={body.id}>
-                                        {body.name}
-                                    </SelectItem>)}
-                            </SelectContent>
-                        </Select>}
-        
-        
+
+
                     {/** Model */}
                     {shouldShowModel &&
                         <Select
-                            value={value?.model ? { label: `Test Model`, value: value.model} : undefined}
+                            value={value?.model ? { label: `Test Model`, value: value.model } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('model', option)
                             }}

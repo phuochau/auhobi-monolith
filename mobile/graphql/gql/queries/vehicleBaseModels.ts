@@ -14,6 +14,8 @@ export const VehicleBaseModelsQuery = gql`
     				refId
     				name
     				image
+    				startYear
+    				endYear
     				metadata
     				id
     				createdAt

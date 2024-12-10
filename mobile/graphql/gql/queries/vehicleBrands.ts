@@ -13,6 +13,8 @@ export const VehicleBrandsQuery = gql`
     			node {
     				name
     				logo
+    				startYear
+    				endYear
     				metadata
     				id
     				createdAt
