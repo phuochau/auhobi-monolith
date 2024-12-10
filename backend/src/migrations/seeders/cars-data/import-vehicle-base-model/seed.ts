@@ -41,6 +41,29 @@ export default class ImportVehicleBaseModels extends Seeder {
                                 }
                                 modelEntity.baseModel = subBaseModelEntity
                                 await modelEntity.save()
+
+                                // Update years for base model
+                                if (!baseModelEntity.startYear || (modelEntity.startYear < baseModelEntity.startYear)) {
+                                    baseModelEntity.startYear = modelEntity.startYear
+                                }
+                                
+                                if (!baseModelEntity.endYear || (modelEntity.endYear > baseModelEntity.endYear)) {
+                                    baseModelEntity.endYear = modelEntity.endYear
+                                }
+
+                                await baseModelEntity.save()
+
+
+                                // Update years for sub base model
+                                if (!subBaseModelEntity.startYear || (modelEntity.startYear < subBaseModelEntity.startYear)) {
+                                    subBaseModelEntity.startYear = modelEntity.startYear
+                                }
+
+                                if (!subBaseModelEntity.endYear || (modelEntity.endYear > subBaseModelEntity.endYear)) {
+                                    subBaseModelEntity.endYear = modelEntity.endYear
+                                }
+
+                                await subBaseModelEntity.save()
                             }
                         }
                     }

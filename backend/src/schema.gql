@@ -5,6 +5,8 @@
 type VehicleBrand {
   name: String!
   logo: String
+  startYear: Int
+  endYear: Int
   metadata: JSON
   id: ID!
   createdAt: DateTime!
@@ -35,6 +37,8 @@ type VehicleBaseModel {
   refId: String
   name: String!
   image: String
+  startYear: Int
+  endYear: Int
   metadata: JSON
   id: ID!
   createdAt: DateTime!
@@ -5070,6 +5074,8 @@ type VehicleBodyConnection {
 type VehicleBrandDeleteResponse {
   name: String
   logo: String
+  startYear: Int
+  endYear: Int
   metadata: JSON
   id: ID
   createdAt: DateTime
@@ -5132,6 +5138,8 @@ type VehicleBaseModelDeleteResponse {
   refId: String
   name: String
   image: String
+  startYear: Int
+  endYear: Int
   metadata: JSON
   id: ID
   createdAt: DateTime
@@ -8347,6 +8355,8 @@ input VehicleBaseModelFilter {
   or: [VehicleBaseModelFilter!]
   refId: StringFieldComparison
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8360,6 +8370,8 @@ input VehicleBaseModelFilterVehicleBaseModelFilter {
   or: [VehicleBaseModelFilterVehicleBaseModelFilter!]
   refId: StringFieldComparison
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8370,6 +8382,8 @@ input VehicleBaseModelFilterVehicleBrandFilter {
   and: [VehicleBaseModelFilterVehicleBrandFilter!]
   or: [VehicleBaseModelFilterVehicleBrandFilter!]
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8385,6 +8399,8 @@ input VehicleBaseModelSort {
 enum VehicleBaseModelSortFields {
   refId
   name
+  startYear
+  endYear
   id
   createdAt
   updatedAt
@@ -8395,6 +8411,8 @@ input VehicleBrandFilter {
   and: [VehicleBrandFilter!]
   or: [VehicleBrandFilter!]
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8409,6 +8427,8 @@ input VehicleBrandSort {
 
 enum VehicleBrandSortFields {
   name
+  startYear
+  endYear
   id
   createdAt
   updatedAt
@@ -8442,6 +8462,8 @@ input VehicleModelFilterVehicleBaseModelFilter {
   or: [VehicleModelFilterVehicleBaseModelFilter!]
   refId: StringFieldComparison
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -8452,6 +8474,8 @@ input VehicleModelFilterVehicleBrandFilter {
   and: [VehicleModelFilterVehicleBrandFilter!]
   or: [VehicleModelFilterVehicleBrandFilter!]
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -10811,6 +10835,8 @@ input VehicleBaseModelDTO {
   refId: String
   name: String!
   image: String
+  startYear: Int
+  endYear: Int
   metadata: JSON
   brand: ID!
   parent: ID
@@ -10842,6 +10868,8 @@ input VehicleBaseModelUpdateFilter {
   or: [VehicleBaseModelUpdateFilter!]
   refId: StringFieldComparison
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -10863,6 +10891,8 @@ input VehicleBaseModelDeleteFilter {
   or: [VehicleBaseModelDeleteFilter!]
   refId: StringFieldComparison
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -10877,6 +10907,8 @@ input CreateOneVehicleBrandInput {
 input VehicleBrandDTO {
   name: String!
   logo: String
+  startYear: Int
+  endYear: Int
   metadata: JSON
 }
 
@@ -10905,6 +10937,8 @@ input VehicleBrandUpdateFilter {
   and: [VehicleBrandUpdateFilter!]
   or: [VehicleBrandUpdateFilter!]
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
@@ -10925,6 +10959,8 @@ input VehicleBrandDeleteFilter {
   and: [VehicleBrandDeleteFilter!]
   or: [VehicleBrandDeleteFilter!]
   name: StringFieldComparison
+  startYear: IntFieldComparison
+  endYear: IntFieldComparison
   id: IDFilterComparison
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison

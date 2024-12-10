@@ -1,4 +1,4 @@
-import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { TABLE_PREFIX } from '../constants';
 import { FilterableField } from '@ptc-org/nestjs-query-graphql';
@@ -14,6 +14,14 @@ class BaseClass extends BaseEntity {
   @Field({ nullable: true })
   @Column({ nullable: true })
   logo?: string;
+
+  @FilterableField(() => Int, { nullable: true })
+  @Column({ type: 'int', nullable: true })
+  startYear?: number
+
+  @FilterableField(() => Int, { nullable: true })
+  @Column({ type: 'int', nullable: true })
+  endYear?: number
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })

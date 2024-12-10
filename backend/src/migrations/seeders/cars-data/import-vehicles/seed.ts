@@ -38,6 +38,15 @@ export default class ImportVehicles extends Seeder {
     
                 const brand = await this.getOrCreateBrand(queryRunner, inBrand)
                 const body = await this.getOrCreateBody(queryRunner, inBody)
+
+                if (!brand.startYear || (inStartYear < brand.startYear)) {
+                    brand.startYear = inStartYear
+                }
+                if (!brand.endYear || (inEndYear > brand.endYear)) {
+                    brand.endYear = inEndYear
+                }
+                await brand.save()
+
                 await this.getOrCreateModel(
                     queryRunner,
                     inRef,
@@ -54,7 +63,6 @@ export default class ImportVehicles extends Seeder {
                     inMaxTorque,
                     vehicle.images.map(item => CarsDataHelper.getThumbUrlFromOnlineImageUrl(item))
                 )
-    
                 console.log(`Imported model ${inBrand} ${inModel}.`)
             }
     

@@ -5,6 +5,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Button } from '../ui/button'
 import { Text } from '../ui/text'
 import { Input } from "../ui/input"
+import dayjs from "dayjs"
+import { useAppDispatch } from "@/hooks/store.hooks"
+import { fetchVehicleBrandsAction } from "@/store/vehicle/actions/fetchVehicleBrands.action"
+
+function getYears (): number[] {
+    const years = []
+    const now = dayjs().year()
+
+    for (let i = 1969; i <= now; i++) {
+        years.push(i)
+    }
+
+    return years
+}
 
 export type VehicleInputValue = {
     year?: string,
@@ -26,10 +40,23 @@ const VehicleInput =  React.forwardRef<
     React.ElementRef<typeof View>,
     VehicleInputProps
 >((props, ref) => {
+    const dispatch = useAppDispatch()
     const { value, onBlur, onChange } = props
     const [custom, setCustom] = useState(false)
+    // const [brands, setBrands] = useState<VehicleBrand[]>([])
 
-    const years = [2020, 2021, 2022, 2023, 2024]
+    const years = getYears()
+
+    async function fetchBrands() {
+        if (value?.year) {
+            const brands = dispatch(fetchVehicleBrandsAction({
+                filter: {
+                    // startYear: value.year
+                }
+            }))
+        }
+    }
+
     const brands: VehicleBrand[] = [
         { id: '1', name: 'Audi', createdAt: '2024' },
         { id: '2', name: 'BMW', createdAt: '2024' },
