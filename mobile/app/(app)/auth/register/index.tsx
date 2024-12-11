@@ -106,7 +106,7 @@ const RegisterScreen = () => {
         <ScrollView className="flex-1" contentContainerClassName="p-6">
           <Text className="text-4xl mb-2 text-foreground font-semibold">Sign Up</Text>
           <Text className="text-muted-foreground mb-8">Enter your information to create a new account.</Text>
-          <View className="flex-1 gap-4">
+          <View className="gap-4">
             <GraphQLError nativeID="RegisterError" response={response}></GraphQLError>
 
             <Controller
@@ -184,7 +184,7 @@ const RegisterScreen = () => {
             <AppleSignInButton text="Sign up with Apple" />
           </View>
 
-          <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
             <Text className="text-muted-foreground">Already have an account? </Text>
             <Link href={'/auth/login'} className="underline">
               <Text className="font-semibold text-primary">Sign In</Text>

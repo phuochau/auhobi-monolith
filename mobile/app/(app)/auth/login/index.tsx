@@ -91,7 +91,7 @@ const LoginScreen = () => {
         <ScrollView className="flex-1" contentContainerClassName="p-6">
           <Text className="text-4xl mb-2 text-foreground font-semibold">Sign in to Auhobi</Text>
           <Text className="text-muted-foreground mb-8">Enter your credentials below to login to your account.</Text>
-          <View className="gap-4 flex-1">
+          <View className="gap-4">
             <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
             <Controller
               control={control}
@@ -149,7 +149,7 @@ const LoginScreen = () => {
             <AppleSignInButton />
           </View>
 
-          <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+          <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
             <Text className="text-muted-foreground">Don't have an account? </Text>
             <Link href={'/auth/register'} className="underline">
               <Text className="font-semibold text-primary">Sign up</Text>

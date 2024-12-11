@@ -94,7 +94,7 @@ const VerificationScreen = () => {
           </Button>
         </View>
 
-        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+        <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
           <Text className="text-muted-foreground">Already verified your account? </Text>
           <Link href={'/auth/login'} className="underline">
             <Text className="font-semibold text-primary">Sign In</Text>

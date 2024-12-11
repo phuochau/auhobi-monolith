@@ -60,7 +60,7 @@ const LoginScreen = () => {
       <View className="w-full h-full flex flex-col p-6">
         <Text className="text-4xl mb-2 text-foreground font-semibold">Forgot password</Text>
         <Text className="text-muted-foreground mb-8">Enter your email below to reset your password.</Text>
-        <View className="flex-1 gap-4">
+        <View className="gap-4">
           <GraphQLError nativeID="LoginError" response={response}></GraphQLError>
           <Controller
             control={control}
@@ -82,7 +82,7 @@ const LoginScreen = () => {
           </Button>
         </View>
 
-        <View className="mb-6 text-center flex flex-row items-center justify-center flex-wrap">
+        <View className="mt-4 text-center flex flex-row items-center justify-center flex-wrap">
           <Text className="text-muted-foreground">Remember your account? </Text>
           <Link href={'/auth/login'} className="underline">
             <Text className="font-semibold text-primary">Sign In</Text>
