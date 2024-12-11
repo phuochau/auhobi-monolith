@@ -37,7 +37,7 @@ export type VehicleInputProps = React.ComponentPropsWithoutRef<typeof View> & {
     value?: VehicleInputValue,
     onChange?: (value: VehicleInputValue) => any,
     onBlur?: () => any,
-    onSelectModel?: (value: VehicleModel | undefined) => any,
+    onSelectModel?: (value: VehicleModel) => any,
 }
 
 const VehicleInput = React.forwardRef<
@@ -195,7 +195,9 @@ const VehicleInput = React.forwardRef<
     function notifySelectedModel() {
         if (value?.model && onSelectModel) {
             const model = models.find(item => item.id === value?.model)
-            onSelectModel(model)
+            if (model) {
+                onSelectModel(model)
+            }
         }
     }
 

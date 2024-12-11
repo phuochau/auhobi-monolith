@@ -5,14 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
-import { UserVehicle } from "@/graphql/gql/generated-models"
+import { UserVehicle, VehicleModel } from "@/graphql/gql/generated-models"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
 import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { addVehicleAction } from '@/store/user/actions/add-vehicle.action'
 import { VehicleInput } from '../form-fields/vehicle-input'
-import { Image, ScrollView, View } from 'react-native'
+import { Image, ImageSourcePropType, ScrollView, View } from 'react-native'
+
+const VEHICLE_PLACEHOLDER = require('@/assets/icons/car-side-view.png')
 
 const formSchema = z.object({
   name: z
@@ -28,6 +30,7 @@ export type AddVehicleProps = {
 const AddVehicle = (props: AddVehicleProps) => {
   const { onSuccess } = props
   const dispatch = useAppDispatch()
+  const [vehicleImage, setVehicleImage] = useState<ImageSourcePropType | undefined>(VEHICLE_PLACEHOLDER)
   const [submitting, setSubmitting] = useState(false)
   const [response, setResponse] = useState<GraphQLResponse<UserVehicle>>()
 
@@ -55,6 +58,14 @@ const AddVehicle = (props: AddVehicleProps) => {
     setSubmitting(false)
   }
 
+  function onSelectModel(item: VehicleModel): void {
+    if (item?.images?.length) {
+      setVehicleImage({ uri: item.images[0] })
+    } else {
+      setVehicleImage(VEHICLE_PLACEHOLDER)
+    }
+  }
+
   return (
     <View className="w-full h-full flex flex-col">
       <ScrollView className="flex-1">
@@ -63,7 +74,7 @@ const AddVehicle = (props: AddVehicleProps) => {
           <View className='flex flex-col items-center justify-center py-12'>
             <Image
               className='w-full h-24'
-              source={require('@/assets/icons/car-side-view.png')}
+              source={vehicleImage}
               resizeMode='contain'
             />
           </View>
@@ -86,9 +97,10 @@ const AddVehicle = (props: AddVehicleProps) => {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <VehicleInput
+                value={value}
                 onBlur={onBlur}
                 onChange={onChange}
-                value={value}
+                onSelectModel={onSelectModel}
               />
             )}
             name="vehicle"
