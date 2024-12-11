@@ -407,6 +407,7 @@ export namespace CarsDataCrawler {
         if (brandElements.length) {
             for (const element of brandElements) {
                 const brandName = await element.getAttribute('title')
+                const brandUrl = await element.getAttribute('href')
                 const imageSrc = await element.$('img').then(img => img?.getAttribute('src'))
                 const filename = FileUtils.getFileName(imageSrc!)!
 
@@ -416,7 +417,8 @@ export namespace CarsDataCrawler {
                 Logger.success('[DOWNLOADED]', brandName, imageSrc)
                 brands.push({
                     name: brandName,
-                    image: filename
+                    image: filename,
+                    url: brandUrl
                 })
             }
             FileUtils.overwrite(BRAND_DATA_PATH, JSON.stringify(brands))

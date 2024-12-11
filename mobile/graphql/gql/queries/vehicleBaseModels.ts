@@ -18,6 +18,9 @@ export const VehicleBaseModelsQuery = gql`
     				endYear
     				metadata
     				id
+						parent {
+							id
+						}
     				createdAt
     				updatedAt
     				deletedAt

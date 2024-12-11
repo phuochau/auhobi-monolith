@@ -11,10 +11,9 @@ import { FormMessage } from "@/components/ui/form"
 import { useAppDispatch } from "@/hooks/store.hooks"
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { addVehicleAction } from '@/store/user/actions/add-vehicle.action'
-import { View } from 'react-native'
 import { VehicleInput } from '../form-fields/vehicle-input'
-import { Image } from 'react-native'
- 
+import { Image, ScrollView, View } from 'react-native'
+
 const formSchema = z.object({
   name: z
     .string()
@@ -27,77 +26,82 @@ export type AddVehicleProps = {
 }
 
 const AddVehicle = (props: AddVehicleProps) => {
-    const { onSuccess } = props
-    const dispatch = useAppDispatch()
-    const [submitting, setSubmitting] = useState(false)
-    const [response, setResponse] = useState<GraphQLResponse<UserVehicle>>()
+  const { onSuccess } = props
+  const dispatch = useAppDispatch()
+  const [submitting, setSubmitting] = useState(false)
+  const [response, setResponse] = useState<GraphQLResponse<UserVehicle>>()
 
-    const {
-      control,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        name: ''
-      }
-    })
- 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-      setSubmitting(true)
-      setResponse(undefined)
-  
-      const { payload } = await dispatch(addVehicleAction({ userVehicle: values }))
-      const response = payload as GraphQLResponse<UserVehicle>
-      setResponse(response)
-      if (!response.errors && response.data) {
-        onSuccess(response.data)
-      } 
-      setSubmitting(false)
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: ''
     }
-    
-    return (
-      <View className='gap-4'>
-        <View className='flex flex-col items-center justify-center py-12'>
-          <Image
-            className='w-full h-24'
-            source={require('@/assets/icons/car-side-view.png')}
-            resizeMode='contain'
+  })
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setSubmitting(true)
+    setResponse(undefined)
+
+    const { payload } = await dispatch(addVehicleAction({ userVehicle: values }))
+    const response = payload as GraphQLResponse<UserVehicle>
+    setResponse(response)
+    if (!response.errors && response.data) {
+      onSuccess(response.data)
+    }
+    setSubmitting(false)
+  }
+
+  return (
+    <View className="w-full h-full flex flex-col">
+      <ScrollView className="flex-1">
+
+        <View className='gap-4'>
+          <View className='flex flex-col items-center justify-center py-12'>
+            <Image
+              className='w-full h-24'
+              source={require('@/assets/icons/car-side-view.png')}
+              resizeMode='contain'
+            />
+          </View>
+          <GraphQLError nativeID="AddVehicleError" response={response}></GraphQLError>
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                placeholder="Nick Name of your car (e.g: Speed Hunter)"
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+            name="name"
           />
+          <FormMessage nativeID="NameError" error={errors.name}></FormMessage>
+
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <VehicleInput
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value}
+              />
+            )}
+            name="vehicle"
+          />
+          <FormMessage nativeID="VehicleError" error={errors.vehicle as FieldError}></FormMessage>
         </View>
-        <GraphQLError nativeID="AddVehicleError" response={response}></GraphQLError>
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              placeholder="Nick Name of your car (e.g: Speed Hunter)"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-          name="name"
-        />
-        <FormMessage nativeID="NameError" error={errors.name}></FormMessage>
+      </ScrollView>
 
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <VehicleInput
-              onBlur={onBlur}
-              onChange={onChange}
-              value={value}
-            />
-          )}
-          name="vehicle"
-        />
-        <FormMessage nativeID="VehicleError" error={errors.vehicle as FieldError}></FormMessage>
-
-        <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
-          <Text>Add Car</Text>
-        </Button>
-      </View>
-    )
+      <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+        <Text>Add Car</Text>
+      </Button>
+    </View>
+  )
 }
 
 export default AddVehicle

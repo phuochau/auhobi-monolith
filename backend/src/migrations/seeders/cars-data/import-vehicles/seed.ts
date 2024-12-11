@@ -64,10 +64,10 @@ export default class ImportVehicles extends Seeder {
                     inMaxTorque,
                     vehicle.images.map(item => CarsDataHelper.getThumbUrlFromOnlineImageUrl(item))
                 )
-                console.log(`Imported model ${inBrand} ${inModel}.`)
+                console.log(`\nImported car ${inBrand} ${inModel}.`)
             }
     
-            console.log('Imported file:', filepath)
+            console.log('\nImported file:', filepath)
         }
     }
 
@@ -76,6 +76,7 @@ export default class ImportVehicles extends Seeder {
         let brand = await repo.findOneBy({ name: brandName })
         if (!brand) {
             brand = await repo.insert({ name: brandName }).then(item => _.get(item, 'raw[0]'))
+            brand = await repo.findOneBy({ id: brand.id })
         }
         return brand
     }
@@ -85,6 +86,7 @@ export default class ImportVehicles extends Seeder {
         let body = await repo.findOneBy({ name: bodyName })
         if (!body) {
             body = await repo.insert({ name: bodyName }).then(item => _.get(item, 'raw[0]'))
+            body = await repo.findOneBy({ id: body.id })
         }
         return body
     }
@@ -123,6 +125,7 @@ export default class ImportVehicles extends Seeder {
                 maxTorque,
                 images: images || []
             }).then(item => _.get(item, 'raw[0]'))
+            model = await repo.findOneBy({ id: model.id })
         }
         return model
     }

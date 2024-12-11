@@ -59,7 +59,6 @@ const VehicleInput = React.forwardRef<
     const shouldShowModel = shouldShowSubBaseModel && Boolean(value?.subBaseModel)
 
     async function fetchBrands() {
-        console.log('fetch brands')
         if (shouldShowBrand) {
             const selectedYear = parseInt(value!.year!)
             const { payload } = await dispatch(fetchVehicleBrandsAction({
@@ -94,14 +93,17 @@ const VehicleInput = React.forwardRef<
 
             const filters: VehicleBaseModelFilter[] = [
                 {
-                    startYear: {
-                        lte: selectedYear
-                    }
+                    startYear: { lte: selectedYear }
                 },
                 {
-                    endYear: {
-                        gte: selectedYear
-                    }
+                    or: [
+                        {
+                            endYear: { gte: selectedYear }
+                        },
+                        {
+                            endYear: { is: null }
+                        }
+                    ]
                 },
                 {
                     brand: {
@@ -137,9 +139,10 @@ const VehicleInput = React.forwardRef<
                 },
                 sorting: [{ direction: SortDirection.Asc, field: VehicleBaseModelSortFields.Name }]
             }))
-            console.log(payload)
 
             const baseModelConnection = payload as GraphQLResponse<VehicleBaseModelConnection>
+
+            console.log(JSON.stringify(baseModelConnection))
 
             if (parentId) {
                 setSubBaseModels((baseModelConnection.data?.edges || []).map(item => item.node))

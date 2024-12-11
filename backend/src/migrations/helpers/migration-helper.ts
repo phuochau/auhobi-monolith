@@ -11,13 +11,15 @@ export namespace MigrationHelpers {
     
     export const saveFile = async (queryRunner: QueryRunner, mimetype: string, response: CloudinaryResponse): Promise<File> => {
         const repo = queryRunner.manager.getRepository<File>(File)
-        return repo.insert({
+        const file = await repo.insert({
             name: response.original_filename,
             mimetype,
             refId: response.public_id,
             url: response.url,
             secureUrl: response.secure_url
         }).then(item => _.get(item, 'raw[0]'))
+
+        return repo.findOneBy({ id: file.id })
     }
 
     export const uploadFile = async(queryRunner: QueryRunner, localImagePath: string, remoteSubFolder: string, filenameOverride?: string): Promise<File> => {

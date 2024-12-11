@@ -18,16 +18,16 @@ export default class ImportBrandsSeeder extends Seeder {
         
         for (const brand of brands) {
             const file = await MigrationHelpers.uploadFile(queryRunner, path.join(BRANDS_IMAGES_DIR, brand.image), 'car-data/brands', _.snakeCase(brand.name))
-            await this.getOrCreateBrand(queryRunner, brand.name, file.url)
-            console.log(`Imported brand ${brand.name}.`)
+            await this.getOrCreateBrand(queryRunner, brand.url, brand.name, file.url)
+            console.log(`\nImported brand ${brand.name}.`)
         }
     }
 
-    private async getOrCreateBrand(queryRunner: QueryRunner, brandName: string, brandLogo: string): Promise<VehicleBrand> {
+    private async getOrCreateBrand(queryRunner: QueryRunner, refId: string, brandName: string, brandLogo: string): Promise<VehicleBrand> {
         const repo = queryRunner.manager.getRepository<VehicleBrand>(VehicleBrand)
         let brand = await repo.findOneBy({ name: brandName })
         if (!brand) {
-            brand = await repo.insert({ name: brandName, logo: brandLogo }).then(item => _.get(item, 'raw[0]'))
+            brand = await repo.insert({ refId: refId, name: brandName, logo: brandLogo }).then(item => _.get(item, 'raw[0]'))
         }
         return brand
     }

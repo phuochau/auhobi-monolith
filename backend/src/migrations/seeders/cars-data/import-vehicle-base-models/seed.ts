@@ -27,12 +27,12 @@ export default class ImportVehicleBaseModels extends Seeder {
             for (const baseModel of baseModels) {
                 const brand = await this.getBrand(queryRunner, baseModel.brandName)
                 const baseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName, brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(baseModel.baseModelImageUrl))
-                console.log('Imported base model:', baseModel.baseModelName, baseModel.baseModelUrl)
+                console.log('\nImported base model:', baseModel.baseModelName, baseModel.baseModelUrl)
     
                 if (baseModel.subBaseModels?.length) {
                     for (const subBaseModel of baseModel.subBaseModels) {
                         const subBaseModelEntity = await this.getOrCreateBaseModel(queryRunner, subBaseModel.baseModelUrl, subBaseModel.baseModelName, brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(subBaseModel.baseModelImageUrl), baseModelEntity.id)
-                        console.log('Imported sub base model:', subBaseModel.baseModelName, baseModel.baseModelUrl)
+                        console.log('\nImported sub base model:', subBaseModel.baseModelName, baseModel.baseModelUrl)
 
                         if (subBaseModel.models?.length) {
                             for (const model of subBaseModel.models) {
@@ -81,7 +81,10 @@ export default class ImportVehicleBaseModels extends Seeder {
 
     private async getOrCreateBaseModel(queryRunner: QueryRunner, refId: string, name: string, brandId: string, image: string, parentId?: string): Promise<VehicleBaseModel> {
         const repo = queryRunner.manager.getRepository<VehicleBaseModel>(VehicleBaseModel)
-        let item = await repo.findOneBy({ name: name, refId: refId })
+        if (!refId) {
+            throw new Error('Empty ref url: ' + name)
+        }
+        let item = await repo.findOneBy({ refId: refId })
         if (!item) {
             item = await repo.insert({
                 refId: refId,
@@ -90,6 +93,8 @@ export default class ImportVehicleBaseModels extends Seeder {
                 image,
                 parent: { id: parentId }
             }).then(item => _.get(item, 'raw[0]'))
+
+            item = await repo.findOneBy({ refId: refId })
         }
         return item
     }

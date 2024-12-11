@@ -1,6 +1,6 @@
 import * as SelectPrimitive from '@rn-primitives/select';
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View, ScrollView } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Check } from '@/lib/icons/Check';
 import { ChevronDown } from '@/lib/icons/ChevronDown';
@@ -116,7 +116,9 @@ const SelectContent = React.forwardRef<
                     'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
                 )}
               >
-                {children}
+                <ScrollView>
+                  {children}
+                </ScrollView>
               </SelectPrimitive.Viewport>
             </View>
             <SelectScrollDownButton />

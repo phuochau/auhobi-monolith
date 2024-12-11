@@ -7,6 +7,10 @@ import GraphQLJSON from 'graphql-type-json';
 @ObjectType()
 @InputType()
 class BaseClass extends BaseEntity {
+  @FilterableField({ nullable: true })
+  @Column({ nullable: true })
+  refId: string;
+  
   @FilterableField()
   @Column()
   name: string;

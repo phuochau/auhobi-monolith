@@ -1,4 +1,5 @@
 export interface CarDataBrand {
     name: string,
-    image: string
+    image: string,
+    url: string
 }
