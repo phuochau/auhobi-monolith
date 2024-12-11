@@ -142,8 +142,6 @@ const VehicleInput = React.forwardRef<
 
             const baseModelConnection = payload as GraphQLResponse<VehicleBaseModelConnection>
 
-            console.log(JSON.stringify(baseModelConnection))
-
             if (parentId) {
                 setSubBaseModels((baseModelConnection.data?.edges || []).map(item => item.node))
             } else {
@@ -169,6 +167,35 @@ const VehicleInput = React.forwardRef<
 
             const connection = payload as GraphQLResponse<VehicleModelConnection>
             setModels((connection.data?.edges || []).map(item => item.node))
+
+            notifySelectedModel()
+        }
+    }
+
+    function getBaseModelName(item: VehicleBaseModel | undefined): string | null {
+        if (!item) {
+            return null
+        }
+
+        let name = item.name
+
+        const yearParts = []
+        if (item.startYear) {
+            yearParts.push(item.startYear)
+        }
+        if (item.endYear) {
+            yearParts.push(item.endYear)
+        } else {
+            yearParts.push('now')
+        }
+
+        return `${name} (${yearParts.join(' - ')})`
+    }
+
+    function notifySelectedModel() {
+        if (value?.model && onSelectModel) {
+            const model = models.find(item => item.id === value?.model)
+            onSelectModel(model)
         }
     }
 
@@ -240,7 +267,7 @@ const VehicleInput = React.forwardRef<
                     {/** Base Model */}
                     {shouldShowBaseModel &&
                         <Select
-                            value={value?.baseModel ? { label: baseModels.find(item => item.id === value.baseModel)?.name || value.baseModel, value: value.baseModel } : undefined}
+                            value={value?.baseModel ? { label: getBaseModelName(baseModels.find(item => item.id === value.baseModel)) || value.baseModel, value: value.baseModel } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('baseModel', option?.value)
                             }}
@@ -263,7 +290,7 @@ const VehicleInput = React.forwardRef<
                     {/** Sub Base Model */}
                     {shouldShowSubBaseModel &&
                         <Select
-                            value={value?.subBaseModel ? { label: subBaseModels.find(item => item.id === value.subBaseModel)?.name || value.subBaseModel, value: value.subBaseModel } : undefined}
+                            value={value?.subBaseModel ? { label: getBaseModelName(subBaseModels.find(item => item.id === value.subBaseModel)) || value.subBaseModel, value: value.subBaseModel } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('subBaseModel', option?.value)
                             }}
@@ -289,9 +316,8 @@ const VehicleInput = React.forwardRef<
                             value={value?.model ? { label: models.find(item => item.id === value.model)?.name || value.model, value: value.model } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('model', option?.value)
-                                if (onSelectModel && option?.value) {
-                                    const modelId = option!.value!
-                                    onSelectModel(models.find(item => item.id === modelId))
+                                if (option?.value) {
+                                    notifySelectedModel()
                                 }
                             }}
                         >
