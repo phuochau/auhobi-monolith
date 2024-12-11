@@ -3,11 +3,12 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "android:build:development": "eas build --profile development --platform android",
     "start": "expo start",
     "start:tunnel": "npx expo start --tunnel",
     "android": "expo run:android",
+    "android:build:dev": "eas build --profile development --platform android",
     "ios": "expo run:ios",
+    "ios:build:dev": "eas build --profile development --platform ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "android:reverse": "adb reverse tcp:3001 tcp:3001",
