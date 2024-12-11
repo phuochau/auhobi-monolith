@@ -96,7 +96,7 @@ const GoogleSignInButton = (props: GoogleSignInButtonProps) => {
 
     return (
         <Button onPress={signIn} loading={submitting} size={'lg'} variant={'outline'} className="flex flex-row items-center">
-            <Image source={require('@/assets/icons/google.png')} className="w-7 h-7" />
+            <Image source={require('@/assets/icons/google.png')} className="w-7 h-7 -ml-0.5" />
             <Text className="flex-1 text-center text-foreground">{text}</Text>
         </Button>
     )

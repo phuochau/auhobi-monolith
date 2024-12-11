@@ -43,8 +43,6 @@ const AppleSignInButton = (props: AppleSignInButtonProps) => {
               ],
             });
 
-            console.log(credential)
-
             if (credential) {
                 if (onAuthorized) {
                     onAuthorized(credential)

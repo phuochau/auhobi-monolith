@@ -9,8 +9,10 @@ import { Platform } from "react-native";
 import { signOutAction } from "@/store/user/actions/sign-out.action";
 
 class GraphQLClient {
-    instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
-    restInstance = new HttpService(process.env.EXPO_PUBLIC_REST_URL!)
+    // instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
+    instance = new HttpService('192.168.1.5.3001/graphql')
+    // restInstance = new HttpService(process.env.EXPO_PUBLIC_REST_URL!)
+    restInstance = new HttpService('192.168.1.5.3001')
     accessToken: string | undefined;
     refreshToken: string  | undefined;
 

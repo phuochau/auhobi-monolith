@@ -62,6 +62,7 @@ const FacebookSignInButton = (props: FacebookSignInButtonProps) => {
                     }))
                     const response = payload as GraphQLResponse<LoginResult>
 
+                    console.log(response)
                     if (!response.errors && response.data) {
                         setSubmitting(false)
                         Navigation.resetToDashboard(router)

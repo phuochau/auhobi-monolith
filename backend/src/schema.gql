@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type VehicleBrand {
+  refId: String
   name: String!
   logo: String
   startYear: Int
@@ -5072,6 +5073,7 @@ type VehicleBodyConnection {
 }
 
 type VehicleBrandDeleteResponse {
+  refId: String
   name: String
   logo: String
   startYear: Int
@@ -8381,6 +8383,7 @@ input VehicleBaseModelFilterVehicleBaseModelFilter {
 input VehicleBaseModelFilterVehicleBrandFilter {
   and: [VehicleBaseModelFilterVehicleBrandFilter!]
   or: [VehicleBaseModelFilterVehicleBrandFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
   endYear: IntFieldComparison
@@ -8410,6 +8413,7 @@ enum VehicleBaseModelSortFields {
 input VehicleBrandFilter {
   and: [VehicleBrandFilter!]
   or: [VehicleBrandFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
   endYear: IntFieldComparison
@@ -8426,6 +8430,7 @@ input VehicleBrandSort {
 }
 
 enum VehicleBrandSortFields {
+  refId
   name
   startYear
   endYear
@@ -8473,6 +8478,7 @@ input VehicleModelFilterVehicleBaseModelFilter {
 input VehicleModelFilterVehicleBrandFilter {
   and: [VehicleModelFilterVehicleBrandFilter!]
   or: [VehicleModelFilterVehicleBrandFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
   endYear: IntFieldComparison
@@ -10905,6 +10911,7 @@ input CreateOneVehicleBrandInput {
 }
 
 input VehicleBrandDTO {
+  refId: String
   name: String!
   logo: String
   startYear: Int
@@ -10936,6 +10943,7 @@ input UpdateManyVehicleBrandsInput {
 input VehicleBrandUpdateFilter {
   and: [VehicleBrandUpdateFilter!]
   or: [VehicleBrandUpdateFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
   endYear: IntFieldComparison
@@ -10958,6 +10966,7 @@ input DeleteManyVehicleBrandsInput {
 input VehicleBrandDeleteFilter {
   and: [VehicleBrandDeleteFilter!]
   or: [VehicleBrandDeleteFilter!]
+  refId: StringFieldComparison
   name: StringFieldComparison
   startYear: IntFieldComparison
   endYear: IntFieldComparison
