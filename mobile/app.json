@@ -35,8 +35,7 @@
           {
             "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
           }
-        ],
-        "NSAppTransportSecurity": { "NSAllowsArbitraryLoads": true }
+        ]
       },
       "bundleIdentifier": "com.auhobi.mobile"
     },
@@ -70,14 +69,7 @@
         }
       ],
       "expo-font",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "usesCleartextTraffic": true
-          }
-        }
-      ],
+      "expo-build-properties",
       [
         "expo-image-picker",
         {
