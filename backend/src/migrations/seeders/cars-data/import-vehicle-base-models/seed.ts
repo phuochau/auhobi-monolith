@@ -81,9 +81,6 @@ export default class ImportVehicleBaseModels extends Seeder {
 
     private async getOrCreateBaseModel(queryRunner: QueryRunner, refId: string, name: string, brandId: string, image: string, parentId?: string): Promise<VehicleBaseModel> {
         const repo = queryRunner.manager.getRepository<VehicleBaseModel>(VehicleBaseModel)
-        if (!refId) {
-            throw new Error('Empty ref url: ' + name)
-        }
         let item = await repo.findOneBy({ refId: refId })
         if (!item) {
             item = await repo.insert({
