@@ -8688,6 +8688,7 @@ type Mutation {
   updateManyAccounts(input: UpdateManyAccountsInput!): UpdateManyResponse!
   deleteOneAccount(input: DeleteOneAccountInput!): AccountDeleteResponse!
   deleteManyAccounts(input: DeleteManyAccountsInput!): DeleteManyResponse!
+  changePassword(input: AccountChangePasswordInput!): Boolean!
   createOneAccountVerfication(input: CreateOneAccountVerficationInput!): AccountVerfication!
   createManyAccountVerfications(input: CreateManyAccountVerficationsInput!): [AccountVerfication!]!
   updateOneAccountVerfication(input: UpdateOneAccountVerficationInput!): AccountVerfication!
@@ -9058,6 +9059,11 @@ input AccountDeleteFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+}
+
+input AccountChangePasswordInput {
+  oldPassword: String!
+  newPassword: String!
 }
 
 input CreateOneAccountVerficationInput {

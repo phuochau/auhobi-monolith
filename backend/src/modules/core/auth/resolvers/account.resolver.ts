@@ -1,10 +1,12 @@
-import { Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Account, AccountDTO } from "../entities/account.entity";
 import { CRUDResolver } from "@ptc-org/nestjs-query-graphql";
 import { InjectQueryService, QueryService } from "@ptc-org/nestjs-query-core";
 import { CurrentAccount } from "../entities/decorators/current-account.decorator";
 import { UseGuards } from "@nestjs/common";
 import { GraphQLGuard } from "../guards/graphql.guard";
+import { AccountChangePasswordInput } from "./inputs/account-change-password.input";
+import { AccountService } from "../services/account.service";
 
 const ResolveConfig = { guards: [GraphQLGuard] }
 
@@ -20,7 +22,8 @@ export class AccountResolver extends CRUDResolver(Account, {
   enableTotalCount: true
 }) {
   constructor(
-    @InjectQueryService(Account) override readonly service: QueryService<Account>
+    @InjectQueryService(Account) override readonly service: QueryService<Account>,
+    private accountService: AccountService
   ) {
     super(service);
   }
@@ -32,5 +35,16 @@ export class AccountResolver extends CRUDResolver(Account, {
   @UseGuards(GraphQLGuard)
   me(@CurrentAccount() account: Account) {
     return account
+  }
+
+  /**
+   * Change password
+   */
+  @Mutation(() => Boolean)
+  changePassword(
+    @CurrentAccount() account: Account,
+    @Args({ name: 'input', type: () => AccountChangePasswordInput }) input: AccountChangePasswordInput
+  ) {
+    return this.accountService.changePassword(account, input.oldPassword, input.newPassword)
   }
 }

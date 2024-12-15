@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
 import { Account } from '../entities/account.entity';
@@ -8,6 +8,7 @@ import { Encryption } from 'src/lib/encryption';
 import dayjs, { Dayjs } from 'dayjs';
 import { AccountAuthMethod } from '../entities/enums/account-auth-method.enum';
 import _ from 'lodash';
+import { ErrorCodes } from 'src/modules/shared/enums/error-codes';
 
 @Injectable()
 export class AccountService {
@@ -209,5 +210,19 @@ export class AccountService {
     account.user.avatar = avatar
     account.isActivated = true
     return this.repo.save(account)
+  }
+
+  /**
+   * Change password
+   */
+
+  async changePassword(account: Account, oldPassword: string, newPassword: string): Promise<Boolean> {
+    const passwordMatched = await this.compareHash(oldPassword, account.password)
+    if (!passwordMatched) {
+      throw new NotFoundException(ErrorCodes.AUTH_ACCOUNT_NOT_FOUND);
+    }
+
+    await this.updatePassword(account, newPassword)
+    return true
   }
 }
