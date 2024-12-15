@@ -7,7 +7,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { FacebookApi } from '@/lib/facebook-api';
 import { GoogleApi } from '@/lib/google-api';
-import { DatePickerService } from '@/services/date-picker.service';
 
 const AuthScreen = () => {
   const router = useRouter()
@@ -19,8 +18,6 @@ const AuthScreen = () => {
 
   useEffect(() => {
     initSDKs()
-
-    DatePickerService.openRangePicker()
   }, [])
 
   return (
