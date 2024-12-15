@@ -13,6 +13,7 @@ import { ConfirmationService } from '@/services/confirmation.service';
 import BaseToast from 'react-native-toast-message';
 import { Toast } from '@/components/ui/toast';
 import * as Sentry from '@sentry/react-native';
+import { DatePickerService } from '@/services/date-picker.service';
 
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN
@@ -77,6 +78,7 @@ function RootLayout() {
         <Stack.Screen name="(app)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
+      {DatePickerService.render()}
       {ConfirmationService.render()}
       <BaseToast config={Toast.customConfig} />
       <PortalHost />

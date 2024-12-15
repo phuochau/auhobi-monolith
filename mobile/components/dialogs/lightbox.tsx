@@ -48,7 +48,7 @@ export const Lightbox = (props: LightboxProps) => {
 
     return (
         <Portal name='lightbox'>
-            <View className="w-screen h-screen bg-primary relative">
+            <View className="w-screen h-screen relative">
                 <Carousel
                     ref={ref}
                     loop={true}
