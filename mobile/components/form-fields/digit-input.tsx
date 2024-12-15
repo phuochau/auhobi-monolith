@@ -66,8 +66,7 @@ export const DigitInput = (props: DigitInputProps) => {
 
     const {
       control,
-      getValues,
-      formState: { errors }
+      getValues
     } = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: defaultValues

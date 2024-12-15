@@ -4,7 +4,7 @@ import { Link, Stack, useRouter } from "expo-router"
 import { Button } from "@/components/ui/button"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import { isValid, z } from "zod"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { GraphQLError } from "@/components/form-fields/graphql-error"
@@ -32,7 +32,7 @@ const LoginScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -77,7 +77,7 @@ const LoginScreen = () => {
           />
           <FormMessage nativeID="EmailError" error={errors.email}></FormMessage>
 
-          <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+          <Button size={'lg'} loading={submitting} disabled={submitting || !isValid} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
             <Text>Reset password</Text>
           </Button>
         </View>

@@ -73,7 +73,7 @@ const AddServiceHistory = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -309,7 +309,7 @@ const AddServiceHistory = () => {
             />
             <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
 
-            <Button loading={submitting} disabled={submitting} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+            <Button loading={submitting} disabled={submitting || !isValid} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Save</Text>
             </Button>
           </View>

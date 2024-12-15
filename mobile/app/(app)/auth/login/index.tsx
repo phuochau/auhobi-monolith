@@ -55,7 +55,7 @@ const LoginScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -131,7 +131,7 @@ const LoginScreen = () => {
               </Link>
             </View>
 
-            <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+            <Button size={'lg'} loading={submitting} disabled={submitting || !isValid} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Sign In</Text>
             </Button>
 

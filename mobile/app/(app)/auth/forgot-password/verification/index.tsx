@@ -48,7 +48,7 @@ const ForgotVerificationScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -119,7 +119,7 @@ const ForgotVerificationScreen = () => {
             name="confirmPassword"
           />
 
-          <Button size={'lg'} onPress={handleSubmit(onSubmit)} loading={submitting} disabled={submitting || !valid} className="w-full mt-2">
+          <Button size={'lg'} onPress={handleSubmit(onSubmit)} loading={submitting} disabled={submitting || !valid || !isValid} className="w-full mt-2">
             <Text>Update password</Text>
           </Button>
         </View>
