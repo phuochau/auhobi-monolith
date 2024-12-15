@@ -436,6 +436,34 @@ export namespace CarsDataCrawler {
     export const BASE_MODEL_DATA_PATH = path.join(BASE_MODEL_BASE_DIR, 'base_models.json')
     export const BASE_MODEL_IMAGES_DIR = path.join(BASE_MODEL_BASE_DIR, 'images')
 
+    const baseModelCrawlVehiclesInSubModelPage = async (browser: Browser, subModelUrl: string): Promise<any[]> => {
+        const page = await CrawlerController.getNewPage(browser)
+        await goto(page, subModelUrl)
+        const modelElements = await page.$$('.types .row a')
+         
+        const models: any = []
+
+        for (const element of modelElements) {
+            let modelName = await element.getAttribute('title')
+            if (modelName?.length) {
+                modelName = modelName.replace('specs', '').trim()
+            }
+
+            const modelUrl = await element.getAttribute('href')
+
+            Logger.info('[FOUND]', modelName, modelUrl)
+
+            models.push({
+                modelName,
+                modelUrl
+            })
+        }
+
+        await page.close()
+
+        return models
+    }
+
     export const baseModelCrawlAll = async (browser: Browser): Promise<void> => {
         if (!fs.existsSync(BASE_MODEL_IMAGES_DIR)) {
             fs.mkdirSync(BASE_MODEL_IMAGES_DIR, { recursive: true })
@@ -498,24 +526,31 @@ export namespace CarsDataCrawler {
                     const subModelPage = await CrawlerController.getNewPage(browser)
                     await goto(subModelPage, subModelUrl)
 
-                    const modelElements = await subModelPage.$$('.types .row a')
-                    
                     const models: any = []
 
-                    for (const element of modelElements) {
-                        const modelName = await element.getAttribute('title')
-                        const modelUrl = await element.getAttribute('href')
+                    // check if there are years element
+                    const yearElements = await subModelPage.$$('.types .typesallyears')
+                    if (yearElements.length) {
+                        const yearUrls: string[] = []
+                        for (const yearElement of yearElements) {
+                            const yearUrl = await yearElement.getAttribute('href')
+                            if (yearUrl) {
+                                yearUrls.push(yearUrl)
+                            }
+                        }
+                        Logger.info('[SUB BASE MODEL YEAR URLS]:', yearUrls)
+                        await subModelPage.close()
 
-                        Logger.info('[FOUND]', modelName, modelUrl)
+                        for (const yearUrl of yearUrls) {
+                            models.push(...(await baseModelCrawlVehiclesInSubModelPage(browser, yearUrl)))
+                        }
 
-                        models.push({
-                            modelName,
-                            modelUrl
-                        })
+                    } else {
+                        models.push(...(await baseModelCrawlVehiclesInSubModelPage(browser, subModelUrl)))
+                        await subModelPage.close()
                     }
 
                     subBaseModels[subModelIndex].models = models
-                    await subModelPage.close()
                 }
 
                 baseModels[modelIndex].subBaseModels = subBaseModels
@@ -546,7 +581,12 @@ export namespace CarsDataCrawler {
         const baseModels: any[] = []
         for (const baseModel of baseModelElements) {
             const baseModelUrl = await baseModel.getAttribute('href')
-            const baseModelName = await baseModel.getAttribute('title')
+
+            let baseModelName = await baseModel.textContent()
+            if (baseModelName?.length) {
+                baseModelName = baseModelName.replace(/\s\s+/g, ' ')
+            }
+
             const baseModelImageUrl = await baseModel.$('picture img').then(ele => ele?.getAttribute('src'))
             
             if (baseModelImageUrl) {
