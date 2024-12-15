@@ -59,6 +59,7 @@ const AddVehicle = (props: AddVehicleProps) => {
   }
 
   function onSelectModel(item: VehicleModel): void {
+    console.log(item)
     if (item?.images?.length) {
       setVehicleImage({ uri: item.images[0] })
     } else {

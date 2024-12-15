@@ -581,7 +581,7 @@ export namespace CarsDataCrawler {
         // TO
         // https://www.cars-data.com/pictures/thumbs/350px/abarth/abarth-124-spider_3560_12.jpg
         const parts = uri.replace(BASE_URL, '').split('/')
-        return `${BASE_URL}${[...[parts[0], parts[1], 'thumbs/350px'], ...parts.slice(4)].join('/')}`
+        return `${BASE_URL}${[...[parts[0], parts[1], 'thumbs/350px'], ...parts.slice(2)].join('/')}`
     }
 
 }

@@ -19,6 +19,6 @@ export namespace CarsDataHelper {
             return undefined
         }
         const parts = uri.replace(BASE_URL, '').split('/')
-        return `${BASE_URL}${[...[parts[0], parts[1], 'thumbs/350px'], ...parts.slice(4)].join('/')}`
+        return `${BASE_URL}${[...[parts[0], parts[1], 'thumbs/350px'], ...parts.slice(2)].join('/')}`
     }
 }
