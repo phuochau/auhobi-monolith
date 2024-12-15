@@ -68,6 +68,7 @@ const AddVehicle = (props: AddVehicleProps) => {
   }
 
   function onSelectModel(item: VehicleModel): void {
+    console.log('onSelectModel', item)
     if (item?.images?.length) {
       setVehicleImage({ uri: item.images[0] })
     } else {
@@ -83,13 +84,13 @@ const AddVehicle = (props: AddVehicleProps) => {
       <ScrollView className="flex-1">
 
         <View className='gap-4'>
-          <View className='flex flex-col items-center justify-center py-12'>
+          {/* <View className='flex flex-col items-center justify-center'>
             <Image
-              className='w-full h-24'
+              className='w-full h-48'
               source={vehicleImage}
-              resizeMode='contain'
+              resizeMode='cover'
             />
-          </View>
+          </View> */}
           <GraphQLError nativeID="AddVehicleError" response={response}></GraphQLError>
           <Controller
             control={control}

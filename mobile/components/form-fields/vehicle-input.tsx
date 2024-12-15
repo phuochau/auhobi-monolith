@@ -177,7 +177,6 @@ const VehicleInput = React.forwardRef<
             }))
 
             const connection = payload as GraphQLResponse<VehicleModelConnection>
-            console.log('models:', connection)
             setModels((connection.data?.edges || []).map(item => item.node))
 
             notifySelectedModel()
