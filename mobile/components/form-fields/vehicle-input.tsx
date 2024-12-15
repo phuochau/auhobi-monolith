@@ -11,6 +11,7 @@ import { fetchVehicleBrandsAction } from "@/store/vehicle/actions/fetchVehicleBr
 import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { fetchVehicleBaseModelsAction } from "@/store/vehicle/actions/fetchVehicleBaseModels.action"
 import { fetchVehicleModelsAction } from "@/store/vehicle/actions/fetchVehicleModels.action"
+import _ from "lodash"
 
 function getYears(): number[] {
     const years = []
@@ -152,12 +153,30 @@ const VehicleInput = React.forwardRef<
 
     async function fetchModels() {
         if (shouldShowModel) {
+            const selectedYear = parseInt(value!.year!)
             const selectedSubBaseModel = value?.subBaseModel
             const { payload } = await dispatch(fetchVehicleModelsAction({
                 filter: {
-                    baseModel: {
-                        id: { eq: selectedSubBaseModel }
-                    }
+                    and: [
+                        {
+                            startYear: { lte: selectedYear }
+                        },
+                        {
+                            or: [
+                                {
+                                    endYear: { gte: selectedYear }
+                                },
+                                {
+                                    endYear: { is: null }
+                                }
+                            ]
+                        },
+                        {
+                            baseModel: {
+                                id: { eq: selectedSubBaseModel }
+                            }
+                        }
+                    ]
                 },
                 paging: {
                     first: 1000
@@ -192,6 +211,26 @@ const VehicleInput = React.forwardRef<
         return `${name} (${yearParts.join(' - ')})`
     }
 
+    function getModelName(item: VehicleModel | undefined): string | null {
+        if (!item) {
+            return null
+        }
+
+        let name = item.name
+
+        const yearParts = []
+        if (item.startYear) {
+            yearParts.push(item.startYear)
+        }
+        if (item.endYear) {
+            yearParts.push(item.endYear)
+        } else {
+            yearParts.push('now')
+        }
+
+        return `${name} (${yearParts.join(' - ')})`
+    }
+
     function notifySelectedModel() {
         if (value?.model && onSelectModel) {
             const model = models.find(item => item.id === value?.model)
@@ -201,12 +240,45 @@ const VehicleInput = React.forwardRef<
         }
     }
 
-    function onValueChange(fieldKey: string, fieldValue: any) {
+    function onValueChange(fieldKey: keyof VehicleInputValue, fieldValue: any) {
+        const newValue = {
+            ...(value || {}),
+            [fieldKey]: fieldValue
+        }
+
+        switch (fieldKey) {
+            case 'year':
+                newValue.brand = undefined
+                setBrands([])
+                newValue.baseModel = undefined
+                setBaseModels([])
+                newValue.subBaseModel = undefined
+                setSubBaseModels([])
+                newValue.model = undefined
+                setModels([])
+                break
+            case 'brand':
+                newValue.baseModel = undefined
+                setBaseModels([])
+                newValue.subBaseModel = undefined
+                setSubBaseModels([])
+                newValue.model = undefined
+                setModels([])
+                break;
+            case 'baseModel':
+                newValue.subBaseModel = undefined
+                setSubBaseModels([])
+                newValue.model = undefined
+                setModels([])
+                break;
+            case 'subBaseModel':
+                newValue.model = undefined
+                setModels([])
+                break;
+        }
+
         if (onChange) {
-            onChange({
-                ...(value || {}),
-                [fieldKey]: fieldValue
-            })
+            onChange(_.pickBy(newValue, v => !_.isNil(v)))
         }
 
         if (onBlur) {
@@ -282,8 +354,8 @@ const VehicleInput = React.forwardRef<
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {baseModels.map(baseModel =>
-                                    <SelectItem key={baseModel.id} label={baseModel.name} value={baseModel.id}>
-                                        {baseModel.name}
+                                    <SelectItem key={baseModel.id} label={getBaseModelName(baseModel) || baseModel.name} value={baseModel.id}>
+                                        {getBaseModelName(baseModel)}
                                     </SelectItem>)}
                             </SelectContent>
                         </Select>}
@@ -305,8 +377,8 @@ const VehicleInput = React.forwardRef<
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {subBaseModels.map(baseModel =>
-                                    <SelectItem key={baseModel.id} label={baseModel.name} value={baseModel.id}>
-                                        {baseModel.name}
+                                    <SelectItem key={baseModel.id} label={getBaseModelName(baseModel) || baseModel.name} value={baseModel.id}>
+                                        {getBaseModelName(baseModel)}
                                     </SelectItem>)}
                             </SelectContent>
                         </Select>}
@@ -315,7 +387,7 @@ const VehicleInput = React.forwardRef<
                     {/** Model */}
                     {shouldShowModel &&
                         <Select
-                            value={value?.model ? { label: models.find(item => item.id === value.model)?.name || value.model, value: value.model } : undefined}
+                            value={value?.model ? { label: getModelName(models.find(item => item.id === value.model)) || value.model, value: value.model } : undefined}
                             onValueChange={(option) => {
                                 onValueChange('model', option?.value)
                                 if (option?.value) {
@@ -331,8 +403,8 @@ const VehicleInput = React.forwardRef<
                             </SelectTrigger>
                             <SelectContent className="w-full">
                                 {models.map(model =>
-                                    <SelectItem key={model.id} label={model.name} value={model.id}>
-                                        {model.name}
+                                    <SelectItem key={model.id} label={getModelName(model) || model.name} value={model.id}>
+                                        {getModelName(model)}
                                     </SelectItem>)}
                             </SelectContent>
                         </Select>}
