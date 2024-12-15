@@ -67,6 +67,7 @@ class BaseClass extends BaseEntity {
 @FilterableRelation('body', () => VehicleBody, { update: { enabled: true } })
 @FilterableRelation('brand', () => VehicleBrand)
 @FilterableRelation('baseModel', () => VehicleBaseModel)
+@FilterableRelation('subBaseModel', () => VehicleBaseModel)
 @Entity({ name: `${TABLE_PREFIX}_models` })
 export class VehicleModel extends BaseClass {
   @IDField(() => ID)
@@ -78,6 +79,9 @@ export class VehicleModel extends BaseClass {
 
   @ManyToOne(() => VehicleBaseModel, genXToOneOptions({ nullable: true }))
   baseModel?: VehicleBaseModel
+
+  @ManyToOne(() => VehicleBaseModel, genXToOneOptions({ nullable: true }))
+  subBaseModel?: VehicleBaseModel
 
   @ManyToOne(() => VehicleBody, genXToOneOptions({ nullable: true }))
   body?: VehicleBody
@@ -105,6 +109,9 @@ export class VehicleModelDTO extends BaseClass {
 
   @FilterableField(() => ID, { nullable: true })
   baseModel?: VehicleBaseModel
+
+  @FilterableField(() => ID, { nullable: true })
+  subBaseModel?: VehicleBaseModel
 
   @FilterableField(() => ID, { nullable: true })
   body?: VehicleBody

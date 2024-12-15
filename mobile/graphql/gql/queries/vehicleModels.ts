@@ -58,6 +58,18 @@ export const VehicleModelsQuery = gql`
     					updatedAt
     					deletedAt
     				}
+    				subBaseModel {
+    					refId
+    					name
+    					image
+    					startYear
+    					endYear
+    					metadata
+    					id
+    					createdAt
+    					updatedAt
+    					deletedAt
+    				}
     			}
     			cursor
     		}

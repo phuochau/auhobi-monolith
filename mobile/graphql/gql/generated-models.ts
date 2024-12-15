@@ -12616,6 +12616,7 @@ export type VehicleBaseModelFilterVehicleBrandFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBaseModelFilterVehicleBrandFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12744,6 +12745,7 @@ export type VehicleBrand = {
   logo?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name: Scalars['String']['output'];
+  refId?: Maybe<Scalars['String']['output']>;
   startYear?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -12761,6 +12763,7 @@ export type VehicleBrandDto = {
   logo?: InputMaybe<Scalars['String']['input']>;
   metadata?: InputMaybe<Scalars['JSON']['input']>;
   name: Scalars['String']['input'];
+  refId?: InputMaybe<Scalars['String']['input']>;
   startYear?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -12772,6 +12775,7 @@ export type VehicleBrandDeleteFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBrandDeleteFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12785,6 +12789,7 @@ export type VehicleBrandDeleteResponse = {
   logo?: Maybe<Scalars['String']['output']>;
   metadata?: Maybe<Scalars['JSON']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  refId?: Maybe<Scalars['String']['output']>;
   startYear?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -12805,6 +12810,7 @@ export type VehicleBrandFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBrandFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12821,6 +12827,7 @@ export enum VehicleBrandSortFields {
   EndYear = 'endYear',
   Id = 'id',
   Name = 'name',
+  RefId = 'refId',
   StartYear = 'startYear',
   UpdatedAt = 'updatedAt'
 }
@@ -12833,6 +12840,7 @@ export type VehicleBrandUpdateFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleBrandUpdateFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12856,6 +12864,7 @@ export type VehicleModel = {
   name: Scalars['String']['output'];
   refId?: Maybe<Scalars['String']['output']>;
   startYear?: Maybe<Scalars['Int']['output']>;
+  subBaseModel: VehicleBaseModel;
   transmission?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -12883,6 +12892,7 @@ export type VehicleModelDto = {
   name: Scalars['String']['input'];
   refId?: InputMaybe<Scalars['String']['input']>;
   startYear?: InputMaybe<Scalars['Int']['input']>;
+  subBaseModel?: InputMaybe<Scalars['ID']['input']>;
   transmission?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -12951,6 +12961,7 @@ export type VehicleModelFilter = {
   or?: InputMaybe<Array<VehicleModelFilter>>;
   refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
+  subBaseModel?: InputMaybe<VehicleModelFilterVehicleBaseModelFilter>;
   transmission?: InputMaybe<StringFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -12986,6 +12997,7 @@ export type VehicleModelFilterVehicleBrandFilter = {
   id?: InputMaybe<IdFilterComparison>;
   name?: InputMaybe<StringFieldComparison>;
   or?: InputMaybe<Array<VehicleModelFilterVehicleBrandFilter>>;
+  refId?: InputMaybe<StringFieldComparison>;
   startYear?: InputMaybe<IntFieldComparison>;
   updatedAt?: InputMaybe<DateFieldComparison>;
 };
@@ -19176,6 +19188,7 @@ export type VehicleBrandResolvers<ContextType = any, ParentType extends Resolver
   logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -19195,6 +19208,7 @@ export type VehicleBrandDeleteResponseResolvers<ContextType = any, ParentType ex
   logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   metadata?: Resolver<Maybe<ResolversTypes['JSON']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -19224,6 +19238,7 @@ export type VehicleModelResolvers<ContextType = any, ParentType extends Resolver
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   refId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   startYear?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  subBaseModel?: Resolver<ResolversTypes['VehicleBaseModel'], ParentType, ContextType>;
   transmission?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

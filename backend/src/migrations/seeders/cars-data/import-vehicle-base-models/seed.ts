@@ -41,7 +41,8 @@ export default class ImportVehicleBaseModels extends Seeder {
                                 if (!modelEntity) {
                                     continue
                                 }
-                                modelEntity.baseModel = subBaseModelEntity
+                                modelEntity.baseModel = baseModelEntity
+                                modelEntity.subBaseModel = subBaseModelEntity
                                 await modelEntity.save()
 
                                 // Update years for base model

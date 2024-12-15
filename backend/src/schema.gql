@@ -69,6 +69,7 @@ type VehicleModel {
   body: VehicleBody!
   brand: VehicleBrand!
   baseModel: VehicleBaseModel!
+  subBaseModel: VehicleBaseModel!
 }
 
 type UserVehicle {
@@ -8457,6 +8458,7 @@ input VehicleModelFilter {
   createdAt: DateFieldComparison
   updatedAt: DateFieldComparison
   deletedAt: DateFieldComparison
+  subBaseModel: VehicleModelFilterVehicleBaseModelFilter
   baseModel: VehicleModelFilterVehicleBaseModelFilter
   brand: VehicleModelFilterVehicleBrandFilter
   body: VehicleModelFilterVehicleBodyFilter
@@ -11004,6 +11006,7 @@ input VehicleModelDTO {
   metadata: JSON
   brand: ID!
   baseModel: ID
+  subBaseModel: ID
   body: ID
 }
 
