@@ -15,7 +15,6 @@ const LoadingScreen = () => {
 
     useEffect(() => {
         setTimeout(async () => {
-            // Navigation.reset(router, { pathname: '/dashboard'})
             try {
                 if (account) {
                     await dispatch(meAction())

@@ -436,9 +436,12 @@ export namespace CarsDataCrawler {
     export const BASE_MODEL_DATA_PATH = path.join(BASE_MODEL_BASE_DIR, 'base_models.json')
     export const BASE_MODEL_IMAGES_DIR = path.join(BASE_MODEL_BASE_DIR, 'images')
 
-    const baseModelCrawlVehiclesInSubModelPage = async (browser: Browser, subModelUrl: string): Promise<any[]> => {
+    const baseModelCrawlVehiclesInSubModelPage = async (browser: Browser, subModelUrl: string): Promise<{ baseModelName: any, models: any[] }> => {
         const page = await CrawlerController.getNewPage(browser)
         await goto(page, subModelUrl)
+
+        const baseModelName = (await page.locator('.title h1').textContent())?.replace('specs', '').trim()
+
         const modelElements = await page.$$('.types .row a')
          
         const models: any = []
@@ -461,7 +464,10 @@ export namespace CarsDataCrawler {
 
         await page.close()
 
-        return models
+        return {
+            baseModelName,
+            models
+        }
     }
 
     export const baseModelCrawlAll = async (browser: Browser): Promise<void> => {
@@ -514,10 +520,12 @@ export namespace CarsDataCrawler {
                 // e.g: modelUrl - https://www.cars-data.com/en/bmw/5-series
                 
                 Logger.info('[BASE MODEL URL]', baseModel.baseModelUrl)
-                const subBaseModels: any[] = await baseModelCrawlModels(browser, brand.brandName, baseModel.baseModelUrl!)
+                const initialSubBaseModels: any[] = await baseModelCrawlModels(browser, brand.brandName, baseModel.baseModelUrl!)
 
-                for (let subModelIndex = 0; subModelIndex < subBaseModels.length; subModelIndex++) {
-                    const subBaseModel = subBaseModels[subModelIndex]
+                const subBaseModels: any[] = []
+
+                for (let subModelIndex = 0; subModelIndex < initialSubBaseModels.length; subModelIndex++) {
+                    const subBaseModel = initialSubBaseModels[subModelIndex]
                     // e.g: subModelUrl - https://www.cars-data.com/en/bmw-5-series-2020/4654
                     const subModelUrl = subBaseModel.baseModelUrl
 
@@ -525,8 +533,6 @@ export namespace CarsDataCrawler {
 
                     const subModelPage = await CrawlerController.getNewPage(browser)
                     await goto(subModelPage, subModelUrl)
-
-                    const models: any = []
 
                     // check if there are years element
                     const yearElements = await subModelPage.$$('.types .typesallyears')
@@ -542,17 +548,25 @@ export namespace CarsDataCrawler {
                         await subModelPage.close()
 
                         for (const yearUrl of yearUrls) {
-                            models.push(...(await baseModelCrawlVehiclesInSubModelPage(browser, yearUrl)))
+                            const result = await baseModelCrawlVehiclesInSubModelPage(browser, yearUrl)
+                            subBaseModels.push({
+                                ...initialSubBaseModels[subModelIndex],
+                                baseModelName: result.baseModelName,
+                                baseModelUrl: yearUrl,
+                                models: result.models
+                            })
                         }
 
                     } else {
-                        models.push(...(await baseModelCrawlVehiclesInSubModelPage(browser, subModelUrl)))
+                        const result = await baseModelCrawlVehiclesInSubModelPage(browser, subModelUrl)
+                        initialSubBaseModels[subModelIndex].baseModelName = result.baseModelName
+                        initialSubBaseModels[subModelIndex].models = result.models
+                        subBaseModels.push(initialSubBaseModels)
                         await subModelPage.close()
                     }
-
-                    subBaseModels[subModelIndex].models = models
                 }
 
+                console.log(subBaseModels)
                 baseModels[modelIndex].subBaseModels = subBaseModels
                 Logger.success('[COMPLETE] BASE MODEL:', baseModel.baseModelName)
             }
