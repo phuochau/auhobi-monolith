@@ -153,24 +153,10 @@ const VehicleInput = React.forwardRef<
 
     async function fetchModels() {
         if (shouldShowModel) {
-            const selectedYear = parseInt(value!.year!)
             const selectedSubBaseModel = value?.subBaseModel
             const { payload } = await dispatch(fetchVehicleModelsAction({
                 filter: {
                     and: [
-                        {
-                            startYear: { lte: selectedYear }
-                        },
-                        {
-                            or: [
-                                {
-                                    endYear: { gte: selectedYear }
-                                },
-                                {
-                                    endYear: { is: null }
-                                }
-                            ]
-                        },
                         {
                             baseModel: {
                                 id: { eq: selectedSubBaseModel }

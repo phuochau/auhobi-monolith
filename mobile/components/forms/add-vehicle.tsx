@@ -13,6 +13,7 @@ import { GraphQLResponse } from "@/graphql/types/graphql-response"
 import { addVehicleAction } from '@/store/user/actions/add-vehicle.action'
 import { VehicleInput } from '../form-fields/vehicle-input'
 import { Image, ImageSourcePropType, ScrollView, View } from 'react-native'
+import _ from 'lodash'
 
 const VEHICLE_PLACEHOLDER = require('@/assets/icons/car-side-view.png')
 
@@ -37,7 +38,9 @@ const AddVehicle = (props: AddVehicleProps) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    getValues,
+    trigger,
+    formState: { errors, isValid },
   } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,6 +69,8 @@ const AddVehicle = (props: AddVehicleProps) => {
       setVehicleImage(VEHICLE_PLACEHOLDER)
     }
   }
+
+  const values = getValues()
 
   return (
     <View className="w-full h-full flex flex-col">
@@ -100,7 +105,10 @@ const AddVehicle = (props: AddVehicleProps) => {
               <VehicleInput
                 value={value}
                 onBlur={onBlur}
-                onChange={onChange}
+                onChange={(v) => {
+                  onChange(v)
+                  trigger('vehicle')
+                }}
                 onSelectModel={onSelectModel}
               />
             )}
@@ -110,7 +118,7 @@ const AddVehicle = (props: AddVehicleProps) => {
         </View>
       </ScrollView>
 
-      <Button size={'lg'} loading={submitting} disabled={submitting} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+      <Button size={'lg'} loading={submitting} disabled={submitting || !(isValid && values?.vehicle?.model)} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
         <Text>Add Car</Text>
       </Button>
     </View>

@@ -544,7 +544,6 @@ export namespace CarsDataCrawler {
                                 yearUrls.push(yearUrl)
                             }
                         }
-                        Logger.info('[SUB BASE MODEL YEAR URLS]:', yearUrls)
                         await subModelPage.close()
 
                         for (const yearUrl of yearUrls) {
@@ -566,7 +565,6 @@ export namespace CarsDataCrawler {
                     }
                 }
 
-                console.log(subBaseModels)
                 baseModels[modelIndex].subBaseModels = subBaseModels
                 Logger.success('[COMPLETE] BASE MODEL:', baseModel.baseModelName)
             }
