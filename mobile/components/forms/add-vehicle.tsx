@@ -52,7 +52,13 @@ const AddVehicle = (props: AddVehicleProps) => {
     setSubmitting(true)
     setResponse(undefined)
 
-    const { payload } = await dispatch(addVehicleAction({ userVehicle: values }))
+    const { payload } = await dispatch(addVehicleAction({
+      userVehicle: {
+        name: values.name,
+        model: values.vehicle?.model,
+        customModel: values.vehicle?.customModel
+      }
+    }))
     const response = payload as GraphQLResponse<UserVehicle>
     setResponse(response)
     if (!response.errors && response.data) {
@@ -62,7 +68,6 @@ const AddVehicle = (props: AddVehicleProps) => {
   }
 
   function onSelectModel(item: VehicleModel): void {
-    console.log(item)
     if (item?.images?.length) {
       setVehicleImage({ uri: item.images[0] })
     } else {
@@ -71,6 +76,7 @@ const AddVehicle = (props: AddVehicleProps) => {
   }
 
   const values = getValues()
+  const formValid = isValid && (values?.vehicle?.model || values?.vehicle?.customModel?.length)
 
   return (
     <View className="w-full h-full flex flex-col">
@@ -118,7 +124,7 @@ const AddVehicle = (props: AddVehicleProps) => {
         </View>
       </ScrollView>
 
-      <Button size={'lg'} loading={submitting} disabled={submitting || !(isValid && values?.vehicle?.model)} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
+      <Button size={'lg'} loading={submitting} disabled={submitting || !formValid} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
         <Text>Add Car</Text>
       </Button>
     </View>

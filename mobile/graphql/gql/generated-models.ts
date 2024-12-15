@@ -207,6 +207,11 @@ export type AccountAvgAggregate = {
   role?: Maybe<Scalars['Float']['output']>;
 };
 
+export type AccountChangePasswordInput = {
+  newPassword: Scalars['String']['input'];
+  oldPassword: Scalars['String']['input'];
+};
+
 export type AccountConnection = {
   __typename?: 'AccountConnection';
   /** Array of edges. */
@@ -3109,6 +3114,7 @@ export type Mutation = {
   authResendVerificationWithEmail: Scalars['Boolean']['output'];
   authVerify: Scalars['Boolean']['output'];
   authVerifyByCode: Scalars['Boolean']['output'];
+  changePassword: Scalars['Boolean']['output'];
   createManyAccountPasswordResets: Array<AccountPasswordReset>;
   createManyAccountVerfications: Array<AccountVerfication>;
   createManyAccounts: Array<Account>;
@@ -3444,6 +3450,11 @@ export type MutationAuthVerifyArgs = {
 
 export type MutationAuthVerifyByCodeArgs = {
   input: AuthVerifyAccountByCodeInput;
+};
+
+
+export type MutationChangePasswordArgs = {
+  input: AccountChangePasswordInput;
 };
 
 
@@ -13128,6 +13139,7 @@ export type ResolversTypes = ResolversObject<{
   AccountAggregateResponse: ResolverTypeWrapper<AccountAggregateResponse>;
   AccountAuthMethodsFilterComparison: AccountAuthMethodsFilterComparison;
   AccountAvgAggregate: ResolverTypeWrapper<AccountAvgAggregate>;
+  AccountChangePasswordInput: AccountChangePasswordInput;
   AccountConnection: ResolverTypeWrapper<AccountConnection>;
   AccountCountAggregate: ResolverTypeWrapper<AccountCountAggregate>;
   AccountDTO: AccountDto;
@@ -14172,6 +14184,7 @@ export type ResolversParentTypes = ResolversObject<{
   AccountAggregateResponse: AccountAggregateResponse;
   AccountAuthMethodsFilterComparison: AccountAuthMethodsFilterComparison;
   AccountAvgAggregate: AccountAvgAggregate;
+  AccountChangePasswordInput: AccountChangePasswordInput;
   AccountConnection: AccountConnection;
   AccountCountAggregate: AccountCountAggregate;
   AccountDTO: AccountDto;
@@ -16072,6 +16085,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   authResendVerificationWithEmail?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthResendVerificationWithEmailArgs, 'input'>>;
   authVerify?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthVerifyArgs, 'input'>>;
   authVerifyByCode?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAuthVerifyByCodeArgs, 'input'>>;
+  changePassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'input'>>;
   createManyAccountPasswordResets?: Resolver<Array<ResolversTypes['AccountPasswordReset']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountPasswordResetsArgs, 'input'>>;
   createManyAccountVerfications?: Resolver<Array<ResolversTypes['AccountVerfication']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountVerficationsArgs, 'input'>>;
   createManyAccounts?: Resolver<Array<ResolversTypes['Account']>, ParentType, ContextType, RequireFields<MutationCreateManyAccountsArgs, 'input'>>;

@@ -157,9 +157,15 @@ const VehicleInput = React.forwardRef<
             const { payload } = await dispatch(fetchVehicleModelsAction({
                 filter: {
                     and: [
+                        // {
+                        //     baseModel: {
+                        //         id: { eq: selectedSubBaseModel }
+                        //     }
+                        // },
+                        // TEST only
                         {
-                            baseModel: {
-                                id: { eq: selectedSubBaseModel }
+                            brand: {
+                                id: { eq: value?.brand! }
                             }
                         }
                     ]
@@ -171,6 +177,7 @@ const VehicleInput = React.forwardRef<
             }))
 
             const connection = payload as GraphQLResponse<VehicleModelConnection>
+            console.log('models:', connection)
             setModels((connection.data?.edges || []).map(item => item.node))
 
             notifySelectedModel()
