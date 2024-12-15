@@ -26,7 +26,7 @@ export default class ImportVehicles extends Seeder {
                 const inRef = vehicle.ref
                 const inBrand = vehicle.brandName
                 const inBody = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Body Type']
-                const inModel = vehicle.name
+                const inModel = vehicle.name.replace('specs', '').trim()
                 const inStartYear = vehicle.startYear
                 const inEndYear = vehicle.endYear
                 const inDrive = CarsDataHelper.getTechDriveSection(vehicle)?.features['Drive Wheel']
