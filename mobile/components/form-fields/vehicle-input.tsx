@@ -158,7 +158,7 @@ const VehicleInput = React.forwardRef<
                 filter: {
                     and: [
                         {
-                            baseModel: {
+                            subBaseModel: {
                                 id: { eq: selectedSubBaseModel }
                             }
                         }
