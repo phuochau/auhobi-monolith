@@ -28,8 +28,8 @@ export const EmptyContainer =  React.forwardRef<
             {...props}
             className={cn("flex flex-col gap-2 items-center justify-center flex-1", className)}
         >
-          {Boolean(title?.length) && <Text className={cn("text-primary-foreground text-lg", titleClassName)}>{title}</Text>}
-          {Boolean(description?.length) && <Text className={cn("text-muted-foreground", descriptionClassName)}>{description}</Text>}
+          {Boolean(title?.length) && <Text className={cn("text-foreground text-lg font-semibold", titleClassName)}>{title}</Text>}
+          {Boolean(description?.length) && <Text className={cn("text-muted", descriptionClassName)}>{description}</Text>}
         </View>
     )
 });

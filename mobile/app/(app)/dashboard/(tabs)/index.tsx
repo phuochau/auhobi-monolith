@@ -69,8 +69,8 @@ const ServiceHistory = () => {
 
   useEffect(() => {
     setLoading(false)
-    setLogs(MOCKING_DATA)
-    // fetchLogs()
+    // setLogs(MOCKING_DATA)
+    fetchLogs()
   }, [])
 
   return (
@@ -85,7 +85,7 @@ const ServiceHistory = () => {
       }
       contentContainerClassName="gap-6 py-6"
       keyExtractor={item => item.node.id}
-      ListEmptyComponent={loading ? <Loader /> : <EmptyContainer title="Empty" />}
+      ListEmptyComponent={loading ? <Loader /> : <EmptyContainer title="Empty Logs" />}
     />
   )
 }
