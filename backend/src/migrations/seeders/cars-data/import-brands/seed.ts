@@ -18,7 +18,7 @@ export default class ImportBrandsSeeder extends Seeder {
         
         for (const brand of brands) {
             const file = await MigrationHelpers.uploadFile(queryRunner, path.join(BRANDS_IMAGES_DIR, brand.image), 'car-data/brands', _.snakeCase(brand.name))
-            await this.getOrCreateBrand(queryRunner, brand.url, brand.name, file.url)
+            await this.getOrCreateBrand(queryRunner, brand.url, brand.name.trim(), file.url)
             console.log(`\nImported brand ${brand.name}.`)
         }
     }

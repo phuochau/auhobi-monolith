@@ -23,21 +23,21 @@ export default class ImportVehicles extends Seeder {
             let vehicles: CarDataVehicle[] = JSON.parse(fs.readFileSync(filepath, 'utf-8'))
 
             for (let vehicle of vehicles) {
-                const inRef = vehicle.ref
-                const inBrand = vehicle.brandName
-                const inBody = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Body Type']
-                const inModel = vehicle.name.replace('specs', '').trim()
+                const inRef = vehicle.ref?.trim()
+                const inBrand = vehicle.brandName?.trim()
+                const inBody = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Body Type']?.trim()
+                const inModel = vehicle.name.replace('specs', '')?.trim()
                 const inStartYear = vehicle.startYear
                 const inEndYear = vehicle.endYear
-                const inDrive = CarsDataHelper.getTechDriveSection(vehicle)?.features['Drive Wheel']
-                const inEngine = CarsDataHelper.getTechDriveSection(vehicle)?.features['Engine/motor Type']
-                const inFuel = CarsDataHelper.getTechDriveSection(vehicle)?.features['Fuel Type']
-                const inTransmission = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Transmission']
-                const inMaxPower = CarsDataHelper.getTechDriveSection(vehicle)?.features['Power']
-                const inMaxTorque = CarsDataHelper.getTechDriveSection(vehicle)?.features['Max Torque']
+                const inDrive = CarsDataHelper.getTechDriveSection(vehicle)?.features['Drive Wheel']?.trim()
+                const inEngine = CarsDataHelper.getTechDriveSection(vehicle)?.features['Engine/motor Type']?.trim()
+                const inFuel = CarsDataHelper.getTechDriveSection(vehicle)?.features['Fuel Type']?.trim()
+                const inTransmission = CarsDataHelper.getTechGeneralSection(vehicle)?.features['Transmission']?.trim()
+                const inMaxPower = CarsDataHelper.getTechDriveSection(vehicle)?.features['Power']?.trim()
+                const inMaxTorque = CarsDataHelper.getTechDriveSection(vehicle)?.features['Max Torque']?.trim()
     
-                const brand = await this.getOrCreateBrand(queryRunner, inBrand)
-                const body = await this.getOrCreateBody(queryRunner, inBody)
+                const brand = await this.getOrCreateBrand(queryRunner, inBrand.trim())
+                const body = await this.getOrCreateBody(queryRunner, inBody.trim())
 
                 if (!brand.startYear || (inStartYear < brand.startYear)) {
                     brand.startYear = inStartYear

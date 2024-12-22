@@ -157,15 +157,9 @@ const VehicleInput = React.forwardRef<
             const { payload } = await dispatch(fetchVehicleModelsAction({
                 filter: {
                     and: [
-                        // {
-                        //     baseModel: {
-                        //         id: { eq: selectedSubBaseModel }
-                        //     }
-                        // },
-                        // TEST only
                         {
-                            brand: {
-                                id: { eq: value?.brand! }
+                            baseModel: {
+                                id: { eq: selectedSubBaseModel }
                             }
                         }
                     ]

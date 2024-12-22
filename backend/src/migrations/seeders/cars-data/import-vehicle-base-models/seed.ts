@@ -26,12 +26,12 @@ export default class ImportVehicleBaseModels extends Seeder {
             const baseModels: CarDataBaseModel[] = brand.baseModels
             for (const baseModel of baseModels) {
                 const brand = await this.getBrand(queryRunner, baseModel.brandName)
-                const baseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName, brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(baseModel.baseModelImageUrl))
+                const baseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName.trim(), brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(baseModel.baseModelImageUrl))
                 console.log('\nImported base model:', baseModel.baseModelName, baseModel.baseModelUrl)
     
                 if (baseModel.subBaseModels?.length) {
                     for (const subBaseModel of baseModel.subBaseModels) {
-                        const subBaseModelEntity = await this.getOrCreateBaseModel(queryRunner, subBaseModel.baseModelUrl, subBaseModel.baseModelName, brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(subBaseModel.baseModelImageUrl), baseModelEntity.id)
+                        const subBaseModelEntity = await this.getOrCreateBaseModel(queryRunner, subBaseModel.baseModelUrl, subBaseModel.baseModelName.trim(), brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(subBaseModel.baseModelImageUrl), baseModelEntity.id)
                         console.log('\nImported sub base model:', subBaseModel.baseModelName, baseModel.baseModelUrl)
 
                         if (subBaseModel.models?.length) {
