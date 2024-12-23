@@ -485,16 +485,16 @@ export namespace CarsDataCrawler {
         Logger.info('[FOUND]', brandElements.length, 'brands')
 
         const parsedUrls: string[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_PARSED_URL_PATH, '[]'))
-        const parsedBaseModels: any[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_DATA_PATH, '[]'))
+        const parsedBrands: any[] = JSON.parse(await FileUtils.safeReadFile(BASE_MODEL_DATA_PATH, '[]'))
 
         for (const element of brandElements) {
             const brandName = await element.getAttribute('title')
             const brandUrl = await element.getAttribute('href')
 
-            const isExist = parsedBaseModels.find(item => item.brandName === brandName)
+            const isExist = parsedBrands.find(item => item.brandName === brandName)
 
             if (!Boolean(isExist)) {
-                parsedBaseModels.push({
+                parsedBrands.push({
                     brandName,
                     brandUrl
                 })
@@ -503,8 +503,8 @@ export namespace CarsDataCrawler {
         await brandsPage.close()
 
         // Process models
-        for (let brandIndex = 0; brandIndex < parsedBaseModels.length; brandIndex++) {
-            const brand = parsedBaseModels[brandIndex]
+        for (let brandIndex = 0; brandIndex < parsedBrands.length; brandIndex++) {
+            const brand = parsedBrands[brandIndex]
             Logger.info('=========', brand.brandName, '=========')
             Logger.info('[BRAND URL]', brand.brandUrl)
 
@@ -513,14 +513,14 @@ export namespace CarsDataCrawler {
             }
 
             // e.g: brandUrl - https://www.cars-data.com/en/bmw
-            const baseModels: any[] = await baseModelCrawlModels(browser, brand.brandName, brand.brandUrl)
+            const baseModels: any[] = await baseModelCrawlSubBaseModels(browser, brand.brandName, brand.brandUrl)
 
             for (let modelIndex = 0; modelIndex < baseModels.length; modelIndex++) {
                 const baseModel = baseModels[modelIndex]
                 // e.g: modelUrl - https://www.cars-data.com/en/bmw/5-series
                 
                 Logger.info('[BASE MODEL URL]', baseModel.baseModelUrl)
-                const initialSubBaseModels: any[] = await baseModelCrawlModels(browser, brand.brandName, baseModel.baseModelUrl!)
+                const initialSubBaseModels: any[] = await baseModelCrawlSubBaseModels(browser, brand.brandName, baseModel.baseModelUrl!)
 
                 const subBaseModels: any[] = []
 
@@ -546,15 +546,19 @@ export namespace CarsDataCrawler {
                         }
                         await subModelPage.close()
 
+                        const childOfSubBaseModels = []
                         for (const yearUrl of yearUrls) {
                             const result = await baseModelCrawlVehiclesInSubModelPage(browser, yearUrl)
-                            subBaseModels.push({
+                            childOfSubBaseModels.push({
                                 ...initialSubBaseModels[subModelIndex],
                                 baseModelName: result.baseModelName,
                                 baseModelUrl: yearUrl,
                                 models: result.models
                             })
                         }
+
+                        initialSubBaseModels[subModelIndex].subBaseModels = childOfSubBaseModels
+                        subBaseModels.push(initialSubBaseModels[subModelIndex])
 
                     } else {
                         const result = await baseModelCrawlVehiclesInSubModelPage(browser, subModelUrl)
@@ -570,18 +574,18 @@ export namespace CarsDataCrawler {
             }
 
             parsedUrls.push(brand.brandUrl)
-            parsedBaseModels[brandIndex].baseModels = baseModels
+            parsedBrands[brandIndex].baseModels = baseModels
 
-            FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(parsedBaseModels))
+            FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(parsedBrands))
             FileUtils.overwrite(BASE_MODEL_PARSED_URL_PATH, JSON.stringify(parsedUrls))
             Logger.info('[COMPLETE] BRAND', brand.brandName)
         }
 
-        FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(parsedBaseModels))
+        FileUtils.overwrite(BASE_MODEL_DATA_PATH, JSON.stringify(parsedBrands))
         Logger.success('DONE!!!!!!')
     }
 
-    export const baseModelCrawlModels = async (browser: Browser, brandName: string, parentUrl: string) => {
+    export const baseModelCrawlSubBaseModels = async (browser: Browser, brandName: string, parentUrl: string) => {
         // go to brand models url
         const listPage = await CrawlerController.getNewPage(browser)
         await goto(listPage, parentUrl)
