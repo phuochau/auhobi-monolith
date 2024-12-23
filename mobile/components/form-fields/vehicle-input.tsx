@@ -178,6 +178,7 @@ const VehicleInput = React.forwardRef<
     }
 
     function getBaseModelName(item: VehicleBaseModel | undefined): string | null {
+        console.log(item)
         if (!item) {
             return null
         }
