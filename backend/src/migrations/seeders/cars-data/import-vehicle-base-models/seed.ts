@@ -26,12 +26,29 @@ export default class ImportVehicleBaseModels extends Seeder {
             const baseModels: CarDataBaseModel[] = brand.baseModels
             for (const baseModel of baseModels) {
                 const brand = await this.getBrand(queryRunner, baseModel.brandName)
-                const baseModelEntity = await this.getOrCreateBaseModel(queryRunner, baseModel.baseModelUrl, baseModel.baseModelName.trim(), brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(baseModel.baseModelImageUrl))
+                const baseModelEntity = await this.getOrCreateBaseModel(
+                    queryRunner,
+                    baseModel.baseModelUrl,
+                    baseModel.baseModelName.trim(),
+                    brand.id,
+                    CarsDataHelper.getThumbUrlFromOnlineImageUrl(baseModel.baseModelImageUrl),
+                    baseModel.startYear,
+                    baseModel.endYear
+                )
                 console.log('\nImported base model:', baseModel.baseModelName, baseModel.baseModelUrl)
     
                 if (baseModel.subBaseModels?.length) {
                     for (const subBaseModel of baseModel.subBaseModels) {
-                        const subBaseModelEntity = await this.getOrCreateBaseModel(queryRunner, subBaseModel.baseModelUrl, subBaseModel.baseModelName.trim(), brand.id, CarsDataHelper.getThumbUrlFromOnlineImageUrl(subBaseModel.baseModelImageUrl), baseModelEntity.id)
+                        const subBaseModelEntity = await this.getOrCreateBaseModel(
+                            queryRunner,
+                            subBaseModel.baseModelUrl,
+                            subBaseModel.baseModelName.trim(),
+                            brand.id,
+                            CarsDataHelper.getThumbUrlFromOnlineImageUrl(subBaseModel.baseModelImageUrl),
+                            subBaseModel.startYear,
+                            subBaseModel.endYear,
+                            baseModelEntity.id
+                        )
                         console.log('\nImported sub base model:', subBaseModel.baseModelName, baseModel.baseModelUrl)
 
                         if (subBaseModel.models?.length) {
@@ -50,8 +67,10 @@ export default class ImportVehicleBaseModels extends Seeder {
                                     baseModelEntity.startYear = modelEntity.startYear
                                 }
                                 
-                                if (!baseModelEntity.endYear || (modelEntity.endYear > baseModelEntity.endYear)) {
-                                    baseModelEntity.endYear = modelEntity.endYear
+                                if (!baseModel.endYear?.length) {
+                                    if (!baseModelEntity.endYear || (modelEntity.endYear > baseModelEntity.endYear)) {
+                                        baseModelEntity.endYear = modelEntity.endYear
+                                    }
                                 }
 
                                 await baseModelRepo.save(baseModelEntity)
@@ -62,8 +81,10 @@ export default class ImportVehicleBaseModels extends Seeder {
                                     subBaseModelEntity.startYear = modelEntity.startYear
                                 }
 
-                                if (!subBaseModelEntity.endYear || (modelEntity.endYear > subBaseModelEntity.endYear)) {
-                                    subBaseModelEntity.endYear = modelEntity.endYear
+                                if (!subBaseModel.endYear?.length) {
+                                    if (!subBaseModelEntity.endYear || (modelEntity.endYear > subBaseModelEntity.endYear)) {
+                                        subBaseModelEntity.endYear = modelEntity.endYear
+                                    }
                                 }
 
                                 await baseModelRepo.save(subBaseModelEntity)
@@ -80,7 +101,7 @@ export default class ImportVehicleBaseModels extends Seeder {
         return repo.findOneBy({ name: brandName })
     }
 
-    private async getOrCreateBaseModel(queryRunner: QueryRunner, refId: string, name: string, brandId: string, image: string, parentId?: string): Promise<VehicleBaseModel> {
+    private async getOrCreateBaseModel(queryRunner: QueryRunner, refId: string, name: string, brandId: string, image: string, startYear?: string, endYear?: string, parentId?: string): Promise<VehicleBaseModel> {
         const repo = queryRunner.manager.getRepository<VehicleBaseModel>(VehicleBaseModel)
         let item = await repo.findOneBy({ refId: refId })
         if (!item) {
@@ -89,7 +110,9 @@ export default class ImportVehicleBaseModels extends Seeder {
                 name: name,
                 brand: { id: brandId },
                 image,
-                parent: { id: parentId }
+                parent: { id: parentId },
+                startYear: startYear?.length ? parseInt(startYear) : undefined,
+                endYear: endYear?.length && endYear !== 'present' ? parseInt(endYear) : undefined
             }).then(item => _.get(item, 'raw[0]'))
 
             item = await repo.findOneBy({ refId: refId })

@@ -544,25 +544,19 @@ export namespace CarsDataCrawler {
                                 yearUrls.push(yearUrl)
                             }
                         }
-                        await subModelPage.close()
 
-                        const childOfSubBaseModels = []
+                        await subModelPage.close()
+                        const models = []
                         for (const yearUrl of yearUrls) {
                             const result = await baseModelCrawlVehiclesInSubModelPage(browser, yearUrl)
-                            childOfSubBaseModels.push({
-                                ...initialSubBaseModels[subModelIndex],
-                                baseModelName: result.baseModelName,
-                                baseModelUrl: yearUrl,
-                                models: result.models
-                            })
+                            models.push(...result.models)
                         }
 
-                        initialSubBaseModels[subModelIndex].subBaseModels = childOfSubBaseModels
+                        initialSubBaseModels[subModelIndex].models = models
                         subBaseModels.push(initialSubBaseModels[subModelIndex])
 
                     } else {
                         const result = await baseModelCrawlVehiclesInSubModelPage(browser, subModelUrl)
-                        initialSubBaseModels[subModelIndex].baseModelName = result.baseModelName
                         initialSubBaseModels[subModelIndex].models = result.models
                         subBaseModels.push(initialSubBaseModels)
                         await subModelPage.close()
@@ -599,8 +593,17 @@ export namespace CarsDataCrawler {
             const baseModelUrl = await baseModel.getAttribute('href')
 
             let baseModelName = await baseModel.textContent()
+            let startYear = undefined
+            let endYear = undefined
+
             if (baseModelName?.length) {
-                baseModelName = baseModelName.replace(/\s\s+/g, ' ')
+                const found = baseModelName.match(/[0-9]{4} - ([0-9]{4}|present)/)
+                if (found?.length) {
+                    const parts = found[0].split(' - ')
+                    startYear = parts[0]
+                    endYear = parts[1]
+                }
+                baseModelName = baseModelName.replace(/\s\s+/g, ' ').trim()
             }
 
             const baseModelImageUrl = await baseModel.$('picture img').then(ele => ele?.getAttribute('src'))
@@ -612,7 +615,9 @@ export namespace CarsDataCrawler {
                         brandName,
                         baseModelName,
                         baseModelUrl,
-                        baseModelImageUrl: getOnlineImageUrlFromThumbUrl(baseModelImageUrl)
+                        baseModelImageUrl: getOnlineImageUrlFromThumbUrl(baseModelImageUrl),
+                        startYear,
+                        endYear
                     })
                 }
             }

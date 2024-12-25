@@ -3,7 +3,9 @@ export interface CarDataBaseModel {
     baseModelName: string,
     baseModelUrl: string,
     baseModelImageUrl: string,
-    subBaseModels?: CarDataBaseSubModel[]
+    subBaseModels?: CarDataBaseSubModel[],
+    startYear?: string,
+    endYear?: string,
 }
 
 export interface CarDataBaseSubModel {
@@ -11,7 +13,9 @@ export interface CarDataBaseSubModel {
     baseModelName: string,
     baseModelUrl: string,
     baseModelImageUrl: string,
-    models?: CarDataModel[]
+    models?: CarDataModel[],
+    startYear?: string,
+    endYear?: string,
 }
 
 export interface CarDataModel {
