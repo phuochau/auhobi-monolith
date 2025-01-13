@@ -50,6 +50,7 @@ const ForgotVerificationScreen = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<z.infer<typeof formSchema>>({
+    mode: 'all',
     resolver: zodResolver(formSchema),
     defaultValues: {
       password: '',

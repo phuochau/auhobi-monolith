@@ -76,6 +76,7 @@ const AddServiceHistory = () => {
     formState: { errors, isValid },
     setValue
   } = useForm<z.infer<typeof formSchema>>({
+    mode: 'all',
     resolver: zodResolver(formSchema),
     defaultValues: {
       date: (new Date()).toISOString()
