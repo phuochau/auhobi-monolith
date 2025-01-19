@@ -112,7 +112,7 @@ export const DigitInput = (props: DigitInputProps) => {
                                         }
                                     }
                                 }}
-                                className={cn('flex-1 text-center !text-xl font-semibold h-full', inputClassName)}
+                                className={cn('text-center !text-3xl font-semibold', inputClassName)}
                             />
                         )}
                         name={key}
