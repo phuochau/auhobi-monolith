@@ -26,7 +26,7 @@ export namespace SessionService {
     }
     
     export const getSession = async (): Promise<IronSession<SessionData>> => {
-        return getIronSession<SessionData>(cookies(), getSessionOptions());
+        return getIronSession<SessionData>(await cookies(), getSessionOptions());
     }
     
     export const createSession = async (account: Partial<Account>, accessToken: string, refreshToken: string, oldSession?: Partial<SessionData>): Promise<void> => {
