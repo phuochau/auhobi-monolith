@@ -2763,13 +2763,11 @@ type GarageCountAggregate {
 type GarageSumAggregate {
   lat: Float
   lng: Float
-  id: Float
 }
 
 type GarageAvgAggregate {
   lat: Float
   lng: Float
-  id: Float
 }
 
 type GarageMinAggregate {

@@ -93,7 +93,7 @@ class BaseClass extends BaseEntity {
 export class Garage extends BaseClass {
   @FilterableField(() => ID)
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
 
   @ManyToOne(() => Org, genXToOneOptions({ nullable: true }))
   org?: Org;

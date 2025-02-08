@@ -5,7 +5,7 @@ import GraphQLJSON from 'graphql-type-json';
 import { TABLE_PREFIX } from '../constants';
 import { VehicleModel } from '../../vehicle/entities/vehicle-model.entity';
 import _ from 'lodash';
-import { UserVechileStatus as UserVechicleStatus } from './enums/user-vehicle-status.enum';
+import { UserVechileStatus as UserVehicleStatus } from './enums/user-vehicle-status.enum';
 import { User } from './user.entity';
 import { GqlContext } from '../../core/graphql/types/gql-context';
 import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
@@ -25,9 +25,9 @@ class BaseClass extends BaseEntity {
   @Column({ nullable: true })
   picture?: string;
 
-  @FilterableField(() => UserVechicleStatus, { nullable: true })
-  @Column({  nullable: false, default: UserVechicleStatus.ACTIVATED })
-  status: UserVechicleStatus;
+  @FilterableField(() => UserVehicleStatus, { nullable: true })
+  @Column({  nullable: false, default: UserVehicleStatus.ACTIVATED })
+  status: UserVehicleStatus;
 
   @Field(() => GraphQLJSON, { nullable: true })
   @Column({ type: 'jsonb', nullable: true })

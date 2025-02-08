@@ -99,6 +99,8 @@ const AddServiceHistory = () => {
         return
       }
 
+      console.log(JSON.stringify(res))
+
       setValue('type', payload.type)
       setValue('description', payload.description || undefined)
       setValue('date', payload.date)
@@ -231,7 +233,7 @@ const AddServiceHistory = () => {
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
                 <Input
-                  placeholder="Mileage"
+                  placeholder="Mileage (optional)"
                   keyboardType="number-pad"
                   onBlur={onBlur}
                   onChangeText={onChange}
