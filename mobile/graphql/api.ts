@@ -10,7 +10,7 @@ import { signOutAction } from "@/store/user/actions/sign-out.action";
 
 class GraphQLClient {
     // instance = new HttpService(process.env.EXPO_PUBLIC_GRAPHQL_URL!)
-    instance = new HttpService("http://192.168.1.8:3001/graphql")
+    instance = new HttpService("http://192.168.1.6:3001/graphql")
     restInstance = new HttpService(process.env.EXPO_PUBLIC_REST_URL!)
     accessToken: string | undefined;
     refreshToken: string  | undefined;

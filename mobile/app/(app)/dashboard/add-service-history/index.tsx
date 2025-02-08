@@ -45,7 +45,7 @@ const formSchema = z.object({
     type: z.nativeEnum(GarageType),
     data: z.any()
   }).optional(),
-  links: z.string().url().array().optional(),
+  links: z.string().regex(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi).array().optional(),
   media: z.string().array().optional(),
   bills: z.object({
     total: z.number(),
