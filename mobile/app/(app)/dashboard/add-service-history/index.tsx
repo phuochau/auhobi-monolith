@@ -31,6 +31,7 @@ import _ from "lodash"
 import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
 import { AvoidSoftInput } from "react-native-avoid-softinput";
 import { useFocusEffect } from "@react-navigation/native";
+import { listServiceLog } from "@/store/service-log/actions/list-service-logs.action"
 
 type AddServiceHistorySearchParams = {
   serviceLogId?: string
@@ -141,6 +142,7 @@ const AddServiceHistory = () => {
       if (!response.errors && response.data) {
         Toast.success('Successfully added the service history!');
         router.dismiss()
+        await dispatch<any>(listServiceLog())
       }
       setSubmitting(false)
     } catch (err) {

@@ -1,46 +1,26 @@
 import { FlatList } from "react-native"
 import { ServiceHistoryItem } from "@/components/rich/service-history-item"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Loader } from "@/components/ui/loader"
 import { EmptyContainer } from "@/components/ui/empty-container"
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks"
 import { listServiceLog } from "@/store/service-log/actions/list-service-logs.action"
-import { ServiceLogConnection, ServiceLogDeleteResponse, ServiceLogEdge, ServiceLogSortFields, SortDirection } from "@/graphql/gql/generated-models"
-import { selectCurrentVehicle } from "@/store/user/user.selectors"
+import { ServiceLogDeleteResponse, ServiceLogEdge } from "@/graphql/gql/generated-models"
 import { ConfirmationService } from "@/services/confirmation.service"
 import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
 import { useRouter } from "expo-router"
+import { selectFetchingLogs, selectLogs } from "@/store/service-log/service-log.selector"
 
 const MOCKING_DATA = require('./logs.json')
 
 const ServiceHistory = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const vehicle = useAppSelector(selectCurrentVehicle)
-  const [loading, setLoading] = useState(true)
-  const [logs, setLogs] = useState<ServiceLogEdge[]>([])
+  const loading = useAppSelector(selectFetchingLogs)
+  const logs = useAppSelector(selectLogs)
 
   async function fetchLogs() {
-    try {
-      const res = await dispatch<any>(listServiceLog({
-        paging: { first: 500 },
-        sorting: [{ field: ServiceLogSortFields.CreatedAt, direction: SortDirection.Desc }],
-        filter: {
-          vehicle: {
-            id: { eq: vehicle?.id }
-          }
-        }
-      }))
-
-      const payload = (res.payload?.data || []) as ServiceLogConnection
-      
-      setLogs(payload.edges || [])
-      setLoading(false)
-    } catch (err) {
-      console.log(err)
-    } finally {
-      setLoading(false)
-    }
+    await dispatch<any>(listServiceLog())
   }
 
   function onEdit(item: ServiceLogEdge): void {
@@ -68,7 +48,6 @@ const ServiceHistory = () => {
   }
 
   useEffect(() => {
-    setLoading(false)
     // setLogs(MOCKING_DATA)
     fetchLogs()
   }, [])

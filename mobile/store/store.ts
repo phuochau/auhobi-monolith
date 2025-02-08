@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from './storage';
 import { appReducer } from './app/app.slice';
 import { userReducer } from './user/user.slice'
+import { serviceLogReducer } from './service-log/service-log.slice';
 
 const persistConfig = {
   key: 'auhobi',
@@ -11,7 +12,8 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, combineReducers({
   app: appReducer,
-  user: userReducer
+  user: userReducer,
+  serviceLog: serviceLogReducer
 }))
 
 export const store = configureStore({
