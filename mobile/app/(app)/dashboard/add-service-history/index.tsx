@@ -129,9 +129,6 @@ const AddServiceHistory = () => {
     setResponse(undefined)
 
     try {
-      if (editingId) {
-        await dispatch(deleteServiceLogAction({ input: { id: editingId } }))
-      }
       const { payload } = await dispatch(addServiceLog({
         ...values,
         vehicle: vehicle!
@@ -142,6 +139,11 @@ const AddServiceHistory = () => {
       if (!response.errors && response.data) {
         Toast.success('Successfully added the service history!');
         router.dismiss()
+        
+        if (editingId) {
+          await dispatch(deleteServiceLogAction({ input: { id: editingId } }))
+        }
+
         await dispatch<any>(listServiceLog())
       }
       setSubmitting(false)
@@ -230,7 +232,7 @@ const AddServiceHistory = () => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <Input
                   placeholder="Mileage"
-                  keyboardType="numeric"
+                  keyboardType="number-pad"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -270,19 +272,19 @@ const AddServiceHistory = () => {
             />
             <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
 
-            <Label nativeID="LinkLabel">Links</Label>
+            <Label nativeID="BillsLabel">Bills</Label>
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <LinkInput
+                <BillInput
                   value={value}
                   onBlur={onBlur}
                   onChange={onChange}
                 />
               )}
-              name="links"
+              name="bills"
             />
-            <FormMessage nativeID="LinkError" error={errors?.links?.length ? errors.links.pop!() : undefined}></FormMessage>
+            <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
 
             <Label nativeID="MediaLabel">Images</Label>
             <Controller
@@ -298,19 +300,19 @@ const AddServiceHistory = () => {
             />
             <FormMessage nativeID="MediaError" error={errors?.media?.length ? errors.media.pop!() : undefined}></FormMessage>
 
-            <Label nativeID="BillsLabel">Bills</Label>
+            <Label nativeID="LinkLabel">Reference Links</Label>
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <BillInput
+                <LinkInput
                   value={value}
                   onBlur={onBlur}
                   onChange={onChange}
                 />
               )}
-              name="bills"
+              name="links"
             />
-            <FormMessage nativeID="BillsError" error={errors?.bills?.length ? errors.bills.pop!()?.total : undefined}></FormMessage>
+            <FormMessage nativeID="LinkError" error={errors?.links?.length ? errors.links.pop!() : undefined}></FormMessage>
 
             <Button loading={submitting} disabled={submitting || !isValid} size={'lg'} className="w-full mt-2" onPress={handleSubmit(onSubmit)}>
               <Text>Save</Text>

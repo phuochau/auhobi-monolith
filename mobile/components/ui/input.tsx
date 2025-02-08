@@ -28,7 +28,7 @@ const Input = React.forwardRef<
   ...props
 }, ref) => {
   const [shownPassword, setShownPassword] = React.useState(false)
-  const isNumericInput = props.keyboardType === 'numeric'
+  const isNumericInput = props.keyboardType === 'number-pad' || props.keyboardType === 'numeric'
   const isEmailInput = props.keyboardType === 'email-address'
   const isUrlInput = props.keyboardType === 'url'
 
@@ -51,7 +51,7 @@ const Input = React.forwardRef<
 
   function onUpdateText(text: string): void {
     if (onChangeText) {
-      if (isNumericInput) {
+      if (isNumericInput && text?.length) {
         const numValue = numeral(text).value()
         onChangeText(numValue ? `${numValue}` : '')
       } else {
@@ -62,7 +62,7 @@ const Input = React.forwardRef<
 
   let maskedValue = value
 
-  if (isNumericInput) {
+  if (isNumericInput && value?.length) {
     maskedValue = numeral(value || '').format('0,0')
   }
 
