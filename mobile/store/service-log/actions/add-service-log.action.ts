@@ -12,7 +12,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export interface AddServiceLogInput {
     vehicle: UserVehicle;
     date: string;
-    mileage: string;
+    mileage?: string;
     type: string;
     links?: string[];
     media?: string[] | undefined;
@@ -119,7 +119,7 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
             let serviceLogInput: ServiceLogDto = {
               date: values.date,
               type: values.type as ServiceLogType,
-              mileage: parseInt(values.mileage),
+              mileage: values.mileage?.length ? parseInt(values.mileage) : undefined,
               vehicle: vehicle!.id,
               media,
               links: values.links

@@ -41,7 +41,7 @@ const formSchema = z.object({
   type: z.string(),
   description: z.string().optional(),
   date: z.string(),
-  mileage: z.string(),
+  mileage: z.string().optional(),
   garage: z.object({
     type: z.nativeEnum(GarageType),
     data: z.any()
