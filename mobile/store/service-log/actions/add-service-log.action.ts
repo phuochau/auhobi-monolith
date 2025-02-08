@@ -14,6 +14,7 @@ export interface AddServiceLogInput {
     date: string;
     mileage: string;
     type: string;
+    links?: string[];
     media?: string[] | undefined;
     garage?: {
         type: GarageType;
@@ -120,7 +121,8 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
               type: values.type as ServiceLogType,
               mileage: parseInt(values.mileage),
               vehicle: vehicle!.id,
-              media
+              media,
+              links: values.links
             }
 
             serviceLogInput = await appendGarageDTO(serviceLogInput, values)
@@ -133,6 +135,7 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
             })
             return res
         } catch (err: any) {
+            console.log(err)
             return thunkApi.rejectWithValue(err.message)
         }
     }
