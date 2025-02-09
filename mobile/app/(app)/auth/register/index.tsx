@@ -22,6 +22,7 @@ import { GoogleSignInButton } from "@/components/rich/auth/google-signin-button"
 import { AppleSignInButton } from "@/components/rich/auth/apple-signin-button"
 import { AvoidSoftInput } from "react-native-avoid-softinput";
 import { useFocusEffect } from "@react-navigation/native";
+import { ErrorUtils } from "@/lib/error-utils"
 
 const formSchema = z.object({
   email: z
@@ -91,7 +92,7 @@ const RegisterScreen = () => {
     if (!response.errors && response.data) {
       router.replace({ pathname: '/auth/register/verification', params: { email: values.email } })
     } else {
-      const errorCode = GraphQLAPI.getErrorString(response)
+      const errorCode = ErrorUtils.getGraphQLErrorString(response)
       if (errorCode === ErrorCodes.AuthAccountPendingActivation) {
         router.replace({ pathname: '/auth/register/verification', params: { email: values.email, resent: 'true' } })
       } else {

@@ -11,6 +11,7 @@ import { deleteServiceLogAction } from "@/store/service-log/actions/delete-servi
 import { useRouter } from "expo-router"
 import { selectFetchingLogs, selectLogs } from "@/store/service-log/service-log.selector"
 import { Toast } from "@/components/ui/toast"
+import { ErrorUtils } from "@/lib/error-utils"
 
 const MOCKING_DATA = require('./logs.json')
 
@@ -36,7 +37,6 @@ const ServiceHistory = () => {
       onConfirm: async () => {
         try {
           const res = await dispatch<any>(deleteServiceLogAction({ input: { id: item.node.id } }))
-          console.log(JSON.stringify(res))
           const payload = res.payload?.data as ServiceLogDeleteResponse;
 
           if (payload) {
@@ -45,6 +45,7 @@ const ServiceHistory = () => {
           }
         } catch (err) {
           console.log(err)
+          Toast.error(ErrorUtils.getErrorMessage(err));
         }
       }
     })
@@ -54,8 +55,6 @@ const ServiceHistory = () => {
     // setLogs(MOCKING_DATA)
     fetchLogs()
   }, [])
-
-  console.log(JSON.stringify(logs))
 
   return (
     <FlatList
