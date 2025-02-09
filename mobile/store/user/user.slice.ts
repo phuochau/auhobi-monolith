@@ -56,6 +56,7 @@ export const userSlice = createSlice({
     }),
     builder.addMatcher<GraphQLResponseAction<LoginResult>>(signInByFacebookAction.settled, (state, { payload }) => {
       if (!payload.errors && payload.data) {
+        console.log(JSON.stringify(payload.data))
         return {
           ...state,
           ...payload.data

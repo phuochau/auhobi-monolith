@@ -74,7 +74,7 @@ const LoginScreen = () => {
     const response = payload as GraphQLResponse<LoginResult>
     setResponse(response)
     if (!response.errors && response.data) {
-      Navigation.resetToDashboard(router)
+      Navigation.resetToIndex(router)
     } else {
       const errorCode = GraphQLAPI.getErrorString(response)
       if (errorCode === ErrorCodes.AuthAccountPendingActivation) {

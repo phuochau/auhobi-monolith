@@ -130,8 +130,6 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
             serviceLogInput = await appendGarageDTO(serviceLogInput, values)
             serviceLogInput = await appendBillDTOs(serviceLogInput, values)
 
-            console.log(JSON.stringify(serviceLogInput))
-
             const res = await GraphQLAPI.authQuery<ServiceLog, MutationCreateOneServiceLogArgs>(CreateOneServiceLogMutation, {
                 input: {
                     serviceLog: serviceLogInput

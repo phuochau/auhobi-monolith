@@ -58,7 +58,7 @@ const AppleSignInButton = (props: AppleSignInButtonProps) => {
                 const response = payload as GraphQLResponse<LoginResult>
                 if (!response.errors && response.data) {
                     setSubmitting(false)
-                    Navigation.resetToDashboard(router)
+                    Navigation.resetToIndex(router)
                 } else {
                     Toast.error(_.get(response.errors?.[0], 'message', 'There was an error. Please try again.'))
                 }

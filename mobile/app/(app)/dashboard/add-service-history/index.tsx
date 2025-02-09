@@ -131,6 +131,7 @@ const AddServiceHistory = () => {
     setResponse(undefined)
 
     try {
+      console.log(JSON.stringify(values))
       const { payload } = await dispatch(addServiceLog({
         ...values,
         vehicle: vehicle!

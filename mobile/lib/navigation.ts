@@ -6,6 +6,10 @@ export namespace Navigation {
         router.replace(href)
     }
 
+    export const resetToIndex = (router: Router) => {
+        reset(router, { pathname: '/' })
+    }
+
     export const resetToDashboard = (router: Router) => {
         reset(router, { pathname: '/dashboard' })
     }
