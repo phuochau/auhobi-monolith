@@ -10,6 +10,7 @@ import { ConfirmationService } from "@/services/confirmation.service"
 import { deleteServiceLogAction } from "@/store/service-log/actions/delete-service-log.action"
 import { useRouter } from "expo-router"
 import { selectFetchingLogs, selectLogs } from "@/store/service-log/service-log.selector"
+import { Toast } from "@/components/ui/toast"
 
 const MOCKING_DATA = require('./logs.json')
 
@@ -35,10 +36,12 @@ const ServiceHistory = () => {
       onConfirm: async () => {
         try {
           const res = await dispatch<any>(deleteServiceLogAction({ input: { id: item.node.id } }))
+          console.log(JSON.stringify(res))
           const payload = res.payload?.data as ServiceLogDeleteResponse;
 
-          if (payload.id) {
-            // fetchLogs()
+          if (payload) {
+            Toast.success('Successfully deleted the service history!');
+            fetchLogs()
           }
         } catch (err) {
           console.log(err)

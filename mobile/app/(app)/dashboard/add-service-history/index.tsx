@@ -260,20 +260,6 @@ const AddServiceHistory = () => {
             />
             <FormMessage nativeID="GarageError" error={errors.garage as FieldError}></FormMessage>
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Textarea
-                  placeholder="Description"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="description"
-            />
-            <FormMessage nativeID="DescriptionError" error={errors.description}></FormMessage>
-
             <Label nativeID="BillsLabel">Bills</Label>
             <Controller
               control={control}

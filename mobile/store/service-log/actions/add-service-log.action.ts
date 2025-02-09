@@ -13,6 +13,7 @@ export interface AddServiceLogInput {
     vehicle: UserVehicle;
     date: string;
     mileage?: string;
+    description?: string;
     type: string;
     links?: string[];
     media?: string[] | undefined;
@@ -119,6 +120,7 @@ export const addServiceLog = createAsyncThunk<GraphQLResponse<ServiceLog>, AddSe
             let serviceLogInput: ServiceLogDto = {
               date: values.date,
               type: values.type as ServiceLogType,
+              description: values.description,
               mileage: values.mileage?.length ? parseInt(values.mileage) : undefined,
               vehicle: vehicle!.id,
               media,

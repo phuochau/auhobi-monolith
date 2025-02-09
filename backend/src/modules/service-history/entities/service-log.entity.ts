@@ -1,6 +1,6 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { BeforeCreateOne, CreateOneInputType, FilterableField, FilterableOffsetConnection, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
+import { BeforeCreateOne, FilterableField, FilterableOffsetConnection, FilterableRelation } from '@ptc-org/nestjs-query-graphql';
 import { TABLE_PREFIX } from '../constants';
 import { Garage, GarageDTO } from '../../garage/entities/garage.entity';
 import { UserVehicle } from '../../end-user/entities/user-vehicle.entity';
@@ -8,7 +8,6 @@ import { genXToOneOptions } from '../../core/database/helpers/genXToOneOptions';
 import { ServiceLogType } from './enums/service-log-type.enum';
 import { genXToManyOptions } from '../../core/database/helpers/genXToManyOptions';
 import { ServiceLogBill, ServiceLogBillDTO } from './service-log-bill.entity';
-import { GqlContext } from 'src/modules/core/graphql/types/gql-context';
 import { GarageBeforeCreateOneHook } from 'src/modules/garage/entities/hooks/garage-id.hooks';
 
 @ObjectType()
