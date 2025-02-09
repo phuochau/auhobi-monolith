@@ -1,7 +1,7 @@
 import { RelationOptions } from "typeorm"
 
 export const DefaultOneToOneOptions: RelationOptions = {
-    cascade: ['insert', 'update', 'remove', 'soft-remove'],
+    cascade: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE'
 }

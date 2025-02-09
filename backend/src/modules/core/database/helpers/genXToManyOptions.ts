@@ -1,9 +1,9 @@
 import { RelationOptions } from "typeorm";
 
 const DefaultManyToManyOptions: RelationOptions = {
-  cascade: ['insert', 'update', 'remove', 'soft-remove'],
+  cascade: true,
   onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+  onUpdate: 'CASCADE',
 }
 
 export const genXToManyOptions = (opts: RelationOptions = {}, replace = false): RelationOptions => {
@@ -12,6 +12,6 @@ export const genXToManyOptions = (opts: RelationOptions = {}, replace = false): 
   }
   return {
     ...DefaultManyToManyOptions,
-    ...opts
+    ...opts,
   }
 }

@@ -8884,6 +8884,7 @@ type Mutation {
   setGarageOnServiceLog(input: SetGarageOnServiceLogInput!): ServiceLog!
   addBillsToServiceLog(input: AddBillsToServiceLogInput!): ServiceLog!
   setBillsOnServiceLog(input: SetBillsOnServiceLogInput!): ServiceLog!
+  removeBillsFromServiceLog(input: RemoveBillsFromServiceLogInput!): ServiceLog!
   createOneServiceLog(input: CreateOneServiceLogInput!): ServiceLog!
   createManyServiceLogs(input: CreateManyServiceLogsInput!): [ServiceLog!]!
   updateOneServiceLog(input: UpdateOneServiceLogInput!): ServiceLog!
@@ -11223,6 +11224,14 @@ input AddBillsToServiceLogInput {
 }
 
 input SetBillsOnServiceLogInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input RemoveBillsFromServiceLogInput {
   """The id of the record."""
   id: ID!
 
