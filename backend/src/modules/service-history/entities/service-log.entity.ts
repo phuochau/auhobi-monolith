@@ -46,7 +46,7 @@ class BaseClass extends BaseEntity {
  * Entity
  */
 @ObjectType()
-@FilterableOffsetConnection('bills', () => ServiceLogBill, { nullable: true, update: { enabled: true }, remove: { enabled: true } })
+@FilterableOffsetConnection('bills', () => ServiceLogBill, { nullable: true, update: { enabled: true } })
 @FilterableRelation('garage', () => Garage, { nullable: true, update: { enabled: true } })
 @FilterableRelation('vehicle', () => UserVehicle)
 @Entity({ name: `${TABLE_PREFIX}_logs` })
