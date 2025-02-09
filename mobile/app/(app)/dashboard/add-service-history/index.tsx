@@ -99,7 +99,7 @@ const AddServiceHistory = () => {
         return
       }
 
-      console.log(JSON.stringify(res))
+      console.log(JSON.stringify(payload))
 
       setValue('type', payload.type)
       setValue('description', payload.description || undefined)

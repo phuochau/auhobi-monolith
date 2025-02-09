@@ -23,7 +23,6 @@ const GarageInput =  React.forwardRef<
 }, ref) => {
     const { colors } = useTheme();
     const [gararaDialogOpen, setGarageDialogOpen] = useState(false)
-    const [textValue, setTextValue] = useState<string>(getTextFromValue(value))
 
     function openDialog() {
         setGarageDialogOpen(true)
@@ -50,7 +49,6 @@ const GarageInput =  React.forwardRef<
     }
 
     function onChosenGarage(result: GaragePickerResult) {
-        setTextValue(getTextFromValue(result))
         if (onChange) {
             onChange(result)
         }
@@ -69,7 +67,7 @@ const GarageInput =  React.forwardRef<
                         placeholderClassName={cn('text-muted-foreground', textInput?.placeholderClassName)}
                         editable={false}
                         {...textInput}
-                        value={textValue}
+                        value={getTextFromValue(value)}
                     />
                 </View>
             </Pressable>
