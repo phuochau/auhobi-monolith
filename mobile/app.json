@@ -34,8 +34,15 @@
           },
           {
             "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
           }
-        ]
+        ],
+        "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.auhobi.mobile"
     },
@@ -97,7 +104,9 @@
           "iosUrlScheme": "com.googleusercontent.apps.83664194139-7o1d45vinl7nivvop7da4fm60d1pig5t"
         }
       ],
-      ["expo-apple-authentication"],
+      [
+        "expo-apple-authentication"
+      ],
       [
         "@sentry/react-native/expo",
         {
