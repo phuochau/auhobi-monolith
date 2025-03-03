@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { View, Text, Pressable } from 'react-native'
 import { BottomSheetModal, BottomSheetBackdrop } from '@gorhom/bottom-sheet'
-import DatePicker from 'react-native-ui-datepicker'
+import DatePicker, { DateType } from 'react-native-ui-datepicker'
 import dayjs, { Dayjs } from 'dayjs'
 import { CalendarDays } from 'lucide-react-native'
 import { cn } from '@/lib/utils'
@@ -43,7 +43,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
     bottomSheetRef.current?.dismiss()
   }, [])
 
-  const handleValueChange = useCallback((value: { startDate?: string; endDate?: string }) => {
+  const handleValueChange = useCallback((value: { startDate?: DateType; endDate?: DateType }) => {
     const newRange = {
       startDate: value.startDate ? dayjs(value.startDate) : null,
       endDate: value.endDate ? dayjs(value.endDate) : null
@@ -115,7 +115,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
             mode="range"
             startDate={localValue.startDate?.toISOString()}
             endDate={localValue.endDate?.toISOString()}
-            onValueChange={handleValueChange}
+            onChange={handleValueChange}
           />
         </View>
       </BottomSheetModal>
