@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -11,15 +11,34 @@ import {
 import Icon from '@react-native-vector-icons/material-design-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useForm, Controller } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthenticationStackParamList } from '../authentication.stack';
 
-export const SignInScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+// Define the schema
+const schema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
 
-  const handleLogin = () => {
-    Alert.alert('Logged in!');
+type SignInFormValues = z.infer<typeof schema>;
+
+export const SignInScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInFormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data: SignInFormValues) => {
+    Alert.alert('Logged in!', `Email: ${data.email}`);
+    // TODO: call your login API here
   };
 
   return (
@@ -33,30 +52,54 @@ export const SignInScreen = () => {
         <Text style={styles.subtitle}>Track your car maintenance easily</Text>
       </View>
 
-      {/* Inputs */}
+      {/* Form */}
       <View style={styles.inputSection}>
-        <View style={styles.inputWrapper}>
-          <Icon name="email-outline" size={20} color="#9CA3AF" />
-          <TextInput
-            style={styles.input}
-            placeholder="Email address"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={setEmail}
-          />
-        </View>
+        {/* Email */}
+        <Controller
+          control={control}
+          name="email"
+          defaultValue=""
+          render={({ field: { value, onChange, onBlur } }) => (
+            <View style={styles.inputWrapper}>
+              <Icon name="email-outline" size={20} color="#9CA3AF" />
+              <TextInput
+                style={styles.input}
+                placeholder="Email address"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+              />
+            </View>
+          )}
+        />
+        {errors.email && (
+          <Text style={styles.errorText}>{errors.email.message}</Text>
+        )}
 
-        <View style={styles.inputWrapper}>
-          <Icon name="lock-outline" size={20} color="#9CA3AF" />
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry
-            value={password}
-            onChangeText={setPassword}
-          />
-        </View>
+        {/* Password */}
+        <Controller
+          control={control}
+          name="password"
+          defaultValue=""
+          render={({ field: { value, onChange, onBlur } }) => (
+            <View style={styles.inputWrapper}>
+              <Icon name="lock-outline" size={20} color="#9CA3AF" />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                secureTextEntry
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+              />
+            </View>
+          )}
+        />
+        {errors.password && (
+          <Text style={styles.errorText}>{errors.password.message}</Text>
+        )}
 
         {/* Forgot Password */}
         <View style={styles.forgotWrapper}>
@@ -66,7 +109,10 @@ export const SignInScreen = () => {
         </View>
 
         {/* Sign In Button */}
-        <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
+        <TouchableOpacity
+          style={styles.signInButton}
+          onPress={handleSubmit(onSubmit)}
+        >
           <Text style={styles.signInText}>Sign In</Text>
         </TouchableOpacity>
       </View>
@@ -165,6 +211,12 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontWeight: '600',
     fontSize: 16,
+  },
+  errorText: {
+    color: '#EF4444',
+    fontSize: 12,
+    marginBottom: 12,
+    marginLeft: 4,
   },
   dividerWrapper: {
     flexDirection: 'row',
