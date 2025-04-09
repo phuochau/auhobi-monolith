@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import Icon from '@react-native-vector-icons/material-icons';
 import { AuthenticationStackParamList } from '../authentication.stack';
 
 export const WelcomeScreen = () => {
@@ -14,46 +13,30 @@ export const WelcomeScreen = () => {
 
   return (
     <ImageBackground
-      source={require('@assets/images/welcome-bg.jpg')}
+      source={require('../../../assets/images/welcome-bg.jpg')}
+      style={styles.background}
       resizeMode="cover"
-      className="flex-1 justify-end"
     >
-      <View className="absolute inset-0 bg-black/30" />
-
-      <View className="px-6 pb-8 items-center">
-        {/* Logo and title */}
-        <View className="absolute top-20 items-center">
-          <View className="bg-black p-4 rounded-full mb-3">
-            <Icon name="article" size={24} color="white" />
+      <View style={styles.container}>
+        <View style={styles.logoWrapper}>
+          <View style={styles.logoCircle}>
+            <Text style={styles.carIcon}>🚗</Text>
           </View>
-          <Text className="text-white text-3xl font-bold">CarLog</Text>
-          <Text className="text-gray-300 text-sm mt-1">
-            Your car's digital service book
-          </Text>
+          <Text style={styles.title}>CarLog</Text>
+          <Text style={styles.subtitle}>Your car's digital service book</Text>
         </View>
 
-        {/* Get Started Button */}
-        <TouchableOpacity
-          className="mt-60 w-full bg-blue-500 py-4 rounded-xl items-center"
-          onPress={handleGetStarted}
-        >
-          <Text className="text-white text-base font-semibold">Get Started</Text>
+        <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
 
-        {/* Terms and Privacy */}
-        <Text className="text-xs text-gray-300 text-center mt-4">
+        <Text style={styles.termsText}>
           By continuing, you agree to our{' '}
-          <Text
-            className="underline text-white"
-            onPress={() => Linking.openURL('https://yourdomain.com/terms')}
-          >
+          <Text style={styles.link} onPress={() => Linking.openURL('https://yourdomain.com/terms')}>
             Terms
           </Text>{' '}
           &{' '}
-          <Text
-            className="underline text-white"
-            onPress={() => Linking.openURL('https://yourdomain.com/privacy')}
-          >
+          <Text style={styles.link} onPress={() => Linking.openURL('https://yourdomain.com/privacy')}>
             Privacy Policy
           </Text>
         </Text>
@@ -67,17 +50,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-  },
   container: {
     padding: 24,
     alignItems: 'center',
   },
   logoWrapper: {
-    position: 'absolute',
-    top: 80,
     alignItems: 'center',
   },
   logoCircle: {

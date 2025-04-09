@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
+  StyleSheet,
   Alert,
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-design-icons';
@@ -18,29 +19,27 @@ export const SignInScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    Alert.alert('Login pressed');
+    Alert.alert('Logged in!');
   };
 
   return (
-    <View className="flex-1 bg-white items-center justify-center px-6">
+    <View style={styles.container}>
       {/* Logo */}
-      <View className="bg-indigo-500 p-5 rounded-2xl mb-5">
-        <Icon name="car" size={28} color="white" />
+      <View style={styles.logoWrapper}>
+        <View style={styles.logoCircle}>
+          <Icon name="car" size={28} color="white" />
+        </View>
+        <Text style={styles.title}>Car Manager</Text>
+        <Text style={styles.subtitle}>Track your car maintenance easily</Text>
       </View>
 
-      {/* Title */}
-      <Text className="text-2xl font-semibold text-gray-900">Car Manager</Text>
-      <Text className="text-sm text-gray-500 mt-1">
-        Track your car maintenance easily
-      </Text>
-
-      {/* Input fields */}
-      <View className="w-full mt-8 space-y-4">
-        <View className="flex-row items-center px-4 py-3 bg-gray-100 rounded-xl">
+      {/* Inputs */}
+      <View style={styles.inputSection}>
+        <View style={styles.inputWrapper}>
           <Icon name="email-outline" size={20} color="#9CA3AF" />
           <TextInput
+            style={styles.input}
             placeholder="Email address"
-            className="ml-2 flex-1 text-gray-700"
             keyboardType="email-address"
             autoCapitalize="none"
             value={email}
@@ -48,60 +47,164 @@ export const SignInScreen = () => {
           />
         </View>
 
-        <View className="flex-row items-center px-4 py-3 bg-gray-100 rounded-xl">
+        <View style={styles.inputWrapper}>
           <Icon name="lock-outline" size={20} color="#9CA3AF" />
           <TextInput
+            style={styles.input}
             placeholder="Password"
-            className="ml-2 flex-1 text-gray-700"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
           />
         </View>
-      </View>
 
-      {/* Forgot Password */}
-      <View className="w-full items-end mt-2">
-        <Pressable onPress={() => Alert.alert('Navigate to forgot password')}>
-          <Text className="text-indigo-500 text-sm font-medium">Forgot Password?</Text>
-        </Pressable>
-      </View>
+        {/* Forgot Password */}
+        <View style={styles.forgotWrapper}>
+          <Pressable onPress={() => Alert.alert('Forgot Password')}>
+            <Text style={styles.forgotText}>Forgot Password?</Text>
+          </Pressable>
+        </View>
 
-      {/* Sign In Button */}
-      <TouchableOpacity
-        className="mt-5 w-full bg-indigo-500 py-4 rounded-xl items-center"
-        onPress={handleLogin}
-      >
-        <Text className="text-white font-semibold text-base">Sign In</Text>
-      </TouchableOpacity>
+        {/* Sign In Button */}
+        <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
+          <Text style={styles.signInText}>Sign In</Text>
+        </TouchableOpacity>
+      </View>
 
       {/* Divider */}
-      <View className="flex-row items-center w-full my-5">
-        <View className="flex-1 h-px bg-gray-200" />
-        <Text className="mx-2 text-gray-400 text-sm">Or continue with</Text>
-        <View className="flex-1 h-px bg-gray-200" />
+      <View style={styles.dividerWrapper}>
+        <View style={styles.divider} />
+        <Text style={styles.dividerText}>Or continue with</Text>
+        <View style={styles.divider} />
       </View>
 
-      {/* Social Buttons */}
-      <View className="flex-row justify-center space-x-4">
-        <TouchableOpacity className="p-3 rounded-xl border border-gray-200">
+      {/* Social Logins */}
+      <View style={styles.socialWrapper}>
+        <TouchableOpacity style={styles.socialButton}>
           <Icon name="google" size={22} color="#9CA3AF" />
         </TouchableOpacity>
-        <TouchableOpacity className="p-3 rounded-xl border border-gray-200">
-          <Icon name="facebook" size={22} color="#3B5998" />
+        <TouchableOpacity style={styles.socialButton}>
+          <Icon name="facebook" size={22} color="#3b5998" />
         </TouchableOpacity>
-        <TouchableOpacity className="p-3 rounded-xl border border-gray-200">
+        <TouchableOpacity style={styles.socialButton}>
           <Icon name="apple" size={22} color="#111" />
         </TouchableOpacity>
       </View>
 
-      {/* Sign Up Link */}
-      <View className="flex-row mt-6">
-        <Text className="text-gray-500">Don't have an account? </Text>
+      {/* Sign up link */}
+      <View style={styles.signUpWrapper}>
+        <Text style={styles.signUpText}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('sign-up')}>
-          <Text className="text-indigo-500 font-semibold">Sign up</Text>
+          <Text style={styles.signUpLink}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+  },
+  logoWrapper: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  logoCircle: {
+    backgroundColor: '#4F46E5',
+    padding: 16,
+    borderRadius: 16,
+    marginBottom: 12,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '600',
+    color: '#111827',
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#6B7280',
+    marginTop: 4,
+  },
+  inputSection: {
+    marginTop: 10,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F3F4F6',
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    marginBottom: 12,
+  },
+  input: {
+    flex: 1,
+    marginLeft: 10,
+    color: '#111827',
+  },
+  forgotWrapper: {
+    alignItems: 'flex-end',
+    marginBottom: 20,
+  },
+  forgotText: {
+    color: '#4F46E5',
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  signInButton: {
+    backgroundColor: '#4F46E5',
+    borderRadius: 12,
+    paddingVertical: 14,
+    alignItems: 'center',
+  },
+  signInText: {
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  dividerWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 24,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#E5E7EB',
+  },
+  dividerText: {
+    marginHorizontal: 10,
+    color: '#9CA3AF',
+    fontSize: 12,
+  },
+  socialWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 16,
+  },
+  socialButton: {
+    borderColor: '#E5E7EB',
+    borderWidth: 1,
+    borderRadius: 12,
+    padding: 12,
+    marginHorizontal: 6,
+  },
+  signUpWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 32,
+  },
+  signUpText: {
+    color: '#6B7280',
+    fontSize: 13,
+  },
+  signUpLink: {
+    color: '#4F46E5',
+    fontWeight: '600',
+    fontSize: 13,
+  },
+});

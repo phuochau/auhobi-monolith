@@ -8,8 +8,8 @@ import AuthenticatedTabs from '../modules/main/home/home.tabs';
 const Stack = createNativeStackNavigator();
 
 // For now, let's mock auth state:
-const isAuthenticated = true;
-const isOnboarded = true;
+const isAuthenticated = false;
+const isOnboarded = false;
 
 const RootNavigator = () => {
   return (
