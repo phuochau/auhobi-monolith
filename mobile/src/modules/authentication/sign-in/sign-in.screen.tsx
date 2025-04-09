@@ -15,6 +15,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthenticationStackParamList } from '../authentication.stack';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../../store/slices/auth';
 
 // Define the schema
 const schema = z.object({
@@ -27,6 +29,7 @@ type SignInFormValues = z.infer<typeof schema>;
 export const SignInScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -39,6 +42,7 @@ export const SignInScreen = () => {
   const onSubmit = (data: SignInFormValues) => {
     Alert.alert('Logged in!', `Email: ${data.email}`);
     // TODO: call your login API here
+    dispatch(signIn(data));
   };
 
   return (
