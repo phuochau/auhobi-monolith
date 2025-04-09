@@ -4,14 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthenticationStack } from '../modules/authentication/authentication.stack';
 import { OnboardingStack } from '../modules/onboarding/onboarding.stack';
 import AuthenticatedTabs from '../modules/main/home/home.tabs';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const Stack = createNativeStackNavigator();
 
-// For now, let's mock auth state:
-const isAuthenticated = false;
-const isOnboarded = false;
-
 const RootNavigator = () => {
+  const { isAuthenticated, isOnboarded } = useSelector((state: RootState) => state.auth);
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {!isAuthenticated ? (
