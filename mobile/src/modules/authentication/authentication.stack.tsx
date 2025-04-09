@@ -6,6 +6,12 @@ import { SignUpScreen } from './sign-up/sign-up.screen';
 
 const Stack = createNativeStackNavigator();
 
+export type AuthenticationStackParamList = {
+  'welcome': undefined;
+  'sign-in': undefined;
+  'sign-up': undefined;
+};
+
 export const AuthenticationStack = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="welcome" component={WelcomeScreen} />
