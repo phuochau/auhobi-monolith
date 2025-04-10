@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import Modal from 'react-native-modal';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { MainStackParamList } from '../../main.stack';
+import { useNavigation } from '@react-navigation/native';
 
 const logs = [
     {
@@ -106,6 +109,8 @@ const MaintenanceCard = ({ log }: any) => (
 );
 
 export const ServiceHistoriesScreen = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
+  
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedRange, setSelectedRange] = useState('This Month');
     
@@ -146,6 +151,14 @@ export const ServiceHistoriesScreen = () => {
             }}
           >
             <Icon name="bell-badge-outline" size={22} color="#333" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => {
+              navigation.navigate('summary');
+            }}
+          >
+            <Icon name="chart-pie-outline" size={22} color="#333" />
           </TouchableOpacity>
         </View>
       </View>
