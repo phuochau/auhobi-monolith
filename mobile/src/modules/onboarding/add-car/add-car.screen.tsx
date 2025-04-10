@@ -14,6 +14,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Dropdown } from 'react-native-element-dropdown';
+import { selectCar } from '../../../store/slices/auth';
+import { useDispatch } from 'react-redux';
 
 // ------------------------
 // Zod Schema
@@ -49,6 +51,7 @@ const brandOptions = [
 
 export const AddCarScreen = () => {
     const [photo, setPhoto] = useState<string | null>(null);
+    const dispatch = useDispatch();
 
     const {
         control,
@@ -81,7 +84,7 @@ export const AddCarScreen = () => {
 
     const onSubmit = (data: AddCarFormData) => {
         console.log({ ...data, photo });
-        // TODO: submit to API or store locally
+        dispatch(selectCar({ ...data, photo }));
     };
 
     return (
