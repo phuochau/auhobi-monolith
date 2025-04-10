@@ -19,7 +19,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   isAuthenticated: true,
-  isOnboarded: false,
+  isOnboarded: true,
   user: null,
   selectedCar: null,
 };
