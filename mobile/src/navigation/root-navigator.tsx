@@ -3,9 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AuthenticationStack } from '../modules/authentication/authentication.stack';
 import { OnboardingStack } from '../modules/onboarding/onboarding.stack';
-import AuthenticatedTabs from '../modules/main/home/home.tabs';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { MainStack } from '../modules/main/main.stack';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +19,7 @@ const RootNavigator = () => {
       ) : !isOnboarded ? (
         <Stack.Screen name="Onboarding" component={OnboardingStack} />
       ) : (
-        <Stack.Screen name="Authenticated" component={AuthenticatedTabs} />
+        <Stack.Screen name="Main" component={MainStack} />
       )}
     </Stack.Navigator>
   );
