@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,8 +6,10 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-design-icons';
+import Modal from 'react-native-modal';
 
 const logs = [
     {
@@ -45,6 +47,15 @@ const logs = [
           { id: '1', uri: 'https://i.imgur.com/u3zRAzW.jpeg' },
         ],
       },
+];
+
+const dateRanges = [
+  'This Month',
+  'Last Month',
+  'Last 3 Months',
+  'Last 6 Months',
+  'This Year',
+  'Custom Range',
 ];
 
 const Tag = ({ label, color }: any) => (
@@ -95,7 +106,9 @@ const MaintenanceCard = ({ log }: any) => (
 );
 
 export const ServiceHistoriesScreen = () => {
-
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [selectedRange, setSelectedRange] = useState('This Month');
+    
   const renderItem = ({ item, index }: any) => {
     const showDate = index === 0 || logs[index - 1].date !== item.date;
 
@@ -111,6 +124,8 @@ export const ServiceHistoriesScreen = () => {
       </View>
     );
   };
+  
+  const toggleModal = () => setModalVisible(!isModalVisible);
 
   return (
     <View style={styles.container}>
@@ -120,9 +135,7 @@ export const ServiceHistoriesScreen = () => {
         <View style={styles.headerButtons}>
           <TouchableOpacity
             style={styles.iconButton}
-            onPress={() => {
-              console.log('Open date range picker');
-            }}
+            onPress={toggleModal}
           >
             <Icon name="calendar-today" size={22} color="#333" />
           </TouchableOpacity>
@@ -137,6 +150,51 @@ export const ServiceHistoriesScreen = () => {
         </View>
       </View>
 
+      {/* Date Range Modal */}
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={toggleModal}
+        style={styles.modal}
+        swipeDirection="down"
+        onSwipeComplete={toggleModal}
+        backdropOpacity={0.4}
+      >
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Select Date Range</Text>
+          {dateRanges.map((range) => (
+            <Pressable
+              key={range}
+              style={[
+                styles.rangeOption,
+                selectedRange === range && styles.rangeSelected,
+              ]}
+              onPress={() => setSelectedRange(range)}
+            >
+              <Text
+                style={[
+                  styles.rangeText,
+                  selectedRange === range && { color: '#267BFF', fontWeight: 'bold' },
+                ]}
+              >
+                {range}
+              </Text>
+              {range === 'Custom Range' && (
+                <Icon name="calendar" size={18} color="#888" style={{ marginLeft: 'auto' }} />
+              )}
+              {selectedRange === range && (
+                <Icon name="check" size={18} color="#267BFF" style={{ marginLeft: 10 }} />
+              )}
+            </Pressable>
+          ))}
+
+          <TouchableOpacity style={styles.applyButton} onPress={toggleModal}>
+            <Text style={styles.applyButtonText}>Apply</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+
+     {/* List Content */}
       <FlatList
         data={logs}
         renderItem={renderItem}
@@ -268,5 +326,47 @@ const styles = StyleSheet.create({
     color: '#888',
     marginTop: 6,
     textAlign: 'right',
+  },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 14,
+    borderTopRightRadius: 14,
+    padding: 20,
+    paddingBottom: 30,
+  },
+  modalTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 14,
+  },
+  rangeOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomColor: '#EEE',
+    borderBottomWidth: 1,
+  },
+  rangeText: {
+    fontSize: 14,
+    color: '#333',
+  },
+  rangeSelected: {
+    backgroundColor: '#F0F6FF',
+    borderRadius: 6,
+  },
+  applyButton: {
+    marginTop: 20,
+    backgroundColor: '#267BFF',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  applyButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
