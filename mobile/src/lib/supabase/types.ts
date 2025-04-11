@@ -69,6 +69,30 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          created_at: string
+          first_name: string | null
+          id: number
+          last_name: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          first_name?: string | null
+          id?: number
+          last_name?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          first_name?: string | null
+          id?: number
+          last_name?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       ref_service_types: {
         Row: {
           created_at: string

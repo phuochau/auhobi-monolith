@@ -7,19 +7,28 @@ import { Database } from './types'
 const supabaseUrl = environment.SUPABASE_URL!
 const supabaseAnonKey = environment.SUPABASE_ANON_KEY!
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    storage: AsyncStorage,
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: false,
-  },
-})
-
-AppState.addEventListener('change', (state) => {
-  if (state === 'active') {
-    supabase.auth.startAutoRefresh()
-  } else {
-    supabase.auth.stopAutoRefresh()
+export namespace Supabase {
+  export const client = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      storage: AsyncStorage,
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: false,
+    },
+  })
+  
+  AppState.addEventListener('change', (state) => {
+    if (state === 'active') {
+      client.auth.startAutoRefresh()
+    } else {
+      client.auth.stopAutoRefresh()
+    }
+  })
+  export const getSession = () => {
+    return client.auth.getSession()
   }
-})
+  
+  export const signOut = () => {
+    return client.auth.signOut()
+  }
+}

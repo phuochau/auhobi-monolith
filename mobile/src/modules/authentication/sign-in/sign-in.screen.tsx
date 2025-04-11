@@ -15,8 +15,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthenticationStackParamList } from '../authentication.stack';
-import { useDispatch } from 'react-redux';
-import { signIn } from '../../../store/slices/auth';
+import { signIn } from '../../../store/auth/auth.actions';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 // Define the schema
 const schema = z.object({
@@ -29,7 +29,8 @@ type SignInFormValues = z.infer<typeof schema>;
 export const SignInScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { loading, error } = useAppSelector((state) => state.auth);
 
   const {
     control,
@@ -40,8 +41,6 @@ export const SignInScreen = () => {
   });
 
   const onSubmit = (data: SignInFormValues) => {
-    Alert.alert('Logged in!', `Email: ${data.email}`);
-    // TODO: call your login API here
     dispatch(signIn(data));
   };
 
@@ -115,9 +114,10 @@ export const SignInScreen = () => {
         {/* Sign In Button */}
         <TouchableOpacity
           style={styles.signInButton}
+          disabled={loading}
           onPress={handleSubmit(onSubmit)}
         >
-          <Text style={styles.signInText}>Sign In</Text>
+          <Text style={styles.signInText}>{loading ? 'Signing In...' : 'Sign In'}</Text>
         </TouchableOpacity>
       </View>
 
