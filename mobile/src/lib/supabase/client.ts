@@ -1,12 +1,13 @@
 import { createClient } from '@supabase/supabase-js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { environment } from '../config/environment'
+import { environment } from '../../config/environment'
 import { AppState } from 'react-native'
+import { Database } from './types'
 
 const supabaseUrl = environment.SUPABASE_URL!
 const supabaseAnonKey = environment.SUPABASE_ANON_KEY!
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     storage: AsyncStorage,
     persistSession: true,
