@@ -2,25 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '@supabase/supabase-js';
 import _ from 'lodash'
 import { Tables } from '../../lib/supabase/types';
-import { initAuth, signIn, signOut } from './auth.actions'
-
-interface Car {
-  nickname: string;
-  brand: string;
-  model: string;
-  year: string;
-  licensePlate: string;
-  mileage: string;
-  photo?: string | null;
-}
+import { initAuth, signIn, signOut, fetchUserVehicles } from './auth.actions'
 
 interface AuthState {
   initializing: boolean;
   isAuthenticated: boolean;
-  isOnboarded: boolean;
   user: User | null;
   profile: Tables<'profiles'> | null;
-  selectedCar: Car | null;
+  vehicles: Tables<'user_vehicles'>[] | [];
+  selectedVehicle : Tables<'user_vehicles'> | null;
   loading: boolean;
   error: string | null;
 }
@@ -28,10 +18,10 @@ interface AuthState {
 const defaultState = {
   initializing: false,
   isAuthenticated: true,
-  isOnboarded: true,
   profile: null,
   user: null,
-  selectedCar: null,
+  vehicles: [],
+  selectedVehicle: null,
   loading: false,
   error: null
 }
@@ -42,11 +32,8 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    completeOnboarding: (state) => {
-      state.isOnboarded = true;
-    },
-    selectCar: (state, action: PayloadAction<Car>) => {
-      state.selectedCar = action.payload;
+    selectVehicle: (state, action: PayloadAction<Tables<'user_vehicles'>>) => {
+      state.selectedVehicle = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -91,11 +78,28 @@ const authSlice = createSlice({
       .addCase(signOut.rejected, (state, action) => {
         state.error = action.payload as string;
       });
+
+    // Fetch User Vehicles
+    builder
+      .addCase(fetchUserVehicles.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserVehicles.fulfilled, (state, action) => {
+        state.loading = false;
+        state.vehicles = action.payload;
+        if (state.selectedVehicle === null) {
+          state.selectedVehicle = state.vehicles[0] || null;
+        }
+      })
+      .addCase(fetchUserVehicles.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
-export const { 
-  completeOnboarding,
-  selectCar
+export const {
+  selectVehicle
 } = authSlice.actions;
 export default authSlice.reducer;

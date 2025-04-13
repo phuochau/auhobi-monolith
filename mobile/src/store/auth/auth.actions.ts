@@ -10,17 +10,26 @@ export const initAuth = createAsyncThunk(
       return null;
     }
 
-    const {
-      data: profile,
-      error: profileError,
-    } = await Supabase.client
-      .from('profiles')
-      .select('*')
-      .eq('user_id', data.session.user.id)
-      .single();
+    console.log('before fetching profile', data.session.user);
 
-    if (profileError) {
-      return thunkAPI.rejectWithValue(profileError.message);
+    let profile = null
+    try {
+      const response = await Supabase.client
+        .from('profiles')
+        .select('*')
+        .eq('user_id', data.session.user.id)
+        .single();
+
+      const profileError = response.error
+      profile = response.data
+
+      console.log(profile, profileError);
+      if (profileError) {
+        thunkAPI.dispatch(signOut());
+        return thunkAPI.rejectWithValue(profileError.message);
+      }
+    } catch (err) {
+      console.log('err', err)
     }
 
     return {
@@ -73,3 +82,26 @@ export const signOut = createAsyncThunk('auth/signOut', async (_, thunkAPI) => {
   }
   return true;
 });
+
+export const fetchUserVehicles = createAsyncThunk(
+  'auth/fetchUserVehicles',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState() as any;
+    const userId = state.auth.user?.id;
+
+    if (!userId) {
+      return thunkAPI.rejectWithValue('User not authenticated');
+    }
+
+    const { data: vehicles, error } = await Supabase.client
+      .from('user_vehicles')
+      .select('*')
+      .eq('owner_id', userId);
+
+    if (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+
+    return vehicles;
+  }
+);

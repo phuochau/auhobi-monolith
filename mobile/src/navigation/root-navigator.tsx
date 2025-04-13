@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { MainStack } from '../modules/main/main.stack';
 import { useAppDispatch } from '../store/hooks';
-import { initAuth, signOut } from '../store/auth/auth.actions';
+import { initAuth, signOut, fetchUserVehicles } from '../store/auth/auth.actions';
 import { Supabase } from '../lib/supabase/client';
 import { ActivityIndicator, View } from 'react-native';
 
@@ -18,16 +18,27 @@ const RootNavigator = () => {
   const {
     initializing,
     user,
-    isOnboarded
+    vehicles
   } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    dispatch(initAuth());
-    const { data: authListener } = Supabase.client.auth.onAuthStateChange((event, session) => {
+    const initializeAuth = async () => {
+      await dispatch(initAuth());
+      if (user) {
+        await dispatch(fetchUserVehicles())
+      }
+    };
+
+    initializeAuth();
+
+    const { data: authListener } = Supabase.client.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_OUT') {
         dispatch(signOut());
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        dispatch(initAuth());
+        await dispatch(initAuth());
+        if (session?.user) {
+          await dispatch(fetchUserVehicles());
+        }
       }
     });
 
@@ -48,7 +59,7 @@ const RootNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {!user ? (
         <Stack.Screen name="Authentication" component={AuthenticationStack} />
-      ) : !isOnboarded ? (
+      ) : !vehicles || vehicles.length === 0 ? (
         <Stack.Screen name="Onboarding" component={OnboardingStack} />
       ) : (
         <Stack.Screen name="Main" component={MainStack} />
