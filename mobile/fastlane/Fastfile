@@ -1,0 +1,36 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build iOS app"
+  lane :build do
+    cocoapods
+    build_ios_app(
+      workspace: "ios/Auhobi.xcworkspace",
+      scheme: "Auhobi"
+    )
+  end
+
+  desc "Build and upload to TestFlight"
+  lane :beta do
+    build
+    upload_to_testflight
+  end
+end
+
+platform :android do
+  desc "Build Android app"
+  lane :build do
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: "android/"
+    )
+  end
+
+  desc "Build and upload to Play Store Beta"
+  lane :beta do
+    build
+    upload_to_play_store(
+      track: 'beta'
+    )
+  end
+end 
