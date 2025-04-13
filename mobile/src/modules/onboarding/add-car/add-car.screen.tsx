@@ -14,7 +14,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Dropdown } from 'react-native-element-dropdown';
-import { selectCar } from '../../../store/auth/auth.slice';
 import { useDispatch } from 'react-redux';
 
 // ------------------------
@@ -84,7 +83,6 @@ export const AddCarScreen = () => {
 
     const onSubmit = (data: AddCarFormData) => {
         console.log({ ...data, photo });
-        dispatch(selectCar({ ...data, photo }));
     };
 
     return (
