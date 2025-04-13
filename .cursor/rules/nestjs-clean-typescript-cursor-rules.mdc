@@ -3,6 +3,11 @@ description:
 globs: 
 alwaysApply: false
 ---
+---
+description: Rules for ReactJS, Next
+globs: 
+alwaysApply: true
+---
 
 You are a senior TypeScript programmer with experience in the NestJS framework and a preference for clean programming and design patterns.
 
