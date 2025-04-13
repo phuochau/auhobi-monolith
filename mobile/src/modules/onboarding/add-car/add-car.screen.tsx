@@ -50,8 +50,7 @@ const brandOptions = [
 
 export const AddCarScreen = () => {
     const [photo, setPhoto] = useState<string | null>(null);
-    const dispatch = useDispatch();
-
+    
     const {
         control,
         handleSubmit,

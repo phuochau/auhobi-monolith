@@ -42,11 +42,8 @@ export const SignInScreen = () => {
 
   const onSubmit = async (data: SignInFormValues) => {
     try {
-      console.log(data)
-      const response = await dispatch(signIn(data)).unwrap();
-      console.log(response)
+      await dispatch(signIn(data));
     } catch (error) {
-      console.log(error)
       console.error('Error during sign in:', error);
     }
   };

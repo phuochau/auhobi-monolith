@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Supabase } from '../../lib/supabase/client';
+import { client, Supabase } from '../../lib/supabase/client';
 
 export const initAuth = createAsyncThunk(
   'auth/initAuth',
@@ -10,11 +10,9 @@ export const initAuth = createAsyncThunk(
       return null;
     }
 
-    console.log('before fetching profile', data.session.user);
-
     let profile = null
     try {
-      const response = await Supabase.client
+      const response = await client
         .from('profiles')
         .select('*')
         .eq('user_id', data.session.user.id)
@@ -23,7 +21,6 @@ export const initAuth = createAsyncThunk(
       const profileError = response.error
       profile = response.data
 
-      console.log(profile, profileError);
       if (profileError) {
         thunkAPI.dispatch(signOut());
         return thunkAPI.rejectWithValue(profileError.message);
@@ -43,7 +40,7 @@ export const initAuth = createAsyncThunk(
 export const signIn = createAsyncThunk(
   'auth/signIn',
   async ({ email, password }: { email: string; password: string }, thunkAPI) => {
-    const { data, error } = await Supabase.client.auth.signInWithPassword({ email, password });
+    const { data, error } = await client.auth.signInWithPassword({ email, password });
 
     if (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -57,7 +54,7 @@ export const signIn = createAsyncThunk(
     const {
       data: profile,
       error: profileError,
-    } = await Supabase.client
+    } = await client
       .from('profiles')
       .select('*')
       .eq('user_id', user.id)
@@ -93,7 +90,7 @@ export const fetchUserVehicles = createAsyncThunk(
       return thunkAPI.rejectWithValue('User not authenticated');
     }
 
-    const { data: vehicles, error } = await Supabase.client
+    const { data: vehicles, error } = await client
       .from('user_vehicles')
       .select('*')
       .eq('owner_id', userId);
