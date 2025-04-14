@@ -17,6 +17,10 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVehicleBrands, createVehicle, uploadVehiclePhoto } from '../../../store/vehicle/vehicle.actions';
+import { signOut } from '../../../store/auth/auth.actions';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/root-navigator';
 import dayjs from 'dayjs';
 
 // ------------------------
@@ -37,8 +41,10 @@ const schema = z.object({
 type AddCarFormData = z.infer<typeof schema>;
 
 export const AddCarScreen = () => {
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const [photo, setPhoto] = useState<string | null>(null);
     const [uploadingPhoto, setUploadingPhoto] = useState(false);
+    const [signingOut, setSigningOut] = useState(false);
     const dispatch = useAppDispatch();
     const { brands, loading } = useAppSelector(state => state.vehicle);
     const { user } = useAppSelector(state => state.auth);
@@ -102,6 +108,17 @@ export const AddCarScreen = () => {
         } catch (error) {
             console.log(error)
             Alert.alert('Error', 'Failed to add car. Please try again.');
+        }
+    };
+
+    const handleSignOut = async () => {
+        try {
+            setSigningOut(true);
+            await dispatch(signOut());
+        } catch (error) {
+            Alert.alert('Error', 'Failed to sign out. Please try again.');
+        } finally {
+            setSigningOut(false);
         }
     };
 
@@ -204,6 +221,16 @@ export const AddCarScreen = () => {
             >
                 <Text style={styles.addButtonText}>
                     {(isSubmitting || uploadingPhoto) ? 'Adding...' : 'Add Car'}
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+                style={styles.signOutButton} 
+                onPress={handleSignOut}
+                disabled={signingOut}
+            >
+                <Text style={styles.signOutText}>
+                    {signingOut ? 'Signing out...' : 'Sign Out'}
                 </Text>
             </TouchableOpacity>
         </ScrollView>
@@ -320,5 +347,15 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginTop: -8,
         marginBottom: 8,
+    },
+    signOutButton: {
+        marginTop: 24,
+        paddingVertical: 12,
+        alignItems: 'center',
+    },
+    signOutText: {
+        color: '#EF4444',
+        fontSize: 14,
+        fontWeight: '500',
     },
 });

@@ -13,6 +13,12 @@ import { ActivityIndicator, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
+export type RootStackParamList = {
+  Authentication: undefined;
+  Onboarding: undefined;
+  Main: undefined;
+};
+
 const RootNavigator = () => {
   const dispatch = useAppDispatch();
   const {
@@ -30,21 +36,6 @@ const RootNavigator = () => {
     };
 
     initializeAuth();
-
-    const { data: authListener } = Supabase.client.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_OUT') {
-        dispatch(signOut());
-      } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        await dispatch(initAuth());
-        if (session?.user) {
-          await dispatch(fetchUserVehicles());
-        }
-      }
-    });
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
   }, []);
 
   if (initializing) {
@@ -54,6 +45,8 @@ const RootNavigator = () => {
       </View>
     )
   }
+
+  console.log('user', user);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

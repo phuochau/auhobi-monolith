@@ -15,7 +15,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthenticationStackParamList } from '../authentication.stack';
-import { signIn, fetchUserVehicles } from '../../../store/auth/auth.actions';
+import { signIn } from '../../../store/auth/auth.actions';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 
 // Define the schema
@@ -30,7 +30,7 @@ export const SignInScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
   const dispatch = useAppDispatch();
-  const { loading, error, vehicles } = useAppSelector((state) => state.auth);
+  const { loading } = useAppSelector((state) => state.auth);
 
   const {
     control,
@@ -43,7 +43,8 @@ export const SignInScreen = () => {
   const onSubmit = async (data: SignInFormValues) => {
     try {
       await dispatch(signIn(data));
-    } catch (error) {
+    } catch (error: any) {
+      Alert.alert('Error', error?.message || 'An error occurred during sign in');
       console.error('Error during sign in:', error);
     }
   };

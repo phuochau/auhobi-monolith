@@ -6,7 +6,6 @@ import { initAuth, signIn, signOut, fetchUserVehicles } from './auth.actions'
 
 interface AuthState {
   initializing: boolean;
-  isAuthenticated: boolean;
   user: User | null;
   profile: Tables<'profiles'> | null;
   vehicles: Tables<'user_vehicles'>[] | [];
@@ -17,7 +16,6 @@ interface AuthState {
 
 const defaultState = {
   initializing: false,
-  isAuthenticated: true,
   profile: null,
   user: null,
   vehicles: [],
@@ -63,7 +61,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.profile = action.payload.profile;
-        state.isAuthenticated = true;
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
@@ -73,7 +70,7 @@ const authSlice = createSlice({
     // Sign Out
     builder
       .addCase(signOut.fulfilled, (state) => {
-        state = defaultState
+        Object.assign(state, defaultState)
       })
       .addCase(signOut.rejected, (state, action) => {
         state.error = action.payload as string;
