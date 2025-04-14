@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  Alert,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -14,6 +15,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Dropdown } from 'react-native-element-dropdown';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import ImagePicker from 'react-native-image-crop-picker';
+import { DateInput } from '../../../components/DateInput';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { createServiceHistory } from '../../../store/service-history/service-history.actions';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { MainStackParamList } from '../../main/main.stack';
+import { Supabase } from '../../../lib/supabase/client';
 
 // ------------------------
 // Zod Schema
@@ -29,11 +37,16 @@ const schema = z.object({
     .string()
     .regex(/^\d+$/, 'Mileage must be a number'),
   notes: z.string().optional(),
+  date: z.string().min(1, 'Required'),
 });
 
 type AddServiceLogForm = z.infer<typeof schema>;
 
 export const AddServiceHistory = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
+  const dispatch = useAppDispatch();
+  const { selectedVehicle } = useAppSelector((state) => state.auth);
+
   const {
     control,
     handleSubmit,
@@ -47,11 +60,13 @@ export const AddServiceHistory = () => {
       cost: '',
       mileage: '',
       notes: '',
+      date: new Date().toISOString().split('T')[0],
     },
   });
 
   const [servicePhoto, setServicePhoto] = useState<string | null>(null);
   const [billPhoto, setBillPhoto] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   const pickImage = async (setter: (uri: string) => void) => {
     try {
@@ -67,13 +82,60 @@ export const AddServiceHistory = () => {
     }
   };
 
-  const onSubmit = (data: AddServiceLogForm) => {
-    console.log('Form submitted:', {
-      ...data,
-      servicePhoto,
-      billPhoto,
-    });
-    // TODO: handle storing or submitting this data
+  const uploadImage = async (uri: string): Promise<string> => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const filename = uri.split('/').pop() || 'image.jpg';
+    const { data, error } = await Supabase.getStorage()
+      .upload(`service-photos/${Date.now()}-${filename}`, blob);
+
+    if (error) {
+      throw error;
+    }
+
+    const { data: { publicUrl } } = Supabase.getStorage()
+      .getPublicUrl(data.path);
+    return publicUrl;
+  };
+
+  const onSubmit = async (data: AddServiceLogForm) => {
+    if (!selectedVehicle) {
+      Alert.alert('Error', 'No vehicle selected');
+      return;
+    }
+
+    try {
+      setUploading(true);
+      const media: string[] = [];
+
+      if (servicePhoto) {
+        const servicePhotoUrl = await uploadImage(servicePhoto);
+        media.push(servicePhotoUrl);
+      }
+
+      if (billPhoto) {
+        const billPhotoUrl = await uploadImage(billPhoto);
+        media.push(billPhotoUrl);
+      }
+
+      await dispatch(createServiceHistory({
+        serviceTypeId: 1, // TODO: Get from service types
+        serviceDetails: data.details,
+        provider: data.provider,
+        cost: parseFloat(data.cost),
+        mileage: parseInt(data.mileage),
+        notes: data.notes,
+        date: data.date,
+        media: media.length > 0 ? media : undefined,
+        vehicleId: selectedVehicle.id,
+      })).unwrap();
+
+      navigation.goBack();
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'Failed to create service history');
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -85,7 +147,7 @@ export const AddServiceHistory = () => {
             <Icon name="camera-outline" size={20} color="#fff" />
             <View style={{ marginLeft: 12 }}>
               <Text style={styles.scanTitle}>Scan your bill</Text>
-              <Text style={styles.scanSubtitle}>We’ll extract the information for you</Text>
+              <Text style={styles.scanSubtitle}>We'll extract the information for you</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.scanButton}>
@@ -109,6 +171,19 @@ export const AddServiceHistory = () => {
             />
           )}
         />
+
+        <Label text="Service Date" />
+        <Controller
+          control={control}
+          name="date"
+          render={({ field: { onChange, value } }) => (
+            <DateInput
+              value={value}
+              onChange={onChange}
+            />
+          )}
+        />
+        {errors.date && <ErrorText message={errors.date.message} />}
 
         <Label text="Service Details" />
         <Controller
@@ -206,8 +281,14 @@ export const AddServiceHistory = () => {
       </ScrollView>
 
       {/* Save Button */}
-      <TouchableOpacity style={styles.saveButton} onPress={handleSubmit(onSubmit)}>
-        <Text style={styles.saveButtonText}>Save Log</Text>
+      <TouchableOpacity 
+        style={[styles.saveButton, uploading && styles.saveButtonDisabled]} 
+        onPress={handleSubmit(onSubmit)}
+        disabled={uploading}
+      >
+        <Text style={styles.saveButtonText}>
+          {uploading ? 'Saving...' : 'Save Log'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -345,6 +426,9 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     alignItems: 'center',
     elevation: 3,
+  },
+  saveButtonDisabled: {
+    backgroundColor: '#B5B5B5',
   },
   saveButtonText: {
     color: '#fff',

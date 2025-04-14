@@ -39,6 +39,9 @@ alwaysApply: true
   - Use consistent styling, through `StyleSheet.create()`.
   - Ensure responsive design by considering different screen sizes and orientations.
   - Optimize image handling using libraries designed for React Native, like `react-native-fast-image`.
+
+  Redux:
+  - Always create .slice.ts for Redux slice and .actions.ts for Redux actions.
   
   Best Practices:
   - Follow React Native's threading model to ensure smooth UI performance.

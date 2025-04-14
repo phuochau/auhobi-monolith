@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Supabase } from '../../lib/supabase/client';
+import { Tables } from '../../lib/supabase/types';
 
 export const initAuth = createAsyncThunk(
   'auth/initAuth',
@@ -10,28 +11,13 @@ export const initAuth = createAsyncThunk(
       return null;
     }
 
-    let profile = null
-    try {
-      const response = await Supabase.client
-        .from('profiles')
-        .select('*')
-        .eq('user_id', data.session.user.id)
-        .single();
-
-      const profileError = response.error
-      profile = response.data
-
-      if (profileError) {
-        thunkAPI.dispatch(signOut());
-        return thunkAPI.rejectWithValue(profileError.message);
-      }
-    } catch (err) {
-      console.log('err', err)
-    }
+    await thunkAPI.dispatch(fetchUserProfile({ userId: data.session.user.id }));
+    console.log('fetched profile');
+    await thunkAPI.dispatch(fetchUserVehicles({ userId: data.session.user.id }));
+    console.log('fetched vehicles');
 
     return {
-      user: data.session.user,
-      profile
+      user: data.session.user
     };
   }
 );
@@ -51,24 +37,10 @@ export const signIn = createAsyncThunk(
       return thunkAPI.rejectWithValue('User not found');
     }
 
-    const {
-      data: profile,
-      error: profileError,
-    } = await Supabase.client
-      .from('profiles')
-      .select('*')
-      .eq('user_id', user.id)
-      .single();
+    await thunkAPI.dispatch(fetchUserProfile({ userId: user.id }));
+    await thunkAPI.dispatch(fetchUserVehicles({ userId: user.id }));
 
-    if (profileError) {
-      return thunkAPI.rejectWithValue(profileError.message);
-    }
-
-    if (!profile) {
-      return thunkAPI.rejectWithValue('Profile not found');
-    }
-
-    return { user, profile }; // Will be typed as Profile
+    return { user };
   }
 );
 
@@ -80,12 +52,30 @@ export const signOut = createAsyncThunk('auth/signOut', async (_, thunkAPI) => {
   return true;
 });
 
+export const fetchUserProfile = createAsyncThunk(
+  'auth/fetchUserProfile',
+  async ({ userId }: { userId: string }, thunkAPI) => {
+    if (!userId) {
+      return thunkAPI.rejectWithValue('User not authenticated');
+    }
+
+    const { data: profile, error } = await Supabase.client
+      .from('profiles')
+      .select('*')
+      .eq('user_id', userId)
+      .single();
+
+    if (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+
+    return profile;
+  }
+);
+
 export const fetchUserVehicles = createAsyncThunk(
   'auth/fetchUserVehicles',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState() as any;
-    const userId = state.auth.user?.id;
-
+  async ({ userId }: { userId: string }, thunkAPI) => {
     if (!userId) {
       return thunkAPI.rejectWithValue('User not authenticated');
     }

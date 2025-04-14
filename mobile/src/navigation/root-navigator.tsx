@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { MainStack } from '../modules/main/main.stack';
 import { useAppDispatch } from '../store/hooks';
-import { initAuth, signOut, fetchUserVehicles } from '../store/auth/auth.actions';
-import { Supabase } from '../lib/supabase/client';
+import { initAuth } from '../store/auth/auth.actions';
 import { ActivityIndicator, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -30,9 +29,6 @@ const RootNavigator = () => {
   useEffect(() => {
     const initializeAuth = async () => {
       await dispatch(initAuth());
-      if (user) {
-        await dispatch(fetchUserVehicles())
-      }
     };
 
     initializeAuth();
@@ -46,8 +42,11 @@ const RootNavigator = () => {
     )
   }
 
+  console.log('--------------------------------');
+  console.log('initializing', initializing);
   console.log('user', user);
-
+  console.log('vehicles', vehicles);
+  console.log('--------------------------------');
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {!user ? (

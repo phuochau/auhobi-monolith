@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '@supabase/supabase-js';
 import _ from 'lodash'
 import { Tables } from '../../lib/supabase/types';
-import { initAuth, signIn, signOut, fetchUserVehicles } from './auth.actions'
+import { initAuth, signIn, signOut, fetchUserVehicles, fetchUserProfile } from './auth.actions'
 
 interface AuthState {
   initializing: boolean;
@@ -44,7 +44,6 @@ const authSlice = createSlice({
       .addCase(initAuth.fulfilled, (state, action) => {
         state.initializing = false;
         state.user = action.payload?.user || null;
-        state.profile = action.payload?.profile || null;
       })
       .addCase(initAuth.rejected, (state, action) => {
         state.initializing = false;
@@ -60,7 +59,6 @@ const authSlice = createSlice({
       .addCase(signIn.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
-        state.profile = action.payload.profile;
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
@@ -76,21 +74,24 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       });
 
+    // Fetch User Profile
+    builder
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.profile = action.payload;
+      })
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.error = action.payload as string;
+      });
+
     // Fetch User Vehicles
     builder
-      .addCase(fetchUserVehicles.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(fetchUserVehicles.fulfilled, (state, action) => {
-        state.loading = false;
         state.vehicles = action.payload;
         if (state.selectedVehicle === null) {
           state.selectedVehicle = state.vehicles[0] || null;
         }
       })
       .addCase(fetchUserVehicles.rejected, (state, action) => {
-        state.loading = false;
         state.error = action.payload as string;
       });
   },
