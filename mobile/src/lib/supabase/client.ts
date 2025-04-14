@@ -38,6 +38,10 @@ export namespace Supabase {
     }
   })
 
+  export const getStorage = () => {
+    return Supabase.client.storage.from(environment.SUPABASE_STORAGE_ID)
+  }
+
   export const getSession = () => {
     return client.auth.getSession()
   }

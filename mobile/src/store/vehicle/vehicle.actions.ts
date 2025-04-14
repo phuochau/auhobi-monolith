@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Supabase } from "../../lib/supabase/client";
 import { fetchUserVehicles } from "../auth/auth.actions";
 import RNFS from 'react-native-fs';
-import { environment } from "../../config/environment";
 
 export const fetchVehicleBrands = createAsyncThunk(
     'vehicle/fetchBrands',
@@ -36,9 +35,7 @@ export const uploadVehiclePhoto = createAsyncThunk(
             // Read the file as base64
             const base64 = await RNFS.readFile(filePath, 'base64');
 
-            const { data, error } = await Supabase.client.storage
-                .from(environment.SUPABASE_STORAGE_ID)
-                .upload(`${userId}/${fileName}`, base64, {
+            const { data, error } = await Supabase.getStorage().upload(`${userId}/${fileName}`, base64, {
                     contentType: 'image/jpeg',
                     upsert: false,
                 });
@@ -47,9 +44,7 @@ export const uploadVehiclePhoto = createAsyncThunk(
                 return thunkAPI.rejectWithValue(error.message);
             }
 
-            const { data: { publicUrl } } = Supabase.client.storage
-                .from(environment.SUPABASE_STORAGE_ID)
-                .getPublicUrl(fileName);
+            const { data: { publicUrl } } = Supabase.getStorage().getPublicUrl(fileName);
 
             return publicUrl;
         } catch (error) {
