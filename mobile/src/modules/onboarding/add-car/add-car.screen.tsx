@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Image,
+    Alert,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -14,13 +15,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Dropdown } from 'react-native-element-dropdown';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { fetchVehicleBrands, createVehicle, uploadVehiclePhoto } from '../../../store/vehicle/vehicle.actions';
+import dayjs from 'dayjs';
 
 // ------------------------
 // Zod Schema
 // ------------------------
 const schema = z.object({
-    nickname: z.string().min(1, 'Required'),
+    nickname: z.string().min(1).optional(),
     brand: z.string().min(1, 'Required'),
     model: z.string().min(1, 'Required'),
     year: z
@@ -28,42 +31,33 @@ const schema = z.object({
         .regex(/^\d{4}$/, 'Invalid year')
         .refine(val => parseInt(val) >= 1980 && parseInt(val) <= 2050, {
             message: 'Year must be between 1980 and 2050',
-        }),
-    licensePlate: z.string().min(1, 'Required'),
-    mileage: z
-        .string()
-        .regex(/^\d+$/, 'Mileage must be a number')
-        .refine(val => parseInt(val) >= 0, 'Mileage must be positive'),
+        })
 });
 
 type AddCarFormData = z.infer<typeof schema>;
 
-// ------------------------
-// Dropdown Options
-// ------------------------
-const brandOptions = [
-    { label: 'Toyota', value: 'Toyota' },
-    { label: 'Honda', value: 'Honda' },
-    { label: 'Ford', value: 'Ford' },
-    { label: 'Tesla', value: 'Tesla' },
-];
-
 export const AddCarScreen = () => {
     const [photo, setPhoto] = useState<string | null>(null);
+    const [uploadingPhoto, setUploadingPhoto] = useState(false);
+    const dispatch = useAppDispatch();
+    const { brands, loading } = useAppSelector(state => state.vehicle);
+    const { user } = useAppSelector(state => state.auth);
     
+    useEffect(() => {
+        dispatch(fetchVehicleBrands());
+    }, [dispatch]);
+
     const {
         control,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm<AddCarFormData>({
         resolver: zodResolver(schema),
         defaultValues: {
             nickname: '',
-            brand: 'Toyota',
+            brand: '',
             model: '',
-            year: '2025',
-            licensePlate: '',
-            mileage: '',
+            year: dayjs().year().toString()
         },
     });
 
@@ -73,6 +67,8 @@ export const AddCarScreen = () => {
                 width: 800,
                 height: 800,
                 cropping: true,
+                mediaType: 'photo',
+                includeBase64: false,
             });
             setPhoto(image.path);
         } catch {
@@ -80,14 +76,48 @@ export const AddCarScreen = () => {
         }
     };
 
-    const onSubmit = (data: AddCarFormData) => {
-        console.log({ ...data, photo });
+    const onSubmit = async (data: AddCarFormData) => {
+        if (!user?.id) {
+            Alert.alert('Error', 'User not authenticated');
+            return;
+        }
+
+        try {
+            let photoUrl: string | undefined;
+            
+            if (photo) {
+                setUploadingPhoto(true);
+                photoUrl = await dispatch(uploadVehiclePhoto(photo)).unwrap();
+                setUploadingPhoto(false);
+            }
+
+            await dispatch(createVehicle({
+                brand_id: parseInt(data.brand),
+                model: data.model,
+                name: data.nickname,
+                year: data.year,
+                owner_id: user.id,
+                photo: photoUrl,
+            })).unwrap();
+        } catch (error) {
+            console.log(error)
+            Alert.alert('Error', 'Failed to add car. Please try again.');
+        }
     };
+
+    const brandOptions = brands.map(brand => ({
+        label: brand.name,
+        value: brand.id.toString(),
+    }));
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.photoWrapper}>
-                <TouchableOpacity style={styles.photoUpload} onPress={pickPhoto}>
+                <TouchableOpacity 
+                    style={styles.photoUpload} 
+                    onPress={pickPhoto}
+                    disabled={uploadingPhoto}
+                >
                     {photo ? (
                         <Image source={{ uri: photo }} style={styles.photo} />
                     ) : (
@@ -95,7 +125,9 @@ export const AddCarScreen = () => {
                             <Icon name="car" size={28} color="#3B82F6" />
                         </View>
                     )}
-                    <Text style={styles.photoText}>Add car photo</Text>
+                    <Text style={styles.photoText}>
+                        {uploadingPhoto ? 'Uploading photo...' : 'Add car photo'}
+                    </Text>
                     <Text style={styles.photoOptional}>Optional</Text>
                 </TouchableOpacity>
             </View>
@@ -128,7 +160,8 @@ export const AddCarScreen = () => {
                             valueField="value"
                             value={value}
                             onChange={item => onChange(item.value)}
-                            placeholder="Select brand"
+                            placeholder={loading ? "Loading brands..." : "Select brand"}
+                            search={true}
                         />
                     )}
                 />
@@ -164,44 +197,14 @@ export const AddCarScreen = () => {
                 {errors.year && <Text style={styles.error}>{errors.year.message}</Text>}
             </View>
 
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Additional Information</Text>
-
-                <Controller
-                    control={control}
-                    name="licensePlate"
-                    render={({ field: { onChange, value } }) => (
-                        <TextInput
-                            placeholder="ABC 123"
-                            style={styles.input}
-                            value={value}
-                            onChangeText={onChange}
-                        />
-                    )}
-                />
-                {errors.licensePlate && <Text style={styles.error}>{errors.licensePlate.message}</Text>}
-
-                <View style={styles.mileageRow}>
-                    <Controller
-                        control={control}
-                        name="mileage"
-                        render={({ field: { onChange, value } }) => (
-                            <TextInput
-                                placeholder="0"
-                                style={[styles.input, { flex: 1 }]}
-                                keyboardType="numeric"
-                                value={value}
-                                onChangeText={onChange}
-                            />
-                        )}
-                    />
-                    <Text style={styles.unit}>mi</Text>
-                </View>
-                {errors.mileage && <Text style={styles.error}>{errors.mileage.message}</Text>}
-            </View>
-
-            <TouchableOpacity style={styles.addButton} onPress={handleSubmit(onSubmit)}>
-                <Text style={styles.addButtonText}>Add Car</Text>
+            <TouchableOpacity 
+                style={[styles.addButton, (isSubmitting || uploadingPhoto) && styles.addButtonDisabled]} 
+                onPress={handleSubmit(onSubmit)}
+                disabled={isSubmitting || uploadingPhoto}
+            >
+                <Text style={styles.addButtonText}>
+                    {(isSubmitting || uploadingPhoto) ? 'Adding...' : 'Add Car'}
+                </Text>
             </TouchableOpacity>
         </ScrollView>
     );
@@ -212,7 +215,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 16,
         paddingVertical: 24,
-        backgroundColor: '#F9FAFF', // lighter blue background
+        backgroundColor: '#F9FAFF',
     },
     photoWrapper: {
         backgroundColor: '#EDF3FF',
@@ -303,6 +306,9 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         alignItems: 'center',
         marginHorizontal: 16,
+    },
+    addButtonDisabled: {
+        backgroundColor: '#93C5FD',
     },
     addButtonText: {
         color: '#fff',

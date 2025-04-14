@@ -5,9 +5,6 @@ import { environment } from '../../config/environment'
 import { AppState } from 'react-native'
 import { Database } from './types'
 
-const supabaseUrl = environment.SUPABASE_URL!
-const supabaseAnonKey = environment.SUPABASE_ANON_KEY!
-
 export namespace Supabase {
   let fetchCount = 0
   let launchTime = 0
@@ -21,7 +18,7 @@ export namespace Supabase {
     return fetch(...args)
   }
 
-  export const client = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  export const client = createClient<Database>(environment.SUPABASE_URL, environment.SUPABASE_ANON_KEY, {
     auth: {
       storage: AsyncStorage,
       persistSession: true,

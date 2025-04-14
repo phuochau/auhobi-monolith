@@ -4,8 +4,21 @@ import { AddCarScreen } from './add-car/add-car.screen';
 
 const Stack = createNativeStackNavigator();
 
-export const OnboardingStack = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="add-car" component={AddCarScreen} />
-  </Stack.Navigator>
-);
+export type OnboardingStackParamList = {
+    'add-car': undefined;
+    'home': undefined;
+};
+
+export const OnboardingStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+                name="add-car"
+                component={AddCarScreen}
+                options={{
+                    title: 'Add Car',
+                }}
+            />
+        </Stack.Navigator>
+    );
+};

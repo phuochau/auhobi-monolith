@@ -215,28 +215,34 @@ export type Database = {
       }
       user_vehicles: {
         Row: {
-          brand_id: number | null
+          brand_id: number
           created_at: string
           id: number
-          model: string | null
-          owner_id: string | null
-          year: string | null
+          model: string
+          name: string | null
+          owner_id: string
+          photo: string | null
+          year: string
         }
         Insert: {
-          brand_id?: number | null
+          brand_id: number
           created_at?: string
           id?: number
-          model?: string | null
-          owner_id?: string | null
-          year?: string | null
+          model: string
+          name?: string | null
+          owner_id: string
+          photo?: string | null
+          year: string
         }
         Update: {
-          brand_id?: number | null
+          brand_id?: number
           created_at?: string
           id?: number
-          model?: string | null
-          owner_id?: string | null
-          year?: string | null
+          model?: string
+          name?: string | null
+          owner_id?: string
+          photo?: string | null
+          year?: string
         }
         Relationships: [
           {

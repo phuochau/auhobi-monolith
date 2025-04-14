@@ -6,8 +6,6 @@ export const initAuth = createAsyncThunk(
   async (_, thunkAPI) => {
     const { data, error } = await Supabase.getSession();
 
-    console.log(data, error)
-
     if (error || !data?.session?.user) {
       return null;
     }
