@@ -27,7 +27,7 @@ import dayjs from 'dayjs';
 // Zod Schema
 // ------------------------
 const schema = z.object({
-    nickname: z.string().min(1).optional(),
+    nickname: z.string().optional(),
     brand: z.string().min(1, 'Required'),
     model: z.string().min(1, 'Required'),
     year: z
