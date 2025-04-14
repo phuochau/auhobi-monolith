@@ -8,7 +8,7 @@ import { RootState } from '../store';
 import { MainStack } from '../modules/main/main.stack';
 import { useAppDispatch } from '../store/hooks';
 import { initAuth, signOut, fetchUserVehicles } from '../store/auth/auth.actions';
-import { client } from '../lib/supabase/client';
+import { Supabase } from '../lib/supabase/client';
 import { ActivityIndicator, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -31,7 +31,7 @@ const RootNavigator = () => {
 
     initializeAuth();
 
-    const { data: authListener } = client.auth.onAuthStateChange(async (event, session) => {
+    const { data: authListener } = Supabase.client.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_OUT') {
         dispatch(signOut());
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
@@ -46,8 +46,6 @@ const RootNavigator = () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
-
-  console.log(initializing, client)
 
   if (initializing) {
     return (

@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { client, Supabase } from '../../lib/supabase/client';
+import { Supabase } from '../../lib/supabase/client';
 
 export const initAuth = createAsyncThunk(
   'auth/initAuth',
   async (_, thunkAPI) => {
     const { data, error } = await Supabase.getSession();
+
+    console.log(data, error)
 
     if (error || !data?.session?.user) {
       return null;
@@ -12,7 +14,7 @@ export const initAuth = createAsyncThunk(
 
     let profile = null
     try {
-      const response = await client
+      const response = await Supabase.client
         .from('profiles')
         .select('*')
         .eq('user_id', data.session.user.id)
@@ -40,7 +42,7 @@ export const initAuth = createAsyncThunk(
 export const signIn = createAsyncThunk(
   'auth/signIn',
   async ({ email, password }: { email: string; password: string }, thunkAPI) => {
-    const { data, error } = await client.auth.signInWithPassword({ email, password });
+    const { data, error } = await Supabase.client.auth.signInWithPassword({ email, password });
 
     if (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -54,7 +56,7 @@ export const signIn = createAsyncThunk(
     const {
       data: profile,
       error: profileError,
-    } = await client
+    } = await Supabase.client
       .from('profiles')
       .select('*')
       .eq('user_id', user.id)
@@ -90,7 +92,7 @@ export const fetchUserVehicles = createAsyncThunk(
       return thunkAPI.rejectWithValue('User not authenticated');
     }
 
-    const { data: vehicles, error } = await client
+    const { data: vehicles, error } = await Supabase.client
       .from('user_vehicles')
       .select('*')
       .eq('owner_id', userId);
