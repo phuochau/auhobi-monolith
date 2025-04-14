@@ -102,3 +102,24 @@ export const fetchUserVehicles = createAsyncThunk(
     return vehicles;
   }
 );
+
+export const signUp = createAsyncThunk(
+  'auth/signUp',
+  async ({ email, password }: { email: string; password: string }, thunkAPI) => {
+    // Sign up with Supabase
+    const { data: authData, error: authError } = await Supabase.client.auth.signUp({
+      email,
+      password,
+    });
+
+    if (authError) {
+      return thunkAPI.rejectWithValue(authError.message);
+    }
+
+    if (!authData.user) {
+      return thunkAPI.rejectWithValue('User creation failed');
+    }
+
+    return { user: authData.user };
+  }
+);

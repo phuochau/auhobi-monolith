@@ -7,26 +7,48 @@ import {
   Pressable,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-design-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthenticationStackParamList } from '../authentication.stack';
+import { useAppDispatch } from '../../../store/hooks';
+import { signUp } from '../../../store/auth/auth.actions';
 
 export const SignUpScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthenticationStackParamList>>();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     if (password !== confirmPassword) {
-      Alert.alert('Passwords do not match');
+      Alert.alert('Error', 'Passwords do not match');
       return;
     }
 
-    Alert.alert('Account created!');
-    // Proceed to API logic
+    if (password.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters long');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      
+      const result = await dispatch(signUp({ email, password })).unwrap();
+
+      if (result.user) {
+        Alert.alert('Success', 'Account created successfully! Please check your email for verification.');
+        navigation.navigate('sign-in');
+      }
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'An error occurred during sign up');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,8 +99,16 @@ export const SignUpScreen = () => {
         </View>
 
         {/* Sign Up Button */}
-        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-          <Text style={styles.signUpText}>Sign Up</Text>
+        <TouchableOpacity 
+          style={[styles.signUpButton, loading && styles.disabledButton]} 
+          onPress={handleSignUp}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#ffffff" />
+          ) : (
+            <Text style={styles.signUpText}>Sign Up</Text>
+          )}
         </TouchableOpacity>
       </View>
 
@@ -163,6 +193,9 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     alignItems: 'center',
     marginTop: 10,
+  },
+  disabledButton: {
+    opacity: 0.7,
   },
   signUpText: {
     color: '#ffffff',
