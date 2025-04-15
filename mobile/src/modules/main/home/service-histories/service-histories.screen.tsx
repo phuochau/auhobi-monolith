@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -17,15 +17,60 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchServiceHistories, ServiceHistoryType } from '../../../../store/service-history/service-history.actions';
 import dayjs from 'dayjs';
-import { Tables } from '../../../../lib/supabase/types';
+
+enum DateRange {
+  THIS_MONTH = 0,
+  LAST_MONTH = 1,
+  LAST_3_MONTHS = 2,
+  LAST_6_MONTHS = 3,
+  THIS_YEAR = 4,
+  CUSTOM = 5,
+}
+
 const dateRanges = [
-  'This Month',
-  'Last Month',
-  'Last 3 Months',
-  'Last 6 Months',
-  'This Year',
-  'Custom Range',
+  { id: DateRange.THIS_MONTH, label: 'This Month' },
+  { id: DateRange.LAST_MONTH, label: 'Last Month' },
+  { id: DateRange.LAST_3_MONTHS, label: 'Last 3 Months' },
+  { id: DateRange.LAST_6_MONTHS, label: 'Last 6 Months' },
+  { id: DateRange.THIS_YEAR, label: 'This Year' },
+  { id: DateRange.CUSTOM, label: 'Custom Range' },
 ];
+
+const getDateRange = (range: DateRange) => {
+  const today = dayjs();
+  switch (range) {
+    case DateRange.THIS_MONTH:
+      return {
+        start: today.startOf('month'),
+        end: today.endOf('month'),
+      };
+    case DateRange.LAST_MONTH:
+      return {
+        start: today.subtract(1, 'month').startOf('month'),
+        end: today.subtract(1, 'month').endOf('month'),
+      };
+    case DateRange.LAST_3_MONTHS:
+      return {
+        start: today.subtract(2, 'month').startOf('month'),
+        end: today.endOf('month'),
+      };
+    case DateRange.LAST_6_MONTHS:
+      return {
+        start: today.subtract(5, 'month').startOf('month'),
+        end: today.endOf('month'),
+      };
+    case DateRange.THIS_YEAR:
+      return {
+        start: today.startOf('year'),
+        end: today.endOf('year'),
+      };
+    default:
+      return {
+        start: today.startOf('month'),
+        end: today.endOf('month'),
+      };
+  }
+};
 
 const Tag = ({ label, color }: { label: string; color: { bg: string; text: string } }) => (
   <View style={[styles.tag, { backgroundColor: color.bg }]}>
@@ -82,12 +127,13 @@ const ServiceHistoryCard = ({ log }: { log: ServiceHistoryType }) => {
 export const ServiceHistoriesScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const dispatch = useAppDispatch();
-  const { dateMonthFormat, dateMonthYearFormat, monthYearFormat } = useAppSelector((state) => state.app);
+  const { dateMonthFormat, dateMonthYearFormat, monthYearFormat, dateFormat } = useAppSelector((state) => state.app);
   const { selectedVehicle } = useAppSelector((state) => state.auth);
   const { histories, loading, error } = useAppSelector((state) => state.serviceHistory);
   
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedRange, setSelectedRange] = useState('This Month');
+  const [selectedRange, setSelectedRange] = useState<DateRange>(DateRange.THIS_MONTH);
+  const [dateRange, setDateRange] = useState(getDateRange(DateRange.THIS_MONTH));
 
   useEffect(() => {
     if (selectedVehicle) {
@@ -95,9 +141,22 @@ export const ServiceHistoriesScreen = () => {
     }
   }, [dispatch, selectedVehicle]);
 
-  const renderItem = ({ item, index }: { item: any; index: number }) => {
+  const filteredHistories = useMemo(() => {
+    return histories.filter(history => {
+      const historyDate = dayjs(history.date);
+      return historyDate.isAfter(dateRange.start) && historyDate.isBefore(dateRange.end);
+    });
+  }, [histories, dateRange]);
+
+  const handleRangeSelect = (range: DateRange) => {
+    setSelectedRange(range);
+    setDateRange(getDateRange(range));
+    setModalVisible(false);
+  };
+
+  const renderItem = ({ item, index }: { item: ServiceHistoryType; index: number }) => {
     const currentDate = dayjs(item.date).format(dateMonthFormat);
-    const previousDate = index > 0 ? dayjs(histories[index - 1].date).format(dateMonthFormat) : null;
+    const previousDate = index > 0 ? dayjs(filteredHistories[index - 1].date).format(dateMonthFormat) : null;
     const showDate = index === 0 || currentDate !== previousDate;
     const isToday = dayjs(item.date).format(dateMonthYearFormat) === dayjs().format(dateMonthYearFormat);
 
@@ -143,7 +202,7 @@ export const ServiceHistoriesScreen = () => {
       {/* Floating Header */}
       <View style={styles.stickyHeader}>
         <Text style={styles.headerTitle}>
-          {dayjs().format(monthYearFormat)}
+          {dayjs(dateRange.start).format(dateFormat)} - {dayjs(dateRange.end).format(dateFormat)}
         </Text>
         <View style={styles.headerButtons}>
           <TouchableOpacity
@@ -184,25 +243,25 @@ export const ServiceHistoriesScreen = () => {
           <Text style={styles.modalTitle}>Select Date Range</Text>
           {dateRanges.map((range) => (
             <Pressable
-              key={range}
+              key={range.id}
               style={[
                 styles.rangeOption,
-                selectedRange === range && styles.rangeSelected,
+                selectedRange === range.id && styles.rangeSelected,
               ]}
-              onPress={() => setSelectedRange(range)}
+              onPress={() => handleRangeSelect(range.id)}
             >
               <Text
                 style={[
                   styles.rangeText,
-                  selectedRange === range && { color: '#267BFF', fontWeight: 'bold' },
+                  selectedRange === range.id && { color: '#267BFF', fontWeight: 'bold' },
                 ]}
               >
-                {range}
+                {range.label}
               </Text>
-              {range === 'Custom Range' && (
+              {range.id === DateRange.CUSTOM && (
                 <Icon name="calendar" size={18} color="#888" style={{ marginLeft: 'auto' }} />
               )}
-              {selectedRange === range && (
+              {selectedRange === range.id && (
                 <Icon name="check" size={18} color="#267BFF" style={{ marginLeft: 10 }} />
               )}
             </Pressable>
@@ -216,7 +275,7 @@ export const ServiceHistoriesScreen = () => {
 
       {/* List Content */}
       <FlatList
-        data={histories}
+        data={filteredHistories}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ padding: 16, paddingTop: 76 }}
