@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Supabase } from "../../lib/supabase/client";
+import { Tables } from "../../lib/supabase/types";
 
 export const fetchServiceTypes = createAsyncThunk(
   'serviceHistory/fetchServiceTypes',
@@ -21,13 +22,17 @@ export const fetchServiceTypes = createAsyncThunk(
   }
 );
 
-export const fetchServiceHistories = createAsyncThunk(
+export type ServiceHistoryWithServiceTypeType = Omit<Tables<"service_histories">, "service_type_id"> & {
+  ref_service_types: Tables<"ref_service_types">
+}
+
+export const fetchServiceHistories = createAsyncThunk<ServiceHistoryWithServiceTypeType[], number>(
     'serviceHistory/fetchHistories',
     async (vehicleId: number, thunkAPI) => {
       try {
         const { data, error } = await Supabase.client
           .from('service_histories')
-          .select('*')
+          .select('*, ref_service_types(*)')
           .eq('user_vehicle_id', vehicleId)
           .order('date', { ascending: false });
   

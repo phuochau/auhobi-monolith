@@ -15,8 +15,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainStackParamList } from '../../main.stack';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { fetchServiceHistories } from '../../../../store/service-history/service-history.actions';
+import { fetchServiceHistories, ServiceHistoryWithServiceTypeType } from '../../../../store/service-history/service-history.actions';
 import dayjs from 'dayjs';
+import { Tables } from '../../../../lib/supabase/types';
 const dateRanges = [
   'This Month',
   'Last Month',
@@ -32,7 +33,7 @@ const Tag = ({ label, color }: { label: string; color: { bg: string; text: strin
   </View>
 );
 
-const ServiceHistoryCard = ({ log }: { log: any }) => {
+const ServiceHistoryCard = ({ log }: { log: ServiceHistoryWithServiceTypeType }) => {
   const { dateFormat, mileageUnit, currency, naText } = useAppSelector((state) => state.app);
   const atDate = dayjs(log.date).format(dateFormat);
   const formattedMileage = log.mileage ? `${log.mileage.toLocaleString()} ${mileageUnit}` : naText;
@@ -42,8 +43,7 @@ const ServiceHistoryCard = ({ log }: { log: any }) => {
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <View style={styles.tagRow}>
-          <Tag label={log.service_type?.name || 'Service'} color={{ bg: '#E7F1FF', text: '#267BFF' }} />
-          <Tag label="Complete" color={{ bg: '#DDF5E6', text: '#21A366' }} />
+          <Tag label={log.ref_service_types.name || 'Service'} color={{ bg: '#E7F1FF', text: '#267BFF' }} />
         </View>
         <Text style={styles.amount}>{formattedCost}</Text>
       </View>
