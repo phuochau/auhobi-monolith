@@ -22,11 +22,11 @@ export const fetchServiceTypes = createAsyncThunk(
   }
 );
 
-export type ServiceHistoryWithServiceTypeType = Omit<Tables<"service_histories">, "service_type_id"> & {
+export type ServiceHistoryType = Omit<Tables<"service_histories">, "service_type_id"> & {
   ref_service_types: Tables<"ref_service_types">
 }
 
-export const fetchServiceHistories = createAsyncThunk<ServiceHistoryWithServiceTypeType[], number>(
+export const fetchServiceHistories = createAsyncThunk<ServiceHistoryType[], number>(
     'serviceHistory/fetchHistories',
     async (vehicleId: number, thunkAPI) => {
       try {

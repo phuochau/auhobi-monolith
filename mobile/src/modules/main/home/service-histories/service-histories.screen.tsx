@@ -15,7 +15,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainStackParamList } from '../../main.stack';
 import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { fetchServiceHistories, ServiceHistoryWithServiceTypeType } from '../../../../store/service-history/service-history.actions';
+import { fetchServiceHistories, ServiceHistoryType } from '../../../../store/service-history/service-history.actions';
 import dayjs from 'dayjs';
 import { Tables } from '../../../../lib/supabase/types';
 const dateRanges = [
@@ -33,7 +33,7 @@ const Tag = ({ label, color }: { label: string; color: { bg: string; text: strin
   </View>
 );
 
-const ServiceHistoryCard = ({ log }: { log: ServiceHistoryWithServiceTypeType }) => {
+const ServiceHistoryCard = ({ log }: { log: ServiceHistoryType }) => {
   const { dateFormat, mileageUnit, currency, naText } = useAppSelector((state) => state.app);
   const atDate = dayjs(log.date).format(dateFormat);
   const formattedMileage = log.mileage ? `${log.mileage.toLocaleString()} ${mileageUnit}` : naText;

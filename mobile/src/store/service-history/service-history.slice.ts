@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Tables } from '../../lib/supabase/types';
-import { createServiceHistory, fetchServiceHistories, fetchServiceTypes, ServiceHistoryWithServiceTypeType } from './service-history.actions';
+import { createServiceHistory, fetchServiceHistories, fetchServiceTypes, ServiceHistoryType } from './service-history.actions';
 
 interface ServiceHistoryState {
-  histories: ServiceHistoryWithServiceTypeType[];
+  histories: ServiceHistoryType[];
   serviceTypes: Tables<'ref_service_types'>[];
   loading: boolean;
   error: string | null;
@@ -44,7 +44,7 @@ const serviceHistorySlice = createSlice({
       })
       .addCase(fetchServiceHistories.fulfilled, (state, action) => {
         state.loading = false;
-        state.histories = (action.payload as any) as ServiceHistoryWithServiceTypeType[];
+        state.histories = (action.payload as any) as ServiceHistoryType[];
       })
       .addCase(fetchServiceHistories.rejected, (state, action) => {
         state.loading = false;
@@ -59,7 +59,7 @@ const serviceHistorySlice = createSlice({
       })
       .addCase(createServiceHistory.fulfilled, (state, action) => {
         state.loading = false;
-        state.histories = [(action.payload as any) as ServiceHistoryWithServiceTypeType, ...state.histories];
+        state.histories = [(action.payload as any) as ServiceHistoryType, ...state.histories];
       })
       .addCase(createServiceHistory.rejected, (state, action) => {
         state.loading = false;
