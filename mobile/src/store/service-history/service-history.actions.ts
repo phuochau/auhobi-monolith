@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Supabase } from "../../lib/supabase/client";
-import { RootState } from "..";
 
 export const fetchServiceTypes = createAsyncThunk(
   'serviceHistory/fetchServiceTypes',
@@ -28,7 +27,7 @@ export const fetchServiceHistories = createAsyncThunk(
       try {
         const { data, error } = await Supabase.client
           .from('service_histories')
-          .select('*, service_history_bills(*)')
+          .select('*')
           .eq('user_vehicle_id', vehicleId)
           .order('date', { ascending: false });
   
