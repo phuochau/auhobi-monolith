@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Image,
   Alert,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
@@ -14,10 +13,10 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dropdown } from 'react-native-element-dropdown';
 import Icon from '@react-native-vector-icons/material-design-icons';
-import ImagePicker from 'react-native-image-crop-picker';
 import { DateInput } from '../../../components/DateInput';
+import { Gallery } from '../../../components/Gallery';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { createServiceHistory } from '../../../store/service-history/service-history.actions';
+import { createServiceHistory, fetchServiceTypes } from '../../../store/service-history/service-history.actions';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainStackParamList } from '../../main/main.stack';
@@ -27,12 +26,12 @@ import { Supabase } from '../../../lib/supabase/client';
 // Zod Schema
 // ------------------------
 const schema = z.object({
-  serviceType: z.string().min(1, 'Required'),
+  serviceType: z.number(),
   details: z.string().min(1, 'Required'),
   provider: z.string().min(1, 'Required'),
   cost: z
     .string()
-    .refine((val) => /^\d+(\.\d{1,2})?$/.test(val), 'Invalid amount'),
+    .refine((val) => !val || /^\d+(\.\d{1,2})?$/.test(val), 'Invalid amount'),
   mileage: z
     .string()
     .regex(/^\d+$/, 'Mileage must be a number'),
@@ -45,7 +44,12 @@ type AddServiceLogForm = z.infer<typeof schema>;
 export const AddServiceHistory = () => {
   const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const dispatch = useAppDispatch();
-  const { selectedVehicle } = useAppSelector((state) => state.auth);
+  const { selectedVehicle, user } = useAppSelector((state) => state.auth);
+  const { serviceTypes } = useAppSelector((state) => state.serviceHistory);
+
+  useEffect(() => {
+    dispatch(fetchServiceTypes());
+  }, [dispatch]);
 
   const {
     control,
@@ -54,7 +58,7 @@ export const AddServiceHistory = () => {
   } = useForm<AddServiceLogForm>({
     resolver: zodResolver(schema),
     defaultValues: {
-      serviceType: 'Maintenance',
+      serviceType: undefined,
       details: '',
       provider: '',
       cost: '',
@@ -64,74 +68,41 @@ export const AddServiceHistory = () => {
     },
   });
 
-  const [servicePhoto, setServicePhoto] = useState<string | null>(null);
-  const [billPhoto, setBillPhoto] = useState<string | null>(null);
+  const [media, setMedia] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
-  const pickImage = async (setter: (uri: string) => void) => {
-    try {
-      const image = await ImagePicker.openPicker({
-        width: 800,
-        height: 800,
-        cropping: true,
-        compressImageQuality: 0.8,
-      });
-      setter(image.path);
-    } catch (error) {
-      console.warn('Image selection canceled or failed', error);
-    }
-  };
-
-  const uploadImage = async (uri: string): Promise<string> => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    const filename = uri.split('/').pop() || 'image.jpg';
-    const { data, error } = await Supabase.getStorage()
-      .upload(`service-photos/${Date.now()}-${filename}`, blob);
-
-    if (error) {
-      throw error;
-    }
-
-    const { data: { publicUrl } } = Supabase.getStorage()
-      .getPublicUrl(data.path);
-    return publicUrl;
-  };
-
   const onSubmit = async (data: AddServiceLogForm) => {
-    if (!selectedVehicle) {
+    if (!selectedVehicle || !user) {
       Alert.alert('Error', 'No vehicle selected');
       return;
     }
 
     try {
       setUploading(true);
-      const media: string[] = [];
+      const uploadedMedia: string[] = [];
 
-      if (servicePhoto) {
-        const servicePhotoUrl = await uploadImage(servicePhoto);
-        media.push(servicePhotoUrl);
+      if (media.length > 0) {
+        for (const photo of media) {
+          const photoUrl = await Supabase.uploadImage(`${user.id}/${selectedVehicle.id}`, photo);
+          uploadedMedia.push(photoUrl);
+        }
       }
-
-      if (billPhoto) {
-        const billPhotoUrl = await uploadImage(billPhoto);
-        media.push(billPhotoUrl);
-      }
-
+      
       await dispatch(createServiceHistory({
-        serviceTypeId: 1, // TODO: Get from service types
+        serviceTypeId: data.serviceType,
         serviceDetails: data.details,
         provider: data.provider,
-        cost: parseFloat(data.cost),
+        cost: data.cost ? parseFloat(data.cost) : undefined,
         mileage: parseInt(data.mileage),
         notes: data.notes,
         date: data.date,
-        media: media.length > 0 ? media : undefined,
+        media: uploadedMedia.length > 0 ? uploadedMedia : undefined,
         vehicleId: selectedVehicle.id,
       })).unwrap();
 
       navigation.goBack();
     } catch (error: any) {
+      console.log(error);
       Alert.alert('Error', error.message || 'Failed to create service history');
     } finally {
       setUploading(false);
@@ -162,15 +133,20 @@ export const AddServiceHistory = () => {
           name="serviceType"
           render={({ field: { onChange, value } }) => (
             <Dropdown
-              data={[{ label: 'Maintenance', value: 'Maintenance' }]}
+              data={serviceTypes.map(type => ({
+                label: type.name,
+                value: type.id,
+              }))}
               value={value}
               onChange={item => onChange(item.value)}
               labelField="label"
               valueField="value"
               style={styles.dropdown}
+              placeholder="Select service type"
             />
           )}
         />
+        {errors.serviceType && <ErrorText message={errors.serviceType.message} />}
 
         <Label text="Service Date" />
         <Controller
@@ -265,18 +241,12 @@ export const AddServiceHistory = () => {
           )}
         />
 
-        <Label text="Service Photos" />
-        <PhotoUpload
-          uri={servicePhoto}
-          label="Add Photo"
-          onPress={() => pickImage(setServicePhoto)}
-        />
-
-        <Label text="Bill Photos" />
-        <PhotoUpload
-          uri={billPhoto}
-          label="Add Bill"
-          onPress={() => pickImage(setBillPhoto)}
+        <Label text="Photos" />
+        <Gallery
+          images={media}
+          onImagesChange={setMedia}
+          maxImages={4}
+          imagesPerRow={4}
         />
       </ScrollView>
 
@@ -301,19 +271,6 @@ const Label = ({ text }: { text: string }) => (
 
 const ErrorText = ({ message }: { message?: string }) =>
   message ? <Text style={styles.error}>{message}</Text> : null;
-
-const PhotoUpload = ({ uri, label, onPress }: { uri: string | null; label: string; onPress: () => void }) => (
-  <TouchableOpacity style={styles.photoBox} onPress={onPress}>
-    {uri ? (
-      <Image source={{ uri }} style={styles.photo} />
-    ) : (
-      <>
-        <Text style={styles.photoPlus}>+</Text>
-        <Text style={styles.photoLabel}>{label}</Text>
-      </>
-    )}
-  </TouchableOpacity>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -388,33 +345,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 14,
     color: '#555',
-  },
-  photoBox: {
-    height: 100,
-    width: 100,
-    borderWidth: 1,
-    borderColor: '#DDD',
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 8,
-    backgroundColor: '#FAFAFA',
-  },
-  photo: {
-    height: 100,
-    width: 100,
-    borderRadius: 12,
-    resizeMode: 'cover',
-  },
-  photoPlus: {
-    fontSize: 26,
-    color: '#845EF7',
-    fontWeight: 'bold',
-  },
-  photoLabel: {
-    fontSize: 12,
-    color: '#888',
-    marginTop: 4,
   },
   saveButton: {
     position: 'absolute',

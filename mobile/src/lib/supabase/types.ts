@@ -113,9 +113,10 @@ export type Database = {
       }
       service_histories: {
         Row: {
+          cost: number | null
           created_at: string
           custom_garage_name: string | null
-          date: string | null
+          date: string
           diy: boolean | null
           garage_id: number | null
           id: number
@@ -124,12 +125,13 @@ export type Database = {
           note: string | null
           service_details: string | null
           service_type_id: number
-          user_vehicle_id: number | null
+          user_vehicle_id: number
         }
         Insert: {
+          cost?: number | null
           created_at?: string
           custom_garage_name?: string | null
-          date?: string | null
+          date: string
           diy?: boolean | null
           garage_id?: number | null
           id?: number
@@ -138,12 +140,13 @@ export type Database = {
           note?: string | null
           service_details?: string | null
           service_type_id: number
-          user_vehicle_id?: number | null
+          user_vehicle_id: number
         }
         Update: {
+          cost?: number | null
           created_at?: string
           custom_garage_name?: string | null
-          date?: string | null
+          date?: string
           diy?: boolean | null
           garage_id?: number | null
           id?: number
@@ -152,7 +155,7 @@ export type Database = {
           note?: string | null
           service_details?: string | null
           service_type_id?: number
-          user_vehicle_id?: number | null
+          user_vehicle_id?: number
         }
         Relationships: [
           {
@@ -178,41 +181,6 @@ export type Database = {
           },
         ]
       }
-      service_history_bills: {
-        Row: {
-          created_at: string
-          currency: string | null
-          id: number
-          photo: string[] | null
-          service_history_id: number | null
-          total: number | null
-        }
-        Insert: {
-          created_at?: string
-          currency?: string | null
-          id?: number
-          photo?: string[] | null
-          service_history_id?: number | null
-          total?: number | null
-        }
-        Update: {
-          created_at?: string
-          currency?: string | null
-          id?: number
-          photo?: string[] | null
-          service_history_id?: number | null
-          total?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "service_history_bills_service_history_id_fkey"
-            columns: ["service_history_id"]
-            isOneToOne: false
-            referencedRelation: "service_histories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       user_vehicles: {
         Row: {
           brand_id: number
@@ -220,8 +188,8 @@ export type Database = {
           id: number
           model: string
           name: string | null
-          owner_id: string
           photo: string | null
+          user_id: string
           year: string
         }
         Insert: {
@@ -230,8 +198,8 @@ export type Database = {
           id?: number
           model: string
           name?: string | null
-          owner_id: string
           photo?: string | null
+          user_id: string
           year: string
         }
         Update: {
@@ -240,8 +208,8 @@ export type Database = {
           id?: number
           model?: string
           name?: string | null
-          owner_id?: string
           photo?: string | null
+          user_id?: string
           year?: string
         }
         Relationships: [

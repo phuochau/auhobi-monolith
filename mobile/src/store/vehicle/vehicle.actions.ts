@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Supabase } from "../../lib/supabase/client";
 import { fetchUserVehicles } from "../auth/auth.actions";
-import RNFS from 'react-native-fs';
 
 export const fetchVehicleBrands = createAsyncThunk(
     'vehicle/fetchBrands',
@@ -24,35 +23,6 @@ export const fetchVehicleBrands = createAsyncThunk(
     }
 );
 
-export const uploadVehiclePhoto = createAsyncThunk(
-    'vehicle/uploadPhoto',
-    async (filePath: string, thunkAPI) => {
-        try {
-            const state = thunkAPI.getState() as any;
-            const userId = state.auth.user?.id;
-            const fileName = `vehicles/${Date.now()}-${Math.random().toString(36).substring(7)}.jpg`;
-            
-            // Read the file as base64
-            const base64 = await RNFS.readFile(filePath, 'base64');
-
-            const { data, error } = await Supabase.getStorage().upload(`${userId}/${fileName}`, base64, {
-                    contentType: 'image/jpeg',
-                    upsert: false,
-                });
-
-            if (error) {
-                return thunkAPI.rejectWithValue(error.message);
-            }
-
-            const { data: { publicUrl } } = Supabase.getStorage().getPublicUrl(fileName);
-
-            return publicUrl;
-        } catch (error) {
-            return thunkAPI.rejectWithValue('Failed to upload photo');
-        }
-    }
-);
-
 export const createVehicle = createAsyncThunk(
     'vehicle/createVehicle',
     async (data: {
@@ -64,9 +34,12 @@ export const createVehicle = createAsyncThunk(
         photo?: string;
     }, thunkAPI) => {
         try {
+            const state = thunkAPI.getState() as any;
+            const userId = state.auth.user?.id;
+
             const { data: vehicle, error } = await Supabase.client
                 .from('user_vehicles')
-                .insert([data])
+                .insert([{ ...data, user_id: userId }])
                 .select()
                 .single();
 
@@ -74,7 +47,7 @@ export const createVehicle = createAsyncThunk(
                 return thunkAPI.rejectWithValue(error.message);
             }
 
-            thunkAPI.dispatch(fetchUserVehicles());
+            thunkAPI.dispatch(fetchUserVehicles({ userId }));
 
             return vehicle;
         } catch (error) {

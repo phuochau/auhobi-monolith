@@ -16,12 +16,14 @@ import Icon from '@react-native-vector-icons/material-design-icons';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { fetchVehicleBrands, createVehicle, uploadVehiclePhoto } from '../../../store/vehicle/vehicle.actions';
+import { fetchVehicleBrands, createVehicle } from '../../../store/vehicle/vehicle.actions';
 import { signOut } from '../../../store/auth/auth.actions';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/root-navigator';
 import dayjs from 'dayjs';
+import { Supabase } from '../../../lib/supabase/client';
+import RNFS from 'react-native-fs';
 
 // ------------------------
 // Zod Schema
@@ -93,7 +95,8 @@ export const AddCarScreen = () => {
             
             if (photo) {
                 setUploadingPhoto(true);
-                photoUrl = await dispatch(uploadVehiclePhoto(photo)).unwrap();
+                const base64 = await RNFS.readFile(photo, 'base64');
+                photoUrl = await Supabase.uploadImage(`${user?.id}`, base64);
                 setUploadingPhoto(false);
             }
 

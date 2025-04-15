@@ -38,15 +38,29 @@ export namespace Supabase {
     }
   })
 
-  export const getStorage = () => {
-    return Supabase.client.storage.from(environment.SUPABASE_STORAGE_ID)
-  }
-
   export const getSession = () => {
     return client.auth.getSession()
   }
 
   export const signOut = () => {
     return client.auth.signOut()
+  }
+
+  export const getStorage = () => {
+    return Supabase.client.storage.from(environment.SUPABASE_STORAGE_ID)
+  }
+
+  export const uploadImage = async (remoteDirPath: string, file: string): Promise<string> => {
+    const response = await fetch(file);
+    const blob = await response.blob();
+    const filename = file.split('/').pop() || 'image.jpg';
+    const { data, error } = await Supabase.getStorage().upload(`${remoteDirPath}/${Date.now()}-${filename}`, blob);
+
+    if (error) {
+      throw error;
+    }
+
+    const { data: { publicUrl } } = Supabase.getStorage().getPublicUrl(data.path);
+    return publicUrl;
   }
 }

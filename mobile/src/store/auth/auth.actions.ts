@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Supabase } from '../../lib/supabase/client';
-import { Tables } from '../../lib/supabase/types';
 
 export const initAuth = createAsyncThunk(
   'auth/initAuth',
@@ -12,9 +11,7 @@ export const initAuth = createAsyncThunk(
     }
 
     await thunkAPI.dispatch(fetchUserProfile({ userId: data.session.user.id }));
-    console.log('fetched profile');
     await thunkAPI.dispatch(fetchUserVehicles({ userId: data.session.user.id }));
-    console.log('fetched vehicles');
 
     return {
       user: data.session.user
@@ -83,7 +80,7 @@ export const fetchUserVehicles = createAsyncThunk(
     const { data: vehicles, error } = await Supabase.client
       .from('user_vehicles')
       .select('*')
-      .eq('owner_id', userId);
+      .eq('user_id', userId);
 
     if (error) {
       return thunkAPI.rejectWithValue(error.message);

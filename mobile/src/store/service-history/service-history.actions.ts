@@ -1,6 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Supabase } from "../../lib/supabase/client";
+import { RootState } from "..";
 
+export const fetchServiceTypes = createAsyncThunk(
+  'serviceHistory/fetchServiceTypes',
+  async (_, thunkAPI) => {
+    try {
+      const { data: serviceTypes, error } = await Supabase.client
+        .from('ref_service_types')
+        .select('*')
+        .order('name');
+
+      if (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+
+      return serviceTypes;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Failed to fetch service types');
+    }
+  }
+);
 
 export const fetchServiceHistories = createAsyncThunk(
     'serviceHistory/fetchHistories',
@@ -40,7 +60,7 @@ export const fetchServiceHistories = createAsyncThunk(
         serviceTypeId: number;
         serviceDetails: string;
         provider: string;
-        cost: number;
+        cost?: number;
         mileage: number;
         notes?: string;
         date: string;
@@ -50,7 +70,6 @@ export const fetchServiceHistories = createAsyncThunk(
       thunkAPI
     ) => {
       try {
-        // First create the service history
         const { data: history, error: historyError } = await Supabase.client
           .from('service_histories')
           .insert({
@@ -62,27 +81,14 @@ export const fetchServiceHistories = createAsyncThunk(
             date,
             media,
             user_vehicle_id: vehicleId,
+            cost
           })
           .select()
           .single();
-  
+ 
+          
         if (historyError) {
           return thunkAPI.rejectWithValue(historyError.message);
-        }
-  
-        // Then create the bill record
-        if (cost > 0) {
-          const { error: billError } = await Supabase.client
-            .from('service_history_bills')
-            .insert({
-              service_history_id: history.id,
-              total: cost,
-              currency: 'USD',
-            });
-  
-          if (billError) {
-            return thunkAPI.rejectWithValue(billError.message);
-          }
         }
   
         return history;
