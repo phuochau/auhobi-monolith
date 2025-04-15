@@ -4,21 +4,29 @@ import DatePicker, { DateType, useDefaultStyles } from 'react-native-ui-datepick
 import dayjs from 'dayjs';
 import Icon from '@react-native-vector-icons/material-design-icons';
 
-interface DateInputProps {
-  value: string;
-  onChange: (date: string) => void;
+interface DateRangeInputProps {
+  value: { startDate: string; endDate: string };
+  onChange: (value: { startDate: string; endDate: string }) => void;
   label?: string;
   displayFormat?: string;
 }
 
-export const DateInput: React.FC<DateInputProps> = ({ value, onChange, label, displayFormat = 'MMM D, YYYY' }) => {
+export const DateRangeInput: React.FC<DateRangeInputProps> = ({
+  value,
+  onChange,
+  label,
+  displayFormat = 'MMM D, YYYY',
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const defaultStyles = useDefaultStyles();
+  const [selectedDate, setSelectedDate] = useState<{ startDate: string; endDate: string }>(value);
   
-  const handleDateChange = (params: { date: DateType }) => {
-    if (params.date) {
-      onChange(dayjs(params.date).toISOString());
-      setIsVisible(false);
+  const handleDateChange = (params: { startDate: DateType; endDate: DateType }) => {
+    if (params.startDate && params.endDate) {
+      setSelectedDate({
+        startDate: dayjs(params.startDate).format('YYYY-MM-DD'),
+        endDate: dayjs(params.endDate).format('YYYY-MM-DD'),
+      });
     }
   };
 
@@ -29,10 +37,21 @@ export const DateInput: React.FC<DateInputProps> = ({ value, onChange, label, di
         style={styles.input}
         onPress={() => setIsVisible(true)}
       >
-        <Text style={styles.dateText}>
-          {value ? dayjs(value).format(displayFormat) : 'Select date'}
-        </Text>
-        <Icon name="calendar" size={20} color="#666" />
+        <View style={styles.dateRangeContainer}>
+          <View style={styles.dateContainer}>
+            <Icon name="calendar" size={20} color="#666" />
+            <Text style={styles.dateText}>
+              {dayjs(value.startDate).format(displayFormat)}
+            </Text>
+          </View>
+          <Text style={styles.separator}>to</Text>
+          <View style={styles.dateContainer}>
+            <Icon name="calendar" size={20} color="#666" />
+            <Text style={styles.dateText}>
+              {dayjs(value.endDate).format(displayFormat)}
+            </Text>
+          </View>
+        </View>
       </TouchableOpacity>
 
       <Modal
@@ -44,9 +63,10 @@ export const DateInput: React.FC<DateInputProps> = ({ value, onChange, label, di
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <DatePicker
-              date={value ? dayjs(value) : dayjs()}
+              mode="range"
+              startDate={dayjs(selectedDate.startDate)}
+              endDate={dayjs(selectedDate.endDate)}
               onChange={handleDateChange}
-              mode="single"
               styles={{
                 ...defaultStyles,
                 today: { borderColor: 'blue', borderWidth: 1 }, // Add a border to today's date
@@ -56,9 +76,12 @@ export const DateInput: React.FC<DateInputProps> = ({ value, onChange, label, di
             />
             <TouchableOpacity
               style={styles.closeButton}
-              onPress={() => setIsVisible(false)}
+              onPress={() => {
+                setIsVisible(false);
+                onChange(selectedDate);
+              }}
             >
-              <Text style={styles.closeButtonText}>Close</Text>
+              <Text style={styles.closeButtonText}>Confirm</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -74,19 +97,30 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   input: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: '#DDD',
     borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    padding: 12,
     backgroundColor: '#fff',
+  },
+  dateRangeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  dateContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   dateText: {
     fontSize: 14,
     color: '#333',
+  },
+  separator: {
+    marginHorizontal: 8,
+    color: '#666',
   },
   modalContainer: {
     flex: 1,

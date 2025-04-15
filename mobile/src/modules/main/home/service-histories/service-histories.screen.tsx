@@ -17,6 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { fetchServiceHistories, ServiceHistoryType } from '../../../../store/service-history/service-history.actions';
 import dayjs from 'dayjs';
+import { DateRangeInput } from '../../../../components/DateRangeInput';
 
 enum DateRange {
   THIS_MONTH = 0,
@@ -134,6 +135,10 @@ export const ServiceHistoriesScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedRange, setSelectedRange] = useState<DateRange>(DateRange.THIS_MONTH);
   const [dateRange, setDateRange] = useState(getDateRange(DateRange.THIS_MONTH));
+  const [customDateRange, setCustomDateRange] = useState({
+    startDate: dayjs().startOf('month').format('YYYY-MM-DD'),
+    endDate: dayjs().endOf('month').format('YYYY-MM-DD'),
+  });
 
   useEffect(() => {
     if (selectedVehicle) {
@@ -150,8 +155,26 @@ export const ServiceHistoriesScreen = () => {
 
   const handleRangeSelect = (range: DateRange) => {
     setSelectedRange(range);
-    setDateRange(getDateRange(range));
-    setModalVisible(false);
+    if (range === DateRange.CUSTOM) {
+      setDateRange({
+        start: dayjs(customDateRange.startDate),
+        end: dayjs(customDateRange.endDate),
+      });
+    } else {
+      setDateRange(getDateRange(range));
+      setModalVisible(false);
+    }
+  };
+
+  const handleCustomDateRangeChange = (value: { startDate: string; endDate: string }) => {
+    setCustomDateRange(value);
+    if (selectedRange === DateRange.CUSTOM) {
+      setDateRange({
+        start: dayjs(value.startDate),
+        end: dayjs(value.endDate),
+      });
+      setModalVisible(false);
+    }
   };
 
   const renderItem = ({ item, index }: { item: ServiceHistoryType; index: number }) => {
@@ -267,9 +290,15 @@ export const ServiceHistoriesScreen = () => {
             </Pressable>
           ))}
 
-          <TouchableOpacity style={styles.applyButton} onPress={toggleModal}>
-            <Text style={styles.applyButtonText}>Apply</Text>
-          </TouchableOpacity>
+          {selectedRange === DateRange.CUSTOM && (
+            <View style={styles.customRangeContainer}>
+              <DateRangeInput
+                value={customDateRange}
+                onChange={handleCustomDateRangeChange}
+                displayFormat={dateFormat}
+              />
+            </View>
+          )}
         </View>
       </Modal>
 
@@ -480,5 +509,17 @@ const styles = StyleSheet.create({
   applyButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  customRangeContainer: {
+    marginTop: 8,
+    padding: 16,
+    backgroundColor: '#F8FAFF',
+    borderRadius: 10,
+  },
+  customRangeLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 8,
+    color: '#333',
   },
 });
