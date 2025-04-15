@@ -13,17 +13,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Icon from '@react-native-vector-icons/material-design-icons';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, { Image as ImageType } from 'react-native-image-crop-picker';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { fetchVehicleBrands, createVehicle } from '../../../store/vehicle/vehicle.actions';
 import { signOut } from '../../../store/auth/auth.actions';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/root-navigator';
 import dayjs from 'dayjs';
 import { Supabase } from '../../../lib/supabase/client';
-import RNFS from 'react-native-fs';
 
 // ------------------------
 // Zod Schema
@@ -43,8 +39,7 @@ const schema = z.object({
 type AddCarFormData = z.infer<typeof schema>;
 
 export const AddCarScreen = () => {
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-    const [photo, setPhoto] = useState<string | null>(null);
+    const [photo, setPhoto] = useState<ImageType | null>(null);
     const [uploadingPhoto, setUploadingPhoto] = useState(false);
     const [signingOut, setSigningOut] = useState(false);
     const dispatch = useAppDispatch();
@@ -76,9 +71,9 @@ export const AddCarScreen = () => {
                 height: 800,
                 cropping: true,
                 mediaType: 'photo',
-                includeBase64: false,
+                includeBase64: true,
             });
-            setPhoto(image.path);
+            setPhoto(image);
         } catch {
             console.log('Photo picking cancelled');
         }
@@ -95,8 +90,7 @@ export const AddCarScreen = () => {
             
             if (photo) {
                 setUploadingPhoto(true);
-                const base64 = await RNFS.readFile(photo, 'base64');
-                photoUrl = await Supabase.uploadImage(`${user?.id}`, base64);
+                photoUrl = await Supabase.uploadImage(`${user?.id}`, photo.filename!, photo.data!);
                 setUploadingPhoto(false);
             }
 
@@ -139,7 +133,7 @@ export const AddCarScreen = () => {
                     disabled={uploadingPhoto}
                 >
                     {photo ? (
-                        <Image source={{ uri: photo }} style={styles.photo} />
+                        <Image source={{ uri: photo?.path }} style={styles.photo} />
                     ) : (
                         <View style={styles.iconCircle}>
                             <Icon name="car" size={28} color="#3B82F6" />

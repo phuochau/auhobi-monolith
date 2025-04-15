@@ -59,7 +59,6 @@ const serviceHistorySlice = createSlice({
       })
       .addCase(createServiceHistory.fulfilled, (state, action) => {
         state.loading = false;
-        state.histories = [(action.payload as any) as ServiceHistoryType, ...state.histories];
       })
       .addCase(createServiceHistory.rejected, (state, action) => {
         state.loading = false;

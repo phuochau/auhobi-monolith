@@ -1,9 +1,12 @@
 import 'react-native-url-polyfill/auto'
 import { createClient } from '@supabase/supabase-js'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { environment } from '../../config/environment'
 import { AppState } from 'react-native'
+import RNFS from 'react-native-fs';
+import { environment } from '../../config/environment'
 import { Database } from './types'
+import mime from 'mime';
+import { decode } from 'base64-arraybuffer'
 
 export namespace Supabase {
   let fetchCount = 0
@@ -50,11 +53,16 @@ export namespace Supabase {
     return Supabase.client.storage.from(environment.SUPABASE_STORAGE_ID)
   }
 
-  export const uploadImage = async (remoteDirPath: string, file: string): Promise<string> => {
-    const response = await fetch(file);
-    const blob = await response.blob();
-    const filename = file.split('/').pop() || 'image.jpg';
-    const { data, error } = await Supabase.getStorage().upload(`${remoteDirPath}/${Date.now()}-${filename}`, blob);
+  export const uploadImage = async (remoteDirPath: string, localFilePath: string, base64Data?: string): Promise<string> => {
+    const base64 = base64Data || await RNFS.readFile(localFilePath, 'base64')
+    const filename = localFilePath.split('/').pop() || 'image.jpg';
+    const { data, error } = await Supabase.getStorage().upload(
+      `${remoteDirPath}/${Date.now()}-${filename}`,
+      decode(base64),
+      {
+        contentType: mime.getType(filename) || 'image/jpeg'
+      }
+    );
 
     if (error) {
       throw error;

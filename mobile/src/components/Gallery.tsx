@@ -5,10 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  FlatList,
-  Dimensions,
+  FlatList
 } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, { Image as ImageType } from 'react-native-image-crop-picker';
 
 interface GalleryProps {
   images: string[];
@@ -94,7 +93,7 @@ export const Gallery: React.FC<GalleryProps> = ({
           renderItem({ item, index })
         )
       }
-      keyExtractor={(item, index) => (item === 'ADD_BUTTON' ? 'add' : item)}
+      keyExtractor={(item) => (item === 'ADD_BUTTON' ? 'add' : item)}
       numColumns={imagesPerRow}
       contentContainerStyle={styles.container}
       scrollEnabled={false}

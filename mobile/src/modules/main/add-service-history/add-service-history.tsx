@@ -21,6 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { MainStackParamList } from '../../main/main.stack';
 import { Supabase } from '../../../lib/supabase/client';
+import RNFS from 'react-native-fs';
 
 // ------------------------
 // Zod Schema
@@ -45,6 +46,7 @@ export const AddServiceHistory = () => {
   const navigation = useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const dispatch = useAppDispatch();
   const { selectedVehicle, user } = useAppSelector((state) => state.auth);
+  const { mileageUnit, currency } = useAppSelector((state) => state.app);
   const { serviceTypes } = useAppSelector((state) => state.serviceHistory);
 
   useEffect(() => {
@@ -81,12 +83,17 @@ export const AddServiceHistory = () => {
       setUploading(true);
       const uploadedMedia: string[] = [];
 
+      
       if (media.length > 0) {
         for (const photo of media) {
-          const photoUrl = await Supabase.uploadImage(`${user.id}/${selectedVehicle.id}`, photo);
+          const base64 = await RNFS.readFile(photo, 'base64');
+          console.log(base64)
+          const photoUrl = await Supabase.uploadImage(`${user.id}`, photo, base64);
           uploadedMedia.push(photoUrl);
         }
       }
+
+      console.log(uploadedMedia)
       
       await dispatch(createServiceHistory({
         serviceTypeId: data.serviceType,
@@ -97,7 +104,7 @@ export const AddServiceHistory = () => {
         notes: data.notes,
         date: data.date,
         media: uploadedMedia.length > 0 ? uploadedMedia : undefined,
-        vehicleId: selectedVehicle.id,
+        userVehicleId: selectedVehicle.id,
       })).unwrap();
 
       navigation.goBack();
@@ -199,7 +206,7 @@ export const AddServiceHistory = () => {
             <TextInput
               style={styles.input}
               keyboardType="numeric"
-              placeholder="$0.00"
+              placeholder={`0.00 ${currency}`}
               value={field.value}
               onChangeText={field.onChange}
             />
@@ -222,7 +229,7 @@ export const AddServiceHistory = () => {
               />
             )}
           />
-          <Text style={styles.mileageUnit}>mi</Text>
+          <Text style={styles.mileageUnit}>{mileageUnit}</Text>
         </View>
         {errors.mileage && <ErrorText message={errors.mileage.message} />}
 

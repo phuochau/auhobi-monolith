@@ -59,7 +59,7 @@ export const fetchServiceHistories = createAsyncThunk<ServiceHistoryType[], numb
         notes,
         date,
         media,
-        vehicleId,
+        userVehicleId,
       }: {
         serviceTypeId: number;
         serviceDetails: string;
@@ -69,7 +69,7 @@ export const fetchServiceHistories = createAsyncThunk<ServiceHistoryType[], numb
         notes?: string;
         date: string;
         media?: string[];
-        vehicleId: number;
+        userVehicleId: number;
       },
       thunkAPI
     ) => {
@@ -84,16 +84,17 @@ export const fetchServiceHistories = createAsyncThunk<ServiceHistoryType[], numb
             note: notes,
             date,
             media,
-            user_vehicle_id: vehicleId,
+            user_vehicle_id: userVehicleId,
             cost
           })
           .select()
           .single();
- 
           
         if (historyError) {
           return thunkAPI.rejectWithValue(historyError.message);
         }
+
+        await thunkAPI.dispatch(fetchServiceHistories(userVehicleId));
   
         return history;
       } catch (error) {
